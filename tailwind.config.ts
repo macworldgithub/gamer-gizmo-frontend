@@ -11,6 +11,12 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        grayText: "#7d7d7d",
+        secondaryColor: "#6345ed",
+      },
+      backgroundImage: {
+        "custom-gradient":
+          "linear-gradient(to right, rgb(99, 69, 237), #dc39fc)",
       },
     },
   },
