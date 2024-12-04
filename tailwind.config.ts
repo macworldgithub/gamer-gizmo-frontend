@@ -11,8 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        grayText: "#7d7d7d",
-        secondaryColor: "#6345ed",
+        navTextLight: "#7d7d7d",
+        navTextDark: "#ffffff",
+        secondaryColorLight: "#6345ed",
+        secondaryColorDark: "#dc39fc",
       },
       backgroundImage: {
         "custom-gradient":
