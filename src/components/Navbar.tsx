@@ -12,18 +12,18 @@ const Navbar = () => {
     return (
         <div className="bg-white w-screen">
             {/* Top Bar */}
-            <div className="h-16 bg-[#f9f9f9] flex justify-between items-center px-10">
+            <div className="max-sm:h-20 h-16 bg-[#f9f9f9] flex justify-between items-center max-sm:px-5 sm:px-8 px-10">
                 {/* Dropdown Menus */}
-                <div className="flex space-x-4 ml-[5%]">
-                    <div className="w-40 h-10 bg-[#ffffff] rounded-md flex justify-center ml-28 items-center">
-                        <select className="w-full h-full bg-transparent text-black rounded-md px-2 outline-none">
+                <div className="flex max-sm:space-x-1 space-x-4 max-sm:ml-0 sm:ml-0 ml-[5%]">
+                    <div className="max-sm:w-[4rem] sm:w-24  w-40 max-sm-h-5  h-10 bg-[#ffffff] rounded-md flex justify-center max-sm:ml-2 sm:ml-8 ml-28 items-center">
+                        <select className="w-full h-full bg-transparent max-sm:text-xs sm:text-base text-black rounded-md max-sm:px-1 px-2 outline-none">
                             <option value="ethereum">Ethereum</option>
                             <option value="bitcoin">Bitcoin</option>
                             <option value="solana">Solana</option>
                         </select>
                     </div>
-                    <div className="w-40 h-10 bg-[#ffffff] rounded-md flex justify-center items-center">
-                        <select className="w-full h-full bg-transparent text-black rounded-md px-2 outline-none">
+                    <div className="max-sm:w-[4rem]  sm:w-24 w-40 h-10 bg-[#ffffff] rounded-md flex justify-center items-center">
+                        <select className="w-full h-full bg-transparent max-sm:text-xs sm:text-base text-black rounded-md max-sm:px-0 px-2 outline-none">
                             <option value="english">English</option>
                             <option value="french">French</option>
                             <option value="spanish">Spanish</option>
@@ -31,14 +31,13 @@ const Navbar = () => {
                     </div>
                 </div>
                 {/* Live Streaming Section */}
-                <div className="flex items-center  mr-[10px]">
-                    <p
-                        className="text-navTextLight text-base mr-5"
-
-                    >Live Streaming Coming Soon</p>
-
-                    <div className="px-4 ml-2 mr-8 py-1 bg-custom-gradient text-white rounded-md">
-                        05:29:32:48
+                <div className="flex items-center max-sm:mr-2 mr-[20%]">
+                    <div className='flex max-sm:block justify-center items-center'>
+                        <p className="text-navTextLight max-sm:text-[0.7rem] sm:text-[0.9rem] sm:ml-5 max-sm:px-2 text-base max-sm:mr-0 mr-5"
+                        >Live Streaming Coming Soon</p>
+                        <div className="px-4 tracking-wider max-sm:w-[5rem] w-44 max-sm:h-8  h-12 ml-2 mr-8 py-1 flex justify-center items-center max-sm:text-[0.8rem] text-lg bg-custom-gradient text-white rounded-md">
+                            05:29:32:48
+                        </div>
                     </div>
                     <div className='flex  gap-3'>
                         <FontAwesomeIcon icon={faFacebookF} className="z-10" color="#4267B2" />
@@ -48,14 +47,7 @@ const Navbar = () => {
                         <FontAwesomeIcon icon={faLinkedin} className="z-10" color="#a0a4a7" />
                     </div>
                 </div>
-                {/* Social Media Icons */}
-                <div className="flex space-x-4 text-secondaryColorLight">
-                    <a href="#"><i className="fab fa-facebook"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                    <a href="#"><i className="fab fa-pinterest"></i></a>
-                    <a href="#"><i className="fab fa-instagram"></i></a>
-                    <a href="#"><i className="fab fa-linkedin"></i></a>
-                </div>
+
             </div>
 
             {/* Bottom Navigation Bar */}
