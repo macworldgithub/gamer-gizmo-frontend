@@ -4,11 +4,13 @@ import ThemeToggle from './ThemeToggle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 const Navbar = () => {
     // const currentTheme = useSelector((state: any) => state.theme.theme);
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     return (
-        <div className="bg-white w-screen absolute top-0">
+        <div className="bg-white w-screen">
             {/* Top Bar */}
             <div className="h-16 bg-[#f9f9f9] flex justify-between items-center px-10">
                 {/* Dropdown Menus */}
