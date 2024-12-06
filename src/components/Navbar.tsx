@@ -12,9 +12,9 @@ const Navbar = () => {
     return (
         <div className="bg-white w-screen">
             {/* Top Bar */}
-            <div className="max-sm:h-20 h-16 bg-[#f9f9f9] flex justify-between items-center max-sm:px-5 sm:px-8 px-10">
+            <div className="max-sm:h-20 h-16 bg-[#f9f9f9] flex justify-between items-center max-sm:px-3 sm:px-8 px-10">
                 {/* Dropdown Menus */}
-                <div className="flex max-sm:space-x-1 space-x-4 max-sm:ml-0 sm:ml-0 ml-[5%]">
+                <div className="flex max-sm:space-x-0 space-x-4 max-sm:ml-0 sm:ml-0 ml-[5%]">
                     <div className="max-sm:w-[4rem] sm:w-24  w-40 max-sm-h-5  h-10 bg-[#ffffff] rounded-md flex justify-center max-sm:ml-2 sm:ml-8 ml-28 items-center">
                         <select className="w-full h-full bg-transparent max-sm:text-xs sm:text-base text-black rounded-md max-sm:px-1 px-2 outline-none">
                             <option value="ethereum">Ethereum</option>
@@ -39,7 +39,7 @@ const Navbar = () => {
                             05:29:32:48
                         </div>
                     </div>
-                    <div className='flex  gap-3'>
+                    <div className='flex  gap-3 max-sm:'>
                         <FontAwesomeIcon icon={faFacebookF} className="z-10" color="#4267B2" />
                         <FontAwesomeIcon icon={faTwitter} className="z-10" color="#a0a4a7" />
                         <FontAwesomeIcon icon={faInstagram} className="z-10" color="#a0a4a7" />
