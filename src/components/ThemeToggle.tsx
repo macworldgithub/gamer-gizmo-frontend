@@ -114,7 +114,7 @@ const ThemeToggle = () => {
     };
     return (
         <div
-            className="relative w-[175px] h-[55px] bg-white rounded-full flex items-center p-1 cursor-pointer shadow-md" onClick={handleToggle}
+            className="relative w-[8rem] h-[3rem] bg-white rounded-full flex items-center max-sm:my-3 p-1 cursor-pointer shadow-md" onClick={handleToggle}
 
         >
             {/* Icons */}
@@ -122,12 +122,12 @@ const ThemeToggle = () => {
                 <FontAwesomeIcon icon={faSun} className="z-10 " color="#000000" />
                 {/* color={isDarkMode ? 'white' : 'black'} */}
             </div>
-            <div className="absolute left-[70%] flex items-center w-36">
+            <div className="absolute left-[65%] flex items-center  w-[8rem]">
                 <FontAwesomeIcon icon={faMoon} className="z-10" color={`${theme === "night" ? "#ffffff" : "#000000"}`} />
                 {/* style={{ color: isDarkMode ? 'white' : 'black' }} */}
             </div>
             <div
-                className={`w-[50%] h-[47px] bg-custom-gradient rounded-full transform transition-all duration-300 ${theme === "night" ? "translate-x-[100%]" : "translate-x-0"
+                className={`w-[3.5rem] h-[2.2rem] bg-custom-gradient rounded-full transform transition-all duration-300 ${theme === "night" ? "translate-x-[100%]" : "translate-x-0"
                     }`}
             />
         </div>
