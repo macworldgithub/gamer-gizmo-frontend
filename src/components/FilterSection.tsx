@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const FilterSection = () => {
+    const [isVisible, setIsVisible] = useState(window.innerWidth > 768);
     const dropdownOptions = [
         { label: 'Processor', options: ['lorem', 'lorem'] },
         { label: 'New Items', options: ['lorem', 'lorem'] },
@@ -9,17 +10,37 @@ const FilterSection = () => {
         { label: 'Location', options: ['lorem', 'lorem'] },
     ];
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsVisible(window.innerWidth > 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, [])
     return (
 
+
         <div className="min-h-[50%] max-h-[75%] bg-custom-gradient relative flex flex-col justify-center items-center py-14">
-            <div className="flex items-center bg-transparent rounded-full px-4 py-2 border border-gray-300 shadow-md w-[700px] h-[57px]">
+            {isVisible && (
+                <div className="flex items-center bg-transparent rounded-full px-4 py-2 border border-gray-300 shadow-md w-[700px] h-[57px]">
+                    <i className="fas fa-search text-gray-500 mr-2"></i>
+                    <input
+                        type="text"
+                        placeholder="Find what do you want"
+                        className="outline-none bg-transparent text-white placeholder-white"
+                    />
+                </div>
+            )}
+            {/* <div className="flex items-center bg-transparent rounded-full px-4 py-2 border border-gray-300 shadow-md w-[700px] h-[57px]">
                 <i className="fas fa-search text-gray-500 mr-2"></i>
                 <input
                     type="text"
                     placeholder="Find what do you want"
                     className="outline-none bg-transparent text-white placeholder-white"
                 />
-            </div>
+            </div> */}
 
             <div className='text-white font-bold text-[50px]'>
                 A Premier Marketplace for Gamers

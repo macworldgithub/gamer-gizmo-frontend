@@ -19,7 +19,7 @@ const Navbar = () => {
     return (
         <div className="bg-white w-screen">
             {/* Top Bar */}
-            <div className="max-sm:h-20 h-16 bg-[#f9f9f9]   flex lg:justify-between md:justify-center items-center max-sm:px-1 sm:px-8 px-10">
+            <div className="max-sm:h-20 h-16 bg-[#f9f9f9]   flex lg:justify-between md:justify-center items-center max-sm:px-1 sm:px-8 md:px-0 lg:px-10">
                 {/* Dropdown Menus */}
                 <div className="flex max-sm:space-x-0 space-x-4 max-sm:ml-0 sm:ml-0 max-sm:gap-2 md:ml-[12%]">
                     <div className="max-sm:w-[4rem] sm:w-[5rem]  md:w-[6rem] max-sm-h-5  md:h-10 bg-[#ffffff] rounded-md flex justify-center max-sm:ml-2 sm:ml-8 ml-28 items-center">
@@ -40,7 +40,7 @@ const Navbar = () => {
                 {/* Live Streaming Section */}
                 <div className="flex items-center max-sm:mr-2 mr-[20%]">
                     <div className='flex max-sm:block justify-center items-center'>
-                        <p className="text-navTextLight text-[0.5rem] w-max text-wrap  md:text-xs sm:ml-5 text-center   md:mr-5"
+                        <p className="text-navTextLight lg:text-[1rem] w-max text-wrap max-sm:text-[0.5rem] sm:md:text-xs sm:ml-5 text-center   md:mr-5"
                         >Live Streaming Coming Soon</p>
                         <div className="px-4 tracking-wider max-sm:w-[5rem]  w-44 max-sm:h-8 h-[2rem] md:h-12 ml-2 mr-8 py-1 flex justify-center items-center text-[0.6rem] md:text-lg bg-custom-gradient text-white rounded-md">
                             05:29:32:48
@@ -60,16 +60,16 @@ const Navbar = () => {
             {/* Bottom Navigation Bar */}
             <div className="flex justify-evenly items-center  h-20  bg-white">
                 {/* <div> */}
-                <Image src="/images/gameIcon.png" alt="logo-img" width={100} height={100} className='max-sm:w-[4rem] md:w-[2rem] lg:w-[5rem] md:h-[2rem] lg:h-10 max-sm:mx-auto' />
+                <Image src="/images/gameIcon.png" alt="logo-img" width={100} height={100} className='max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[6rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto' />
                 {/* </div> */}
-                <div className='hidden md:flex md:gap-5 lg:gap-9 font-bold md:text-[0.8rem] lg:text-[1.2rem]'>
+                <div className='hidden md:flex md:gap-5 md:pl-2 lg:gap-[4rem] font-bold md:text-[0.65rem] lg:text-[1.1rem] whitespace-nowrap'>
                     <Link href="#" className="text-navTextLight " >Laptops</Link>
                     <Link href="#" className="text-navTextLight">Desktops</Link>
                     <Link href="#" className="text-navTextLight">Store</Link>
                     <Link href="#" className="text-navTextLight">Components</Link>
                     <Link href="#" className="text-navTextLight">Blogs</Link>
                     <Link href="#" className="text-navTextLight">About Us</Link>
-                    <Link href="#" className="text-navTextLight">Contact Us</Link>
+                    <Link href="#" className="text-navTextLight ">Contact Us</Link>
                     <Link href="#" className="text-secondaryColorLight">Inspection</Link>
                 </div>
 
@@ -97,9 +97,8 @@ const Navbar = () => {
                     {/* Drawer Menu */}
                     {
                         (
-
                             <div
-                                className={`fixed left-0 bg-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
+                                className={`flex-nowrap fixed left-0 bg-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
                                 ${isDrawerOpen ? 'animate-slide-in' : firstClick ? 'animate-slide-out' : 'hidden'}`}>
                                 <Image
                                     src="/images/profile.png"
@@ -110,7 +109,7 @@ const Navbar = () => {
                                 />
                                 <p className='text-secondaryColorLight'>Ayla Imran</p>
 
-                                <Link href="#" className="text-black text-lg hover:text-gray-300" onClick={() => setIsDrawerOpen(false)}>Laptops</Link>
+                                <Link href="#" className="text-black text-lg hover:text-gray-300 " onClick={() => setIsDrawerOpen(false)}>Laptops</Link>
                                 <Link href="#" className="text-black text-lg hover:text-gray-300" onClick={() => setIsDrawerOpen(false)}>Desktops</Link>
                                 <Link href="#" className="text-black text-lg hover:text-gray-300" onClick={() => setIsDrawerOpen(false)}>Store</Link>
                                 <Link href="#" className="text-black text-lg hover:text-gray-300" onClick={() => setIsDrawerOpen(false)}>Components</Link>
@@ -131,10 +130,10 @@ const Navbar = () => {
                         )}
 
                 </div>
-                <div className="hidden md:flex  items-center md:gap-10 mr-16 ml-0 pl-0">
-                    <div className="md:w-[8rem] lg:[10rem] md:h-7 lg:h-10 md:ml-2  bg-custom-gradient rounded-full flex justify-center items-center gap-2">
+                <div className="hidden md:lg:flex  items-center md:gap-[0.2rem] lg:gap-[1rem] lg:mx-0 lg:px-0">
+                    <div className="md:w-[5rem] lg:w-[10rem] md:h-6 lg:h-10 md:ml-[0.3rem]  bg-custom-gradient rounded-full flex justify-center items-center gap-2">
                         <Image src="/images/btnIcon.png" className='md:w-[0.6rem]' width={18} height={18} alt="btnIcon" />
-                        <p className='md:text-xs'>Post Your Ad</p>
+                        <p className='md:text-[0.5rem] lg:text-sm'>Post Your Ad</p>
                     </div>
                     {/* <div className="flex space-x-4 items-center"> */}
                     <Image
@@ -142,7 +141,7 @@ const Navbar = () => {
                         alt="Profile"
                         width={40}
                         height={40}
-                        className="rounded-full"
+                        className="rounded-full md:w-[1rem] lg:w-[2rem] md:mx-0"
                     />
                     <ThemeToggle />
                 </div>
