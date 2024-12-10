@@ -14,12 +14,12 @@ const CategoriesComponent = () => {
     "Customization & Gaming Gears",
   ];
   const offeringList = [
-    { name: "Headphones", price: "237 AED", image: "headphones.png" },
-    { name: "Mouse", price: "237 AED", image: "mouse.png" },
-    { name: "Keyboard", price: "237 AED", image: "keyboard.png" },
-    { name: "Earbuds", price: "237 AED", image: "earbuds.png" },
-    { name: "Controller", price: "237 AED", image: "controller.png" },
-    { name: "Mousepad", price: "237 AED", image: "mousepad.png" },
+    { name: "Headphones", price: "237 AED", image: "/images/headPhones.png" },
+    { name: "Mouse", price: "237 AED", image: "/images/mouse.png" },
+    { name: "Keyboard", price: "237 AED", image: "/images/keyboard.png" },
+    { name: "Earbuds", price: "237 AED", image: "/images/earbuds.png" },
+    { name: "Controller", price: "237 AED", image: "/images/controller.png" },
+    { name: "Mousepad", price: "237 AED", image: "/images/mousepad.png" },
   ]
   return (
     <div>
@@ -105,7 +105,7 @@ const CategoriesComponent = () => {
       <div className="bg-white shadow-lg my-4 rounded-lg p-8 max-w-5xl mx-auto mt-10">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">GamerGizmo Offering</h2>
-          <button className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
+          <button className="flex items-center gap-2 bg-custom-gradient text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
             <span>Explore More</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@ const CategoriesComponent = () => {
               />
               <h3 className="text-sm font-semibold mb-2">{item.name}</h3>
               <p className="text-sm text-gray-500 mb-4">{item.price}</p>
-              <button className="bg-purple-500 w-24 h-8 text-white text-sm px-4 py-2 rounded-full hover:bg-purple-600">
+              <button className="bg-custom-gradient w-24 h-8 text-white text-sm px-4 py-2 rounded-full hover:bg-purple-600">
                 Buy
               </button>
             </div>
