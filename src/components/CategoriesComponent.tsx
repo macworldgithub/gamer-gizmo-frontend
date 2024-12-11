@@ -22,10 +22,10 @@ const CategoriesComponent = () => {
     { name: "Mousepad", price: "237 AED", image: "/images/mousepad.png" },
   ]
   return (
-    <div className="mb-36  text-black">
+    <div className="mb-36 text-black">
       {/* Top Section */}
 
-      <div className="bg-[#f4f2fe] relative py-12 w-full h-[50rem]">
+      <div className="bg-[#f4f2fe] relative py-12 w-full h-[38rem]">
         {/* Main Container */}
         <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6 lg:p-10 flex flex-col lg:flex-row items-center gap-6">
           {/* Left Section */}
@@ -84,7 +84,7 @@ const CategoriesComponent = () => {
           </div>
         </div>
         {/* Categories Section */}
-        <div className=" absolute -bottom-32 left-[35rem] rounded-xl z-50 w-[63rem] mb-12 shadow-xl mx-auto p-6 bg-white   text-black">
+        <div className=" absolute -bottom-56  left-[34rem] rounded-xl z-50 w-[64.5rem] mb-12 shadow-lg mx-auto p-6 bg-white   text-black">
           <h2 className="text-xl font-bold pl-10 mb-6">Categories</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {category.map((category, index) => (
@@ -101,9 +101,8 @@ const CategoriesComponent = () => {
         </div>
       </div>
 
-
       {/* Offering Section */}
-      <div className="text-black shadow-lg mt-32  rounded-lg p-8 max-w-5xl mx-auto">
+      <div className="text-black bg-white shadow-xl mt-56 rounded-lg p-8 max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">GamerGizmo Offering</h2>
           <button className="flex items-center gap-2 bg-custom-gradient text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
