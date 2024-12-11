@@ -41,18 +41,18 @@ const FilterSection = () => {
                 />
             </div> */}
 
-            <div className='text-white font-bold max-md:text-[2rem] md:text-[3rem]'>
+            <div className='text-white font-bold max-md:text-[2rem] md:text-[2.5rem]'>
                 A Premier Marketplace for Gamers
             </div>
-            <div className='text-white font-bold max-md:text-[2rem] md:text-[3rem]'>
+            <div className='text-white font-bold max-md:text-[2rem] md:text-[2.5rem]'>
                 where Gamers gear up
             </div>
             <p className='text-white max-md:font-light md:font-medium md:text-lg max-md:text-xs'>Shop a Wide Range of Accessories for Every Device</p>
 
-            <div className="flex max-md:flex-col  bg-[#ffffff]  justify-around max-md:rounded-md items-center w-[86rem]
-             max-md:w-[20rem] max-md:h-[30rem] max-md:py-5 md:h-[5.625rem]  mt-5 rounded-md gap-6">
+            <div className="flex max-md:flex-col  bg-[#ffffff] justify-around max-md:rounded-md items-center md:w-[50rem] lg:w-[60rem]
+             max-md:w-[20rem] max-md:h-[30rem] max-md:py-5 md:h-[5.625rem] px-4 mt-5 rounded-md gap-6">
                 {dropdownOptions.map((dropdown, index) => (
-                    <div key={index} className="w-48  h-10  max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex  justify-center items-center border-2 border-gray-300">
+                    <div key={index} className="w-32 h-10 text-sm max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center border-2 border-gray-300 ">
                         <select className="w-full full bg-transparent text-black rounded-md px-2 mr-2 outline-none">
                             <option value={dropdown.options[0]}>{dropdown.label}</option>
                             {dropdown.options.map((option, id) => (
@@ -61,7 +61,7 @@ const FilterSection = () => {
                         </select>
                     </div>
                 ))}
-                <div className='bg-custom-gradient my-3 w-48 h-10 max-md:mx-5 rounded-full flex justify-center items-center text-lg font-medium text-white'>Filter</div>
+                <div className='bg-custom-gradient  my-3 w-32 h-10 max-md:mx-5 rounded-full flex justify-center items-center md:text-base font-medium text-white'>Filter</div>
 
             </div>
 

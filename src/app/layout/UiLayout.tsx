@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
 import Navbar from '@/components/Navbar';
 import { ReactNode, useEffect, useState } from 'react';
@@ -25,15 +26,9 @@ const UiLayout = ({ children }: UiProps) => {
             <div className="min-h-screen h-max bg-white overflow-scroll">
                 <Navbar />
                 <div>{children}</div>
-                <div className="bg-black w-full h-7  z-50 text-white text-center">Footer</div>
+                <div className="bg-black w-full h-7  z-50 text-white text-center"><Footer /></div>
             </div>
-            // <div className="bg-white flex flex-col min-h-screen">
-            //     <Navbar />
-            //     {/* Content area that will grow based on children */}
-            //     <div className="flex-1">{children}</div>
-            //     {/* Footer will always appear after content */}
-            //     <div className="bg-black w-full h-7 text-white text-center">Footer</div>
-            // </div>
+
         )
     );
 

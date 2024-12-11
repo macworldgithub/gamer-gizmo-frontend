@@ -60,9 +60,9 @@ const Navbar = () => {
             {/* Bottom Navigation Bar */}
             <div className="flex justify-evenly items-center  h-20  bg-white">
                 {/* <div> */}
-                <Image src="/images/gameIcon.png" alt="logo-img" width={100} height={100} className='max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[6rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto' />
+                <Image src="/images/gameIcon.png" alt="logo-img" width={100} height={100} className='max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto' />
                 {/* </div> */}
-                <div className='hidden md:flex md:gap-5 md:pl-2 lg:gap-[4rem] font-bold md:text-[0.65rem] lg:text-[1.1rem] whitespace-nowrap'>
+                <div className='hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap'>
                     <Link href="#" className="text-navTextLight " >Laptops</Link>
                     <Link href="#" className="text-navTextLight">Desktops</Link>
                     <Link href="#" className="text-navTextLight">Store</Link>
@@ -130,10 +130,10 @@ const Navbar = () => {
                         )}
 
                 </div>
-                <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem] lg:gap-[1.5rem] ">
-                    <div className="md:w-[5rem] lg:w-[10rem] md:h-6 lg:h-10 md:ml-[0.1rem]  bg-custom-gradient rounded-full flex justify-center items-center gap-2">
+                <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem]">
+                    <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem]  bg-custom-gradient rounded-full flex justify-center items-center gap-2">
                         <Image src="/images/btnIcon.png" className='md:w-[0.6rem]' width={18} height={18} alt="btnIcon" />
-                        <p className='md:text-[0.5rem] lg:text-sm'>Post Your Ad</p>
+                        <p className='md:text-[0.5rem] lg:text-[0.7rem] font-bold'>Post Your Ad</p>
                     </div>
                     {/* <div className="flex space-x-4 items-center"> */}
                     <Image
@@ -141,7 +141,7 @@ const Navbar = () => {
                         alt="Profile"
                         width={40}
                         height={40}
-                        className="rounded-full md:w-[1rem] lg:w-[2rem] md:mx-0"
+                        className="rounded-full md:w-[1rem] lg:w-[1.8rem] md:mx-0"
                     />
                     <ThemeToggle />
                 </div>
