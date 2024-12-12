@@ -23,14 +23,14 @@ const Navbar = () => {
                 {/* Dropdown Menus */}
                 <div className="flex  md:space-x-4    max-md:gap-2 md:ml-[12%]">
                     <div className="max-md:w-[4rem]  md:w-[6rem] max-md-h-5  md:h-10 bg-[#ffffff] rounded-md flex justify-center sm:ml-8 md:ml-28 items-center">
-                        <select className="w-full h-full bg-transparent max-sm:text-[0.7rem] sm:text-sm text-black rounded-md max-sm:px-1 px-2 outline-none">
+                        <select className="w-full h-full bg-transparent max-sm:text-[0.6rem] sm:text-sm text-black rounded-md max-sm:px-1 px-2 outline-none">
                             <option value="ethereum">Ethereum</option>
                             <option value="bitcoin">Bitcoin</option>
                             <option value="solana">Solana</option>
                         </select>
                     </div>
                     <div className="max-sm:w-[4rem]  sm:w-[5rem] md:w-[6rem] md:h-10 bg-[#ffffff] rounded-md flex justify-center items-center">
-                        <select className="w-full h-full bg-transparent max-sm:text-xs sm:text-sm text-black rounded-md max-sm:px-0 px-2 outline-none">
+                        <select className="w-full h-full bg-transparent max-sm:text-[0.6rem] sm:text-sm text-black rounded-md max-sm:px-0 px-2 outline-none">
                             <option value="english">English</option>
                             <option value="french">French</option>
                             <option value="spanish">Spanish</option>
@@ -79,20 +79,14 @@ const Navbar = () => {
                         className="text-black focus:outline-none"
                     >
                         {/* Drawer Icon */}
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5"
-                            />
-                        </svg>
+                        <Image
+                            src="/images/drawerIcon.png"
+                            alt="Drawer-Icon"
+                            width={35}
+                            height={45}
+                        // className='w-[1.6rem] h-[1.1rem]'
+
+                        />
                     </button>
                     {/* Drawer Menu */}
                     {

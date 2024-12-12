@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card";
+import Image from "next/image";
 
 const CategoriesComponent = () => {
   const category = [
@@ -25,24 +26,27 @@ const CategoriesComponent = () => {
     <div className="mb-36 text-black">
       {/* Top Section */}
 
-      <div className="bg-[#f4f2fe] relative py-12 w-full h-[38rem]">
+      <div className="bg-[#f4f2fe] relative py-12 w-full h-[48rem] lg:h-[52rem]">
+        <h1 className=" text-center md:text-[1.5rem] font-semibold">Sell your PCs and Gaming Accesories On </h1>
+        <h1 className=" text-center md:text-[1.5rem] font-semibold mb-3">Gamezen and get the price</h1>
+
         {/* Main Container */}
-        <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6 lg:p-10 flex flex-col lg:flex-row items-center gap-6">
+        <div className="md:max-w-5xl md:w-[25rem] lg:w-[50rem] h-[35rem] lg:h-[18rem] max-md:max-w-[21rem]  mx-auto bg-white shadow-lg rounded-xl max-lg:p-2 md:p-6 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center max-md:items-center gap-6">
           {/* Left Section */}
-          <div className="flex-1 text-center">
+          <div className="flex-1 justify-start md:px-8">
             <h2 className="text-xl font-bold text-purple-700 mb-4">
               Post your Ad on GamerGizmo
             </h2>
             <ul className="text-sm space-y-2 mb-6">
-              <li className="flex items-center justify-center gap-2">
+              <li className="flex items-center  gap-2">
                 <span className="text-secondaryColorDark">✔</span>
                 Post your Ad for Free in 3 Easy Steps
               </li>
-              <li className="flex items-center justify-center gap-2">
+              <li className="flex items-center  gap-2">
                 <span className="text-secondaryColorDark">✔</span>
                 Sell your component at the Best Price
               </li>
-              <li className="flex items-center justify-center gap-2">
+              <li className="flex items-center  gap-2">
                 <span className="text-secondaryColorDark">✔</span>
                 Get Genuine offers from Verified Buyers
               </li>
@@ -53,14 +57,14 @@ const CategoriesComponent = () => {
           </div>
 
           {/* Separator */}
-          <div className="hidden lg:flex flex-col items-center">
-            <div className="w-px h-16 bg-gray-300"></div>
+          <div className="flex lg:flex-col items-center">
+            <div className="lg:w-px lg:h-16 w-28 h-px  bg-gray-300"></div>
             <div className="text-gray-500 font-medium my-2">Or</div>
-            <div className="w-px h-16 bg-gray-300"></div>
+            <div className="lg:w-px lg:h-16 w-28 h-px bg-gray-300"></div>
           </div>
 
           {/* Right Section */}
-          <div className="flex-1 justify-start ml-16">
+          <div className="flex-1 justify-start max-lg:px-8 lg:ml-16">
             <h2 className="text-xl font-bold text-purple-700 mb-4">
               Try GamerGizmo Sell For Me
             </h2>
@@ -78,7 +82,7 @@ const CategoriesComponent = () => {
                 Dedicated Sales Expert to sell your Component
               </li>
             </ul>
-            <button className="bg-custom-gradient text-white py-2 px-6 rounded-full hover:opacity-90">
+            <button className="bg-custom-gradient text-white py-2 mb-2 px-8  rounded-full hover:opacity-90">
               Buy For GamerGizmo
             </button>
           </div>
@@ -106,21 +110,8 @@ const CategoriesComponent = () => {
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">GamerGizmo Offering</h2>
           <button className="flex items-center gap-2 bg-custom-gradient text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
+            <Image src="/images/arrowIcon.png" alt='Arrow-Icon' width={16} height={16} className='text-[0.2rem]' />
             <span>Explore More</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14.25 9V5.25a2.25 2.25 0 00-2.25-2.25h-5.5A2.25 2.25 0 004.25 5.25v13.5a2.25 2.25 0 002.25 2.25h5.5a2.25 2.25 0 002.25-2.25V15m5.784-3.794l-2.586-2.586m0 0a1.5 1.5 0 00-2.122 2.122m2.122-2.122l-2.586 2.586"
-              />
-            </svg>
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
