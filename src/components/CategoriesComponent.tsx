@@ -92,11 +92,11 @@ const CategoriesComponent = () => {
         <div className="flex justify-center w-full mx-auto md:w-[50rem]  h-auto  max-lg:mt-12  ">
           <div className="absolute lg:-bottom-56  rounded-xl z-50  mb-12 shadow-lg mx-auto p-8 bg-white text-black">
             <h2 className="text-xl font-bold pl-10 mb-6">Categories</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid max-sm:grid-cols-1 max-lg:grid-cols-2 lg:grid-cols-3 gap-6">
               {category.map((category, index) => (
                 <div
                   key={index}
-                  className="w-full max-w-[15rem] mx-auto border border-gray-200 bg-white p-6 rounded-lg  flex flex-col justify-between whitespace-nowrap"
+                  className="w-full max-w-[15rem] max-md:w-[20rem] mx-auto border border-gray-200 bg-white p-6 rounded-lg  flex flex-col justify-between whitespace-nowrap"
                 >
                   <h2 className="text-[0.9rem] font-bold text-center mb-4">
                     {category}

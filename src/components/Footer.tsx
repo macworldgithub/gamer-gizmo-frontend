@@ -26,26 +26,26 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <div className="relative bg-black text-white py-20">
+        <div className="relative bg-black text-white mt-16 py-20 ">
 
-            <div className="absolute -top-16 w-full rounded-md">
-                <div className="bg-custom-gradient rounded-2xl flex flex-col md:flex-row justify-between items-center  mx-auto max-w-5xl px-8 py-8">
+            <div className="absolute -top-16 w-full rounded-md  ">
+                <div className=" mt-5 bg-custom-gradient rounded-2xl flex flex-col max-lg:whitespace-nowrap max-sm:w-[20rem]  max-md:w-[30rem] max-md:h-[11rem] max-lg:h-[10rem] sm:flex-col  max-lg:w-[40rem]  max-lg:flex  max-lg:justify-start md:flex-row justify-between items-center  mx-auto max-w-5xl px-8 py-8">
                     {/* Heading and Description */}
-                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <h2 className="text-2xl md:text-3xl font-bold">Newsletters</h2>
-                        <p className="text-sm md:text-lg mt-2">
+                    <div className="flex flex-col items-center max-md:items-center lg:text-center sm:text-start md:text-start">
+                        <h2 className="md:text-2xl max-lg:text-[0.9rem] max-lg:text-center lg:text-3xl font-bold">Newsletters</h2>
+                        <p className="text-sm lg:text-base mt-2">
                             Most popular gaming digital nft marketplace
                         </p>
                     </div>
 
                     {/* Input and Button */}
-                    <div className="flex mt-6 md:mt-0 md:ml-8">
+                    <div className="flex mt-6 md:mt-0 lg:ml-8 max-md:justify-center max-lg:w-[3rem] max-md:w-[6rem]  max-md:pb-5 max-md:px-0 max-lg:px-10">
                         <input
                             type="email"
                             placeholder="Enter Email Address"
-                            className="md:w-[15rem] w-full p-3 rounded-l-full focus:outline-none"
+                            className="lg:w-[15rem] w-full placeholder:pl-2 lg:p-3 placeholder-gray-500 max-md:placeholder:text-[0.4rem] placeholder:text-[0.7rem] max-lg:w-[6rem] rounded-l-full focus:outline-none"
                         />
-                        <button className="bg-white text-purple-600 font-bold py-3 px-6 rounded-r-full">
+                        <button className="bg-white  text-purple-600 font-bold py-3 px-6 rounded-r-full">
                             Browse More
                         </button>
                     </div>

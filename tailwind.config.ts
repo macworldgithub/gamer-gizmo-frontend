@@ -29,14 +29,13 @@ export default {
         navTextDark: "#ffffff",
         secondaryColorLight: "#6345ed",
         secondaryColorDark: "#dc39fc",
-        blueLight: '#f4f2fe',
+        blueLight: "#f4f2fe",
+        btnGray: "#e8e3fc",
       },
       backgroundImage: {
         "custom-gradient":
           "linear-gradient(to right, rgb(99, 69, 237), #dc39fc)",
-          "blue-gradientLight":
-          "linear-gradient(to top, #f4f2fe, #dc39fc)",
-          
+        "blue-gradientLight": "linear-gradient(to top, #f4f2fe, #dc39fc)",
       },
     },
   },

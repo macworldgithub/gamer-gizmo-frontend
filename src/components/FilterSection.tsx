@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
+import SelectLabels from './SelectLabels';
 
 const FilterSection = () => {
     const [isVisible, setIsVisible] = useState(window.innerWidth > 768);
@@ -42,7 +43,7 @@ const FilterSection = () => {
             </div>
             <p className='text-white max-md:font-light md:font-medium md:text-lg max-md:text-xs'>Shop a Wide Range of Accessories for Every Device</p>
 
-            <div className="flex max-md:flex-col  bg-[#ffffff] justify-around max-md:rounded-md items-center md:w-[47rem] lg:w-[60rem]
+            {/* <div className="flex max-md:flex-col  bg-[#ffffff] justify-around max-md:rounded-md items-center md:w-[47rem] lg:w-[60rem]
              max-md:w-[20rem]  max-md:h-[30rem] max-md:py-5 md:h-[5.625rem] px-4 mt-5 rounded-md gap-6">
                 {dropdownOptions.map((dropdown, index) => (
                     <div key={index} className="w-28 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center border-2 border-gray-300 ">
@@ -56,7 +57,9 @@ const FilterSection = () => {
                 ))}
                 <div className='bg-custom-gradient  my-3 w-32 h-10 max-md:mx-5 rounded-full flex justify-center items-center md:text-base font-medium text-white'>Filter</div>
 
-            </div>
+            </div> */}
+
+            <SelectLabels />
 
             <div className='bg-black w-[191px] h-[55px] mt-5 rounded-full flex justify-center gap-3 items-center'>
                 <Image src="/images/arrowIcon.png" alt='Arrow-Icon' width={20} height={20} className='' />
