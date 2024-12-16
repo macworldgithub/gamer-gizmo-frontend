@@ -19,3 +19,39 @@ body {
   background: var(--background);
   font-family: Urbanist, Arial, Helvetica, sans-serif;
 }
+
+#rememberMe {
+  display: none;
+}
+
+#customRadio {
+  display: inline-block;
+  width: 20px; /* Adjust size as needed */
+  height: 20px;
+  border: 2px solid rgba(99, 69, 237, 1); /* Outer circle color */
+  border-radius: 50%; /* Ensures it’s circular */
+  margin-right: 8px;
+  position: relative;
+  vertical-align: middle;
+}
+
+#rememberMe:checked + #customRadio {
+  background-color: transparent; /* Keeps the outer circle empty */
+}
+
+#customRadio::after {
+  content: "";
+  width: 12px; /* Reduced size for padding effect */
+  height: 12px;
+  background: rgba(99, 69, 237, 1); /* Inner circle color */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none; /* Hidden when not checked */
+}
+
+#rememberMe:checked + #customRadio::after {
+  display: block; /* Shows the filled inner circle when checked */
+}

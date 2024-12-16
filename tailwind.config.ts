@@ -49,6 +49,9 @@ export default {
         blueLight: "#f4f2fe",
 
         customPurple: "rgba(99, 69, 237, 0.12)",
+        customPurpleBorder: "rgba(99, 69, 237, 1)",
+
+        customBg: '#0D0D12', // You can name it "customBg" or any other name
       },
       backgroundImage: {
         "custom-gradient":

@@ -2,44 +2,35 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import { useThemeStyles } from "@/theme/useThemeStyles";
 const CredentialSide = () => {
-  const theme = useSelector((state: any) => state.Theme.theme);
-
-  const [headingTextColor, setHeadingTextColor] = useState("text-black");
-  const [borderColor, setBorderColor] = useState("");
-
-  useEffect(() => {
-    if (theme === "day") {
-      setHeadingTextColor("text-black");
-      setBorderColor("shadow-combinedDay");
-    } else {
-      setHeadingTextColor("text-white");
-      setBorderColor("shadow-combinedNight");
-    }
-  }, [theme]);
+  const themeStyles = useThemeStyles();
 
   return (
     <div
       id="loginCredentials"
-      className={`flex  ${borderColor} flex-col w-[60%] max-md:w-[100%]  items-center gap-5 max-sm:gap-2 box-border   max-sm:mb-[300px] p-10 `}
+      className={`flex ${themeStyles.borderColor} max-sm:h-max rounded-l-[12px] flex-col w-[60%] max-md:w-[100%] ${themeStyles.loginBackgroundColor}  items-center gap-5 max-sm:gap-2 box-border   max-sm:mb-[300px] p-10 `}
     >
       <div className="w-[100%] mb-7 max-sm:mb-3">
         <h1
-          className={`text-[2rem] max-sm:text-[1.5rem] font-bold text-left ${headingTextColor} `}
+          className={`text-[2rem] max-sm:text-[1.5rem] font-bold text-left ${themeStyles.headingTextColor} `}
         >
           Login Your Account
         </h1>
       </div>
       <input
-        className="w-[100%] p-3 rounded bg-customPurple font-bold"
+        className={`w-[100%] p-3 rounded ${themeStyles.inputBackgroundColor} font-bold ${themeStyles.inputTextColor} border-2 ${themeStyles.inputBorderColor}  focus:outline-none`}
         placeholder="User name or email"
       />
       <input
-        className="w-[100%] p-3 rounded bg-customPurple font-bold"
+        className={`w-[100%] p-3 rounded ${themeStyles.inputBackgroundColor} font-bold ${themeStyles.inputTextColor} border-2 ${themeStyles.inputBorderColor} focus:outline-none`}
         placeholder="Password"
       />
-      <div className={`w-[100%] ${headingTextColor}`}>
-        <input type="radio" /> Remember Me
+      <div className={`w-[100%] ${themeStyles.headingTextColor}`}>
+        <label htmlFor="rememberMe">
+          <input type="radio" id="rememberMe" />
+          <span id="customRadio"></span> Remember Me
+        </label>
       </div>
       <div className="w-[100%]  h-max">
         <button className=" bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ">
