@@ -23,8 +23,8 @@ const PopularItemSection: React.FC<SectionProps> = ({
   onExplore,
 }) => {
   return (
-    <div className="relative mx-auto max-md:w-[60rem] md:w-[50rem] lg:w-[80rem] ">
-      <div className="my-8 px-4 py-5">
+    <div className="relative w-full  ">
+      <div className="my-8 py-5">
         <div className="flex lg:justify-between max-sm:flex-col max-sm:items-start mx-auto items-center mb-6">
           <div>
             <h2 className="text-xl font-bold text-gray-900 max-sm:text-[0.8rem]">
@@ -36,12 +36,12 @@ const PopularItemSection: React.FC<SectionProps> = ({
           </div>
           <button
             onClick={onExplore}
-            className="bg-custom-gradient  text-white px-4 py-2 rounded-full text-sm hover:bg-purple-600 sm:absolute right-[33em] md:ml-56 sm:ml-20 md:absolute md:right-[16em]  lg:absolute lg:right-[23.5%] max-sm:mt-3 "
+            className="bg-custom-gradient  text-white px-4 py-2 rounded-full text-sm hover:bg-purple-600   max-sm:mt-3 "
           >
             Explore More
           </button>
         </div>
-        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-4 max-sm:w-[15rem] sm:w-[30rem] md:w-[35rem] max-lg:w-[30rem] lg:w-[60rem]">
+        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-4 ">
           {products.map((product) => (
             <div
               key={product.id}
