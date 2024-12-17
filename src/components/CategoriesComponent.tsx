@@ -97,23 +97,23 @@ const CategoriesComponent = () => {
 
         {/* Categories Section */}
         <Wrapper>
-          <div className=" w-auto h-auto ">
-            <div className="absolute w-full max-w-screen-xl lg:-bottom-56  rounded-xl z-50  mb-12 shadow-lg mx-auto p-8 bg-white text-black">
-              <h2 className="text-xl font-bold pl-10 mb-6">Categories</h2>
-              <div className="grid max-sm:grid-cols-1 max-lg:grid-cols-2 lg:grid-cols-3 gap-6">
-                {category.map((category, index) => (
-                  <div
-                    key={index}
-                    className="w-full max-w-[15rem] max-md:w-[20rem] mx-auto border border-gray-200 bg-white p-6 rounded-lg  flex flex-col justify-between whitespace-nowrap"
-                  >
-                    <h2 className="text-[0.9rem] font-bold text-center mb-4">
-                      {category}
-                    </h2>
-                  </div>
-                ))}
-              </div>
+          {/* <div className=" w-auto h-auto "> */}
+          <div className=" absolute w-full max-w-[1200px]  lg:-bottom-56  rounded-xl z-50  mb-16 shadow-lg p-8 bg-white text-black">
+            <h2 className="text-xl font-bold pl-2 mb-6">Categories</h2>
+            <div className="grid  max-sm:grid-cols-1 max-lg:grid-cols-2 lg:grid-cols-3 gap-6">
+              {category.map((category, index) => (
+                <div
+                  key={index}
+                  className="w-full max-w-[15rem] max-md:w-[20rem] mx-auto border border-gray-200 bg-white p-6 rounded-lg  flex flex-col justify-between whitespace-nowrap"
+                >
+                  <h2 className="text-[0.9rem] font-bold text-center mb-4">
+                    {category}
+                  </h2>
+                </div>
+              ))}
             </div>
           </div>
+          {/* </div> */}
         </Wrapper>
       </div>
 
