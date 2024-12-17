@@ -1,22 +1,4 @@
-// import Image from 'next/image'
-// import React from 'react'
 
-// const Footer = () => {
-//     return (
-//         <div className='bg-black w-full h-[30rem] flex justify-center items-center'>
-//             <div className='flex-col justify-center'>
-//                 <Image src="/images/gameIcon.png" alt='logo img' width={100} height={100} />
-//                 <p>"Gamer Gizmo – Your ultimate destination for gaming gear, laptops, and accessories. Level up your gaming experience with ease."</p>
-//             </div>
-//             <div></div>
-//             <div></div>
-//             <div></div>
-//             <div></div>
-//         </div>
-//     )
-// }
-
-// export default Footer
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -57,7 +39,7 @@ const Footer = () => {
                 {/* Logo & Description */}
                 <div className=''>
                     <Image src="/images/gameIcon.png" width={100} height={100} alt="Logo" className="mb-2" />
-                    <p className="text-sm max-w-xs leading-relaxed text-start">
+                    <p className="text-sm max-w-xs leading-relaxed text-start md:text-xs">
                         “Gamer Gizmo – Your ultimate destination for gaming gear, laptops,
                         and accessories. Level up your gaming experience with ease.”
                     </p>
@@ -78,7 +60,7 @@ const Footer = () => {
                 {/* Marketplace */}
                 <div className='text-start'>
                     <h3 className="font-bold mb-4 text-[1.2rem] ">Marketplace</h3>
-                    <ul className="space-y-2 text-sm ">
+                    <ul className="space-y-2 text-sm md:text-xs">
                         <li>Gaming Gear</li>
                         <li>Consoles</li>
                         <li>Gaming PCs</li>
@@ -91,7 +73,7 @@ const Footer = () => {
                 {/* Support */}
                 <div className='text-start'>
                     <h3 className="mb-4 text-[1.2rem] font-bold">Supports</h3>
-                    <ul className="space-y-2 text-sm">
+                    <ul className="space-y-2 text-sm md:text-xs">
                         <li>Terms & Conditions</li>
                         <li>24/7 Supports</li>
                         <li>Cookie Policy</li>
@@ -102,7 +84,7 @@ const Footer = () => {
                 {/* Contact */}
                 <div className='text-start'>
                     <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
-                    <p className="text-sm">
+                    <p className="text-sm md:text-xs">
                         Email: support@gamergizmo.com
                         <br />
                         Phone: +123 456 7890
@@ -114,7 +96,7 @@ const Footer = () => {
                         {/* <div className="w-16 h-16 bg-gray-600"></div> */}
                         <Image src="/images/footerImg.png" alt='footer-image' width={40} height={40} />
                         <div>
-                            <p className="text-sm">
+                            <p className="text-sm md:text-xs">
                                 Boost Your Gaming Setup with These Hacks
                             </p>
                             <Link href="#" className="text-xs underline">
