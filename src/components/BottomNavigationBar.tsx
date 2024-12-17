@@ -25,7 +25,7 @@ const BottomNavigationBar = () => {
   };
   return (
     <div
-      className={`flex justify-evenly items-center  h-20  ${backgroundColor}`}
+      className={`flex justify-evenly items-center  h-20  bg-white dark:bg-black`}
     >
       {/* <div> */}
       <Image

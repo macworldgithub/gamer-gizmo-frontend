@@ -7,9 +7,6 @@ import Section from "@/components/PopularItemSection";
 import PopularMainSection from "@/components/PopularMainSection";
 
 export default function HomePage() {
-
-
-
   return (
     <>
       <FilterSection />
@@ -17,6 +14,5 @@ export default function HomePage() {
       <CategoriesComponent />
       <PopularMainSection />
     </>
-
   );
 }

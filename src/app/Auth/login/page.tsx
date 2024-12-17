@@ -9,7 +9,6 @@ import PageHeader from "@/components/PageHeader";
 const Login = () => {
   return (
     <>
-      {console.log("dddd")}
       <LoginLayout>
         <CredentialSide />
         <PictureSide />
