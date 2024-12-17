@@ -21,7 +21,7 @@ const PostAdd = () => {
             <div className="w-[30%] py-5 gap-2 items-end h-max  flex flex-col">
               <span>
                 City
-                <input className=" border-customPurpleBorder" />{" "}
+                <input className=" p-2 rounded  dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none" />{" "}
               </span>
               <span>
                 Pic Info <input />{" "}
