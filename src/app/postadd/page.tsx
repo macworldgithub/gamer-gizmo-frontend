@@ -24,20 +24,24 @@ const PostAdd = () => {
                 <input className=" p-2 rounded  dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none" />{" "}
               </span>
               <span>
-                Pic Info <input />{" "}
+                Pic Info
+                <input className=" p-2 rounded  dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none" />{" "}
               </span>
               <span>
-                Graphics Card <input />{" "}
+                Graphics Card{" "}
+                <input className=" p-2 rounded  dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none" />{" "}
               </span>
               <span>
                 RAM
-                <input />{" "}
+                <input className=" p-2 rounded  dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none" />{" "}
               </span>
               <span>
-                Storage <input />{" "}
+                Storage{" "}
+                <input className=" p-2 rounded  dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none" />{" "}
               </span>
               <span>
-                LCD Size <input />{" "}
+                LCD Size{" "}
+                <input className=" p-2 rounded  dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none" />{" "}
               </span>
             </div>
           </div>
