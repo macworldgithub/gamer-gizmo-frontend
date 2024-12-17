@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Wrapper from "./Common/Wrapper/Wrapper";
 
 interface Product {
   id: number;
@@ -23,11 +24,12 @@ const PopularItemSection: React.FC<SectionProps> = ({
   onExplore,
 }) => {
   return (
-    <div className="relative w-full  ">
+    <div className="relative w-full">
       <div className="my-8 py-5">
+        {/* Title and Explore Button */}
         <div className="flex lg:justify-between max-sm:flex-col max-sm:items-start mx-auto items-center mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900  max-sm:text-[0.8rem]">
+            <h2 className="text-xl font-bold text-gray-900 max-sm:text-[0.8rem]">
               {title}
             </h2>
             <p className="text-gray-500 text-sm max-sm:text-[0.5rem]">
@@ -36,25 +38,29 @@ const PopularItemSection: React.FC<SectionProps> = ({
           </div>
           <button
             onClick={onExplore}
-            className="bg-custom-gradient  text-white px-4 py-2 rounded-full text-sm hover:bg-purple-600   max-sm:mt-3 "
+            className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm hover:bg-purple-600 max-sm:mt-3"
           >
             Explore More
           </button>
         </div>
-        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-4 ">
+
+        {/* Product Cards */}
+        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {products.map((product) => (
             <div
               key={product.id}
               className="dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200"
             >
+              {/* Product Image */}
               <Image
                 src={product.imageUrl}
-                alt="Left Arrow"
+                alt={product.name}
                 width={100}
                 height={100}
                 className="flex justify-center mx-auto mt-2 w-[12rem] h-[8rem] px-5"
               />
-              <div className="p-4 relative w-[100%] ">
+              {/* Product Details */}
+              <div className="p-4">
                 <h3 className="text-sm dark:text-white font-semibold text-gray-900 truncate">
                   {product.name}
                 </h3>
@@ -64,99 +70,37 @@ const PopularItemSection: React.FC<SectionProps> = ({
                 <p className="text-purple-500 font-bold mt-2">
                   {product.price}
                 </p>
-                <div className="flex justify-end">
-                  <button className="rounded-full w-3 absolute left-[50rem]">
-                    <Image
-                      src="/images/arrowLeft.png"
-                      alt="Left Arrow"
-                      width={35}
-                      height={45}
-                      // className='w-[1.6rem] h-[1.1rem]'
-                    />
-                  </button>
-                </div>
                 <button className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-white mt-2 w-[4rem] py-1 rounded-full text-sm hover:bg-purple-600">
                   Buy
                 </button>
               </div>
             </div>
           ))}
+        </div>
 
-          <div className="flex lg:justify-end max-sm:w-[15rem] sm:w-[30rem] md:w-[35rem] max-lg:w-[30rem] lg:w-[60rem] gap-8">
-            <button className="bg-gray-100 rounded-full w-11 mt-9 h-11 border gray-[#efecfd]">
-              <Image
-                src="/images/arrowLeft.png"
-                alt="Right Arrow"
-                width={20}
-                height={25}
-                // className="filter invert-[50%] sepia-[50%] saturate-[300%] hue-rotate-[240deg]"
-                className="mx-auto"
-              />
-            </button>
-            <button className="bg-custom-gradient rounded-full w-11 mt-9 h-11">
-              <Image
-                src="/images/arrowRight.png"
-                alt="Right Arrow"
-                width={20}
-                height={25}
-                // className="filter invert-[50%] sepia-[50%] saturate-[300%] hue-rotate-[240deg]"
-                className="mx-auto"
-              />
-            </button>
-          </div>
+        {/* Navigation Arrows - Centered below Cards */}
+        <div className="flex justify-center gap-6 mt-6 lg:justify-end">
+          <button className="bg-gray-100 rounded-full w-11 h-11 border-gray-200 hover:bg-gray-300">
+            <Image
+              src="/images/arrowLeft.png"
+              alt="Left Arrow"
+              width={20}
+              height={25}
+              className="mx-auto"
+            />
+          </button>
+          <button className="bg-custom-gradient rounded-full w-11 h-11 hover:bg-purple-700">
+            <Image
+              src="/images/arrowRight.png"
+              alt="Right Arrow"
+              width={20}
+              height={25}
+              className="mx-auto"
+            />
+          </button>
         </div>
       </div>
     </div>
-    // *******************************************************************************************
-    // <div className="relative mx-auto max-md:w-[60rem] md:w-[50rem] lg:w-[80rem]">
-    //   <div className="my-8 px-4 py-5">
-    //     <div className="flex flex-wrap justify-between items-center mb-6">
-    //       <div>
-    //         <h2 className="text-xl font-bold text-gray-900">{title}</h2>
-    //         <p className="text-gray-500 text-sm">{subtitle}</p>
-    //       </div>
-    //       <div className="mt-4 lg:mt-0">
-    //         <button
-    //           onClick={onExplore}
-    //           className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm hover:bg-purple-600"
-    //         >
-    //           Explore More
-    //         </button>
-    //       </div>
-    //     </div>
-
-    //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-    //       {products.map((product) => (
-    //         <div
-    //           key={product.id}
-    //           className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200"
-    //         >
-    //           <Image
-    //             src={product.imageUrl}
-    //             alt="Product Image"
-    //             width={100}
-    //             height={100}
-    //             className="flex justify-center mx-auto mt-2 w-[12rem] h-[8rem]"
-    //           />
-    //           <div className="p-4">
-    //             <h3 className="text-sm font-semibold text-gray-900 truncate">
-    //               {product.name}
-    //             </h3>
-    //             <p className="text-xs text-gray-500 mt-1 truncate">
-    //               {product.description}
-    //             </p>
-    //             <p className="text-purple-500 font-bold mt-2">
-    //               {product.price}
-    //             </p>
-    //             <button className="bg-btnGray flex justify-center items-center mx-auto text-white mt-2 w-[4rem] py-1 rounded-md text-sm hover:bg-purple-600">
-    //               Buy
-    //             </button>
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
