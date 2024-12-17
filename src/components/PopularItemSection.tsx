@@ -23,11 +23,11 @@ const PopularItemSection: React.FC<SectionProps> = ({
   onExplore,
 }) => {
   return (
-    <div className="relative mx-auto max-md:w-[60rem] md:w-[50rem] lg:w-[80rem] ">
+    <div className="relative mx-auto max-md:w-[60rem] md:w-[50rem] lg:w-[80rem]">
       <div className="my-8 px-4 py-5">
         <div className="flex lg:justify-between max-sm:flex-col max-sm:items-start mx-auto items-center mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 max-sm:text-[0.8rem]">
+            <h2 className="text-xl font-bold text-gray-900  max-sm:text-[0.8rem]">
               {title}
             </h2>
             <p className="text-gray-500 text-sm max-sm:text-[0.5rem]">
@@ -45,7 +45,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200"
+              className="dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200"
             >
               <Image
                 src={product.imageUrl}
@@ -55,7 +55,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
                 className="flex justify-center mx-auto mt-2 w-[12rem] h-[8rem] px-5"
               />
               <div className="p-4 relative w-[100%] ">
-                <h3 className="text-sm font-semibold text-gray-900 truncate">
+                <h3 className="text-sm dark:text-white font-semibold text-gray-900 truncate">
                   {product.name}
                 </h3>
                 <p className="text-xs text-gray-500 mt-1 truncate">
@@ -74,22 +74,36 @@ const PopularItemSection: React.FC<SectionProps> = ({
                       // className='w-[1.6rem] h-[1.1rem]'
                     />
                   </button>
-                  <button>
-                    <Image
-                      src="/images/arrowRight.png"
-                      alt="Right Arrow"
-                      width={35}
-                      height={45}
-                      // className='w-[1.6rem] h-[1.1rem]'
-                    />
-                  </button>
                 </div>
-                <button className="bg-btnGray flex justify-center items-center mx-auto text-white mt-2 w-[4rem] py-1 rounded-md text-sm hover:bg-purple-600">
+                <button className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-white mt-2 w-[4rem] py-1 rounded-full text-sm hover:bg-purple-600">
                   Buy
                 </button>
               </div>
             </div>
           ))}
+
+          <div className="flex lg:justify-end max-sm:w-[15rem] sm:w-[30rem] md:w-[35rem] max-lg:w-[30rem] lg:w-[60rem] gap-8">
+            <button className="bg-gray-100 rounded-full w-11 mt-9 h-11 border gray-[#efecfd]">
+              <Image
+                src="/images/arrowLeft.png"
+                alt="Right Arrow"
+                width={20}
+                height={25}
+                // className="filter invert-[50%] sepia-[50%] saturate-[300%] hue-rotate-[240deg]"
+                className="mx-auto"
+              />
+            </button>
+            <button className="bg-custom-gradient rounded-full w-11 mt-9 h-11">
+              <Image
+                src="/images/arrowRight.png"
+                alt="Right Arrow"
+                width={20}
+                height={25}
+                // className="filter invert-[50%] sepia-[50%] saturate-[300%] hue-rotate-[240deg]"
+                className="mx-auto"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
