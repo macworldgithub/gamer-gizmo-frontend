@@ -8,11 +8,10 @@ import PopularMainSection from "@/components/PopularMainSection";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <FilterSection />
       <CategoriesComponent />
-      <CategoriesComponent />
       <PopularMainSection />
-    </>
+    </div>
   );
 }
