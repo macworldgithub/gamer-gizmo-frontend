@@ -8,6 +8,23 @@ export default {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        left: "-5px 0 5px -2px rgba(0, 0, 0, 0.1)", // Adjust values as needed
+        right: "5px 0 5px -2px rgba(0, 0, 0, 0.1)", // Right shadow
+        bottom: "0 5px 5px -2px rgba(0, 0, 0, 0.1)", // Bottom shadow
+        top: "0 -5px 5px -2px rgba(0, 0, 0, 0.1)", // Top shadow
+        colorLeft: "-5px 0 5px -2px rgba(99, 69, 237, 0.5)", // Left shadow
+        colorRight: "5px 0 5px -2px rgba(99, 69, 237, 0.15)", // Right shadow
+        colorBottom: "0 5px 5px -2px rgba(99, 69, 237, 0.5)", // Bottom shadow
+        colorTop: "0 -5px 5px -2px rgba(99, 69, 237, 0.5)", // Top shadow
+        combinedDay:
+          "5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)",
+        combinedNight:
+          "5px 5px 10px rgba(99, 69, 237, 0.5), -5px -5px 10px rgba(99, 69, 237, 0.5)",
+      },
+
+      colorShadow: {},
+
       keyframes: {
         slideIn: {
           "0%": { transform: "translateX(-100%)" },
@@ -31,6 +48,10 @@ export default {
         secondaryColorDark: "#dc39fc",
         blueLight: "#f4f2fe",
         btnGray: "#e8e3fc",
+        customPurple: "rgba(99, 69, 237, 0.12)",
+        customPurpleBorder: "rgba(99, 69, 237, 1)",
+
+        customBg: "#0D0D12", // You can name it "customBg" or any other name
       },
       backgroundImage: {
         "custom-gradient":
