@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -47,11 +48,11 @@ export default {
         secondaryColorLight: "#6345ed",
         secondaryColorDark: "#dc39fc",
         blueLight: "#f4f2fe",
+        customBg: "rgba(13, 13, 18, 1)",
 
         customPurple: "rgba(99, 69, 237, 0.12)",
         customPurpleBorder: "rgba(99, 69, 237, 1)",
-
-        customBg: '#0D0D12', // You can name it "customBg" or any other name
+        linksColor: "#DC39FC",
       },
       backgroundImage: {
         "custom-gradient":

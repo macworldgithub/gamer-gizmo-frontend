@@ -9,24 +9,11 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/Store/Store";
 
 const TopNav = () => {
-  const theme = useSelector((state: RootState) => state.Theme.theme);
-  const [backgroundColor, setBackgroundColor] = useState<string>();
-
-  useEffect(() => {
-    if (theme === "day") {
-      setBackgroundColor("bg-white");
-    } else {
-      setBackgroundColor("bg-black");
-    }
-  }, [theme]);
-
   return (
     <div
-      className={`max-md:w-full max-md:h-20 h-16 ${backgroundColor} max-md:mx-auto  flex max-md:justify-center lg:justify-between md:justify-center items-center  md:px-0 lg:px-10`}
+      className={`max-md:w-full max-md:h-20 h-16 bg-white dark:bg-black max-md:mx-auto  flex max-md:justify-center lg:justify-between md:justify-center items-center  md:px-0 lg:px-10`}
     >
       {/* Dropdown Menus */}
       <div className="flex  md:space-x-4    max-md:gap-2 md:ml-[12%]">

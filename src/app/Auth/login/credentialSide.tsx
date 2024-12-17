@@ -1,32 +1,29 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { useSelector } from "react-redux";
-import { useThemeStyles } from "@/theme/useThemeStyles";
-const CredentialSide = () => {
-  const themeStyles = useThemeStyles();
 
+const CredentialSide = () => {
   return (
     <div
       id="loginCredentials"
-      className={`flex ${themeStyles.borderColor} max-sm:h-max rounded-l-[12px] flex-col w-[60%] max-md:w-[100%] ${themeStyles.loginBackgroundColor}  items-center gap-5 max-sm:gap-2 box-border   max-sm:mb-[300px] p-10 `}
+      className={`flex dark:shadow-combinedNight shadow-combinedDay max-sm:h-max rounded-l-[12px] flex-col w-[60%] max-md:w-[100%] dark:bg-black  items-center gap-5 max-sm:gap-2 box-border   max-sm:mb-[300px] p-10 `}
     >
       <div className="w-[100%] mb-7 max-sm:mb-3">
         <h1
-          className={`text-[2rem] max-sm:text-[1.5rem] font-bold text-left ${themeStyles.headingTextColor} `}
+          className={`text-[2rem] max-sm:text-[1.5rem] font-bold text-left text-black dark:text-white `}
         >
           Login Your Account
         </h1>
       </div>
       <input
-        className={`w-[100%] p-3 rounded ${themeStyles.inputBackgroundColor} font-bold ${themeStyles.inputTextColor} border-2 ${themeStyles.inputBorderColor}  focus:outline-none`}
+        className={`w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
         placeholder="User name or email"
       />
       <input
-        className={`w-[100%] p-3 rounded ${themeStyles.inputBackgroundColor} font-bold ${themeStyles.inputTextColor} border-2 ${themeStyles.inputBorderColor} focus:outline-none`}
+        className={`w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
         placeholder="Password"
+        type="password"
       />
-      <div className={`w-[100%] ${themeStyles.headingTextColor}`}>
+      <div className={`w-[100%] text-black dark:text-white`}>
         <label htmlFor="rememberMe">
           <input type="radio" id="rememberMe" />
           <span id="customRadio"></span> Remember Me

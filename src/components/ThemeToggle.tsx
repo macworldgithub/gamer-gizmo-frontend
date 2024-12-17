@@ -8,7 +8,6 @@
 // import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 
-
 // const ThemeToggle = () => {
 //     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -20,7 +19,6 @@
 //             document.documentElement.classList.remove("dark");
 //         }
 //     };
-
 
 //     return (
 //         <div
@@ -58,7 +56,6 @@
 //     const dispatch = useDispatch();
 //     const currentTheme = useSelector((state: any) => state.Theme.theme);
 
-
 //     return (
 //         <div
 //             className="relative w-[175px] h-[55px] bg-white rounded-full flex items-center p-1 cursor-pointer shadow-md"
@@ -83,7 +80,6 @@
 
 // export default ThemeToggle;
 
-
 "use client";
 
 import React, { useState } from "react";
@@ -95,42 +91,52 @@ import { changeTheme } from "@/app/Redux/ThemeSlice";
 
 // const [isDarkMode,setDa]
 const ThemeToggle = () => {
-    const dispatch = useDispatch()
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    //@ts-ignore
-    const theme = useSelector(state => state.Theme.theme)
+  const dispatch = useDispatch();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  //@ts-ignore
+  const theme = useSelector((state) => state.Theme.theme);
 
-    const handleToggle = () => {
-        setIsDarkMode(!isDarkMode);
-        if (!isDarkMode) {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-        }
+  const handleToggle = () => {
+    setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
 
-        dispatch(changeTheme())
-
-
-    };
-    return (
-        <div
-            className="relative  md:w-[5rem] lg:max-w-[9rem] lg:min-w-[7rem] md:h-[2rem] lg:h-[3rem] bg-white rounded-full  flex justify-between items-center  p-1 max-md:my-6 cursor-pointer shadow-md shadow-blue-500/50" onClick={handleToggle}
-        >
-            {/* Icons */}
-            <div className="absolute md:left-[0.8rem] lg:left-[1.28rem] max-md:left-[1rem] flex items-center space-x-12 w-36">
-                <FontAwesomeIcon icon={faSun} className="z-10 " color="#000000" />
-                {/* color={isDarkMode ? 'white' : 'black'} */}
-            </div>
-            <div className="absolute md:left-[3rem] lg:left-[63%] max-md:left-[3.7rem] flex max-lg:items-center  w-[8rem]">
-                <FontAwesomeIcon icon={faMoon} className="z-10" color={`${theme === "night" ? "#ffffff" : "#000000"}`} />
-                {/* style={{ color: isDarkMode ? 'white' : 'black' }} */}
-            </div>
-            <div
-                className={`lg:w-[3rem] md:w-[2rem] max-md:w-[2.5rem] max-md:h-[1.7rem] md:h-[1.5rem] lg:h-[2rem] bg-custom-gradient rounded-full transform transition-all duration-300 ${theme === "night" ? "translate-x-[100%]" : "translate-x-0"
-                    }`}
-            />
-        </div>
-    );
+    // dispatch(changeTheme());
+  };
+  return (
+    <div
+      className="relative  md:w-[5rem] lg:max-w-[9rem] lg:min-w-[7rem] md:h-[2rem] lg:h-[3rem] bg-white rounded-full  flex justify-between items-center  p-1 max-md:my-6 cursor-pointer shadow-md shadow-blue-500/50"
+      onClick={handleToggle}
+    >
+      {/* Icons */}
+      <div className="absolute md:left-[0.8rem] lg:left-[1.28rem] max-md:left-[1rem] flex items-center space-x-12 w-36">
+        <FontAwesomeIcon icon={faSun} className="z-10 " color="#000000" />
+        {/* color={isDarkMode ? 'white' : 'black'} */}
+      </div>
+      <div className="absolute md:left-[3rem] lg:left-[63%] max-md:left-[3.7rem] flex max-lg:items-center  w-[8rem]">
+        <FontAwesomeIcon
+          icon={faMoon}
+          className="z-10"
+          color={`${
+            localStorage.getItem("theme") === "dark" ? "#ffffff" : "#000000"
+          }`}
+        />
+        {/* style={{ color: isDarkMode ? 'white' : 'black' }} */}
+      </div>
+      <div
+        className={`lg:w-[3rem] md:w-[2rem] max-md:w-[2.5rem] max-md:h-[1.7rem] md:h-[1.5rem] lg:h-[2rem] bg-custom-gradient rounded-full transform transition-all duration-300 ${
+          localStorage.getItem("theme") === "dark"
+            ? "translate-x-[100%]"
+            : "translate-x-0"
+        }`}
+      />
+    </div>
+  );
 };
 
 export default ThemeToggle;

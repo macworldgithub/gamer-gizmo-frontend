@@ -2,22 +2,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    theme: "day",
-
+  theme:
+    typeof window !== "undefined" ? localStorage.getItem("theme") : "light",
 };
 
 const ThemeSlice = createSlice({
-    name: "Theme",
-    initialState,
-    reducers: {
-        changeTheme: (state) => {
-            if (state.theme === "day") {
-                state.theme = "night";
-            } else {
-                state.theme = "day";
-            }
-        },
+  name: "Theme",
+  initialState,
+  reducers: {
+    changeTheme: (state) => {
+      if (state.theme === "dark") {
+        state.theme = "light";
+      } else {
+        state.theme = "dark";
+      }
     },
+  },
 });
 
 export const { changeTheme } = ThemeSlice.actions;
