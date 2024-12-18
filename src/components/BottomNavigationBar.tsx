@@ -36,28 +36,14 @@ const BottomNavigationBar = () => {
         className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
       />
       {/* </div> */}
-      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap">
-        <Link href="#" className="text-navTextLight ">
-          Laptops
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Desktops
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Store
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Components
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Blogs
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          About Us
-        </Link>
-        <Link href="#" className="text-navTextLight ">
-          Contact Us
-        </Link>
+      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
+        <Link href="#">Laptops</Link>
+        <Link href="#">Desktops</Link>
+        <Link href="#">Store</Link>
+        <Link href="#">Components</Link>
+        <Link href="#">Blogs</Link>
+        <Link href="#">About Us</Link>
+        <Link href="#">Contact Us</Link>
         <Link href="#" className="text-secondaryColorLight">
           Inspection
         </Link>
@@ -171,7 +157,7 @@ const BottomNavigationBar = () => {
                   height={18}
                   alt="btnIcon"
                 />
-                <p className="text-sm">Post Your Ad</p>
+                <p className="text-sm text-white">Post Your Ad</p>
               </div>
 
               <ThemeToggle />
@@ -188,7 +174,7 @@ const BottomNavigationBar = () => {
             height={18}
             alt="btnIcon"
           />
-          <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold">
+          <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
             Post Your Ad
           </p>
         </div>

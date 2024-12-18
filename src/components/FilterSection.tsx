@@ -22,7 +22,7 @@ const FilterSection = () => {
     };
   }, []);
   return (
-    <div className=" max-lg:min-h-[50%] w-full max-md:h-[50rem] md:lg:max-h-[75%]  bg-custom-gradient relative flex flex-col justify-center items-center overf py-14">
+    <div className="max-lg:min-h-[50%] w-full max-md:h-[50rem] md:lg:max-h-[75%]  bg-curve-light dark:bg-curve-dark relative flex flex-col justify-center items-center overf py-14  bg-cover bg-center bg-no-repeat">
       {isVisible && (
         <div className="flex items-center bg-transparent rounded-full py-2 border border-gray-300 shadow-md p-2 w-[600px] h-[57px]">
           <i className="fas fa-search text-gray-500 mr-2"></i>
@@ -46,7 +46,7 @@ const FilterSection = () => {
 
       <SelectLabels />
 
-      <div className="bg-black w-[191px] h-[55px] mt-5 rounded-full flex justify-center gap-3 items-center">
+      <div className="bg-black dark:bg-custom-gradient w-[191px] h-[55px] mt-5 rounded-full flex justify-center gap-3 items-center">
         <Image
           src="/images/arrowIcon.png"
           alt="Arrow-Icon"

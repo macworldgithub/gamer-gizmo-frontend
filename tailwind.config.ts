@@ -58,6 +58,13 @@ export default {
         "custom-gradient":
           "linear-gradient(to right, rgb(99, 69, 237), #dc39fc)",
         "blue-gradientLight": "linear-gradient(to top, #f4f2fe, #dc39fc)",
+        "dark-custom-gradient":
+          "linear-gradient(to right, rgb(0, 0, 0), #000000)",
+
+        "curve-light":
+          "linear-gradient(to right, rgb(99, 69, 237), #dc39fc), url('/images/curve.png')",
+        "curve-dark":
+          "linear-gradient(to right, rgb(0, 0, 0), #000000), url('/images/curve.png')",
       },
     },
   },

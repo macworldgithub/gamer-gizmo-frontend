@@ -26,20 +26,19 @@ const CategoriesComponent = () => {
   return (
     <div className="mb-36 text-black">
       {/* Top Section */}
-
-      <div className="bg-[#f4f2fe] relative py-12 w-full max-sm:h-[65rem] sm:h-[69rem] md:h-[65rem] lg:h-[52rem]">
-        <h1 className=" text-center md:text-[1.5rem] font-semibold">
-          Sell your PCs and Gaming Accesories On{" "}
+      <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] relative py-12 w-full max-sm:h-[65rem] sm:h-[69rem] md:h-[65rem] lg:h-[52rem]">
+        <h1 className=" text-center md:text-[1.5rem] font-bold">
+          Level Up Your Gaming Gear - Buy, Sell, and
         </h1>
-        <h1 className="text-center md:text-[1.5rem] font-semibold mb-3">
-          Gamezen and get the price
+        <h1 className="text-center md:text-[1.5rem] font-bold mb-3">
+          Upgrade with GamerGizmo!
         </h1>
 
         {/* Main Container */}
         <Wrapper>
-          <div className="w-full mx-auto bg-white shadow-lg rounded-xl max-lg:p-2 md:p-6 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center  max-md:items-center gap-6">
+          <div className="w-full mx-auto bg-white dark:bg-black dark:text-white text-black shadow-lg rounded-xl max-lg:p-2 md:p-6 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center  max-md:items-center gap-6">
             {/* Left Section */}
-            <div className="flex-1 justify-start md:px-8">
+            <div className="flex-1 justify-start md:px-8 ">
               <h2 className="text-xl font-bold text-purple-700 mb-4">
                 Post your Ad on GamerGizmo
               </h2>
@@ -97,29 +96,31 @@ const CategoriesComponent = () => {
 
         {/* Categories Section */}
         <Wrapper>
-          {/* <div className=" w-auto h-auto "> */}
-          <div className=" absolute w-full max-w-[1200px]  lg:-bottom-56  rounded-xl z-50  mb-16 shadow-lg p-8 bg-white text-black">
-            <h2 className="text-xl font-bold pl-2 mb-6">Categories</h2>
-            <div className="grid  max-sm:grid-cols-1 max-lg:grid-cols-2 lg:grid-cols-3 gap-6">
-              {category.map((category, index) => (
-                <div
-                  key={index}
-                  className="w-full max-w-[15rem] max-md:w-[20rem] mx-auto border border-gray-200 bg-white p-6 rounded-lg  flex flex-col justify-between whitespace-nowrap"
-                >
-                  <h2 className="text-[0.9rem] font-bold text-center mb-4">
-                    {category}
-                  </h2>
-                </div>
-              ))}
+          <div className="relative flex justify-center items-center w-full mt-12">
+            <div className="w-full max-w-[1200px] rounded-xl z-50 shadow-lg p-8 bg-white dark:bg-black text-black">
+              <h2 className="text-2xl font-bold text-center mb-6 dark:text-white">
+                Categories
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+                {category.map((item, index) => (
+                  <div
+                    key={index}
+                    className="w-full max-w-[15rem] border border-gray-200 bg-white p-6 rounded-lg shadow-md flex flex-col justify-center items-center"
+                  >
+                    <h2 className="text-[0.9rem] font-bold text-center mb-4">
+                      {item}
+                    </h2>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          {/* </div> */}
         </Wrapper>
       </div>
 
       {/* Offering Section */}
       <Wrapper>
-        <div className="text-black max-md:h-[60rem] relative h-auto bg-white shadow-xl w-full  max-sm:mt-[50rem] sm:mt-[20rem] md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
+        <div className="text-black max-md:h-[60rem] relative h-auto bg-white dark:bg-black shadow-xl w-full  max-sm:mt-[50rem] sm:mt-[20rem] md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
           <div className="flex justify-between max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-sm max-md:whitespace-nowrap font-bold">
               GamerGizmo Offering
@@ -141,7 +142,7 @@ const CategoriesComponent = () => {
             {offeringList.map((item, index) => (
               <div
                 key={index}
-                className="border rounded-lg p-4 flex flex-col items-center bg-white shadow-md hover:shadow-lg"
+                className="border rounded-lg p-4 flex flex-col items-center bg-white dark:bg-black shadow-md hover:shadow-lg"
               >
                 <img
                   src={item.image}
