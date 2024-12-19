@@ -96,9 +96,9 @@ const CategoriesComponent = () => {
 
         {/* Categories Section */}
         <Wrapper>
-          <div className="relative flex justify-center items-center w-full mt-12">
+          <div className="relative flex justify-center items-center w-full mt-16">
             <div className="w-full max-w-[1200px] rounded-xl z-50 shadow-lg p-8 bg-white dark:bg-black text-black">
-              <h2 className="text-2xl font-bold text-center mb-6 dark:text-white">
+              <h2 className="text-2xl sm:pl-[0.9rem] md:pl-[calc(8%+10px)] lg:pl-[calc(4%+20px)]  font-bold max-sm:text-center text-start mb-6 dark:text-white">
                 Categories
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
@@ -122,7 +122,7 @@ const CategoriesComponent = () => {
       <Wrapper>
         <div className="text-black max-md:h-[60rem] relative h-auto bg-white dark:bg-black shadow-xl w-full  max-sm:mt-[50rem] sm:mt-[20rem] md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
           <div className="flex justify-between max-md:flex-col items-center mb-8">
-            <h2 className="text-2xl max-md:text-sm max-md:whitespace-nowrap font-bold">
+            <h2 className="text-2xl max-md:text-sm max-md:whitespace-nowrap dark:text-white font-bold">
               GamerGizmo Offering
             </h2>
             <button className="flex justify-center max-md:absolute max-md:bottom-4 max-md:py-2 items-center max-sm:w-[7rem] max-sm:h-[2.6rem] gap-2 bg-custom-gradient text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
@@ -149,9 +149,11 @@ const CategoriesComponent = () => {
                   alt={item.name}
                   className="w-24 h-24 object-contain mb-4"
                 />
-                <h3 className="text-sm font-semibold mb-2">{item.name}</h3>
+                <h3 className="text-sm font-semibold mb-2 dark:text-white">
+                  {item.name}
+                </h3>
                 <p className="text-sm text-gray-500 mb-4">{item.price}</p>
-                <button className="bg-custom-gradient w-24 h-8 text-white text-sm px-4 py-2 rounded-full hover:bg-purple-600">
+                <button className="bg-[#E8E3FC] w-24 h-8 font-bold text-black text-sm px-4 py-2 rounded-full hover:bg-purple-600">
                   Buy
                 </button>
               </div>

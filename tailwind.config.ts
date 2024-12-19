@@ -62,9 +62,9 @@ export default {
           "linear-gradient(to right, rgb(0, 0, 0), #000000)",
 
         "curve-light":
-          "linear-gradient(to right, rgb(99, 69, 237), #dc39fc), url('/images/curve.png')",
+          "linear-gradient(to right, rgba(99, 69, 237, 0.9), rgba(220, 57, 252, 0.9))",
         "curve-dark":
-          "linear-gradient(to right, rgb(0, 0, 0), #000000), url('/images/curve.png')",
+          "linear-gradient(to right, rgba(0, 0, 0,0.7), rgba(0, 0, 0, 0.7))",
       },
     },
   },

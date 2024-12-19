@@ -42,75 +42,12 @@ export default function SelectLabels() {
   };
 
   return (
-    // <div className="bg-white rounded-md">
-    //   <FormControl sx={{ m: 1, minWidth: 120 }}>
-    //     <Select
-    //       value={age}
-    //       onChange={handleChange}
-    //       style={{ width: "200px", borderRadius: "50px" }}
-    //       displayEmpty
-    //       inputProps={{ "aria-label": "Without label" }}
-    //       MenuProps={{
-    //         PaperProps: {
-    //           sx: {
-    //             marginTop: "5px",
-    //             borderLeftRadius: "25px",
-    //             borderBottomLeftRadius: "25px",
-    //             padding: "1px",
-    //             boxShadow: "none",
-    //             maxHeight: "200px", // Set maximum height for dropdown
-    //             overflowY: "auto",
-    //             "&::-webkit-scrollbar": {
-    //               width: "8px", // Width of the scrollbar
-    //             },
-    //             "&::-webkit-scrollbar-thumb": {
-    //               backgroundColor: "purple", // Color of the scrollbar thumb
-    //               borderRadius: "50px", // Rounded corners for the scrollbar thumb
-    //             },
-    //             "&::-webkit-scrollbar-thumb:hover": {
-    //               backgroundColor: "#6a0dad", // Darker color on hover
-    //             },
-    //             "&::-webkit-scrollbar-track": {
-    //               backgroundColor: "#f0f0f0", // Track color
-    //             },
-    //           },
-    //         },
-    //       }}
-    //       sx={{
-    //         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    //           borderColor: "black",
-    //           border: "1px solid grey", // Prevent blue border on focus
-    //         },
-    //       }}
-    //     >
-    //       {menuItems.map((item, index) => (
-    //         <MenuItem
-    //           key={index}
-    //           value={item.value}
-    //           sx={{
-    //             height: "50px",
-    //             "&.Mui-selected": {
-    //               backgroundColor: "transparent !important", // Removes the selected background
-    //             },
-    //             "&:hover": {
-    //               transition: "all 0.5s ease",
-    //               backgroundColor: "#E8E3FC", // Set hover background color
-    //               color: "white",
-    //             },
-    //           }}
-    //         >
-    //           {item.label}
-    //         </MenuItem>
-    //       ))}
-    //     </Select>
-    //   </FormControl>
-    // </div>
     <Wrapper>
-      <div className="flex max-md:flex-col bg-[#ffffff] py-5 justify-around max-md:rounded-md items-centermax-md:h-[30rem] max-md:py-5 md:h-[5.625rem] px-4 mt-5 rounded-md gap-6">
+      <div className="flex max-md:flex-col max-md:items-center bg-[#ffffff] py-5 justify-around max-md:rounded-md items-centermax-md:h-[30rem] max-md:py-5 md:h-[5.625rem] px-4 mt-5 rounded-md gap-6">
         {dropdownOptions.map((dropdown, index) => (
           <div
             key={index}
-            className="w-28 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center "
+            className="w-28 max-md:w-60 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center "
           >
             <FormControl sx={{ m: 1, minWidth: 120, width: "100%" }}>
               <Select
@@ -177,7 +114,7 @@ export default function SelectLabels() {
             </FormControl>
           </div>
         ))}
-        <div className="bg-custom-gradient my-3 w-32 h-10 max-md:mx-5 rounded-full md:p-1.5 flex justify-center items-center md:text-base font-medium text-white">
+        <div className="bg-custom-gradient my-3  w-28 max-md:w-60 h-10 max-md:mx-5 rounded-full md:p-1.5 flex justify-center items-center md:text-base font-medium text-white">
           Filter
         </div>
       </div>

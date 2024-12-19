@@ -25,14 +25,14 @@ const PopularItemSection: React.FC<SectionProps> = ({
 }) => {
   return (
     <div className="relative w-full">
-      <div className="my-8 py-5">
+      <div className="my-8 ">
         {/* Title and Explore Button */}
         <div className="flex lg:justify-between max-sm:flex-col max-sm:items-start mx-auto items-center mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 max-sm:text-[0.8rem]">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[0.8rem]">
               {title}
             </h2>
-            <p className="text-gray-500 text-sm max-sm:text-[0.5rem]">
+            <p className="text-gray-500 dark:text-white mt-2 text-sm max-sm:text-[0.5rem]">
               {subtitle}
             </p>
           </div>
@@ -80,7 +80,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
 
         {/* Navigation Arrows - Centered below Cards */}
         <div className="flex justify-center gap-6 mt-6 lg:justify-end">
-          <button className="bg-gray-100 rounded-full w-11 h-11 border-gray-200 hover:bg-gray-300">
+          <button className="bg-gray-100 dark:bg-[#161328] rounded-full w-11 h-11 border-gray-200 hover:bg-gray-300">
             <Image
               src="/images/arrowLeft.png"
               alt="Left Arrow"
