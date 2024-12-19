@@ -22,10 +22,7 @@ const FilterSection = () => {
     };
   }, []);
   return (
-    <div
-      style={{}}
-      className="w-[100%] h-[100%] bg-cover dark:bg-black bg-black bg-[url('/images/curve.png')]  "
-    >
+    <div className="w-[100%] h-[100%] bg-cover dark:bg-black bg-black bg-[url('/images/curve.png')]  ">
       <div className="max-lg:min-h-[50%] w-full max-md:h-[50rem] md:lg:max-h-[75%] py-14 bg-curve-light dark:bg-curve-dark relative flex flex-col justify-center items-center  bg-cover bg-center bg-no-repeat ">
         {isVisible && (
           <div className="flex items-center bg-transparent rounded-full py-2 border border-gray-300 shadow-md p-2 w-[600px] h-[57px]">

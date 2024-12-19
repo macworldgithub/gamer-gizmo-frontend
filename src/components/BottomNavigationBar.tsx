@@ -4,6 +4,7 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/Store/Store";
+import { dark } from "@mui/material/styles/createPalette";
 
 const BottomNavigationBar = () => {
   const theme = useSelector((state: RootState) => state.Theme.theme);
@@ -49,31 +50,25 @@ const BottomNavigationBar = () => {
         </Link>
       </div>
 
-      <div className="md:hidden absolute left-0 ml-4">
+      <div className="md:hidden   absolute left-0 ml-4">
         <button
           onClick={toggleDrawer}
           className="text-black focus:outline-none"
         >
           {/* Drawer Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
+          <Image
+            src="/images/drawerIcon.png"
+            alt="Drawer-Icon"
+            width={35}
+            height={45}
+            style={{ filter: dark ? "invert(1)" : "invert(0)" }}
+            className="w-[1.6rem] h-[1.1rem]"
+          />
         </button>
         {/* Drawer Menu */}
         {
           <div
-            className={`flex-nowrap fixed left-0 bg-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
+            className={`flex-nowrap fixed left-0 bg-white dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
@@ -93,56 +88,56 @@ const BottomNavigationBar = () => {
 
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300 "
+              className=" text-lg hover:text-gray-300 "
               onClick={() => setIsDrawerOpen(false)}
             >
               Laptops
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Desktops
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Store
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Components
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Blogs
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               About Us
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className=" text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Contact Us
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className=" text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Inspection
