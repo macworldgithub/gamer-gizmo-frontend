@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -5,22 +7,9 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Wrapper from "./Common/Wrapper/Wrapper";
+import { useEffect, useState } from "react";
 
 export default function SelectLabels() {
-  // const [age, setAge] = React.useState("");
-
-  // const handleChange = (event: SelectChangeEvent) => {
-  //   setAge(event.target.value);
-  // };
-
-  // Define menu items in an array
-  const menuItems = [
-    { value: "", label: <em>None</em> },
-    { value: 10, label: "Ten" },
-    { value: 20, label: "Twenty" },
-    { value: 30, label: "Thirty" },
-  ];
-
   const dropdownOptions = [
     { label: "Processor", options: ["lorem", "lorem"] },
     { label: "New Items", options: ["lorem", "lorem"] },
@@ -29,36 +18,71 @@ export default function SelectLabels() {
     { label: "Location", options: ["lorem", "lorem"] },
   ];
 
-  const [selectedValues, setSelectedValues] = React.useState(
+  const [selectedValues, setSelectedValues] = useState(
     dropdownOptions.map((dropdown) => dropdown.options[0])
   );
 
-  // Handle dropdown value change
+  const [dropdownStates, setDropdownStates] = useState(
+    dropdownOptions.map(() => false)
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (dropdownStates.some((isOpen) => isOpen)) {
+        setDropdownStates(dropdownStates.map(() => false));
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [dropdownStates]);
+
   //@ts-ignore
   const handleChange = (index, event) => {
-    const updatedValues = [...selectedValues];
-    updatedValues[index] = event.target.value;
+    const updatedValues = selectedValues.map((value, i) =>
+      i === index ? event.target.value : value
+    );
     setSelectedValues(updatedValues);
+  };
+
+  const handleOpen = (index: any) => {
+    setDropdownStates(dropdownStates.map((state, i) => i === index));
+  };
+
+  const handleClose = () => {
+    setDropdownStates(dropdownStates.map(() => false));
   };
 
   return (
     <Wrapper>
-      {/* <div className="flex max-md:flex-col max-md:items-center bg-white py-5 justify-around max-md:rounded-md items-centermax-md:h-[30rem] max-md:py-5 md:h-[5.625rem] px-4 mt-5 rounded-md gap-6"> */}
       <div className="flex flex-wrap bg-white py-5 justify-center md:justify-around rounded-md px-4 mt-5 gap-4 md:gap-6">
         {dropdownOptions.map((dropdown, index) => (
           <div
             key={index}
-            className="w-28  max-md:w-60 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center"
+            className="w-28 max-md:w-60 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center relative"
           >
-            <FormControl sx={{ m: 1, minWidth: 120, width: "100%" }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: 120,
+                width: "100%",
+              }}
+            >
               <Select
                 value={selectedValues[index]}
                 onChange={(event) => handleChange(index, event)}
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
+                open={dropdownStates[index]}
+                onOpen={() => handleOpen(index)}
+                onClose={handleClose}
                 MenuProps={{
+                  disableScrollLock: true,
                   PaperProps: {
                     sx: {
+                      position: "absolute",
+                      top: "100%",
                       marginTop: "17.5px",
                       borderLeftRadius: "25px",
                       borderBottomLeftRadius: "25px",
@@ -113,7 +137,7 @@ export default function SelectLabels() {
             </FormControl>
           </div>
         ))}
-        <div className="bg-custom-gradient  w-28 max-md:w-60 h-10 lg:h-12 max-md:mx-5 rounded-full md:p-1.5 flex justify-center items-center md:text-base font-medium text-white">
+        <div className="bg-custom-gradient w-28 max-md:w-60 h-10 lg:h-12 max-md:mx-5 rounded-full md:p-1.5 flex justify-center items-center md:text-base font-medium text-white">
           Filter
         </div>
       </div>
