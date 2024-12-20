@@ -8,7 +8,7 @@ const page = () => {
         pageName="GamerGizmo for buisness"
         title="hello"
         description="tughieihkjnkjjjjjjjjffjfjfjfjfjfjfj"
-        button="jrebgke"
+        // button="jrebgke"
       />
     </div>
   );
