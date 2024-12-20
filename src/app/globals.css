@@ -55,3 +55,21 @@ body {
 #rememberMe:checked + #customRadio::after {
   display: block; /* Shows the filled inner circle when checked */
 }
+
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 12px; /* Height of the scrollbar (for horizontal scrollbars) */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: purple; /* Color of the scrollbar thumb */
+  border-radius: 50px; /* Rounded edges for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6a0dad; /* Thumb color when hovered */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Color of the scrollbar track */
+}
