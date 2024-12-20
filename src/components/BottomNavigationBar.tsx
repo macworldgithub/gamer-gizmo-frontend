@@ -4,6 +4,7 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/Store/Store";
+import { dark } from "@mui/material/styles/createPalette";
 
 const BottomNavigationBar = () => {
   const theme = useSelector((state: RootState) => state.Theme.theme);
@@ -36,58 +37,38 @@ const BottomNavigationBar = () => {
         className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
       />
       {/* </div> */}
-      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap">
-        <Link href="#" className="text-navTextLight ">
-          Laptops
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Desktops
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Store
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Components
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          Blogs
-        </Link>
-        <Link href="#" className="text-navTextLight">
-          About Us
-        </Link>
-        <Link href="#" className="text-navTextLight ">
-          Contact Us
-        </Link>
+      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
+        <Link href="#">Laptops</Link>
+        <Link href="#">Desktops</Link>
+        <Link href="#">Store</Link>
+        <Link href="#">Components</Link>
+        <Link href="#">Blogs</Link>
+        <Link href="#">About Us</Link>
+        <Link href="#">Contact Us</Link>
         <Link href="#" className="text-secondaryColorLight">
           Inspection
         </Link>
       </div>
 
-      <div className="md:hidden absolute left-0 ml-4">
+      <div className="md:hidden   absolute left-0 ml-4">
         <button
           onClick={toggleDrawer}
           className="text-black focus:outline-none"
         >
           {/* Drawer Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
+          <Image
+            src="/images/drawerIcon.png"
+            alt="Drawer-Icon"
+            width={35}
+            height={45}
+            style={{ filter: dark ? "invert(1)" : "invert(0)" }}
+            className="w-[1.6rem] h-[1.1rem]"
+          />
         </button>
         {/* Drawer Menu */}
         {
           <div
-            className={`flex-nowrap fixed left-0 bg-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
+            className={`flex-nowrap fixed left-0 bg-white dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
@@ -107,56 +88,56 @@ const BottomNavigationBar = () => {
 
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300 "
+              className=" text-lg hover:text-gray-300 "
               onClick={() => setIsDrawerOpen(false)}
             >
               Laptops
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Desktops
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Store
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Components
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Blogs
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className="text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               About Us
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className=" text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Contact Us
             </Link>
             <Link
               href="#"
-              className="text-black text-lg hover:text-gray-300"
+              className=" text-lg hover:text-gray-300"
               onClick={() => setIsDrawerOpen(false)}
             >
               Inspection
@@ -171,7 +152,7 @@ const BottomNavigationBar = () => {
                   height={18}
                   alt="btnIcon"
                 />
-                <p className="text-sm">Post Your Ad</p>
+                <p className="text-sm text-white">Post Your Ad</p>
               </div>
 
               <ThemeToggle />
@@ -188,7 +169,7 @@ const BottomNavigationBar = () => {
             height={18}
             alt="btnIcon"
           />
-          <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold">
+          <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
             Post Your Ad
           </p>
         </div>
