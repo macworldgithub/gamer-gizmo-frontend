@@ -43,11 +43,12 @@ export default function SelectLabels() {
 
   return (
     <Wrapper>
-      <div className="flex max-md:flex-col max-md:items-center bg-white py-5 justify-around max-md:rounded-md items-centermax-md:h-[30rem] max-md:py-5 md:h-[5.625rem] px-4 mt-5 rounded-md gap-6">
+      {/* <div className="flex max-md:flex-col max-md:items-center bg-white py-5 justify-around max-md:rounded-md items-centermax-md:h-[30rem] max-md:py-5 md:h-[5.625rem] px-4 mt-5 rounded-md gap-6"> */}
+      <div className="flex flex-wrap bg-white py-5 justify-center md:justify-around rounded-md px-4 mt-5 gap-4 md:gap-6">
         {dropdownOptions.map((dropdown, index) => (
           <div
             key={index}
-            className="w-28 max-md:w-60 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center"
+            className="w-28  max-md:w-60 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center"
           >
             <FormControl sx={{ m: 1, minWidth: 120, width: "100%" }}>
               <Select

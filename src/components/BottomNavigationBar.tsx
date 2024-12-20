@@ -25,9 +25,7 @@ const BottomNavigationBar = () => {
     setFirstClick(true);
   };
   return (
-    <div
-      className={`flex justify-evenly items-center  h-20  bg-white dark:bg-black`}
-    >
+    <div className={`flex justify-evenly items-center h-20  dark:bg-black`}>
       {/* <div> */}
       <Image
         src="/images/gameIcon.png"
@@ -35,7 +33,7 @@ const BottomNavigationBar = () => {
         width={100}
         height={100}
         className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
-      />
+      />  
       {/* </div> */}
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         <Link href="#">Laptops</Link>
@@ -50,25 +48,26 @@ const BottomNavigationBar = () => {
         </Link>
       </div>
 
-      <div className="md:hidden   absolute left-0 ml-4">
+      <div className="md:hidden absolute left-0 ml-4 ">
         <button
           onClick={toggleDrawer}
-          className="text-black focus:outline-none"
+          className="focus:outline-none text-black dark:text-white"
         >
-          {/* Drawer Icon */}
-          <Image
-            src="/images/drawerIcon.png"
-            alt="Drawer-Icon"
-            width={35}
-            height={45}
-            style={{ filter: dark ? "invert(1)" : "invert(0)" }}
-            className="w-[1.6rem] h-[1.1rem]"
-          />
+          <div className="w-[1.6rem] h-[1.1rem]">
+            <Image
+              src="/images/drawerIcon.svg"
+              alt="Drawer Icon"
+              width={35}
+              height={45}
+              className="dark:invert"
+            />
+          </div>
         </button>
+
         {/* Drawer Menu */}
         {
           <div
-            className={`flex-nowrap fixed left-0 bg-white dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
+            className={`flex-nowrap fixed left-0 bg-white dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 overflow-y-auto
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
