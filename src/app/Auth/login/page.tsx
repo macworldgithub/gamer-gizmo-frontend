@@ -10,8 +10,8 @@ const Login = () => {
   return (
     <>
       <LoginLayout>
-        <CredentialSide />
-        <PictureSide />
+        <CredentialSide/>
+        <PictureSide/>
       </LoginLayout>
     </>
   );
