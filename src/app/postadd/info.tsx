@@ -120,7 +120,7 @@ const PartsInfromation = () => {
   return (
     <div className="w-[100%] max-sm:w-[50%] py-5 gap-2 h-max flex flex-col">
       {selectData.map((select: any, index: any) => (
-        <span className="flex" key={select.id}>
+        <span className="flex " key={select.id}>
           <Select
             open={openStates[index]}
             onOpen={() => handleOpen(index)}
@@ -128,6 +128,7 @@ const PartsInfromation = () => {
             value={selectedValues[index]} // Bind selected value to the state
             onChange={(e) => handleChange(index, e.target.value)}
             fullWidth
+            className=" dark:text-white"
             sx={{
               color: "black",
               fontWeight: "600",

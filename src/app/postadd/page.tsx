@@ -8,18 +8,22 @@ import PartsNames from "./parts";
 import PartsInfromation from "./info";
 import LaptopInformation from "./laptopinfo";
 import UploadPhotos from "./uploadphotos";
+import ContactInformation from "./contact";
+import SubmissionButton from "./submit";
 
 const PostAdd = () => {
   return (
     <>
       <PageHeader pageName="postyouradd" />
 
-      <div id="layout" className="pb-[5rem]">
+      <div id="layout" className="">
         <Guide />
         <Wrapper>
-          <div className="w-[100%] h-max flex justify-center items-center flex-col">
+          <div className="w-[100%] pb-5 dark:text-white h-max flex justify-center items-center flex-col">
             <LaptopInformation />
             <UploadPhotos />
+            <ContactInformation />
+            <SubmissionButton />
           </div>
         </Wrapper>
       </div>

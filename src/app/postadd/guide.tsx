@@ -3,15 +3,15 @@ import Image from "next/image";
 
 const Guide = () => {
   return (
-    <div className="w-[100%] bg-[#f9f9f9]  px-10 m py-[1rem] flex justify-center  box-border">
+    <div className="w-[100%] bg-[#f9f9f9] dark:bg-[#151520] px-10 m py-[1rem] flex justify-center  box-border">
       <div className="  text-center flex flex-col justify-center items-center">
         <h1 className="text-[2.5rem] text-customPurpleBorder font-medium">
           Sell Your Pc With three Simple Steps!
         </h1>
-        <h1 className="text-[1rem] font-normal mb-2">
+        <h1 className="text-[1rem] font-normal mb-2 dark:text-white">
           it's free and take less than a minute
         </h1>
-        <div className="flex gap-4  max-sm:flex max-sm:flex-col">
+        <div className="flex gap-4 dark:text-white  max-sm:flex max-sm:flex-col">
           <div className="flex items-center gap-3">
             <Image
               src={"/images/product.png"}

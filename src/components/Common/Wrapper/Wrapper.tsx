@@ -8,7 +8,7 @@ const Wrapper = ({
   className?: string;
 }) => {
   return (
-    <div className="flex justify-center w-full ">
+    <div className="flex justify-center w-full dark:bg-black ">
       <div
         className={`max-w-screen-xl max-sm:px-8 sm:px-14 px-4 md:px-8 w-full ${className}`}
       >
