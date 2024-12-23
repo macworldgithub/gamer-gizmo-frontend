@@ -46,7 +46,7 @@ const BottomNavigationBar = () => {
   };
 
   return (
-    <div className={`flex justify-evenly items-center h-20  dark:bg-black`}>
+    <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
       {/* <div> */}
       <Image
         src="/images/gameIcon.png"
