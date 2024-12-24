@@ -27,18 +27,18 @@ const PopularItemSection: React.FC<SectionProps> = ({
     <div className="relative w-full">
       <div className="my-8 ">
         {/* Title and Explore Button */}
-        <div className="flex lg:justify-between max-sm:flex-col max-sm:items-start mx-auto items-center mb-6">
+        <div className="flex justify-between max-sm:flex-col  max-sm:items-start mx-auto items-center mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[0.8rem]">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[1.1rem]">
               {title}
             </h2>
-            <p className="text-gray-500 dark:text-white mt-2 text-sm max-sm:text-[0.5rem]">
+            <p className="text-gray-500 dark:text-white mt-2 text-sm max-sm:text-[0.6rem]">
               {subtitle}
             </p>
           </div>
           <button
             onClick={onExplore}
-            className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm hover:bg-purple-600 max-sm:mt-3"
+            className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm flex md:justify-end hover:bg-purple-600 max-sm:mt-3"
           >
             Explore More
           </button>

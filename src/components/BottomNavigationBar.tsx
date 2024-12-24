@@ -9,6 +9,9 @@ import { dark } from "@mui/material/styles/createPalette";
 const BottomNavigationBar = () => {
   const theme = useSelector((state: RootState) => state.Theme.theme);
   const [backgroundColor, setBackgroundColor] = useState<string>();
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [firstClick, setFirstClick] = useState(false);
 
   useEffect(() => {
     if (theme === "day") {
@@ -17,17 +20,33 @@ const BottomNavigationBar = () => {
       setBackgroundColor("bg-black");
     }
   }, [theme]);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [firstClick, setFirstClick] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolling(true);
+        if (isDrawerOpen) {
+          setIsDrawerOpen(false); // Close drawer when scrolling
+        }
+      } else {
+        setIsScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isDrawerOpen]);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
     setFirstClick(true);
   };
+
   return (
-    <div
-      className={`flex justify-evenly items-center  h-20  bg-white dark:bg-black`}
-    >
+    <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
       {/* <div> */}
       <Image
         src="/images/gameIcon.png"
@@ -50,25 +69,26 @@ const BottomNavigationBar = () => {
         </Link>
       </div>
 
-      <div className="md:hidden   absolute left-0 ml-4">
+      <div className="md:hidden absolute left-0 ml-4 ">
         <button
           onClick={toggleDrawer}
-          className="text-black focus:outline-none"
+          className="focus:outline-none text-black dark:text-white"
         >
-          {/* Drawer Icon */}
-          <Image
-            src="/images/drawerIcon.png"
-            alt="Drawer-Icon"
-            width={35}
-            height={45}
-            style={{ filter: dark ? "invert(1)" : "invert(0)" }}
-            className="w-[1.6rem] h-[1.1rem]"
-          />
+          <div className="w-[1.6rem] h-[1.1rem]">
+            <Image
+              src="/images/drawerIcon.svg"
+              alt="Drawer Icon"
+              width={35}
+              height={45}
+              className="dark:invert"
+            />
+          </div>
         </button>
+
         {/* Drawer Menu */}
-        {
+        {isDrawerOpen && (
           <div
-            className={`flex-nowrap fixed left-0 bg-white dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 py-8 
+            className={`flex-nowrap fixed left-0 bg-white dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 overflow-y-auto
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
@@ -158,7 +178,7 @@ const BottomNavigationBar = () => {
               <ThemeToggle />
             </div>
           </div>
-        }
+        )}
       </div>
       <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem]">
         <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem]  bg-custom-gradient rounded-full flex justify-center items-center gap-2">
