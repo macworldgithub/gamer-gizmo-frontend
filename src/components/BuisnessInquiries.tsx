@@ -42,9 +42,9 @@ const BuisnessInquiries: React.FC<{ cardContent: CardContent }> = ({
 
   return (
     <Wrapper>
-      <div className="flex flex-col lg:flex-row justify-between items-start gap-6 p-6 h-[40rem] max-lg:h-auto">
+      <div className="w-full flex flex-col lg:flex-row justify-start items-start dark:bg-[#0D0D12 ]  gap-6 p-6 h-[40rem] max-lg:h-auto">
         {/* Card Content */}
-        <div className="w-full lg:w-2/3">
+        <div className="w-full lg:w-[55%]">
           <CommonCard
             title={cardContent.title}
             description={cardContent.description}
@@ -53,7 +53,7 @@ const BuisnessInquiries: React.FC<{ cardContent: CardContent }> = ({
         </div>
 
         {/* Form Section */}
-        <div className="w-[20rem] lg:w-1/3">
+        <div className="w-full lg:w-[40%]   max-lg:flex-col max-lg:justify-start max-lg:items-start ">
           <Form
             formData={formData}
             onChange={handleInputChange}
