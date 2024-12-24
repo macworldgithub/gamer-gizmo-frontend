@@ -1,16 +1,17 @@
 "use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface AdState {
+interface SellForMe {
   pcInfo: string;
   graphicCard: string;
   ram: string;
   storage: string;
-  lcdSize: string;
-  adDescription: string;
+  motherboard: string;
   city: string;
   mobileNumber: string;
-  secondaryNumber: string;
+  name: string;
+  address: string;
+  country: string;
 }
 
 const initialState = {
@@ -18,21 +19,22 @@ const initialState = {
   graphicCard: "",
   ram: "",
   storage: "",
-  lcdSize: "",
-  adDescription: "",
+  motherboard: "",
   city: "",
   mobileNumber: "",
-  secondaryNumber: "",
+  name: "",
+  address: "",
+  country: "",
 };
 
-const adSlice = createSlice({
-  name: "adInformation",
+const sellForMeSlice = createSlice({
+  name: "sellForMe",
   initialState,
   reducers: {
     // Dynamic reducer to update any field
     setAdField: (
       state,
-      action: PayloadAction<{ field: keyof AdState | string; value: string }>
+      action: PayloadAction<{ field: keyof SellForMe | string; value: string }>
     ) => {
       //@ts-ignore
       state[action.payload.field] = action.payload.value;
@@ -40,5 +42,5 @@ const adSlice = createSlice({
   },
 });
 
-export const { setAdField } = adSlice.actions;
-export default adSlice;
+export const { setAdField } = sellForMeSlice.actions;
+export default sellForMeSlice;

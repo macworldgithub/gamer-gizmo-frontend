@@ -101,9 +101,11 @@ const ThemeToggle = () => {
     if (!isDarkMode) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
+      window.dispatchEvent(new Event("storage"));
     } else {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
+      window.dispatchEvent(new Event("storage"));
     }
 
     // dispatch(changeTheme());

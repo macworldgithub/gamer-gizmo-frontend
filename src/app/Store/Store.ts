@@ -3,9 +3,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import currencySlice from "../Redux/CurrencySlice";
 import ThemeSlice from "../Redux/ThemeSlice";
 import adSlice from "../Redux/AddSlice";
+import sellForMeSlice from "../Redux/SellForMeSlice";
 
 const Store = configureStore({
   reducer: {
+    SellForMe: sellForMeSlice.reducer,
     Ad: adSlice.reducer,
     Currency: currencySlice.reducer, // Add more reducers here as needed
     Theme: ThemeSlice.reducer,

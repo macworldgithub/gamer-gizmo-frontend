@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { Select, MenuItem, Input, OutlinedInput, Box } from "@mui/material";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../Store/Store";
 import { setAdField } from "../Redux/AddSlice";
@@ -8,6 +9,22 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
 const ContactInformation = () => {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark" ? true : false
+  );
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      if (localStorage.getItem("theme") === "dark") {
+        setDarkMode(true);
+      } else {
+        setDarkMode(false);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+  }, []);
+
   const dispatch = useDispatch();
   const { city, mobileNumber, secondaryNumber } = useSelector(
     (state: RootState) => state.Ad
@@ -119,7 +136,7 @@ const ContactInformation = () => {
               // Target PhoneInput's internal input with the class "PhoneInputInput"
               "& .PhoneInputInput": {
                 // Basic text styles
-                color: "black",
+                color: darkMode ? "white" : "black",
                 fontWeight: 600,
 
                 // Outlined border style
@@ -127,6 +144,7 @@ const ContactInformation = () => {
                 borderRadius: "4px",
                 padding: "10px",
                 width: "100%",
+                background: darkMode ? "#000" : "#fff",
 
                 // Remove default outline
                 outline: "none",
@@ -168,7 +186,7 @@ const ContactInformation = () => {
               // Target PhoneInput's internal input with the class "PhoneInputInput"
               "& .PhoneInputInput": {
                 // Basic text styles
-                color: "black",
+                color: darkMode ? "white" : "black",
                 fontWeight: 600,
 
                 // Outlined border style
@@ -176,6 +194,7 @@ const ContactInformation = () => {
                 borderRadius: "4px",
                 padding: "10px",
                 width: "100%",
+                background: darkMode ? "#000" : "#fff",
 
                 // Remove default outline
                 outline: "none",
