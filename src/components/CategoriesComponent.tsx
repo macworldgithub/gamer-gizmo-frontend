@@ -36,7 +36,7 @@ const CategoriesComponent = () => {
 
         {/* Main Container */}
         <Wrapper>
-          <div className="w-full mx-auto bg-white dark:bg-black dark:text-white text-black shadow-lg rounded-xl max-lg:p-2 md:p-6 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center  max-md:items-center gap-6">
+          <div className="w-full mx-auto bg-white dark:bg-black dark:text-white text-black shadow-lg rounded-xl max-lg:p-2 md:p-6 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center md:items-center max-md:items-center gap-6">
             {/* Left Section */}
             <div className="flex-1 justify-start md:px-8 ">
               <h2 className="text-xl font-bold text-purple-700 mb-4">
@@ -69,7 +69,7 @@ const CategoriesComponent = () => {
             </div>
 
             {/* Right Section */}
-            <div className="flex-1 justify-start max-lg:px-8 lg:ml-16">
+            <div className="flex-1 justify-start md:px-8 lg:ml-16 max-md:pl-8">
               <h2 className="text-xl font-bold text-purple-700 mb-4">
                 Try GamerGizmo Sell For Me
               </h2>

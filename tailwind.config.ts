@@ -59,6 +59,8 @@ export default {
       backgroundImage: {
         "custom-gradient":
           "linear-gradient(to right, rgb(99, 69, 237), #dc39fc)",
+
+        "disabled-button": "linear-gradient(to right, #D3D3D3, #D3D3D3)",
         "blue-gradientLight": "linear-gradient(to top, #f4f2fe, #dc39fc)",
         "dark-custom-gradient":
           "linear-gradient(to right, rgb(0, 0, 0), #000000)",

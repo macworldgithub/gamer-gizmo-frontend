@@ -14,23 +14,23 @@ const CredentialSide = () => {
           Create An Account
         </h1>
       </div>
-      <div className="flex w-[100%] justify-between max-sm:flex-col">
+      <div className="flex max-sm:gap-2 w-[100%] justify-between max-sm:flex-col">
         <input
-          className={`w-[49%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
+          className={`w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
           placeholder="First Name"
         />
         <input
-          className={`w-[49%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
+          className={`w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
           placeholder="Last Name"
         />
       </div>
-      <div className="flex w-[100%] justify-between max-sm:flex-col">
+      <div className="flex w-[100%] max-sm:gap-2 justify-between max-sm:flex-col">
         <input
-          className={`w-[49%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
+          className={`w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
           placeholder="Phone Number"
         />
         <input
-          className={`w-[49%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
+          className={`w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
           placeholder="User Name"
         />
       </div>
@@ -38,13 +38,13 @@ const CredentialSide = () => {
         className={`w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
         placeholder="Email Address"
       />
-      <div className="flex w-[100%] justify-between max-sm:flex-col">
+      <div className="flex w-[100%] max-sm:gap-2 justify-between max-sm:flex-col">
         <input
-          className={`w-[49%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
+          className={`w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
           placeholder="password"
         />
         <input
-          className={`w-[49%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
+          className={`w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
           placeholder="re-password"
         />
       </div>
