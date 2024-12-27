@@ -14,6 +14,9 @@ const CommonCard: React.FC<CardProps> = ({ title, description, note }) => {
       <h2 className="text-3xl font-bold">{title}</h2>
       <p className="text-base">{description}</p>
       <small className="text-sm">{note}</small>
+
+
+      
     </div>
     // </Wrapper>
   );
