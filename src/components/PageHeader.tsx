@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Wrapper from "./Common/Wrapper/Wrapper";
 
 interface PageHeadProps {
   pageName: string;
@@ -9,6 +8,7 @@ interface PageHeadProps {
 }
 
 const PageHeader = ({
+  //@ts-ignore
   pageName,
   title,
   description,

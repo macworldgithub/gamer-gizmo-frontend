@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Wrapper from "./Common/Wrapper/Wrapper";
+// import Wrapper from "./Common/Wrapper/Wrapper";
 
 interface Product {
   id: number;
