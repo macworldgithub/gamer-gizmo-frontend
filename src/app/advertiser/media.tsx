@@ -1,7 +1,7 @@
 import React from "react";
-// import Gamer from "../../../public/images/Gamer.png";
-// import Rectangle1 from "../../../public/images/Rectangle1.png";
-// import Rectangle2 from "../../../public/images/Rectangle2.png";
+import Gamer from "../../../public/images/Gamer.png";
+import Rectangle1 from "../../../public/images/Rectangle1.png";
+import Rectangle2 from "../../../public/images/Rectangle2.png";
 import Image from "next/image";
 
 function MediaPack() {
@@ -10,7 +10,7 @@ function MediaPack() {
      
       <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row items-center md:items-start">
         <div className="p-4 w-full md:w-[50%]">
-          {/* <Image src={Gamer} alt="GamerGizmo Advertising" className="mb-6 mx-auto md:mx-0" /> */}
+          <Image src={Gamer} alt="GamerGizmo Advertising" className="mb-6 mx-auto md:mx-0" />
           <h3 className="text-lg font-bold mb-2 text-center md:text-left">
             GamerGizmo Advertising
           </h3>
@@ -19,13 +19,13 @@ function MediaPack() {
           </h3>
           <p className="text-center md:text-left">2025</p>
         </div>
-        {/* <Image src={Rectangle1} alt="Media pack" className="w-full md:w-[50%] h-auto md:h-full" /> */}
+        <Image src={Rectangle1} alt="Media pack" className="w-full md:w-[50%] h-auto md:h-full" />
       </div>
 
     
       <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row items-center md:items-start">
         <div className="p-4 w-full md:w-[50%]">
-          {/* <Image src={Gamer} alt="GamerGizmo Advertising" className="mb-6 mx-auto md:mx-0" /> */}
+          <Image src={Gamer} alt="GamerGizmo Advertising" className="mb-6 mx-auto md:mx-0" />
           <h3 className="text-lg font-bold mb-2 text-center md:text-left">
             GamerGizmo Advertising
           </h3>
@@ -34,7 +34,7 @@ function MediaPack() {
           </h3>
           <p className="text-center md:text-left">2025</p>
         </div>
-        {/* <Image src={Rectangle2} alt="Ad specs" className="w-full md:w-[50%] h-auto md:h-full" /> */}
+        <Image src={Rectangle2} alt="Ad specs" className="w-full md:w-[50%] h-auto md:h-full" />
       </div>
     </div>
   );
