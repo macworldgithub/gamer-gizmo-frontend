@@ -89,13 +89,12 @@ const BottomNavigationBar = () => {
         {isDrawerOpen && (
           <div
             className={`flex-nowrap fixed left-0 bg-white dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 overflow-y-auto
-                            ${
-                              isDrawerOpen
-                                ? "animate-slide-in"
-                                : firstClick
-                                ? "animate-slide-out"
-                                : "hidden"
-                            }`}
+                            ${isDrawerOpen
+                ? "animate-slide-in"
+                : firstClick
+                  ? "animate-slide-out"
+                  : "hidden"
+              }`}
           >
             <Image
               src="/images/profile.png"
@@ -164,16 +163,18 @@ const BottomNavigationBar = () => {
             </Link>
 
             <div className="flex-col items-center mx-auto pl-0">
-              <div className="w-[7rem] mx-auto h-10 bg-custom-gradient rounded-full flex justify-center items-center gap-2">
-                <Image
-                  src="/images/btnIcon.png"
-                  className="w-[0.8rem]"
-                  width={18}
-                  height={18}
-                  alt="btnIcon"
-                />
-                <p className="text-sm text-white">Post Your Ad</p>
-              </div>
+              <Link href="/postadd">
+                <div className="w-[7rem] mx-auto h-10 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+                  <Image
+                    src="/images/btnIcon.png"
+                    className="w-[0.8rem]"
+                    width={18}
+                    height={18}
+                    alt="btnIcon"
+                  />
+                  <span className="text-sm text-white">Post Your Ad</span>
+                </div>
+              </Link>
 
               <ThemeToggle />
             </div>
@@ -181,18 +182,20 @@ const BottomNavigationBar = () => {
         )}
       </div>
       <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem]">
-        <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem]  bg-custom-gradient rounded-full flex justify-center items-center gap-2">
-          <Image
-            src="/images/btnIcon.png"
-            className="md:w-[0.6rem]"
-            width={18}
-            height={18}
-            alt="btnIcon"
-          />
-          <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
-            Post Your Ad
-          </p>
-        </div>
+        <Link href="/postadd">
+          <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+            <Image
+              src="/images/btnIcon.png"
+              className="md:w-[0.6rem]"
+              width={18}
+              height={18}
+              alt="btnIcon"
+            />
+            <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
+              Post Your Ad
+            </p>
+          </div>
+        </Link>
         {/* <div className="flex space-x-4 items-center"> */}
         <Image
           src="/images/profile.png"

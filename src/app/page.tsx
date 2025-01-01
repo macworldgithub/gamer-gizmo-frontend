@@ -4,7 +4,6 @@ import BrowseVideos from "@/components/BrowseVideos";
 import CategoriesComponent from "@/components/CategoriesComponent";
 import FilterSection from "@/components/FilterSection";
 import LiveCommunity from "@/components/LiveCommunity";
-import Section from "@/components/PopularItemSection";
 import PopularMainSection from "@/components/PopularMainSection";
 
 export default function HomePage() {

@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const CredentialSide = () => {
   return (
@@ -41,7 +42,8 @@ const CredentialSide = () => {
           Sign In
         </button>
       </div>
-      <h2 className="text-[#DC39FC] underline">Register me</h2>
+      {/* <h2 className="text-[#DC39FC] underline">Register me</h2> */}
+      <Link className="text-[#DC39FC] underline" href="/Auth/register">Register me</Link>
       <div className=" relative mt-3">
         <div className=" text-white bg-[#DC39FC] flex justify-center items-center rounded absolute top-[-10px] right-[75px] w-[50px] h-[30px]">
           or
