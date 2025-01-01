@@ -87,6 +87,15 @@ const Footer = () => {
             <li>Laptops</li>
             <li>Used Components</li>
             <li>Accessories</li>
+            <li>
+              <Link
+                href="/advertising"
+                className="text-blue-500 hover:underline no-underline text-inherit"
+              >
+                Advertising
+              </Link>
+            </li>
+            {/* <li>Advertising</li> */}
           </ul>
         </div>
 

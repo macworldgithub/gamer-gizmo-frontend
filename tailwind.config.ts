@@ -54,6 +54,7 @@ export default {
         customPurpleBorder: "rgba(99, 69, 237, 1)",
         linksColor: "#DC39FC",
         pinkishBorder: "#DC39FC",
+        bluishBorder: "#E3DDFC",
       },
       backgroundImage: {
         "custom-gradient":

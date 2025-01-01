@@ -16,7 +16,7 @@ const PostAdd = () => {
     <>
       <PageHeader pageName="postyouradd" />
 
-      <div id="layout" className="">
+      <div id="layout" className="dark:bg-black">
         <Guide />
         <Wrapper>
           <div className="w-[100%] pb-5 dark:text-white h-max flex justify-center items-center flex-col">

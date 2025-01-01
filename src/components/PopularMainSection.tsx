@@ -84,7 +84,7 @@ const PopularMainSection: React.FC = () => {
 
   return (
     <Wrapper>
-      <div className="h-auto w-full  ">
+      <div className="h-auto w-full">
         <PopularItemSection
           title="Popular in Used Gaming PC Parts"
           subtitle="Choose your necessary parts from this category."
