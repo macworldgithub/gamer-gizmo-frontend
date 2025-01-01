@@ -1,4 +1,3 @@
-import Banner from "@/components/Common/Banner";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import PageHeader from "@/components/PageHeader";
 import React from "react";

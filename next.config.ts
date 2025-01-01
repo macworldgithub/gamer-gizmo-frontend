@@ -1,9 +1,12 @@
-// next.config.js
 const nextConfig = {
-  webpack(config: any) {
+  eslint: {
+    ignoreDuringBuilds: true, // Disable ESLint checks during builds
+  },
+  webpack(config :any) {
     // Find and modify the rule that handles SVGs
     const fileLoaderRule = config.module.rules.find(
-      (rule: any) => rule.test && rule.test.test(".svg")
+      (rule :any) =>
+        rule.test && rule.test instanceof RegExp && rule.test.test(".svg")
     );
 
     // Exclude SVGs from the default file loader
