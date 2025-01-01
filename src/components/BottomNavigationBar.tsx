@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
-import { useSelector } from "react-redux";
+"use client"
 import { RootState } from "@/app/Store/Store";
-import { dark } from "@mui/material/styles/createPalette";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import ThemeToggle from "./ThemeToggle";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const BottomNavigationBar = () => {
+  const isLogin = useSelector((state: RootState) => state.login.isLoggedIn);
   const theme = useSelector((state: RootState) => state.Theme.theme);
   const [backgroundColor, setBackgroundColor] = useState<string>();
   const [isScrolling, setIsScrolling] = useState(false);
@@ -44,6 +46,8 @@ const BottomNavigationBar = () => {
     setIsDrawerOpen(!isDrawerOpen);
     setFirstClick(true);
   };
+
+ 
 
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
@@ -196,7 +200,16 @@ const BottomNavigationBar = () => {
             </p>
           </div>
         </Link>
-        {/* <div className="flex space-x-4 items-center"> */}
+
+        {/* <Image
+          src="/images/profile.png"
+          alt="Profile"
+          width={40}
+          height={40}
+          className="rounded-full md:w-[1rem] lg:w-[1.8rem] md:mx-0"
+        /> */}
+        {isLogin ? (
+        // Show the profile image if logged in
         <Image
           src="/images/profile.png"
           alt="Profile"
@@ -204,7 +217,24 @@ const BottomNavigationBar = () => {
           height={40}
           className="rounded-full md:w-[1rem] lg:w-[1.8rem] md:mx-0"
         />
-        <ThemeToggle />
+      ) : (
+        // Show the login button if not logged in
+        <Link href="/Auth/login">
+          <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+            <Image
+              src="/images/btnIcon.png"
+              className="md:w-[0.6rem]"
+              width={18}
+              height={18}
+              alt="btnIcon"
+            />
+            <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
+              Login
+            </p>
+          </div>
+        </Link>
+      )}
+        <ThemeToggle /> 
       </div>
       {/* </div> */}
     </div>
