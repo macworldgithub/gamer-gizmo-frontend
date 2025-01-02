@@ -10,10 +10,10 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        left: "-5px 0 5px -2px rgba(0, 0, 0, 0.1)", // Adjust values as needed
-        right: "5px 0 5px -2px rgba(0, 0, 0, 0.1)", // Right shadow
-        bottom: "0 5px 5px -2px rgba(0, 0, 0, 0.1)", // Bottom shadow
-        top: "0 -5px 5px -2px rgba(0, 0, 0, 0.1)", // Top shadow
+        left: "-5px 0 5px -2px rgba(0, 0, 0, 0.1)", 
+        right: "5px 0 5px -2px rgba(0, 0, 0, 0.1)", 
+        bottom: "0 5px 5px -2px rgba(0, 0, 0, 0.1)", 
+        top: "0 -5px 5px -2px rgba(0, 0, 0, 0.1)", 
         colorLeft: "-5px 0 5px -2px rgba(99, 69, 237, 0.5)", // Left shadow
         colorRight: "5px 0 5px -2px rgba(99, 69, 237, 0.15)", // Right shadow
         colorBottom: "0 5px 5px -2px rgba(99, 69, 237, 0.5)", // Bottom shadow

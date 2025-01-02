@@ -53,7 +53,7 @@ export default function SelectLabels() {
 
   return (
     <Wrapper>
-      <div className="flex max-md:flex-col w-[100%] max-md:flex-wrap max-xl:flex-wrap h-max p-2 rounded bg-white justify-center items-center">
+      <div className="flex max-md:flex-col w-[100%]  max-md:flex-wrap max-xl:flex-wrap h-max p-2 rounded bg-white justify-center items-center">
         <div className="flex max-lg:flex-col max-sm:mb-2  justify-center mb-1 gap-8 max-md:gap-5 w-[100%]  h-max flex-wrap  items-center ">
           {dropdownOptions.map((dropdown, index) => (
             <div key={index} className="flex justify-center items-center">
