@@ -12,7 +12,7 @@ import Wrapper from "@/components/Common/Wrapper/Wrapper";
 function DownloadApp() {
   return (
     <Wrapper>
-      <div className=" bg-[#f7f3ff] py-12 px-4 md:px-8 lg:px-16 overflow-hidden bg-[#f7f3ff]">
+      <div className=" bg-[#f7f3ff] py-12 px-4 md:px-8 lg:px-16 overflow-hidden">
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             Enjoy visibility from anywhere

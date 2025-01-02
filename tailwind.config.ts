@@ -55,6 +55,7 @@ export default {
         linksColor: "#DC39FC",
         pinkishBorder: "#DC39FC",
         bluishBorder: "#E3DDFC",
+        secondaryBlack:"#1e1e2f"
       },
       backgroundImage: {
         "custom-gradient":
