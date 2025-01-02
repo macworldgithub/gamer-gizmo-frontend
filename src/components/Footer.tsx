@@ -95,7 +95,6 @@ const Footer = () => {
                 Advertising
               </Link>
             </li>
-            {/* <li>Advertising</li> */}
           </ul>
         </div>
 

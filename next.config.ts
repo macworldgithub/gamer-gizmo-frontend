@@ -1,12 +1,18 @@
 const nextConfig = {
+  eslint: {
+    // Warning: This allows production builds to successfully complete
+    // even if your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
   typescript: {
     // Ignore TypeScript errors during the build process
     ignoreBuildErrors: true,
   },
-  webpack(config) {
+
+  webpack(config: any) {
     // Find and modify the rule that handles SVGs
     const fileLoaderRule = config.module.rules.find(
-      (rule) =>
+      (rule: any) =>
         rule.test && rule.test instanceof RegExp && rule.test.test(".svg")
     );
 

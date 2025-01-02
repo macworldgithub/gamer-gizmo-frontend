@@ -1,25 +1,13 @@
-// import Image from "next/image";
-// import Link from "next/link";
-// import React from "react";
-
-// const ProductDetails = () => {
-//   return (
-//     <div className="w-full flex justify-center items-center h-auto">
-//       {/* <div className="w-[48rem] bg-orange-300"> */}
-//       <Image
-//         src="/images/graphicCard.png"
-//         alt="logo-img"
-//         width={600}
-//         height={400}
-//         // className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[48rem] md:h-[31.25rem] lg:h-12 max-sm:mx-auto"
-//       />
-//       {/* </div> */}
-//     </div>
-//   );
-// };
-
-// export default ProductDetails;
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faLinkedin,
+  faYoutube,
+  faTwitter,
+  faSquareGooglePlus,
+} from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 const ProductDetails = () => {
   return (
@@ -37,16 +25,6 @@ const ProductDetails = () => {
       {/* Details Section */}
       <div className="w-full max-w-5xl bg-white p-6 mt-6">
         <div className="flex flex-col justify-center items-center">
-          {/* <div className="flex items-center justify-between gap-36 mt-4 md:mt-0  shadow-md rounded-md">
-            <div className="text-sm text-gray-400 flex items-center space-x-1">
-              <div>Dale J. Barnes</div>
-              <span>|</span>
-              <span>05 Jan 2022</span>
-            </div>
-            <div className="text-sm text-gray-400 flex items-center">
-              Comments (5)
-            </div>
-          </div> */}
           <div className="w-full flex justify-start mt-4 mb-7">
             <div className="w-full flex justify-between  items-center bg-white shadow-md  rounded-lg">
               {/* User Info */}
@@ -101,10 +79,10 @@ const ProductDetails = () => {
           <div className="flex flex-col items-start">
             <h1 className="text-black font-bold text-lg mb-5"> Popular Tags</h1>
             <div className="flex justify-between gap-6">
-              <button className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm flex md:justify-end hover:bg-purple-600 max-sm:mt-3">
+              <button className="bg-secondaryColorLight w-28 text-center text-white px-4 py-2 rounded-md text-sm flex md:justify-center hover:bg-purple-600 max-sm:mt-3">
                 Overview
               </button>
-              <button className="bg-gray-200 text-white px-4 py-2 rounded-full text-sm flex md:justify-end hover:bg-purple-600 max-sm:mt-3">
+              <button className="bg-btnGray w-28 text-black font-bold px-4 py-2 rounded-md text-sm flex md:justify-end hover:bg-purple-600 max-sm:mt-3">
                 Specifications
               </button>
             </div>
@@ -112,18 +90,51 @@ const ProductDetails = () => {
           <div className="flex space-x-4 mt-4 md:mt-0">
             <span className="text-gray-600 font-semibold">Share Post:</span>
             <div className="flex space-x-3">
-              <button className="text-blue-600 hover:text-blue-800">
-                <i className="fab fa-facebook-f"></i>
-              </button>
-              <button className="text-blue-600 hover:text-blue-800">
-                <i className="fab fa-twitter"></i>
-              </button>
-              <button className="text-blue-600 hover:text-blue-800">
-                <i className="fab fa-linkedin-in"></i>
-              </button>
-              <button className="text-blue-600 hover:text-blue-800">
-                <i className="fab fa-google"></i>
-              </button>
+              <Link href="#" className="text-white">
+                <div className="bg-blue-600 w-7 h-8 rounded-md text-center flex justify-center items-center">
+                  <FontAwesomeIcon
+                    icon={faFacebookF}
+                    className=""
+                    color="#ffffff"
+                  />
+                </div>
+              </Link>
+              <Link href="#" className="text-white">
+                <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
+                  <FontAwesomeIcon
+                    icon={faLinkedin}
+                    className="z-10"
+                    color="#000000"
+                  />
+                </div>
+              </Link>
+              <Link href="#" className="text-white">
+                <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
+                  <FontAwesomeIcon
+                    icon={faYoutube}
+                    className="z-10"
+                    color="#000000"
+                  />
+                </div>
+              </Link>
+              <Link href="#" className="text-white">
+                <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
+                  <FontAwesomeIcon
+                    icon={faTwitter}
+                    className="z-10"
+                    color="#000000"
+                  />
+                </div>
+              </Link>
+              <Link href="#" className="text-white">
+                <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
+                  <FontAwesomeIcon
+                    icon={faSquareGooglePlus}
+                    className="w-28 h-5"
+                    color="#000000"
+                  />
+                </div>
+              </Link>
             </div>
           </div>
         </div>

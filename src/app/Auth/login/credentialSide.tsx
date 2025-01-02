@@ -14,8 +14,8 @@ const CredentialSide = () => {
 
   const handleLogin = () => {
     if (username && password) {
-      dispatch(setLogin(true)); 
-router.push('/')
+      dispatch(setLogin(true));
+      router.push("/");
     }
   };
   return (
@@ -31,7 +31,7 @@ router.push('/')
         </h1>
       </div>
       <input
-      type="text"
+        type="text"
         className={`w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
         placeholder="User name or email"
         value={username}
@@ -50,9 +50,12 @@ router.push('/')
           <span id="customRadio"></span> Remember Me
         </label>
       </div>
-    
+
       <div className="w-[100%]  h-max">
-        <button onClick={handleLogin} className=" bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ">
+        <button
+          onClick={handleLogin}
+          className=" bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center "
+        >
           <Image
             className=" mt-1 mr-1"
             src={"/images/send.svg"}
@@ -63,9 +66,10 @@ router.push('/')
           Sign In
         </button>
       </div>
-    
-      
-      <Link className="text-[#DC39FC] underline" href="/Auth/register">Register me</Link>
+
+      <Link className="text-[#DC39FC] underline" href="/Auth/register">
+        Register me
+      </Link>
       <div className=" relative mt-3">
         <div className=" text-white bg-[#DC39FC] flex justify-center items-center rounded absolute top-[-10px] right-[75px] w-[50px] h-[30px]">
           or
