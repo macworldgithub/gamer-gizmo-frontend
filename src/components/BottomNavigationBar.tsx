@@ -200,13 +200,6 @@ const BottomNavigationBar = () => {
           </div>
         </Link>
 
-        {/* <Image
-          src="/images/profile.png"
-          alt="Profile"
-          width={40}
-          height={40}
-          className="rounded-full md:w-[1rem] lg:w-[1.8rem] md:mx-0"
-        /> */}
         {isLogin ? (
           // Show the profile image if logged in
           <Image
