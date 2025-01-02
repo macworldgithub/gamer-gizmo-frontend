@@ -1,9 +1,7 @@
+import BuisnessInquiries from "@/components/BuisnessInquiries";
 import PageHeader from "@/components/PageHeader";
-import React from "react";
 import ServiceCards from "./ServiceCards";
 import StatsCards from "./StatsCards";
-// import Wrapper from "@/components/Common/Wrapper/Wrapper";
-import BuisnessInquiries from "@/components/BuisnessInquiries";
 
 const page = () => {
   const cardContent = {

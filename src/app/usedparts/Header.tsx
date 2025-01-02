@@ -194,31 +194,21 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="py-10  ">
-        {/* ya chat gpt wala ha  */}
-        <div className="flex flex-col md:flex-row items-center justify-between px-4 max-w-7xl mx-auto mb-10 space-y-4 md:space-y-0">
-          {/* Heading Section */}
-          {/* <div className="text-center md:text-left">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Popular in New Gaming PC Parts
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Choose your necessary parts from the available categories
-            </p>
-          </div> */}
+      {/* <div className="py-10  "> */}
+
+      <Wrapper>
+        <div className="w-full h-auto">
+          {/* Product Grid */}
+          <PopularItemSection
+            title="Popular in used Gaming PC Parts"
+            subtitle="Choose your necessary gaming items from this category."
+            products={usedConsoles}
+            explorePath="/usedparts"
+            onExplore={() => console.log("Explore Used Consoles")}
+          />
         </div>
-        <Wrapper>
-          <div className="w-full h-auto">
-            {/* Product Grid */}
-            <PopularItemSection
-              title="Popular in New Gaming PC Parts"
-              subtitle="Choose your necessary gaming items from this category."
-              products={usedConsoles}
-              onExplore={() => console.log("Explore Used Consoles")}
-            />
-          </div>
-        </Wrapper>
-      </div>
+      </Wrapper>
+      {/* </div> */}
       <Inspection />
     </div>
   );

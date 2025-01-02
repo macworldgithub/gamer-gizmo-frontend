@@ -1,7 +1,23 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { setLogin } from "@/app/Redux/LoginSlice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const CredentialSide = () => {
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleLogin = () => {
+    if (username && password) {
+      dispatch(setLogin(true)); 
+router.push('/')
+    }
+  };
   return (
     <div
       id="loginCredentials"
@@ -15,13 +31,18 @@ const CredentialSide = () => {
         </h1>
       </div>
       <input
+      type="text"
         className={`w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
         placeholder="User name or email"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <input
         className={`w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2  dark:border-customPurpleBorder  focus:outline-none`}
-        placeholder="Password"
         type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
       <div className={`w-[100%] text-black dark:text-white`}>
         <label htmlFor="rememberMe">
@@ -29,8 +50,9 @@ const CredentialSide = () => {
           <span id="customRadio"></span> Remember Me
         </label>
       </div>
+    
       <div className="w-[100%]  h-max">
-        <button className=" bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ">
+        <button onClick={handleLogin} className=" bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ">
           <Image
             className=" mt-1 mr-1"
             src={"/images/send.svg"}
@@ -41,7 +63,9 @@ const CredentialSide = () => {
           Sign In
         </button>
       </div>
-      <h2 className="text-[#DC39FC] underline">Register me</h2>
+    
+      
+      <Link className="text-[#DC39FC] underline" href="/Auth/register">Register me</Link>
       <div className=" relative mt-3">
         <div className=" text-white bg-[#DC39FC] flex justify-center items-center rounded absolute top-[-10px] right-[75px] w-[50px] h-[30px]">
           or

@@ -1,6 +1,7 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
-// import Wrapper from "./Common/Wrapper/Wrapper";
 
 interface Product {
   id: number;
@@ -15,6 +16,7 @@ interface SectionProps {
   subtitle: string;
   products: Product[];
   onExplore: () => void;
+  explorePath:string;
 }
 
 const PopularItemSection: React.FC<SectionProps> = ({
@@ -22,7 +24,13 @@ const PopularItemSection: React.FC<SectionProps> = ({
   subtitle,
   products,
   onExplore,
+  explorePath,
 }) => {
+  const router = useRouter();
+  const handleExplore = () => {
+    router.push( explorePath);   
+  };
+
   return (
     <div className="relative w-full">
       <div className="my-8 ">
@@ -89,7 +97,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
               className="mx-auto"
             />
           </button>
-          <button className="bg-custom-gradient rounded-full w-11 h-11 hover:bg-purple-700">
+          <button className="bg-custom-gradient rounded-full w-11 h-11 hover:bg-purple-700" onClick={handleExplore}>
             <Image
               src="/images/arrowRight.png"
               alt="Right Arrow"

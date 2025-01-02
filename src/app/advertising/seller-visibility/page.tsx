@@ -1,5 +1,6 @@
 import FeaturesSection from "@/components/FeaturesSection";
 import React from "react";
+import Download_app from "./Download_app";
 
 const page = () => {
   const features = [
@@ -23,6 +24,8 @@ const page = () => {
     },
   ];
   return (
+
+    <>
     <div className="w-full bg-white">
       <FeaturesSection
         features={features}
@@ -31,7 +34,10 @@ const page = () => {
         buttonText="Learn More"
         buttonLink="/learn-more"
       />
+      <Download_app/>
     </div>
+      
+      </>
   );
 };
 
