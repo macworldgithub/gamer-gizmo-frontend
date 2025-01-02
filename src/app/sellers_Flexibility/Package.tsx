@@ -30,7 +30,7 @@ const features = [
 const LeftRightContent = () => {
   return (
 
-    <div className="min-h-screen flex flex-col lg:flex-row items-center lg:items-start bg-[#F4F2FE] dark:bg-secondaryBlack p-6 overflow-hidden">
+    <div className="flex flex-col lg:flex-row items-center lg:items-start bg-[#F4F2FE] dark:bg-secondaryBlack p-6 overflow-hidden">
 
       <div className="lg:w-1/2 flex justify-center items-center mb-8 lg:mb-0 pt-12 dark:text-white">
         <Image
