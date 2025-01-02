@@ -16,7 +16,7 @@ interface SectionProps {
   subtitle: string;
   products: Product[];
   onExplore: () => void;
-  explorePath:string;
+  explorePath: string;
 }
 
 const PopularItemSection: React.FC<SectionProps> = ({
@@ -28,7 +28,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
 }) => {
   const router = useRouter();
   const handleExplore = () => {
-    router.push( explorePath);   
+    router.push(explorePath);
   };
 
   return (
@@ -75,7 +75,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
                 <p className="text-xs text-gray-500 mt-1 truncate">
                   {product.description}
                 </p>
-                <p className="text-purple-500 font-bold mt-2">
+                <p className="text-purple-500 font-bold mt-2"> 
                   {product.price}
                 </p>
                 <button className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-white mt-2 w-[4rem] py-1 rounded-full text-sm hover:bg-purple-600">
@@ -97,7 +97,10 @@ const PopularItemSection: React.FC<SectionProps> = ({
               className="mx-auto"
             />
           </button>
-          <button className="bg-custom-gradient rounded-full w-11 h-11 hover:bg-purple-700" onClick={handleExplore}>
+          <button
+            className="bg-custom-gradient rounded-full w-11 h-11 hover:bg-purple-700"
+            onClick={handleExplore}
+          >
             <Image
               src="/images/arrowRight.png"
               alt="Right Arrow"

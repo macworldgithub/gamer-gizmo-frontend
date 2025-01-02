@@ -3,6 +3,7 @@ import React from "react";
 import ProductDetails from "./ProductDetails";
 import AuthorSection from "./AuthorSection";
 import RelatedNewsSection from "./RelatedNewsSection";
+import Rightsection from "./Rightsection";
 
 const page = () => {
   return (
@@ -14,7 +15,9 @@ const page = () => {
           <AuthorSection />
           <RelatedNewsSection />
         </div>
-        <div className="w-[30%] bg-orange-200">world</div>
+        <div className="w-[30%]">
+          <Rightsection />
+        </div>
       </div>
     </div>
   );
