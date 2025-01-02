@@ -124,7 +124,7 @@ const usedConsoles = [
   },
 ];
 
-const Header = () => {
+const ConsoleHeader = () => {
   return (
     <div className="bg-white dark:bg-black">
       {/* Page Header */}
@@ -201,18 +201,6 @@ const Header = () => {
         </div>
       </div>
       <div className="py-10  dark:bg-black">
-        {/* ya chat gpt wala ha  */}
-        <div className="flex flex-col md:flex-row items-center justify-between px-4 max-w-7xl mx-auto mb-10 space-y-4 md:space-y-0">
-          {/* Heading Section */}
-          {/* <div className="text-center md:text-left">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Popular in New Gaming PC Parts
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Choose your necessary parts from the available categories
-            </p>
-          </div> */}
-        </div>
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
             {/* Product Grid */}
@@ -231,4 +219,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ConsoleHeader;

@@ -22,6 +22,7 @@ export default {
           "5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)",
         combinedNight:
           "5px 5px 10px rgba(99, 69, 237, 0.5), -5px -5px 10px rgba(99, 69, 237, 0.5)",
+          
       },
 
       colorShadow: {},

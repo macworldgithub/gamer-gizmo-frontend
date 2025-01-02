@@ -59,14 +59,14 @@ const BottomNavigationBar = () => {
       />
       {/* </div> */}
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
-        <Link href="#">Laptops</Link>
-        <Link href="#">Desktops</Link>
-        <Link href="#">Store</Link>
-        <Link href="#">Components</Link>
-        <Link href="#">Blogs</Link>
-        <Link href="#">About Us</Link>
-        <Link href="#">Contact Us</Link>
-        <Link href="#" className="text-secondaryColorLight">
+        <Link href="/console-screen">Laptops</Link>
+        <Link href="/console-screen">Desktops</Link>
+        <Link href="/console-screen">Store</Link>
+        <Link href="/console-screen">Components</Link>
+        <Link href="/console-screen">Blogs</Link>
+        <Link href="/console-screen">About Us</Link>
+        <Link href="/console-screen">Contact Us</Link>
+        <Link href="/console-screen" className="text-secondaryColorLight">
           Inspection
         </Link>
       </div>
