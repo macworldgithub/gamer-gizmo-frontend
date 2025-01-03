@@ -68,7 +68,7 @@ const ContactInformation = () => {
   }, [city, mobileNumber, secondaryNumber]);
 
   return (
-    <div className="w-[65%] h-max shadow-combinedNight border rounded py-5 px-[5%] box-border my-10 flex flex-col ">
+    <div className="md:w-[65%] max-md:w-full h-max shadow-combinedNight border rounded py-5 px-[5%] box-border my-10 flex flex-col ">
       <h1 className="text-[1.5rem] font-semibold mb-2">Upload Photos </h1>
       <div className="flex">
         <div className="py-5  h-max w-max text-nowrap flex flex-col items-end gap-4 max-sm:w-[32%] max-sm:text-wrap  mt-1 pr-1 max-sm:items-start">

@@ -5,12 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAdField } from "../Redux/AddSlice";
 import { RootState } from "../Store/Store";
 
-// Define types for the selectData options
 interface SelectOption {
   value: number;
   label: string;
 }
-
 interface SelectData {
   id: number;
   name: string;
@@ -21,7 +19,7 @@ const PartsInfromation = () => {
   const Ad = useSelector((state: RootState) => state.Ad);
   const dispatch = useDispatch();
 
-  const [openStates, setOpenStates] = useState<boolean[]>(Array(5).fill(false)); // Initialize an array for each Select component's state
+  const [openStates, setOpenStates] = useState<boolean[]>(Array(5).fill(false));
 
   const handleOpen = (index: number) => {
     setOpenStates((prev) => prev.map((open, i) => (i === index ? true : open)));
@@ -137,7 +135,8 @@ const PartsInfromation = () => {
             open={openStates[index]}
             onOpen={() => handleOpen(index)}
             onClose={() => handleClose(index)}
-            value={Ad[`${select.name}`]} // Bind selected value to the state
+            // @ts-ignore
+            value={Ad[`${select.name}`]}
             onChange={(e) => handleChange(e.target.value, select.name)}
             fullWidth
             className=" dark:text-white"
