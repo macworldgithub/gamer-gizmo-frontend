@@ -21,7 +21,7 @@ const BottomNavigationBar = () => {
     } else {
       setBackgroundColor("bg-black");
     }
-  }, [theme]);
+}, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
