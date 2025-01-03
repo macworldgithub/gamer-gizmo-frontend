@@ -108,14 +108,6 @@ const BottomNavigationBar = () => {
               className="rounded-full"
             />
             <p className="text-secondaryColorLight">Ayla Imran</p>
-
-            <Link
-              href="#"
-              className=" text-lg  hover:text-gray-300 "
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Laptops
-            </Link>
             <Link
               href="#"
               className="text-lg hover:text-gray-300"
@@ -123,6 +115,14 @@ const BottomNavigationBar = () => {
             >
               Desktops
             </Link>
+            <Link
+              href="#"
+              className=" text-lg  hover:text-gray-300 "
+              onClick={() => setIsDrawerOpen(false)}
+            >
+              Laptops
+            </Link>
+
             <Link
               href="#"
               className="text-lg hover:text-gray-300"
