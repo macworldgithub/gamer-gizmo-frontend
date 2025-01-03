@@ -1,10 +1,8 @@
-import React from "react";
 
 import CredentialSide from "./credentialSide";
 
-import PictureSide from "./pictureSide";
 import LoginLayout from "./loginlayout";
-import PageHeader from "@/components/PageHeader";
+import PictureSide from "./pictureSide";
 
 const Login = () => {
   return (
