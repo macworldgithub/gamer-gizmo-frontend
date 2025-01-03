@@ -1,7 +1,4 @@
-import React from "react";
-
 import CredentialSide from "./credentialSide";
-
 import PictureSide from "./pictureSide";
 import LoginLayout from "./loginlayout";
 

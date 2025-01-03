@@ -128,7 +128,7 @@ const PartsInfromation = () => {
   };
 
   return (
-    <div className="w-[100%] max-sm:w-[50%] py-5 gap-2 h-max flex flex-col">
+    <div className="w-[100%] max-sm:w-[60%] py-5 gap-2 h-max flex flex-col">
       {selectData.map((select: SelectData, index: number) => (
         <span className="flex " key={select.id}>
           <Select

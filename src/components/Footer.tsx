@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="absolute -top-16 w-full rounded-md  ">
         <div className=" mt-5 bg-custom-gradient rounded-2xl flex flex-col max-lg:whitespace-nowrap max-sm:w-[20rem]  max-md:w-[30rem] max-md:h-[11rem] max-lg:h-[10rem] sm:flex-col  max-lg:w-[40rem]  max-lg:flex  max-lg:justify-start md:flex-row justify-between items-center  mx-auto max-w-5xl px-8 py-8">
           {/* Heading and Description */}
-          <div className="flex flex-col items-center max-md:items-center lg:text-center sm:text-start md:text-start">
+          <div className="flex flex-col items-center max-md:items-center lg:text-center sm:text-start md:text-start ">
             <h2 className="md:text-2xl max-lg:text-[0.9rem] max-lg:text-center lg:text-3xl font-bold">
               Newsletters
             </h2>
