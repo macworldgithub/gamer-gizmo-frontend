@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="relative bg-black text-white  py-20 ">
+    <div className="relative bg-footerBlack text-white  py-20 ">
       <div className="absolute -top-16 w-full rounded-md  ">
         <div className=" mt-5 bg-custom-gradient rounded-2xl flex flex-col max-lg:whitespace-nowrap max-sm:w-[20rem]  max-md:w-[30rem] max-md:h-[11rem] max-lg:h-[10rem] sm:flex-col  max-lg:w-[40rem]  max-lg:flex  max-lg:justify-start md:flex-row justify-between items-center  mx-auto max-w-5xl px-8 py-8">
           {/* Heading and Description */}

@@ -49,16 +49,20 @@ const BottomNavigationBar = () => {
 
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
-      <Image
-        src="/images/gameIcon.png"
-        alt="logo-img"
-        width={100}
-        height={100}
-        className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
-      />
-      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
-        <Link href="/console-screen">Laptops</Link>
+      <Link href="/">
+        <Image
+          src="/images/gameIcon.png"
+          alt="logo-img"
+          width={100}
+          height={100}
+          className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
+        />
+      </Link>
+      {/* </div> */}
+      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         <Link href="/console-screen">Desktops</Link>
+        <Link href="/console-screen">Laptops</Link>
+        <Link href="/console-screen">Store</Link>
         <Link href="/console-screen">Components</Link>
         <Link href="/console-screen">Blogs</Link>
         <Link href="/console-screen">About Us</Link>
@@ -87,7 +91,7 @@ const BottomNavigationBar = () => {
         {/* Drawer Menu */}
         {isDrawerOpen && (
           <div
-            className={`flex-nowrap fixed left-0  dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 overflow-y-auto
+            className={`flex-nowrap fixed left-0  dark:bg-black bg-white dark:text-white w-[10rem] h-[85vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-1 max-sm:space-y-2  overflow-y-auto
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
@@ -107,7 +111,7 @@ const BottomNavigationBar = () => {
 
             <Link
               href="#"
-              className=" text-lg hover:text-gray-300 "
+              className=" text-lg  hover:text-gray-300 "
               onClick={() => setIsDrawerOpen(false)}
             >
               Laptops

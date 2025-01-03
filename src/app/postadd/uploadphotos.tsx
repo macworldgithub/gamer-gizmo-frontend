@@ -4,7 +4,7 @@ import RulesOfUploading from "./rules";
 
 const UploadPhotos = () => {
   return (
-    <div className="w-[65%] h-max shadow-combinedNight border rounded py-5 px-[5%] box-border my-10 flex flex-col ">
+    <div className="md:w-[65%] max-md:w-full  h-max shadow-combinedNight border rounded py-5 px-[5%] box-border my-10 flex flex-col ">
       <h1 className="text-[1.5rem] font-semibold mb-2">Upload Photos </h1>
       <div className="w-[100%] h-max border-customPurpleBorder border-dashed border rounded py-2">
         <div className="flex  w-[100%] h-max items-center justify-center gap-4 max-sm:flex-col max-sm:gap-2">
