@@ -55,9 +55,9 @@ const ConsoleHeader = () => {
       <PageHeader pageName="Used-Gaming-PC-Parts" title="Gaming PCs Parts" />
 
       {/* Main Content */}
-      <div className=" py-28 max-lg:py-8 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
-        <div className="w-[100%] flex flex-col lg:flex-row relative justify-around items-center  mx-auto space-y-8 md:space-y-0">
-          <div className="flex w-full max-lg:min-h-[50%] max-xl:max-h-[75%]  justify-center items-center gap-4 lg:absolute lg:-top-36 md:pb-16">
+      <div className="py-28 max-lg:py-8 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
+        <div className="w-[100%] flex flex-col xl:flex-row relative justify-around items-center  mx-auto space-y-8 md:space-y-0">
+          <div className="flex w-full max-lg:min-h-[50%] max-xl:max-h-[75%]  justify-center items-center gap-4 xl:absolute xl:-top-36 md:pb-16">
             <SelectLabels />
           </div>
           {/* Free Ad Section */}
