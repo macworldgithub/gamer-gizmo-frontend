@@ -221,6 +221,7 @@ const Header = () => {
               subtitle="Choose your necessary gaming items from this category."
               products={usedConsoles}
               onExplore={() => console.log("Explore Used Consoles")}
+              explorePath=""
             />
           </div>
         </Wrapper>

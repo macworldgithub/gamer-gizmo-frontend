@@ -24,6 +24,3 @@ const CommonCard: React.FC<CardProps> = ({ title, description, note }) => {
 
 export default CommonCard;
 
-{
-  /* <div className=" bg-white text-black dark:text:white w-[60em] max-sm:w-[15em] sm:w-[30rem] md:w-[40em] max-md:ml-5 h-[25em] border border-pinkishBorder dark:text-white p-6 rounded-lg shadow-lg flex flex-col gap-4 dark:bg-black "> */
-}

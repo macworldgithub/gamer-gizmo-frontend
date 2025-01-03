@@ -8,8 +8,7 @@ interface layoutProps {
   children: React.ReactNode;
 }
 
-const LoginLayout = ({ children }: layoutProps) => {
-  const themeStyles = useThemeStyles();
+const LoginLayout = ({  }: layoutProps) => {
 
   return (
     <>

@@ -1,10 +1,10 @@
-"use client"; 
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
 
 const Rightsection = () => {
-  const [quantity, setQuantity] = useState(1); 
+  const [quantity, setQuantity] = useState(1);
 
   const handleIncrement = () => setQuantity(quantity + 1);
   const handleDecrement = () => {
@@ -12,9 +12,9 @@ const Rightsection = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-10 flex flex-col justify-center items-center gap-8">
+    <div className=" max-md:hidden py-10 flex flex-col justify-center items-start gap-8">
       {/* First Card (Price & Quantity) */}
-      <div className="border border-gray-300 rounded-lg p-6 w-72 bg-white shadow-md flex flex-col justify-between">
+      <div className="border h-72 border-gray-300 rounded-lg p-6 w-72 bg-white shadow-md flex flex-col justify-between">
         {/* Price Heading */}
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
           AED 551.00
@@ -69,7 +69,7 @@ const Rightsection = () => {
       </div>
 
       {/* Seller Details Section */}
-      <div className="border border-gray-300 rounded-lg p-6 w-72 bg-white shadow-md flex flex-col items-center">
+      <div className="border border-gray-300 rounded-lg p-6 w-72 h-72 bg-white shadow-md flex flex-col items-center">
         {/* Heading */}
         <h2 className="text-center text-lg font-bold text-gray-800">
           Seller Details
@@ -82,7 +82,7 @@ const Rightsection = () => {
         <div className="flex items-center mb-6">
           {/* Seller Image */}
           <Image
-            src="/images/person.png" 
+            src="/images/person.png"
             alt="Seller Image"
             width={40}
             height={40}
@@ -130,7 +130,7 @@ const Rightsection = () => {
       </div>
 
       {/* Third Card (Buy From GamerGizmo) */}
-      <div className="border border-gray-300 rounded-lg p-6 w-72 bg-white shadow-md flex flex-col items-center">
+      <div className="border border-gray-300 rounded-lg p-6 w-72 h-72 bg-white shadow-md flex flex-col items-center">
         <Image
           src="/images/trawly.png"
           alt="Cart Icon"

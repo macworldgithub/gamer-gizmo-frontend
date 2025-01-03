@@ -1,24 +1,31 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Select, MenuItem } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAdField } from "../Redux/AddSlice";
-import { useSelector } from "react-redux";
 import { RootState } from "../Store/Store";
+
+interface SelectOption {
+  value: number;
+  label: string;
+}
+interface SelectData {
+  id: number;
+  name: string;
+  options: SelectOption[];
+}
 
 const PartsInfromation = () => {
   const Ad = useSelector((state: RootState) => state.Ad);
   const dispatch = useDispatch();
-  const [openStates, setOpenStates] = useState(
-    Array(5).fill(false) // Initialize an array for each Select component's state
-  );
 
-  const handleOpen = (index: any) => {
+  const [openStates, setOpenStates] = useState<boolean[]>(Array(5).fill(false));
+
+  const handleOpen = (index: number) => {
     setOpenStates((prev) => prev.map((open, i) => (i === index ? true : open)));
   };
 
-  const handleClose = (index: any) => {
+  const handleClose = (index: number) => {
     setOpenStates((prev) =>
       prev.map((open, i) => (i === index ? false : open))
     );
@@ -28,7 +35,7 @@ const PartsInfromation = () => {
     console.log(Ad, "holdon");
   }, [Ad]);
 
-  const selectData = [
+  const selectData: SelectData[] = [
     {
       id: 2,
       name: "pcInfo",
@@ -49,7 +56,6 @@ const PartsInfromation = () => {
     {
       id: 3,
       name: "graphicCard",
-
       options: [
         { value: 23, label: "Earth" },
         { value: 24, label: "Mars" },
@@ -67,7 +73,6 @@ const PartsInfromation = () => {
     {
       id: 4,
       name: "ram",
-
       options: [
         { value: 34, label: "Red" },
         { value: 35, label: "Blue" },
@@ -85,7 +90,6 @@ const PartsInfromation = () => {
     {
       id: 5,
       name: "storage",
-
       options: [
         { value: 45, label: "One" },
         { value: 46, label: "Two" },
@@ -103,7 +107,6 @@ const PartsInfromation = () => {
     {
       id: 6,
       name: "lcdSize",
-
       options: [
         { value: 56, label: "Morning" },
         { value: 57, label: "Night" },
@@ -126,14 +129,14 @@ const PartsInfromation = () => {
 
   return (
     <div className="w-[100%] max-sm:w-[50%] py-5 gap-2 h-max flex flex-col">
-      {selectData.map((select: any, index: any) => (
+      {selectData.map((select: SelectData, index: number) => (
         <span className="flex " key={select.id}>
           <Select
             open={openStates[index]}
             onOpen={() => handleOpen(index)}
             onClose={() => handleClose(index)}
-            //@ts-ignore
-            value={Ad[`${select.name}`]} // Bind selected value to the state
+            // @ts-ignore
+            value={Ad[`${select.name}`]}
             onChange={(e) => handleChange(e.target.value, select.name)}
             fullWidth
             className=" dark:text-white"
@@ -161,11 +164,10 @@ const PartsInfromation = () => {
               },
               disableScrollLock: true,
               closeAfterTransition: true,
-
               autoFocus: false,
             }}
           >
-            {select.options.map((option: any) => (
+            {select.options.map((option: SelectOption) => (
               <MenuItem
                 key={option.value}
                 value={option.label}
@@ -179,7 +181,6 @@ const PartsInfromation = () => {
                   "&:hover": {
                     transition: "all 0.5s ease",
                     backgroundColor: "rgba(225, 79, 251, 0.1)",
-
                     color: "black",
                   },
                 }}

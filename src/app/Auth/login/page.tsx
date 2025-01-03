@@ -1,15 +1,13 @@
-
 import CredentialSide from "./credentialSide";
-
-import LoginLayout from "./loginlayout";
 import PictureSide from "./pictureSide";
+import LoginLayout from "./loginlayout";
 
 const Login = () => {
   return (
     <>
       <LoginLayout>
-        <CredentialSide/>
-        <PictureSide/>
+        <CredentialSide />
+        <PictureSide />
       </LoginLayout>
     </>
   );
