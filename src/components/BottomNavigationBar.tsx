@@ -21,7 +21,7 @@ const BottomNavigationBar = () => {
     } else {
       setBackgroundColor("bg-black");
     }
-}, [theme]);
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +58,7 @@ const BottomNavigationBar = () => {
         className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
       />
       {/* </div> */}
-      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem] lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
+      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         <Link href="/console-screen">Laptops</Link>
         <Link href="/console-screen">Desktops</Link>
         <Link href="/console-screen">Store</Link>
@@ -90,7 +90,7 @@ const BottomNavigationBar = () => {
         {/* Drawer Menu */}
         {isDrawerOpen && (
           <div
-            className={`flex-nowrap fixed left-0  dark:bg-black dark:text-white w-[10rem] h-screen z-50 bg-red flex flex-col items-center space-y-6 overflow-y-auto
+            className={`flex-nowrap fixed left-0  dark:bg-black bg-white dark:text-white w-[10rem] h-[85vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-1 max-sm:space-y-2  overflow-y-auto
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
@@ -110,7 +110,7 @@ const BottomNavigationBar = () => {
 
             <Link
               href="#"
-              className=" text-lg hover:text-gray-300 "
+              className=" text-lg  hover:text-gray-300 "
               onClick={() => setIsDrawerOpen(false)}
             >
               Laptops
@@ -200,13 +200,6 @@ const BottomNavigationBar = () => {
           </div>
         </Link>
 
-        {/* <Image
-          src="/images/profile.png"
-          alt="Profile"
-          width={40}
-          height={40}
-          className="rounded-full md:w-[1rem] lg:w-[1.8rem] md:mx-0"
-        /> */}
         {isLogin ? (
           // Show the profile image if logged in
           <Image

@@ -46,99 +46,23 @@ const usedConsoles = [
     price: "AED 1914.95",
     imageUrl: "/images/gpu5.png",
   },
-  {
-    id: 1,
-    name: "Radeon RX 580 OC...",
-    description: "Powerful graphics card for gaming...",
-    price: "AED 551.00",
-    imageUrl: "/images/gpu.png",
-  },
-  {
-    id: 2,
-    name: "Asus ROG Hyperion...",
-    description: "High-performance computer case...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu2.png",
-  },
-  {
-    id: 3,
-    name: "MSI PRO B760M-E...",
-    description:
-      "The PRO Series is tailored to professionals from all walks of life. The lineup features... ",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu3.png",
-  },
-  {
-    id: 4,
-    name: "Bloody W95 Max RGB",
-    description:
-      "The A4Tech W95 Max Bloody mouse is the optimal solution for those looking for a high-quality and productive mouse",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu4.png",
-  },
-  {
-    id: 5,
-    name: "Corsair VENGEANCE",
-    description:
-      "CORSAIR VENGEANCE RGB PRO Series DDR4 overclocked memory lights up your PC with mesmerizing ...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu5.png",
-  },
-  {
-    id: 1,
-    name: "Radeon RX 580 OC...",
-    description: "Powerful graphics card for gaming...",
-    price: "AED 551.00",
-    imageUrl: "/images/gpu.png",
-  },
-  {
-    id: 2,
-    name: "Asus ROG Hyperion...",
-    description: "High-performance computer case...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu2.png",
-  },
-  {
-    id: 3,
-    name: "MSI PRO B760M-E...",
-    description:
-      "The PRO Series is tailored to professionals from all walks of life. The lineup features... ",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu3.png",
-  },
-  {
-    id: 4,
-    name: "Bloody W95 Max RGB",
-    description:
-      "The A4Tech W95 Max Bloody mouse is the optimal solution for those looking for a high-quality and productive mouse",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu4.png",
-  },
-  {
-    id: 5,
-    name: "Corsair VENGEANCE",
-    description:
-      "CORSAIR VENGEANCE RGB PRO Series DDR4 overclocked memory lights up your PC with mesmerizing ...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu5.png",
-  },
 ];
 
 const ConsoleHeader = () => {
   return (
-    <div className="bg-white dark:bg-black">
+    <div className="bg-white dark:bg-black w-full h-auto">
       {/* Page Header */}
       <PageHeader pageName="Used-Gaming-PC-Parts" title="Gaming PCs Parts" />
 
       {/* Main Content */}
-      <div className=" py-28 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
-        <div className="w-[100%] flex flex-col md:flex-row relative justify-around items-center  mx-auto space-y-8 md:space-y-0">
-          <div className="flex w-full max-lg:min-h-[50%] max-xl:max-h-[75%] justify-center items-center gap-4 md:absolute -top-36">
+      <div className=" py-28 max-lg:py-8 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
+        <div className="w-[100%] flex flex-col lg:flex-row relative justify-around items-center  mx-auto space-y-8 md:space-y-0">
+          <div className="flex w-full max-lg:min-h-[50%] max-xl:max-h-[75%]  justify-center items-center gap-4 lg:absolute lg:-top-36 md:pb-16">
             <SelectLabels />
           </div>
           {/* Free Ad Section */}
           <Wrapper>
-            <div className="dark:bg-secondaryBlack dark:text-white  text-gray-800  flex justify-center gap-4 max-md:flex-col max-md:items-center">
+            <div className="dark:bg-secondaryBlack dark:text-white text-gray-800  flex justify-center gap-4 max-md:flex-col items-center">
               <div className="text-center">
                 <div className="flex justify-center mb-3">
                   <Image
@@ -189,16 +113,12 @@ const ConsoleHeader = () => {
                   Sell your product faster than others at a better price.
                 </p>
               </div>
+              {/* Call-to-Action Button */}
+              <button className="bg-custom-gradient text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8">
+                Sell Your Product
+              </button>
             </div>
-
-          {/* Call-to-Action Button */}
-          <div className="text-center">
-            <button className="bg-custom-gradient text-white  w-36 h-12 rounded-full shadow-md text-sm ">
-              Sell Your Product
-            </button>
-          </div>
           </Wrapper>
-
         </div>
       </div>
       <div className="py-10  dark:bg-black">
