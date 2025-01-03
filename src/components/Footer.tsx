@@ -41,13 +41,16 @@ const Footer = () => {
       <div className="pt-32 pb-10 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
         {/* Logo & Description */}
         <div className="">
-          <Image
-            src="/images/gameIcon.png"
-            width={100}
-            height={100}
-            alt="Logo"
-            className="mb-2"
-          />
+          <Link href="/">
+            <Image
+              src="/images/gameIcon.png"
+              width={100}
+              height={100}
+              alt="Logo"
+              className="mb-2"
+            />
+          </Link>
+
           <p className="text-sm max-w-xs leading-relaxed text-start md:text-xs">
             “Gamer Gizmo – Your ultimate destination for gaming gear, laptops,
             and accessories. Level up your gaming experience with ease.”
