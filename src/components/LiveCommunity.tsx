@@ -48,12 +48,12 @@ const LiveCommunity: React.FC = () => {
   ];
 
   return (
-    <Wrapper className="mb-6">
-      <div className="space-y-8">
-        <h1 className="text-3xl font-bold max-sm:text-xl dark:text-white max-sm:ml-4 md:pl-4 sm:pl-3">
+    <div className="space-y-8 bg-white dark:bg-black w-full py-6">
+      <Wrapper>
+        <h1 className="text-3xl text-start font-bold max-sm:text-xl text-black dark:text-white max-sm:ml-4 md:pl-4 sm:pl-3 pb-3">
           Live Community
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full text-black dark:text-white">
           {cardsData.map((card, index) => (
             <CommunityCard
               key={index}
@@ -65,13 +65,13 @@ const LiveCommunity: React.FC = () => {
             />
           ))}
         </div>
-        <div className="flex justify-end max-md:justify-center mt-8 ">
+        <div className="flex justify-end max-md:justify-center mt-8">
           <button className="px-6 py-2 w-[10rem] h-[3rem] bg-custom-gradient  text-white text-center text-xs font-semibold rounded-full shadow hover:opacity-90">
             Join Live Community
           </button>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </div>
   );
 };
 

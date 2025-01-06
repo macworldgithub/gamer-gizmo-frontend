@@ -75,7 +75,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
                 <p className="text-xs text-gray-500 mt-1 truncate">
                   {product.description}
                 </p>
-                <p className="text-purple-500 font-bold mt-2"> 
+                <p className="text-purple-500 font-bold mt-2">
                   {product.price}
                 </p>
                 <button className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-white mt-2 w-[4rem] py-1 rounded-full text-sm hover:bg-purple-600">

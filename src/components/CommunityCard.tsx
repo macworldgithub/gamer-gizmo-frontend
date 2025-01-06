@@ -19,7 +19,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
 }) => {
   return (
     <div className="border border-purple-300 rounded-lg p-4 shadow-sm mx-3">
-      <div className="flex items-center space-x-3">
+      <div className="flex justify-start items-center space-x-3">
         <div className="w-10 h-10 bg-gray-300 rounded-md">
           <Image src={src} width={100} height={100} alt="profile-pic" />
         </div>
@@ -28,9 +28,11 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
           <p className="text-sm text-gray-500">{time}</p>
         </div>
       </div>
-      <h3 className="mt-4 text-lg font-semibold dark:text-white">{question}</h3>
-      <p className="mt-2 text-gray-600">{description}</p>
-      <div className="flex space-x-4 mt-4 text-sm text-gray-500">
+      <h3 className="mt-4 text-lg font-semibold text-start dark:text-white">
+        {question}
+      </h3>
+      <p className="mt-2 text-start text-gray-600">{description}</p>
+      <div className="flex justify-end space-x-4 mt-4 text-sm text-gray-500">
         <button className="flex items-center space-x-1 hover:text-purple-500">
           <span>Reply</span>
         </button>

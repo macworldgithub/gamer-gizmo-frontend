@@ -202,7 +202,6 @@ const BottomNavigationBar = () => {
         </Link>
 
         {isLogin ? (
-          // Show the profile image if logged in
           <Image
             src="/images/profile.png"
             alt="Profile"
@@ -211,7 +210,6 @@ const BottomNavigationBar = () => {
             className="rounded-full md:w-[1rem] lg:w-[1.8rem] md:mx-0"
           />
         ) : (
-          // Show the login button if not logged in
           <Link href="/Auth/login">
             <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
               <Image
@@ -229,7 +227,6 @@ const BottomNavigationBar = () => {
         )}
         <ThemeToggle />
       </div>
-      {/* </div> */}
     </div>
   );
 };
