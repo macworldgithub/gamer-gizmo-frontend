@@ -66,7 +66,7 @@ const BottomNavigationBar = () => {
         <Link href="/console-screen">Components</Link>
         <Link href="/console-screen">Blogs</Link>
         <Link href="/console-screen">About Us</Link>
-        <Link href="/console-screen">Contact Us</Link>
+        <Link href="/contact">Contact Us</Link>
         <Link href="/console-screen" className="text-secondaryColorLight">
           Inspection
         </Link>
