@@ -2,20 +2,20 @@ import React from "react";
 
 const ContactForm = () => {
     return (
-        // <Wrapper>
+       
         <div className="w-full py-4 px-4">
             <div className="w-full max-w-4xl bg-white p-4 shadow-md py-4 mb-4 border dark:bg-black">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-2 dark:text-white">Leave a Reply</h2>
                 <p className="text-gray-500 mb-6 dark:text-white">We're Ready to Help Your Business</p>
                 <form className="space-y-6 ">
-                    {/* Full Name and Email Address */}
-                    <div className="grid dark:bg-blackrid-cols-1 md:grid-cols-2 gap-4 font-semibold text-[#14161B] ">
+                   
+                    <div className="grid dark:bg-black grid-cols-1 md:grid-cols-2 gap-4 font-semibold">
                         <div >
                             <input 
                                 type="text"
                                 id="fullName"
                                 placeholder="Full Name"
-                                className="mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-black p-2"
+                                className="text-[#14161B] mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-black p-2"
                             />
                         </div>
                         <div>
@@ -23,12 +23,11 @@ const ContactForm = () => {
                                 type="email"
                                 id="email"
                                 placeholder="Email Address"
-                                className="mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 dark:bg-black"
+                                className="text-[#14161B]  mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 dark:bg-black"
                             />
                         </div>
                     </div>
 
-                    {/* Message */}
                     <div>
                         <textarea
                             id="message"
@@ -38,7 +37,6 @@ const ContactForm = () => {
                         ></textarea>
                     </div>
 
-                    {/* Submit Button */}
                     <div>
                         <button
                             type="submit"
@@ -50,7 +48,6 @@ const ContactForm = () => {
                 </form>
             </div>
         </div>
-        // </Wrapper>
     );
 };
 

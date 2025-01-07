@@ -63,14 +63,14 @@ const page = () => {
     <div className="w-full h-auto bg-white dark:bg-black">
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-10">
-        <div className="w-full max-md:w-full ">
+        <div className="w-[70%] max-md:w-full ">
           <ProductDetails />
           {/* <Sellersdetails/> */}
           <AuthorSection />
           <RelatedNewsSection />
           <CommentsSection />
         </div>
-        <div className="w-[40%]">
+        <div className="w-[30%]">
           <Rightsection />
         </div>
         <div>
