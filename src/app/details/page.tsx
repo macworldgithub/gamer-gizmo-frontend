@@ -63,7 +63,7 @@ const page = () => {
     <div className="w-full h-auto bg-white dark:bg-black">
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-10">
-        <div className="w-[70%] max-md:w-full">
+        <div className="w-[70%] max-md:w-full ">
           <ProductDetails />
           {/* <Sellersdetails/> */}
           <AuthorSection />
@@ -77,18 +77,18 @@ const page = () => {
       </div>
 
       <div>
-        <Wrapper>
-          <div className="w-full h-auto">
-            {/* Product Grid */}
-            <PopularItemSection
-              title="Similar Ads"
-              subtitle="Choose your necessary gaming items from this category."
-              products={usedConsoles}
-              onExplore={() => console.log("Explore Used Consoles")}
-              explorePath=""
-            />
-          </div>
-        </Wrapper>
+        {/* <Wrapper> */}
+        <div className="w-full ml-20 mr-20 h-auto">
+          {/* Product Grid */}
+          <PopularItemSection
+            title="Similar Ads"
+            subtitle="Choose your necessary gaming items from this category."
+            products={usedConsoles}
+            onExplore={() => console.log("Explore Used Consoles")}
+            explorePath=""
+          />
+        </div>
+        {/* </Wrapper> */}
       </div>
     </div>
   );
