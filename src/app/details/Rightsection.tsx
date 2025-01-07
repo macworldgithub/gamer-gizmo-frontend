@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 const Rightsection = () => {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(2);
 
   const handleIncrement = () => setQuantity(quantity + 1);
   const handleDecrement = () => {
@@ -12,16 +12,16 @@ const Rightsection = () => {
   };
 
   return (
-    <div className=" max-md:hidden py-10 flex flex-col justify-center items-start gap-8">
+    <div className=" max-md:hidden py-10 flex flex-col justify-center items-start gap-8 ">
       {/* First Card (Price & Quantity) */}
-      <div className="border h-72 border-gray-300 rounded-lg p-6 w-72 bg-white shadow-md flex flex-col justify-between">
+      <div className=" border h-72 border-gray-300 rounded-lg p-6 w-72 bg-white shadow-md flex flex-col justify-between dark:bg-black">
         {/* Price Heading */}
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
           AED 551.00
         </h1>
 
         {/* Horizontal Divider */}
-        <hr className="my-6 border-gray-300 w-full" />
+        <hr className="my-6 border-gray-300 w-full " />
 
         {/* Quantity Selector */}
         <div className="flex items-center justify-center w-fit mx-auto border border-purple-500 rounded-md overflow-hidden mb-4">
@@ -69,9 +69,9 @@ const Rightsection = () => {
       </div>
 
       {/* Seller Details Section */}
-      <div className="border border-gray-300 rounded-lg p-6 w-72 h-72 bg-white shadow-md flex flex-col items-center">
+      <div className="dark:bg-black  border border-gray-300 rounded-lg p-6 w-72 h-72 bg-white shadow-md flex flex-col items-center">
         {/* Heading */}
-        <h2 className="text-center text-lg font-bold text-gray-800">
+        <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
           Seller Details
         </h2>
 
@@ -90,13 +90,13 @@ const Rightsection = () => {
           />
           {/* Seller Name and Member Since */}
           <div className="text-left">
-            <p className="text-gray-800 font-semibold">Shamsher Alikhan</p>
-            <p className="text-gray-500 text-sm">Member Since Nov 26, 2022</p>
+            <p className="text-gray-800 font-semibold dark:text-white">Shamsher Alikhan</p>
+            <p className="text-gray-500 text-sm dark:text-[#969696]">Member Since Nov 26, 2022</p>
           </div>
         </div>
 
         {/* Icons Row */}
-        <div className="flex justify-center items-center space-x-6 mb-6">
+        <div className="flex justify-center items-center space-x-6 mb-6 dark:invert">
           <Image
             src="/images/cellphone.png"
             alt="Cellphone Icon"
@@ -120,7 +120,7 @@ const Rightsection = () => {
         </div>
 
         {/* Footer Text */}
-        <p className="text-center text-sm text-gray-600 mb-2">
+        <p className="text-center text-sm text-gray-600 mb-2 dark:text-white">
           See if your friends know this seller
         </p>
         {/* Connect with Facebook */}
@@ -130,17 +130,17 @@ const Rightsection = () => {
       </div>
 
       {/* Third Card (Buy From GamerGizmo) */}
-      <div className="border border-gray-300 rounded-lg p-6 w-72 h-72 bg-white shadow-md flex flex-col items-center">
+      <div className="dark:bg-black border border-gray-300 rounded-lg p-6 w-72 h-72 bg-white shadow-md flex flex-col items-center">
         <Image
           src="/images/trawly.png"
           alt="Cart Icon"
           width={60}
           height={80}
         />
-        <h2 className="text-center text-sm font-bold text-purple-600 mt-4">
+        <h2 className=" text-center text-sm font-bold text-purple-600 mt-4">
           Buy From GamerGizmo and Get
         </h2>
-        <ul className="mt-4 text-black text-center space-y-1">
+        <ul className="mt-4 text-black text-center space-y-1 dark:text-white">
           <li>1. 100% Genuine Products</li>
           <li className="-ml-8">2. Hassle Free Buying</li>{" "}
           {/* Adjusted position */}

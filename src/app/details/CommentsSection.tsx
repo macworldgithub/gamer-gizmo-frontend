@@ -26,28 +26,28 @@ const CommentsSection = () => {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 border border-btnGray">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+    <div className="w-full max-w-5xl mx-auto p-4 border border-Gray dark:bg-black">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6 dark:text-white">
         People Comments
       </h2>
       <div className="space-y-6">
         {comments.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col sm:flex-row items-start sm:items-center bg-white rounded-lg p-4 sm:space-x-4 space-y-4 sm:space-y-0"
+            className="dark:bg-black flex flex-col sm:flex-row items-start sm:items-center bg-white rounded-lg p-4 sm:space-x-4 space-y-4 sm:space-y-0"
           >
             {/* User Avatar */}
-            <div className="w-20 h-20 bg-gray-300 rounded-full flex justify-center items-center text-gray-500 text-sm">
+            <div className="w-20 h-20 bg-gray-300 rounded-full flex justify-center items-center text-gray-500 text-sm ">
               80X80
             </div>
 
             {/* User Info */}
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+            <div className="flex-1 ">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                 {item.name}
               </h3>
-              <p className="text-sm text-gray-500">{item.date}</p>
-              <p className="mt-2 text-gray-600 text-sm leading-relaxed">
+              <p className="text-sm text-gray-500 dark:text-white">{item.date}</p>
+              <p className="mt-2 text-gray-600 text-sm leading-relaxed dark:text-[#616161]">
                 {item.comment}
               </p>
               <Link

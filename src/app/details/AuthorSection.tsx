@@ -12,7 +12,7 @@ import Image from "next/image";
 const AuthorSection = () => {
   return (
     <div className="w-full flex justify-center mt-6">
-      <div className=" w-full max-w-5xl bg-white shadow-lg rounded-lg p-6 flex justify-center items-center gap-6 space-y-4">
+      <div className="dark:bg-black  w-full max-w-5xl bg-white shadow-lg rounded-lg p-6 flex justify-center items-center gap-6 space-y-4">
         {/* Author Image */}
         <div className="w-44">
           <Image
@@ -25,13 +25,13 @@ const AuthorSection = () => {
         </div>
 
         {/* Author Info */}
-        <div className="flex flex-col items-start">
-          <div className="">
+        <div className="flex flex-col items-start dark:text-white">
+          <div>
             <h3 className="text-lg font-bold">Herbert N. Johnson</h3>
-            <p className="text-gray-500">Author</p>
+            <p className="text-gray-500 dark:text-white">Author</p>
           </div>
           {/* Description */}
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-gray-600 text-sm leading-relaxed dark:text-white">
             Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
             quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
             quo voluptas nulla pariatur must explain to you how all this
