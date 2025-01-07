@@ -1,13 +1,10 @@
 "use client";
 
-import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Wrapper from "./Common/Wrapper/Wrapper";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import { useEffect, useState } from "react";
+import Wrapper from "./Common/Wrapper/Wrapper";
 
 export default function SelectLabels() {
   const dropdownOptions = [
@@ -56,19 +53,10 @@ export default function SelectLabels() {
 
   return (
     <Wrapper>
-      <div className="flex flex-wrap bg-white py-5 justify-center md:justify-around rounded-md px-4 mt-5 gap-4 md:gap-6">
-        {dropdownOptions.map((dropdown, index) => (
-          <div
-            key={index}
-            className="w-28 max-md:w-60 h-10 text-xs max-md:mx-5 max-md:my-[0.3rem] bg-white rounded-full flex justify-center items-center relative"
-          >
-            <FormControl
-              sx={{
-                m: 1,
-                minWidth: 120,
-                width: "100%",
-              }}
-            >
+      <div className="flex max-md:flex-col w-[100%]  max-md:flex-wrap max-xl:flex-wrap h-max p-2 rounded bg-white justify-center items-center">
+        <div className="flex max-lg:flex-col max-sm:mb-2  justify-center mb-1 gap-8 max-md:gap-5 w-[100%]  h-max flex-wrap  items-center ">
+          {dropdownOptions.map((dropdown, index) => (
+            <div key={index} className="flex justify-center items-center">
               <Select
                 value={selectedValues[index]}
                 onChange={(event) => handleChange(index, event)}
@@ -106,13 +94,15 @@ export default function SelectLabels() {
                     },
                   },
                 }}
+                className="w-[180px] h-12 mt-2 max-sm:w-[245px] max-md:w-[360px] max-lg:w-[550px]  border border-searchFilterBorder"
                 sx={{
-                  width: "100%",
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black",
-                    border: "1px solid grey",
-                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {},
                   borderRadius: "50px",
+                  fontFamily: "Urbanist",
+                  fontWeight: "600",
+                  ".MuiSelect-icon": {
+                    color: "#6345ed", // Change the arrow color here
+                  },
                 }}
               >
                 {dropdown.options.map((option, id) => (
@@ -134,10 +124,11 @@ export default function SelectLabels() {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
-          </div>
-        ))}
-        <div className="bg-custom-gradient w-28 max-md:w-60 h-10 lg:h-12 max-md:mx-5 rounded-full md:p-1.5 flex justify-center items-center md:text-base font-medium text-white">
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-custom-gradient  w-[180px] max-md:w-60 h-[40px] lg:h-12  rounded-full  flex justify-center items-center md:text-base font-medium text-white">
           Filter
         </div>
       </div>

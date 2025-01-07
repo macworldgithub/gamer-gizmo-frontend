@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Wrapper from "./Common/Wrapper/Wrapper";
 
 interface PageHeadProps {
   pageName: string;
@@ -9,6 +8,7 @@ interface PageHeadProps {
 }
 
 const PageHeader = ({
+  //@ts-ignore
   pageName,
   title,
   description,
@@ -17,7 +17,7 @@ const PageHeader = ({
   return (
     <>
       {(title || description || button) && (
-        <div className="w-full h-auto  bg-custom-gradient text-[white]   py-6">
+        <div className="w-full h-auto  bg-custom-gradient text-[white] py-6">
           <div className="flex flex-col bg-custom-gradient   items-start space-y-2 lg:px-32 md:px-32 max-md:px-7 mb-10">
             {title && (
               <h1 className="text-2xl lg:text-4xl max-md:text-lg font-bold">
@@ -38,7 +38,7 @@ const PageHeader = ({
         </div>
       )}
       {!title && !description && !button && (
-        <div className="w-[100%] lg:h-[250px]  h-[140px] bg-custom-gradient text-[white] font-bold max-sm:flex max-sm:justify-center ">
+        <div className="w-[100%] h-[100px] bg-custom-gradient text-[white] font-bold max-sm:flex max-sm:justify-center ">
           <Image
             src={"/images/HeroArea.png"}
             width={0}

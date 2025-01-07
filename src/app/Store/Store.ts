@@ -4,6 +4,8 @@ import currencySlice from "../Redux/CurrencySlice";
 import ThemeSlice from "../Redux/ThemeSlice";
 import adSlice from "../Redux/AddSlice";
 import sellForMeSlice from "../Redux/SellForMeSlice";
+import Login from "../Auth/login/page";
+import loginSlice from "../Redux/LoginSlice";
 
 const Store = configureStore({
   reducer: {
@@ -11,6 +13,7 @@ const Store = configureStore({
     Ad: adSlice.reducer,
     Currency: currencySlice.reducer, // Add more reducers here as needed
     Theme: ThemeSlice.reducer,
+    login: loginSlice
   },
 });
 
