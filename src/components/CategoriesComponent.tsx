@@ -5,14 +5,15 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 
 const CategoriesComponent = () => {
   const category = [
-    "New Gaming PC Parts",
+    "Used Desktops",
+    "Used Laptops",
     "Used Gaming PC Parts",
+    "Used Gaming Consoles",
+    "Used Gaming Accessories",
     "New Desktops",
     "New Laptops",
-    "Used Laptops",
-    "Used Desktops",
-    "Accessories",
-    "Gaming Consoles",
+    "New Gaming PC Parts",
+    "New Gaming Consoles",
     "Customization & Gaming Gears",
   ];
   const offeringList = [

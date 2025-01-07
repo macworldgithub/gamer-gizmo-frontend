@@ -1,14 +1,14 @@
-import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import PageHeader from "@/components/PageHeader";
+import ContactCards from "./ContactCards";
+import Map from "./Map";
 
 const AboutPage = () => {
   return (
-    <>
-      <PageHeader pageName={"Contact Us"} />
-      <Wrapper>
-        <div className="h-96 w-full bg-blue-950"></div>
-      </Wrapper>
-    </>
+    <div className="w-full bg-white dark:bg-black">
+      <PageHeader pageName={"Contact Us"} title="Contact" />
+      <ContactCards />
+      <Map />
+    </div>
   );
 };
 

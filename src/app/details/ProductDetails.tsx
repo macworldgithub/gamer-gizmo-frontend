@@ -80,7 +80,7 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        <Buynow/>
+        <Buynow />
 
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">
@@ -165,10 +165,8 @@ const ProductDetails = () => {
         )}
         {activeTab === "specifications" && <SpecificationsTable />}
 
-        <Sellersdetails/>
+        <Sellersdetails />
       </div>
-
-
     </div>
   );
 };

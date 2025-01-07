@@ -9,14 +9,12 @@ import CommentsSection from "./CommentsSection";
 import ContactForm from "./ContactForm";
 import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
-import Sellersdetails from "./sellersdetail";
 const page = () => {
-
   const cardContent = {
     title: "Similar Ads",
     description:
       "Choose your necessary Parts from this Used Gaming Pc categories",
-    note: ""
+    note: "",
   };
 
   const usedConsoles = [
@@ -30,7 +28,8 @@ const page = () => {
     {
       id: 2,
       name: "Asus ROG Hyperion...",
-      description: "ROG Hyperion GR701 E-ATX computer case, 420 mm dual radiator support,....",
+      description:
+        "ROG Hyperion GR701 E-ATX computer case, 420 mm dual radiator support,....",
       price: "AED 1914.95",
       imageUrl: "/images/NewGPU1.png",
     },
@@ -60,25 +59,21 @@ const page = () => {
     },
   ];
   return (
-    <div className="w-full h-auto bg-white dark:bg-black">
+    <div className="w-full h-auto bg-white dark:bg-[#14161B]">
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-10">
-        <div className="w-[70%] max-md:w-full ">
+        <div className="w-[65%] max-md:w-full">
           <ProductDetails />
-          {/* <Sellersdetails/> */}
           <AuthorSection />
           <RelatedNewsSection />
           <CommentsSection />
+          <ContactForm />
         </div>
-        <div className="w-[30%]">
+        <div className="w-[35%]">
           <Rightsection />
         </div>
-        <div>
-        </div>
       </div>
-      <div>
-      <ContactForm/>
-      </div>
+
       <div>
         <Wrapper>
           <div className="w-full h-auto">

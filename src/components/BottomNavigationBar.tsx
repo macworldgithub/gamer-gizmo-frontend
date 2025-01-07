@@ -49,23 +49,24 @@ const BottomNavigationBar = () => {
 
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
-      {/* <div> */}
-      <Image
-        src="/images/gameIcon.png"
-        alt="logo-img"
-        width={100}
-        height={100}
-        className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
-      />
+      <Link href="/">
+        <Image
+          src="/images/gameIcon.png"
+          alt="logo-img"
+          width={100}
+          height={100}
+          className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
+        />
+      </Link>
       {/* </div> */}
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
-        <Link href="/console-screen">Laptops</Link>
         <Link href="/console-screen">Desktops</Link>
+        <Link href="/console-screen">Laptops</Link>
         <Link href="/console-screen">Store</Link>
         <Link href="/console-screen">Components</Link>
         <Link href="/console-screen">Blogs</Link>
         <Link href="/console-screen">About Us</Link>
-        <Link href="/console-screen">Contact Us</Link>
+        <Link href="/contact">Contact Us</Link>
         <Link href="/console-screen" className="text-secondaryColorLight">
           Inspection
         </Link>
@@ -107,14 +108,6 @@ const BottomNavigationBar = () => {
               className="rounded-full"
             />
             <p className="text-secondaryColorLight">Ayla Imran</p>
-
-            <Link
-              href="#"
-              className=" text-lg  hover:text-gray-300 "
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Laptops
-            </Link>
             <Link
               href="#"
               className="text-lg hover:text-gray-300"
@@ -122,6 +115,14 @@ const BottomNavigationBar = () => {
             >
               Desktops
             </Link>
+            <Link
+              href="#"
+              className=" text-lg  hover:text-gray-300 "
+              onClick={() => setIsDrawerOpen(false)}
+            >
+              Laptops
+            </Link>
+
             <Link
               href="#"
               className="text-lg hover:text-gray-300"
@@ -201,7 +202,6 @@ const BottomNavigationBar = () => {
         </Link>
 
         {isLogin ? (
-          // Show the profile image if logged in
           <Image
             src="/images/profile.png"
             alt="Profile"
@@ -210,7 +210,6 @@ const BottomNavigationBar = () => {
             className="rounded-full md:w-[1rem] lg:w-[1.8rem] md:mx-0"
           />
         ) : (
-          // Show the login button if not logged in
           <Link href="/Auth/login">
             <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
               <Image
@@ -228,7 +227,6 @@ const BottomNavigationBar = () => {
         )}
         <ThemeToggle />
       </div>
-      {/* </div> */}
     </div>
   );
 };
