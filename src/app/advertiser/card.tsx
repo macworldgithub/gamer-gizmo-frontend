@@ -28,15 +28,15 @@ const ServiceCards = () => {
   
     return (
       <Wrapper>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8 w-full dark:bg-black mb-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className=" flex flex-col items-center text-center  rounded-lg w-full max-w-sm mx-auto"
+              className=" flex flex-col items-center text-center  rounded-lg w-full max-w-sm mx-auto dark:text-white"
             >
               <Image
                 src={service.icon}
-                className="text-4xl mb-4 "
+                className="text-4xl mb-4 dark:invert"
                 width={100}
                 height={100}
                 alt="pc"
@@ -45,7 +45,7 @@ const ServiceCards = () => {
               ">
                 {service.title}
               </h3>
-              <p className="text-gray-500 text-base mb-4">
+              <p className="text-gray-500 text-base mb-4 dark:text-white">
                 {service.description}
               </p>
               <button className="bg-custom-gradient text-white py-2 px-6 rounded hover:opacity-90">
