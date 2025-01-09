@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactForm = () => {
   return (
-    <div className="w-full max-w-5xl mx-auto my-6 bg-white p-4 shadow-md py-4 mb-4 dark:bg-black">
+    <div className="w-full max-w-5xl mx-auto my-6 bg-white p-4 shadow-md py-4 mb-4 dark:bg-black rounded-lg max-md:w-[90%] max-md:mx-auto">
       <h2 className="text-2xl font-semibold text-gray-800 mb-2 dark:text-white">
         Leave a Reply
       </h2>

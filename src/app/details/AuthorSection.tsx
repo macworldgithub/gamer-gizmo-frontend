@@ -12,7 +12,7 @@ import Image from "next/image";
 const AuthorSection = () => {
   return (
     <div className="w-full flex justify-center mt-6">
-      <div className="dark:bg-black  w-full max-w-5xl bg-white shadow-lg rounded-lg p-6 flex justify-center items-center gap-6 space-y-4">
+      <div className="dark:bg-black  w-full max-w-5xl bg-white shadow-lg rounded-lg p-6 flex justify-center items-center gap-6 space-y-4 max-md:w-[90%] max-md:mx-auto">
         {/* Author Image */}
         <div className="w-44">
           <Image

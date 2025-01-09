@@ -33,7 +33,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
 
   return (
     <div className="relative w-full">
-      <div className="my-8 ">
+      <div className=" max-md:w-[80%] max-md:mx-auto md:m-4">
         {/* Title and Explore Button */}
         <div className="flex justify-between max-sm:flex-col  max-sm:items-start mx-auto items-center mb-6">
           <div>
