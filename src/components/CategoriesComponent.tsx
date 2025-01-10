@@ -5,14 +5,15 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 
 const CategoriesComponent = () => {
   const category = [
-    "New Gaming PC Parts",
+    "Used Desktops",
+    "Used Laptops",
     "Used Gaming PC Parts",
+    "Used Gaming Consoles",
+    "Used Gaming Accessories",
     "New Desktops",
     "New Laptops",
-    "Used Laptops",
-    "Used Desktops",
-    "Accessories",
-    "Gaming Consoles",
+    "New Gaming PC Parts",
+    "New Gaming Consoles",
     "Customization & Gaming Gears",
   ];
   const offeringList = [
@@ -23,10 +24,11 @@ const CategoriesComponent = () => {
     { name: "Controller", price: "237 AED", image: "/images/controller.png" },
     { name: "Mousepad", price: "237 AED", image: "/images/mousepad.png" },
   ];
+
   return (
     <div className="mb-36 text-black">
       {/* Top Section */}
-      <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] relative py-12 w-full max-sm:h-[65rem] sm:h-[69rem] md:h-[65rem] lg:h-[52rem]">
+      <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative  py-12 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[52rem]">
         <h1 className=" text-center md:text-[1.5rem] font-bold">
           Level Up Your Gaming Gear - Buy, Sell, and
         </h1>
@@ -95,32 +97,32 @@ const CategoriesComponent = () => {
         </Wrapper>
 
         {/* Categories Section */}
-        <Wrapper>
-          <div className="relative flex justify-center items-center w-full mt-16">
-            <div className="w-full max-w-[1200px] rounded-xl z-20 shadow-lg p-8 bg-white dark:bg-black text-black">
-              <h2 className="text-2xl sm:pl-[0.9rem] md:pl-[calc(8%+10px)] lg:pl-[calc(4%+20px)]  font-bold max-sm:text-center text-start mb-6 dark:text-white">
-                Categories
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
-                {category.map((item, index) => (
-                  <div
-                    key={index}
-                    className="w-full max-w-[15rem] border border-gray-200 bg-white p-6 rounded-lg shadow-md flex flex-col justify-center items-center"
-                  >
-                    <h2 className="text-[0.9rem] font-bold text-center mb-4">
-                      {item}
-                    </h2>
-                  </div>
-                ))}
-              </div>
+        {/* <Wrapper className="max:md-hidden"> */}
+        <div className="md:relative flex justify-center items-center w-full mt-16 max-md:hidden">
+          <div className="w-full max-w-[1200px] rounded-xl z-20 shadow-lg p-8 bg-white dark:bg-black text-black">
+            <h2 className="text-2xl sm:pl-[0.9rem] md:pl-[calc(8%+10px)] lg:pl-[calc(4%+20px)]  font-bold max-sm:text-center text-start mb-6 dark:text-white">
+              Categories
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+              {category.map((item, index) => (
+                <div
+                  key={index}
+                  className="w-full max-w-[15rem] border border-gray-200 bg-white p-6 rounded-lg shadow-md flex flex-col justify-center items-center"
+                >
+                  <h2 className="text-[0.9rem] font-bold text-center mb-4">
+                    {item}
+                  </h2>
+                </div>
+              ))}
             </div>
           </div>
-        </Wrapper>
+        </div>
+        {/* </Wrapper> */}
       </div>
 
       {/* Offering Section */}
       <Wrapper>
-        <div className="text-black max-md:h-[60rem] relative h-auto bg-white dark:bg-black shadow-xl w-full  max-sm:mt-[50rem] sm:mt-[20rem] md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
+        <div className="text-black max-md:h-[60rem] relative h-auto bg-white dark:bg-black shadow-xl w-full  max-sm:mt-0 sm:mt-0 md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
           <div className="flex justify-between max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-sm max-md:whitespace-nowrap dark:text-white font-bold">
               GamerGizmo Offering

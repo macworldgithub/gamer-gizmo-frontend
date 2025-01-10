@@ -2,10 +2,11 @@ import FeaturesSection from "@/components/FeaturesSection";
 import React from "react";
 import Download_app from "./Download_app";
 
-const page = () => {
+
+const Page = () => {
   const features = [
     {
-      icon: "/images/performance.png",
+      icon: "/images/chartline.png",
       title: "Track your overall performance",
       description:
         "Robust listing plans with smart add-ons to turbocharge your PC sales.",
@@ -41,4 +42,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

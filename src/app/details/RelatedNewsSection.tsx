@@ -1,46 +1,54 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const RelatedNewsSection = () => {
   return (
     <div className="w-full flex justify-center mt-8 mb-5">
-      <div className="w-full max-w-5xl">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+      <div className="w-full max-md:w-[80%] max-w-5xl border border-btnGray dark:border-[#6345ED] p-4">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4 dark:text-white">
           Related News
         </h2>
-        <div className="grid grid-cols-2 gap-4 border border-gray-100">
+        <div className="grid lg:grid-cols-2 gap-4">
           {/* News Item */}
-          <div className="flex items-start  p-4 space-x-4">
-            {/* Image */}
-            <div className="w-20 h-20 bg-gray-300 flex justify-center items-center text-gray-500 text-sm">
-              80X80
-            </div>
-            {/* News Content */}
-            <div>
-              <div className="flex items-center space-x-2 text-sm text-gray-500">
+          <div className="flex items-start p-4 space-x-4">
+            <Image
+              src="/images/profile.png"
+              alt="Profile"
+              width={80}
+              height={80}
+              className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[80px] lg:max-h-[80px]"
+            />
+            <div className="text-sm">
+              <div className="flex items-center space-x-2 text-gray-500 dark:text-white">
                 <i className="fas fa-calendar-alt"></i>
                 <span>05 Jan 2022</span>
               </div>
               <Link
                 href="#"
-                className="text-gray-800 font-medium mt-2 block hover:text-gray-600"
+                className="dark:text-white text-gray-800 font-bold mt-2 block hover:text-gray-600 max-w-xs break-words"
               >
                 Comprehensive Guides Server Push Design Feature
               </Link>
             </div>
           </div>
+
           {/* Duplicate News Item */}
           <div className="flex items-start p-4 space-x-4">
-            <div className="w-20 h-20 bg-gray-300 flex justify-center items-center text-gray-500 text-sm">
-              80X80
-            </div>
-            <div>
-              <div className="flex items-center space-x-2 text-sm text-gray-500">
+            <Image
+              src="/images/profile.png"
+              alt="Profile"
+              width={80}
+              height={80}
+              className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[80px] lg:max-h-[80px]"
+            />
+            <div className="text-sm">
+              <div className="flex items-center space-x-2 text-gray-500 dark:text-white">
                 <i className="fas fa-calendar-alt"></i>
                 <span>05 Jan 2022</span>
               </div>
               <Link
                 href="#"
-                className="text-gray-800 font-medium mt-2 block hover:text-gray-600"
+                className="dark:text-white text-gray-800 font-bold mt-2 block hover:text-gray-600 max-w-xs break-words"
               >
                 Comprehensive Guides Server Push Design Feature
               </Link>

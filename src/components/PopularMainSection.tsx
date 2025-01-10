@@ -84,7 +84,6 @@ const PopularMainSection: React.FC = () => {
   ];
 
   return (
-    <Wrapper>
       <div className="h-auto w-full">
         <PopularItemSection
           title="Popular in Used Gaming PC Parts"
@@ -129,7 +128,6 @@ const PopularMainSection: React.FC = () => {
           onExplore={() => console.log("Explore Used Consoles")}
         />
       </div>
-    </Wrapper>
   );
 };
 

@@ -26,7 +26,7 @@ export default function BrowseVideos() {
   ];
   return (
     // <Wrapper>
-    <div className="w-full bg-gray-100 dark:bg-[#1e1e2f]  py-10 px-5">
+    <div className="w-full  bg-gray-100 dark:bg-[#1e1e2f]  py-10 px-5">
       <div className="max-w-5xl mx-auto py-20">
         {/* Heading */}
         <div className="text-start mb-6 px-16">

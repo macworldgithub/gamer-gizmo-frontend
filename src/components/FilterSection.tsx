@@ -4,13 +4,6 @@ import SelectLabels from "./SelectLabels";
 
 const FilterSection = () => {
   const [isVisible, setIsVisible] = useState(window.innerWidth > 768);
-  // const dropdownOptions = [
-  //   { label: "Processor", options: ["lorem", "lorem"] },
-  //   { label: "New Items", options: ["lorem", "lorem"] },
-  //   { label: "Model", options: ["Gaming", "Electronics"] },
-  //   { label: "Price Range", options: ["Low to High", "High to Low"] },
-  //   { label: "Location", options: ["lorem", "lorem"] },
-  // ];
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,10 +15,19 @@ const FilterSection = () => {
     };
   }, []);
   return (
-    <div className="w-[100%] h-auto bg-cover dark:bg-black bg-black bg-[url('/images/curve.png')]  ">
+    <div className="w-[100%] h-auto bg-cover dark:bg-black bg-black bg-[url('/images/curve.png')] max-md:hidden">
       <div className="max-lg:min-h-[50%] sm:h-auto w-full max-md:h-[50rem] max-xl:max-h-[75%] py-14 bg-curve-light dark:bg-curve-dark relative flex flex-col justify-center items-center  bg-cover bg-center bg-no-repeat ">
+        <p className="text-white font-bold max-md:text-[1.4rem] md:text-[2.5rem] max-sm:whitespace-nowrap">
+          A Premier Marketplace for Gamers
+        </p>
+        <p className="text-white font-bold max-md:text-[1.4rem] md:text-[2.5rem] mb-2">
+          where Gamers gear up
+        </p>
+        <p className="text-white max-md:font-light md:font-medium md:text-lg max-md:text-xs mb-2">
+          Shop a Wide Range of Accessories for Every Device
+        </p>
         {isVisible && (
-          <div className="flex items-center bg-transparent rounded-full py-2 border border-gray-300 shadow-md p-2 w-[600px] h-[57px]">
+          <div className="flex items-center bg-transparent rounded-full py-2 border border-gray-300 shadow-md p-2 w-[600px] h-[57px] mb-4">
             <i className="fas fa-search text-gray-500 mr-2"></i>
             <input
               type="text"
@@ -34,15 +36,7 @@ const FilterSection = () => {
             />
           </div>
         )}
-        <p className="text-white font-bold max-md:text-[1.4rem] md:text-[2.5rem] max-sm:whitespace-nowrap">
-          A Premier Marketplace for Gamers
-        </p>
-        <p className="text-white font-bold max-md:text-[1.4rem] md:text-[2.5rem]">
-          where Gamers gear up
-        </p>
-        <p className="text-white max-md:font-light md:font-medium md:text-lg max-md:text-xs">
-          Shop a Wide Range of Accessories for Every Device
-        </p>
+
         <SelectLabels />
         <div className="bg-black dark:bg-custom-gradient w-[191px] h-[55px] mt-5 rounded-full flex justify-center gap-3 items-center">
           <Image

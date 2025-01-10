@@ -1,10 +1,9 @@
 "use client";
 import { configureStore } from "@reduxjs/toolkit";
-import currencySlice from "../Redux/CurrencySlice";
-import ThemeSlice from "../Redux/ThemeSlice";
 import adSlice from "../Redux/AddSlice";
+import currencySlice from "../Redux/CurrencySlice";
 import sellForMeSlice from "../Redux/SellForMeSlice";
-import Login from "../Auth/login/page";
+import ThemeSlice from "../Redux/ThemeSlice";
 import loginSlice from "../Redux/LoginSlice";
 
 const Store = configureStore({

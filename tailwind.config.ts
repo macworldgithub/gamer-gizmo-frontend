@@ -10,10 +10,10 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        left: "-5px 0 5px -2px rgba(0, 0, 0, 0.1)", // Adjust values as needed
-        right: "5px 0 5px -2px rgba(0, 0, 0, 0.1)", // Right shadow
-        bottom: "0 5px 5px -2px rgba(0, 0, 0, 0.1)", // Bottom shadow
-        top: "0 -5px 5px -2px rgba(0, 0, 0, 0.1)", // Top shadow
+        left: "-5px 0 5px -2px rgba(0, 0, 0, 0.1)",
+        right: "5px 0 5px -2px rgba(0, 0, 0, 0.1)",
+        bottom: "0 5px 5px -2px rgba(0, 0, 0, 0.1)",
+        top: "0 -5px 5px -2px rgba(0, 0, 0, 0.1)",
         colorLeft: "-5px 0 5px -2px rgba(99, 69, 237, 0.5)", // Left shadow
         colorRight: "5px 0 5px -2px rgba(99, 69, 237, 0.15)", // Right shadow
         colorBottom: "0 5px 5px -2px rgba(99, 69, 237, 0.5)", // Bottom shadow
@@ -55,6 +55,9 @@ export default {
         linksColor: "#DC39FC",
         pinkishBorder: "#DC39FC",
         bluishBorder: "#E3DDFC",
+        secondaryBlack: "#1e1e2f",
+        footerBlack: "#0D0D12",
+        searchFilterBorder: "rgba(99, 69, 237, 0.1)",
       },
       backgroundImage: {
         "custom-gradient":
@@ -72,5 +75,20 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    //@ts-ignore
+    function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* Hide scrollbar for modern browsers */
+          '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
+          'scrollbar-width': 'none', /* Firefox */
+          '&::-webkit-scrollbar': {
+            display: 'none', /* Chrome, Safari, and Edge */
+          },
+        },
+      });
+    },
+  
+  ],
 } satisfies Config;
