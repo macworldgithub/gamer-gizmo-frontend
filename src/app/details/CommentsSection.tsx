@@ -26,7 +26,7 @@ const CommentsSection = () => {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 border border-Gray dark:bg-black">
+    <div className="w-full max-w-5xl mx-auto p-4 border border-Gray dark:bg-black dark:border-[#6345ED]">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 dark:text-white">
         People Comments
       </h2>

@@ -13,7 +13,7 @@ const page = () => {
   };
 
   return (
-    <div className="dark:bg-black">
+  <div className="dark:bg-black">
       <div>
         <PageHeader
           pageName="advertiser"

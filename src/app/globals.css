@@ -77,3 +77,9 @@ body {
 .input-field {
   @apply p-3 bg-blueLight dark:bg-black rounded-md border border-bluishBorder dark:border-purple-700 focus:ring-2 focus:ring-purple-500 focus:outline-none;
 }
+.progress-bar {
+  background-color: #6345ed !important;
+}
+.progress-success {
+  background-color: #6a0dad;
+}

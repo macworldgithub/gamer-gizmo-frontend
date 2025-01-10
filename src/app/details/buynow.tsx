@@ -12,9 +12,9 @@ const Buynow = () => {
   };
 
   return (
-    <div className="md:hidden mt-4 border h-72 border-gray-300 rounded-lg p-6 w-full bg-white shadow-md flex flex-col justify-between dark:bg-black">
+    <div className="dark:border-[#6345ED] dark:border md:hidden mt-4 h-72 border-gray-300 rounded-lg p-6 w-full bg-white shadow-md flex flex-col justify-between dark:bg-black">
             {/* Price Heading */}
-            <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
+            <h1 className=" text-2xl font-bold text-purple-600 text-center md:text-3xl">
               AED 551.00
             </h1>
     
