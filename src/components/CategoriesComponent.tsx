@@ -17,7 +17,7 @@ const CategoriesComponent = () => {
     "Customization & Gaming Gears",
   ];
   const offeringList = [
-    { name: "Headphones", price: "237 AED", image: "/images/headPhones.png" },
+    { name: "Headphones", price: "237 AED", image: "/images/headphones.png" },
     { name: "Mouse", price: "237 AED", image: "/images/mouse.png" },
     { name: "Keyboard", price: "237 AED", image: "/images/keyboard.png" },
     { name: "Earbuds", price: "237 AED", image: "/images/earbuds.png" },
@@ -121,10 +121,10 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      <Wrapper>
+      {/* <Wrapper> */}
         <div className="text-black max-md:h-[60rem] relative h-auto bg-white dark:bg-black shadow-xl w-full  max-sm:mt-0 sm:mt-0 md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
-          <div className="flex justify-between max-md:flex-col items-center mb-8">
-            <h2 className="text-2xl max-md:text-sm max-md:whitespace-nowrap dark:text-white font-bold">
+          <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
+            <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
               GamerGizmo Offering
             </h2>
             <button className="flex justify-center max-md:absolute max-md:bottom-4 max-md:py-2 items-center max-sm:w-[7rem] max-sm:h-[2.6rem] gap-2 bg-custom-gradient text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
@@ -140,7 +140,7 @@ const CategoriesComponent = () => {
               </span>
             </button>
           </div>
-          <div className="grid max-md:grid-cols-2 md:place-items-center md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid max-md:grid-cols-2 md:place-items-center md:grid-cols-3 lg:grid-cols-6 gap-3">
             {offeringList.map((item, index) => (
               <div
                 key={index}
@@ -162,7 +162,7 @@ const CategoriesComponent = () => {
             ))}
           </div>
         </div>
-      </Wrapper>
+      {/* </Wrapper> */}
     </div>
   );
 };

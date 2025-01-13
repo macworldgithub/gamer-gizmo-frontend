@@ -35,7 +35,7 @@ const categories = [
 const MobileCategories = () => {
   return (
     <Wrapper>
-      <div className="w-full flex justify-center py-10  h-auto dark:bg-black  md:hidden">
+      <div className="w-full flex justify-center py-10  h-auto  md:hidden">
         <div className="w-full  grid grid-cols-3 gap-4 dark:border shadow-lg bg-[#FFFFFF] rounded-lg p-6 dark:bg-black dark:border-[#6345ED] sm:grid-cols-3">
           {categories.map((category) => (
             <div
