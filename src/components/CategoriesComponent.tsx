@@ -26,7 +26,7 @@ const CategoriesComponent = () => {
   ];
 
   return (
-    <div className="mb-36 text-black">
+    <div className="mb-36 max-md:mb-12 text-black">
       {/* Top Section */}
       <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative  py-12 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[52rem]">
         <h1 className=" text-center md:text-[1.5rem] font-bold">
