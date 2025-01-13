@@ -65,7 +65,6 @@ const BottomNavigationBar = () => {
         <Link href="/console-screen">Store</Link>
         <Link href="/usedparts">Components</Link>
         <Link href="/console-screen">Blogs</Link>
-        <Link href="/console-screen">About Us</Link>
         <Link href="/contact">Contact Us</Link>
         <Link href="/details" className="text-secondaryColorLight">
           Inspection
@@ -144,13 +143,7 @@ const BottomNavigationBar = () => {
             >
               Blogs
             </Link>
-            <Link
-              href="#"
-              className="text-lg hover:text-gray-300"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              About Us
-            </Link>
+            
             <Link
               href="/contact"
               className=" text-lg hover:text-gray-300"
