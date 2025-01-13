@@ -60,10 +60,10 @@ const PopularItemSection: React.FC<SectionProps> = ({
           {products.map((product) => (
             <div
               key={product.id}
-              className="flex-none dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] sm:w-[40%] md:w-[35%] lg:w-[18.5%]" // Width adjusts dynamically
+              className="flex-none dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] sm:w-[40%] md:w-[35%] lg:w-[18.5%]" 
             >
               {/* Image Section */}
-              <div className="relative w-full h-[6rem] sm:h-[7rem] md:h-[8rem] lg:h-[9rem]"> {/* Balanced height */}
+              <div className="relative w-full h-[6rem] sm:h-[7rem] md:h-[8rem] lg:h-[9rem]"> 
                 <Image
                   src={product.imageUrl}
                   alt={product.name}
