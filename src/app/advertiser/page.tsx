@@ -1,9 +1,6 @@
-import PageHeader from '@/components/PageHeader'
-import React from 'react'
-import Image from 'next/image'
-import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import BuisnessInquiries from "@/components/BuisnessInquiries";
-import Card from './card'
+import PageHeader from '@/components/PageHeader';
+import Card from './card';
 import MediaPack from './media';
 import Stats from './stats';
 const page = () => {

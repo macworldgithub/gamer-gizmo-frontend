@@ -75,5 +75,20 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    //@ts-ignore
+    function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* Hide scrollbar for modern browsers */
+          '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
+          'scrollbar-width': 'none', /* Firefox */
+          '&::-webkit-scrollbar': {
+            display: 'none', /* Chrome, Safari, and Edge */
+          },
+        },
+      });
+    },
+  
+  ],
 } satisfies Config;

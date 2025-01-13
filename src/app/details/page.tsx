@@ -62,7 +62,7 @@ const page = () => {
     <div className="w-full h-auto bg-white dark:bg-[#14161B]">
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-10">
-        <div className="w-[70%] max-md:w-full">
+        <div className="w-[65%] max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
           <ProductDetails />
           <AuthorSection />
           <RelatedNewsSection />
