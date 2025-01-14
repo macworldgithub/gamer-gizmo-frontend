@@ -35,7 +35,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
 
   return (
     <div className="px-6 sm:px-6 md:px-10 lg:px-12">
-      <div className="my-2">
+      <div className="my-4">
         <Wrapper>
           <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4">
             <div>
@@ -54,16 +54,14 @@ const PopularItemSection: React.FC<SectionProps> = ({
             </button>
           </div>
         </Wrapper>
-
-        {/* Product Section */}
         <div className="flex gap-4 overflow-x-auto scrollbar-hide">
           {products.map((product) => (
             <div
               key={product.id}
               className="flex-none dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] sm:w-[40%] md:w-[35%] lg:w-[18.5%]" // Width adjusts dynamically
             >
-              {/* Image Section */}
-              <div className="relative w-full h-[6rem] sm:h-[7rem] md:h-[8rem] lg:h-[9rem]"> {/* Balanced height */}
+
+              <div className="relative w-full h-[6rem] sm:h-[7rem] md:h-[8rem] lg:h-[9rem]">
                 <Image
                   src={product.imageUrl}
                   alt={product.name}
@@ -73,7 +71,6 @@ const PopularItemSection: React.FC<SectionProps> = ({
                 />
               </div>
 
-              {/* Content Section */}
               <div className="p-3">
                 <h3 className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[0.8rem]">
                   {product.name}
@@ -92,7 +89,6 @@ const PopularItemSection: React.FC<SectionProps> = ({
           ))}
         </div>
 
-        {/* Scroll Button */}
         <div className="flex justify-end gap-6 mt-6">
           <button
             className="bg-custom-gradient rounded-full w-10 h-10 hover:bg-purple-700"

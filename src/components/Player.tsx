@@ -1,7 +1,6 @@
 "use client";
-
+import { ClassNames } from "@emotion/react";
 import ReactPlayer from "react-player";
-
 export default function Player(props: any) {
   const { src, poster, ...rest } = props;
 
@@ -14,6 +13,7 @@ export default function Player(props: any) {
   };
 
   return (
+    
     <ReactPlayer
       url={src}
       config={config}
@@ -22,5 +22,7 @@ export default function Player(props: any) {
       controls
       {...rest}
     />
+
+    
   );
 }
