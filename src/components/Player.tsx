@@ -1,6 +1,6 @@
 "use client";
-import { ClassNames } from "@emotion/react";
 import ReactPlayer from "react-player";
+
 export default function Player(props: any) {
   const { src, poster, ...rest } = props;
 
@@ -8,6 +8,7 @@ export default function Player(props: any) {
     file: {
       attributes: {
         poster,
+        className: " object-cover max-sm:h-2 max-sm:w-2", // Resizing poster
       },
     },
   };
@@ -22,7 +23,5 @@ export default function Player(props: any) {
       controls
       {...rest}
     />
-
-    
   );
 }
