@@ -35,7 +35,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
 
   return (
     <div className="px-6 sm:px-6 md:px-10 lg:px-12">
-      <div className="my-4">
+      <div className="my-8">
         <Wrapper>
           <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4">
             <div>
@@ -95,22 +95,21 @@ const PopularItemSection: React.FC<SectionProps> = ({
               </div>
             ))}
           </div>
+          <div className="flex justify-end lg:pr-7 mt-3">
+            <button
+              className="bg-custom-gradient rounded-full w-10 h-10 hover:bg-purple-700 "
+              onClick={handleExplore}
+            >
+              <Image
+                src="/images/arrowRight.png"
+                alt="Right Arrow"
+                width={20}
+                height={25}
+                className="mx-auto"
+              />
+            </button>
+          </div>
         </Wrapper>
-
-        <div className="flex justify-end gap-6 mt-6">
-          <button
-            className="bg-custom-gradient rounded-full w-10 h-10 hover:bg-purple-700"
-            onClick={handleExplore}
-          >
-            <Image
-              src="/images/arrowRight.png"
-              alt="Right Arrow"
-              width={20}
-              height={25}
-              className="mx-auto"
-            />
-          </button>
-        </div>
       </div>
     </div>
   );
