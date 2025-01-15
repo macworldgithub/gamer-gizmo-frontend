@@ -11,6 +11,10 @@ import Link from "next/link";
 
 const credentialSlide = () => {
   const router = useRouter();
+  const apiBaseUrl =
+    process.env.REACT_APP_API_BASE_URL || "http://localhost:4001";
+  const signupUrl = `${apiBaseUrl}/auth/signup`;
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -28,108 +32,6 @@ const credentialSlide = () => {
       [name]: value,
     }));
   };
-  //   e.preventDefault();
-
-  //   if (formData.password !== formData.confirmPassword) {
-  //     alert("Passwords do not match");
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:4001/auth/signup",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     if (response.status === 200) {
-  //       alert("Registration successful!");
-  //     } else {
-  //       alert(response.data.message || "Registration failed");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during signup:", error);
-  //     alert("An error occurred. Please try again.");
-  //   }
-  // };
-
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault();
-
-  //   // Frontend validation for password match
-  //   if (formData.password !== formData.confirmPassword) {
-  //     toast.error("Passwords do not match", {
-  //       position: "top-right",
-  //       autoClose: 3000,
-  //       hideProgressBar: true,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //     });
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:4001/auth/signup",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     if (response.status === 200) {
-  //       toast.success("Registration successful!", {
-  //         position: "top-right",
-  //         autoClose: 3000,
-  //         hideProgressBar: true,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //       });
-
-  //       setTimeout(() => {
-  //         router.push("/Auth/otp"); // Redirect to OTP screen
-  //       }, 3000);
-  //     }
-  //   } catch (error: any) {
-  //     console.error("Error during signup:", error);
-
-  //     const errorMessage =
-  //       error.response?.data?.message || "An error occurred. Please try again.";
-
-  //     // Display the backend error message
-  //     if (Array.isArray(errorMessage)) {
-  //       // If the error message is an array (e.g., validation errors)
-  //       errorMessage.forEach((msg) => {
-  //         toast.error(msg, {
-  //           position: "top-right",
-  //           autoClose: 3000,
-  //           hideProgressBar: true,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //         });
-  //       });
-  //     } else {
-  //       // Single error message
-  //       toast.error(errorMessage, {
-  //         position: "top-right",
-  //         autoClose: 3000,
-  //         hideProgressBar: true,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //       });
-  //     }
-  //   }
-  // };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -147,17 +49,15 @@ const credentialSlide = () => {
       toast.error("Passwords do not match");
       return;
     }
+    console.log("Signup URL:", signupUrl);
+    console.log("Form Data:", formData);
 
     try {
-      const response = await axios.post(
-        "http://localhost:4001/auth/signup",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(signupUrl, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       console.log("Response:", response);
 
@@ -173,6 +73,7 @@ const credentialSlide = () => {
           draggable: true,
         });
       }
+      console.log("API Response:", response.data);
     } catch (error: any) {
       console.error("Error during signup:", error);
       toast.error(
