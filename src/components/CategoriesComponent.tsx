@@ -121,7 +121,7 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      {/* <Wrapper> */}
+      <Wrapper>
         <div className="text-black max-md:h-[60rem] relative h-auto bg-white dark:bg-black shadow-xl w-full  max-sm:mt-0 sm:mt-0 md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
           <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
@@ -162,7 +162,7 @@ const CategoriesComponent = () => {
             ))}
           </div>
         </div>
-      {/* </Wrapper> */}
+      </Wrapper>
     </div>
   );
 };

@@ -8,7 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { colors } from "@mui/material";
 
 const credentialSlide = () => {
   const router = useRouter();
@@ -166,6 +165,7 @@ const credentialSlide = () => {
         toast.success("Registration successful! OTP has been sent to email", {
           icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
         });
+        router.push("/Auth/otp");
       } else {
         toast.error(response.data.message || "Registration failed", {
           closeOnClick: true,
