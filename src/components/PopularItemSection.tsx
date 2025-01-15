@@ -37,7 +37,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
     <div className="px-6 sm:px-6 md:px-10 lg:px-12">
       <div className="my-8">
         <Wrapper>
-          <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4">
+          <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4 lg:pr-6">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[1rem]">
                 {title}
