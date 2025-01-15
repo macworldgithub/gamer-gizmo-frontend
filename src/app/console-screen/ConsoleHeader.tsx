@@ -52,7 +52,7 @@ const ConsoleHeader = () => {
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
       {/* Page Header */}
-      <PageHeader pageName="Used-Gaming-PC-Parts" title="Gaming PCs Parts" />
+      <PageHeader pageName="Used-Gaming-PC-Parts" title="Gaming Consoles" />
 
       {/* Main Content */}
       <div className="py-28 max-lg:py-8 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
@@ -125,7 +125,14 @@ const ConsoleHeader = () => {
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
             <PopularItemSection
-              title="Popular in New Gaming PC Parts"
+              title="Popular in  Used PC Consoles"
+              subtitle="Choose your necessary gaming items from this category."
+              products={usedConsoles}
+              onExplore={() => console.log("Explore Used Consoles")}
+              explorePath=""
+            />
+            <PopularItemSection
+              title="Popular in  New PC Consoles"
               subtitle="Choose your necessary gaming items from this category."
               products={usedConsoles}
               onExplore={() => console.log("Explore Used Consoles")}

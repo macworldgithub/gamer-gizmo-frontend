@@ -4,13 +4,6 @@ import SelectLabels from "./SelectLabels";
 
 const FilterSection = () => {
   const [isVisible, setIsVisible] = useState(window.innerWidth > 768);
-  // const dropdownOptions = [
-  //   { label: "Processor", options: ["lorem", "lorem"] },
-  //   { label: "New Items", options: ["lorem", "lorem"] },
-  //   { label: "Model", options: ["Gaming", "Electronics"] },
-  //   { label: "Price Range", options: ["Low to High", "High to Low"] },
-  //   { label: "Location", options: ["lorem", "lorem"] },
-  // ];
 
   useEffect(() => {
     const handleResize = () => {
