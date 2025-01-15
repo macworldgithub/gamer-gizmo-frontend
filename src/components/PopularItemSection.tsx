@@ -37,7 +37,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
     <div className="px-6 sm:px-6 md:px-10 lg:px-12">
       <div className="my-4">
         <Wrapper>
-          <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4">
+          <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4 ">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[1rem]">
                 {title}
@@ -48,16 +48,15 @@ const PopularItemSection: React.FC<SectionProps> = ({
             </div>
             <button
               onClick={onExplore}
-              className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm max-sm:text-[0.6rem] hover:bg-purple-600 max-sm:mt-3"
+              className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm max-sm:text-[0.6rem] hover:bg-purple-600 max-sm:mt-3 mt-6"
             >
               Explore More
             </button>
           </div>
         </Wrapper>
-
         {/* Product Section */}
         <Wrapper>
-          <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-5 overflow-x-auto scrollbar-hide">
             {products.map((product) => (
               <div
                 key={product.id}
@@ -95,9 +94,9 @@ const PopularItemSection: React.FC<SectionProps> = ({
               </div>
             ))}
           </div>
-        </Wrapper>
+          </Wrapper>
 
-        <div className="flex justify-end gap-6 mt-6">
+        <div className="flex justify-end gap-6 mt-6 md:pr-16">
           <button
             className="bg-custom-gradient rounded-full w-10 h-10 hover:bg-purple-700"
             onClick={handleExplore}
@@ -113,6 +112,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
         </div>
       </div>
     </div>
+   
   );
 };
 
