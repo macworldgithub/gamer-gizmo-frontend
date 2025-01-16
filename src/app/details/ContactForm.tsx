@@ -2,24 +2,22 @@ import React from "react";
 
 const ContactForm = () => {
   return (
-    // <Wrapper>
-    // <div className="w-full py-4 px-4">
-    <div className="w-full max-w-5xl mx-auto my-6 bg-white p-4 shadow-md py-4 mb-4 border dark:bg-black">
+    <div className="w-full max-w-5xl mx-auto my-6 bg-white p-4 shadow-md py-4 mb-4 dark:bg-black rounded-lg max-md:w-[90%] max-md:mx-auto">
       <h2 className="text-2xl font-semibold text-gray-800 mb-2 dark:text-white">
         Leave a Reply
       </h2>
       <p className="text-gray-500 mb-6 dark:text-white">
         We're Ready to Help Your Business
       </p>
-      <form className="space-y-6 ">
-        {/* Full Name and Email Address */}
-        <div className="grid dark:bg-blackrid-cols-1 md:grid-cols-2 gap-4 font-semibold text-[#14161B] ">
+      <form className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-semibold">
           <div>
             <input
               type="text"
               id="fullName"
-              placeholder="Full Name"
-              className="mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-black p-2"
+              placeholder="Full Name "
+              className="placeholder:text-black mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 dark:bg-black
+              dark:placeholder:text-[#616161] dark:border-[#6345ED] dark:border"
             />
           </div>
           <div>
@@ -27,7 +25,8 @@ const ContactForm = () => {
               type="email"
               id="email"
               placeholder="Email Address"
-              className="mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 dark:bg-black"
+              className="placeholder:text-black mt-2 block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 dark:bg-black
+              dark:placeholder:text-[#616161] dark:border-[#6345ED] dark:border"
             />
           </div>
         </div>
@@ -38,7 +37,7 @@ const ContactForm = () => {
             id="message"
             rows={5}
             placeholder="Write Message"
-            className="mt-1 font-semibold text-[#14161B] block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-black"
+            className="placeholder:text-black mt-1 font-semibold block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-black p-2 dark:placeholder:text-[#616161] dark:border-[#6345ED] dark:border "
           ></textarea>
         </div>
 
@@ -53,8 +52,6 @@ const ContactForm = () => {
         </div>
       </form>
     </div>
-    // </div>
-    // </Wrapper>
   );
 };
 

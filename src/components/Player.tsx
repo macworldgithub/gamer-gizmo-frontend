@@ -1,5 +1,4 @@
 "use client";
-
 import ReactPlayer from "react-player";
 
 export default function Player(props: any) {
@@ -9,6 +8,7 @@ export default function Player(props: any) {
     file: {
       attributes: {
         poster,
+        className: " object-cover max-sm:h-2 max-sm:w-2", // Resizing poster
       },
     },
   };

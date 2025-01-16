@@ -9,7 +9,6 @@ import CommentsSection from "./CommentsSection";
 import ContactForm from "./ContactForm";
 import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
-import Sellersdetails from "./sellersdetail";
 const page = () => {
   const cardContent = {
     title: "Similar Ads",
@@ -60,25 +59,24 @@ const page = () => {
     },
   ];
   return (
-    <div className="w-full h-auto bg-white dark:bg-black">
+    <div className="w-full h-auto bg-white dark:bg-[#14161B]">
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-10">
-        <div className="w-[70%] max-md:w-full ">
+        <div className="w-[65%] max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
           <ProductDetails />
-          {/* <Sellersdetails/> */}
           <AuthorSection />
           <RelatedNewsSection />
           <CommentsSection />
           <ContactForm />
         </div>
-        <div className="w-[30%]">
+        <div className="md:w-[35%] max-md:w-0">
           <Rightsection />
         </div>
       </div>
 
       <div>
         {/* <Wrapper> */}
-        <div className="w-full ml-20 mr-20 h-auto">
+        <div className="w-full h-auto">
           {/* Product Grid */}
           <PopularItemSection
             title="Similar Ads"

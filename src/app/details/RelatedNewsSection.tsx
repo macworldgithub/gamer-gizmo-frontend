@@ -4,7 +4,7 @@ import Link from "next/link";
 const RelatedNewsSection = () => {
   return (
     <div className="w-full flex justify-center mt-8 mb-5">
-      <div className="w-full max-w-5xl border border-btnGray p-4">
+      <div className="w-full max-md:w-[80%] max-w-5xl border border-btnGray dark:border-[#6345ED] p-4">
         <h2 className="text-xl font-semibold text-gray-800 mb-4 dark:text-white">
           Related News
         </h2>

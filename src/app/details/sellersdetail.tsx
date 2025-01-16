@@ -3,14 +3,14 @@ import Image from 'next/image'
 const Sellersdetails = () => {
   return (
     <div className='md:hidden w-full mt-4'>
-       <div className=" dark:bg-black  border border-gray-300 rounded-lg p-6 h-72 bg-white shadow-md flex flex-col items-center">
+       <div className="dark:border-[#6345ED] dark:border dark:bg-black border-gray-300 rounded-lg p-2 h-80 bg-white shadow-md flex flex-col items-center ">
               {/* Heading */}
               <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
                 Seller Details
               </h2>
       
               {/* Horizontal Line */}
-              <hr className="my-4 border-gray-300 w-full" />
+              <hr className="my-4 border-gray-300  w-full" />
       
               {/* Seller Information */}
               <div className="flex items-center mb-6">
@@ -64,7 +64,7 @@ const Sellersdetails = () => {
             </div>
       
             {/* Third Card (Buy From GamerGizmo) */}
-            <div className="mt-3 dark:bg-black border border-gray-300 rounded-lg p-6 h-72 bg-white shadow-md flex flex-col items-center">
+            <div className="dark:border-[#6345ED] dark:border mt-3 dark:bg-black border-gray-300 rounded-lg p-6 h-72 bg-white shadow-md flex flex-col items-center">
               <Image
                 src="/images/trawly.png"
                 alt="Cart Icon"
