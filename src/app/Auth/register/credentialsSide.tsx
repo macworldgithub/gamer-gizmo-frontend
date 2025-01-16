@@ -11,9 +11,8 @@ import Link from "next/link";
 
 const credentialSlide = () => {
   const router = useRouter();
-  const apiBaseUrl =
-    process.env.REACT_APP_API_BASE_URL || "http://localhost:4001";
-  const signupUrl = `${apiBaseUrl}/auth/signup`;
+
+  const signupUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`;
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -37,13 +36,7 @@ const credentialSlide = () => {
     e.preventDefault();
 
     if (formData.password.length < 6) {
-      toast.error("password must be atleast 6 characters long", {
-        position: "top-right",
-        autoClose: 3000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error("password must be atleast 6 characters long");
     }
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
@@ -65,13 +58,11 @@ const credentialSlide = () => {
         toast.success("Registration successful! OTP has been sent to email", {
           icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
         });
-        router.push("/Auth/otp");
+        setTimeout(() => {
+          router.push(`/Auth/otp?email=${formData.email}`);
+        }, 3000);
       } else {
-        toast.error(response.data.message || "Registration failed", {
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(response.data.message || "Registration failed", {});
       }
       console.log("API Response:", response.data);
     } catch (error: any) {
@@ -181,15 +172,6 @@ const credentialSlide = () => {
           <h2 className="underline">Already have an account</h2>
         </Link>
       </form>
-      <ToastContainer
-        hideProgressBar={false}
-        autoClose={3000}
-        progressClassName="progress-bar"
-        position="top-right"
-        closeOnClick={true}
-        pauseOnHover={true}
-        draggable={true}
-      />
     </div>
   );
 };

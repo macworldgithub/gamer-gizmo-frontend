@@ -1,12 +1,16 @@
 "use client";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState, useRef, FormEvent } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useRef, FormEvent, use, useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function OtpScreen() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
+
+  const otpUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/verifyOtp`;
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -32,15 +36,6 @@ export default function OtpScreen() {
     }
   };
 
-  // const handleSubmit = (e: FormEvent): void => {
-  //   e.preventDefault();
-  //   const enteredOtp = otp.join("");
-  //   if (enteredOtp.length === otp.length) {
-  //     alert(`Entered OTP: ${enteredOtp}`);
-  //   } else {
-  //     alert("Please complete the OTP.");
-  //   }
-  // };
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     const enteredOtp = otp.join("");
@@ -49,8 +44,8 @@ export default function OtpScreen() {
       try {
         // Post the entered OTP to the API
         const response = await axios.post(
-          "http://localhost:4001/auth/verifyOtp",
-          { otp: enteredOtp },
+          otpUrl,
+          { email, otp: enteredOtp },
           {
             headers: {
               "Content-Type": "application/json",
@@ -58,52 +53,23 @@ export default function OtpScreen() {
           }
         );
 
-        if (response.status === 200) {
-          toast.success("OTP verified successfully!", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-
-          // Navigate to the next page after successful OTP verification
-          router.push("/dashboard");
+        if (response.status === 200 || 2001) {
+          toast.success("OTP verified successfully!");
+          setTimeout(() => {
+            router.push("/");
+          }, 3000);
         } else {
-          toast.error(response.data.message || "OTP verification failed", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
+          toast.error(response.data.message || "OTP verification failed");
         }
       } catch (error: any) {
         console.error("Error during OTP verification:", error);
         toast.error(
           error.response?.data?.message ||
-            "An error occurred. Please try again.",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          }
+            "An error occurred. Please try again."
         );
       }
     } else {
-      toast.error("Please complete the OTP.", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error("Please complete the OTP.");
     }
   };
 
