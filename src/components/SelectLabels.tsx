@@ -9,10 +9,10 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 export default function SelectLabels() {
   const dropdownOptions = [
     { label: "Processor", options: ["mouse", "keyboard"] },
-    { label: "New Items", options: ["lorem", "used items"] },
+    { label: "New Items", options: ["New items", "used items"] },
     { label: "Model", options: ["Gaming", "Electronics"] },
     { label: "Price Range", options: ["Low to High", "High to Low"] },
-    { label: "Location", options: ["lahore", "karachi"] },
+    { label: "Location", options: ["Lahore", "Karachi"] },
   ];
 
   const [selectedValues, setSelectedValues] = useState(
