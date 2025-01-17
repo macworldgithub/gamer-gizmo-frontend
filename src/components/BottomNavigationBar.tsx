@@ -90,7 +90,7 @@ const BottomNavigationBar = () => {
         {/* Drawer Menu */}
         {isDrawerOpen && (
           <div
-            className={`flex-nowrap fixed left-0  dark:bg-black bg-white dark:text-white w-[10rem] h-[85vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-1 max-sm:space-y-2  overflow-y-auto
+            className={`flex-nowrap fixed left-0 text-white dark:bg-black bg-white dark:text-white w-[10rem] h-[85vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-1 max-sm:space-y-2  overflow-y-auto
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
