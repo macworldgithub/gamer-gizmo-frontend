@@ -63,13 +63,13 @@ const PopularItemSection: React.FC<SectionProps> = ({
               className="flex-none dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] sm:w-[40%] md:w-[35%] lg:w-[18.5%]" 
             >
               {/* Image Section */}
-              <div className="relative w-full h-[6rem] sm:h-[7rem] md:h-[8rem] lg:h-[9rem]"> 
+              <div className="relative w-full h-[6rem] sm:h-[7rem] md:h-[8rem] lg:h-[9rem] p-2"> 
                 <Image
                   src={product.imageUrl}
                   alt={product.name}
                   layout="fill"
                   objectFit="cover"
-                  className="rounded-t-lg"
+                  className="rounded-t-lg p-2"
                 />
               </div>
 
