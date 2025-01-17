@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import axios from "axios";
+
+import axiosInstance from "@/app/utils/axios";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -46,11 +47,7 @@ const credentialSlide = () => {
     console.log("Form Data:", formData);
 
     try {
-      const response = await axios.post(signupUrl, formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axiosInstance.post(signupUrl, formData);
 
       console.log("Response:", response);
 
