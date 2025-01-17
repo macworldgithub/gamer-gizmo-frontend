@@ -10,7 +10,7 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 
 const CategoriesComponent = () => {
   // Custom Hook for Media Query
-  const useMediaQuery = (query) => {
+  const useMediaQuery = (query: any) => {
     const [matches, setMatches] = useState(false);
 
     useEffect(() => {
@@ -146,12 +146,12 @@ const CategoriesComponent = () => {
 
       {/* Offering Section */}
       <Wrapper className="">
-        <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto bg-white dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 mx-auto mt-72 max-sm:mt-10">
+        <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto bg-white dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto mt-72 max-sm:mt-10">
           <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
               GamerGizmo Offering
             </h2>
-            <button className="flex justify-center max-md:py-2 items-center max-sm:w-[7rem] max-sm:h-[2.6rem] gap-2 bg-custom-gradient text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
+            <button className="flex max-sm:mt-4 justify-center max-md:py-2 items-center max-sm:w-[7rem] max-sm:h-[2.6rem] gap-2 bg-custom-gradient text-white px-4 max-sm:px-0 py-2 rounded-full shadow-md hover:shadow-lg">
               <Image
                 src="/images/arrowIcon.png"
                 alt="Arrow-Icon"
@@ -177,21 +177,21 @@ const CategoriesComponent = () => {
               modules={[Pagination]}
               className="mySwiper"
               spaceBetween={10} 
-              slidesPerView={2.5} 
+              slidesPerView={4} 
             >
               {offeringList.map((item, index) => (
                 <SwiperSlide key={index} className="flex justify-center">
-                  <div className="border rounded-lg p-2 flex flex-col items-center dark:bg-black shadow-md hover:shadow-lg w-full">
+                  <div className="border rounded-lg flex flex-col items-center dark:bg-black shadow-md hover:shadow-lg w-full">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-16 h-16 object-contain mb-2"
+                      className="w-20 h-9 object-contain "
                     />
-                    <h3 className="text-xs font-semibold mb-1 dark:text-white">
+                    <h3 className="text-[0.7rem] font-semibold dark:text-white">
                       {item.name}
                     </h3>
-                    <p className="text-xs text-gray-500 mb-2">{item.price}</p>
-                    <button className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-white mt-2 w-[4rem] py-1 rounded-full text-xs hover:bg-purple-600 max-md:w-[3rem] max-md:py-0.5 max-sm:w-[2.5rem] max-sm:py-0.5 max-sm:text-[0.6rem]">
+                    <p className="text-xs text-gray-500 ">{item.price}</p>
+                    <button className="bg-btnGray  font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-gray-400 mt-1 w-[4rem]  rounded-full text-xs hover:bg-purple-600 max-md:w-[3rem] max-md:py-0.5 max-sm:w-[2rem] max-sm:py-0.2 max-sm:text-[0.6rem] mb-2">
                       Buy
                     </button>
                   </div>
