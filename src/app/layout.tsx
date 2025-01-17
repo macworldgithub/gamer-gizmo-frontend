@@ -4,6 +4,8 @@ import Script from "next/script"; // Import Script from next/script
 import "./globals.css";
 import ClientProvider from "./Client/ClientProvider";
 import UiLayout from "./layout/UiLayout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -59,6 +61,15 @@ export default function RootLayout({
               })();
             `,
           }}
+        />
+        <ToastContainer
+          hideProgressBar={false}
+          autoClose={3000}
+          progressClassName="progress-bar"
+          position="top-right"
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
         />
         <ClientProvider>
           <UiLayout>{children}</UiLayout>
