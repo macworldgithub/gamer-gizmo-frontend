@@ -1,23 +1,124 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { setLogin } from "@/app/Redux/LoginSlice";
+import { InitializeUserData } from "@/components/Store/Slicer/LoginSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { FaCheckCircle } from "react-icons/fa";
+import { detectPlatform } from "@/app/utils/detectPlatform";
+import { getLocation } from "@/app/utils/getLocation";
 
 const CredentialSide = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-
-  const handleLogin = () => {
+  const [platform, setPlatform] = useState("");
+  const [region, setRegion] = useState("");
+  const [showAccountsModal, setShowAccountsModal] = useState(false);
+  const [accounts, setAccounts] = useState([]);
+  const loginUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`;
+  const logOutUserAccount = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logoutOtherAccounts`;
+  const handleLogin = async () => {
     if (username && password) {
-      dispatch(setLogin(true));
-      router.push("/");
+      try {
+        const response = await axios.post(loginUrl, {
+          name: username,
+          password: password,
+          platform,
+          region,
+        });
+        console.log("Response:", response);
+
+        if (response.status === 200 || response.status === 201) {
+          toast.success("Login successful!", {
+            icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
+          });
+          dispatch(InitializeUserData(response.data));
+          setTimeout(() => {
+            router.push(`/`);
+          }, 3000);
+        } else {
+          toast.error(response.data.message || "Registration failed", {});
+        }
+        console.log("API Response:", response.data);
+      } catch (error: any) {
+        console.error("Error during signup:", error);
+        if (Array.isArray(error.response?.data?.message)) {
+          for (let i = 0; error.response?.data?.message.length > i; i++) {
+            toast.error(
+              error.response?.data?.message[i] ||
+                "An error occurred. Please try again."
+            );
+          }
+        } else {
+          if (
+            error.response?.data?.message ==
+            "You have reached max account logins"
+          ) {
+            setShowAccountsModal(true);
+            setAccounts(error.response?.data.accounts);
+          } else if (
+            error.response?.data?.message ==
+            "User is not Verified, Email is sent to the registerd email"
+          ) {
+            toast.error(
+              error.response?.data?.message ||
+                "An error occurred. Please try again."
+            );
+            setTimeout(() => {
+              router.push(`/auth/otp?email=${username}`);
+            }, 3000);
+          } else {
+            toast.error(
+              error.response?.data?.message ||
+                "An error occurred. Please try again."
+            );
+          }
+        }
+      }
+    } else {
+      toast.error("Please Fill the fields");
     }
   };
+  const LogoutExistingAccount = async (acc: any) => {
+    try {
+      const response = await axios.post(logOutUserAccount, {
+        token: acc.token,
+      });
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Confirmation Sent to Registered Email", {
+          icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
+        });
+        setTimeout(() => {
+          setShowAccountsModal(false);
+          // router.push(`/auth/logout-otp`);
+        }, 3000);
+      } else {
+        toast.error(response.data.message || "Registration failed", {});
+      }
+      console.log("API Response:", response.data);
+    } catch (error: any) {
+      console.error("Error during signup:", error);
+      toast.error(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
+    }
+  };
+  useEffect(() => {
+    const fetch = async () => {
+      let loc = await getLocation();
+      // @ts-expect-error
+      setRegion(loc);
+    };
+    let res = detectPlatform();
+    fetch();
+    setPlatform(res);
+  }, []);
+
   return (
     <div
       id="loginCredentials"
@@ -67,7 +168,7 @@ const CredentialSide = () => {
         </button>
       </div>
 
-      <Link className="text-[#DC39FC] underline" href="/Auth/register">
+      <Link className="text-[#DC39FC] underline" href="/auth/register">
         Register me
       </Link>
       <div className=" relative mt-3">
@@ -85,6 +186,50 @@ const CredentialSide = () => {
           <Image src={"/images/tw.svg"} alt="twitter" width={40} height={40} />
         </div>
       </div>
+      {showAccountsModal && (
+        <div className="absolute z-[9] backdrop-blur-sm top-0 left-0  overflow-hidden h-screen w-full flex justify-center items-center">
+          <div className="bg-white md:px-12 flex justify-center flex-col items-center py-10 rounded-xl shadow-xl px-4 w-fit">
+            <h1 className="font-bold text-xl">Max Account Login Reached</h1>
+            <div className="mt-4 ">
+              <p className="font-semibold mb-3 text-center">
+                Following Accounts are logged in currently
+              </p>
+              <div className="flex flex-col gap-2 justify-between">
+                {accounts &&
+                  accounts.length > 0 &&
+                  accounts.map((e) => (
+                    <div className="flex gap-4 ">
+                      <div className="flex ">
+                        {/* @ts-expect-error */}
+                        <p>{e.region},</p>
+                        {/* @ts-expect-error */}
+                        <p>{e.platform} </p>
+                      </div>
+                      <div className="flex italic">
+                        {/* @ts-expect-error */}
+                        <p>{new Date(e.created_at).toLocaleString()}</p>
+                      </div>
+                      <div className="flex italic">
+                        <button
+                          onClick={() => LogoutExistingAccount(e)}
+                          className=" bg-red-600 text-white  rounded-lg  px-4 text-sm"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <button
+              className="mt-7 bg-red-600 text-white  rounded-lg px-12 py-2"
+              onClick={() => setShowAccountsModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

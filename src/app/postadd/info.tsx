@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Select, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setAdField } from "../Redux/AddSlice";
-import { RootState } from "../Store/Store";
+import { setAdField } from "../../components/Store/Slicer/AddSlice";
+import { RootState } from "../../components/Store/Store";
 
 interface SelectOption {
   value: number;

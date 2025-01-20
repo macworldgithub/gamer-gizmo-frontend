@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
 
 const credentialSlide = () => {
   const router = useRouter();
@@ -23,6 +24,8 @@ const credentialSlide = () => {
     phone: "",
     password: "",
     confirmPassword: "",
+    gender: "",
+    dob: "",
   });
 
   const handleInputChange = (e: any) => {
@@ -47,8 +50,10 @@ const credentialSlide = () => {
     console.log("Form Data:", formData);
 
     try {
-      const response = await axiosInstance.post(signupUrl, formData);
-
+      const response = await axios.post(signupUrl, {
+        ...formData,
+        dob: new Date(formData.dob),
+      });
       console.log("Response:", response);
 
       if (response.status === 200 || response.status === 201) {
@@ -56,7 +61,7 @@ const credentialSlide = () => {
           icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
         });
         setTimeout(() => {
-          router.push(`/Auth/otp?email=${formData.email}`);
+          router.push(`/auth/otp?email=${formData.email}`);
         }, 3000);
       } else {
         toast.error(response.data.message || "Registration failed", {});
@@ -64,18 +69,25 @@ const credentialSlide = () => {
       console.log("API Response:", response.data);
     } catch (error: any) {
       console.error("Error during signup:", error);
-      toast.error(
-        error.response?.data?.message || "An error occurred. Please try again."
-      );
+      if (error.response?.data?.message.length > 0) {
+        for (let i = 0; error.response?.data?.message.length > i; i++) {
+          toast.error(
+            error.response?.data?.message[i] ||
+              "An error occurred. Please try again."
+          );
+        }
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     }
   };
 
   return (
     <div
       id="loginCredentials"
-      className="flex dark:shadow-combinedNight shadow-combinedDay max-sm:h-max rounded-l-[12px] flex-col w-[60%] max-md:w-[100%] dark:bg-black items-center gap-5 max-sm:gap-2 box-border max-sm:mb-[300px] p-10"
+      className="flex dark:shadow-combinedNight shadow-combinedDay max-sm:h-fit rounded-l-[12px] flex-col w-[60%] max-md:w-[100%] dark:bg-black items-center gap-5 max-sm:gap-2 box-border max-sm:mb-[300px] p-10"
     >
-      <div className="w-[100%] mb-7 max-sm:mb-3">
+      <div className="w-[100%] mb-2">
         <h1 className="text-[2rem] max-sm:text-[1.5rem] font-bold text-left text-black dark:text-white">
           Create An Account
         </h1>
@@ -113,11 +125,36 @@ const credentialSlide = () => {
             placeholder="User Name"
           />
         </div>
+        <div className="flex max-sm:gap-2 w-[100%] justify-between max-sm:flex-col py-2">
+          {/* Gender Dropdown */}
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleInputChange}
+            className="w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2 dark:border-customPurpleBorder focus:outline-none"
+          >
+            <option value="" disabled>
+              Select Gender
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+
+          {/* Date of Birth Picker */}
+          <input
+            type="date"
+            name="dob"
+            value={formData.dob}
+            onChange={handleInputChange}
+            className="w-[49%] max-sm:w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2 dark:border-customPurpleBorder focus:outline-none"
+          />
+        </div>
+
         <input
           name="email"
           value={formData.email}
           onChange={handleInputChange}
-          className="w-[100%] p-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2 dark:border-customPurpleBorder focus:outline-none"
+          className="w-[100%] p-3 mt-3 rounded bg-customPurple dark:bg-black font-bold text-black dark:text-white border-2 dark:border-customPurpleBorder focus:outline-none"
           placeholder="Email Address"
         />
         <div className="flex w-[100%] max-sm:gap-2 justify-between max-sm:flex-col py-4">
@@ -163,7 +200,7 @@ const credentialSlide = () => {
           </button>
         </div>
         <Link
-          href="/Auth/login"
+          href="/auth/login"
           className="w-[100%] text-linksColor flex justify-center"
         >
           <h2 className="underline">Already have an account</h2>

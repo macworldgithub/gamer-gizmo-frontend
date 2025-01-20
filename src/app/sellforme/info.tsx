@@ -4,9 +4,9 @@ import { Select, MenuItem, Input, OutlinedInput } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { setAdField } from "../Redux/SellForMeSlice";
+import { setAdField } from "../../components/Store/Slicer/SellForMeSlice";
 import { useSelector } from "react-redux";
-import { RootState } from "../Store/Store";
+import { RootState } from "../../components/Store/Store";
 
 const PartsInfromation = () => {
   const Ad = useSelector((state: RootState) => state.SellForMe);
