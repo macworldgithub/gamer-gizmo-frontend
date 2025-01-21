@@ -67,10 +67,10 @@ const PopularItemSection: React.FC<SectionProps> = ({
                   <Image
                     src={product.imageUrl}
                     alt={product.name}
-                    layout="responsiveness"
-                    width={140}
-                    height={100}
-                    className="rounded-t-lg mx-auto "/>
+                    layout="responsiveness"  
+                    width={150}
+                    height={80}
+                    className="rounded-t-lg mx-auto"/>
                 </div>
 
                 <div className="p-3">
