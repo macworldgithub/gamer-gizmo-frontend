@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { Select, MenuItem, Input, OutlinedInput, Box } from "@mui/material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../Store/Store";
-import { setAdField } from "../Redux/AddSlice";
+import { RootState } from "../../components/Store/Store";
+import { setAdField } from "../../components/Store/Slicer/AddSlice";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 

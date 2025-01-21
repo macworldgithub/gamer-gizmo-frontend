@@ -1,9 +1,31 @@
-import React from "react";
-import Card from "./Card";
+import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import Image from "next/image";
 import Wrapper from "./Common/Wrapper/Wrapper";
 
 const CategoriesComponent = () => {
+  // Custom Hook for Media Query
+  const useMediaQuery = (query: any) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+      const listener = () => setMatches(media.matches);
+      media.addEventListener("change", listener);
+      return () => media.removeEventListener("change", listener);
+    }, [matches, query]);
+
+    return matches;
+  };
+
+  const isSmallScreen = useMediaQuery("(max-width: 640px)");
+  // const CategoriesComponent = () => {
   const category = [
     "Used Desktops",
     "Used Laptops",
@@ -16,6 +38,7 @@ const CategoriesComponent = () => {
     "New Gaming Consoles",
     "Customization & Gaming Gears",
   ];
+
   const offeringList = [
     { name: "Headphones", price: "237 AED", image: "/images/headphones.png" },
     { name: "Mouse", price: "237 AED", image: "/images/mouse.png" },
@@ -27,7 +50,6 @@ const CategoriesComponent = () => {
 
   return (
     <div className="mb-36 max-md:mb-12 text-black">
-      {/* Top Section */}
       <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative  py-12 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[52rem]">
         <h1 className=" text-center md:text-[1.5rem] font-bold">
           Level Up Your Gaming Gear - Buy, Sell, and
@@ -121,13 +143,13 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      <Wrapper>
-        <div className="text-black max-md:h-[60rem] relative h-auto bg-white dark:bg-black shadow-xl w-full  max-sm:mt-0 sm:mt-0 md:mt-[25rem] lg:mt-56 rounded-lg p-8 gap-6 mx-auto">
+      <Wrapper className="">
+        <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto bg-white dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto mt-72 max-sm:mt-10">
           <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
               GamerGizmo Offering
             </h2>
-            <button className="flex justify-center max-md:absolute max-md:bottom-4 max-md:py-2 items-center max-sm:w-[7rem] max-sm:h-[2.6rem] gap-2 bg-custom-gradient text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg">
+            <button className="flex max-sm:mt-4 justify-center max-md:py-2 items-center max-sm:w-[7rem] max-sm:h-[2.6rem] gap-2 bg-custom-gradient text-white px-4 max-sm:px-0 py-2 rounded-full shadow-md hover:shadow-lg">
               <Image
                 src="/images/arrowIcon.png"
                 alt="Arrow-Icon"
@@ -140,27 +162,65 @@ const CategoriesComponent = () => {
               </span>
             </button>
           </div>
-          <div className="grid max-md:grid-cols-2 md:place-items-center md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {offeringList.map((item, index) => (
-              <div
-                key={index}
-                className="border rounded-lg p-4 flex flex-col items-center bg-white dark:bg-black shadow-md hover:shadow-lg"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-24 h-24 object-contain mb-4"
-                />
-                <h3 className="text-sm font-semibold mb-2 dark:text-white">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-gray-500 mb-4">{item.price}</p>
-                <button className="bg-[#E8E3FC] w-24 h-8 font-bold text-black text-sm px-4 py-2 rounded-full hover:bg-purple-600">
-                  Buy
-                </button>
-              </div>
-            ))}
-          </div>
+
+          {isSmallScreen ? (
+            
+
+            <Swiper
+              pagination={{
+                clickable: true,
+                bulletClass: "swiper-pagination-bullet-custom",
+                bulletActiveClass: "swiper-pagination-bullet-active-custom",
+              }}
+              modules={[Pagination]}
+              className="mySwiper"
+              spaceBetween={10} 
+              slidesPerView={4} 
+            >
+              {offeringList.map((item, index) => (
+                <SwiperSlide key={index} className="flex justify-center">
+                  <div className="border rounded-lg flex flex-col items-center dark:bg-black shadow-md hover:shadow-lg w-full">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-20 h-9 object-contain "
+                    />
+                    <h3 className="text-[0.7rem] font-semibold dark:text-white">
+                      {item.name}
+                    </h3>
+                    <p className="text-xs text-gray-500 ">{item.price}</p>
+                    <button className="bg-btnGray  font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-gray-400 mt-1 w-[4rem]  rounded-full text-xs hover:bg-purple-600 max-md:w-[3rem] max-md:py-0.5 max-sm:w-[2rem] max-sm:py-0.2 max-sm:text-[0.6rem] mb-2">
+                      Buy
+                    </button>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="grid max-md:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {offeringList.map((item, index) => (
+                <div
+                  key={index}
+                  className="border rounded-lg p-4 flex flex-col items-center dark:bg-black shadow-md hover:shadow-lg"
+                >
+                  <div className="">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-24 h-24 object-contain mb-4"
+                    />
+                  </div>
+                  <h3 className="text-sm font-semibold mb-2 dark:text-white">
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-4">{item.price}</p>
+                  <button className="bg-[#E8E3FC] w-24 h-8 font-bold text-black text-sm px-4 py-2 rounded-full hover:bg-purple-600">
+                    Buy
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </Wrapper>
     </div>
