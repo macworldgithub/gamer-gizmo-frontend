@@ -55,6 +55,7 @@ export default function OtpScreen() {
           }, 3000);
         } else {
           toast.error(response.data.message || "OTP verification failed");
+          
         }
       } catch (error: any) {
         console.error("Error during OTP verification:", error);
