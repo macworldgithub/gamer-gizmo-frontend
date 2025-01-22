@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, UseSelector } from "react-redux";
-import { RootState } from "../Store/Store";
+import { RootState } from "../../components/Store/Store";
 
 const SubmissionButton = () => {
   const [disable, setDisable] = useState<boolean>(true);

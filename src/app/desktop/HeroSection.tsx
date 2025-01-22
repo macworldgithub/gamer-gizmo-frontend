@@ -1,11 +1,9 @@
 "use client";
-import PageHeader from "@/components/PageHeader";
-import React from "react";
-import Image from "next/image";
-import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import Inspection from "@/components/Inspection";
+import PopularItemSection from "@/components/PopularItemSection";
 import SelectLabels from "@/components/SelectLabels";
+import Image from "next/image";
 
 const usedConsoles = [
   {
