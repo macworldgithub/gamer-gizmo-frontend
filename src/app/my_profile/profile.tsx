@@ -1,11 +1,11 @@
-"use client";
 import React from "react";
 import Image from "next/image";
-
+import profile from "../../../public/images/myprofile.png"
+import camera from "../../../public/images/camera image.png"
 export default function ProfilePage() {
   return (
-    <div className=" min-h-screen">
-      <div className="w-full bg-white p-6 md:max-w-2xl md:rounded-lg md:shadow-md mx-auto md:mt-10">
+    <div className=" min-h-screen md:w-[60%]">
+      <div className="w-full bg-white p-6  md:rounded-lg md:shadow-md mx-auto md:mt-10">
         {/* Title */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold">My Profile</h1>
@@ -13,17 +13,17 @@ export default function ProfilePage() {
         </div>
 
         {/* Profile Picture Section */}
-        <div className="flex items-center mb-6 max-md:hidden lg:flex">
+        <div className="flex items-center mb-6 max-md:hidden">
           <div className="relative">
             <Image
-              src="/profile image.png"
+              src={profile}
               alt="Profile"
               width={100}
               height={100}
               className="rounded-full"
             />
             <Image
-              src="/camera button.png"
+              src={camera}
               alt="Camera Icon"
               width={24}
               height={24}
@@ -36,6 +36,33 @@ export default function ProfilePage() {
           </div>
         </div>
 
+        {/* Verification Badge Section */}
+        <div className="bg-purple-50 p-4 rounded-lg mb-8 max-md:hidden">
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-purple-500 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <p className="text-purple-500 font-medium">Got a verified badge yet?</p>
+          </div>
+          <p className="text-sm text-gray-600 mt-1">Get more visibility and enhance your credibility.</p>
+          <button className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-md text-sm hover:bg-purple-600">
+            Get Started
+          </button>
+        </div>
+
+
+
         {/* Profile Name Section */}
         <div className="mb-8">
           <h3 className="text-lg font-semibold">Profile Name</h3>
@@ -47,7 +74,7 @@ export default function ProfilePage() {
                 <input
                   type="text"
                   id="firstName"
-                  defaultValue="Muhammad"
+                  defaultValue="Michel"
                   className="block w-full sm:text-sm p-2"
                 />
               </fieldset>
@@ -59,7 +86,7 @@ export default function ProfilePage() {
                 <input
                   type="text"
                   id="lastName"
-                  defaultValue="Ahmed"
+                  defaultValue="Smith"
                   className="block w-full sm:text-sm p-2"
                 />
               </fieldset>
