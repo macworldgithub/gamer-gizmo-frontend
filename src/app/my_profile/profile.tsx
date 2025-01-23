@@ -2,6 +2,10 @@ import React from "react";
 import Image from "next/image";
 import profile from "../../../public/images/myprofile.png"
 import camera from "../../../public/images/camera image.png"
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
+import Person2Icon from '@mui/icons-material/Person2';
+
 export default function ProfilePage() {
   return (
     <div className="w-full md:w-[80%] lg:w-[65%] xl:w-[45%] 2xl:w-[30%]">
@@ -64,11 +68,14 @@ export default function ProfilePage() {
 
 
         {/* Profile Name Section */}
-        <div className="mb-8">
+        <div className="mb-8 flex gap-4">
+          
+          <div className="w-[35%]">
           <h3 className="text-lg font-semibold">Profile Name</h3>
           <p className="text-sm text-black mb-4">This is displayed on your profile</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-center">
+          </div>
+          <div className="w-[65%]">
+            <div className="">
               <fieldset className="border border-black-400 rounded-md w-full">
                 <legend className="text-sm text-black-400 px-2">First Name</legend>
                 <input
@@ -80,7 +87,7 @@ export default function ProfilePage() {
               </fieldset>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center mt-4">
               <fieldset className="border border-black-400 rounded-md w-full">
                 <legend className="text-sm text-black-400 px-2">Last Name</legend>
                 <input
@@ -92,6 +99,7 @@ export default function ProfilePage() {
               </fieldset>
             </div>
           </div>
+          
         </div>
 
         {/* Account Details Section */}
@@ -100,8 +108,13 @@ export default function ProfilePage() {
           <p className="text-black-400 text-sm mb-4">This is not visible to other users</p>
           <div className="space-y-4">
             {/* Date of Birth */}
-            <div>
-              <fieldset className="border border-black-400 rounded-md w-full">
+            <div className="flex gap-14">
+            <div className="flex gap-3 w-[30%]">
+              <CalendarMonthOutlinedIcon/>
+              <label className="block  font-medium text-black-400 mb-2">Date of birth</label>
+              </div>
+              <div className="w-[70%]">
+              <fieldset className="border border-black-400 rounded-md">
                 <legend className="text-sm text-black-400 px-2">Date of Birth</legend>
                 <input
                   type="date"
@@ -110,9 +123,15 @@ export default function ProfilePage() {
                 />
               </fieldset>
             </div>
+            </div>
 
             {/* Nationality */}
-            <div>
+            <div className="flex w-auto gap-14">
+            <div className="flex gap-3 w-[30%]">
+              <LanguageOutlinedIcon/>
+            <label className="block text-lg font-medium text-black-400 mb-2">Nationality</label>
+            </div>
+            <div className="w-[70%]">
               <fieldset className="border border-black-400 rounded-md w-full">
                 <legend className="text-sm text-black-400 px-2">Search Country</legend>
                 <select
@@ -125,12 +144,17 @@ export default function ProfilePage() {
                   <option value="india">India</option>
                 </select>
               </fieldset>
+              </div>
             </div>
 
             {/* Gender */}
-            <div>
-              <label className="block text-sm font-medium text-black-400 mb-2">Gender</label>
-              <div className="flex sm:items-center sm:space-x-4 max-sm:flex-col">
+            <div className="flex gap-14">
+            <div className="flex gap-3 w-[30%]">
+              <Person2Icon/>
+              <label className="block text-lg font-medium text-black-400 mb-2">Gender</label>
+              </div>
+              <div className="w-[70%]">
+              <div className="flex sm:items-center sm:space-x-4 max-sm:flex-col m-2">
                 <label className="flex items-center">
                   <input
                     type="radio"
@@ -162,7 +186,7 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
-
+        </div>
         {/* Save Changes Button */}
         <button
           type="submit"

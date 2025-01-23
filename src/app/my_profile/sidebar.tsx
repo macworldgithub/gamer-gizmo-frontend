@@ -58,7 +58,7 @@ export default function Sidebar() {
         {/* Security Section */}
         <div className="mt-4 flex hover:bg-gray-200 rounded-lg ml-3">
          <LockIcon/>
-          <p className=" px-3 cursor-pointer">Security</p>
+          <p className="px-3 cursor-pointer">Security</p>
         </div>
       </div>
     </div>
