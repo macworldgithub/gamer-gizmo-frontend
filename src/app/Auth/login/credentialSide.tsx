@@ -43,11 +43,11 @@ const CredentialSide = () => {
             router.push(`/`);
           }, 3000);
         } else {
-          toast.error(response.data.message || "Registration failed", {});
+          toast.error(response.data.message || "Login failed failed", {});
         }
         console.log("API Response:", response.data);
       } catch (error: any) {
-        console.error("Error during signup:", error);
+        console.error("Error during Login:", error);
         if (Array.isArray(error.response?.data?.message)) {
           for (let i = 0; error.response?.data?.message.length > i; i++) {
             toast.error(
@@ -87,7 +87,7 @@ const CredentialSide = () => {
   };
   const LogoutExistingAccount = async (acc: any) => {
     try {
-      const response = await axios.post(logOutUserAccount, {
+      const response = await axiosInstance.post(logOutUserAccount, {
         token: acc.token,
       });
       if (response.status === 200 || response.status === 201) {
@@ -169,7 +169,7 @@ const CredentialSide = () => {
         </button>
       </div>
 
-      <Link className="text-[#DC39FC] underline" href="/Auth/register">
+      <Link className="text-[#DC39FC] underline" href="/auth/register">
         Register me
       </Link>
       <div className=" relative mt-3">

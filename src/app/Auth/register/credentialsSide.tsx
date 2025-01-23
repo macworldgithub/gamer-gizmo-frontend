@@ -61,7 +61,7 @@ const credentialSlide = () => {
           icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
         });
         setTimeout(() => {
-          router.push(`/Auth/otp?email=${formData.email}`);
+          router.push(`/auth/otp?email=${formData.email}`);
         }, 3000);
       } else {
         toast.error(response.data.message || "Registration failed", {});

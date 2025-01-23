@@ -232,7 +232,7 @@ const BottomNavigationBar = () => {
             </Link>
 
             <div className="flex-col items-center mx-auto pl-0">
-              <Link href="/postadd">
+              <Link href="/category">
                 <div className="w-[7rem] mx-auto h-10 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
                   <Image
                     src="/images/btnIcon.png"
@@ -251,7 +251,7 @@ const BottomNavigationBar = () => {
         )}
       </div>
       <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem]">
-        <Link href="/postadd">
+        <Link href="/category">
           <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
             <Image
               src="/images/btnIcon.png"
@@ -279,7 +279,7 @@ const BottomNavigationBar = () => {
             </Dropdown>
           </div>
         ) : (
-          <Link href="/Auth/login">
+          <Link href="/auth/login">
             <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
               <Image
                 src="/images/btnIcon.png"

@@ -14,7 +14,7 @@ export default function HomePage() {
       <FilterSection />
       <CategoriesComponent />
       <PopularMainSection />
-      {/* <LiveCommunity /> */}
+
       <BrowseVideos />
     </div>
   );

@@ -51,11 +51,10 @@ export default function OtpScreen() {
         if (response.status === 200 || response.status === 201) {
           toast.success("OTP verified successfully!");
           setTimeout(() => {
-            router.push("/auth/login");
+            router.push("/Auth/login");
           }, 3000);
         } else {
           toast.error(response.data.message || "OTP verification failed");
-          
         }
       } catch (error: any) {
         console.error("Error during OTP verification:", error);

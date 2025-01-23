@@ -19,6 +19,7 @@ const LaptopInformation = () => {
       </Wrapper>
     </div>
     // </Wrapper>
+    
   );
 };
 
