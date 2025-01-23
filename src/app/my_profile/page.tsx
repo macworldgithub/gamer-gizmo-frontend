@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 import ProfilePage from './profile';
-import SideBar from './sidebar';
-const page = () => {
-  return (
-    <>
-    <div className='md:flex md:gap-12 lg:'>
-    <SideBar/>
-    <ProfilePage/>
-    </div>
-    </>
-  )
-}
+import Sidebar from './sidebar';
 
-export default page;
+const Page = () => {
+  return (
+    <div className="flex flex-col md:flex-row md:justify-center md:gap-16 xl:gap-32 2xl:gap-40">
+      <Sidebar />
+      <ProfilePage />
+    </div>
+  );
+};
+
+export default Page;

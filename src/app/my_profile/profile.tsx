@@ -4,12 +4,12 @@ import profile from "../../../public/images/myprofile.png"
 import camera from "../../../public/images/camera image.png"
 export default function ProfilePage() {
   return (
-    <div className=" min-h-screen md:w-[60%]">
-      <div className="w-full bg-white p-6  md:rounded-lg md:shadow-md mx-auto md:mt-10">
+    <div className="w-full md:w-[80%] lg:w-[65%] xl:w-[45%] 2xl:w-[30%]">
+      <div className="bg-white p-6 rounded-lg mt-8">
         {/* Title */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold">My Profile</h1>
-          <p className="text-gray-500">Update your profile details here</p>
+          <p className="text-black">Update your profile details here</p>
         </div>
 
         {/* Profile Picture Section */}
@@ -66,11 +66,11 @@ export default function ProfilePage() {
         {/* Profile Name Section */}
         <div className="mb-8">
           <h3 className="text-lg font-semibold">Profile Name</h3>
-          <p className="text-sm text-gray-500 mb-4">This is displayed on your profile</p>
+          <p className="text-sm text-black mb-4">This is displayed on your profile</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-center">
-              <fieldset className="border border-gray-300 rounded-md w-full">
-                <legend className="text-sm text-gray-400 px-2">First Name</legend>
+              <fieldset className="border border-black-400 rounded-md w-full">
+                <legend className="text-sm text-black-400 px-2">First Name</legend>
                 <input
                   type="text"
                   id="firstName"
@@ -81,8 +81,8 @@ export default function ProfilePage() {
             </div>
 
             <div className="flex items-center">
-              <fieldset className="border border-gray-300 rounded-md w-full">
-                <legend className="text-sm text-gray-400 px-2">Last Name</legend>
+              <fieldset className="border border-black-400 rounded-md w-full">
+                <legend className="text-sm text-black-400 px-2">Last Name</legend>
                 <input
                   type="text"
                   id="lastName"
@@ -97,12 +97,12 @@ export default function ProfilePage() {
         {/* Account Details Section */}
         <div className="mb-8">
           <h2 className="text-lg font-semibold mb-1">Account details</h2>
-          <p className="text-gray-500 text-sm mb-4">This is not visible to other users</p>
+          <p className="text-black-400 text-sm mb-4">This is not visible to other users</p>
           <div className="space-y-4">
             {/* Date of Birth */}
             <div>
-              <fieldset className="border border-gray-300 rounded-md w-full">
-                <legend className="text-sm text-gray-400 px-2">Date of Birth</legend>
+              <fieldset className="border border-black-400 rounded-md w-full">
+                <legend className="text-sm text-black-400 px-2">Date of Birth</legend>
                 <input
                   type="date"
                   id="dob"
@@ -113,8 +113,8 @@ export default function ProfilePage() {
 
             {/* Nationality */}
             <div>
-              <fieldset className="border border-gray-300 rounded-md w-full">
-                <legend className="text-sm text-gray-400 px-2">Search Country</legend>
+              <fieldset className="border border-black-400 rounded-md w-full">
+                <legend className="text-sm text-black-400 px-2">Search Country</legend>
                 <select
                   id="nationality"
                   className="block w-full sm:text-sm p-2"
@@ -129,7 +129,7 @@ export default function ProfilePage() {
 
             {/* Gender */}
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">Gender</label>
+              <label className="block text-sm font-medium text-black-400 mb-2">Gender</label>
               <div className="flex sm:items-center sm:space-x-4 max-sm:flex-col">
                 <label className="flex items-center">
                   <input
@@ -138,7 +138,7 @@ export default function ProfilePage() {
                     value="male"
                     className="text-purple-500 focus:ring-purple-500"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Male</span>
+                  <span className="ml-2 text-sm text-black-400">Male</span>
                 </label>
                 <label className="flex items-center">
                   <input
@@ -147,7 +147,7 @@ export default function ProfilePage() {
                     value="female"
                     className="text-purple-500 focus:ring-purple-500"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Female</span>
+                  <span className="ml-2 text-sm text-black-400">Female</span>
                 </label>
                 <label className="flex items-center">
                   <input
@@ -156,7 +156,7 @@ export default function ProfilePage() {
                     value="prefer-not-to-say"
                     className="text-purple-500 focus:ring-purple-500"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Prefer not to say</span>
+                  <span className="ml-2 text-sm text-black-400">Prefer not to say</span>
                 </label>
               </div>
             </div>
@@ -166,10 +166,11 @@ export default function ProfilePage() {
         {/* Save Changes Button */}
         <button
           type="submit"
-          className="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+          className="ml-auto  flex justify-end bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
         >
           Save Changes
         </button>
+
       </div>
     </div>
   );
