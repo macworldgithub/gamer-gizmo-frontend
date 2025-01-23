@@ -10,7 +10,7 @@ export default function Sidebar() {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
 
   return (<div>
-    <div className=" text-center">
+    <div className=" text-center max-md:hidden">
     <h2 className="text-2xl font-semibold">Profile Settings</h2>
   </div>
     <div className="hidden md:block w-64 max-w-xs bg-white shadow-lg rounded-lg border mt-4 md:ml-4 lg:ml-0 md:h-80">

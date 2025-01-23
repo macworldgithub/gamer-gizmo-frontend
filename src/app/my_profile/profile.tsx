@@ -12,8 +12,8 @@ export default function ProfilePage() {
       <div className="bg-white p-6 rounded-lg mt-8">
         {/* Title */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">My Profile</h1>
-          <p className="text-black">Update your profile details here</p>
+          <h1 className="text-2xl font-bold max-md:text-md">My Profile</h1>
+          <p className="text-black max-md:text-sm">Update your profile details here</p>
         </div>
 
         {/* Profile Picture Section */}
@@ -68,33 +68,32 @@ export default function ProfilePage() {
 
 
         {/* Profile Name Section */}
-        <div className="mb-8 flex gap-4">
-          
-          <div className="w-[35%]">
-          <h3 className="text-lg font-semibold">Profile Name</h3>
-          <p className="text-sm text-black mb-4">This is displayed on your profile</p>
+        <div className="mb-8 flex gap-4 max-md:flex-col ">
+          <div className="w-[35%] max-md:w-full">
+          <h3 className="text-lg font-semibold max-md:text-md">Profile Name</h3>
+          <p className="text-md text-black mb-4 max-md:text-sm">This is displayed on your profile</p>
           </div>
-          <div className="w-[65%]">
-            <div className="">
+          <div className="w-[65%] max-md:w-full">
+            <div>
               <fieldset className="border border-black-400 rounded-md w-full">
-                <legend className="text-sm text-black-400 px-2">First Name</legend>
+                <legend className="text-sm text-black-400 px-2 max-md:text-sm">First Name</legend>
                 <input
                   type="text"
                   id="firstName"
                   defaultValue="Michel"
-                  className="block w-full sm:text-sm p-2"
+                  className="block w-full sm:text-sm p-2 max-md:text-sm"
                 />
               </fieldset>
             </div>
 
             <div className="flex items-center mt-4">
               <fieldset className="border border-black-400 rounded-md w-full">
-                <legend className="text-sm text-black-400 px-2">Last Name</legend>
+                <legend className="text-sm text-black-400 px-2 max-md:text-sm">Last Name</legend>
                 <input
                   type="text"
                   id="lastName"
                   defaultValue="Smith"
-                  className="block w-full sm:text-sm p-2"
+                  className="block w-full sm:text-sm p-2 max-md:text-sm"
                 />
               </fieldset>
             </div>
@@ -103,40 +102,40 @@ export default function ProfilePage() {
         </div>
 
         {/* Account Details Section */}
-        <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-1">Account details</h2>
+        <div className="mb-8 ">
+          <h2 className="text-lg font-semibold mb-1 max-md:text-md">Account details</h2>
           <p className="text-black-400 text-sm mb-4">This is not visible to other users</p>
-          <div className="space-y-4">
+          <div className=" space-y-4  ">
             {/* Date of Birth */}
-            <div className="flex gap-14">
-            <div className="flex gap-3 w-[30%]">
-              <CalendarMonthOutlinedIcon/>
-              <label className="block  font-medium text-black-400 mb-2">Date of birth</label>
+            <div className="flex md:gap-14 max-md:flex-col">
+            <div className="flex gap-3 w-[30%] max-md:w-full">
+              <CalendarMonthOutlinedIcon fontSize="small" className="md:mt-1"/>
+              <label className="block font-medium max-md:text-sm text-black-400 mb-2">Date of birth</label>
               </div>
-              <div className="w-[70%]">
+              <div className="w-[70%] max-md:w-full">
               <fieldset className="border border-black-400 rounded-md">
-                <legend className="text-sm text-black-400 px-2">Date of Birth</legend>
+                <legend className="text-sm text-black-400 px-2 max-md:text-sm">Date of Birth</legend>
                 <input
                   type="date"
                   id="dob"
-                  className="block w-full sm:text-sm p-2"
+                  className="block w-full sm:text-sm p-2 max-md:text-sm"
                 />
               </fieldset>
             </div>
             </div>
 
             {/* Nationality */}
-            <div className="flex w-auto gap-14">
+            <div className="flex w-auto md:gap-14 max-md:flex-col">
             <div className="flex gap-3 w-[30%]">
-              <LanguageOutlinedIcon/>
-            <label className="block text-lg font-medium text-black-400 mb-2">Nationality</label>
+              <LanguageOutlinedIcon fontSize="small" className="md:mt-1"/>
+            <label className="block text-lg font-medium text-black-400 mb-2 max-md:text-sm">Nationality</label>
             </div>
-            <div className="w-[70%]">
+            <div className="w-[70%] max-md:w-full">
               <fieldset className="border border-black-400 rounded-md w-full">
-                <legend className="text-sm text-black-400 px-2">Search Country</legend>
+                <legend className="text-sm text-black-400 px-2 max-md:text-sm">Search Country</legend>
                 <select
                   id="nationality"
-                  className="block w-full sm:text-sm p-2"
+                  className="block w-full sm:text-sm p-2 max-md:text-sm"
                 >
                   <option value="">Search Country</option>
                   <option value="dubai">Dubai</option>
@@ -148,19 +147,19 @@ export default function ProfilePage() {
             </div>
 
             {/* Gender */}
-            <div className="flex gap-14">
+            <div className="flex md:gap-14 max-md:flex-col">
             <div className="flex gap-3 w-[30%]">
-              <Person2Icon/>
-              <label className="block text-lg font-medium text-black-400 mb-2">Gender</label>
+              <Person2Icon fontSize="small" className="md:mt-1"/>
+              <label className="block text-lg font-medium text-black-400 mb-2 max-md:text-sm">Gender</label>
               </div>
-              <div className="w-[70%]">
+              <div className="w-[70%] max-md:w-full">
               <div className="flex sm:items-center sm:space-x-4 max-sm:flex-col m-2">
                 <label className="flex items-center">
                   <input
                     type="radio"
                     name="gender"
                     value="male"
-                    className="text-purple-500 focus:ring-purple-500"
+                    className="text-purple-500 focus:ring-purple-500 max-md:text-sm"
                   />
                   <span className="ml-2 text-sm text-black-400">Male</span>
                 </label>
@@ -169,18 +168,20 @@ export default function ProfilePage() {
                     type="radio"
                     name="gender"
                     value="female"
-                    className="text-purple-500 focus:ring-purple-500"
+                    className="text-purple-500 focus:ring-purple-500 max-md:text-sm"
                   />
                   <span className="ml-2 text-sm text-black-400">Female</span>
                 </label>
+                </div>
+                <div className="sm:items-center sm:space-x-4 max-sm:flex-col m-2">
                 <label className="flex items-center">
                   <input
                     type="radio"
                     name="gender"
                     value="prefer-not-to-say"
-                    className="text-purple-500 focus:ring-purple-500"
+                    className="text-purple-500 focus:ring-purple-500 max-md:text-sm"
                   />
-                  <span className="ml-2 text-sm text-black-400">Prefer not to say</span>
+                  <span className="ml-2 text-sm text-black-400 max-md:text-sm ">Prefer not to say</span>
                 </label>
               </div>
             </div>
