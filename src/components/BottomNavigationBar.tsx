@@ -103,7 +103,7 @@ const BottomNavigationBar = () => {
       key: "4",
 
       icon: <MdOutlineFavorite />,
-      label: "Fvaourites",
+      label: "Favourites",
     },
     {
       key: "5",

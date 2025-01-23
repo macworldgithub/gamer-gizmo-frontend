@@ -19,7 +19,6 @@ const Page: React.FC = () => {
   const categoryUrl = `${process.env.NEXT}`;
 
   useEffect(() => {
-    // Fetch categories from the API
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
@@ -28,7 +27,7 @@ const Page: React.FC = () => {
         if (response.data && response.data.data) {
           const fetchedCategories = response.data.data.map((category: any) => ({
             ...category,
-            icon: category.icon || defaultIcon, // Use default icon if not provided
+            icon: category.icon || defaultIcon,
           }));
           setCategories(fetchedCategories);
         } else {
@@ -67,13 +66,12 @@ const Page: React.FC = () => {
               key={category.id}
               className="flex flex-col items-center justify-center border hover:bg-gray-200 border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg cursor-pointer transition duration-200"
             >
-              {/* Fixed image size and proper positioning */}
               <div className="relative max-md:w-16 max-md:h-16 md:w-32 md:h-32 max-md:mb-0 md:mb-4">
                 <Image
                   src={category.icon}
                   alt={category.name}
-                  layout="fill" // Fill the container
-                  objectFit="contain" // Preserve aspect ratio
+                  layout="fill"
+                  objectFit="contain"
                   className="rounded-lg"
                 />
               </div>
