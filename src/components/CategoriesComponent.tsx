@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -51,7 +49,7 @@ const CategoriesComponent = () => {
   ];
 
   return (
-    <div className="mb-36 max-md:mb-12 text-black">
+    <div className="mb-36 max-md:mb-0 text-black">
       <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative  py-12 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[52rem]">
         <h1 className=" text-center md:text-[1.5rem] font-bold">
           Level Up Your Gaming Gear - Buy, Sell, and
@@ -145,7 +143,7 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      <Wrapper className="">
+      <Wrapper className="md:mt-20 max-md:m-0">
         <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto bg-white dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto mt-72 max-sm:mt-10">
           <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
@@ -166,8 +164,6 @@ const CategoriesComponent = () => {
           </div>
 
           {isSmallScreen ? (
-            
-
             <Swiper
               pagination={{
                 clickable: true,
@@ -176,8 +172,8 @@ const CategoriesComponent = () => {
               }}
               modules={[Pagination]}
               className="mySwiper"
-              spaceBetween={10} 
-              slidesPerView={4} 
+              spaceBetween={10}
+              slidesPerView={4}
             >
               {offeringList.map((item, index) => (
                 <SwiperSlide key={index} className="flex justify-center">
