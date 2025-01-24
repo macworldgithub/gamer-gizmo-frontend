@@ -62,8 +62,8 @@ const CategoriesComponent = () => {
         <Wrapper>
           <div className="w-full mx-auto bg-white dark:bg-black dark:text-white text-black shadow-lg rounded-xl max-lg:p-2 md:p-6 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center md:items-center max-md:items-center gap-6">
             {/* Left Section */}
-            <div className="flex-1 justify-start max-md:px-4">
-              <h2 className="text-xl font-bold text-purple-700 mb-4 truncate">
+            <div className="flex-1 justify-start max-md:px-4 ">
+              <h2 className="text-xl font-bold text-purple-700 mb-4">
                 Post your Ad on GamerGizmo
               </h2>
               <ul className="text-sm space-y-2 mb-4">
