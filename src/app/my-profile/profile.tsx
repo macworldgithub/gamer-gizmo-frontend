@@ -1,0 +1,262 @@
+"use client";
+import React from "react";
+import Image from "next/image";
+import profile from "../../../public/images/myprofile.png";
+import camera from "../../../public/images/camera image.png";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import { MdEdit } from "react-icons/md";
+import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import Person2Icon from "@mui/icons-material/Person2";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa";
+import ResetPasswordModal from "@/components/Modals/ResetPasswordModal";
+import EditPasswordModal from "@/components/Modals/EditProfileDetail";
+export default function ProfilePage() {
+  const [openPassModal, setOpenPassModal] = React.useState(false);
+  const [openEditModal, setOpenEditModal] = React.useState(false);
+  return (
+    <div className="w-full ">
+      <div className="bg-white p-6 rounded-lg mt-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold max-md:text-md">My Profile</h1>
+          <p className="text-black max-md:text-sm">
+            Update your profile details here
+          </p>
+        </div>
+
+        <div className="flex w-full  items-center mb-6 max-md:hidden">
+          <div className="relative">
+            <Image
+              src={profile}
+              alt="Profile"
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
+            <Image
+              src={camera}
+              alt="Camera Icon"
+              width={24}
+              height={24}
+              className="absolute bottom-0 right-0 bg-purple-600 p-1 rounded-full"
+            />
+          </div>
+          <div className="ml-4">
+            <h2 className="text-xl font-semibold">Muhammad Ahmed</h2>
+            <p className="text-gray-500">Joined on January 2025</p>
+          </div>
+          <button
+            onClick={() => setOpenEditModal(true)}
+            className="ml-auto md:w-auto flex justify-center items-center gap-3 px-6 py-2 bg-gradient-to-r from-[#DC39FC] to-[#6345ED] text-white rounded-full shadow hover:shadow-md focus:outline-none"
+          >
+            <MdEdit color="white" />
+            Edit Profile
+          </button>
+        </div>
+
+        {/* Verification Badge Section */}
+        <div className="bg-purple-50 p-4 rounded-lg mb-8 max-md:hidden">
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-purple-500 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <p className="text-purple-500 font-medium">
+              Got a verified badge yet?
+            </p>
+          </div>
+          <p className="text-sm text-gray-600 mt-1">
+            Get more visibility and enhance your credibility.
+          </p>
+          <button className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-md text-sm hover:bg-purple-600">
+            Get Started
+          </button>
+        </div>
+
+        {/* Profile Name Section */}
+        <div className="mb-8 ">
+          <div className="w-[35%] max-md:w-full">
+            <h3 className="text-lg font-semibold max-md:text-md">
+              Profile Name
+            </h3>
+          </div>
+          <div className="space-y-4 mt-2">
+            <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%] max-md:w-full">
+                <FaUser fontSize="large" className="md:mt-1" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                  User Name
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <fieldset className="rounded-md">
+                  <p>Khan234</p>
+                </fieldset>
+              </div>
+            </div>
+            {/* <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%] max-md:w-full">
+                <FaHospitalUser fontSize="small" className="md:mt-1" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                  First Name
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <fieldset className="rounded-md">
+                  <p>Anas</p>
+                </fieldset>
+              </div>
+            </div> */}
+            {/* <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%] max-md:w-full">
+                <FaHospitalUser fontSize="small" className="md:mt-1" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                  Last Name
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <fieldset className="rounded-md">
+                  <p>Khan</p>
+                </fieldset>
+              </div>
+            </div> */}
+            <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%] max-md:w-full">
+                <MdEmail fontSize="large" className="md:mt-1" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                  Email
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <fieldset className="rounded-md">
+                  <p>abc@gmail.com</p>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Account Details Section */}
+        <div className="mb-8 ">
+          <h2 className="text-lg font-semibold mb-1 max-md:text-md">
+            Account details
+          </h2>
+
+          <div className=" space-y-4 mt-2 ">
+            {/* Date of Birth */}
+            <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%] max-md:w-full">
+                <CalendarMonthOutlinedIcon
+                  fontSize="small"
+                  className="md:mt-1"
+                />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                  Date of birth
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <fieldset className="rounded-md">
+                  <p>28 Fev, 2024</p>
+                </fieldset>
+              </div>
+            </div>
+
+            {/* Nationality */}
+            <div className="flex w-auto md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%]">
+                <LanguageOutlinedIcon fontSize="small" className="md:mt-1" />
+                <label className="block text-lg font-medium text-black-400 mb-2 max-md:text-sm">
+                  Country
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <fieldset className="rounded-md w-full">
+                  <p>Dubai</p>
+                </fieldset>
+              </div>
+            </div>
+
+            {/* Gender */}
+            <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%]">
+                <Person2Icon fontSize="small" className="md:mt-1" />
+                <label className="block text-lg font-medium text-black-400 mb-2 max-md:text-sm">
+                  Gender
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <p>Male</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mb-8 ">
+          <h2 className="text-lg font-semibold mb-1 max-md:text-md">
+            Account Address
+          </h2>
+
+          <div className=" space-y-4  ">
+            {/* Date of Birth */}
+            <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%] max-md:w-full">
+                <FaLocationDot fontSize="large" className="md:mt-1" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                  Address
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <fieldset className=" rounded-md">
+                  <p>SOME ADDREESS</p>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mb-8 ">
+          <h2 className="text-lg font-semibold mb-1 max-md:text-md">
+            Security
+          </h2>
+
+          <div className=" space-y-4  ">
+            <div className="flex md:gap-14 max-md:flex-col">
+              <div className="flex gap-3 w-[30%] max-md:w-full">
+                <RiLockPasswordFill fontSize="large" className="md:mt-1" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                  Password
+                </label>
+              </div>
+              <div className="w-[70%] max-md:w-full">
+                <button
+                  onClick={() => setOpenPassModal(true)}
+                  className="md:w-auto px-6 py-2 bg-gradient-to-r from-[#DC39FC] to-[#6345ED] text-white rounded-full shadow hover:shadow-md focus:outline-none"
+                >
+                  Reset Password
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ResetPasswordModal
+        openPassModal={openPassModal}
+        setOpenPassModal={setOpenPassModal}
+      />
+      <EditPasswordModal
+        openEditModal={openEditModal}
+        setOpenEditModal={setOpenEditModal}
+      />
+    </div>
+  );
+}
