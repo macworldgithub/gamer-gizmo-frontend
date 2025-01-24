@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import PopularItemSection from "./PopularItemSection";
 import Wrapper from "./Common/Wrapper/Wrapper";
@@ -84,50 +84,50 @@ const PopularMainSection: React.FC = () => {
   ];
 
   return (
-      <div className="h-auto w-full">
-        <PopularItemSection
-          title="Popular in Used Gaming PC Parts"
-          subtitle="Choose your necessary parts from this category."
-          products={gamingPCParts}
-          explorePath="/usedparts"
-          onExplore={() => console.log("Explore Gaming PC Parts")}
-        />
-        <PopularItemSection
-          title="Popular in Used Consoles"
-          subtitle="Choose your necessary gaming items from this category."
-          products={usedConsoles}
-          explorePath="/usedparts"
-          onExplore={() => console.log("Explore Used Consoles")}
-        />
-        <PopularItemSection
-          title="Popular in New Gaming PC Parts"
-          subtitle="Choose your necessary gaming items from this category."
-          products={usedConsoles}
-          explorePath="/usedparts"
-          onExplore={() => console.log("Explore Used Consoles")}
-        />
-        <PopularItemSection
-          title="Popular in New Consoles"
-          subtitle="Choose your necessary gaming items from this category."
-          products={usedConsoles}
-          explorePath="/usedparts"
-          onExplore={() => console.log("Explore Used Consoles")}
-        />
-        <PopularItemSection
-          title="Popular in Used Laptops"
-          subtitle="Choose your necessary gaming items from this category."
-          products={usedConsoles}
-          explorePath="/usedparts"
-          onExplore={() => console.log("Explore Used Consoles")}
-        />
-        <PopularItemSection
-          title="Popular in New Laptops"
-          subtitle="Choose your necessary gaming items from this category."
-          explorePath="/usedparts"
-          products={usedConsoles}
-          onExplore={() => console.log("Explore Used Consoles")}
-        />
-      </div>
+    <div className="h-auto w-full">
+      <PopularItemSection
+        title="Popular in Used Gaming PC Parts"
+        subtitle="Choose your necessary parts from this category."
+        products={gamingPCParts}
+        explorePath="/usedparts"
+        onExplore={() => console.log("Explore Gaming PC Parts")}
+      />
+      <PopularItemSection
+        title="Popular in Used Consoles"
+        subtitle="Choose your necessary gaming items from this category."
+        products={usedConsoles}
+        explorePath="/usedparts"
+        onExplore={() => console.log("Explore Used Consoles")}
+      />
+      <PopularItemSection
+        title="Popular in New Gaming PC Parts"
+        subtitle="Choose your necessary gaming items from this category."
+        products={usedConsoles}
+        explorePath="/"
+        onExplore={() => console.log("Explore Used Consoles")}
+      />
+      <PopularItemSection
+        title="Popular in New Consoles"
+        subtitle="Choose your necessary gaming items from this category."
+        products={usedConsoles}
+        explorePath="/"
+        onExplore={() => console.log("Explore Used Consoles")}
+      />
+      <PopularItemSection
+        title="Popular in Used Laptops"
+        subtitle="Choose your necessary gaming items from this category."
+        products={usedConsoles}
+        explorePath="/"
+        onExplore={() => console.log("Explore Used Consoles")}
+      />
+      <PopularItemSection
+        title="Popular in New Laptops"
+        subtitle="Choose your necessary gaming items from this category."
+        explorePath="/"
+        products={usedConsoles}
+        onExplore={() => console.log("Explore Used Consoles")}
+      />
+    </div>
   );
 };
 

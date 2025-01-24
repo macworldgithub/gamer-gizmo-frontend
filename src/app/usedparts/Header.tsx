@@ -139,7 +139,7 @@ const Header = () => {
           {/* Free Ad Section */}
           <div className="dark:bg-secondaryBlack dark:text-white  text-gray-800  flex justify-center gap-4 max-md:flex-col max-md:items-center">
             <div className="text-center">
-              <div className="flex justify-center mb-3">
+              <div className="flex justify-center mb-3  ">
                 <Image
                   src="/images/adds.png"
                   alt="Free Ad"
