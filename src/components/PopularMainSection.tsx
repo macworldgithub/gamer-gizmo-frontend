@@ -89,14 +89,14 @@ const PopularMainSection: React.FC = () => {
         title="Popular in Used Gaming PC Parts"
         subtitle="Choose your necessary parts from this category."
         products={gamingPCParts}
-        explorePath="/usedparts"
+        explorePath="/"
         onExplore={() => console.log("Explore Gaming PC Parts")}
       />
       <PopularItemSection
         title="Popular in Used Consoles"
         subtitle="Choose your necessary gaming items from this category."
         products={usedConsoles}
-        explorePath="/usedparts"
+        explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <PopularItemSection
