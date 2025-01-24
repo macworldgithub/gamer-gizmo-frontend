@@ -55,22 +55,29 @@ const PopularItemSection: React.FC<SectionProps> = ({
     <div className="px-6 sm:px-6 md:px-10 lg:px-12">
       <div className="my-8">
         <Wrapper className="max-sm:px-2">
-          <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4 lg:pr-6">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[1rem]">
-                {title}
-              </h2>
-              <p className="text-gray-500 dark:text-white mt-2 md:text-sm sm:text-[0.8rem] max-sm:text-[0.6rem]">
-                {subtitle}
-              </p>
+          {/* <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4  lg:pr-6"> */}
+          <div className="flex justify-between items-center mb-2">
+            {/* <div className=""> */}
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[0.8rem]">
+              {title}
+            </h2>
+            {/* </div> */}
+            <div className="flex justify-end lg:pr-7">
+              <button
+                className="bg-custom-gradient rounded-full  w-10 h-10 hover:bg-purple-700 "
+                onClick={handleExplore}
+              >
+                <Image
+                  src="/images/arrowRight.png"
+                  alt="Right Arrow"
+                  width={20}
+                  height={25}
+                  className="mx-auto"
+                />
+              </button>
             </div>
-            <button
-              onClick={onExplore}
-              className="bg-custom-gradient text-white px-4 py-2 rounded-full text-sm max-sm:text-[0.6rem] hover:bg-purple-600 max-sm:mt-3 mt-6"
-            >
-              Explore More
-            </button>
           </div>
+          {/* </div> */}
         </Wrapper>
         {/* Product Section */}
         <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
@@ -82,7 +89,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
               <div
                 key={product.id}
                 onClick={() => handleCardClick(product.id, index)}
-                className={`flex-none dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] max-sm:w-[23%]  sm:w-[40%] md:w-[35%] lg:w-[18.5%] transition-transform duration-500 ease-in-out ${
+                className={`flex-none dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] max-sm:w-[23%]  sm:w-[40%] md:w-[35%] lg:w-[18.5%] transition-transform duration-500 ease-in-out  ${
                   selectedCard === product.id
                     ? "shadow-xl shadow-white bg-white"
                     : "shadow-md shadow-gray-200"
@@ -114,20 +121,6 @@ const PopularItemSection: React.FC<SectionProps> = ({
                 </div>
               </div>
             ))}
-          </div>
-          <div className="flex justify-end lg:pr-7 mt-3">
-            <button
-              className="bg-custom-gradient rounded-full w-10 h-10 hover:bg-purple-700 "
-              onClick={handleExplore}
-            >
-              <Image
-                src="/images/arrowRight.png"
-                alt="Right Arrow"
-                width={20}
-                height={25}
-                className="mx-auto"
-              />
-            </button>
           </div>
         </Wrapper>
       </div>
