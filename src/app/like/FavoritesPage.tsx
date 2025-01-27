@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
+  
   const [items, setItems] = useState([
     {
       id: 1,
