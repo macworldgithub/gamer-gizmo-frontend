@@ -1,7 +1,6 @@
 "use client";
 
 import { RootState } from "@/components/Store/Store";
-import { CloudFilled } from "@ant-design/icons";
 import {
   Box,
   Button,
@@ -35,8 +34,13 @@ interface Model {
   name: string;
 }
 const PublishAdd: React.FC = () => {
+  const [selectComponentCategory, setSelectedComponentCategory] = useState();
+  const [selectCategory, setSelectedCategory] = useState(0);
+  const [selectBrand, setSelectedBrand] = useState(0);
+  const [selectModel, setSelectedModel] = useState(0);
   const [activeStep, setActiveStep] = useState<number>(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
+  const [detailData, setDetailData] = useState<Record<string, any>>({});
   const [itemCondition, setItemCondition] = useState<string>("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -50,7 +54,7 @@ const PublishAdd: React.FC = () => {
   const [modelError, setModelError] = useState<string | null>(null);
 
   const token = useSelector((state: RootState) => state.user.token);
-
+  console.log(selectCategory, selectBrand, "formData");
   const categoryIconMapping: Record<string, string> = {
     Desktops: "/images/desktopImage.jpg",
     Laptops: "/images/LaptopImage.png",
@@ -58,162 +62,126 @@ const PublishAdd: React.FC = () => {
     Accessories: "/images/accessories.jpg",
     Default: "/images/default.jpg",
   };
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:4001/categories/getAll"
-        );
-        if (response.data && response.data.data) {
-          setCategories(response.data.data);
-        } else {
-          setCategories([]);
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getAll`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (err) {
-        setCategoryError("Failed to fetch categories.");
-      } finally {
-        setLoadingCategories(false);
+      );
+      if (response.data && response.data.data) {
+        setCategories(response.data.data);
+      } else {
+        setCategories([]);
       }
-    };
+    } catch (err) {
+      setCategoryError("Failed to fetch categories.");
+    } finally {
+      setLoadingCategories(false);
+    }
+  };
+  const fetchComponentCategories = async () => {
+    try {
+      const response = await axios(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/component-category/getAll`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
+      if (response?.data) {
+        setComponentCategories(response.data.data);
+      } else {
+        console.error("Unexpected API response structure:", response); // Debugging error log
+        throw new Error("Unexpected API response");
+      }
+    } catch (error) {
+      setCategoryError("Failed to load component categories");
+      console.error("Error occurred while fetching categories:", error);
+    } finally {
+      console.log("Fetch operation completed.");
+    }
+  };
+  const fetchModels = async () => {
+    if (!formData.brand) {
+      console.log("No brand selected, skipping API call.");
+      return;
+    }
+    setLoadingModels(true);
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/models/getAll?brand=${formData.brand.id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setModels(response?.data?.data || []);
+    } catch (err) {
+      setModelError("Failed to fetch models.");
+    } finally {
+      setLoadingModels(false);
+    }
+  };
+  const fetchBrands = async () => {
+    if (!selectCategory) {
+      console.log("No category selected. Skipping brand fetch.");
+      return;
+    }
+
+    setLoadingBrands(true);
+
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/brands/getAll?category=${selectCategory}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data && response.data.data) {
+        setBrands(response.data.data);
+      } else {
+        console.log("No brands found in the response data.");
+        setBrands([]);
+      }
+    } catch (err: any) {
+      console.error(
+        "Error fetching brands:",
+        err.response?.data || err.message
+      );
+      setBrandError("Failed to fetch brands.");
+    } finally {
+      console.log("Finished fetching brands.");
+      setLoadingBrands(false);
+    }
+  };
+  useEffect(() => {
     fetchCategories();
   }, []);
-
   useEffect(() => {
-    const fetchBrands = async () => {
-      if (!formData.category) {
-        console.log("No category selected. Skipping brand fetch.");
-        return;
-      }
-
-      setLoadingBrands(true);
-      console.log("Starting to fetch brands for category:", formData.category);
-
-      try {
-        // Log the token and API URL
-        console.log("Token used for API call:", token);
-        console.log(
-          "API URL:",
-          `http://localhost:4001/brands/getAll?category=${formData.category.id}`
-        );
-
-        // Perform API call
-        const response = await axios.get(
-          `http://localhost:4001/brands/getAll?category=${formData.category.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        // Log the full response
-        console.log("API response:", response);
-
-        if (response.data && response.data.data) {
-          console.log("Brands fetched successfully:", response.data.data);
-          setBrands(response.data.data);
-        } else {
-          console.log("No brands found in the response data.");
-          setBrands([]);
-        }
-      } catch (err: any) {
-        // Log the error message and details
-        console.error(
-          "Error fetching brands:",
-          err.response?.data || err.message
-        );
-        setBrandError("Failed to fetch brands.");
-      } finally {
-        // Log that the loading state is being updated
-        console.log("Finished fetching brands.");
-        setLoadingBrands(false);
-      }
-    };
-
-    // Log when the fetch function is triggered
-    console.log(
-      "Triggering fetchBrands due to category change:",
-      formData.category
-    );
-
     fetchBrands();
-  }, [formData.category, token]);
+    fetchComponentCategories();
+  }, [selectCategory, token]);
 
   useEffect(() => {
-    const fetchModels = async () => {
-      if (!formData.brand) {
-        console.log("No brand selected, skipping API call.");
-        return;
-      }
-
-      console.log("Fetching models for brand:", formData.brand.id);
-
-      setLoadingModels(true);
-      try {
-        const response = await axios.get(
-          `http://localhost:4001/models/getAll?brand=${formData.brand.id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        console.log("API Response:", response);
-        setModels(response?.data?.data || []);
-        console.log("Models fetched successfully:", response.data?.data);
-      } catch (err) {
-        console.error("Error fetching models:", err);
-        setModelError("Failed to fetch models.");
-      } finally {
-        setLoadingModels(false);
-        console.log("Loading models state set to false.");
-      }
-    };
-
     fetchModels();
   }, [formData.brand, token]);
-  //for components type api
-  useEffect(() => {
-    const fetchComponentCategories = async () => {
-      console.log("Starting to fetch component categories..."); // Debugging log
-      try {
-        setLoadingCategories(true);
-        console.log(
-          "Fetching data from API: http://localhost:4001/component-category/getAll"
-        ); // Debugging log
-        const response = await fetch(
-          "http://localhost:4001/component-category/getAll"
-        );
-
-        console.log("Response received:", response); // Debugging log for raw response
-        const result = await response.json();
-
-        console.log("Parsed response JSON:", result); // Debugging log for parsed JSON
-        if (result?.data) {
-          console.log(
-            "Component categories fetched successfully:",
-            result.data
-          ); // Debugging log for the fetched data
-          setComponentCategories(result.data);
-        } else {
-          console.error("Unexpected API response structure:", result); // Debugging error log
-          throw new Error("Unexpected API response");
-        }
-      } catch (error) {
-        setCategoryError("Failed to load component categories");
-        console.error("Error occurred while fetching categories:", error); // Debugging error log
-      } finally {
-        setLoadingCategories(false);
-        console.log("Fetch operation completed."); // Debugging log for completion
-      }
-    };
-
-    fetchComponentCategories();
-  }, []);
 
   const handleNext = () => {
+    // if(activeStep==0){
+    //   if(formData.category){
+    //   }
     setActiveStep((prevStep) => prevStep + 1);
+    // }else if(activeStep==1){
+    //   if(formData.category){
+    //     setActiveStep((prevStep) => prevStep + 1);
+    //   }
+    // }
   };
 
   const handleBack = () => {
@@ -226,12 +194,25 @@ const PublishAdd: React.FC = () => {
       [field]: value,
     }));
   };
+  const handleDetailChange = (field: string, value: any) => {
+    setDetailData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
 
   const handleItemConditionChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     setItemCondition(event.target.value as string);
     handleFormChange("itemCondition", event.target.value);
+  };
+  const handleCategoryChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    console.log(event, "event");
+    // setSelectedComponentCategories(event.target.value);
+    // handleFormChange("itemCondition", event.target.value);
   };
 
   const steps = [
@@ -249,10 +230,10 @@ const PublishAdd: React.FC = () => {
               {categories.map((category) => (
                 <div
                   key={category?.id}
-                  onClick={() => handleFormChange("category", category)}
+                  onClick={() => setSelectedCategory(category?.id)}
                   className={clsx(
                     "p-4 border rounded-lg cursor-pointer text-center",
-                    formData.category?.id === category.id
+                    selectCategory === category.id
                       ? "bg-blue-500 text-white"
                       : "hover:bg-gray-200 dark:hover:bg-gray-400"
                   )}
@@ -291,10 +272,10 @@ const PublishAdd: React.FC = () => {
                 <div
                   //@ts-ignore
                   key={brand?.id}
-                  onClick={() => handleFormChange("brand", brand)}
+                  onClick={() => setSelectedBrand(brand.id)}
                   className={clsx(
                     "p-4 border rounded-lg cursor-pointer text-center",
-                    formData?.brand?.id === brand?.id
+                    selectBrand === brand?.id
                       ? "bg-green-500 text-white"
                       : "hover:bg-gray-200 dark:hover:bg-gray-400"
                   )}
@@ -302,7 +283,7 @@ const PublishAdd: React.FC = () => {
                   {" "}
                   <img
                     //@ts-ignore
-                    src={`http://localhost:4001${brand?.logo}`}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${brand?.logo}`}
                     alt={brand.name}
                     className="mx-auto mb-2 w-16 h-16 object-contain"
                   />
@@ -315,40 +296,6 @@ const PublishAdd: React.FC = () => {
       ),
     },
     {
-      label: "Model Selection",
-      content: (
-        <div className="w-full text-center">
-          <h2 className="text-lg font-bold">Select Model</h2>
-          {loadingModels ? (
-            <p>Loading models...</p>
-          ) : modelError ? (
-            <p className="text-red-500">{modelError}</p>
-          ) : (
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <InputLabel id="model-select-label">Select Model</InputLabel>
-                <Select
-                  labelId="model-select-label"
-                  value={formData.model || ""}
-                  onChange={(e) => handleFormChange("model", e.target.value)}
-                >
-                  {models.map((model) => (
-                    <MenuItem
-                      key={model.id}
-                      value={model.id}
-                      style={{ color: "black" }}
-                    >
-                      {model.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-          )}
-        </div>
-      ),
-    },
-    {
       label: "Details",
       content: (
         <div className="flex flex-col space-y-4">
@@ -356,8 +303,8 @@ const PublishAdd: React.FC = () => {
             label="Title"
             variant="outlined"
             fullWidth
-            value={formData.title || ""}
-            onChange={(e) => handleFormChange("title", e.target.value)}
+            value={detailData.title || ""}
+            onChange={(e) => handleDetailChange("title", e.target.value)}
           />
           <TextField
             label="Description"
@@ -365,8 +312,8 @@ const PublishAdd: React.FC = () => {
             fullWidth
             multiline
             rows={4}
-            value={formData.description || ""}
-            onChange={(e) => handleFormChange("description", e.target.value)}
+            value={detailData.description || ""}
+            onChange={(e) => handleDetailChange("description", e.target.value)}
           />
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
@@ -377,10 +324,33 @@ const PublishAdd: React.FC = () => {
                 value={itemCondition}
                 label="Condition"
                 //@ts-ignore
-                onChange={handleItemConditionChange}
+                onChange={(e) => setItemCondition(e.target.value)}
               >
-                <MenuItem value="New">New</MenuItem>
-                <MenuItem value="Used">Used</MenuItem>
+                <MenuItem value="new">New</MenuItem>
+                <MenuItem value="used">Used</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="model-select-label">Select Model</InputLabel>
+              <Select
+                labelId="model-select-label"
+                id="model-select"
+                value={selectModel}
+                // @ts-ignore
+                onChange={(e) => setSelectedModel(e.target.value)}
+              >
+                {models.map((model) => (
+                  <MenuItem
+                    key={model.id}
+                    value={model.id}
+                    style={{ color: "black" }}
+                  >
+                    {model.name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
@@ -490,29 +460,28 @@ const PublishAdd: React.FC = () => {
                 ) : categoryError ? (
                   <p className="text-red-500">{categoryError}</p>
                 ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-                    {componentCategories?.map((category) => (
-                      <div
+                  <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="cat-select-label">Category</InputLabel>
+                      <Select
+                        labelId="cat-select-label"
+                        id="cat-select"
+                        value={selectComponentCategory}
+                        label="Category"
                         //@ts-ignore
-                        key={category?.id}
-                        onClick={() =>
-                          handleFormChange("component_type", category)
+                        onChange={(e) =>
+                          // @ts-expect-error
+                          setSelectedComponentCategory(e.target.value)
                         }
-                        className={clsx(
-                          "p-4 border rounded-lg cursor-pointer text-center",
-                          //@ts-ignore
-
-                          formData?.component_type?.id === category?.id
-                            ? "bg-green-500 text-white"
-                            : "hover:bg-gray-200 dark:hover:bg-gray-400"
-                        )}
                       >
-                        <div className="text-lg font-medium">
-                          {/* {category.name} */}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                        {componentCategories &&
+                          componentCategories.length > 0 &&
+                          componentCategories.map((e: any) => (
+                            <MenuItem value={e.id}>{e.name}</MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
                 )}
               </div>
               <TextField
