@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 const BottomNavigationBar = () => {
   const isLogin = useSelector((state: RootState) => state.user.token != null);
   const token = useSelector((state: RootState) => state.user.token);
-
+  const router = useRouter();
   const theme = useSelector((state: RootState) => state.Theme.theme);
   const [backgroundColor, setBackgroundColor] = useState<string>();
   const [isScrolling, setIsScrolling] = useState(false);
@@ -68,6 +68,7 @@ const BottomNavigationBar = () => {
       );
       if (res.status == 201) {
         dispatch(clearUserData());
+        router.push("/auth/login");
         toast.success("SuccessFully Logout");
       } else {
         toast.error("Failed to Logout");
@@ -92,7 +93,7 @@ const BottomNavigationBar = () => {
     {
       key: "2",
       icon: <CgProfile />,
-      label: "Profile",
+      label: <Link href="/profile">Profile</Link>,
     },
     {
       icon: <FaCartPlus />,

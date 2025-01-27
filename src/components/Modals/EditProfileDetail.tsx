@@ -1,49 +1,106 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import Person2Icon from "@mui/icons-material/Person2";
+import { FaPhoneAlt } from "react-icons/fa";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import { LuFileUser } from "react-icons/lu";
-const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
-  const [formData, setFormData] = useState({
-    username: "Khan234",
-    firstName: "Khan",
-    lastName: "Khan",
-    email: "abc@gmail.com",
-    country: "Dubai",
-    gender: "Male",
-    address: "SOME ADDRESS",
-    dob: "1990-01-01", // Initial value for DOB
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../Store/Store";
+import { toast } from "react-toastify";
+type FormDataType = {
+  first_name: string;
+  last_name: string;
+  phone: string;
+  dob: string; // ISO 8601 format or formatted date string (yyyy-MM-dd)
+  gender: "male" | "female" | "other"; // Define specific gender values
+  address: string | null; // Allow null for optional fields
+};
+const EditProfileModal = ({
+  openEditModal,
+  setOpenEditModal,
+  setRefetch,
+  refetch,
+}: any) => {
+  const [formData, setFormData] = useState<FormDataType>({
+    first_name: "",
+    last_name: "",
+    phone: "",
+    dob: "2004-05-24T00:00:00.000Z",
+    gender: "male",
+    address: null,
   });
   const [errors, setErrors] = useState<any>({});
-
+  const token = useSelector((state: RootState) => state.user.token);
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" }); // Clear error on change
   };
+  const fetchProfileData = async () => {
+    let res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/getUserData`,
+      {
+        headers: {
+          Authorization: ` Bearer ${token}`,
+        },
+      }
+    );
 
-  const handleSave = () => {
+    setFormData({
+      first_name: res.data.data.first_name,
+      last_name: res.data.data.last_name,
+      phone: res.data.data.phone,
+      dob: res.data.data.dob,
+      gender: res.data.data.gender,
+      address: res.data.data.address,
+    });
+  };
+  useEffect(() => {
+    fetchProfileData();
+  }, [refetch]);
+  const handleSave = async () => {
     const newErrors: any = {};
-    Object.keys(formData).forEach((key) => {
-      // @ts-expect-error
+    ["first_name", "last_name", "phone", "dob", "gender"].forEach((key) => {
+      // @ts-ignore
       if (!formData[key]) {
         newErrors[key] = `${
           key.charAt(0).toUpperCase() + key.slice(1)
         } is required`;
       }
     });
-
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
-    console.log("Updated Profile Data:", formData);
-    setOpenEditModal(false); // Close modal on save
+    let res = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/updateUserData`,
+      formData,
+      {
+        headers: {
+          Authorization: ` Bearer ${token}`,
+        },
+      }
+    );
+    if (res.status == 201) {
+      toast.success("Successfully updated");
+      setRefetch(!refetch);
+      setTimeout(() => {
+        setOpenEditModal(false);
+      }, 1000);
+    } else {
+      toast.error("Error updating, Please Try Again");
+    }
   };
 
+  if (!openEditModal) return null;
   return (
     <div
       className={`fixed inset-0 transition-all duration-200 bg-black bg-opacity-50 flex justify-center items-center z-50 ${
@@ -54,7 +111,7 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
         <h2 className="text-2xl font-semibold mb-4">Edit Profile</h2>
         <form className="space-y-4">
           {/* Username Field */}
-          <div>
+          {/* <div>
             <label
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
@@ -76,12 +133,12 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
             {errors.username && (
               <p className="text-red-500 text-sm">{errors.username}</p>
             )}
-          </div>
+          </div> */}
 
           {/* First Name Field */}
           <div>
             <label
-              htmlFor="firstName"
+              htmlFor="first_name"
               className="block text-sm font-medium text-gray-700"
             >
               First Name
@@ -89,17 +146,17 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
             <div className="flex items-center gap-3 mt-1">
               <LuFileUser className="text-gray-500" />
               <input
-                id="firstName"
+                id="first_name"
                 type="text"
-                name="firstName"
-                value={formData.firstName}
+                name="first_name"
+                value={formData.first_name}
                 onChange={handleChange}
                 placeholder="First Name"
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
             {errors.firstName && (
-              <p className="text-red-500 text-sm">{errors.firstName}</p>
+              <p className="text-red-500 text-sm">{errors.first_name}</p>
             )}
           </div>
 
@@ -114,17 +171,17 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
             <div className="flex items-center gap-3 mt-1">
               <LuFileUser className="text-gray-500" />
               <input
-                id="lastName"
+                id="last_name"
                 type="text"
-                name="lastName"
-                value={formData.lastName}
+                name="last_name"
+                value={formData.last_name}
                 onChange={handleChange}
                 placeholder="Last Name"
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
             {errors.lastName && (
-              <p className="text-red-500 text-sm">{errors.lastName}</p>
+              <p className="text-red-500 text-sm">{errors.last_name}</p>
             )}
           </div>
 
@@ -142,7 +199,11 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
                 id="dob"
                 type="date"
                 name="dob"
-                value={formData.dob}
+                value={
+                  formData.dob
+                    ? formatDate(formData.dob) // Converts to correct format
+                    : ""
+                }
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
@@ -150,32 +211,6 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
             {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
           </div>
 
-          {/* Country Field */}
-          <div>
-            <label
-              htmlFor="country"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Country
-            </label>
-            <div className="flex items-center gap-3 mt-1">
-              <LanguageOutlinedIcon className="text-gray-500" />
-              <input
-                id="country"
-                type="text"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                placeholder="Country"
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-            {errors.country && (
-              <p className="text-red-500 text-sm">{errors.country}</p>
-            )}
-          </div>
-
-          {/* Gender Field */}
           <div>
             <label
               htmlFor="gender"
@@ -192,13 +227,36 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
               </select>
             </div>
             {errors.gender && (
               <p className="text-red-500 text-sm">{errors.gender}</p>
+            )}
+          </div>
+          <div>
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Phone
+            </label>
+            <div className="flex items-center gap-3 mt-1">
+              <FaPhoneAlt className="text-gray-500" />
+              <input
+                id="phone"
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Phone"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            {errors.phone && (
+              <p className="text-red-500 text-sm">{errors.phone}</p>
             )}
           </div>
 
@@ -216,7 +274,7 @@ const EditProfileModal = ({ openEditModal, setOpenEditModal }: any) => {
                 id="address"
                 type="text"
                 name="address"
-                value={formData.address}
+                value={formData.address ? formData.address : ""}
                 onChange={handleChange}
                 placeholder="Address"
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"

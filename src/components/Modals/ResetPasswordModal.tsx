@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { Modal, TextField } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../Store/Store";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function ResetPasswordModal({
   openPassModal,
   setOpenPassModal,
 }: any) {
+  const token = useSelector((state: RootState) => state.user.token);
+  const email = useSelector((state: RootState) => state.user.email);
   const [otpSent, setOtpSent] = useState(false);
   const [formData, setFormData] = useState({
     otp: "",
@@ -50,18 +56,67 @@ export default function ResetPasswordModal({
     return newErrors;
   };
 
-  const handleResetPassword = () => {
+  const handleResetPassword = async () => {
     const validationErrors = validateFields();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    alert("Password reset successful!");
-    setOpenPassModal(false);
-    setOtpSent(false);
-    setFormData({ otp: "", newPassword: "", confirmPassword: "" });
-  };
 
+    try {
+      let res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/resetPasswordOtp`,
+        { password: formData.newPassword, email: email, otp: formData.otp },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status == 201) {
+        toast.success("Successfully Updated Passowrd");
+        setTimeout(() => {
+          setOpenPassModal(false);
+          setOtpSent(false);
+          setFormData({ otp: "", newPassword: "", confirmPassword: "" });
+        }, 1000);
+      } else {
+        toast.error("Failed");
+      }
+    } catch (err) {
+      console.log(err, "ppap");
+      //  @ts-ignore
+      if (Array.isArray(err.response.data.message)) {
+        //  @ts-ignore
+        err.response.data.message.forEach((e) => {
+          toast.error(e);
+        });
+      } else {
+        //  @ts-ignore
+        toast.error(err.response.data.message);
+      }
+    }
+  };
+  const SendOtp = async () => {
+    console.log(email, "email");
+    let res = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sendForgetPasswordOtp`,
+      { email: email },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (res.status == 201) {
+      toast.success("Successfully sent Otp");
+      setTimeout(() => {
+        setOtpSent(true);
+      }, 1000);
+    } else {
+      toast.error("Error updating, Please Try Again");
+    }
+  };
   return (
     <Modal
       open={openPassModal}
@@ -90,7 +145,7 @@ export default function ResetPasswordModal({
               email. Please enter the OTP to create a new password.
             </h1>
             <button
-              onClick={() => setOtpSent(true)}
+              onClick={() => SendOtp()}
               className="md:w-auto px-6 py-2 bg-gradient-to-r from-[#DC39FC] to-[#6345ED] text-white rounded-full shadow hover:shadow-xl focus:outline-none"
             >
               Send OTP
