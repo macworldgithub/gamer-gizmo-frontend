@@ -2,7 +2,18 @@
 
 import { RootState } from "@/components/Store/Store";
 import { CloudFilled } from "@ant-design/icons";
-import { Button, Step, StepLabel, Stepper, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Step,
+  StepLabel,
+  Stepper,
+  TextField,
+} from "@mui/material";
 import axios from "axios";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
@@ -19,15 +30,25 @@ interface Brand {
   name: string;
 }
 
+interface Model {
+  id: number;
+  name: string;
+}
 const PublishAdd: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
+  const [itemCondition, setItemCondition] = useState<string>("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [models, setModels] = useState<Model[]>([]);
+  const [componentCategories, setComponentCategories] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
   const [loadingBrands, setLoadingBrands] = useState<boolean>(false);
+  const [loadingModels, setLoadingModels] = useState<boolean>(false);
   const [categoryError, setCategoryError] = useState<string | null>(null);
   const [brandError, setBrandError] = useState<string | null>(null);
+  const [modelError, setModelError] = useState<string | null>(null);
+
   const token = useSelector((state: RootState) => state.user.token);
 
   const categoryIconMapping: Record<string, string> = {
@@ -37,6 +58,7 @@ const PublishAdd: React.FC = () => {
     Accessories: "/images/accessories.jpg",
     Default: "/images/default.jpg",
   };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -119,6 +141,77 @@ const PublishAdd: React.FC = () => {
     fetchBrands();
   }, [formData.category, token]);
 
+  useEffect(() => {
+    const fetchModels = async () => {
+      if (!formData.brand) {
+        console.log("No brand selected, skipping API call.");
+        return;
+      }
+
+      console.log("Fetching models for brand:", formData.brand.id);
+
+      setLoadingModels(true);
+      try {
+        const response = await axios.get(
+          `http://localhost:4001/models/getAll?brand=${formData.brand.id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        console.log("API Response:", response);
+        setModels(response?.data?.data || []);
+        console.log("Models fetched successfully:", response.data?.data);
+      } catch (err) {
+        console.error("Error fetching models:", err);
+        setModelError("Failed to fetch models.");
+      } finally {
+        setLoadingModels(false);
+        console.log("Loading models state set to false.");
+      }
+    };
+
+    fetchModels();
+  }, [formData.brand, token]);
+  //for components type api
+  useEffect(() => {
+    const fetchComponentCategories = async () => {
+      console.log("Starting to fetch component categories..."); // Debugging log
+      try {
+        setLoadingCategories(true);
+        console.log(
+          "Fetching data from API: http://localhost:4001/component-category/getAll"
+        ); // Debugging log
+        const response = await fetch(
+          "http://localhost:4001/component-category/getAll"
+        );
+
+        console.log("Response received:", response); // Debugging log for raw response
+        const result = await response.json();
+
+        console.log("Parsed response JSON:", result); // Debugging log for parsed JSON
+        if (result?.data) {
+          console.log(
+            "Component categories fetched successfully:",
+            result.data
+          ); // Debugging log for the fetched data
+          setComponentCategories(result.data);
+        } else {
+          console.error("Unexpected API response structure:", result); // Debugging error log
+          throw new Error("Unexpected API response");
+        }
+      } catch (error) {
+        setCategoryError("Failed to load component categories");
+        console.error("Error occurred while fetching categories:", error); // Debugging error log
+      } finally {
+        setLoadingCategories(false);
+        console.log("Fetch operation completed."); // Debugging log for completion
+      }
+    };
+
+    fetchComponentCategories();
+  }, []);
+
   const handleNext = () => {
     setActiveStep((prevStep) => prevStep + 1);
   };
@@ -133,6 +226,14 @@ const PublishAdd: React.FC = () => {
       [field]: value,
     }));
   };
+
+  const handleItemConditionChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setItemCondition(event.target.value as string);
+    handleFormChange("itemCondition", event.target.value);
+  };
+
   const steps = [
     {
       label: "Category Selection",
@@ -214,7 +315,41 @@ const PublishAdd: React.FC = () => {
       ),
     },
     {
-      label: "Add Details",
+      label: "Model Selection",
+      content: (
+        <div className="w-full text-center">
+          <h2 className="text-lg font-bold">Select Model</h2>
+          {loadingModels ? (
+            <p>Loading models...</p>
+          ) : modelError ? (
+            <p className="text-red-500">{modelError}</p>
+          ) : (
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="model-select-label">Select Model</InputLabel>
+                <Select
+                  labelId="model-select-label"
+                  value={formData.model || ""}
+                  onChange={(e) => handleFormChange("model", e.target.value)}
+                >
+                  {models.map((model) => (
+                    <MenuItem
+                      key={model.id}
+                      value={model.id}
+                      style={{ color: "black" }}
+                    >
+                      {model.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+          )}
+        </div>
+      ),
+    },
+    {
+      label: "Details",
       content: (
         <div className="flex flex-col space-y-4">
           <TextField
@@ -233,9 +368,168 @@ const PublishAdd: React.FC = () => {
             value={formData.description || ""}
             onChange={(e) => handleFormChange("description", e.target.value)}
           />
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="condition-select-label">Condition</InputLabel>
+              <Select
+                labelId="condition-select-label"
+                id="condition-select"
+                value={itemCondition}
+                label="Condition"
+                //@ts-ignore
+                onChange={handleItemConditionChange}
+              >
+                <MenuItem value="New">New</MenuItem>
+                <MenuItem value="Used">Used</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </div>
       ),
     },
+    {
+      label: "More Specifications",
+      content: (
+        <div className="flex flex-col space-y-4">
+          {/* Conditionally render additional fields based on the selected category */}
+          {["Laptops", "Desktops"].includes(formData.category?.name) && (
+            <>
+              <TextField
+                label="Processor"
+                variant="outlined"
+                fullWidth
+                value={formData.processor || ""}
+                onChange={(e) => handleFormChange("processor", e.target.value)}
+              />
+              <TextField
+                label="Processor_type"
+                variant="outlined"
+                fullWidth
+                value={formData.processor || ""}
+                onChange={(e) =>
+                  handleFormChange("processor_type", e.target.value)
+                }
+              />
+              <TextField
+                label="RAM"
+                variant="outlined"
+                fullWidth
+                value={formData.ram || ""}
+                onChange={(e) => handleFormChange("ram", e.target.value)}
+              />
+              <TextField
+                label="Storage"
+                variant="outlined"
+                fullWidth
+                value={formData.storage || ""}
+                onChange={(e) => handleFormChange("storage", e.target.value)}
+              />
+              <TextField
+                label="Screen Size"
+                variant="outlined"
+                fullWidth
+                value={formData.screenSize || ""}
+                onChange={(e) => handleFormChange("screenSize", e.target.value)}
+              />
+              <TextField
+                label="Screen Resolution"
+                variant="outlined"
+                fullWidth
+                value={formData.screenResolution || ""}
+                onChange={(e) =>
+                  handleFormChange("screenResolution", e.target.value)
+                }
+              />
+              <TextField
+                label="Weight"
+                variant="outlined"
+                fullWidth
+                value={formData.weight || ""}
+                onChange={(e) => handleFormChange("weight", e.target.value)}
+              />
+              <TextField
+                label="Graphics"
+                variant="outlined"
+                fullWidth
+                value={formData.graphics || ""}
+                onChange={(e) => handleFormChange("graphics", e.target.value)}
+              />
+              <TextField
+                label="Ports"
+                variant="outlined"
+                fullWidth
+                value={formData.ports || ""}
+                onChange={(e) => handleFormChange("ports", e.target.value)}
+              />
+              <TextField
+                label="Battery Life"
+                variant="outlined"
+                fullWidth
+                value={formData.batteryLife || ""}
+                onChange={(e) =>
+                  handleFormChange("batteryLife", e.target.value)
+                }
+              />
+
+              <TextField
+                label="Color"
+                variant="outlined"
+                fullWidth
+                value={formData.color || ""}
+                onChange={(e) => handleFormChange("color", e.target.value)}
+              />
+            </>
+          )}
+
+          {formData.category?.name === "Components" && (
+            <>
+              <div className="w-full text-center">
+                <h2 className="text-lg font-bold">Select Component Type</h2>
+                {loadingCategories ? (
+                  <p>Loading Components...</p>
+                ) : categoryError ? (
+                  <p className="text-red-500">{categoryError}</p>
+                ) : (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+                    {componentCategories?.map((category) => (
+                      <div
+                        //@ts-ignore
+                        key={category?.id}
+                        onClick={() =>
+                          handleFormChange("component_type", category)
+                        }
+                        className={clsx(
+                          "p-4 border rounded-lg cursor-pointer text-center",
+                          //@ts-ignore
+
+                          formData?.component_type?.id === category?.id
+                            ? "bg-green-500 text-white"
+                            : "hover:bg-gray-200 dark:hover:bg-gray-400"
+                        )}
+                      >
+                        <div className="text-lg font-medium">
+                          {/* {category.name} */}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <TextField
+                label="text"
+                variant="outlined"
+                fullWidth
+                value={formData.component_text || ""}
+                onChange={(e) =>
+                  handleFormChange("component_text", e.target.value)
+                }
+              />
+            </>
+          )}
+        </div>
+      ),
+    },
+
     {
       label: "Set Price",
       content: (
@@ -247,6 +541,14 @@ const PublishAdd: React.FC = () => {
             fullWidth
             value={formData.price || ""}
             onChange={(e) => handleFormChange("price", e.target.value)}
+          />
+          <TextField
+            label="Quantity"
+            variant="outlined"
+            type="number"
+            fullWidth
+            value={formData.quantity || ""}
+            onChange={(e) => handleFormChange("quantity", e.target.value)}
           />
         </div>
       ),
