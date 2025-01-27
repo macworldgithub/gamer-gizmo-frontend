@@ -1,6 +1,7 @@
 "use client";
 
 import { RootState } from "@/components/Store/Store";
+import { CloudFilled } from "@ant-design/icons";
 import { Button, Step, StepLabel, Stepper, TextField } from "@mui/material";
 import axios from "axios";
 import clsx from "clsx";
@@ -27,6 +28,7 @@ const PublishAdd: React.FC = () => {
   const [loadingBrands, setLoadingBrands] = useState<boolean>(false);
   const [categoryError, setCategoryError] = useState<string | null>(null);
   const [brandError, setBrandError] = useState<string | null>(null);
+  const token = useSelector((state: RootState) => state.user.token);
 
   const categoryIconMapping: Record<string, string> = {
     Desktops: "/images/desktopImage.jpg",
@@ -35,7 +37,102 @@ const PublishAdd: React.FC = () => {
     Accessories: "/images/accessories.jpg",
     Default: "/images/default.jpg",
   };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4001/categories/getAll"
+        );
+        if (response.data && response.data.data) {
+          setCategories(response.data.data);
+        } else {
+          setCategories([]);
+        }
+      } catch (err) {
+        setCategoryError("Failed to fetch categories.");
+      } finally {
+        setLoadingCategories(false);
+      }
+    };
 
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      if (!formData.category) {
+        console.log("No category selected. Skipping brand fetch.");
+        return;
+      }
+
+      setLoadingBrands(true);
+      console.log("Starting to fetch brands for category:", formData.category);
+
+      try {
+        // Log the token and API URL
+        console.log("Token used for API call:", token);
+        console.log(
+          "API URL:",
+          `http://localhost:4001/brands/getAll?category=${formData.category.id}`
+        );
+
+        // Perform API call
+        const response = await axios.get(
+          `http://localhost:4001/brands/getAll?category=${formData.category.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // Log the full response
+        console.log("API response:", response);
+
+        if (response.data && response.data.data) {
+          console.log("Brands fetched successfully:", response.data.data);
+          setBrands(response.data.data);
+        } else {
+          console.log("No brands found in the response data.");
+          setBrands([]);
+        }
+      } catch (err: any) {
+        // Log the error message and details
+        console.error(
+          "Error fetching brands:",
+          err.response?.data || err.message
+        );
+        setBrandError("Failed to fetch brands.");
+      } finally {
+        // Log that the loading state is being updated
+        console.log("Finished fetching brands.");
+        setLoadingBrands(false);
+      }
+    };
+
+    // Log when the fetch function is triggered
+    console.log(
+      "Triggering fetchBrands due to category change:",
+      formData.category
+    );
+
+    fetchBrands();
+  }, [formData.category, token]);
+
+  const handleNext = () => {
+    setActiveStep((prevStep) => prevStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevStep) => prevStep - 1);
+  };
+
+  const handleFormChange = (field: string, value: any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
   const steps = [
     {
       label: "Category Selection",
@@ -50,11 +147,11 @@ const PublishAdd: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
               {categories.map((category) => (
                 <div
-                  key={category.id}
-                  onClick={() => handleFormChange("category", category.name)}
+                  key={category?.id}
+                  onClick={() => handleFormChange("category", category)}
                   className={clsx(
                     "p-4 border rounded-lg cursor-pointer text-center",
-                    formData.category === category.name
+                    formData.category?.id === category.id
                       ? "bg-blue-500 text-white"
                       : "hover:bg-gray-200 dark:hover:bg-gray-400"
                   )}
@@ -62,7 +159,7 @@ const PublishAdd: React.FC = () => {
                   <div className="relative w-16 h-16 mx-auto mb-4">
                     <img
                       src={
-                        category.icon ||
+                        category?.icon ||
                         categoryIconMapping[category.name] ||
                         categoryIconMapping["Default"]
                       }
@@ -89,18 +186,26 @@ const PublishAdd: React.FC = () => {
             <p className="text-red-500">{brandError}</p>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-              {brands.map((brand) => (
+              {brands?.map((brand) => (
                 <div
-                  key={brand.id}
-                  onClick={() => handleFormChange("brand", brand.name)}
+                  //@ts-ignore
+                  key={brand?.id}
+                  onClick={() => handleFormChange("brand", brand)}
                   className={clsx(
                     "p-4 border rounded-lg cursor-pointer text-center",
-                    formData.brand === brand.name
+                    formData?.brand?.id === brand?.id
                       ? "bg-green-500 text-white"
                       : "hover:bg-gray-200 dark:hover:bg-gray-400"
                   )}
                 >
-                  {brand.name}
+                  {" "}
+                  <img
+                    //@ts-ignore
+                    src={`http://localhost:4001${brand?.logo}`}
+                    alt={brand.name}
+                    className="mx-auto mb-2 w-16 h-16 object-contain"
+                  />
+                  <div>{brand.name}</div>
                 </div>
               ))}
             </div>
@@ -158,77 +263,6 @@ const PublishAdd: React.FC = () => {
       ),
     },
   ];
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:4001/categories/getAll"
-        );
-        if (response.data && response.data.data) {
-          setCategories(response.data.data);
-        } else {
-          setCategories([]);
-        }
-      } catch (err) {
-        setCategoryError("Failed to fetch categories.");
-      } finally {
-        setLoadingCategories(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
-    const fetchBrands = async () => {
-      if (!formData.category) return;
-
-      setLoadingBrands(true);
-
-      try {
-        // Get token from Redux state
-        const token = useSelector((state: RootState) => state.user.token);
-
-        // Perform API call
-        const response = await axios.get(
-          `http://localhost:4001/brands/getAll?category=${formData.category}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (response.data && response.data.data) {
-          setBrands(response.data.data);
-        } else {
-          setBrands([]);
-        }
-      } catch (err) {
-        setBrandError("Failed to fetch brands.");
-      } finally {
-        setLoadingBrands(false);
-      }
-    };
-
-    fetchBrands();
-  }, [formData.category]);
-
-  const handleNext = () => {
-    setActiveStep((prevStep) => prevStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevStep) => prevStep - 1);
-  };
-
-  const handleFormChange = (field: string, value: any) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
 
   return (
     <div className="container mx-auto p-6">
