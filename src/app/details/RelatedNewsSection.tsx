@@ -8,6 +8,7 @@ const RelatedNewsSection = () => {
         <h2 className="text-xl font-semibold text-gray-800 mb-4 dark:text-white">
           Related News
         </h2>
+
         <div className="grid lg:grid-cols-2 gap-4">
           {/* News Item */}
           <div className="flex items-start p-4 space-x-4">
@@ -46,6 +47,7 @@ const RelatedNewsSection = () => {
                 <i className="fas fa-calendar-alt"></i>
                 <span>05 Jan 2022</span>
               </div>
+
               <Link
                 href="#"
                 className="dark:text-white text-gray-800 font-bold mt-2 block hover:text-gray-600 max-w-xs break-words"

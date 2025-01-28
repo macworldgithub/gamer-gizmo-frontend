@@ -104,7 +104,7 @@ const BottomNavigationBar = () => {
       key: "4",
 
       icon: <MdOutlineFavorite />,
-      label: "Favourites",
+      label: <Link href="/like">Favourites</Link>,
     },
     {
       key: "5",
@@ -172,13 +172,41 @@ const BottomNavigationBar = () => {
                                 : "hidden"
                             }`}
           >
-            <Image
+            {/* <Image
               src="/images/profile.png"
               alt="Profile"
               width={40}
               height={40}
               className="rounded-full"
-            />
+            /> */}
+            {isLogin ? (
+              <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
+                <Dropdown className="shadow-2xl" menu={{ items }}>
+                  <Image
+                    src="/images/profile.png"
+                    alt="Profile"
+                    width={40}
+                    height={40}
+                    className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
+                  />
+                </Dropdown>
+              </div>
+            ) : (
+              <Link href="/auth/login">
+                <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+                  <Image
+                    src="/images/btnIcon.png"
+                    className="md:w-[0.6rem]"
+                    width={18}
+                    height={18}
+                    alt="btnIcon"
+                  />
+                  <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
+                    Login
+                  </p>
+                </div>
+              </Link>
+            )}
             <p className="text-secondaryColorLight">Ayla Imran</p>
             <Link
               href="/desktop"
