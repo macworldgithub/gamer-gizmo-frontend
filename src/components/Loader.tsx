@@ -15,7 +15,7 @@ const Loader = () => {
       <div className="mt-4 w-32 h-1 bg-purple-500 animate-ping"></div>
 
       {/* Under Construction Message */}
-      <p className="mt-6 text-lg font-bold text-gray-600 text-center px-4">
+      <p className="mt-6 text-lg font-bold text-gray-600 text-center px-4 animate-slide-right-to-left">
         🚧 Our website is online, but some features are still under development.
         Stay tuned for updates! 🚀
       </p>

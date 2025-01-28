@@ -83,3 +83,17 @@ body {
 .progress-success {
   background-color: #6a0dad;
 }
+@keyframes slideRightToLeft {
+  0% {
+    transform: translateX(
+      120px
+    ); /* Start further to the right for a stronger effect */
+  }
+  100% {
+    transform: translateX(0); /* End at the normal position */
+  }
+}
+
+.animate-slide-right-to-left {
+  animation: slideRightToLeft 2s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Stronger easing for a more dynamic effect */
+}
