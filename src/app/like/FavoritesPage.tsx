@@ -33,7 +33,7 @@ export default function Home() {
   ]);
 
   return (
-    //ya shii haaa:
+    
     <div className="max-lg:hidden">
       <div className="ml-40 mt-20 p-4">
         <h2 className="text-2xl font-bold">My Favorites</h2>
