@@ -53,8 +53,8 @@ export default function SelectLabels() {
 
   return (
     <Wrapper>
-      <div className="flex max-md:flex-col w-[100%]  max-md:flex-wrap max-xl:flex-wrap h-max p-2 rounded bg-white justify-center items-center">
-        <div className="flex max-lg:flex-col max-sm:mb-2  justify-center mb-1 gap-8 max-md:gap-5 w-[100%]  h-max flex-wrap  items-center ">
+      <div className="flex max-sm:flex-col w-[100%]  h-max p-1 rounded bg-white justify-center items-center">
+        <div className="flex max-sm:flex-col max-sm:mb-2 justify-center mb-1 max-lg:gap-4 lg:gap-1 w-[100%]  h-max items-center ">
           {dropdownOptions.map((dropdown, index) => (
             <div key={index} className="flex justify-center items-center">
               <Select
@@ -94,7 +94,7 @@ export default function SelectLabels() {
                     },
                   },
                 }}
-                className="w-[180px] h-12 mt-2 max-sm:w-[245px] max-md:w-[360px] max-lg:w-[550px]  border border-searchFilterBorder"
+                className="lg:w-[150px] h-12 mt-2  max-sm:w-[360px] sm:w-[102px]  md:w-[120px] border border-searchFilterBorder"
                 sx={{
                   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {},
                   borderRadius: "50px",
@@ -128,7 +128,7 @@ export default function SelectLabels() {
           ))}
         </div>
 
-        <div className="bg-custom-gradient  w-[180px] max-md:w-60 h-[40px] lg:h-12  rounded-full  flex justify-center items-center md:text-base font-medium text-white">
+        <div className="bg-custom-gradient  lg:w-[180px] md:w-[100px] max-sm:w-60 sm:w-[80px] h-[40px] lg:h-12  rounded-full  flex justify-center items-center md:text-base font-medium text-white">
           Filter
         </div>
       </div>

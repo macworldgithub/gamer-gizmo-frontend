@@ -8,8 +8,7 @@ interface layoutProps {
   children: React.ReactNode;
 }
 
-const LoginLayout = ({  }: layoutProps) => {
-
+const LoginLayout = ({}: layoutProps) => {
   return (
     <>
       <PageHeader pageName="Login" />

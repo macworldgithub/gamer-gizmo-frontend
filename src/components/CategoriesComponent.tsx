@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -51,8 +49,8 @@ const CategoriesComponent = () => {
   ];
 
   return (
-    <div className="mb-36 max-md:mb-12 text-black">
-      <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative  py-12 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[52rem]">
+    <div className="mb-36 max-md:mb-0 text-black">
+      <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative py-12 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[52rem]">
         <h1 className=" text-center md:text-[1.5rem] font-bold">
           Level Up Your Gaming Gear - Buy, Sell, and
         </h1>
@@ -64,11 +62,11 @@ const CategoriesComponent = () => {
         <Wrapper>
           <div className="w-full mx-auto bg-white dark:bg-black dark:text-white text-black shadow-lg rounded-xl max-lg:p-2 md:p-6 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center md:items-center max-md:items-center gap-6">
             {/* Left Section */}
-            <div className="flex-1 justify-start md:px-8 ">
+            <div className="flex-1 justify-start md:px-8 lg:ml-16 max-md:px-4 ">
               <h2 className="text-xl font-bold text-purple-700 mb-4">
                 Post your Ad on GamerGizmo
               </h2>
-              <ul className="text-sm space-y-2 mb-6">
+              <ul className="text-sm space-y-2 mb-4">
                 <li className="flex items-center  gap-2">
                   <span className="text-secondaryColorDark">✔</span>
                   Post your Ad for Free in 3 Easy Steps
@@ -82,20 +80,20 @@ const CategoriesComponent = () => {
                   Get Genuine offers from Verified Buyers
                 </li>
               </ul>
-              <button className="bg-custom-gradient text-white py-2 px-6 rounded-full hover:opacity-90">
+              <button className="bg-custom-gradient text-white py-2 text-sm px-4 rounded-full hover:opacity-90">
                 Post Your Ad
               </button>
             </div>
 
             {/* Separator */}
-            <div className="flex lg:flex-col md:mx-auto items-center">
+            <div className="flex lg:flex-col md:mx-auto items-center ">
               <div className="lg:w-px lg:h-16 w-28 h-px  bg-gray-300"></div>
               <div className="text-gray-500 font-medium my-2">Or</div>
               <div className="lg:w-px lg:h-16 w-28 h-px bg-gray-300"></div>
             </div>
 
             {/* Right Section */}
-            <div className="flex-1 justify-start md:px-8 lg:ml-16 max-md:pl-8">
+            <div className="flex-1 justify-start md:px-8 lg:ml-16 max-md:px-4 ">
               <h2 className="text-xl font-bold text-purple-700 mb-4">
                 Try GamerGizmo Sell For Me
               </h2>
@@ -113,7 +111,7 @@ const CategoriesComponent = () => {
                   Dedicated Sales Expert to sell your Component
                 </li>
               </ul>
-              <button className="bg-custom-gradient text-white py-2 mb-2 px-8  rounded-full hover:opacity-90">
+              <button className="bg-custom-gradient text-white py-2 mb-2 px-4 text-sm  rounded-full hover:opacity-90">
                 Buy For GamerGizmo
               </button>
             </div>
@@ -145,8 +143,8 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      <Wrapper className="">
-        <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto bg-white dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto mt-72 max-sm:mt-10">
+      <Wrapper className="md:mt-20 max-md:m-0">
+        <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto bg-white dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto md:mt-72 max-sm:mt-10">
           <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
               GamerGizmo Offering
@@ -166,8 +164,6 @@ const CategoriesComponent = () => {
           </div>
 
           {isSmallScreen ? (
-            
-
             <Swiper
               pagination={{
                 clickable: true,
@@ -176,8 +172,8 @@ const CategoriesComponent = () => {
               }}
               modules={[Pagination]}
               className="mySwiper"
-              spaceBetween={10} 
-              slidesPerView={4} 
+              spaceBetween={10}
+              slidesPerView={4}
             >
               {offeringList.map((item, index) => (
                 <SwiperSlide key={index} className="flex justify-center">

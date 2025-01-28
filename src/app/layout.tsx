@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script"; // Import Script from next/script
 import "./globals.css";
-import ClientProvider from "./Client/ClientProvider";
+import StoreProvider from "../components/Store/StoreProvider";
 import UiLayout from "./layout/UiLayout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -71,9 +71,9 @@ export default function RootLayout({
           pauseOnHover={true}
           draggable={true}
         />
-        <ClientProvider>
+        <StoreProvider>
           <UiLayout>{children}</UiLayout>
-        </ClientProvider>
+        </StoreProvider>
       </body>
     </html>
   );

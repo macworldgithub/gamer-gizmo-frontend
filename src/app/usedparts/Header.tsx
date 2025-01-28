@@ -131,15 +131,15 @@ const Header = () => {
       <PageHeader pageName="Used-Gaming-PC-Parts" title="Gaming PCs Parts" />
 
       {/* Main Content */}
-      <div className=" py-28 bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
-        <div className="flex flex-col md:flex-row relative justify-around items-center max-w-6xl mx-auto space-y-8 md:space-y-0">
-          <div className=" md:absolute -top-44  ">
+      <div className=" lg:py-28 max-lg:py-4 bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
+        <div className="flex flex-col lg:flex-row relative justify-around items-center max-w-6xl mx-auto space-y-8 md:space-y-0">
+          <div className=" lg:absolute -top-44 lg:mt-3">
             <SelectLabels />
           </div>
           {/* Free Ad Section */}
-          <div className="dark:bg-secondaryBlack dark:text-white  text-gray-800  flex justify-center gap-4 max-md:flex-col max-md:items-center">
+          <div className="dark:bg-secondaryBlack  dark:text-white text-gray-800  flex justify-center gap-3 max-md:flex-col max-md:items-center">
             <div className="text-center">
-              <div className="flex justify-center mb-3">
+              <div className="flex justify-center mb-3  ">
                 <Image
                   src="/images/adds.png"
                   alt="Free Ad"
@@ -201,18 +201,6 @@ const Header = () => {
         </div>
       </div>
       <div className="py-10  dark:bg-black">
-        {/* ya chat gpt wala ha  */}
-        <div className="flex flex-col md:flex-row items-center justify-between px-4 max-w-7xl mx-auto mb-10 space-y-4 md:space-y-0">
-          {/* Heading Section */}
-          {/* <div className="text-center md:text-left">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Popular in New Gaming PC Parts
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Choose your necessary parts from the available categories
-            </p>
-          </div> */}
-        </div>
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
             {/* Product Grid */}

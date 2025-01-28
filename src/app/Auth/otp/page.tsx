@@ -1,6 +1,6 @@
 "use client";
-import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
+import axiosInstance from "@/app/utils/axios";
 import { useState, useRef, FormEvent, use, useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -43,20 +43,15 @@ export default function OtpScreen() {
     if (enteredOtp.length === otp.length) {
       try {
         // Post the entered OTP to the API
-        const response = await axios.post(
-          otpUrl,
-          { email, otp: enteredOtp },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await axiosInstance.post(otpUrl, {
+          email,
+          otp: enteredOtp,
+        });
 
-        if (response.status === 200 || 2001) {
+        if (response.status === 200 || response.status === 201) {
           toast.success("OTP verified successfully!");
           setTimeout(() => {
-            router.push("/");
+            router.push("/Auth/login");
           }, 3000);
         } else {
           toast.error(response.data.message || "OTP verification failed");
@@ -74,7 +69,7 @@ export default function OtpScreen() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+    <div className="w-full flex flex-col items-center justify-center h-auto max-md:my-14 max-md:py-24  md:my-20  md:py-20 bg-gray-50 px-4">
       <div
         className="bg-white shadow-lg rounded-lg p-8 max-w-3xl
        w-full"
@@ -87,7 +82,7 @@ export default function OtpScreen() {
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <div className="flex justify-center gap-3">
+          <div className="flex justify-center gap-3 max-md:gap-2">
             {otp.map((value, index) => (
               <input
                 key={index}
