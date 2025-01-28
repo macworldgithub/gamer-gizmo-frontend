@@ -95,5 +95,9 @@ body {
 }
 
 .animate-slide-right-to-left {
-  animation: slideRightToLeft 2s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Stronger easing for a more dynamic effect */
+  animation: slideRightToLeft 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.custom-toast-info .Toastify__toast-icon--info {
+  color: #dc39fc !important;
 }

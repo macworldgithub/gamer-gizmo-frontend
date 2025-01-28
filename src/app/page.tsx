@@ -24,6 +24,8 @@ export default function HomePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          progressClassName: "",
+          className: "custom-toast-info",
         }
       );
     }
