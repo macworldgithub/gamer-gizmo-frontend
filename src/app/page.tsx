@@ -9,7 +9,7 @@ import PopularMainSection from "@/components/PopularMainSection";
 
 export default function HomePage() {
   return (
-    <div className="overflow-x-hidden dark:bg-[#0D0D12]">
+    <div className="overflow-x-hidden  dark:bg-[#0D0D12]">
       <MobileCategories />
       <FilterSection />
       <CategoriesComponent />
