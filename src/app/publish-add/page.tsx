@@ -186,10 +186,10 @@ const PublishAdd: React.FC = () => {
           "http://localhost:4001/component-category/getAll"
         );
 
-        console.log("Response received:", response); // Debugging log for raw response
+        console.log("Response received:", response);
         const result = await response.json();
 
-        console.log("Parsed response JSON:", result); // Debugging log for parsed JSON
+        console.log("Parsed response JSON:", result);
         if (result?.data) {
           console.log(
             "Component categories fetched successfully:",
@@ -197,15 +197,14 @@ const PublishAdd: React.FC = () => {
           ); // Debugging log for the fetched data
           setComponentCategories(result.data);
         } else {
-          console.error("Unexpected API response structure:", result); // Debugging error log
-          throw new Error("Unexpected API response");
+          console.error("Unexpected API response structure:", result);
         }
       } catch (error) {
         setCategoryError("Failed to load component categories");
-        console.error("Error occurred while fetching categories:", error); // Debugging error log
+        console.error("Error occurred while fetching categories:", error);
       } finally {
         setLoadingCategories(false);
-        console.log("Fetch operation completed."); // Debugging log for completion
+        console.log("Fetch operation completed.");
       }
     };
 
