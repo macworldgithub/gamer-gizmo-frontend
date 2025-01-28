@@ -39,7 +39,7 @@ export default function Home() {
         </p>
       </div>
       <div className=" border flex flex-col  h-4/6 overflow-y-auto mt-10 ml-40 rounded-b-3xl rounded-t-3xl">
-        <div className="flex justify-center items-center p-4 ">
+        <div className="flex justify-between items-center p-4 ">
           <h2 className="text-xl font-semibold ">All Favorites</h2>
           <button className="text-blue-600 text-sm ">+ Create list</button>
         </div>
