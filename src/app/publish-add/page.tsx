@@ -40,12 +40,11 @@ const PublishAdd: React.FC = () => {
   const [selectModel, setSelectedModel] = useState(0);
   const [activeStep, setActiveStep] = useState<number>(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
-  const [detailData, setDetailData] = useState<Record<string, any>>({});
-  const [itemCondition, setItemCondition] = useState<string>("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [models, setModels] = useState<Model[]>([]);
   const [componentCategories, setComponentCategories] = useState([]);
+  
   const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
   const [loadingBrands, setLoadingBrands] = useState<boolean>(false);
   const [loadingModels, setLoadingModels] = useState<boolean>(false);
@@ -85,7 +84,7 @@ const PublishAdd: React.FC = () => {
   };
   const fetchComponentCategories = async () => {
     try {
-      const response = await axios(
+      const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/component-category/getAll`,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -194,26 +193,9 @@ const PublishAdd: React.FC = () => {
       [field]: value,
     }));
   };
-  const handleDetailChange = (field: string, value: any) => {
-    setDetailData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
+  
 
-  const handleItemConditionChange = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    setItemCondition(event.target.value as string);
-    handleFormChange("itemCondition", event.target.value);
-  };
-  const handleCategoryChange = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    console.log(event, "event");
-    // setSelectedComponentCategories(event.target.value);
-    // handleFormChange("itemCondition", event.target.value);
-  };
+
 
   const steps = [
     {
@@ -303,8 +285,8 @@ const PublishAdd: React.FC = () => {
             label="Title"
             variant="outlined"
             fullWidth
-            value={detailData.title || ""}
-            onChange={(e) => handleDetailChange("title", e.target.value)}
+            value={formData.title || ""}
+            onChange={(e) => handleFormChange("title", e.target.value)}
           />
           <TextField
             label="Description"
@@ -312,8 +294,8 @@ const PublishAdd: React.FC = () => {
             fullWidth
             multiline
             rows={4}
-            value={detailData.description || ""}
-            onChange={(e) => handleDetailChange("description", e.target.value)}
+            value={formData.description || ""}
+            onChange={(e) => handleFormChange("description", e.target.value)}
           />
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
@@ -321,10 +303,10 @@ const PublishAdd: React.FC = () => {
               <Select
                 labelId="condition-select-label"
                 id="condition-select"
-                value={itemCondition}
+                value={formData.condition}
                 label="Condition"
                 //@ts-ignore
-                onChange={(e) => setItemCondition(e.target.value)}
+                onChange={(e) => handleFormChange("condition",e.target.value)}
               >
                 <MenuItem value="new">New</MenuItem>
                 <MenuItem value="used">Used</MenuItem>
