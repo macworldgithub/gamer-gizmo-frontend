@@ -97,13 +97,15 @@ const PopularItemSection: React.FC<SectionProps> = ({
                   }`}
                 >
                   <div className="relative w-full h-40 max-sm:h-[2.2rem]">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
-                      alt={product.name}
-                      layout="fill"
-                      objectFit="contain"
-                      className="rounded-t-lg mx-auto"
-                    />
+                    {product?.images && (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
+                        alt={product.name}
+                        layout="fill"
+                        objectFit="contain"
+                        className="rounded-t-lg mx-auto"
+                      />
+                    )}
                   </div>
 
                   <div className="p-3  max-sm:pt-0">
@@ -114,10 +116,15 @@ const PopularItemSection: React.FC<SectionProps> = ({
                       {product.description}
                     </p>
                     <p className="text-purple-500 font-bold mt-2 sm:mt-1 max-sm:mt-0   max-sm:text-[0.4rem]">
-                      {product.price}
+                      {product.price} AED
                     </p>
-                    <button className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black text-gray-500 mt-2 max-sm:mt-0 w-[4rem] py-1 rounded-full text-xs hover:bg-purple-600 max-md:w-[3rem] max-sm:h-4 max-md:py-0.5 max-sm:w-[2.1rem] max-sm:py-0.1 max-sm:text-[0.6rem]">
-                      Buy
+                    <button
+                      onClick={() => {
+                        router.push(`/product-details/${product.id}`);
+                      }}
+                      className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 max-sm:mt-0 px-3 py-1 rounded-full text-xs hover:bg-purple-600 max-md:w-[3rem] max-sm:h-4 max-md:py-0.5 max-sm:w-[2.1rem] max-sm:py-0.1 max-sm:text-[0.6rem]"
+                    >
+                      View Details
                     </button>
                   </div>
                 </div>

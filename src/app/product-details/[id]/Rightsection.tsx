@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-const Rightsection = () => {
+const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
 
   const handleIncrement = () => setQuantity(quantity + 1);
@@ -17,7 +17,7 @@ const Rightsection = () => {
       <div className=" h-64 border-gray-300 rounded-lg p-6 w-64 bg-white shadow-md flex flex-col justify-between dark:bg-black">
         {/* Price Heading */}
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
-          AED 551.00
+          AED {data.price}
         </h1>
 
         {/* Horizontal Divider */}
@@ -90,8 +90,12 @@ const Rightsection = () => {
           />
           {/* Seller Name and Member Since */}
           <div className="text-left">
-            <p className="text-gray-800 font-semibold dark:text-white">Shamsher Alikhan</p>
-            <p className="text-gray-500 text-sm dark:text-[#969696]">Member Since Nov 26, 2022</p>
+            <p className="text-gray-800 font-semibold dark:text-white">
+              Shamsher Alikhan
+            </p>
+            <p className="text-gray-500 text-sm dark:text-[#969696]">
+              Member Since Nov 26, 2022
+            </p>
           </div>
         </div>
 

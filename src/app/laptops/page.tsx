@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div>
       <div className="w-full">
-        <PageHeader pageName="Laptops" title="laptops" />
+        <PageHeader pageName="Laptops" title="Laptops" />
         <LaptopHeroSection />
       </div>
     </div>

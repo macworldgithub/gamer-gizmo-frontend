@@ -12,20 +12,23 @@ import Link from "next/link";
 import SpecificationsTable from "./specification";
 import Buynow from "./buynow";
 import Sellersdetails from "./sellersdetail";
+import { formatDate } from "@/app/utils/formatDate";
 
-const ProductDetails = () => {
+const ProductDetails = ({ data }: any) => {
   const [activeTab, setActiveTab] = useState("overview"); // State to track active tab
-
+  console.log(data, "ppo");
   return (
     <div className="w-full flex flex-col justify-center items-center">
       {/* Image Section */}
       <div className="w-full flex justify-center items-center h-auto">
-        <Image
-          src="/images/graphicCard.png"
-          alt="graphic-card"
-          width={600}
-          height={400}
-        />
+        {data?.product_images && (
+          <Image
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.product_images[0]?.image_url}`}
+            alt="image"
+            width={600}
+            height={400}
+          />
+        )}
       </div>
 
       {/* Details Section */}
@@ -49,7 +52,7 @@ const ProductDetails = () => {
                   <i className="fas fa-calendar-alt"></i>
                 </div>
                 <div className="text-gray-700 font-medium dark:text-white">
-                  05 Jan 2022
+                  {formatDate(data.created_at)}
                 </div>
               </div>
 
@@ -66,21 +69,17 @@ const ProductDetails = () => {
           </div>
           <div className="flex flex-col items-start">
             <p className="text-sm md:text-xl max-md:text-[0.9rem] font-bold text-gray-800 mb-4 dark:text-white">
-              AMD Radeon RX 580 GTS XXX Edition Graphics Card, S Version, 8GB
-              DDR5 256 Bit Memory, Dual Bios, 2304 Stream Processor, 1386MHz
-              OC+, PCI-E, HDMI, DisplayPort | RX-58085D6
+              {data.name}
             </p>
             <p className="text-sm text-gray-500 mt-2 text-start dark:text-[#616161]">
-              <span className="font-semibold">Warranty:</span> 1 Year &nbsp;
-              <span>
-                Effortless warranty claims with global coverage; shipping costs
-                are on us.
-              </span>
+              <span className="font-semibold">Warranty:</span> 1 Year &nbsp;{" "}
+              <br />
+              <span>{data.description}</span>
             </p>
           </div>
         </div>
 
-        <Buynow />
+        <Buynow data={data}/>
 
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">

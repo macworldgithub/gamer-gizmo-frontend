@@ -8,11 +8,28 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 
 export default function SelectLabels() {
   const dropdownOptions = [
-    { label: "Processor", options: ["mouse", "keyboard"] },
-    { label: "New Items", options: ["New items", "used items"] },
+    {
+      label: "Processor",
+      options: ["Core i3", "Core i5", "Core i7", "Core i9", "AMD Ryzen 3"],
+    },
+    { label: "Condition", options: ["New", "Used"] },
     { label: "Model", options: ["Gaming", "Electronics"] },
-    { label: "Price Range", options: ["Low to High", "High to Low"] },
-    { label: "Location", options: ["Lahore", "Karachi"] },
+    {
+      label: "Price Range",
+      options: ["Below 500$", "$500-$1000", "$1000-$1500"],
+    },
+    {
+      label: "Location",
+      options: [
+        "Abu Dhabi",
+        "Ajman",
+        "Dubai",
+        "Sharjah",
+        "Ras Al Khaimah",
+        "Fujairah",
+        "Umm Al Quwain",
+      ],
+    },
   ];
 
   const [selectedValues, setSelectedValues] = useState(
