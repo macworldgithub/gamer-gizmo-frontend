@@ -98,7 +98,7 @@ const BottomNavigationBar = () => {
     {
       icon: <FaCartPlus />,
       key: "3",
-      label: "Cart",
+      label: <Link href="/Add_to_cart">Cart</Link>,
     },
     {
       key: "4",
