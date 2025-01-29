@@ -159,17 +159,6 @@ const PublishAdd: React.FC = () => {
       ),
     },
     {
-      label: "Brand Selection",
-      content: (
-        <BrandSelection
-          selectCategory={selectCategory}
-          setComponentCategories={setComponentCategories}
-          setSelectedBrand={setSelectedBrand}
-          selectBrand={selectBrand}
-        />
-      ),
-    },
-    {
       label: "Details",
       content: (
         <DetailSection
@@ -178,6 +167,9 @@ const PublishAdd: React.FC = () => {
           setSelectedModel={setSelectedModel}
           selectBrand={selectBrand}
           formData={formData}
+          selectCategory={selectCategory}
+          setSelectedBrand={setSelectedBrand}
+          setComponentCategories={setComponentCategories}
         />
       ),
     },
