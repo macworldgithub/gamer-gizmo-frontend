@@ -6,49 +6,48 @@ import MoreSpecification from "@/components/Publish-add/MoreSpecification";
 import PriceComponent from "@/components/Publish-add/PriceComponent";
 import UploadImages from "@/components/Publish-add/UploadImages";
 import { RootState } from "@/components/Store/Store";
-import {
-  Button,
-  Step,
-  StepLabel,
-  Stepper,
-} from "@mui/material";
+import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import { UploadFile } from "antd";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-
 const PublishAdd: React.FC = () => {
-  const [selectComponentCategory, setSelectedComponentCategory] = useState();
-  const [selectCategory, setSelectedCategory] = useState({id:0,name:""});
-  const [selectBrand, setSelectedBrand] = useState({id:0,name:""});
-  const [selectModel, setSelectedModel] = useState({id:0,name:""});
+  const [selectComponentCategory, setSelectedComponentCategory] = useState({
+    id: 0,
+    name: "",
+  });
+  const router = useRouter();
+  const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
+  const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
+  const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [price,setPrice]=useState("10")
-  const [quantity,setQuantity]=useState("10")
+  const [price, setPrice] = useState("0");
+  const [quantity, setQuantity] = useState("0");
   const [formData, setFormData] = useState<Record<string, any>>({
     processor: "",
-  processor_type: "",
-  ram: "",
-  storage: "",
-  screenSize: "",
-  screenResolution: "",
-  weight: "",
-  title:"",
-  condition:"",
-  description:"",
-  graphics: "",
-  ports: "",
-  batteryLife: "",
-  color: "",
-  component_text: "",
+    processor_type: "",
+    ram: "",
+    os: "",
+    storage: "",
+    screenSize: "",
+    screenResolution: "",
+    weight: "",
+    title: "",
+    condition: "",
+    description: "",
+    graphics: "",
+    ports: "",
+    batteryLife: "",
+    color: "",
+    component_text: "",
   });
   const [componentCategories, setComponentCategories] = useState([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const token = useSelector((state: RootState) => state.user.token);
-
- 
-
+  const id = useSelector((state: RootState) => state.user.id);
 
   const handleNext = () => {
     if (activeStep === 0 && !selectCategory.id) {
@@ -59,16 +58,26 @@ const PublishAdd: React.FC = () => {
       toast.error("Please select a brand before proceeding.");
       return false;
     }
-    if (activeStep === 2 && (!formData.title|| !formData.description|| !formData.condition|| !selectModel) ) {
+    if (
+      activeStep === 2 &&
+      (!formData.title ||
+        !formData.description ||
+        !formData.condition ||
+        !selectModel)
+    ) {
       toast.error("Please provide all the following details.");
       return false;
     }
+    if (activeStep === 4 && (price == "0" || quantity == "0")) {
+      toast.error("Please provide all the following details.");
+      return false;
+    }
+    if (activeStep === 5 && fileList.length < 3) {
+      toast.error("Atleast Upload 3 Images");
+      return false;
+    }
+
     setActiveStep((prevStep) => prevStep + 1);
-    // }else if(activeStep==1){
-    //   if(formData.category){
-    //     setActiveStep((prevStep) => prevStep + 1);
-    //   }
-    // }
   };
 
   const handleBack = () => {
@@ -81,30 +90,108 @@ const PublishAdd: React.FC = () => {
       [field]: value,
     }));
   };
-  
+
+  const handleSubmit = async () => {
+    let formDataObject = new FormData();
+
+    formDataObject.append("name", formData.title);
+    // @ts-ignore
+    formDataObject.append("user_id", id.toString());
+    formDataObject.append("description", formData.description);
+    formDataObject.append("price", price.toString());
+    formDataObject.append("stock", quantity.toString());
+    formDataObject.append("brand_id", selectBrand.id.toString());
+    formDataObject.append("model_id", selectModel.id.toString());
+    formDataObject.append("category_id", selectCategory.id.toString());
+    formDataObject.append("condition", formData.condition);
+    formDataObject.append("is_published", "true");
+
+    if (selectCategory?.name === "Components") {
+      formDataObject.append(
+        "component_type",
+        selectComponentCategory?.name || ""
+      );
+      formDataObject.append("text", formData.component_text);
+    } else {
+      formDataObject.append("ram", formData.ram);
+      formDataObject.append("processor", formData.processor);
+      formDataObject.append("processorType", formData.processor_type);
+      formDataObject.append("storage", formData.storage);
+      formDataObject.append("graphics", formData.graphics);
+      formDataObject.append("ports", formData.ports);
+      formDataObject.append("os", formData.os);
+      formDataObject.append("battery_life", formData.batteryLife);
+      formDataObject.append("screen_size", formData.screenSize);
+      formDataObject.append("weight", formData.weight);
+      formDataObject.append("screen_resolution", formData.screenResolution);
+      formDataObject.append("color", formData.color);
+    }
+    // @ts-ignore
+    formDataObject.append("images", fileList);
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/createProduct`,
+        formDataObject,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if ((response.status = 200)) {
+        toast.success("Product Added Sucessfully");
+        router.push("/publish-add");
+      }
+    } catch (err) {
+      toast.error("Error");
+      console.log("Error", err);
+    }
+  };
+
   const steps = [
     {
       label: "Category Selection",
       content: (
-        <CategorySelection selectCategory={selectCategory} setSelectedCategory={setSelectedCategory}/>
+        <CategorySelection
+          selectCategory={selectCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
       ),
     },
     {
       label: "Brand Selection",
       content: (
-        <BrandSelection selectCategory={selectCategory} setComponentCategories={setComponentCategories} setSelectedBrand={setSelectedBrand} selectBrand={selectBrand}/>
+        <BrandSelection
+          selectCategory={selectCategory}
+          setComponentCategories={setComponentCategories}
+          setSelectedBrand={setSelectedBrand}
+          selectBrand={selectBrand}
+        />
       ),
     },
     {
       label: "Details",
       content: (
-        <DetailSection handleFormChange={handleFormChange} selectModel={selectModel} setSelectedModel={setSelectedModel} selectBrand={selectBrand} formData={formData}/>
+        <DetailSection
+          handleFormChange={handleFormChange}
+          selectModel={selectModel}
+          setSelectedModel={setSelectedModel}
+          selectBrand={selectBrand}
+          formData={formData}
+        />
       ),
     },
     {
       label: "More Specifications",
       content: (
-       <MoreSpecification selectCategory={selectCategory} formData={formData} handleFormChange={handleFormChange} selectComponentCategory={selectComponentCategory} setSelectedComponentCategory={setSelectedComponentCategory} componentCategories={componentCategories} />
+        <MoreSpecification
+          selectCategory={selectCategory}
+          formData={formData}
+          handleFormChange={handleFormChange}
+          selectComponentCategory={selectComponentCategory}
+          setSelectedComponentCategory={setSelectedComponentCategory}
+          componentCategories={componentCategories}
+        />
       ),
     },
 
@@ -112,7 +199,12 @@ const PublishAdd: React.FC = () => {
       label: "Set Price",
       content: (
         <div className="flex flex-col space-y-4">
-          <PriceComponent price={price} setPrice={setPrice} quantity={quantity} setQuantity={setQuantity}/>
+          <PriceComponent
+            price={price}
+            setPrice={setPrice}
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
         </div>
       ),
     },
@@ -120,53 +212,117 @@ const PublishAdd: React.FC = () => {
       label: "Upload Images",
       content: (
         <div className="flex  justify-center items-center ">
-         <UploadImages fileList={fileList} setFileList={setFileList}/>
+          <UploadImages fileList={fileList} setFileList={setFileList} />
         </div>
       ),
     },
     {
       label: "Review",
       content: (
-        <div className="text-center text-black">
-        <h2 className="text-lg font-bold">Review Your Details</h2>
-        <div className="text-left space-y-4 mt-4">
-          <p>
-            <strong>Category:</strong> {selectCategory?.name || "Not selected"}
-          </p>
-          <p>
-            <strong>Brand:</strong> {selectBrand?.name || "Not selected"}
-          </p>
-          <p>
-            <strong>Model:</strong> {selectModel?.name || "Not selected"}
-          </p>
-          <p>
-            <strong>Details:</strong> {formData?.details || "Not provided"}
-          </p>
-          <p>
-            <strong>Specifications:</strong>{" "}
-            {formData.specifications || "Not provided"}
-          </p>
-          <p>
-            <strong>Price:</strong> {formData?.price || "Not provided"}
-          </p>
-          <div>
-            <strong>Images:</strong>
-            <div className="grid grid-cols-3 gap-4 mt-2">
-              {fileList.map((file, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(file.originFileObj as Blob)}
-                  alt={`Uploaded ${index + 1}`}
-                  className="w-full h-32 object-cover rounded"
-                />
-              ))}
+        <div className="p-6 bg-white rounded shadow-md text-black">
+          <h2 className="text-2xl font-bold mb-4">Review Your Details</h2>
+          <div className="space-y-3">
+            <p>
+              <strong>Category:</strong>{" "}
+              {selectCategory?.name || "Not selected"}
+            </p>
+            <p>
+              <strong>Brand:</strong> {selectBrand?.name || "Not selected"}
+            </p>
+            <p>
+              <strong>Model:</strong> {selectModel?.name || "Not selected"}
+            </p>
+            <p>
+              <strong>Title:</strong> {formData.title || "Not provided"}
+            </p>
+            <p>
+              <strong>Description:</strong>{" "}
+              {formData.description || "Not provided"}
+            </p>
+            <p>
+              <strong>Condition:</strong> {formData.condition || "Not provided"}
+            </p>
+            <p>
+              <strong>Price:</strong> {price || "Not provided"}
+            </p>
+            <p>
+              <strong>Quantity:</strong> {quantity || "Not provided"}
+            </p>
+            {["Laptops", "Desktops"].includes(selectCategory.name) && (
+              <>
+                <p>
+                  <strong>Processor:</strong>{" "}
+                  {formData.processor || "Not provided"}
+                </p>
+                <p>
+                  <strong>Processor Type:</strong>{" "}
+                  {formData.processor_type || "Not provided"}
+                </p>
+                <p>
+                  <strong>RAM:</strong> {formData.ram || "Not provided"}
+                </p>
+                <p>
+                  <strong>Storage:</strong> {formData.storage || "Not provided"}
+                </p>
+                <p>
+                  <strong>Screen Size:</strong>{" "}
+                  {formData.screenSize || "Not provided"}
+                </p>
+                <p>
+                  <strong>Screen Resolution:</strong>{" "}
+                  {formData.screenResolution || "Not provided"}
+                </p>
+                <p>
+                  <strong>Weight:</strong> {formData.weight || "Not provided"}
+                </p>
+
+                <p>
+                  <strong>Graphics:</strong>{" "}
+                  {formData.graphics || "Not provided"}
+                </p>
+                <p>
+                  <strong>Ports:</strong> {formData.ports || "Not provided"}
+                </p>
+                <p>
+                  <strong>Battery Life:</strong>{" "}
+                  {formData.batteryLife || "Not provided"}
+                </p>
+                <p>
+                  <strong>Color:</strong> {formData.color || "Not provided"}
+                </p>
+              </>
+            )}
+            {selectCategory?.name === "Components" && (
+              <>
+                <p>
+                  <strong>Component Category:</strong>{" "}
+                  {selectComponentCategory || "Not provided"}
+                </p>
+                <p>
+                  <strong>Component Text:</strong>{" "}
+                  {formData.component_text || "Not provided"}
+                </p>
+              </>
+            )}
+
+            <div>
+              <strong>Uploaded Images:</strong>
+              <div className="grid grid-cols-3 gap-4 mt-2">
+                {fileList.map((file, index) => (
+                  <img
+                    key={index}
+                    src={URL.createObjectURL(file.originFileObj as Blob)}
+                    alt={`Uploaded ${index + 1}`}
+                    className="w-full h-32 object-cover rounded"
+                  />
+                ))}
+              </div>
             </div>
           </div>
+          <p className="text-gray-500 mt-4">
+            Ensure all details are correct before submitting.
+          </p>
         </div>
-        <p className="text-gray-500 dark:text-white mt-4">
-          Make sure all details are correct before publishing.
-        </p>
-      </div>
       ),
     },
   ];
@@ -186,7 +342,11 @@ const PublishAdd: React.FC = () => {
           Back
         </Button>
         {activeStep === steps.length - 1 ? (
-          <Button variant="contained" color="primary">
+          <Button
+            onClick={() => handleSubmit()}
+            variant="contained"
+            color="primary"
+          >
             Publish
           </Button>
         ) : (
