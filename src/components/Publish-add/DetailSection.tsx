@@ -111,9 +111,25 @@ const DetailSection = ({
     fetchModels();
   }, [selectBrand, token]);
 
+  const inputStyles = {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": { borderColor: "#ccc" }, // Default border
+      "&:hover fieldset": { borderColor: "#dc39fc" }, // Hover effect
+      "&.Mui-focused fieldset": { borderColor: "#dc39fc" }, // Focus effect
+    },
+
+    "& .MuiInputLabel-root": {
+      color: "#dc39fc", // Label color when focused
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "#dc39fc", // Label color when focused (purple)
+      // Move label upward
+    },
+  };
   return (
     <div className="flex text-black  flex-col space-y-4">
       <TextField
+        sx={inputStyles}
         label="Title"
         variant="outlined"
         fullWidth
@@ -121,6 +137,7 @@ const DetailSection = ({
         onChange={(e) => handleFormChange("title", e.target.value)}
       />
       <TextField
+        sx={inputStyles}
         label="Description"
         variant="outlined"
         fullWidth
@@ -130,9 +147,10 @@ const DetailSection = ({
         onChange={(e) => handleFormChange("description", e.target.value)}
       />
       <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={inputStyles}>
           <InputLabel id="brand-select-label">Brand</InputLabel>
           <Select
+            sx={inputStyles}
             labelId="brand-select-label"
             id="brand-select"
             value={selectBrand}
@@ -149,13 +167,14 @@ const DetailSection = ({
         </FormControl>
       </Box>
       <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={inputStyles}>
           <InputLabel id="condition-select-label">Condition</InputLabel>
           <Select
             labelId="condition-select-label"
             id="condition-select"
             value={formData.condition}
             label="Condition"
+            sx={inputStyles}
             //@ts-ignore
             onChange={(e) => handleFormChange("condition", e.target.value)}
           >
@@ -165,7 +184,7 @@ const DetailSection = ({
         </FormControl>
       </Box>
       <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={inputStyles}>
           <InputLabel id="model-select-label">Select Model</InputLabel>
           <Select
             labelId="model-select-label"
