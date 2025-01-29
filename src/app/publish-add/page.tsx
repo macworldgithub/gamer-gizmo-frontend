@@ -3,6 +3,7 @@ import CategorySelection from "@/components/Publish-add/CategorySelection";
 import DetailSection from "@/components/Publish-add/DetailSection";
 import MoreSpecification from "@/components/Publish-add/MoreSpecification";
 import PriceComponent from "@/components/Publish-add/PriceComponent";
+import ReviewSection from "@/components/Publish-add/ReviewSection";
 import UploadImages from "@/components/Publish-add/UploadImages";
 import { RootState } from "@/components/Store/Store";
 import { Button, Step, StepLabel, Stepper } from "@mui/material";
@@ -215,124 +216,51 @@ const PublishAdd: React.FC = () => {
     {
       label: "Review",
       content: (
-        <div className="p-6 bg-white rounded shadow-md text-black">
-          <h2 className="text-2xl font-bold mb-4">Review Your Details</h2>
-          <div className="space-y-3">
-            <p>
-              <strong>Category:</strong>{" "}
-              {selectCategory?.name || "Not selected"}
-            </p>
-            <p>
-              <strong>Brand:</strong> {selectBrand?.name || "Not selected"}
-            </p>
-            <p>
-              <strong>Model:</strong> {selectModel?.name || "Not selected"}
-            </p>
-            <p>
-              <strong>Title:</strong> {formData.title || "Not provided"}
-            </p>
-            <p>
-              <strong>Description:</strong>{" "}
-              {formData.description || "Not provided"}
-            </p>
-            <p>
-              <strong>Condition:</strong> {formData.condition || "Not provided"}
-            </p>
-            <p>
-              <strong>Price:</strong> {price || "Not provided"}
-            </p>
-            <p>
-              <strong>Quantity:</strong> {quantity || "Not provided"}
-            </p>
-            {["Laptops", "Desktops"].includes(selectCategory.name) && (
-              <>
-                <p>
-                  <strong>Processor:</strong>{" "}
-                  {formData.processor || "Not provided"}
-                </p>
-                <p>
-                  <strong>Processor Type:</strong>{" "}
-                  {formData.processor_type || "Not provided"}
-                </p>
-                <p>
-                  <strong>RAM:</strong> {formData.ram || "Not provided"}
-                </p>
-                <p>
-                  <strong>Storage:</strong> {formData.storage || "Not provided"}
-                </p>
-                <p>
-                  <strong>Screen Size:</strong>{" "}
-                  {formData.screenSize || "Not provided"}
-                </p>
-                <p>
-                  <strong>Screen Resolution:</strong>{" "}
-                  {formData.screenResolution || "Not provided"}
-                </p>
-                <p>
-                  <strong>Weight:</strong> {formData.weight || "Not provided"}
-                </p>
-
-                <p>
-                  <strong>Graphics:</strong>{" "}
-                  {formData.graphics || "Not provided"}
-                </p>
-                <p>
-                  <strong>Ports:</strong> {formData.ports || "Not provided"}
-                </p>
-                <p>
-                  <strong>Battery Life:</strong>{" "}
-                  {formData.batteryLife || "Not provided"}
-                </p>
-                <p>
-                  <strong>Color:</strong> {formData.color || "Not provided"}
-                </p>
-              </>
-            )}
-            {selectCategory?.name === "Components" && (
-              <>
-                <p>
-                  <strong>Component Category:</strong>
-
-                  {selectComponentCategory || "Not provided"}
-                </p>
-                <p>
-                  <strong>Component Text:</strong>{" "}
-                  {formData.component_text || "Not provided"}
-                </p>
-              </>
-            )}
-
-            <div>
-              <strong>Uploaded Images:</strong>
-              <div className="grid grid-cols-3 gap-4 mt-2">
-                {fileList.map((file, index) => (
-                  <img
-                    key={index}
-                    src={URL.createObjectURL(file.originFileObj as Blob)}
-                    alt={`Uploaded ${index + 1}`}
-                    className="w-full h-32 object-cover rounded"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <p className="text-gray-500 mt-4">
-            Ensure all details are correct before submitting.
-          </p>
-        </div>
+        <ReviewSection
+          selectCategory={selectCategory}
+          selectBrand={selectBrand}
+          selectModel={selectModel}
+          formData={formData}
+          price={price}
+          quantity={quantity}
+          fileList={fileList}
+          selectComponentCategory={selectComponentCategory?.name}
+        />
       ),
     },
   ];
 
-  return (
-    <div className="container mx-auto p-6">
-      <Stepper activeStep={activeStep} alternativeLabel>
+
+
+return (
+  <div className="container mx-auto p-6">
+    {/* Responsive Stepper */}
+    <div className="flex flex-wrap justify-center sm:flex-nowrap">
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        className="w-full sm:w-auto"
+        sx={{
+          flexWrap: "wrap",
+          "& .MuiStep-root": {
+            minWidth: "60px", // Prevent excessive width
+          },
+          "& .MuiStepConnector-root": {
+            display: { xs: "none", sm: "block" }, // Hide connectors on extra small screens
+          },
+        }}
+      >
         {steps.map((step, index) => (
           <Step key={index}>
             <StepLabel
               sx={{
                 "& .MuiStepIcon-root": {
+                  fontSize: "20px", // Smaller step icons
                   color: activeStep >= index ? "#dc39fc" : "#ccc",
+                },
+                "& .MuiStepLabel-label": {
+                  fontSize: { xs: "10px", sm: "14px" }, // Reduce label size
+                  fontWeight: "500",
                 },
               }}
             >
@@ -341,35 +269,45 @@ const PublishAdd: React.FC = () => {
           </Step>
         ))}
       </Stepper>
-      <div className="mt-8">{steps[activeStep].content}</div>
-      <div className="flex  justify-between mt-6">
-        <Button
-          disabled={activeStep === 0}
-          onClick={handleBack}
-          className="bg-gray-600 text-black"
-        >
-          Back
-        </Button>
-        {activeStep === steps.length - 1 ? (
-          <Button
-            onClick={() => handleSubmit()}
-            variant="contained"
-            color="primary"
-          >
-            Publish
-          </Button>
-        ) : (
-          <Button
-            variant="contained"
-            className="bg-custom-gradient"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
-        )}
-      </div>
     </div>
-  );
+
+    {/* Step Content */}
+    <div className="mt-8">{steps[activeStep].content}</div>
+
+    {/* Navigation Buttons */}
+    <div className="flex justify-between mt-6">
+      <Button
+        disabled={activeStep === 0}
+        onClick={handleBack}
+        className="bg-gray-600 text-black"
+      >
+        Back
+      </Button>
+      {activeStep === steps.length - 1 ? (
+        <Button
+          onClick={() => handleSubmit()}
+          variant="contained"
+          style={{
+            backgroundColor: "#dc39fc",
+            fontWeight: "bold",
+            fontSize: "15px",
+          }}
+        >
+          Publish
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          className="bg-custom-gradient"
+          onClick={handleNext}
+        >
+          Next
+        </Button>
+      )}
+    </div>
+  </div>
+);
+
 };
 
 export default PublishAdd;

@@ -145,7 +145,9 @@ const MoreSpecification = ({
           <div className="w-full text-center">
             <h2 className="text-lg font-bold">Select Component Type</h2>
             <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth  
+                          sx={inputStyles}
+              >
                 <InputLabel id="cat-select-label">Category</InputLabel>
                 <Select
                   labelId="cat-select-label"
@@ -154,6 +156,7 @@ const MoreSpecification = ({
                   label="Category"
                   //@ts-ignore
                   onChange={(e) => setSelectedComponentCategory(e.target.value)}
+                  sx={{color: "#000000"}}
                 >
                   {componentCategories &&
                     componentCategories.length > 0 &&
@@ -165,6 +168,7 @@ const MoreSpecification = ({
             </Box>
           </div>
           <TextField
+                      sx={inputStyles}
             label="text"
             variant="outlined"
             fullWidth
