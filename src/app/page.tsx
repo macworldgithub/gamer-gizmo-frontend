@@ -18,7 +18,7 @@ export default function HomePage() {
         "🚧 Our website is online, but some features are still under development. Stay tuned for updates! 🚀",
         {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 6000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

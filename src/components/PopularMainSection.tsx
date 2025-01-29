@@ -1,9 +1,32 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PopularItemSection from "./PopularItemSection";
 import Wrapper from "./Common/Wrapper/Wrapper";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "./Store/Store";
 
 const PopularMainSection: React.FC = () => {
+  const [LaptopUsedData, setLaptopUsedData] = useState([
+    {
+      id: 1,
+      name: "Radeon RX 580 OC...",
+      description: "Powerful graphics card for gaming...",
+      price: "AED 551.00",
+      images: ["/images/gpu.png"],
+    },
+  ]);
+  const [LaptopNewData, setLaptopNewData] = useState([
+    {
+      id: 1,
+      name: "Radeon RX 580 OC...",
+      description: "Powerful graphics card for gaming...",
+      price: "AED 551.00",
+      images: ["/images/gpu.png"],
+    },
+  ]);
+  const token = useSelector((state: RootState) => state.user.token);
+
   const gamingPCParts = [
     {
       id: 1,
@@ -82,10 +105,43 @@ const PopularMainSection: React.FC = () => {
       imageUrl: "/images/consoles5.png",
     },
   ];
+  console.log(LaptopUsedData, "LaptopUsedData");
+  const fetchUsedLaptops = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=used`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
+      setLaptopUsedData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  const fetchNewLaptops = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=new`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setLaptopNewData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+
+  useEffect(() => {
+    fetchUsedLaptops();
+    fetchNewLaptops();
+  }, []);
   return (
     <div className="h-auto w-full">
-      <PopularItemSection
+      {/* <PopularItemSection
         title="Popular in Used Gaming PC Parts"
         subtitle="Choose your necessary parts from this category."
         products={gamingPCParts}
@@ -112,11 +168,11 @@ const PopularMainSection: React.FC = () => {
         products={usedConsoles}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
-      />
+      /> */}
       <PopularItemSection
         title="Popular in Used Laptops"
         subtitle="Choose your necessary gaming items from this category."
-        products={usedConsoles}
+        products={LaptopUsedData}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
       />
@@ -124,7 +180,7 @@ const PopularMainSection: React.FC = () => {
         title="Popular in New Laptops"
         subtitle="Choose your necessary gaming items from this category."
         explorePath="/"
-        products={usedConsoles}
+        products={LaptopNewData}
         onExplore={() => console.log("Explore Used Consoles")}
       />
     </div>

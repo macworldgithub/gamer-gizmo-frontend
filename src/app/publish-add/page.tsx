@@ -1,5 +1,4 @@
 "use client";
-import BrandSelection from "@/components/Publish-add/BrandSelection";
 import CategorySelection from "@/components/Publish-add/CategorySelection";
 import DetailSection from "@/components/Publish-add/DetailSection";
 import MoreSpecification from "@/components/Publish-add/MoreSpecification";
@@ -126,14 +125,19 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("screen_resolution", formData.screenResolution);
       formDataObject.append("color", formData.color);
     }
-    // @ts-ignore
-    formDataObject.append("images", fileList);
+    if (fileList.length > 0) {
+      fileList.forEach((file) => {
+        console.log(file);
+        formDataObject.append("images", file.originFileObj as Blob);
+      });
+    }
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/createProduct`,
         formDataObject,
         {
           headers: {
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
         }
