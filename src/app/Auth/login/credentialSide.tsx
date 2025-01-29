@@ -188,7 +188,7 @@ const CredentialSide = () => {
         </div>
       </div>
       {showAccountsModal && (
-        <div className="absolute z-[9] backdrop-blur-sm top-0 left-0  overflow-hidden h-screen w-full flex justify-center items-center">
+        <div className="absolute z-[9] text-black  backdrop-blur-sm top-0 left-0  overflow-hidden h-screen w-full flex justify-center items-center">
           <div className="bg-white md:px-12 flex justify-center flex-col items-center py-10 rounded-xl shadow-xl px-4 w-fit">
             <h1 className="font-bold text-xl">Max Account Login Reached</h1>
             <div className="mt-4 ">
