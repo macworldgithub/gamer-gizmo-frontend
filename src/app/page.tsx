@@ -25,6 +25,7 @@ export default function HomePage() {
           draggable: true,
           progress: undefined,
           progressClassName: "",
+        
           className: "custom-toast-info",
         }
       );

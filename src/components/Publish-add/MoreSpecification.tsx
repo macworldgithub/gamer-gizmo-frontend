@@ -16,12 +16,28 @@ const MoreSpecification = ({
   setSelectedComponentCategory,
   componentCategories,
 }: any) => {
+  const inputStyles = {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": { borderColor: "#ccc" }, // Default border
+      "&:hover fieldset": { borderColor: "#dc39fc" }, // Hover effect
+      "&.Mui-focused fieldset": { borderColor: "#dc39fc" }, // Focus effect
+    },
+
+    "& .MuiInputLabel-root": {
+      color: "#dc39fc", // Label color when focused
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "#dc39fc", // Label color when focused (purple)
+      // Move label upward
+    },
+  };
   return (
     <div className="flex flex-col space-y-4">
       {/* Conditionally render additional fields based on the selected category */}
       {["Laptops", "Desktops"].includes(selectCategory.name) && (
         <>
           <TextField
+            sx={inputStyles}
             label="Processor"
             variant="outlined"
             fullWidth
@@ -29,6 +45,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("processor", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="Processor_type"
             variant="outlined"
             fullWidth
@@ -36,6 +53,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("processor_type", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="Os"
             variant="outlined"
             fullWidth
@@ -43,6 +61,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("os", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="RAM"
             variant="outlined"
             fullWidth
@@ -50,6 +69,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("ram", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="Storage"
             variant="outlined"
             fullWidth
@@ -57,6 +77,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("storage", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="Screen Size"
             variant="outlined"
             fullWidth
@@ -64,6 +85,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("screenSize", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="Screen Resolution"
             variant="outlined"
             fullWidth
@@ -73,6 +95,7 @@ const MoreSpecification = ({
             }
           />
           <TextField
+            sx={inputStyles}
             label="Weight"
             variant="outlined"
             fullWidth
@@ -80,6 +103,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("weight", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="Graphics"
             variant="outlined"
             fullWidth
@@ -87,6 +111,7 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("graphics", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
             label="Ports"
             variant="outlined"
             fullWidth
@@ -94,6 +119,8 @@ const MoreSpecification = ({
             onChange={(e) => handleFormChange("ports", e.target.value)}
           />
           <TextField
+            sx={inputStyles}
+            className="inputField"
             label="Battery Life"
             variant="outlined"
             fullWidth
@@ -102,6 +129,8 @@ const MoreSpecification = ({
           />
 
           <TextField
+            sx={inputStyles}
+            className="inputField"
             label="Color"
             variant="outlined"
             fullWidth

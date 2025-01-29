@@ -69,11 +69,6 @@ body {
 ::-webkit-scrollbar-track {
   background-color: #f0f0f0; /* Color of the scrollbar track */
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #6a0dad; /* Thumb color when hovered */
-}
-
 /* src/styles/global.css or src/styles/tailwind.css */
 .input-field {
   @apply p-3 bg-blueLight dark:bg-black rounded-md border border-bluishBorder dark:border-purple-700 focus:ring-2 focus:ring-purple-500 focus:outline-none;
@@ -100,5 +95,13 @@ body {
 }
 
 .custom-toast-info .Toastify__toast-icon--info {
+  color: #dc39fc !important;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: black !important;
+}
+
+.css-whm5qd-MuiStepLabel-root .MuiStepIcon-root {
   color: #dc39fc !important;
 }
