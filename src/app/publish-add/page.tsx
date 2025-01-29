@@ -159,17 +159,6 @@ const PublishAdd: React.FC = () => {
       ),
     },
     {
-      label: "Brand Selection",
-      content: (
-        <BrandSelection
-          selectCategory={selectCategory}
-          setComponentCategories={setComponentCategories}
-          setSelectedBrand={setSelectedBrand}
-          selectBrand={selectBrand}
-        />
-      ),
-    },
-    {
       label: "Details",
       content: (
         <DetailSection
@@ -178,6 +167,9 @@ const PublishAdd: React.FC = () => {
           setSelectedModel={setSelectedModel}
           selectBrand={selectBrand}
           formData={formData}
+          selectCategory={selectCategory}
+          setSelectedBrand={setSelectedBrand}
+          setComponentCategories={setComponentCategories}
         />
       ),
     },
@@ -333,7 +325,15 @@ const PublishAdd: React.FC = () => {
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((step, index) => (
           <Step key={index}>
-            <StepLabel>{step.label}</StepLabel>
+            <StepLabel
+              sx={{
+                "& .MuiStepIcon-root": {
+                  color: activeStep >= index ? "#dc39fc" : "#ccc",
+                },
+              }}
+            >
+              {step.label}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>

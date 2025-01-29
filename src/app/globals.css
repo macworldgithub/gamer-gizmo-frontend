@@ -96,7 +96,12 @@ body {
 
 .custom-toast-info .Toastify__toast-icon--info {
   color: #dc39fc !important;
+}
 
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: black !important;
+}
 
-
+.css-whm5qd-MuiStepLabel-root .MuiStepIcon-root {
+  color: #dc39fc !important;
 }
