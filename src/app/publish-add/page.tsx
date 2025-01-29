@@ -295,7 +295,8 @@ const PublishAdd: React.FC = () => {
             {selectCategory?.name === "Components" && (
               <>
                 <p>
-                  <strong>Component Category:</strong>{" "}
+                  <strong>Component Category:</strong>
+
                   {selectComponentCategory || "Not provided"}
                 </p>
                 <p>
@@ -337,8 +338,12 @@ const PublishAdd: React.FC = () => {
         ))}
       </Stepper>
       <div className="mt-8">{steps[activeStep].content}</div>
-      <div className="flex justify-between mt-6">
-        <Button disabled={activeStep === 0} onClick={handleBack}>
+      <div className="flex  justify-between mt-6">
+        <Button
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          className="bg-gray-600 text-black"
+        >
           Back
         </Button>
         {activeStep === steps.length - 1 ? (
@@ -350,7 +355,11 @@ const PublishAdd: React.FC = () => {
             Publish
           </Button>
         ) : (
-          <Button variant="contained" color="primary" onClick={handleNext}>
+          <Button
+            variant="contained"
+            className="bg-custom-gradient"
+            onClick={handleNext}
+          >
             Next
           </Button>
         )}
