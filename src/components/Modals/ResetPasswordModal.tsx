@@ -123,7 +123,7 @@ export default function ResetPasswordModal({
       onClose={() => setOpenPassModal(false)}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      className="flex justify-center items-center"
+      className="flex justify-center items-center text-black "
     >
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
         <div className="right-0 text-right w-full">

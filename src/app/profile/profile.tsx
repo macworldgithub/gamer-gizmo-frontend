@@ -67,7 +67,7 @@ export default function ProfilePage() {
   }, [refetch]);
   // console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}${profileData.profile}`);
   return (
-    <div className="w-full ">
+    <div className="w-full text-black ">
       <div className="bg-white p-6 rounded-lg mt-8">
         <div className="mb-6">
           <h1 className="text-2xl font-bold max-md:text-md">My Profile</h1>
