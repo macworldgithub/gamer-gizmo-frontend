@@ -20,6 +20,8 @@ const PublishAdd: React.FC = () => {
     name: "",
   });
   const router = useRouter();
+  const [selectProcessorVariant, setSelectedProcessorVariant] = useState({ id: 0, name: "" });
+  const [selectProcessor, setSelectedProcessor] = useState({ id: 0, name: "" });
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
   const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
@@ -124,12 +126,11 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("text", formData.component_text);
     } else {
       formDataObject.append("ram", formData.ram);
-      formDataObject.append("processor", formData.processor);
-      formDataObject.append("processorType", formData.processor_type);
+      formDataObject.append("processor", (selectProcessor.id).toString());
+      formDataObject.append("processorVariant", (selectProcessorVariant.id).toString());
       formDataObject.append("storage", formData.storage);
       formDataObject.append("graphics", formData.graphics);
       formDataObject.append("ports", formData.ports);
-      formDataObject.append("os", formData.os);
       formDataObject.append("battery_life", formData.batteryLife);
       formDataObject.append("warranty_status", formData.warranty_status);
       formDataObject.append("connectivity", formData.connectivity);
@@ -203,6 +204,8 @@ const PublishAdd: React.FC = () => {
           selectComponentCategory={selectComponentCategory}
           setSelectedComponentCategory={setSelectedComponentCategory}
           componentCategories={componentCategories}
+          selectProcessorVariant={selectProcessorVariant} setSelectedProcessorVariant={setSelectedProcessorVariant}
+          selectProcessor={selectProcessor} setSelectedProcessor={setSelectedProcessor}
         />
       ),
     },
@@ -238,6 +241,9 @@ const PublishAdd: React.FC = () => {
           formData={formData}
           price={price}
           quantity={quantity}
+          selectLocation={selectedLocation}
+          selectProcessor={selectProcessor}
+          selectProcessorVariant={selectProcessorVariant}
           fileList={fileList}
           selectComponentCategory={selectComponentCategory?.name}
         />

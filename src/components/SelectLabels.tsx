@@ -5,32 +5,69 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useEffect, useState } from "react";
 import Wrapper from "./Common/Wrapper/Wrapper";
+import axios from "axios";
 
 export default function SelectLabels() {
+    const [locationData, setLocationData] = useState<any[]>([]);
+        const [processorData, setProcessorData] = useState<any>([]);
+  
+  const fetchLocations = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/location/getAll`
+      );
+
+      setLocationData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  // const fetchCategories = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/location/getAll`
+  //     );
+
+  //     setLocationData(response?.data?.data || []);
+  //   } catch (err) {
+  //     console.error("Failed to fetch models.");
+  //   }
+  // };
+  const fetchProcessors = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/processor/getProcessor`
+      );
+
+      setProcessorData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  useEffect(() => {
+    fetchProcessors()
+    fetchLocations();
+    // fetchCategories()
+  }, []);
+
   const dropdownOptions = [
     {
       label: "Processor",
-      options: ["Core i3", "Core i5", "Core i7", "Core i9", "AMD Ryzen 3"],
+      // @ts-expect-error
+      options: processorData&&processorData.length>0?processorData.map(e=>e.name) : ["Core i3"],
     },
     { label: "Condition", options: ["New", "Used"] },
-    { label: "Model", options: ["Gaming", "Electronics"] },
+    // { label: "Model", options: ["Gaming", "Electronics"] },
     {
       label: "Price Range",
-      options: ["Below 500$", "$500-$1000", "$1000-$1500"],
+      options: ["Below 500 AED", "AED 500-AED 1000", "AED 1000-AED 1500"],
     },
     {
       label: "Location",
-      options: [
-        "Abu Dhabi",
-        "Ajman",
-        "Dubai",
-        "Sharjah",
-        "Ras Al Khaimah",
-        "Fujairah",
-        "Umm Al Quwain",
-      ],
+      options: locationData&&locationData.length>0?locationData.map(e=>e.name).sort((a, b) => a.localeCompare(b)): ["Sharjah"],
     },
   ];
+  console.log(locationData.map(e=>e.name),"pak")
 
   const [selectedValues, setSelectedValues] = useState(
     dropdownOptions.map((dropdown) => dropdown.options[0])
@@ -122,6 +159,7 @@ export default function SelectLabels() {
                   },
                 }}
               >
+                {/* @ts-expect-error */}
                 {dropdown.options.map((option, id) => (
                   <MenuItem
                     key={id}

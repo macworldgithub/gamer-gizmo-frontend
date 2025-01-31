@@ -96,7 +96,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
                       : "shadow-md shadow-gray-200"
                   }`}
                 >
-                  <div className="relative w-full h-36  bg-black max-sm:h-[2.2rem]">
+                  <div className="relative w-full h-32  bg-black max-sm:h-[2.2rem]">
                     {product?.images && (
                       <Image
                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}

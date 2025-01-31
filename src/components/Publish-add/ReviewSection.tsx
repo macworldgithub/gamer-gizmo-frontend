@@ -5,11 +5,15 @@ interface ReviewSectionProps {
   selectCategory: { id: number; name: string };
   selectBrand: { id: number; name: string };
   selectModel: { id: number; name: string };
+  selectProcessorVariant: { id: number; name: string };
+  selectLocation: { id: number; name: string };
+  selectProcessor: { id: number; name: string };
   formData: Record<string, any>;
   price: string;
   quantity: string;
   fileList: UploadFile[];
   selectComponentCategory: string;
+  
 }
 
 const ReviewSection: React.FC<ReviewSectionProps> = ({
@@ -21,6 +25,9 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
   quantity,
   fileList,
   selectComponentCategory,
+  selectLocation,
+  selectProcessor,
+  selectProcessorVariant
 }) => {
   const details = [
     { label: "Category", value: selectCategory?.name },
@@ -29,14 +36,14 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
     { label: "Title", value: formData.title },
     { label: "Description", value: formData.description },
     { label: "Condition", value: formData.condition },
-    { label: "Location", value: formData.location },
+    { label: "Location", value: selectLocation.name },
     { label: "Price", value: price },
     { label: "Quantity", value: quantity },
   ];
 
   const laptopDetails = [
-    { label: "Processor", value: formData.processor },
-    { label: "Processor Type", value: formData.processor_type },
+    { label: "Processor", value: selectProcessor.name },
+    { label: "Processor Type", value: selectProcessorVariant.name },
     { label: "RAM", value: formData.ram },
     { label: "Storage", value: formData.storage },
     { label: "Screen Size", value: formData.screenSize },
