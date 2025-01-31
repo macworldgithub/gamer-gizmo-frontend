@@ -140,14 +140,62 @@ const MoreSpecification = ({
         </>
       )}
 
+      {selectCategory?.name === "Gaming Consoles" && (
+        <>
+          <TextField
+            sx={inputStyles}
+            label="accessories"
+            variant="outlined"
+            fullWidth
+            value={formData.accessories || ""}
+            onChange={(e) => handleFormChange("accessories", e.target.value)}
+          />
+          <TextField
+            sx={inputStyles}
+            label="Connectivity"
+            variant="outlined"
+            fullWidth
+            value={formData.connectivity || ""}
+            onChange={(e) => handleFormChange("connectivity", e.target.value)}
+          />
+          <TextField
+            sx={inputStyles}
+            label="Warrant Status"
+            variant="outlined"
+            fullWidth
+            value={formData.warranty_status || ""}
+            onChange={(e) =>
+              handleFormChange("warranty_status", e.target.value)
+            }
+          />
+          <TextField
+            sx={inputStyles}
+            className="inputField"
+            label="Battery Life"
+            variant="outlined"
+            fullWidth
+            value={formData.batteryLife || ""}
+            onChange={(e) => handleFormChange("batteryLife", e.target.value)}
+          />
+
+          <TextField
+            sx={inputStyles}
+            className="inputField"
+            label="Color"
+            variant="outlined"
+            fullWidth
+            value={formData.color || ""}
+            onChange={(e) => handleFormChange("color", e.target.value)}
+          />
+        </>
+      )}
+
       {selectCategory?.name === "Components" && (
         <>
           <div className="w-full text-center">
             <h2 className="text-lg font-bold">Select Component Type</h2>
             <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth  
-                          sx={inputStyles}
-              >
+              <FormControl fullWidth sx={inputStyles}>
                 <InputLabel id="cat-select-label">Category</InputLabel>
                 <Select
                   labelId="cat-select-label"
@@ -156,7 +204,7 @@ const MoreSpecification = ({
                   label="Category"
                   //@ts-ignore
                   onChange={(e) => setSelectedComponentCategory(e.target.value)}
-                  sx={{color: "#000000"}}
+                  sx={{ color: "#000000" }}
                 >
                   {componentCategories &&
                     componentCategories.length > 0 &&
@@ -168,7 +216,7 @@ const MoreSpecification = ({
             </Box>
           </div>
           <TextField
-                      sx={inputStyles}
+            sx={inputStyles}
             label="text"
             variant="outlined"
             fullWidth

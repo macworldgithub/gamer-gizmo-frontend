@@ -347,7 +347,7 @@ const DetailSection = ({
         fullWidth
         value={formData.title || ""}
         onChange={(e) => handleFormChange("title", e.target.value)}
-        className="sm:w-full max-sm:w-full"  // Responsive width (full width for small screens)
+        className="sm:w-full max-sm:w-full" // Responsive width (full width for small screens)
       />
       <TextField
         sx={inputStyles}
@@ -358,7 +358,7 @@ const DetailSection = ({
         rows={4}
         value={formData.description || ""}
         onChange={(e) => handleFormChange("description", e.target.value)}
-        className="sm:w-full max-sm:w-full"  // Responsive width (full width for small screens)
+        className="sm:w-full max-sm:w-full" // Responsive width (full width for small screens)
       />
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth sx={inputStyles}>
@@ -370,7 +370,7 @@ const DetailSection = ({
             value={selectBrand}
             label="Brand"
             onChange={(e) => setSelectedBrand(e.target.value)}
-            className="sm:w-full max-sm:w-full"  // Responsive width
+            className="sm:w-full max-sm:w-full" // Responsive width
           >
             {brands.map((brand: any) => (
               <MenuItem key={brand.id} value={brand} style={{ color: "black" }}>
@@ -390,10 +390,27 @@ const DetailSection = ({
             label="Condition"
             sx={inputStyles}
             onChange={(e) => handleFormChange("condition", e.target.value)}
-            className="sm:w-full max-sm:w-full"  // Responsive width
+            className="sm:w-full max-sm:w-full" // Responsive width
           >
             <MenuItem value="new">New</MenuItem>
             <MenuItem value="used">Used</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth sx={inputStyles}>
+          <InputLabel id="location-select-label">Location</InputLabel>
+          <Select
+            labelId="location-select-label"
+            id="location-select"
+            value={formData.loctaion}
+            label="location"
+            sx={inputStyles}
+            onChange={(e) => handleFormChange("location", e.target.value)}
+            className="sm:w-full max-sm:w-full" // Responsive width
+          >
+            <MenuItem value="sharjah">Sharjah</MenuItem>
+            <MenuItem value="dubai">Dubai</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -406,7 +423,7 @@ const DetailSection = ({
             label="Model"
             value={selectModel}
             onChange={(e) => setSelectedModel(e.target.value)}
-            className="sm:w-full max-sm:w-full"  // Responsive width
+            className="sm:w-full max-sm:w-full" // Responsive width
           >
             {models.map((model: any) => (
               <MenuItem key={model.id} value={model} style={{ color: "black" }}>

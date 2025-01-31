@@ -25,87 +25,100 @@ const PopularMainSection: React.FC = () => {
       images: ["/images/gpu.png"],
     },
   ]);
-  const token = useSelector((state: RootState) => state.user.token);
-
-  const gamingPCParts = [
+  const [consolesNewData, setConsolesNewData] = useState([
     {
       id: 1,
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      imageUrl: "/images/gpu.png",
+      images: ["/images/gpu.png"],
     },
-    {
-      id: 2,
-      name: "Asus ROG Hyperion...",
-      description: "High-performance computer case...",
-      price: "AED 1914.95",
-      imageUrl: "/images/gpu2.png",
-    },
-    {
-      id: 3,
-      name: "MSI PRO B760M-E...",
-      description:
-        "The PRO Series is tailored to professionals from all walks of life. The lineup features... ",
-      price: "AED 1914.95",
-      imageUrl: "/images/gpu3.png",
-    },
-    {
-      id: 4,
-      name: "Bloody W95 Max RGB",
-      description:
-        "The A4Tech W95 Max Bloody mouse is the optimal solution for those looking for a high-quality and productive mouse",
-      price: "AED 1914.95",
-      imageUrl: "/images/gpu4.png",
-    },
-    {
-      id: 5,
-      name: "Corsair VENGEANCE",
-      description:
-        "CORSAIR VENGEANCE RGB PRO Series DDR4 overclocked memory lights up your PC with mesmerizing ...",
-      price: "AED 1914.95",
-      imageUrl: "/images/gpu5.png",
-    },
-  ];
-
-  const usedConsoles = [
+  ]);
+  const [consolesUsedData, setConsolesUsedData] = useState([
     {
       id: 1,
-      name: "PlayStation Portal...",
-      description: "Experience the ultimate gaming...",
+      name: "Radeon RX 580 OC...",
+      description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      imageUrl: "/images/consoles.png",
+      images: ["/images/gpu.png"],
     },
+  ]);
+  const [desktopNewData, setDesktopNewData] = useState([
     {
-      id: 2,
-      name: "Sony PlayStation 5.",
-      description: "High-quality Xbox controller...",
-      price: "AED 422.64",
-      imageUrl: "/images/consoles2.png",
+      id: 1,
+      name: "Radeon RX 580 OC...",
+      description: "Powerful graphics card for gaming...",
+      price: "AED 551.00",
+      images: ["/images/gpu.png"],
     },
+  ]);
+  const [desktopUsedData, setDesktopUsedData] = useState([
     {
-      id: 3,
-      name: "Xbox Elite Wireless.",
-      description: "High-quality Xbox controller...",
-      price: "AED 422.64",
-      imageUrl: "/images/consoles3.png",
+      id: 1,
+      name: "Radeon RX 580 OC...",
+      description: "Powerful graphics card for gaming...",
+      price: "AED 551.00",
+      images: ["/images/gpu.png"],
     },
-    {
-      id: 4,
-      name: "Xbox Series S 512GB",
-      description: "High-quality Xbox controller...",
-      price: "AED 422.64",
-      imageUrl: "/images/consoles4.png",
-    },
-    {
-      id: 5,
-      name: "Xbox Series X 1TB.",
-      description: "High-quality Xbox controller...",
-      price: "AED 422.64",
-      imageUrl: "/images/consoles5.png",
-    },
-  ];
-  console.log(LaptopUsedData, "LaptopUsedData");
+  ]);
+  const token = useSelector((state: RootState) => state.user.token);
+
+  const fetchUsedDesktops = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=used`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setDesktopUsedData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  const fetchNewDesktops = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=new`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setDesktopNewData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  const fetchUsedConsoles = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=used`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setConsolesUsedData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  const fetchNewConsoles = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=new`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setConsolesNewData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
   const fetchUsedLaptops = async () => {
     try {
       const response = await axios.get(
@@ -138,37 +151,42 @@ const PopularMainSection: React.FC = () => {
   useEffect(() => {
     fetchUsedLaptops();
     fetchNewLaptops();
+    fetchUsedConsoles();
+    fetchNewConsoles();
+    fetchUsedDesktops();
+    fetchNewDesktops();
   }, []);
   return (
     <div className="h-auto w-full">
-      {/* <PopularItemSection
-        title="Popular in Used Gaming PC Parts"
-        subtitle="Choose your necessary parts from this category."
-        products={gamingPCParts}
-        explorePath="/"
-        onExplore={() => console.log("Explore Gaming PC Parts")}
-      />
       <PopularItemSection
         title="Popular in Used Consoles"
         subtitle="Choose your necessary gaming items from this category."
-        products={usedConsoles}
-        explorePath="/"
-        onExplore={() => console.log("Explore Used Consoles")}
-      />
-      <PopularItemSection
-        title="Popular in New Gaming PC Parts"
-        subtitle="Choose your necessary gaming items from this category."
-        products={usedConsoles}
+        products={consolesUsedData}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <PopularItemSection
         title="Popular in New Consoles"
         subtitle="Choose your necessary gaming items from this category."
-        products={usedConsoles}
+        products={consolesNewData}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
-      /> */}
+      />
+      <PopularItemSection
+        title="Popular in Used Gaming PC"
+        subtitle="Choose your necessary parts from this category."
+        products={desktopUsedData}
+        explorePath="/"
+        onExplore={() => console.log("Explore Gaming PC Parts")}
+      />
+
+      <PopularItemSection
+        title="Popular in New Gaming PC"
+        subtitle="Choose your necessary gaming items from this category."
+        products={desktopNewData}
+        explorePath="/"
+        onExplore={() => console.log("Explore Used Consoles")}
+      />
       <PopularItemSection
         title="Popular in Used Laptops"
         subtitle="Choose your necessary gaming items from this category."

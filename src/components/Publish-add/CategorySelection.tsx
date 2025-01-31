@@ -20,6 +20,7 @@ const CategorySelection = ({ setSelectedCategory, selectCategory }: any) => {
     Desktops: "/images/desktopImage.jpg",
     Laptops: "/images/LaptopImage.png",
     Components: "/images/components.jpg",
+    "Gaming Consoles": "/images/consoles2.png",
     Accessories: "/images/accessories.jpg",
     Default: "/images/default.jpg",
   };

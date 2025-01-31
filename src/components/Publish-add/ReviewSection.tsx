@@ -29,6 +29,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
     { label: "Title", value: formData.title },
     { label: "Description", value: formData.description },
     { label: "Condition", value: formData.condition },
+    { label: "Location", value: formData.location },
     { label: "Price", value: price },
     { label: "Quantity", value: quantity },
   ];
@@ -62,7 +63,9 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
         {details.map(({ label, value }, index) => (
           <div key={index} className="bg-white p-3 rounded-md">
             <p className="text-black text-xl font-bold">{label}</p>
-            <p className="text-gray-500 font-semibold text-base">{value || "Not provided"}</p>
+            <p className="text-gray-500 font-semibold text-base">
+              {value || "Not provided"}
+            </p>
           </div>
         ))}
 
@@ -70,7 +73,9 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
           laptopDetails.map(({ label, value }, index) => (
             <div key={index} className="bg-white p-3 rounded-md">
               <p className="text-black text-xl font-bold">{label}</p>
-              <p  className="text-gray-500 font-semibold">{value || "Not provided"}</p>
+              <p className="text-gray-500 font-semibold">
+                {value || "Not provided"}
+              </p>
             </div>
           ))}
 

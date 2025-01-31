@@ -43,6 +43,10 @@ const PublishAdd: React.FC = () => {
     batteryLife: "",
     color: "",
     component_text: "",
+    accessories: "",
+    connectivity: "",
+    warranty_status: "",
+    location: "",
   });
   const [componentCategories, setComponentCategories] = useState([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -125,9 +129,13 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("ports", formData.ports);
       formDataObject.append("os", formData.os);
       formDataObject.append("battery_life", formData.batteryLife);
+      formDataObject.append("warranty_status", formData.warranty_status);
+      formDataObject.append("connectivity", formData.connectivity);
+      formDataObject.append("accessories", formData.accessories);
       formDataObject.append("screen_size", formData.screenSize);
       formDataObject.append("weight", formData.weight);
       formDataObject.append("screen_resolution", formData.screenResolution);
+      formDataObject.append("location", formData.location);
       formDataObject.append("color", formData.color);
     }
     if (fileList.length > 0) {
@@ -149,7 +157,7 @@ const PublishAdd: React.FC = () => {
       );
       if ((response.status = 200)) {
         toast.success("Product Added Sucessfully");
-        router.push("/publish-add");
+        router.push("/");
       }
     } catch (err) {
       toast.error("Error");
