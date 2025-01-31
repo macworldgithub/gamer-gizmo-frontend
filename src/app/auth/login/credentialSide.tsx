@@ -172,7 +172,7 @@ const CredentialSide = () => {
       <Link className="text-[#DC39FC] underline" href="/auth/register">
         Register me
       </Link>
-      <div className=" relative mt-3">
+      {/* <div className=" relative mt-3">
         <div className=" text-white bg-[#DC39FC] flex justify-center items-center rounded absolute top-[-10px] right-[75px] w-[50px] h-[30px]">
           or
         </div>
@@ -186,7 +186,7 @@ const CredentialSide = () => {
           />
           <Image src={"/images/tw.svg"} alt="twitter" width={40} height={40} />
         </div>
-      </div>
+      </div> */}
       {showAccountsModal && (
         <div className="absolute z-[9] text-black  backdrop-blur-sm top-0 left-0  overflow-hidden h-screen w-full flex justify-center items-center">
           <div className="bg-white md:px-12 flex justify-center flex-col items-center py-10 rounded-xl shadow-xl px-4 w-fit">

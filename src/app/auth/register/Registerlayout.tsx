@@ -17,7 +17,7 @@ const RegisterLayout = ({ children }: layoutProps) => {
       <div
         className={`h-max p-[2rem] max-sm:p-[1rem] bg-white dark:bg-customBg w-[100%] flex items-center justify-center`}
       >
-        <div className="w-[75%] max-sm:mb-[8rem]  max-md:w-[100%] md:h-max xl:h-[600px] lg:w-[1170px]  h-[550px] max-sm:h-[600px] mb-[80px]  rounded-[12px] flex ">
+        <div className="w-[75%] max-sm:mb-[2rem]  max-md:w-[100%] md:h-max xl:h-[700px] lg:w-[1170px]  h-[700px] max-sm:h-fit mb-[80px]  rounded-[12px] flex ">
           <CredentialSide />
           <PictureSide />
         </div>

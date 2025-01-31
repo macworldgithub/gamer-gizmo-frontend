@@ -9,8 +9,8 @@ import { RootState } from "@/components/Store/Store";
 import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import { UploadFile } from "antd";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -48,7 +48,11 @@ const PublishAdd: React.FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
-
+  useLayoutEffect(() => {
+    if (!token) {
+      return redirect("/auth/login");
+    }
+  }, []);
   const handleNext = () => {
     if (activeStep === 0 && !selectCategory.id) {
       toast.error("Please select a category before proceeding.");
@@ -230,84 +234,81 @@ const PublishAdd: React.FC = () => {
     },
   ];
 
-
-
-return (
-  <div className="container mx-auto p-6">
-    {/* Responsive Stepper */}
-    <div className="flex flex-wrap justify-center sm:flex-nowrap">
-      <Stepper
-        activeStep={activeStep}
-        alternativeLabel
-        className="w-full sm:w-auto"
-        sx={{
-          flexWrap: "wrap",
-          "& .MuiStep-root": {
-            minWidth: "60px", // Prevent excessive width
-          },
-          "& .MuiStepConnector-root": {
-            display: { xs: "none", sm: "block" }, // Hide connectors on extra small screens
-          },
-        }}
-      >
-        {steps.map((step, index) => (
-          <Step key={index}>
-            <StepLabel
-              sx={{
-                "& .MuiStepIcon-root": {
-                  fontSize: "20px", // Smaller step icons
-                  color: activeStep >= index ? "#dc39fc" : "#ccc",
-                },
-                "& .MuiStepLabel-label": {
-                  fontSize: { xs: "10px", sm: "14px" }, // Reduce label size
-                  fontWeight: "500",
-                },
-              }}
-            >
-              {step.label}
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </div>
-
-    {/* Step Content */}
-    <div className="mt-8">{steps[activeStep].content}</div>
-
-    {/* Navigation Buttons */}
-    <div className="flex justify-between mt-6">
-      <Button
-        disabled={activeStep === 0}
-        onClick={handleBack}
-        className="bg-gray-600 text-black"
-      >
-        Back
-      </Button>
-      {activeStep === steps.length - 1 ? (
-        <Button
-          onClick={() => handleSubmit()}
-          variant="contained"
-          style={{
-            backgroundColor: "#dc39fc",
-            fontWeight: "bold",
-            fontSize: "15px",
+  return (
+    <div className="container mx-auto p-6">
+      {/* Responsive Stepper */}
+      <div className="flex flex-wrap justify-center sm:flex-nowrap">
+        <Stepper
+          activeStep={activeStep}
+          alternativeLabel
+          className="w-full sm:w-auto"
+          sx={{
+            flexWrap: "wrap",
+            "& .MuiStep-root": {
+              minWidth: "60px", // Prevent excessive width
+            },
+            "& .MuiStepConnector-root": {
+              display: { xs: "none", sm: "block" }, // Hide connectors on extra small screens
+            },
           }}
         >
-          Publish
-        </Button>
-      ) : (
-        <Button
-          variant="contained"
-          className="bg-custom-gradient"
-          onClick={handleNext}
-        >
-          Next
-        </Button>
-      )}
-    </div>
-  </div>
-);
+          {steps.map((step, index) => (
+            <Step key={index}>
+              <StepLabel
+                sx={{
+                  "& .MuiStepIcon-root": {
+                    fontSize: "20px", // Smaller step icons
+                    color: activeStep >= index ? "#dc39fc" : "#ccc",
+                  },
+                  "& .MuiStepLabel-label": {
+                    fontSize: { xs: "10px", sm: "14px" }, // Reduce label size
+                    fontWeight: "500",
+                  },
+                }}
+              >
+                {step.label}
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </div>
 
+      {/* Step Content */}
+      <div className="mt-8">{steps[activeStep].content}</div>
+
+      {/* Navigation Buttons */}
+      <div className="flex justify-between mt-6">
+        <Button
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          className="bg-gray-600 text-black"
+        >
+          Back
+        </Button>
+        {activeStep === steps.length - 1 ? (
+          <Button
+            onClick={() => handleSubmit()}
+            variant="contained"
+            style={{
+              backgroundColor: "#dc39fc",
+              fontWeight: "bold",
+              fontSize: "15px",
+            }}
+          >
+            Publish
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            className="bg-custom-gradient"
+            onClick={handleNext}
+          >
+            Next
+          </Button>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default PublishAdd;
