@@ -23,6 +23,7 @@ const PublishAdd: React.FC = () => {
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
   const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
+  const [selectedLocation, setSelectedLocation] = useState({ id: 0, name: "" });
   const [activeStep, setActiveStep] = useState<number>(0);
   const [price, setPrice] = useState("0");
   const [quantity, setQuantity] = useState("0");
@@ -112,6 +113,7 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("model_id", selectModel.id.toString());
     formDataObject.append("category_id", selectCategory.id.toString());
     formDataObject.append("condition", formData.condition);
+    formDataObject.append("location", selectedLocation.id.toString());
     formDataObject.append("is_published", "true");
 
     if (selectCategory?.name === "Components") {
@@ -135,7 +137,6 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("screen_size", formData.screenSize);
       formDataObject.append("weight", formData.weight);
       formDataObject.append("screen_resolution", formData.screenResolution);
-      formDataObject.append("location", formData.location);
       formDataObject.append("color", formData.color);
     }
     if (fileList.length > 0) {
@@ -185,6 +186,8 @@ const PublishAdd: React.FC = () => {
           selectBrand={selectBrand}
           formData={formData}
           selectCategory={selectCategory}
+          setSelectedLocation={setSelectedLocation}
+          selectedLocation={selectedLocation}
           setSelectedBrand={setSelectedBrand}
           setComponentCategories={setComponentCategories}
         />

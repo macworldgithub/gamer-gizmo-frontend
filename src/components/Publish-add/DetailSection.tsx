@@ -238,11 +238,14 @@ const DetailSection = ({
   selectBrand,
   selectCategory,
   setSelectedBrand,
+  setSelectedLocation,
+  selectedLocation,
   setComponentCategories,
 }: any) => {
   const [models, setModels] = useState<Model[]>([]);
   const token = useSelector((state: RootState) => state.user.token);
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [locationData, setLocationData] = useState<Brand[]>([]);
 
   const fetchBrands = async () => {
     if (!selectCategory) {
@@ -319,8 +322,20 @@ const DetailSection = ({
     }
   };
 
+  const fetchLocations = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/location/getAll`
+      );
+
+      setLocationData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
   useEffect(() => {
     fetchModels();
+    fetchLocations();
   }, [selectBrand, token]);
 
   const inputStyles = {
@@ -403,14 +418,17 @@ const DetailSection = ({
           <Select
             labelId="location-select-label"
             id="location-select"
-            value={formData.loctaion}
+            value={selectedLocation}
             label="location"
             sx={inputStyles}
-            onChange={(e) => handleFormChange("location", e.target.value)}
-            className="sm:w-full max-sm:w-full" // Responsive width
+            onChange={(e) => setSelectedLocation(e.target.value)}
+            className="sm:w-full max-sm:w-full"
           >
-            <MenuItem value="sharjah">Sharjah</MenuItem>
-            <MenuItem value="dubai">Dubai</MenuItem>
+            {locationData.map((loc: any) => (
+              <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                {loc.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>
