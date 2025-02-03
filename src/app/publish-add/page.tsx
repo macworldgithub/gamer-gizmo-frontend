@@ -10,17 +10,24 @@ import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import { UploadFile } from "antd";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+interface Category {
+  id: number;
+  name: string;
+  icon?: string;
+}
 const PublishAdd: React.FC = () => {
   const [selectComponentCategory, setSelectedComponentCategory] = useState({
     id: 0,
     name: "",
   });
   const router = useRouter();
-  const [selectProcessorVariant, setSelectedProcessorVariant] = useState({ id: 0, name: "" });
+  const [selectProcessorVariant, setSelectedProcessorVariant] = useState({
+    id: 0,
+    name: "",
+  });
   const [selectProcessor, setSelectedProcessor] = useState({ id: 0, name: "" });
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
@@ -55,6 +62,33 @@ const PublishAdd: React.FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
+  const [categoryError, setCategoryError] = useState<string | null>(null);
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getAll`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data && response.data.data) {
+        setCategories(response.data.data);
+      } else {
+        setCategories([]);
+      }
+    } catch (err) {
+      setCategoryError("Failed to fetch categories.");
+    } finally {
+      setLoadingCategories(false);
+    }
+  };
+  useEffect(() => {
+    fetchCategories();
+  }, []);
   useLayoutEffect(() => {
     if (!token) {
       return redirect("/auth/login");
@@ -126,8 +160,11 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("text", formData.component_text);
     } else {
       formDataObject.append("ram", formData.ram);
-      formDataObject.append("processor", (selectProcessor.id).toString());
-      formDataObject.append("processorVariant", (selectProcessorVariant.id).toString());
+      formDataObject.append("processor", selectProcessor.id.toString());
+      formDataObject.append(
+        "processorVariant",
+        selectProcessorVariant.id.toString()
+      );
       formDataObject.append("storage", formData.storage);
       formDataObject.append("graphics", formData.graphics);
       formDataObject.append("ports", formData.ports);
@@ -172,8 +209,12 @@ const PublishAdd: React.FC = () => {
       label: "Category Selection",
       content: (
         <CategorySelection
+          setActiveStep={setActiveStep}
           selectCategory={selectCategory}
           setSelectedCategory={setSelectedCategory}
+          categories={categories}
+          loadingCategories={loadingCategories}
+          categoryError={categoryError}
         />
       ),
     },
@@ -204,8 +245,10 @@ const PublishAdd: React.FC = () => {
           selectComponentCategory={selectComponentCategory}
           setSelectedComponentCategory={setSelectedComponentCategory}
           componentCategories={componentCategories}
-          selectProcessorVariant={selectProcessorVariant} setSelectedProcessorVariant={setSelectedProcessorVariant}
-          selectProcessor={selectProcessor} setSelectedProcessor={setSelectedProcessor}
+          selectProcessorVariant={selectProcessorVariant}
+          setSelectedProcessorVariant={setSelectedProcessorVariant}
+          selectProcessor={selectProcessor}
+          setSelectedProcessor={setSelectedProcessor}
         />
       ),
     },
@@ -298,7 +341,8 @@ const PublishAdd: React.FC = () => {
         <Button
           disabled={activeStep === 0}
           onClick={handleBack}
-          className="bg-gray-600 text-black"
+          variant="contained"
+          className={`${activeStep != 0 && "bg-custom-gradient"}`}
         >
           Back
         </Button>
