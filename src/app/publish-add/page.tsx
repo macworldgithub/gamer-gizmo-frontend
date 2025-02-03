@@ -3,13 +3,14 @@ import CategorySelection from "@/components/Publish-add/CategorySelection";
 import DetailSection from "@/components/Publish-add/DetailSection";
 import MoreSpecification from "@/components/Publish-add/MoreSpecification";
 import PriceComponent from "@/components/Publish-add/PriceComponent";
+import ReviewSection from "@/components/Publish-add/ReviewSection";
 import UploadImages from "@/components/Publish-add/UploadImages";
 import { RootState } from "@/components/Store/Store";
 import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import { UploadFile } from "antd";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -19,9 +20,12 @@ const PublishAdd: React.FC = () => {
     name: "",
   });
   const router = useRouter();
+  const [selectProcessorVariant, setSelectedProcessorVariant] = useState({ id: 0, name: "" });
+  const [selectProcessor, setSelectedProcessor] = useState({ id: 0, name: "" });
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
   const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
+  const [selectedLocation, setSelectedLocation] = useState({ id: 0, name: "" });
   const [activeStep, setActiveStep] = useState<number>(0);
   const [price, setPrice] = useState("0");
   const [quantity, setQuantity] = useState("0");
@@ -42,12 +46,20 @@ const PublishAdd: React.FC = () => {
     batteryLife: "",
     color: "",
     component_text: "",
+    accessories: "",
+    connectivity: "",
+    warranty_status: "",
+    location: "",
   });
   const [componentCategories, setComponentCategories] = useState([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
-
+  useLayoutEffect(() => {
+    if (!token) {
+      return redirect("/auth/login");
+    }
+  }, []);
   const handleNext = () => {
     if (activeStep === 0 && !selectCategory.id) {
       toast.error("Please select a category before proceeding.");
@@ -103,6 +115,7 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("model_id", selectModel.id.toString());
     formDataObject.append("category_id", selectCategory.id.toString());
     formDataObject.append("condition", formData.condition);
+    formDataObject.append("location", selectedLocation.id.toString());
     formDataObject.append("is_published", "true");
 
     if (selectCategory?.name === "Components") {
@@ -113,13 +126,15 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("text", formData.component_text);
     } else {
       formDataObject.append("ram", formData.ram);
-      formDataObject.append("processor", formData.processor);
-      formDataObject.append("processorType", formData.processor_type);
+      formDataObject.append("processor", (selectProcessor.id).toString());
+      formDataObject.append("processorVariant", (selectProcessorVariant.id).toString());
       formDataObject.append("storage", formData.storage);
       formDataObject.append("graphics", formData.graphics);
       formDataObject.append("ports", formData.ports);
-      formDataObject.append("os", formData.os);
       formDataObject.append("battery_life", formData.batteryLife);
+      formDataObject.append("warranty_status", formData.warranty_status);
+      formDataObject.append("connectivity", formData.connectivity);
+      formDataObject.append("accessories", formData.accessories);
       formDataObject.append("screen_size", formData.screenSize);
       formDataObject.append("weight", formData.weight);
       formDataObject.append("screen_resolution", formData.screenResolution);
@@ -144,7 +159,7 @@ const PublishAdd: React.FC = () => {
       );
       if ((response.status = 200)) {
         toast.success("Product Added Sucessfully");
-        router.push("/publish-add");
+        router.push("/");
       }
     } catch (err) {
       toast.error("Error");
@@ -172,6 +187,8 @@ const PublishAdd: React.FC = () => {
           selectBrand={selectBrand}
           formData={formData}
           selectCategory={selectCategory}
+          setSelectedLocation={setSelectedLocation}
+          selectedLocation={selectedLocation}
           setSelectedBrand={setSelectedBrand}
           setComponentCategories={setComponentCategories}
         />
@@ -187,6 +204,8 @@ const PublishAdd: React.FC = () => {
           selectComponentCategory={selectComponentCategory}
           setSelectedComponentCategory={setSelectedComponentCategory}
           componentCategories={componentCategories}
+          selectProcessorVariant={selectProcessorVariant} setSelectedProcessorVariant={setSelectedProcessorVariant}
+          selectProcessor={selectProcessor} setSelectedProcessor={setSelectedProcessor}
         />
       ),
     },
@@ -215,134 +234,67 @@ const PublishAdd: React.FC = () => {
     {
       label: "Review",
       content: (
-        <div className="p-6 bg-white rounded shadow-md text-black">
-          <h2 className="text-2xl font-bold mb-4">Review Your Details</h2>
-          <div className="space-y-3">
-            <p>
-              <strong>Category:</strong>{" "}
-              {selectCategory?.name || "Not selected"}
-            </p>
-            <p>
-              <strong>Brand:</strong> {selectBrand?.name || "Not selected"}
-            </p>
-            <p>
-              <strong>Model:</strong> {selectModel?.name || "Not selected"}
-            </p>
-            <p>
-              <strong>Title:</strong> {formData.title || "Not provided"}
-            </p>
-            <p>
-              <strong>Description:</strong>{" "}
-              {formData.description || "Not provided"}
-            </p>
-            <p>
-              <strong>Condition:</strong> {formData.condition || "Not provided"}
-            </p>
-            <p>
-              <strong>Price:</strong> {price || "Not provided"}
-            </p>
-            <p>
-              <strong>Quantity:</strong> {quantity || "Not provided"}
-            </p>
-            {["Laptops", "Desktops"].includes(selectCategory.name) && (
-              <>
-                <p>
-                  <strong>Processor:</strong>{" "}
-                  {formData.processor || "Not provided"}
-                </p>
-                <p>
-                  <strong>Processor Type:</strong>{" "}
-                  {formData.processor_type || "Not provided"}
-                </p>
-                <p>
-                  <strong>RAM:</strong> {formData.ram || "Not provided"}
-                </p>
-                <p>
-                  <strong>Storage:</strong> {formData.storage || "Not provided"}
-                </p>
-                <p>
-                  <strong>Screen Size:</strong>{" "}
-                  {formData.screenSize || "Not provided"}
-                </p>
-                <p>
-                  <strong>Screen Resolution:</strong>{" "}
-                  {formData.screenResolution || "Not provided"}
-                </p>
-                <p>
-                  <strong>Weight:</strong> {formData.weight || "Not provided"}
-                </p>
-
-                <p>
-                  <strong>Graphics:</strong>{" "}
-                  {formData.graphics || "Not provided"}
-                </p>
-                <p>
-                  <strong>Ports:</strong> {formData.ports || "Not provided"}
-                </p>
-                <p>
-                  <strong>Battery Life:</strong>{" "}
-                  {formData.batteryLife || "Not provided"}
-                </p>
-                <p>
-                  <strong>Color:</strong> {formData.color || "Not provided"}
-                </p>
-              </>
-            )}
-            {selectCategory?.name === "Components" && (
-              <>
-                <p>
-                  <strong>Component Category:</strong>
-
-                  {selectComponentCategory || "Not provided"}
-                </p>
-                <p>
-                  <strong>Component Text:</strong>{" "}
-                  {formData.component_text || "Not provided"}
-                </p>
-              </>
-            )}
-
-            <div>
-              <strong>Uploaded Images:</strong>
-              <div className="grid grid-cols-3 gap-4 mt-2">
-                {fileList.map((file, index) => (
-                  <img
-                    key={index}
-                    src={URL.createObjectURL(file.originFileObj as Blob)}
-                    alt={`Uploaded ${index + 1}`}
-                    className="w-full h-32 object-cover rounded"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <p className="text-gray-500 mt-4">
-            Ensure all details are correct before submitting.
-          </p>
-        </div>
+        <ReviewSection
+          selectCategory={selectCategory}
+          selectBrand={selectBrand}
+          selectModel={selectModel}
+          formData={formData}
+          price={price}
+          quantity={quantity}
+          selectLocation={selectedLocation}
+          selectProcessor={selectProcessor}
+          selectProcessorVariant={selectProcessorVariant}
+          fileList={fileList}
+          selectComponentCategory={selectComponentCategory?.name}
+        />
       ),
     },
   ];
 
   return (
     <div className="container mx-auto p-6">
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((step, index) => (
-          <Step key={index}>
-            <StepLabel
-              sx={{
-                "& .MuiStepIcon-root": {
-                  color: activeStep >= index ? "#dc39fc" : "#ccc",
-                },
-              }}
-            >
-              {step.label}
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+      {/* Responsive Stepper */}
+      <div className="flex flex-wrap justify-center sm:flex-nowrap">
+        <Stepper
+          activeStep={activeStep}
+          alternativeLabel
+          className="w-full sm:w-auto"
+          sx={{
+            flexWrap: "wrap",
+            "& .MuiStep-root": {
+              minWidth: "60px", // Prevent excessive width
+            },
+            "& .MuiStepConnector-root": {
+              display: { xs: "none", sm: "block" }, // Hide connectors on extra small screens
+            },
+          }}
+        >
+          {steps.map((step, index) => (
+            <Step key={index}>
+              <StepLabel
+                sx={{
+                  "& .MuiStepIcon-root": {
+                    fontSize: "20px", // Smaller step icons
+                    color: activeStep >= index ? "#dc39fc" : "#ccc",
+                  },
+                  "& .MuiStepLabel-label": {
+                    fontSize: { xs: "10px", sm: "14px" }, // Reduce label size
+                    fontWeight: "500",
+                  },
+                }}
+              >
+                {step.label}
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </div>
+
+      {/* Step Content */}
       <div className="mt-8">{steps[activeStep].content}</div>
-      <div className="flex  justify-between mt-6">
+
+      {/* Navigation Buttons */}
+      <div className="flex justify-between mt-6">
         <Button
           disabled={activeStep === 0}
           onClick={handleBack}
@@ -354,7 +306,11 @@ const PublishAdd: React.FC = () => {
           <Button
             onClick={() => handleSubmit()}
             variant="contained"
-            color="primary"
+            style={{
+              backgroundColor: "#dc39fc",
+              fontWeight: "bold",
+              fontSize: "15px",
+            }}
           >
             Publish
           </Button>

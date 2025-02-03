@@ -21,7 +21,7 @@ const PriceComponent = ({ price, setPrice, quantity, setQuantity }: any) => {
     <div className="flex flex-col space-y-4">
       <TextField
         sx={inputStyles}
-        label="Price (USD)"
+        label="Price (AED)"
         variant="outlined"
         type="number"
         fullWidth

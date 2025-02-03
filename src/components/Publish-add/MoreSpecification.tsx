@@ -6,7 +6,8 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const MoreSpecification = ({
   selectCategory,
@@ -15,7 +16,14 @@ const MoreSpecification = ({
   selectComponentCategory,
   setSelectedComponentCategory,
   componentCategories,
+  setSelectedProcessorVariant,
+  selectProcessorVariant,
+  setSelectedProcessor,
+  selectProcessor
 }: any) => {
+    const [processorVariantData, setProcessorVariantData] = useState<any>([]);
+    const [processorData, setProcessorData] = useState<any>([]);
+  
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
       "& fieldset": { borderColor: "#ccc" }, // Default border
@@ -31,35 +39,81 @@ const MoreSpecification = ({
       // Move label upward
     },
   };
+  const fetchProcessorVariants = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/processor/getProcessorVariant`
+      );
+
+      setProcessorVariantData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  const fetchProcessor = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/processor/getProcessor?variant=${selectProcessorVariant.id}`
+      );
+
+      setProcessorData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+   useEffect(() => {
+    fetchProcessorVariants();
+    }, []);
+   useEffect(() => {
+    fetchProcessor();
+    }, [selectProcessorVariant]);
+  
   return (
     <div className="flex flex-col space-y-4">
       {/* Conditionally render additional fields based on the selected category */}
       {["Laptops", "Desktops"].includes(selectCategory.name) && (
         <>
-          <TextField
-            sx={inputStyles}
-            label="Processor"
-            variant="outlined"
-            fullWidth
-            value={formData.processor || ""}
-            onChange={(e) => handleFormChange("processor", e.target.value)}
-          />
-          <TextField
-            sx={inputStyles}
-            label="Processor_type"
-            variant="outlined"
-            fullWidth
-            value={formData.processor_type || ""}
-            onChange={(e) => handleFormChange("processor_type", e.target.value)}
-          />
-          <TextField
-            sx={inputStyles}
-            label="Os"
-            variant="outlined"
-            fullWidth
-            value={formData.os || ""}
-            onChange={(e) => handleFormChange("os", e.target.value)}
-          />
+        <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel id="pro-var-select-label">Processor Variant</InputLabel>
+                  <Select
+                    labelId="pro-var-select-label"
+                    id="pro-var-select"
+                    value={selectProcessorVariant}
+                    label="Processor Variant"
+                    sx={inputStyles}
+                    onChange={(e) => setSelectedProcessorVariant(e.target.value)}
+                    className="sm:w-full max-sm:w-full"
+                  >
+                    {processorVariantData.map((loc: any) => (
+                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                        {loc.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel id="pro-select-label">Processor</InputLabel>
+                  <Select
+                    labelId="pro-select-label"
+                    id="pro-select"
+                    value={selectProcessor}
+                    label="Processor"
+                    sx={inputStyles}
+                    onChange={(e) => setSelectedProcessor(e.target.value)}
+                    className="sm:w-full max-sm:w-full"
+                  >
+                    {processorData.map((loc: any) => (
+                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                        {loc.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+         
           <TextField
             sx={inputStyles}
             label="RAM"
@@ -140,12 +194,62 @@ const MoreSpecification = ({
         </>
       )}
 
+      {selectCategory?.name === "Gaming Consoles" && (
+        <>
+          <TextField
+            sx={inputStyles}
+            label="accessories"
+            variant="outlined"
+            fullWidth
+            value={formData.accessories || ""}
+            onChange={(e) => handleFormChange("accessories", e.target.value)}
+          />
+          <TextField
+            sx={inputStyles}
+            label="Connectivity"
+            variant="outlined"
+            fullWidth
+            value={formData.connectivity || ""}
+            onChange={(e) => handleFormChange("connectivity", e.target.value)}
+          />
+          <TextField
+            sx={inputStyles}
+            label="Warrant Status"
+            variant="outlined"
+            fullWidth
+            value={formData.warranty_status || ""}
+            onChange={(e) =>
+              handleFormChange("warranty_status", e.target.value)
+            }
+          />
+          <TextField
+            sx={inputStyles}
+            className="inputField"
+            label="Battery Life"
+            variant="outlined"
+            fullWidth
+            value={formData.batteryLife || ""}
+            onChange={(e) => handleFormChange("batteryLife", e.target.value)}
+          />
+
+          <TextField
+            sx={inputStyles}
+            className="inputField"
+            label="Color"
+            variant="outlined"
+            fullWidth
+            value={formData.color || ""}
+            onChange={(e) => handleFormChange("color", e.target.value)}
+          />
+        </>
+      )}
+
       {selectCategory?.name === "Components" && (
         <>
           <div className="w-full text-center">
             <h2 className="text-lg font-bold">Select Component Type</h2>
             <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={inputStyles}>
                 <InputLabel id="cat-select-label">Category</InputLabel>
                 <Select
                   labelId="cat-select-label"
@@ -154,6 +258,7 @@ const MoreSpecification = ({
                   label="Category"
                   //@ts-ignore
                   onChange={(e) => setSelectedComponentCategory(e.target.value)}
+                  sx={{ color: "#000000" }}
                 >
                   {componentCategories &&
                     componentCategories.length > 0 &&
@@ -165,6 +270,7 @@ const MoreSpecification = ({
             </Box>
           </div>
           <TextField
+            sx={inputStyles}
             label="text"
             variant="outlined"
             fullWidth

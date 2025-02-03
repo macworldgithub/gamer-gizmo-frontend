@@ -16,6 +16,7 @@ import { CiLogout } from "react-icons/ci";
 import { clearUserData } from "./Store/Slicer/LoginSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { LuPanelLeftClose } from "react-icons/lu";
 const BottomNavigationBar = () => {
   const isLogin = useSelector((state: RootState) => state.user.token != null);
   const token = useSelector((state: RootState) => state.user.token);
@@ -98,7 +99,7 @@ const BottomNavigationBar = () => {
     {
       icon: <FaCartPlus />,
       key: "3",
-      label: "Cart",
+      label: <Link href="/Add_to_cart">Cart</Link>,
     },
     {
       key: "4",
@@ -122,7 +123,7 @@ const BottomNavigationBar = () => {
   ];
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
-      <Link href="/">
+      {/* <Link href="/">
         <Image
           src="/images/gameIcon.png"
           alt="logo-img"
@@ -130,7 +131,7 @@ const BottomNavigationBar = () => {
           height={100}
           className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
         />
-      </Link>
+      </Link> */}
       {/* </div> */}
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         <Link href="/desktop">Desktops</Link>
@@ -162,8 +163,13 @@ const BottomNavigationBar = () => {
 
         {/* Drawer Menu */}
         {isDrawerOpen && (
-          <div
-            className={`flex-nowrap fixed left-0 text-black dark:bg-black bg-white dark:text-white w-[10rem] h-[85vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-1 max-sm:space-y-2  overflow-y-auto
+          <>
+            <div
+              className="fixed  inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40 "
+              onClick={() => setIsDrawerOpen(false)} // Close drawer when clicking outside
+            ></div>
+            <div
+              className={`flex-nowrap fixed top-0 left-0 text-black dark:bg-black bg-white dark:text-white w-[10rem] h-[100vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-2 max-sm:space-y-2 pt-1 overflow-y-auto
                             ${
                               isDrawerOpen
                                 ? "animate-slide-in"
@@ -171,112 +177,114 @@ const BottomNavigationBar = () => {
                                 ? "animate-slide-out"
                                 : "hidden"
                             }`}
-          >
-            {/* <Image
+            >
+              {/* <Image
               src="/images/profile.png"
               alt="Profile"
               width={40}
               height={40}
               className="rounded-full"
             /> */}
-            {isLogin ? (
-              <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
-                <Dropdown className="shadow-2xl" menu={{ items }}>
-                  <Image
-                    src="/images/profile.png"
-                    alt="Profile"
-                    width={40}
-                    height={40}
-                    className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
-                  />
-                </Dropdown>
+              <div onClick={() => setIsDrawerOpen(false)}>
+                <LuPanelLeftClose size={32} color="black" className="mb-4" />
               </div>
-            ) : (
-              <Link href="/auth/login">
-                <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
-                  <Image
-                    src="/images/btnIcon.png"
-                    className="md:w-[0.6rem]"
-                    width={18}
-                    height={18}
-                    alt="btnIcon"
-                  />
-                  <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
-                    Login
-                  </p>
+              {isLogin ? (
+                <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
+                  <Dropdown className="shadow-2xl" menu={{ items }}>
+                    <Image
+                      src="/images/profile.png"
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
+                    />
+                  </Dropdown>
                 </div>
+              ) : (
+                <Link href="/auth/login" onClick={() => setIsDrawerOpen(false)}>
+                  <div className="w-20 h-8 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+                    <Image
+                      src="/images/btnIcon.png"
+                      className="md:w-[0.6rem]"
+                      width={14}
+                      height={14}
+                      alt="btnIcon"
+                    />
+                    <p className="text-xs font-bold text-white">Login</p>
+                  </div>
+                </Link>
+              )}
+              <p className="text-secondaryColorLight">Ayla Imran</p>
+              <Link
+                href="/desktop"
+                className="text-lg hover:text-gray-300"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Desktops
               </Link>
-            )}
-            <p className="text-secondaryColorLight">Ayla Imran</p>
-            <Link
-              href="/desktop"
-              className="text-lg hover:text-gray-300"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Desktops
-            </Link>
-            <Link
-              href="/laptops"
-              className=" text-lg  hover:text-gray-300 "
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Laptops
-            </Link>
-
-            <Link
-              href="#"
-              className="text-lg hover:text-gray-300"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Store
-            </Link>
-            <Link
-              href="/usedparts"
-              className="text-lg hover:text-gray-300"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Components
-            </Link>
-            <Link
-              href="#"
-              className="text-lg hover:text-gray-300"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Blogs
-            </Link>
-
-            <Link
-              href="/contact"
-              className=" text-lg hover:text-gray-300"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Contact Us
-            </Link>
-            <Link
-              href="/details"
-              className=" text-lg hover:text-gray-300"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Inspection
-            </Link>
-
-            <div className="flex-col items-center mx-auto pl-0">
-              <Link href="/publish-add">
-                <div className="w-[7rem] mx-auto h-10 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
-                  <Image
-                    src="/images/btnIcon.png"
-                    className="w-[0.8rem]"
-                    width={18}
-                    height={18}
-                    alt="btnIcon"
-                  />
-                  <span className="text-sm text-white">Post Your Ad</span>
-                </div>
+              <Link
+                href="/laptops"
+                className=" text-lg  hover:text-gray-300 "
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Laptops
               </Link>
 
-              <ThemeToggle />
+              <Link
+                href="#"
+                className="text-lg hover:text-gray-300"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Store
+              </Link>
+              <Link
+                href="/usedparts"
+                className="text-lg hover:text-gray-300"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Components
+              </Link>
+              <Link
+                href="#"
+                className="text-lg hover:text-gray-300"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Blogs
+              </Link>
+
+              <Link
+                href="/contact"
+                className=" text-lg hover:text-gray-300"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Contact Us
+              </Link>
+              <Link
+                href="/details"
+                className=" text-lg hover:text-gray-300"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Inspection
+              </Link>
+
+              <div className="flex-col items-center mx-auto pl-0">
+                <Link href="/publish-add">
+                  <div className="w-[7rem] mx-auto h-9 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+                    <Image
+                      src="/images/btnIcon.png"
+                      className="w-[0.8rem]"
+                      width={16}
+                      height={16}
+                      alt="btnIcon"
+                    />
+                    <span className="text-xs text-white">Post Your Ad</span>
+                  </div>
+                </Link>
+
+                <ThemeToggle />
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
       <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem]">
@@ -290,7 +298,7 @@ const BottomNavigationBar = () => {
               alt="btnIcon"
             />
             <p className="md:text-[0.5rem] lg:text-[0.7rem] font-bold text-white">
-              Post Your Add
+              Post Your Ad
             </p>
           </div>
         </Link>

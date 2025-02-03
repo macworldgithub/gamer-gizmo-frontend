@@ -3,7 +3,12 @@ import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import Inspection from "@/components/Inspection";
 import PopularItemSection from "@/components/PopularItemSection";
 import SelectLabels from "@/components/SelectLabels";
+import { RootState } from "@/components/Store/Store";
+import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const usedConsoles = [
   {
@@ -47,6 +52,28 @@ const usedConsoles = [
 ];
 
 const LaptopHeroSection = () => {
+  const token = useSelector((state: RootState) => state.user.token);
+  const [data, setData] = useState([]);
+  const fetch = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if ((response.status = 200)) {
+        setData(response.data.data);
+      }
+    } catch (err) {
+      toast.error("Error");
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
       {/* Main Content */}
@@ -120,19 +147,19 @@ const LaptopHeroSection = () => {
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
             <PopularItemSection
-              title="Popular in  Used Laptops"
+              title="Popular in  Laptops"
               subtitle="Choose your necessary gaming items from this category."
-              products={usedConsoles}
+              products={data}
               onExplore={() => console.log("Explore Used Consoles")}
               explorePath=""
             />
-            <PopularItemSection
+            {/* <PopularItemSection
               title="Popular in  New Laptops"
               subtitle="Choose your necessary gaming items from this category."
               products={usedConsoles}
               onExplore={() => console.log("Explore Used Consoles")}
               explorePath=""
-            />
+            /> */}
           </div>
         </Wrapper>
       </div>
