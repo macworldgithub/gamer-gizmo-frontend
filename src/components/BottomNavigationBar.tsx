@@ -186,7 +186,11 @@ const BottomNavigationBar = () => {
               className="rounded-full"
             /> */}
               <div onClick={() => setIsDrawerOpen(false)}>
-                <LuPanelLeftClose size={32} color="black" className="mb-4" />
+                <LuPanelLeftClose
+                  size={32}
+                  color="black"
+                  className="mb-4 dark:invert"
+                />
               </div>
               {isLogin ? (
                 <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
