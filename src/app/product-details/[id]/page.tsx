@@ -56,6 +56,7 @@ const page = () => {
       toast.error("Error");
     }
   };
+  console.log(data);
   useEffect(() => {
     fetch();
     fetchSimilarItems();
