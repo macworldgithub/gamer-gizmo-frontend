@@ -1,7 +1,8 @@
 "use client";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
+import CustomLoader from "@/components/CustomLoader";
 import Inspection from "@/components/Inspection";
-import PopularItemSection from "@/components/PopularItemSection";
+import ProductCard from "@/components/ProductCard";
 import SelectLabels from "@/components/SelectLabels";
 import { RootState } from "@/components/Store/Store";
 import axios from "axios";
@@ -10,52 +11,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const usedConsoles = [
-  {
-    id: 1,
-    name: "Radeon RX 580 OC...",
-    description: "Powerful graphics card for gaming...",
-    price: "AED 551.00",
-    imageUrl: "/images/gpu.png",
-  },
-  {
-    id: 2,
-    name: "Asus ROG Hyperion...",
-    description: "High-performance computer case...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu2.png",
-  },
-  {
-    id: 3,
-    name: "MSI PRO B760M-E...",
-    description:
-      "The PRO Series is tailored to professionals from all walks of life. The lineup features... ",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu3.png",
-  },
-  {
-    id: 4,
-    name: "Bloody W95 Max RGB",
-    description:
-      "The A4Tech W95 Max Bloody mouse is the optimal solution for those looking for a high-quality and productive mouse",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu4.png",
-  },
-  {
-    id: 5,
-    name: "Corsair VENGEANCE",
-    description:
-      "CORSAIR VENGEANCE RGB PRO Series DDR4 overclocked memory lights up your PC with mesmerizing ...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu5.png",
-  },
-];
-
 const LaptopHeroSection = () => {
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const fetch = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1`,
         {
@@ -67,7 +30,9 @@ const LaptopHeroSection = () => {
       if ((response.status = 200)) {
         setData(response.data.data);
       }
+      setLoading(false);
     } catch (err) {
+      setLoading(false);
       toast.error("Error");
     }
   };
@@ -146,24 +111,22 @@ const LaptopHeroSection = () => {
       <div className="py-10  dark:bg-black">
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
-            <PopularItemSection
-              title="Popular in  Laptops"
-              subtitle="Choose your necessary gaming items from this category."
-              products={data}
-              onExplore={() => console.log("Explore Used Consoles")}
-              explorePath=""
-            />
-            {/* <PopularItemSection
-              title="Popular in  New Laptops"
-              subtitle="Choose your necessary gaming items from this category."
-              products={usedConsoles}
-              onExplore={() => console.log("Explore Used Consoles")}
-              explorePath=""
-            /> */}
+            <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
+              <div className="flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
+                {data && data.length > 0 ? (
+                  [...Array(20)]
+                    .flatMap(() => data)
+                    .map((product, index) => <ProductCard product={product} />)
+                ) : (
+                  <div className="text-red-600">No Product To display</div>
+                )}
+              </div>
+            </Wrapper>
           </div>
         </Wrapper>
       </div>
       <Inspection />
+      {loading && <CustomLoader />}
     </div>
   );
 };
