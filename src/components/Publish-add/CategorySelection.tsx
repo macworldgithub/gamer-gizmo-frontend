@@ -69,7 +69,8 @@ const CategorySelection = ({ setSelectedCategory, selectCategory }: any) => {
                   : "hover:bg-gray-200 dark:hover:bg-gray-400"
               )}
             >
-              <div className="relative w-36 h-36 max-md:w-28 max-md:h-28 max-sm:h-16 max-sm:w-16 mx-auto mb-4">
+              <div className="relative w-36 h-36 max-md:w-28 max-md:h-28
+               max-sm:h-16 max-sm:w-16 mx-auto mb-4">
                 <img
                   src={
                     category?.icon ||
