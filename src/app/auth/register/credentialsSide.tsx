@@ -10,10 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
+import TermsAndConditionModal from "@/components/Modals/TermsAndConditionModal";
 
 const credentialSlide = () => {
   const router = useRouter();
-
+  const [showModal, setShowModal] = useState(false);
+  const [terms, setTerms] = useState("off");
   const signupUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`;
 
   const [formData, setFormData] = useState({
@@ -35,19 +37,21 @@ const credentialSlide = () => {
       [name]: value,
     }));
   };
-
+  console.log(terms);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    if (terms != "on") {
+      toast.error("Please accpet terms and condition");
+      return;
+    }
     if (formData.password.length < 6) {
       toast.error("password must be atleast 6 characters long");
+      return;
     }
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-    console.log("Signup URL:", signupUrl);
-    console.log("Form Data:", formData);
 
     try {
       const response = await axiosInstance.post(signupUrl, {
@@ -87,7 +91,7 @@ const credentialSlide = () => {
   return (
     <div
       id="loginCredentials"
-      className="flex dark:shadow-combinedNight shadow-combinedDay max-sm:h-fit rounded-l-[12px] flex-col w-[60%] max-md:w-[100%] dark:bg-black items-center gap-5 max-sm:gap-2 box-border max-sm:mb-[300px] p-10"
+      className="flex dark:shadow-combinedNight shadow-combinedDay  rounded-l-[12px] flex-col w-[60%] max-md:w-[100%] dark:bg-black items-center gap-5 max-sm:gap-2 box-border max-sm:mb-[10px] p-10"
     >
       <div className="w-[100%] mb-2">
         <h1 className="text-[2rem] max-sm:text-[1.5rem] font-bold text-left text-black dark:text-white">
@@ -179,14 +183,21 @@ const credentialSlide = () => {
         </div>
         <div className="w-[100%] text-black dark:text-white py-2">
           <label htmlFor="rememberMe" className="flex">
-            <input type="radio" id="rememberMe" />
+            <input
+              type="radio"
+              id="rememberMe"
+              onChange={(e) => setTerms(e.target.value)}
+            />
             <span id="customRadio"></span> I accept the{" "}
-            <p className="underline text-linksColor font-medium pl-1">
+            <p
+              onClick={() => setShowModal(true)}
+              className="underline text-linksColor hover:cursor-pointer font-medium pl-1"
+            >
               Terms and Condition
             </p>
           </label>
         </div>
-        <div className="w-[100%] h-max py-4">
+        <div className="w-[100%] py-4">
           <button
             type="submit"
             className="bg-custom-gradient text-white w-[100%] py-2 rounded-full flex justify-center"
@@ -208,6 +219,10 @@ const credentialSlide = () => {
           <h2 className="underline">Already have an account</h2>
         </Link>
       </form>
+      <TermsAndConditionModal
+        openEditModal={showModal}
+        setOpenEditModal={setShowModal}
+      />
     </div>
   );
 };

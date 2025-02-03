@@ -36,8 +36,8 @@ export default function MainPage() {
   ]);
 
   return (
-    <Wrapper>
-      <div className=" p-6 lg:mt-52">
+    <Wrapper className="max-sm:pr-0">
+      <div className="lg:p-6 w-full  max-lg:p-0 lg:mt-52">
         <h1 className="text-2xl font-bold mb-6">All Favorites</h1>
 
         {/* Search Bar */}
@@ -45,63 +45,43 @@ export default function MainPage() {
           <input
             type="text"
             placeholder="Search"
-            className=" border border-gray-300 rounded-lg py-2 px-4 "
+            className="border border-gray-300 rounded-lg py-2 px-4 w-[30%] max-sm:w-52"
           />
         </div>
 
         {/* Favorites List */}
-        <div className="grid grid-cols-1 gap-6">
+        <div className="flex flex-col gap-6">
           {favorites.map((item) => (
-            <div key={item.id} className="flex items-start">
+            <div
+              key={item.id}
+              className="flex flex-row items-start p-4 rounded-lg w-full"
+            >
               {/* Image */}
-              <div className="relative w-48 h-48 ">
-                <div className="max-lg:w-[80px] max-sm:h-[20px]">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    className="object-contain max-sm:w-[10px] "
-                    layout="fill"
-                  />
-                </div>
-
-                {/* Save and Heart Icons */}
-                <div className="absolute  flex gap-2">
-                  <Image
-                    src="/images/Save .png"
-                    alt="Save"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 cursor-pointer"
-                  />
-                  <Image
-                    src="/images/Heart.png"
-                    alt="Heart"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 cursor-pointer"
-                  />
-                </div>
+              {/* flex-shrink-0 */}
+              <div className=" w-36 h-36 ">
+                <Image
+                  width={100}
+                  height={100}
+                  src={item.image}
+                  alt={item.name}
+                  className="object-contain w-full h-full"
+                />
               </div>
 
               {/* Details */}
-              <div className="p-6 flex-1">
-                <h2 className="text-xl font-bold break-words max-w-[600px] max-lg:text-md max-md:text-sm">
+              <div className="p-6 max-sm:pr-0 flex flex-col justify-center flex-1">
+                <h2 className="text-base font-bold break-words max-w-[600px] max-sm:text-xs max-sm:w-48">
                   {item.name}
                 </h2>
-
-                <p className="mt-2 text-xs text-gray-500 max-sm:hidden">
-                  {item.warranty}
-                </p>
+                <p className="mt-2 text-xs text-gray-500">{item.warranty}</p>
                 <div className="mt-4 flex items-center gap-2">
-                  <button className="flex items-center gap-2 text-sm text-white bg-custom-gradient px-5 py-3 rounded-lg hover:bg-purple-600 max-sm:px-3 max-sm:py-2 max-sm:w-[8rem] max-sm:text-xs
-                  
-                  ">
-                    <FiPhone />
-                    {item.phone}
+                  <button className="flex items-center justify-center  gap-2    border  max-sm:w-[6rem] max-sm:h-[2rem] max-sm:px-1 px-3 py-3  rounded-lg bg-custom-gradient text-white w-[8rem] h-12 text-xs">
+                    <FiPhone className="w-7 h-4" />
+                    <p className="w-28 max-sm:text-[0.6rem]">{item.phone}</p>
                   </button>
-                  <button className="flex items-center gap-2 text-sm text-purple-500 border border-[#DC39FC] px-3 py-3 rounded-lg hover:bg-purple-100 max-sm:px-3 max-sm:py-2 max-sm:w-[8rem]  max-sm:text-xs ">
+                  <button className="flex items-center justify-center  gap-2  text-purple-500 border border-[#DC39FC] max-sm:w-[6rem] max-sm:h-[2rem] max-sm:px-0 px-3 py-3  rounded-lg hover:bg-purple-100 w-[8rem] h-12 text-xs ">
                     <FiMessageSquare />
-                    Send Message
+                    <p className="max-sm:text-[0.45rem]"> Send Message</p>
                   </button>
                 </div>
               </div>

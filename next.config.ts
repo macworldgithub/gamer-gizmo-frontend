@@ -1,6 +1,6 @@
 const nextConfig = {
   images: {
-    domains: ["localhost"],
+    domains: ["localhost","backend.gamergizmo.com"],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete

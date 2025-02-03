@@ -103,7 +103,7 @@ const EditProfileModal = ({
   if (!openEditModal) return null;
   return (
     <div
-      className={`fixed inset-0 transition-all duration-200 bg-black bg-opacity-50 flex justify-center items-center z-50 ${
+      className={`fixed inset-0 transition-all text-black  duration-200 bg-black bg-opacity-50 flex justify-center items-center z-50 ${
         openEditModal ? "block" : "hidden"
       }`}
     >

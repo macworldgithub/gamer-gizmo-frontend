@@ -1,10 +1,8 @@
-
 "use client";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  
   const [items, setItems] = useState([
     {
       id: 1,
@@ -33,15 +31,14 @@ export default function Home() {
   ]);
 
   return (
-    
     <div className="max-lg:hidden">
       <div className="ml-40 mt-20 p-4">
         <h2 className="text-2xl font-bold">My Favorites</h2>
-        <p className="text-xl">
+        <p className="text-base">
           Create a list to oraganize your favorites listings
         </p>
       </div>
-      <div className="w-[25rem] border flex flex-col  h-4/6 overflow-y-auto mt-20 ml-40 rounded-b-3xl rounded-t-3xl  ">
+      <div className=" border flex flex-col  h-4/6 overflow-y-auto mt-10 ml-40 rounded-b-3xl rounded-t-3xl">
         <div className="flex justify-between items-center p-4 ">
           <h2 className="text-xl font-semibold ">All Favorites</h2>
           <button className="text-blue-600 text-sm ">+ Create list</button>
@@ -51,15 +48,15 @@ export default function Home() {
           {items.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-center gap-10 bg-white border p-3  "
+              className="flex items-center justify-center lg:gap-4 xl:gap-10 bg-white border py-3"
             >
               {/* Image */}
               <Image
                 src={item.image}
                 alt={item.title}
-                width={120}
+                width={100}
                 height={150}
-                className="rounded"
+                className="rounded lg:pl-2"
               />
               {/* Content */}
               <div className=" ">

@@ -1,22 +1,66 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductDetails from "./ProductDetails";
 import AuthorSection from "./AuthorSection";
 import RelatedNewsSection from "./RelatedNewsSection";
 import Rightsection from "./Rightsection";
 import CommentsSection from "./CommentsSection";
+import { useParams } from "next/navigation";
 import ContactForm from "./ContactForm";
 import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "@/components/Store/Store";
 const page = () => {
+  const params = useParams();
+  const token = useSelector((state: RootState) => state.user.token);
+  const [data, setData] = useState([]);
+  const [similarItems, setSimilarItems] = useState([]);
   const cardContent = {
     title: "Similar Ads",
     description:
       "Choose your necessary Parts from this Used Gaming Pc categories",
     note: "",
   };
+  const fetchSimilarItems = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
+      setSimilarItems(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+  const fetch = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getProductById?id=${params.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if ((response.status = 200)) {
+        setData(response.data.data);
+      }
+    } catch (err) {
+      toast.error("Error");
+    }
+  };
+  console.log(data);
+  useEffect(() => {
+    fetch();
+    fetchSimilarItems();
+  }, []);
   const usedConsoles = [
     {
       id: 1,
@@ -63,14 +107,14 @@ const page = () => {
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-10">
         <div className="w-[65%] max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
-          <ProductDetails />
+          <ProductDetails data={data} />
           <AuthorSection />
           <RelatedNewsSection />
           <CommentsSection />
           <ContactForm />
         </div>
         <div className="md:w-[35%] max-md:w-0">
-          <Rightsection />
+          <Rightsection data={data} />
         </div>
       </div>
 
@@ -81,7 +125,7 @@ const page = () => {
           <PopularItemSection
             title="Similar Ads"
             subtitle="Choose your necessary gaming items from this category."
-            products={usedConsoles}
+            products={similarItems}
             onExplore={() => console.log("Explore Used Consoles")}
             explorePath=""
           />
