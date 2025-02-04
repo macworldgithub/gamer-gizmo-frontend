@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { FaHeart, FaBookmark } from "react-icons/fa";
+import { FaRegHeart, FaRegBookmark } from "react-icons/fa";
 
 interface ProductImage {
   image_url: string;
@@ -24,12 +24,15 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
   return (
     <div className="relative w-full max-w-[600px] mx-auto">
       {/* Icons overlay */}
-      <div className="flex space-x-4 justify-between z-10 mt-10">
-        <button className="bg-white p-2 rounded-full shadow hover:bg-gray-100">
-          <FaHeart className="text-red-500" />
+      <div className="flex space-x-4 justify-between z-10 mt-10 mb-4">
+        <button className="hover:bg-gray-100">
+          <FaRegHeart
+            size={25}
+            className=" text-purple-600 hover:text-red-900"
+          />
         </button>
-        <button className="bg-white p-2 rounded-full shadow hover:bg-gray-100">
-          <FaBookmark className="text-gray-600" />
+        <button className="p-2 ">
+          <FaRegBookmark size={25} className="text-gray-600" />
         </button>
       </div>
 
@@ -43,7 +46,7 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
       >
         {data.product_images.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex justify-center items-center bg-white">
+            <div className="flex justify-center items-center bg-white dark:bg-black">
               <Image
                 src={`${baseUrl}/${item.image_url}`}
                 alt={`product-image-${idx}`}
