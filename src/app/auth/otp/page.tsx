@@ -47,14 +47,14 @@ export default function OtpScreen() {
           email,
           otp: enteredOtp,
         });
-
-        if (response.status === 200 || response.status === 201) {
+        console.log(response,"lol")
+        if (response.data === "Verification Success") {
           toast.success("OTP verified successfully!");
           setTimeout(() => {
             router.push("/Auth/login");
           }, 3000);
         } else {
-          toast.error(response.data.message || "OTP verification failed");
+          toast.error(response.data || "OTP verification failed");
         }
       } catch (error: any) {
         console.error("Error during OTP verification:", error);
@@ -81,7 +81,7 @@ export default function OtpScreen() {
           We've sent a verification code to your email.
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex text-black flex-col gap-6">
           <div className="flex justify-center gap-3 max-md:gap-2">
             {otp.map((value, index) => (
               <input
