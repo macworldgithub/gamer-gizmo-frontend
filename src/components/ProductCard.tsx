@@ -21,7 +21,9 @@ const ProductCard = ({ product }: any) => {
       <div className="relative w-full h-32  bg-black max-sm:h-[2.2rem]">
         {product?.images && (
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${
+              product?.images[0]?.image_url || "/logo.png"
+            }`}
             alt={product.name}
             layout="fill"
             objectFit="cover"

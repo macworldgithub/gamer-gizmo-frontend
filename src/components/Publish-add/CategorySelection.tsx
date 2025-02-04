@@ -26,7 +26,7 @@ const CategorySelection = ({
       ) : categoryError ? (
         <p className="text-red-500">{categoryError}</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 max-sm:w-[70%] sm:w-[60%]  md:w-full lg:w-[80%] xl:w-[60%] max-sm:gap-3 gap-14 mt-6 mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 max-sm:w-[70%] sm:w-[60%]  md:w-full lg:w-[80%] xl:w-[60%] max-sm:gap-3 gap-14  mt-6 mx-auto">
           {categories.map((category: any) => (
             <div
               key={category?.id}
