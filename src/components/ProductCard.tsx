@@ -13,21 +13,20 @@ const ProductCard = ({ product }: any) => {
     >
       <div
         className={
-          "hover:cursor-pointer z-20 top-2 right-2 absolute hover:text-red-600"
+          "hover:cursor-pointer z-20 top-2 right-2 absolute text-white  hover:text-red-600"
         }
       >
-        <MdFavorite size={24} />
+        <MdFavorite size={24} className="max-sm:h-4 " />
       </div>
-      <div className="relative w-full h-32  bg-black max-sm:h-[2.2rem]">
+      <div className="relative w-full h-24  bg-black max-sm:h-[2.2rem]">
         {product?.images && (
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${
-              product?.images[0]?.image_url || "/logo.png"
-            }`}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
             alt={product.name}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
             className="rounded-t-lg hover:scale-105 transition-all duration-300 mx-auto"
+            onError={(e) => (e.currentTarget.src = "/gameIcon.png")}
           />
         )}
       </div>
@@ -39,7 +38,7 @@ const ProductCard = ({ product }: any) => {
         <p className="text-xs text-gray-500 mt-1 max-sm:my-0 truncate max-md:text-[0.8rem] max-sm:text-[0.4rem]">
           {product.description}
         </p>
-        <p className="text-purple-500 font-bold mt-2 sm:mt-1 max-sm:mt-0   max-sm:text-[0.4rem]">
+        <p className="text-purple-500 font-bold   max-sm:text-[0.4rem]">
           {product.price} AED
         </p>
         <div className="flex items-center">
@@ -47,9 +46,9 @@ const ProductCard = ({ product }: any) => {
             onClick={() => {
               router.push(`/product-details/${product.id}`);
             }}
-            className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 max-sm:mt-0 px-3 py-1 rounded-full text-xs hover:bg-purple-600 max-md:w-[3rem] max-sm:h-4 max-md:py-0.5 max-sm:w-[2.1rem] max-sm:py-0.1 max-sm:text-[0.6rem]"
+            className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 max-sm:mt-0 px-3 py-1 rounded-full text-xs hover:bg-purple-600 max-md:w-[3rem] max-sm:h-4 max-md:py-0.5 max-sm:w-[4rem] max-sm:py-0.1 "
           >
-            View Details
+            <p className="max-sm:text-[0.4rem]"> View Details</p>
           </button>
         </div>
       </div>

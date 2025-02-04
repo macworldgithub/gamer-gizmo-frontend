@@ -127,6 +127,7 @@ const ConsoleHeader = () => {
             <PopularItemSection
               title="Popular in  Used PC Consoles"
               subtitle="Choose your necessary gaming items from this category."
+              //@ts-ignore
               products={usedConsoles}
               onExplore={() => console.log("Explore Used Consoles")}
               explorePath=""
@@ -134,6 +135,7 @@ const ConsoleHeader = () => {
             <PopularItemSection
               title="Popular in  New PC Consoles"
               subtitle="Choose your necessary gaming items from this category."
+              //@ts-ignore
               products={usedConsoles}
               onExplore={() => console.log("Explore Used Consoles")}
               explorePath=""
