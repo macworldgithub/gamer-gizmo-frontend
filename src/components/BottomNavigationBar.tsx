@@ -272,7 +272,10 @@ const BottomNavigationBar = () => {
               </Link>
 
               <div className="flex-col items-center mx-auto pl-0">
-                <Link href="/publish-add">
+                <Link
+                  href="/publish-add"
+                  onClick={() => setIsDrawerOpen(false)}
+                >
                   <div className="w-[7rem] mx-auto h-9 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
                     <Image
                       src="/images/btnIcon.png"
@@ -281,7 +284,7 @@ const BottomNavigationBar = () => {
                       height={16}
                       alt="btnIcon"
                     />
-                    <span className="text-xs text-white">Post Your Ad</span>
+                    <span className="text-xs text-white ">Post Your Ad</span>
                   </div>
                 </Link>
 
