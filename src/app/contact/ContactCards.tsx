@@ -5,11 +5,9 @@ import Wrapper from "@/components/Common/Wrapper/Wrapper";
 const ContactCards = () => {
   return (
     <div className="bg-white py-10 dark:bg-black">
-     
       <Wrapper>
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-       
-          <div className="bg-[#6345ED12] rounded-lg shadow-lg p-6 text-center h-80 flex flex-col justify-between items-center border border-gray-300 dark:border-purple-400">
+          <div className="bg-[#6345ED12] rounded-lg shadow-lg p-6 text-center h-60 flex flex-col justify-between items-center border border-gray-300 dark:border-purple-400">
             <h2 className="text-xl font-semibold dark:text-white">
               Contact Number
             </h2>
@@ -27,7 +25,7 @@ const ContactCards = () => {
           </div>
 
           {/* Card 2: Location */}
-          <div className="bg-[#6345ED12] rounded-lg shadow-lg p-6 text-center h-80 flex flex-col justify-between items-center border border-gray-300 dark:border-purple-400">
+          <div className="bg-[#6345ED12] rounded-lg shadow-lg p-6 text-center h-60 flex flex-col justify-between items-center border border-gray-300 dark:border-purple-400">
             <h2 className="text-xl font-semibold dark:text-white">Location</h2>
             <div className="flex justify-center">
               <Image
@@ -45,7 +43,7 @@ const ContactCards = () => {
           </div>
 
           {/* Card 3: Email */}
-          <div className="bg-[#6345ED12] rounded-lg shadow-lg p-6 text-center h-80 flex flex-col justify-between items-centerborder-gray-300 border border-gray-300 dark:border-purple-400">
+          <div className="bg-[#6345ED12] rounded-lg shadow-lg p-6 text-center h-60 flex flex-col justify-between items-centerborder-gray-300 border border-gray-300 dark:border-purple-400">
             <h2 className="text-xl font-semibold dark:text-white">Email</h2>
             <div className="flex justify-center">
               <Image

@@ -2,10 +2,11 @@
 import PageHeader from "@/components/PageHeader";
 import React from "react";
 import Image from "next/image";
-import PopularItemSection from "@/components/PopularItemSection";
+// import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import Inspection from "@/components/Inspection";
 import SelectLabels from "@/components/SelectLabels";
+import CardItem from "./CardItem";
 
 const usedConsoles = [
   {
@@ -173,7 +174,7 @@ const Header = () => {
               </p>
             </div>
 
-            {/* Sell Faster Section */}
+            
             <div className="text-center">
               <div className="flex justify-center mb-3">
                 <Image
@@ -203,8 +204,8 @@ const Header = () => {
       <div className="py-10  dark:bg-black">
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
-            {/* Product Grid */}
-            <PopularItemSection
+            
+            <CardItem
               title="Popular in New Gaming PC Parts"
               subtitle="Choose your necessary gaming items from this category."
               products={usedConsoles}

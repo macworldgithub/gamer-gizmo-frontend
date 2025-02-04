@@ -1,7 +1,7 @@
-import React from 'react';
-import Image from 'next/image';
-import gpu from '../../../public/images/GPU6.png';
-import bin from '../../../public/images/Delete.png';
+import React from "react";
+import Image from "next/image";
+import gpu from "../../../public/images/GPU6.png";
+import bin from "../../../public/images/Delete.png";
 
 const ShoppingCart = () => {
   return (
@@ -21,7 +21,9 @@ const ShoppingCart = () => {
                   <th className="text-left p-4 text-sm md:text-base">Item</th>
                   <th className="text-left p-4 text-sm md:text-base">Price</th>
                   <th className="text-left p-4 text-sm md:text-base">Qty</th>
-                  <th className="text-left p-4 text-sm md:text-base">Subtotal</th>
+                  <th className="text-left p-4 text-sm md:text-base">
+                    Subtotal
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -35,7 +37,9 @@ const ShoppingCart = () => {
                         height={64}
                         className="object-cover "
                       />
-                      <span>AMD Radeon RX 580 GTS XXX Edition Graphics Card...</span>
+                      <span>
+                        AMD Radeon RX 580 GTS XXX Edition Graphics Card...
+                      </span>
                     </td>
                     <td className="p-4 font-bold text-sm md:text-base">
                       <span className="text-xs">AED </span>
@@ -79,10 +83,15 @@ const ShoppingCart = () => {
 
         {/* Summary Section */}
         <div className="bg-gray-200 p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold mb-4 text-sm md:text-base">Summary</h2>
+          <h2 className="text-lg font-semibold mb-4 text-sm md:text-base">
+            Summary
+          </h2>
           <div className="w-full h-[2px] bg-gray-300 mb-4"></div>
           <div className="mb-4">
-            <label htmlFor="discountCode" className="block text-sm font-medium mb-2">
+            <label
+              htmlFor="discountCode"
+              className="block text-sm font-medium mb-2"
+            >
               Apply Discount Code
             </label>
             <div className="flex gap-2">
@@ -107,7 +116,9 @@ const ShoppingCart = () => {
               </div>
             </div>
             <div className="flex justify-between">
-              <span className="text-xs md:text-sm">Shipping (Flat Rate - Fixed)</span>
+              <span className="text-xs md:text-sm">
+                Shipping (Flat Rate - Fixed)
+              </span>
               <div className="font-bold">
                 <span className="text-xs">AED </span>
                 <span>20.00</span>
