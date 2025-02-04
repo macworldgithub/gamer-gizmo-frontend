@@ -29,11 +29,21 @@ const PublishAdd: React.FC = () => {
     name: "",
   });
   const [selectProcessor, setSelectedProcessor] = useState({ id: 0, name: "" });
+  const [selectRam, setSelectedRam] = useState({ id: 0, name: "" });
+  const [selectGpu, setSelectedGpu] = useState({ id: 0, name: "" });
+  const [selectStoarge, setSelectedStoarge] = useState({ id: 0, name: "" });
+  const [selectStorageType, setSelectedStorageType] = useState({ id: 0, name: "" });
+  const [selectedCondition, setSelectedCondition] = useState({ id: 0, name: "" });
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
   const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
   const [selectedLocation, setSelectedLocation] = useState({ id: 0, name: "" });
+  const [conditioneData, setConditioneData] = useState<any[]>([]);
   const [activeStep, setActiveStep] = useState<number>(0);
+  const [gpuData, setgpuData] = useState<any[]>([]);
+  const [ramData, setRamData] = useState<any[]>([]);
+  const [storageTypeData, setStorageTypeData] = useState<any[]>([]);
+  const [storageData, setStorageData] = useState<any[]>([]);
   const [price, setPrice] = useState("0");
   const [quantity, setQuantity] = useState("0");
   const [formData, setFormData] = useState<Record<string, any>>({
@@ -57,6 +67,7 @@ const PublishAdd: React.FC = () => {
     connectivity: "",
     warranty_status: "",
     location: "",
+    otherBrandName:""
   });
   const [componentCategories, setComponentCategories] = useState([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -86,9 +97,7 @@ const PublishAdd: React.FC = () => {
       setLoadingCategories(false);
     }
   };
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+ 
   useLayoutEffect(() => {
     if (!token) {
       return redirect("/auth/login");
@@ -104,11 +113,11 @@ const PublishAdd: React.FC = () => {
       return false;
     }
     if (
-      activeStep === 2 &&
+      activeStep === 1 &&
       (!formData.title ||
         !formData.description ||
-        !formData.condition ||
-        !selectModel)
+        !selectBrand
+        )
     ) {
       toast.error("Please provide all the following details.");
       return false;
@@ -135,7 +144,65 @@ const PublishAdd: React.FC = () => {
       [field]: value,
     }));
   };
+  const fetchGPU = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/gpu/getAll`
+      );
+      setgpuData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchRam = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/ram/getAll`
+      );
+      setRamData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchConditions = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/conditions/getAll`
+      );
+      setConditioneData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchStorga = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/getStorage`
+      );
+      setStorageData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchStorgaeType = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/getStorageType`
+      );
+      setStorageTypeData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
 
+  useEffect(() => {
+    fetchCategories();
+    fetchStorga()
+    fetchConditions()
+    fetchStorgaeType()
+    fetchRam()
+    fetchGPU()
+  }, []);
   const handleSubmit = async () => {
     let formDataObject = new FormData();
 
@@ -146,9 +213,10 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("price", price.toString());
     formDataObject.append("stock", quantity.toString());
     formDataObject.append("brand_id", selectBrand.id.toString());
+    formDataObject.append("otherBrandName", formData.otherBrandName);
     formDataObject.append("model_id", selectModel.id.toString());
     formDataObject.append("category_id", selectCategory.id.toString());
-    formDataObject.append("condition", formData.condition);
+    formDataObject.append("condition", selectedCondition.id.toString());
     formDataObject.append("location", selectedLocation.id.toString());
     formDataObject.append("is_published", "true");
 
@@ -232,6 +300,8 @@ const PublishAdd: React.FC = () => {
           selectedLocation={selectedLocation}
           setSelectedBrand={setSelectedBrand}
           setComponentCategories={setComponentCategories}
+          conditioneData={conditioneData}
+          setSelectedCondition={setSelectedCondition} selectedCondition={selectedCondition}
         />
       ),
     },
@@ -249,6 +319,18 @@ const PublishAdd: React.FC = () => {
           setSelectedProcessorVariant={setSelectedProcessorVariant}
           selectProcessor={selectProcessor}
           setSelectedProcessor={setSelectedProcessor}
+          gpuData={gpuData}
+          ramData={ramData}
+          storageTypeData={storageTypeData}
+          storageData={storageData}
+          selectGpu={selectGpu}
+          setSelectedGpu={setSelectedGpu}
+          setSelectedRam={setSelectedRam}
+          selectRam={selectRam}
+          selectStoarge={selectStoarge}
+          setSelectedStoarge={setSelectedStoarge}
+          selectStorageType={selectStorageType}
+          setSelectedStorageType={setSelectedStorageType}
         />
       ),
     },
@@ -289,6 +371,11 @@ const PublishAdd: React.FC = () => {
           selectProcessorVariant={selectProcessorVariant}
           fileList={fileList}
           selectComponentCategory={selectComponentCategory?.name}
+          selectGpu={selectGpu}
+          selectRam={selectRam}
+          selectStoarge={selectStoarge}
+          selectStorageType={selectStorageType}
+          selectedCondition={selectedCondition}
         />
       ),
     },

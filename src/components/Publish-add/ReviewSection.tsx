@@ -13,6 +13,11 @@ interface ReviewSectionProps {
   quantity: string;
   fileList: UploadFile[];
   selectComponentCategory: string;
+  selectGpu:any;
+          selectRam:any;
+          selectStoarge:any;
+          selectStorageType:any;
+          selectedCondition:any;
   
 }
 
@@ -27,15 +32,20 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
   selectComponentCategory,
   selectLocation,
   selectProcessor,
-  selectProcessorVariant
+  selectProcessorVariant,
+  selectGpu,
+          selectRam,
+          selectStoarge,
+          selectStorageType,
+          selectedCondition,
 }) => {
   const details = [
     { label: "Category", value: selectCategory?.name },
-    { label: "Brand", value: selectBrand?.name },
+    { label: "Brand", value: selectBrand?.name?selectBrand?.name:formData.otherBrandName },
     { label: "Model", value: selectModel?.name },
     { label: "Title", value: formData.title },
     { label: "Description", value: formData.description },
-    { label: "Condition", value: formData.condition },
+    { label: "Condition", value: selectedCondition.name },
     { label: "Location", value: selectLocation.name },
     { label: "Price", value: price },
     { label: "Quantity", value: quantity },
@@ -44,8 +54,10 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
   const laptopDetails = [
     { label: "Processor", value: selectProcessor.name },
     { label: "Processor Type", value: selectProcessorVariant.name },
-    { label: "RAM", value: formData.ram },
-    { label: "Storage", value: formData.storage },
+    { label: "RAM", value: selectRam.name },
+    { label: "Storage Type", value: selectStorageType.name },
+    { label: "Storage", value: selectStoarge.name },
+    { label: "GPU", value: selectGpu.name },
     { label: "Screen Size", value: formData.screenSize },
     { label: "Screen Resolution", value: formData.screenResolution },
     { label: "Weight", value: formData.weight },

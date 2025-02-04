@@ -19,7 +19,19 @@ const MoreSpecification = ({
   setSelectedProcessorVariant,
   selectProcessorVariant,
   setSelectedProcessor,
-  selectProcessor
+  selectProcessor,
+  gpuData,
+  storageTypeData,
+  ramData,
+  storageData,
+  selectGpu,
+          setSelectedGpu,
+          setSelectedRam,
+          selectRam,
+          selectStoarge,
+          setSelectedStoarge,
+          selectStorageType,
+          setSelectedStorageType
 }: any) => {
     const [processorVariantData, setProcessorVariantData] = useState<any>([]);
     const [processorData, setProcessorData] = useState<any>([]);
@@ -113,23 +125,88 @@ const MoreSpecification = ({
                   </Select>
                 </FormControl>
               </Box>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel id="ram-select-label">RAM</InputLabel>
+                  <Select
+                    labelId="ram-select-label"
+                    id="ram-select"
+                    value={selectRam}
+                    label="RAM"
+                    sx={inputStyles}
+                    onChange={(e) => setSelectedRam(e.target.value)}
+                    className="sm:w-full max-sm:w-full"
+                  >
+                    {ramData.map((loc: any) => (
+                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                        {loc.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel id="st-select-label">Storage Type</InputLabel>
+                  <Select
+                    labelId="st-select-label"
+                    id="st-select"
+                    value={selectStorageType}
+                    label="Storage Type"
+                    sx={inputStyles}
+                    onChange={(e) => setSelectedStorageType(e.target.value)}
+                    className="sm:w-full max-sm:w-full"
+                  >
+                    {storageTypeData.map((loc: any) => (
+                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                        {loc.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
          
-          <TextField
-            sx={inputStyles}
-            label="RAM"
-            variant="outlined"
-            fullWidth
-            value={formData.ram || ""}
-            onChange={(e) => handleFormChange("ram", e.target.value)}
-          />
-          <TextField
-            sx={inputStyles}
-            label="Storage"
-            variant="outlined"
-            fullWidth
-            value={formData.storage || ""}
-            onChange={(e) => handleFormChange("storage", e.target.value)}
-          />
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel id="s-select-label">Storage</InputLabel>
+                  <Select
+                    labelId="s-select-label"
+                    id="s-select"
+                    value={selectStoarge}
+                    label="Storage"
+                    sx={inputStyles}
+                    onChange={(e) => setSelectedStoarge(e.target.value)}
+                    className="sm:w-full max-sm:w-full"
+                  >
+                    {storageData.map((loc: any) => (
+                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                        {loc.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel id="G-select-label">GPU</InputLabel>
+                  <Select
+                    labelId="G-select-label"
+                    id="G-select"
+                    value={selectGpu}
+                    label="GPU"
+                    sx={inputStyles}
+                    onChange={(e) => setSelectedGpu(e.target.value)}
+                    className="sm:w-full max-sm:w-full"
+                  >
+                    {gpuData.map((loc: any) => (
+                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                        {loc.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+          
           <TextField
             sx={inputStyles}
             label="Screen Size"

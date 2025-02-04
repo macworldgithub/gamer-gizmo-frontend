@@ -9,11 +9,19 @@ import axios from "axios";
 export default function SelectLabels() {
   const [locationData, setLocationData] = useState<any[]>([]);
   const [processorData, setProcessorData] = useState<any[]>([]);
+  const [gpuData, setgpuData] = useState<any[]>([]);
+  const [ramData, setRamData] = useState<any[]>([]);
+  const [storageTypeData, setStorageTypeData] = useState<any[]>([]);
+  const [conditioneData, setConditioneData] = useState<any[]>([]);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
   useEffect(() => {
     fetchProcessors();
     fetchLocations();
+    fetchGPU()
+    fetchRam()
+    fetchStorgaeType()
+    fetchConditions()
   }, []);
 
   const fetchLocations = async () => {
@@ -22,6 +30,46 @@ export default function SelectLabels() {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/location/getAll`
       );
       setLocationData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchGPU = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/gpu/getAll`
+      );
+      setgpuData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchRam = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/ram/getAll`
+      );
+      setRamData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchConditions = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/conditions/getAll`
+      );
+      setConditioneData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+  const fetchStorgaeType = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/getStorageType`
+      );
+      setStorageTypeData(response?.data?.data || []);
     } catch (err) {
       console.error("Failed to fetch locations.");
     }
@@ -48,15 +96,22 @@ export default function SelectLabels() {
     },
     {
       label: "Gpu",
-      options: ["NVIDIA", "AMD", "Integrated"],
+      options: 
+      gpuData.length > 0
+      ? gpuData.map((e) => e.name)
+      : ["NVIDIA", "AMD",],
     },
     {
       label: "RAM",
-      options: ["4GB", "8GB", "16GB", "32GB", "64GB"],
+      options:  ramData.length > 0
+      ? ramData.map((e) => e.name)
+      : ["4GB", "8GB", "16G"],
     },
     {
       label: "Storage",
-      options: ["SSD", "HDD", "Hybrid"],
+      options: storageTypeData.length > 0
+      ? storageTypeData.map((e) => e.name)
+      :["SSD", "HDD"],
     },
     {
       label: "Price Range",
@@ -70,7 +125,9 @@ export default function SelectLabels() {
     },
     {
       label: "Condition",
-      options: ["New", "Used", "Like New", "Refurbished"],
+      options: conditioneData.length > 0
+      ? conditioneData.map((e) => e.name)
+      :["New", "Used",],
     },
     {
       label: "Location",
