@@ -13,6 +13,7 @@ interface UserDataState {
   phone: string | null;
   is_admin_verified: false | null;
   dob: string | null;
+  profile: string | null;
   gender: string | null;
   nic_front_image: string | null;
   nic_back_image: string | null;
@@ -22,6 +23,7 @@ interface UserDataState {
 const initialState: UserDataState = {
   token: null,
   id: null,
+  profile: null,
   username: null,
   email: null,
   first_name: null,

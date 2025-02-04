@@ -26,6 +26,8 @@ const BottomNavigationBar = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [firstClick, setFirstClick] = useState(false);
+  const profile = useSelector((state: RootState) => state.user.profile);
+  const username = useSelector((state: RootState) => state.user.username);
   const dispatch = useDispatch();
   useEffect(() => {
     if (theme === "day") {
@@ -105,7 +107,7 @@ const BottomNavigationBar = () => {
       key: "4",
 
       icon: <MdOutlineFavorite />,
-      label: <Link href="/like">Favourites</Link>,
+      label: <Link href="/favourites">Favourites</Link>,
     },
     {
       key: "5",
@@ -123,15 +125,6 @@ const BottomNavigationBar = () => {
   ];
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
-      {/* <Link href="/">
-        <Image
-          src="/images/gameIcon.png"
-          alt="logo-img"
-          width={100}
-          height={100}
-          className="max-sm:w-[4rem] md:w-[2rem] md:ml-[0.2rem] lg:w-[5rem] md:h-[1.8rem] lg:h-12 max-sm:mx-auto"
-        />
-      </Link> */}
       {/* </div> */}
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         <Link href="/desktop">Desktops</Link>
@@ -178,25 +171,22 @@ const BottomNavigationBar = () => {
                                 : "hidden"
                             }`}
             >
-              {/* <Image
-              src="/images/profile.png"
-              alt="Profile"
-              width={40}
-              height={40}
-              className="rounded-full"
-            /> */}
               <div onClick={() => setIsDrawerOpen(false)}>
                 <LuPanelLeftClose
-                  size={32}
+                  size={28}
                   color="black"
-                  className="mb-4 dark:invert"
+                  className="my-4 dark:invert"
                 />
               </div>
               {isLogin ? (
                 <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
                   <Dropdown className="shadow-2xl" menu={{ items }}>
                     <Image
-                      src="/images/profile.png"
+                      src={
+                        profile != null
+                          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
+                          : "/images/profile.png"
+                      }
                       alt="Profile"
                       width={40}
                       height={40}
@@ -218,7 +208,9 @@ const BottomNavigationBar = () => {
                   </div>
                 </Link>
               )}
-              <p className="text-secondaryColorLight">Ayla Imran</p>
+              {username && (
+                <p className="text-secondaryColorLight">{username}</p>
+              )}
               <Link
                 href="/desktop"
                 className="text-lg hover:text-gray-300"
@@ -314,7 +306,11 @@ const BottomNavigationBar = () => {
           <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
             <Dropdown className="shadow-2xl" menu={{ items }}>
               <Image
-                src="/images/profile.png"
+                src={
+                  profile != null
+                    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
+                    : "/images/profile.png"
+                }
                 alt="Profile"
                 width={50}
                 height={50}
