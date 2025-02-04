@@ -13,6 +13,7 @@ import SpecificationsTable from "./specification";
 import Buynow from "./buynow";
 import Sellersdetails from "./sellersdetail";
 import { formatDate } from "@/app/utils/formatDate";
+import ProductImageSwiper from "@/components/ProductImageSwiper";
 
 const ProductDetails = ({ data }: any) => {
   const [activeTab, setActiveTab] = useState("overview"); // State to track active tab
@@ -22,12 +23,13 @@ const ProductDetails = ({ data }: any) => {
       {/* Image Section */}
       <div className="w-full flex justify-center items-center h-auto">
         {data?.product_images && (
-          <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.product_images[0]?.image_url}`}
-            alt="image"
-            width={600}
-            height={400}
-          />
+          // <Image
+          //   src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.product_images[0]?.image_url}`}
+          //   alt="image"
+          //   width={600}
+          //   height={400}
+          // />
+          <ProductImageSwiper data={data} />
         )}
       </div>
 

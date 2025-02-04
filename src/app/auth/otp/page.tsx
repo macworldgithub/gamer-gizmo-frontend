@@ -78,7 +78,7 @@ export default function OtpScreen() {
           Enter OTP
         </h1>
         <p className="text-center text-gray-500 mb-8">
-          We've sent a verification code to your phone.
+          We've sent a verification code to your email.
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
