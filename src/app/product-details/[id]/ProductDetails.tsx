@@ -79,7 +79,7 @@ const ProductDetails = ({ data }: any) => {
           </div>
         </div>
 
-        <Buynow data={data}/>
+        <Buynow data={data} />
 
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">
