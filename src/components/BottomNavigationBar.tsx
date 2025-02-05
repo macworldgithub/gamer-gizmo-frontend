@@ -265,7 +265,7 @@ const BottomNavigationBar = () => {
 
               <div className="flex-col items-center mx-auto pl-0">
                 <Link
-                  href="/publish-add"
+                  href="/publish-ad"
                   onClick={() => setIsDrawerOpen(false)}
                 >
                   <div className="w-[7rem] mx-auto h-9 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
@@ -287,7 +287,7 @@ const BottomNavigationBar = () => {
         )}
       </div>
       <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem]">
-        <Link href="/publish-add">
+        <Link href="/publish-ad">
           <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
             <Image
               src="/images/btnIcon.png"

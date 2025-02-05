@@ -37,7 +37,7 @@ const FilterSection = () => {
           </div>
         )}
 
-        <SelectLabels />
+        <SelectLabels route="search-product" />
         <div className="bg-black dark:bg-custom-gradient w-[191px] h-[55px] mt-5 rounded-full flex justify-center gap-3 items-center">
           <Image
             src="/images/arrowIcon.png"

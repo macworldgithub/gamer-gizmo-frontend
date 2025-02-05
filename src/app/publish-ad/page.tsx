@@ -1,10 +1,10 @@
 "use client";
-import CategorySelection from "@/components/Publish-add/CategorySelection";
-import DetailSection from "@/components/Publish-add/DetailSection";
-import MoreSpecification from "@/components/Publish-add/MoreSpecification";
-import PriceComponent from "@/components/Publish-add/PriceComponent";
-import ReviewSection from "@/components/Publish-add/ReviewSection";
-import UploadImages from "@/components/Publish-add/UploadImages";
+import CategorySelection from "@/components/publish-ad/CategorySelection";
+import DetailSection from "@/components/publish-ad/DetailSection";
+import MoreSpecification from "@/components/publish-ad/MoreSpecification";
+import PriceComponent from "@/components/publish-ad/PriceComponent";
+import ReviewSection from "@/components/publish-ad/ReviewSection";
+import UploadImages from "@/components/publish-ad/UploadImages";
 import { RootState } from "@/components/Store/Store";
 import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import { UploadFile } from "antd";
