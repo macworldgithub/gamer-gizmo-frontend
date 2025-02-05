@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { formatDate } from "@/app/utils/formatDate";
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdOutlineMailLock } from "react-icons/md";
 
 const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
@@ -104,12 +106,7 @@ const Rightsection = ({ data }: any) => {
         {/* Icons Row */}
         <div className="flex flex-col justify-center gap-2 items-center space-x-6 mb-6 dark:invert">
           <div className="flex gap-4 text-black">
-          <Image
-            src="/images/cellphone.png"
-            alt="Cellphone Icon"
-            width={24}
-            height={24}
-            />
+          <FaPhoneAlt/>
           <div className="text-sm">
           {data?.users?.phone}
           </div>
@@ -117,12 +114,7 @@ const Rightsection = ({ data }: any) => {
             </div>
 
             <div className="flex gap-4 text-black">
-          <Image
-         src="/images/message.png"
-            alt="Message Icon"
-            width={24}
-            height={24}
-            />
+        <MdOutlineMailLock/>
           <div className="text-sm">
           {data?.users?.email}
           </div>
