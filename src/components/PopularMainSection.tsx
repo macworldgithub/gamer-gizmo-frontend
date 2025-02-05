@@ -66,7 +66,7 @@ const PopularMainSection: React.FC = () => {
   const fetchUsedDesktops = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=used`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=2`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -80,7 +80,7 @@ const PopularMainSection: React.FC = () => {
   const fetchNewDesktops = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=new`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=1`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -94,7 +94,7 @@ const PopularMainSection: React.FC = () => {
   const fetchUsedConsoles = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=used`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=2`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -108,7 +108,7 @@ const PopularMainSection: React.FC = () => {
   const fetchNewConsoles = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=new`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=1`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -122,7 +122,7 @@ const PopularMainSection: React.FC = () => {
   const fetchUsedLaptops = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=used`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=2`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -136,7 +136,7 @@ const PopularMainSection: React.FC = () => {
   const fetchNewLaptops = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=new`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=1`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
