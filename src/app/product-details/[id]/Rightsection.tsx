@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { formatDate } from "@/app/utils/formatDate";
 
 const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
@@ -10,22 +11,22 @@ const Rightsection = ({ data }: any) => {
   const handleDecrement = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
+  console.log(data,"data")
 
   return (
-    <div className=" max-md:hidden py-10 flex flex-col justify-center items-start gap-8 pl-2">
+    <div className=" max-md:hidden py-10 flex flex-col  justify-center items-start gap-8 pl-2">
       {/* First Card (Price & Quantity) */}
-      <div className=" h-64 border-gray-300 rounded-lg p-6 w-64 bg-white shadow-md flex flex-col justify-between dark:bg-black">
+      <div className=" h-fit border-gray-300 rounded-lg p-6 w-72  bg-white shadow-md flex flex-col justify-between dark:bg-black">
         {/* Price Heading */}
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
           AED {data.price}
         </h1>
 
         {/* Horizontal Divider */}
-        <hr className="my-6 border-gray-300 w-full " />
+        {/* <hr className="my-6 border-gray-300 w-full " /> */}
 
         {/* Quantity Selector */}
-        <div className="flex items-center justify-center w-fit mx-auto border border-purple-500 rounded-md overflow-hidden mb-4">
-          {/* Decrement Button */}
+        {/* <div className="flex items-center justify-center w-fit mx-auto border border-purple-500 rounded-md overflow-hidden mb-4">
           <button
             onClick={handleDecrement}
             className="w-8 h-8 flex items-center justify-center font-bold text-purple-600 hover:bg-purple-100 transition rounded-l-md"
@@ -33,23 +34,19 @@ const Rightsection = ({ data }: any) => {
             -
           </button>
 
-          {/* Quantity Display */}
           <span className="w-10 h-8 flex items-center justify-center font-bold text-purple-600 border-x border-purple-500">
             {quantity}
           </span>
 
-          {/* Increment Button */}
           <button
             onClick={handleIncrement}
             className="w-8 h-8 flex items-center justify-center font-bold text-purple-600 hover:bg-purple-100 transition rounded-r-md"
           >
             +
           </button>
-        </div>
+        </div> */}
 
-        {/* Buttons Section */}
-        <div className="space-y-4">
-          {/* Buy Now Button */}
+        {/* <div className="space-y-4">
           <button className="flex items-center justify-center w-3/4 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 shadow-md hover:scale-105 transform transition md:py-3">
             <Image
               src="/images/addcart.png"
@@ -61,15 +58,14 @@ const Rightsection = ({ data }: any) => {
             BUY NOW
           </button>
 
-          {/* Add to Cart Button */}
           <button className="flex items-center justify-center w-3/4 mx-auto text-purple-600 border border-purple-600 font-bold py-2 hover:bg-purple-100 transition md:py-3">
             Add to Cart
           </button>
         </div>
-      </div>
+*/}      </div> 
 
       {/* Seller Details Section */}
-      <div className="dark:bg-black  border-gray-300 rounded-lg p-6 w-64 h-72 bg-white shadow-md flex flex-col items-center">
+      <div className="dark:bg-black  border-gray-300 rounded-lg p-6 w-72 h-fit bg-white shadow-md flex flex-col items-center">
         {/* Heading */}
         <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
           Seller Details
@@ -82,8 +78,12 @@ const Rightsection = ({ data }: any) => {
         <div className="flex items-center mb-6">
           {/* Seller Image */}
           <Image
-            src="/images/person.png"
-            alt="Seller Image"
+           src={
+            data?.users?.profile
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
+              : "/images/person.png"
+          }
+          alt="kk"
             width={40}
             height={40}
             className="rounded-full mr-4"
@@ -91,46 +91,55 @@ const Rightsection = ({ data }: any) => {
           {/* Seller Name and Member Since */}
           <div className="text-left">
             <p className="text-gray-800 font-semibold dark:text-white">
-              Shamsher Alikhan
+              {data?.users?.first_name}{" "}{data?.users?.last_name} ( {data?.users?.gender})
             </p>
             <p className="text-gray-500 text-sm dark:text-[#969696]">
-              Member Since Nov 26, 2022
+              Member Since {formatDate(data?.users?.created_at)}
             </p>
           </div>
         </div>
-
+        <div className="text-sm text-black">
+         
+          </div>
         {/* Icons Row */}
-        <div className="flex justify-center items-center space-x-6 mb-6 dark:invert">
+        <div className="flex flex-col justify-center gap-2 items-center space-x-6 mb-6 dark:invert">
+          <div className="flex gap-4 text-black">
           <Image
             src="/images/cellphone.png"
             alt="Cellphone Icon"
-            width={30}
-            height={30}
-          />
+            width={24}
+            height={24}
+            />
+          <div className="text-sm">
+          {data?.users?.phone}
+          </div>
 
+            </div>
+
+            <div className="flex gap-4 text-black">
           <Image
-            src="/images/message.png"
+         src="/images/message.png"
             alt="Message Icon"
-            width={30}
-            height={30}
-          />
+            width={24}
+            height={24}
+            />
+          <div className="text-sm">
+          {data?.users?.email}
+          </div>
 
-          <Image
-            src="/images/facebook.png"
-            alt="Facebook Icon"
-            width={30}
-            height={30}
-          />
+            </div>
+
+         
+          
         </div>
 
         {/* Footer Text */}
-        <p className="text-center text-sm text-gray-600 mb-2 dark:text-white">
+        {/* <p className="text-center text-sm text-gray-600 mb-2 dark:text-white">
           See if your friends know this seller
         </p>
-        {/* Connect with Facebook */}
         <p className="text-center text-sm text-blue-600 font-semibold cursor-pointer hover:underline">
           Connect with Facebook
-        </p>
+        </p> */}
       </div>
 
       {/* Third Card (Buy From GamerGizmo) */}
