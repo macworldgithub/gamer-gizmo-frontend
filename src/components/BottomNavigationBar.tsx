@@ -133,6 +133,7 @@ const BottomNavigationBar = () => {
         <Link href="/usedparts">Components</Link>
         <Link href="/console-screen">Blogs</Link>
         <Link href="/contact">Contact Us</Link>
+        <Link href="/contact">About Us</Link>
         <Link href="/details" className="text-secondaryColorLight">
           Inspection
         </Link>
@@ -255,6 +256,7 @@ const BottomNavigationBar = () => {
               >
                 Contact Us
               </Link>
+              <Link href="/contact">About Us</Link>
               <Link
                 href="/details"
                 className=" text-lg hover:text-gray-300"
@@ -264,10 +266,7 @@ const BottomNavigationBar = () => {
               </Link>
 
               <div className="flex-col items-center mx-auto pl-0">
-                <Link
-                  href="/publish-ad"
-                  onClick={() => setIsDrawerOpen(false)}
-                >
+                <Link href="/publish-ad" onClick={() => setIsDrawerOpen(false)}>
                   <div className="w-[7rem] mx-auto h-9 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
                     <Image
                       src="/images/btnIcon.png"

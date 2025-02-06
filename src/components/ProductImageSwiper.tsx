@@ -49,7 +49,7 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
       >
         {data.product_images.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex justify-center items-center bg-white dark:bg-black">
+            <div className="flex justify-center items-center px-9 bg-white dark:bg-black">
               <Image
                 src={`${baseUrl}/${item.image_url}`}
                 alt={`product-image-${idx}`}

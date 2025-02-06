@@ -40,23 +40,21 @@ const Sellersdetails = ({ data }: any) => {
         </div>
         <div className="flex flex-col justify-center  items-center space-x-6 mb-2 dark:invert">
           <div className="flex gap-4 text-black">
-            <WhatsAppOutlined />
-            <div className="text-[0.6rem]">{data?.users?.phone}</div>
+            <WhatsAppOutlined size={5} />
+            <div className="text-[0.6rem] text-gray-700">
+              {data?.users?.phone}
+            </div>
           </div>
 
           <div className="flex gap-4 text-black">
-            <MdOutlineMailLock />
-            <div className="text-[0.6rem]">{data?.users?.email}</div>
+            <MdOutlineMailLock size={15} />
+            <div className="text-[0.6rem] text-gray-700">
+              {data?.users?.email}
+            </div>
           </div>
         </div>
         {/* Icons Row */}
         <div className="flex justify-center items-center space-x-6 mb-6 dark:invert">
-          {/* <Image
-            src="/images/Cellphone.png"
-            alt="Cellphone Icon"
-            width={30}
-            height={30}
-          /> */}
           <FaWhatsapp size={32} />
           <Image
             src="/images/Message.png"
