@@ -81,7 +81,10 @@ const ProductDetails = ({ data }: any) => {
           </div>
         </div>
 
-        <Buynow data={data} />
+        {/* <Buynow data={data} /> */}
+        <h1 className=" text-2xl font-bold text-purple-600 text-left mt-4  md:text-2xl">
+          AED {data.price}
+        </h1>
 
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">

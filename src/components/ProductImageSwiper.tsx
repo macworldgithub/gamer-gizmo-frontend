@@ -24,7 +24,7 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
   return (
     <div className="relative w-full max-w-[600px] mx-auto">
       {/* Icons overlay */}
-      <div className="flex space-x-4 justify-between z-10 mt-10 mb-4">
+      <div className="flex space-x-4 justify-between z-10 mt-10 mb-4 max-md:px-2">
         <button className="hover:bg-gray-100">
           <FaRegHeart
             size={25}
