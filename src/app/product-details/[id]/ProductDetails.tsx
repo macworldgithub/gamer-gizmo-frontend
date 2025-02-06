@@ -169,7 +169,7 @@ const ProductDetails = ({ data }: any) => {
         )}
         {activeTab === "specifications" && <SpecificationsTable />}
 
-        <Sellersdetails />
+        <Sellersdetails data={data} />
       </div>
     </div>
   );

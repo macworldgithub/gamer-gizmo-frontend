@@ -5,6 +5,7 @@ import Image from "next/image";
 import { formatDate } from "@/app/utils/formatDate";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineMailLock } from "react-icons/md";
+import { WhatsAppOutlined } from "@ant-design/icons";
 
 const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
@@ -13,7 +14,7 @@ const Rightsection = ({ data }: any) => {
   const handleDecrement = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
-  console.log(data,"data")
+  console.log(data, "data");
 
   return (
     <div className=" max-md:hidden py-10 flex flex-col  justify-center items-start gap-8 pl-2">
@@ -23,10 +24,8 @@ const Rightsection = ({ data }: any) => {
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
           AED {data.price}
         </h1>
-
         {/* Horizontal Divider */}
         {/* <hr className="my-6 border-gray-300 w-full " /> */}
-
         {/* Quantity Selector */}
         {/* <div className="flex items-center justify-center w-fit mx-auto border border-purple-500 rounded-md overflow-hidden mb-4">
           <button
@@ -47,7 +46,6 @@ const Rightsection = ({ data }: any) => {
             +
           </button>
         </div> */}
-
         {/* <div className="space-y-4">
           <button className="flex items-center justify-center w-3/4 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 shadow-md hover:scale-105 transform transition md:py-3">
             <Image
@@ -64,7 +62,8 @@ const Rightsection = ({ data }: any) => {
             Add to Cart
           </button>
         </div>
-*/}      </div> 
+*/}{" "}
+      </div>
 
       {/* Seller Details Section */}
       <div className="dark:bg-black  border-gray-300 rounded-lg p-6 w-72 h-fit bg-white shadow-md flex flex-col items-center">
@@ -80,12 +79,12 @@ const Rightsection = ({ data }: any) => {
         <div className="flex items-center mb-6">
           {/* Seller Image */}
           <Image
-           src={
-            data?.users?.profile
-              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
-              : "/images/person.png"
-          }
-          alt="kk"
+            src={
+              data?.users?.profile
+                ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
+                : "/images/person.png"
+            }
+            alt="kk"
             width={40}
             height={40}
             className="rounded-full mr-4"
@@ -93,36 +92,26 @@ const Rightsection = ({ data }: any) => {
           {/* Seller Name and Member Since */}
           <div className="text-left">
             <p className="text-gray-800 font-semibold dark:text-white">
-              {data?.users?.first_name}{" "}{data?.users?.last_name} ( {data?.users?.gender})
+              {data?.users?.first_name} {data?.users?.last_name} ({" "}
+              {data?.users?.gender})
             </p>
             <p className="text-gray-500 text-sm dark:text-[#969696]">
               Member Since {formatDate(data?.users?.created_at)}
             </p>
           </div>
         </div>
-        <div className="text-sm text-black">
-         
-          </div>
+        <div className="text-sm text-black"></div>
         {/* Icons Row */}
         <div className="flex flex-col justify-center gap-2 items-center space-x-6 mb-6 dark:invert">
           <div className="flex gap-4 text-black">
-          <FaPhoneAlt/>
-          <div className="text-sm">
-          {data?.users?.phone}
+            <WhatsAppOutlined />
+            <div className="text-sm">{data?.users?.phone}</div>
           </div>
 
-            </div>
-
-            <div className="flex gap-4 text-black">
-        <MdOutlineMailLock/>
-          <div className="text-sm">
-          {data?.users?.email}
+          <div className="flex gap-4 text-black">
+            <MdOutlineMailLock />
+            <div className="text-sm">{data?.users?.email}</div>
           </div>
-
-            </div>
-
-         
-          
         </div>
 
         {/* Footer Text */}
