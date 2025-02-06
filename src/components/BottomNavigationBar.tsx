@@ -133,7 +133,7 @@ const BottomNavigationBar = () => {
         <Link href="/usedparts">Components</Link>
         <Link href="/console-screen">Blogs</Link>
         <Link href="/contact">Contact Us</Link>
-        <Link href="/contact">About Us</Link>
+        <Link href="/about">About Us</Link>
         <Link href="/details" className="text-secondaryColorLight">
           Inspection
         </Link>
@@ -256,7 +256,7 @@ const BottomNavigationBar = () => {
               >
                 Contact Us
               </Link>
-              <Link href="/contact">About Us</Link>
+              <Link href="/about">About Us</Link>
               <Link
                 href="/details"
                 className=" text-lg hover:text-gray-300"

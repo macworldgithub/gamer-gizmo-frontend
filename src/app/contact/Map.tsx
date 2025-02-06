@@ -4,7 +4,7 @@ import Image from "next/image";
 const Map = () => {
   return (
     <div className="w-full bg-white dark:bg-black ">
-      <div className="md:relative w-full xl:h-[63rem] lg:h-[45rem] md:h-[41rem]  bg-white flex flex-col md:block dark:bg-black">
+      <div className="md:relative w-full xl:h-[69rem] lg:h-[48rem] md:h-[41rem]  bg-white flex flex-col md:block dark:bg-black">
         {/* Map Section */}
         <Image
           src="/images/map.png"

@@ -30,7 +30,7 @@ const Form: React.FC<any> = ({ onSubmit, formData, onChange }) => {
       <input
         type="text"
         name="contactName"
-        placeholder="Contact Name"
+        placeholder="Contact Number"
         value={formData.contactName}
         onChange={onChange}
         className="input-field"

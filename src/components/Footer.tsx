@@ -94,14 +94,22 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div className="text-start">
-            <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
-            <p className="text-sm md:text-xs">
-              Email: support@gamergizmo.com
-              <br />
-              Phone: +123 456 7890
-            </p>
+          <div className="flex flex-col items-start">
+            <div className="text-start ">
+              <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
+              <p className="text-sm md:text-xs">
+                Email: support@gamergizmo.com
+                <br />
+                Phone: +123 456 7890
+              </p>
+            </div>
+            <div className="mt-4">
+              <Link href="/about">
+                <h3 className="font-bold">About Us</h3>
+              </Link>
+            </div>
           </div>
+
           <div className="text-start">
             <h4 className="mb-2 text-[1.2rem] font-bold"> News & Post</h4>
             <div className="flex items-start space-x-4 mb-4">
