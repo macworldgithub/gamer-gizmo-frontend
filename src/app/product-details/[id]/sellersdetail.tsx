@@ -41,12 +41,12 @@ const Sellersdetails = ({ data }: any) => {
         <div className="flex flex-col justify-center  items-center space-x-6 mb-2 dark:invert">
           <div className="flex gap-4 text-black">
             <WhatsAppOutlined />
-            <div className="text-sm">{data?.users?.phone}</div>
+            <div className="text-[0.6rem]">{data?.users?.phone}</div>
           </div>
 
           <div className="flex gap-4 text-black">
             <MdOutlineMailLock />
-            <div className="text-sm">{data?.users?.email}</div>
+            <div className="text-[0.6rem]">{data?.users?.email}</div>
           </div>
         </div>
         {/* Icons Row */}

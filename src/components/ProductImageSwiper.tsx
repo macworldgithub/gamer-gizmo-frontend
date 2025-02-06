@@ -3,6 +3,9 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { FaRegHeart, FaRegBookmark } from "react-icons/fa";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface ProductImage {
   image_url: string;
@@ -22,7 +25,7 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
   if (!data?.product_images?.length) return null;
 
   return (
-    <div className="relative w-full max-w-[600px] mx-auto">
+    <div className="relative w-full max-w-[400px] mx-auto">
       {/* Icons overlay */}
       <div className="flex space-x-4 justify-between z-10 mt-10 mb-4 max-md:px-2">
         <button className="hover:bg-gray-100">
@@ -50,9 +53,9 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
               <Image
                 src={`${baseUrl}/${item.image_url}`}
                 alt={`product-image-${idx}`}
-                width={600}
-                height={400}
-                className="object-cover"
+                width={500}
+                height={200}
+                className="object-cover max-md:h-[2%]"
               />
             </div>
           </SwiperSlide>
