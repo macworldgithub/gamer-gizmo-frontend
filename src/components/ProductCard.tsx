@@ -3,20 +3,23 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 const ProductCard = ({ product }: any) => {
   const [isFav, setIsFav] = useState(true);
   const router = useRouter();
+  // const dispatch = useDispatch("");
+  // const token = useSelector()
   return (
     <div
       key={product.id}
-      className={`flex-none relative dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] max-sm:w-[23%]  sm:w-[40%] md:w-[35%] lg:w-[18.5%] transition-transform duration-500 ease-in-out  ${"shadow-xl shadow-white bg-white"}`}
+      className={`flex-none relative dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] max-sm:w-[23%]  sm:w-[40%] md:w-[35%] lg:w-[18.5%] transition-transform duration-500 ease-in-out`}
     >
       <div
         className={
           "hover:cursor-pointer z-20 top-2 right-2 absolute text-white  hover:text-red-600"
         }
       >
-        <MdFavorite size={24} className="max-sm:h-4 " />
+        <MdFavorite size={24} className="max-sm:h-4" />
       </div>
       <div className="relative w-full h-24  bg-black max-sm:h-[2.2rem]">
         {product?.images && (
@@ -35,7 +38,7 @@ const ProductCard = ({ product }: any) => {
         <h3 className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[0.6rem] max-sm:mb-0">
           {product.name}
         </h3>
-        <p className="text-xs text-gray-500 mt-1 max-sm:my-0 truncate max-md:text-[0.8rem] max-sm:text-[0.4rem]">
+        <p className="text-xs texzt-gray-500 mt-1 max-sm:my-0 truncate max-md:text-[0.8rem] max-sm:text-[0.4rem]">
           {product.description}
         </p>
         <p className="text-purple-500 font-bold   max-sm:text-[0.4rem]">

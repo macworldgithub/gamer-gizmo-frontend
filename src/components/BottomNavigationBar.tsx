@@ -256,7 +256,9 @@ const BottomNavigationBar = () => {
               >
                 Contact Us
               </Link>
-              <Link href="/about">About Us</Link>
+              <Link href="/about" onClick={() => setIsDrawerOpen(false)}>
+                About Us
+              </Link>
               <Link
                 href="/details"
                 className=" text-lg hover:text-gray-300"

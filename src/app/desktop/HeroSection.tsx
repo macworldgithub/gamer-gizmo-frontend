@@ -12,20 +12,19 @@ import { toast } from "react-toastify";
 import ProductCard from "@/components/ProductCard";
 import { useRouter } from "next/navigation";
 
-
-const HeroSection = ({query}:any) => {
+const HeroSection = ({ query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const router=useRouter()
+  const router = useRouter();
 
   const fetch = async () => {
     try {
       const filteredValues = Object.fromEntries(
         Object.entries(query).filter(([key, value]) => value !== "")
       );
-      
-    // @ts-expect-error
+
+      // @ts-expect-error
       const queryParams = new URLSearchParams(filteredValues).toString();
       setLoading(true);
       const response = await axios.get(
@@ -109,8 +108,11 @@ const HeroSection = ({query}:any) => {
                 </p>
               </div>
               {/* Call-to-Action Button */}
-              <button onClick={()=>router.push("/publish-ad")} className="bg-custom-gradient  
-cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8">
+              <button
+                onClick={() => router.push("/publish-ad")}
+                className="bg-custom-gradient  
+cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
+              >
                 Sell Your Product
               </button>
             </div>
