@@ -87,7 +87,10 @@ const ProductDetails = ({ data }: any) => {
         <h1 className=" text-2xl font-bold text-purple-600 text-left mt-4  md:text-2xl">
           AED {data.price}
         </h1>
-
+        <div className="flex items-center">
+          <h1 className="font-bold text-lg">Stock:</h1>
+          <p className="ml-3 text-black font-semibold">{data?.stock}</p>
+        </div>
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">
           <div className="flex flex-col items-start">
@@ -162,7 +165,7 @@ const ProductDetails = ({ data }: any) => {
             </p>
           </div>
         )}
-        {activeTab === "specifications" && <SpecificationsTable />}
+        {activeTab === "specifications" && <SpecificationsTable data={data} />}
 
         <Sellersdetails data={data} />
       </div>
