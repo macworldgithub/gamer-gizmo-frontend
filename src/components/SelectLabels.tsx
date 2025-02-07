@@ -7,30 +7,34 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export default function SelectLabels({query,route}:any) {
+export default function SelectLabels({ query, route }: any) {
   const [locationData, setLocationData] = useState<any[]>([]);
   const [processorData, setProcessorData] = useState<any[]>([]);
   const [gpuData, setgpuData] = useState<any[]>([]);
   const [ramData, setRamData] = useState<any[]>([]);
   const [storageTypeData, setStorageTypeData] = useState<any[]>([]);
   const [conditioneData, setConditioneData] = useState<any[]>([]);
-  const [selectedValues, setSelectedValues] = useState(query?query:{
-      "processor":"", 
-      "storage":"", 
-      "location":"", 
-      "condition":"", 
-      "gpu":"", 
-      "ram":"", 
-      "price":""
-  });
-  const router=useRouter()
+  const [selectedValues, setSelectedValues] = useState(
+    query
+      ? query
+      : {
+          processor: "",
+          storage: "",
+          location: "",
+          condition: "",
+          gpu: "",
+          ram: "",
+          price: "",
+        }
+  );
+  const router = useRouter();
   useEffect(() => {
     fetchProcessors();
     fetchLocations();
-    fetchGPU()
-    fetchRam()
-    fetchStorgaeType()
-    fetchConditions()
+    fetchGPU();
+    fetchRam();
+    fetchStorgaeType();
+    fetchConditions();
   }, []);
 
   const fetchLocations = async () => {
@@ -99,60 +103,44 @@ export default function SelectLabels({query,route}:any) {
     {
       label: "Processor",
       key: "processor",
-      options:
-        processorData.length > 0
-          ? processorData
-          : ["Intel", "AMD"],
+      options: processorData.length > 0 ? processorData : ["Intel", "AMD"],
     },
     {
       label: "Gpu",
       key: "gpu",
-      options: 
-      gpuData.length > 0
-      ? gpuData
-      : ["NVIDIA", "AMD",],
+      options: gpuData.length > 0 ? gpuData : ["NVIDIA", "AMD"],
     },
     {
       label: "RAM",
       key: "ram",
-      options:  ramData.length > 0
-      ? ramData
-      : ["4GB", "8GB", "16G"],
+      options: ramData.length > 0 ? ramData : ["4GB", "8GB", "16G"],
     },
     {
       label: "Storage",
       key: "storage",
-      options: storageTypeData.length > 0
-      ? storageTypeData
-      :["SSD", "HDD"],
+      options: storageTypeData.length > 0 ? storageTypeData : ["SSD", "HDD"],
     },
-   
+
     {
       label: "Condition",
       key: "condition",
-      options: conditioneData.length > 0
-      ? conditioneData
-      :["New", "Used",],
+      options: conditioneData.length > 0 ? conditioneData : ["New", "Used"],
     },
     {
       label: "Location",
       key: "location",
-      options:
-        locationData.length > 0
-          ? locationData
-          : ["All UAE"],
+      options: locationData.length > 0 ? locationData : ["All UAE"],
     },
     {
       label: "Price Range",
       key: "price",
-       options : [
+      options: [
         { id: 1, name: "Below 500 AED" },
         { id: 2, name: "500 - 1000 AED" },
         { id: 3, name: "1000 - 3000 AED" },
         { id: 4, name: "3000 - 5000 AED" },
-        { id: 5, name: "5000+ AED" }
-      ]
-      
+        { id: 5, name: "5000+ AED" },
+      ],
     },
     // {
     //   label: "Sort By",
@@ -165,7 +153,7 @@ export default function SelectLabels({query,route}:any) {
     const filteredValues = Object.fromEntries(
       Object.entries(selectedValues).filter(([key, value]) => value !== "")
     );
-  // @ts-expect-error
+    // @ts-expect-error
     const queryParams = new URLSearchParams(filteredValues).toString();
     router.push(`/${route}?${queryParams}`);
   };
@@ -174,9 +162,8 @@ export default function SelectLabels({query,route}:any) {
   //   setSelectedValues(dropdownOptions.map(() => ""));
   // }, [processorData, locationData]);
 
- 
   const handleChange = (field: string, value: any) => {
-              // @ts-expect-error
+    // @ts-expect-error
     setSelectedValues((prevData) => ({
       ...prevData,
       [field]: value,
@@ -195,17 +182,26 @@ export default function SelectLabels({query,route}:any) {
             <div key={index} className="flex items-center  gap-2">
               <Select
                 value={selectedValues[dropdown.key] || ""}
-                onChange={(event) => handleChange(dropdown.key, event.target.value)}
+                onChange={(event) =>
+                  handleChange(dropdown.key, event.target.value)
+                }
                 displayEmpty
                 inputProps={{ "aria-label": dropdown.label }}
                 // className="lg:w-[105px] h-12 mt-2 max-sm:w-[360px] sm:w-[102px] md:w-[65px] border border-searchFilterBorder"
                 className="w-[105px]"
                 sx={{
+                  overflow: "hidden",
                   borderRadius: "50px",
                   fontFamily: "Urbanist",
                   fontWeight: "600",
                   fontSize: "13px",
                   ".MuiSelect-icon": { color: "#6345ed" },
+                }}
+                MenuProps={{
+                  autoFocus: false,
+                  disablePortal: true,
+                  disableAutoFocus: true,
+                  disableScrollLock: true,
                 }}
               >
                 <MenuItem value="" disabled>
@@ -230,7 +226,10 @@ export default function SelectLabels({query,route}:any) {
         </button>
 
         {/* Filter Button */}
-        <div onClick={()=>handleClick()} className="bg-custom-gradient cursor-pointer lg:w-[150px] md:w-[100px] md:ml-2 max-sm:w-60 sm:w-[80px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-white">
+        <div
+          onClick={() => handleClick()}
+          className="bg-custom-gradient cursor-pointer lg:w-[150px] md:w-[100px] md:ml-2 max-sm:w-60 sm:w-[80px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-white"
+        >
           🔍 Filter
         </div>
       </div>
