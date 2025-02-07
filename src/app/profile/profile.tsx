@@ -20,7 +20,10 @@ import { RootState } from "@/components/Store/Store";
 import { formatDate } from "../utils/formatDate";
 import NicUploadModal from "@/components/Modals/NicUploadModal";
 import ProfilePicUploadModal from "@/components/Modals/ProfilePicUploadModal";
+import { InitializeUserData } from "@/components/Store/Slicer/LoginSlice";
+import { useDispatch } from "react-redux";
 export default function ProfilePage() {
+  const dispatch = useDispatch();
   const [openPassModal, setOpenPassModal] = React.useState(false);
   const [openEditModal, setOpenEditModal] = React.useState(false);
   const [openProfileModal, setOpenProfileModal] = React.useState(false);
@@ -60,6 +63,7 @@ export default function ProfilePage() {
         },
       }
     );
+    dispatch(InitializeUserData({ ...res.data.data }));
     setProfileData(res.data.data || {});
   };
   useEffect(() => {
