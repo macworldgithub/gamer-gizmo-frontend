@@ -13,7 +13,7 @@ export default function AboutUs() {
             className="rounded-t-lg "
           />
         </div>
-        <div className="relative w-full h-60 max-sm:hidden">
+        <div className="relative w-full h-60 max-md:hidden">
           <Image
             src="/images/HeroArea.png"
             alt="Gaming Setup"
@@ -24,7 +24,7 @@ export default function AboutUs() {
         </div>
         <div className="px-10 pb-6 text-center">
           {/* <h1 className="text-5xl font-extrabold text-gray-800">About Us</h1> */}
-          <p className="text-lg max-md:text-sm text-left text-gray-600  dark:text-white">
+          <p className="text-lg max-md:text-sm text-left text-gray-600 max-md:mt-4 md:mt-0 dark:text-white">
             Your ultimate destination for gaming hardware, where gamers connect,
             trade, and celebrate their passion.
           </p>
