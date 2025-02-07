@@ -96,23 +96,39 @@ const BottomNavigationBar = () => {
     {
       key: "2",
       icon: <CgProfile />,
-      label: <Link href="/profile">Profile</Link>,
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/profile">
+          Profile
+        </Link>
+      ),
     },
     {
       icon: <FaCartPlus />,
       key: "3",
-      label: <Link href="/Add_to_cart">Cart</Link>,
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/Add_to_cart">
+          Cart
+        </Link>
+      ),
     },
     {
       key: "4",
 
       icon: <MdOutlineFavorite />,
-      label: <Link href="/favourites">Favourites</Link>,
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/favourites">
+          Favourites
+        </Link>
+      ),
     },
     {
       key: "5",
       icon: <SettingOutlined />,
-      label: "Orders",
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/card">
+          Orders
+        </Link>
+      ),
     },
     {
       key: "6",
@@ -256,9 +272,7 @@ const BottomNavigationBar = () => {
               >
                 Contact Us
               </Link>
-              <Link href="/about" onClick={() => setIsDrawerOpen(false)}>
-                About Us
-              </Link>
+              <Link href="/about">About Us</Link>
               <Link
                 href="/details"
                 className=" text-lg hover:text-gray-300"

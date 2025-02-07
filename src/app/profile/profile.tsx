@@ -45,6 +45,7 @@ export default function ProfilePage() {
     nic_back_image: null,
     profile: "",
   });
+
   const token = useSelector((state: RootState) => state.user.token);
   useLayoutEffect(() => {
     if (!token) {

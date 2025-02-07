@@ -62,13 +62,13 @@ export default function MainPage() {
         <h1 className="text-2xl font-bold mb-6">All Favorites</h1>
 
         {/* Search Bar */}
-        <div className="relative mb-6">
+        {/* <div className="relative mb-6">
           <input
             type="text"
             placeholder="Search"
             className="border border-gray-300 rounded-lg py-2 px-4 w-[30%] max-sm:w-52"
           />
-        </div>
+        </div> */}
 
         {/* Favorites List */}
         <div className="flex flex-col gap-6">
