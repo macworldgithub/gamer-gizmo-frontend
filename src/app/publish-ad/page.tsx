@@ -13,6 +13,7 @@ import { redirect, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+
 interface Category {
   id: number;
   name: string;
@@ -32,8 +33,14 @@ const PublishAdd: React.FC = () => {
   const [selectRam, setSelectedRam] = useState({ id: 0, name: "" });
   const [selectGpu, setSelectedGpu] = useState({ id: 0, name: "" });
   const [selectStoarge, setSelectedStoarge] = useState({ id: 0, name: "" });
-  const [selectStorageType, setSelectedStorageType] = useState({ id: 0, name: "" });
-  const [selectedCondition, setSelectedCondition] = useState({ id: 0, name: "" });
+  const [selectStorageType, setSelectedStorageType] = useState({
+    id: 0,
+    name: "",
+  });
+  const [selectedCondition, setSelectedCondition] = useState({
+    id: 0,
+    name: "",
+  });
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
   const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
@@ -67,7 +74,7 @@ const PublishAdd: React.FC = () => {
     connectivity: "",
     warranty_status: "",
     location: "",
-    otherBrandName:""
+    otherBrandName: "",
   });
   const [componentCategories, setComponentCategories] = useState([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -97,45 +104,57 @@ const PublishAdd: React.FC = () => {
       setLoadingCategories(false);
     }
   };
- 
+
   useLayoutEffect(() => {
     if (!token) {
       return redirect("/auth/login");
     }
   }, []);
+  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+
   const handleNext = () => {
-    if (activeStep === 0 && !selectCategory.id) {
+    if (activeStep === 0 && !selectCategory?.id) {
       toast.error("Please select a category before proceeding.");
       return;
     }
-    if (activeStep === 1 && !selectBrand.id) {
-      toast.error("Please select a brand before proceeding.");
-      return false;
+    if (activeStep === 1 && !selectBrand?.id) {
+      toast.error("Please fill a brand before proceeding.");
+      return;
     }
     if (
       activeStep === 1 &&
-      (!formData.title ||
-        !formData.description ||
-        !selectBrand
-        )
+      (!formData?.title || !formData?.description || !selectBrand)
     ) {
-      toast.error("Please provide all the following details.");
-      return false;
+      toast.error("Please provide all the required details.");
+      return;
     }
-    if (activeStep === 4 && (price == "0" || quantity == "0")) {
-      toast.error("Please provide all the following details.");
-      return false;
+
+    if (activeStep === 3 && (price === "0" || quantity === "0")) {
+      toast.error("Please provide valid price and quantity.");
+      return;
     }
-    if (activeStep === 5 && fileList.length < 3) {
-      toast.error("Atleast Upload 3 Images");
-      return false;
+    if (activeStep === 4 && fileList.length < 3) {
+      toast.error("At least upload 3 images.");
+      return;
+    }
+
+    // Mark step as completed before moving forward
+    if (!completedSteps.includes(activeStep)) {
+      setCompletedSteps([...completedSteps, activeStep]);
     }
 
     setActiveStep((prevStep) => prevStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevStep) => prevStep - 1);
+    setActiveStep((prevStep) => Math.max(prevStep - 1, 0));
+  };
+
+  // Function to handle step click (Allow navigation only to completed or previous steps)
+  const handleStepClick = (index: number) => {
+    if (index <= activeStep || completedSteps.includes(index)) {
+      setActiveStep(index);
+    }
   };
 
   const handleFormChange = (field: string, value: any) => {
@@ -197,11 +216,11 @@ const PublishAdd: React.FC = () => {
 
   useEffect(() => {
     fetchCategories();
-    fetchStorga()
-    fetchConditions()
-    fetchStorgaeType()
-    fetchRam()
-    fetchGPU()
+    fetchStorga();
+    fetchConditions();
+    fetchStorgaeType();
+    fetchRam();
+    fetchGPU();
   }, []);
   const handleSubmit = async () => {
     let formDataObject = new FormData();
@@ -272,8 +291,15 @@ const PublishAdd: React.FC = () => {
     }
   };
 
+  // const handleStepClick = (index: number) => {
+  //   if (index <= activeStep || completedSteps.includes(index)) {
+  //     setActiveStep(index);
+  //   }
+  // };
+
   const steps = [
     {
+      isCompleted: false,
       label: "Category Selection",
       content: (
         <CategorySelection
@@ -287,6 +313,7 @@ const PublishAdd: React.FC = () => {
       ),
     },
     {
+      isCompleted: false,
       label: "Details",
       content: (
         <DetailSection
@@ -301,11 +328,13 @@ const PublishAdd: React.FC = () => {
           setSelectedBrand={setSelectedBrand}
           setComponentCategories={setComponentCategories}
           conditioneData={conditioneData}
-          setSelectedCondition={setSelectedCondition} selectedCondition={selectedCondition}
+          setSelectedCondition={setSelectedCondition}
+          selectedCondition={selectedCondition}
         />
       ),
     },
     {
+      isCompleted: false,
       label: "More Specifications",
       content: (
         <MoreSpecification
@@ -336,6 +365,7 @@ const PublishAdd: React.FC = () => {
     },
 
     {
+      isCompleted: false,
       label: "Set Price",
       content: (
         <div className="flex flex-col space-y-4">
@@ -349,6 +379,7 @@ const PublishAdd: React.FC = () => {
       ),
     },
     {
+      isCompleted: false,
       label: "Upload Images",
       content: (
         <div className="flex  justify-center items-center ">
@@ -357,6 +388,7 @@ const PublishAdd: React.FC = () => {
       ),
     },
     {
+      isCompleted: false,
       label: "Review",
       content: (
         <ReviewSection
@@ -402,6 +434,7 @@ const PublishAdd: React.FC = () => {
           {steps.map((step, index) => (
             <Step key={index}>
               <StepLabel
+                onClick={() => handleStepClick(index)}
                 sx={{
                   "& .MuiStepIcon-root": {
                     fontSize: "20px", // Smaller step icons
