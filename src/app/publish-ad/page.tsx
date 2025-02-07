@@ -129,7 +129,7 @@ const PublishAdd: React.FC = () => {
       return;
     }
 
-    if ((activeStep === 3 && price === "0") || quantity === "0") {
+    if (activeStep === 3 && (price === "0" || quantity === "0")) {
       toast.error("Please provide valid price and quantity.");
       return;
     }
