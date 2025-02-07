@@ -12,19 +12,19 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const LaptopHeroSection = ({query}:any) => {
+const LaptopHeroSection = ({ query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const router=useRouter()
-
+  const router = useRouter();
+  const [fetcher, seReftech] = useState(false);
   const fetch = async () => {
     try {
       const filteredValues = Object.fromEntries(
         Object.entries(query).filter(([key, value]) => value !== "")
       );
-      
-    // @ts-expect-error
+
+      // @ts-expect-error
       const queryParams = new URLSearchParams(filteredValues).toString();
       setLoading(true);
       const response = await axios.get(
@@ -46,7 +46,7 @@ const LaptopHeroSection = ({query}:any) => {
   };
   useEffect(() => {
     fetch();
-  }, [query]);
+  }, [query, fetcher]);
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
       {/* Main Content */}
@@ -109,8 +109,11 @@ const LaptopHeroSection = ({query}:any) => {
                 </p>
               </div>
               {/* Call-to-Action Button */}
-              <button onClick={()=>router.push("/publish-ad")} className="bg-custom-gradient  
-cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8">
+              <button
+                onClick={() => router.push("/publish-ad")}
+                className="bg-custom-gradient  
+cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
+              >
                 Sell Your Product
               </button>
             </div>
@@ -123,8 +126,13 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
             <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
               <div className="flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
                 {data && data.length > 0 ? (
-                  data
-                    .map((product, index) => <ProductCard product={product} />)
+                  data.map((product, index) => (
+                    <ProductCard
+                      fetcher={fetcher}
+                      seReftech={seReftech}
+                      product={product}
+                    />
+                  ))
                 ) : (
                   <div className="text-red-600">No Product To display</div>
                 )}

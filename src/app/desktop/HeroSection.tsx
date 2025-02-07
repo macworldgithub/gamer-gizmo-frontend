@@ -17,6 +17,7 @@ const HeroSection = ({ query }: any) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [fetcher, seReftech] = useState(false);
 
   const fetch = async () => {
     try {
@@ -46,7 +47,7 @@ const HeroSection = ({ query }: any) => {
   };
   useEffect(() => {
     fetch();
-  }, [query]);
+  }, [query, fetcher]);
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
       <div className="py-28 max-lg:py-8 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
@@ -126,7 +127,11 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
               <div className="flex flex-wrap gap-4 justify-center sm:justify-start max-sm:gap-[0.5rem] ">
                 {data && data.length > 0 ? (
                   data.map((product, index) => (
-                    <ProductCard product={product} />
+                    <ProductCard
+                      fetcher={fetcher}
+                      seReftech={seReftech}
+                      product={product}
+                    />
                   ))
                 ) : (
                   <div className="text-red-600">No Product To display</div>

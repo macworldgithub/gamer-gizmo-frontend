@@ -18,7 +18,7 @@ import { CiUser } from "react-icons/ci";
 import { FaRegComment, FaUser } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 
-const ProductDetails = ({ data }: any) => {
+const ProductDetails = ({ data, refetch, seReftech }: any) => {
   const [activeTab, setActiveTab] = useState("overview");
   console.log(data, "ppo");
   return (
@@ -32,7 +32,11 @@ const ProductDetails = ({ data }: any) => {
           //   width={600}
           //   height={400}
           // />
-          <ProductImageSwiper data={data} />
+          <ProductImageSwiper
+            seReftech={seReftech}
+            refetch={refetch}
+            data={data}
+          />
         )}
       </div>
 

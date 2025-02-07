@@ -62,6 +62,7 @@ const PopularMainSection: React.FC = () => {
     },
   ]);
   const token = useSelector((state: RootState) => state.user.token);
+  const [fetcher, seReftech] = useState(false);
 
   const fetchUsedDesktops = async () => {
     try {
@@ -155,13 +156,15 @@ const PopularMainSection: React.FC = () => {
     fetchNewConsoles();
     fetchUsedDesktops();
     fetchNewDesktops();
-  }, []);
+  }, [fetcher]);
   return (
     <div className="h-auto w-full">
       <PopularItemSection
         title="Popular in Used Consoles"
         subtitle="Choose your necessary gaming items from this category."
         products={consolesUsedData}
+        seReftech={seReftech}
+        refetch={fetcher}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
       />
@@ -169,6 +172,8 @@ const PopularMainSection: React.FC = () => {
         title="Popular in New Consoles"
         subtitle="Choose your necessary gaming items from this category."
         products={consolesNewData}
+        seReftech={seReftech}
+        refetch={fetcher}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
       />
@@ -176,6 +181,8 @@ const PopularMainSection: React.FC = () => {
         title="Popular in Used Gaming PC"
         subtitle="Choose your necessary parts from this category."
         products={desktopUsedData}
+        seReftech={seReftech}
+        refetch={fetcher}
         explorePath="/"
         onExplore={() => console.log("Explore Gaming PC Parts")}
       />
@@ -184,6 +191,8 @@ const PopularMainSection: React.FC = () => {
         title="Popular in New Gaming PC"
         subtitle="Choose your necessary gaming items from this category."
         products={desktopNewData}
+        seReftech={seReftech}
+        refetch={fetcher}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
       />
@@ -191,6 +200,8 @@ const PopularMainSection: React.FC = () => {
         title="Popular in Used Laptops"
         subtitle="Choose your necessary gaming items from this category."
         products={LaptopUsedData}
+        seReftech={seReftech}
+        refetch={fetcher}
         explorePath="/"
         onExplore={() => console.log("Explore Used Consoles")}
       />
@@ -199,6 +210,8 @@ const PopularMainSection: React.FC = () => {
         subtitle="Choose your necessary gaming items from this category."
         explorePath="/"
         products={LaptopNewData}
+        seReftech={seReftech}
+        refetch={fetcher}
         onExplore={() => console.log("Explore Used Consoles")}
       />
     </div>

@@ -19,6 +19,8 @@ interface SectionProps {
   products: Product[];
   onExplore: () => void;
   explorePath: string;
+  seReftech: any;
+  refetch: any;
 }
 
 const PopularItemSection: React.FC<SectionProps> = ({
@@ -26,6 +28,8 @@ const PopularItemSection: React.FC<SectionProps> = ({
   subtitle,
   products,
   onExplore,
+  seReftech,
+  refetch,
   explorePath,
 }) => {
   const router = useRouter();
@@ -88,7 +92,11 @@ const PopularItemSection: React.FC<SectionProps> = ({
           >
             {products.length > 0 ? (
               products.map((product, index) => (
-                <ProductCard product={product} />
+                <ProductCard
+                  seReftech={seReftech}
+                  refetch={refetch}
+                  product={product}
+                />
               ))
             ) : (
               <div className="text-red-600">No Product To display</div>
