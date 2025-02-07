@@ -65,7 +65,7 @@ const ProductCard = ({ product, seReftech, refetch }: any) => {
       >
         <MdFavorite size={24} className="max-sm:h-4" />
       </div>
-      {/* <div className="relative w-full h-24  bg-black max-sm:h-[2.2rem]">
+      <div className="relative w-full h-24  bg-black max-sm:h-[2.2rem]">
         {product?.images && (
           <Image
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
@@ -76,7 +76,7 @@ const ProductCard = ({ product, seReftech, refetch }: any) => {
             onError={(e) => (e.currentTarget.src = "/gameIcon.png")}
           />
         )}
-      </div> */}
+      </div>
 
       <div className="p-3  max-sm:pt-0">
         <h3 className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[0.6rem] max-sm:mb-0">
