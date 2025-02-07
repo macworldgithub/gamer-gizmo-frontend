@@ -6,6 +6,13 @@ import { FaRegHeart, FaRegBookmark } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./Store/Store";
+import { toast } from "react-toastify";
 
 interface ProductImage {
   image_url: string;
@@ -16,27 +23,71 @@ interface Data {
 }
 
 interface ProductImageSwiperProps {
-  data: Data;
+  data: any;
+  seReftech: any;
+  refetch: any;
 }
 
-const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
+const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
+  data,
+  seReftech,
+  refetch,
+}) => {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const token = useSelector((state: RootState) => state.user.token);
+  const id = useSelector((state: RootState) => state.user.id);
 
+  const AddToLike = async (prodId: any) => {
+    try {
+      if (!token) {
+        toast.error("Login To add to favourites");
+        return;
+      }
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/addToFavourite`,
+        {
+          userId: id?.toString(),
+          productId: prodId.toString(),
+        }
+      );
+      if (response.status == 201) {
+        toast.success(response.data.message);
+        seReftech(!refetch);
+      }
+    } catch (err) {
+      toast.error("Failed to add to favourites");
+    }
+  };
+  const remove = async (prod: any) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/removeFavourite?userId=${id}&productId=${prod}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("SuccessFully Deleted");
+      seReftech(!refetch);
+    } catch (err) {
+      toast.error("Failed to add to favourites");
+    }
+  };
   if (!data?.product_images?.length) return null;
 
   return (
     <div className="relative w-full max-w-[400px] mx-auto">
       {/* Icons overlay */}
       <div className="flex space-x-4 justify-between z-10 mt-10 mb-4 max-md:px-2">
-        <button className="hover:bg-gray-100">
-          <FaRegHeart
-            size={25}
-            className=" text-purple-600 hover:text-red-900"
-          />
-        </button>
-        <button className="p-2 ">
-          <FaRegBookmark size={25} className="text-gray-600" />
-        </button>
+        <div
+          onClick={() => (data.fav ? remove(data.id) : AddToLike(data.id))}
+          className={`hover:cursor-pointer   z-20 top-2 right-2 absolute ${
+            data.fav ? "text-red-600" : "text-gray-300 "
+          } hover:text-red-600`}
+        >
+          <MdFavorite size={34} className="max-sm:h-4" />
+        </div>
       </div>
 
       <Swiper
@@ -47,7 +98,7 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({ data }) => {
         pagination={{ clickable: true }}
         className="rounded-lg overflow-hidden"
       >
-        {data.product_images.map((item, idx) => (
+        {data.product_images.map((item: any, idx: any) => (
           <SwiperSlide key={idx}>
             <div className="flex justify-center items-center px-9 bg-white dark:bg-black">
               <Image

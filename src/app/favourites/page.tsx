@@ -6,10 +6,10 @@ const page = () => {
   return (
     // <Wrapper>
     <div className="flex w-[100%] ">
-      <div className="lg:w-[40rem] xl:w-[35rem] max-lg:hidden max-lg:w-0">
+      {/* <div className="lg:w-[40rem] xl:w-[35rem] max-lg:hidden max-lg:w-0">
         <FavoritesPage />
-      </div>
-      <div className="lg:w-[55%] max-lg:w-full">
+      </div> */}
+      <div className="w-full">
         <MainPage />
       </div>
     </div>
