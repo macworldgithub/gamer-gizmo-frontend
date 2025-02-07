@@ -20,10 +20,10 @@ export default function SpecificationsTable({ data }: any) {
               } border-b`}
             >
               <th className="px-4 py-2 font-medium dark:bg-black dark:text-[#727272] text-gray-900">
-                {spec.label}
+                {spec?.label}
               </th>
               <td className="px-4 py-2 whitespace-pre-wrap dark:bg-black dark:text-[#727272]">
-                {spec.value}
+                {spec?.value}
               </td>
             </tr>
           ))}

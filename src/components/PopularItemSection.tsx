@@ -10,7 +10,7 @@ interface Product {
   name: string;
   description: string;
   price: string;
-  images: any;
+  // images: any;
 }
 
 interface SectionProps {

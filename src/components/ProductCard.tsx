@@ -49,7 +49,7 @@ const ProductCard = ({ product, seReftech, refetch }: any) => {
       toast.error("Failed to add to favourites");
     }
   };
-  console.log(product, "product");
+  console.log(product.images, "product");
   return (
     <div
       key={product.id}

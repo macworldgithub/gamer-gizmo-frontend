@@ -61,7 +61,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   <SlCalender size={18} />
                 </div>
                 <div className="text-gray-700 font-medium dark:text-white">
-                  {formatDate(data.created_at)}
+                  {formatDate(data?.created_at)}
                 </div>
               </div>
 
@@ -78,7 +78,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           </div>
           <div className="flex flex-col items-start">
             <p className="text-sm md:text-xl text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
-              {data.name}
+              {data?.name}
             </p>
             <p className="text-sm text-gray-500  text-start dark:text-[#616161]">
               <h3 className="text-base font-bold">Warranty:</h3>
@@ -89,7 +89,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
         {/* <Buynow data={data} /> */}
         <h1 className=" text-2xl font-bold text-purple-600 text-left mt-4  md:text-2xl">
-          AED {data.price}
+          AED {data?.price}
         </h1>
         <div className="flex items-center">
           <h1 className="font-bold text-lg">Stock:</h1>

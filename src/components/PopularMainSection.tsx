@@ -13,7 +13,7 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      images: ["/images/gpu.png"],
+      // images: ["/images/gpu.png"],
     },
   ]);
   const [LaptopNewData, setLaptopNewData] = useState([
@@ -22,7 +22,7 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      images: ["/images/gpu.png"],
+      // images: ["/images/gpu.png"],
     },
   ]);
   const [consolesNewData, setConsolesNewData] = useState([
@@ -31,7 +31,7 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      images: ["/images/gpu.png"],
+      // images: ["/images/gpu.png"],
     },
   ]);
   const [consolesUsedData, setConsolesUsedData] = useState([
@@ -40,7 +40,7 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      images: ["/images/gpu.png"],
+      // images: ["/images/gpu.png"],
     },
   ]);
   const [desktopNewData, setDesktopNewData] = useState([
@@ -49,7 +49,7 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      images: ["/images/gpu.png"],
+      // images: ["/images/gpu.png"],
     },
   ]);
   const [desktopUsedData, setDesktopUsedData] = useState([
@@ -58,7 +58,7 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      images: ["/images/gpu.png"],
+      // images: ["/images/gpu.png"],
     },
   ]);
   const token = useSelector((state: RootState) => state.user.token);
