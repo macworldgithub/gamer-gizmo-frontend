@@ -1,12 +1,13 @@
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./Store/Store";
 import { toast } from "react-toastify";
+
 const ProductCard = ({ product, seReftech, refetch }: any) => {
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
@@ -25,7 +26,7 @@ const ProductCard = ({ product, seReftech, refetch }: any) => {
           productId: prodId.toString(),
         }
       );
-      if (response.status == 201) {
+      if (response.status === 201) {
         toast.success(response.data.message);
         seReftech(!refetch);
       }
@@ -33,6 +34,7 @@ const ProductCard = ({ product, seReftech, refetch }: any) => {
       toast.error("Failed to add to favourites");
     }
   };
+
   const remove = async (prod: any) => {
     try {
       const response = await axios.delete(
@@ -43,13 +45,13 @@ const ProductCard = ({ product, seReftech, refetch }: any) => {
           },
         }
       );
-      toast.success("SuccessFully Deleted");
+      toast.success("Successfully Deleted");
       seReftech(!refetch);
     } catch (err) {
       toast.error("Failed to add to favourites");
     }
   };
-  console.log(product.images, "product");
+
   return (
     <div
       key={product.id}

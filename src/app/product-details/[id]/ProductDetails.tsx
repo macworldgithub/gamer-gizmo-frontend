@@ -92,8 +92,28 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           AED {data?.price}
         </h1>
         <div className="flex items-center">
-          <h1 className="font-bold text-lg">Stock:</h1>
-          <p className="ml-3 text-black font-semibold">{data?.stock}</p>
+          <h1 className="font-bold text-secondaryColorLight text-lg">Stock:</h1>
+          <p className="ml-3 dark:text-white text-black font-semibold">
+            {data?.stock}
+          </p>
+        </div>
+        <div className="flex items-center">
+          <h1 className="font-bold text-secondaryColorLight text-lg">
+            Condition:
+          </h1>
+          <p className="ml-3 dark:text-white text-black font-semibold">
+            <p>
+              {data?.condition === 1
+                ? "New"
+                : data?.condition === 2
+                ? "Used"
+                : data?.condition === 3
+                ? "Like New"
+                : data?.condition === 4
+                ? "Refurbished"
+                : "Unknown"}
+            </p>
+          </p>
         </div>
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">
