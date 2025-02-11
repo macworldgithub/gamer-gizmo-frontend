@@ -23,7 +23,7 @@ interface SectionProps {
   refetch: any;
 }
 
-const PopularItemSection: React.FC<SectionProps> = ({
+const ProductSection: React.FC<SectionProps> = ({
   title,
   subtitle,
   products,
@@ -108,4 +108,4 @@ const PopularItemSection: React.FC<SectionProps> = ({
   );
 };
 
-export default PopularItemSection;
+export default ProductSection;

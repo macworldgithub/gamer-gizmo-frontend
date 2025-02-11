@@ -3,6 +3,7 @@ import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import CustomLoader from "@/components/CustomLoader";
 import Inspection from "@/components/Inspection";
 import ProductCard from "@/components/ProductCard";
+import ProductMain from "@/components/ProductMain";
 import SelectLabels from "@/components/SelectLabels";
 import { RootState } from "@/components/Store/Store";
 import axios from "axios";
@@ -124,7 +125,7 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
             <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
-              <div className="flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
+              {/* <div className="flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
                 {data && data.length > 0 ? (
                   data.map((product, index) => (
                     <ProductCard
@@ -136,7 +137,8 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
                 ) : (
                   <div className="text-red-600">No Product To display</div>
                 )}
-              </div>
+              </div> */}
+              <ProductMain categoryId={1} />
             </Wrapper>
           </div>
         </Wrapper>

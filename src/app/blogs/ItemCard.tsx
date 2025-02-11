@@ -1,5 +1,3 @@
-
-
 import Image from "next/image";
 
 const tagColors = {
@@ -88,7 +86,7 @@ export default function BlogCards() {
         {blogPosts.map((post) => (
           <div
             key={post.id}
-            className="bg-white shadow-lg overflow-hidden w-full max-w-xs sm:max-w-xs md:max-w-xs mx-auto lg:max-w-xl"
+            className="bg-white dark:bg-black shadow-lg overflow-hidden w-full max-w-xs sm:max-w-xs md:max-w-xs mx-auto lg:max-w-xl  "
           >
             <Image
               src={post.image}
@@ -101,10 +99,10 @@ export default function BlogCards() {
               <p className="text-xs sm:text-sm md:text-xs text-purple-400 lg:text-lg">
                 {post.author} • {post.date}
               </p>
-              <h3 className="text-sm sm:text-xs md:text-xs font-semibold mt-2 mb-1 lg:text-sm">
+              <h3 className="text-sm sm:text-xs md:text-xs font-semibold mt-2 mb-1 lg:text-sm dark:text-white">
                 {post.title}
               </h3>
-              <p className="text-xs sm:text-xs md:text-xs text-gray-700 mb-2 lg:text-sm">
+              <p className="text-xs sm:text-xs md:text-xs text-gray-700 mb-2 lg:text-sm dark:text-white">
                 {post.description}
               </p>
               <div className="flex flex-wrap gap-1 sm:gap-2">

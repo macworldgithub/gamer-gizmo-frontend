@@ -6,8 +6,13 @@ const nextConfig = {
         hostname: "backend.gamergizmo.com",
       },
       {
+        protocol: "https",
+        hostname: "www.backend.gamergizmo.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
+        port: "4001",
       },
     ],
   },

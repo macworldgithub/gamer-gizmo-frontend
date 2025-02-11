@@ -114,8 +114,11 @@ const ConsoleHeader = () => {
                 </p>
               </div>
               {/* Call-to-Action Button */}
-              <button onClick={()=>router.push("/publish-ad")} className="bg-custom-gradient  
-cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8">
+              <button
+                onClick={() => router.push("/publish-ad")}
+                className="bg-custom-gradient  
+cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
+              >
                 Sell Your Product
               </button>
             </div>
@@ -133,6 +136,7 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
               onExplore={() => console.log("Explore Used Consoles")}
               explorePath=""
             />
+
             <PopularItemSection
               title="Popular in  New PC Consoles"
               subtitle="Choose your necessary gaming items from this category."
