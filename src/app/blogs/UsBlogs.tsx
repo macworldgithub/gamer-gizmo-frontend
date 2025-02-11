@@ -301,7 +301,7 @@ export default function UsBlogs() {
               alt="Team working"
               width={200}
               height={120}
-              className="w-full md:w-80 h-48 object-cover"
+              className="w-full md:w-60 h-48 object-cover "
             />
             <div>
               <p className="text-xs text-purple-600 font-semibold">
@@ -332,7 +332,7 @@ export default function UsBlogs() {
               alt="Workspace"
               width={200}
               height={120}
-              className="w-full md:w-80 h-48 object-cover"
+              className="w-full md:w-60 h-48 object-cover"
             />
             <div>
               <p className="text-xs text-purple-600 font-semibold">
@@ -379,7 +379,7 @@ export default function UsBlogs() {
             <h3 className="text-2xl font-bold hover:underline cursor-pointer">
               Grid system for better Design User Interface
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 md:w-xl">
               A grid system is a design tool used to arrange content on a
               webpage. It is a series of vertical and horizontal lines that
               create a matrix of intersecting points, which can be used to align

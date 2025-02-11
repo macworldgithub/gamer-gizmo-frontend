@@ -18,6 +18,8 @@ const page = () => {
   const params = useParams();
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState([]);
+  const [fetcher, seReftech] = useState(false);
+
   const [similarItems, setSimilarItems] = useState([]);
   const cardContent = {
     title: "Similar Ads",
@@ -60,7 +62,7 @@ const page = () => {
   useEffect(() => {
     fetch();
     fetchSimilarItems();
-  }, []);
+  }, [fetcher]);
   const usedConsoles = [
     {
       id: 1,
@@ -107,7 +109,7 @@ const page = () => {
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-10">
         <div className="w-[65%] max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
-          <ProductDetails data={data} />
+          <ProductDetails seReftech={seReftech} refetch={fetcher} data={data} />
           <AuthorSection />
           <RelatedNewsSection />
           <CommentsSection />
@@ -124,6 +126,8 @@ const page = () => {
           {/* Product Grid */}
           <PopularItemSection
             title="Similar Ads"
+            seReftech={seReftech}
+            refetch={fetcher}
             subtitle="Choose your necessary gaming items from this category."
             products={similarItems}
             onExplore={() => console.log("Explore Used Consoles")}

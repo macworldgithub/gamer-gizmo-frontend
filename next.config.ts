@@ -1,6 +1,15 @@
 const nextConfig = {
   images: {
-    domains: ["localhost","backend.gamergizmo.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "backend.gamergizmo.com",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+    ],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete

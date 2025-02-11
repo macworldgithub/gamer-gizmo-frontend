@@ -16,21 +16,10 @@ const Form: React.FC<any> = ({ onSubmit, formData, onChange }) => {
         onChange={onChange}
         className="input-field"
       />
-      <select
-        name="industry"
-        value={formData.industry}
-        onChange={onChange}
-        className="input-field bg-blueLight text-gray-400"
-      >
-        <option value="">Select Industry</option>
-        <option value="tech">Tech</option>
-        <option value="gaming">Gaming</option>
-        <option value="finance">Finance</option>
-      </select>
       <input
         type="text"
-        name="contactName"
-        placeholder="Contact Name"
+        name="contactNumber"
+        placeholder="Contact Number"
         value={formData.contactName}
         onChange={onChange}
         className="input-field"
@@ -43,6 +32,28 @@ const Form: React.FC<any> = ({ onSubmit, formData, onChange }) => {
         onChange={onChange}
         className="input-field"
       />
+      <select
+        name="industry"
+        value={formData.industry}
+        onChange={onChange}
+        className="input-field bg-blueLight text-gray-400"
+      >
+        <option value="">Select Industry</option>
+        <option value="tech">Tech</option>
+        <option value="gaming">Gaming</option>
+        <option value="finance">Finance</option>
+      </select>
+
+      <input
+        type="number"
+        name="budget"
+        placeholder="Enter your budget in $"
+        value={formData.budget}
+        onChange={onChange}
+        className="pl-4 input-field"
+        min="0"
+      />
+
       <textarea
         name="requirements"
         placeholder="Requirements"

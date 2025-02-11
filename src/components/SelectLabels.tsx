@@ -5,23 +5,36 @@ import Select from "@mui/material/Select";
 import { useEffect, useState } from "react";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
-export default function SelectLabels() {
+export default function SelectLabels({ query, route }: any) {
   const [locationData, setLocationData] = useState<any[]>([]);
   const [processorData, setProcessorData] = useState<any[]>([]);
   const [gpuData, setgpuData] = useState<any[]>([]);
   const [ramData, setRamData] = useState<any[]>([]);
   const [storageTypeData, setStorageTypeData] = useState<any[]>([]);
   const [conditioneData, setConditioneData] = useState<any[]>([]);
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
+  const [selectedValues, setSelectedValues] = useState(
+    query
+      ? query
+      : {
+          processor: "",
+          storage: "",
+          location: "",
+          condition: "",
+          gpu: "",
+          ram: "",
+          price: "",
+        }
+  );
+  const router = useRouter();
   useEffect(() => {
     fetchProcessors();
     fetchLocations();
-    fetchGPU()
-    fetchRam()
-    fetchStorgaeType()
-    fetchConditions()
+    fetchGPU();
+    fetchRam();
+    fetchStorgaeType();
+    fetchConditions();
   }, []);
 
   const fetchLocations = async () => {
@@ -89,67 +102,72 @@ export default function SelectLabels() {
   const dropdownOptions = [
     {
       label: "Processor",
-      options:
-        processorData.length > 0
-          ? processorData.map((e) => e.name)
-          : ["Intel", "AMD"],
+      key: "processor",
+      options: processorData.length > 0 ? processorData : ["Intel", "AMD"],
     },
     {
       label: "Gpu",
-      options: 
-      gpuData.length > 0
-      ? gpuData.map((e) => e.name)
-      : ["NVIDIA", "AMD",],
+      key: "gpu",
+      options: gpuData.length > 0 ? gpuData : ["NVIDIA", "AMD"],
     },
     {
       label: "RAM",
-      options:  ramData.length > 0
-      ? ramData.map((e) => e.name)
-      : ["4GB", "8GB", "16G"],
+      key: "ram",
+      options: ramData.length > 0 ? ramData : ["4GB", "8GB", "16G"],
     },
     {
       label: "Storage",
-      options: storageTypeData.length > 0
-      ? storageTypeData.map((e) => e.name)
-      :["SSD", "HDD"],
+      key: "storage",
+      options: storageTypeData.length > 0 ? storageTypeData : ["SSD", "HDD"],
     },
-    {
-      label: "Price Range",
-      options: [
-        "Below 500 AED",
-        "500 - 1000 AED",
-        "1000 - 3000 AED",
-        "3000 - 5000 AED",
-        "5000+ AED",
-      ],
-    },
+
     {
       label: "Condition",
-      options: conditioneData.length > 0
-      ? conditioneData.map((e) => e.name)
-      :["New", "Used",],
+      key: "condition",
+      options: conditioneData.length > 0 ? conditioneData : ["New", "Used"],
     },
     {
       label: "Location",
-      options:
-        locationData.length > 0
-          ? locationData.map((e) => e.name).sort((a, b) => a.localeCompare(b))
-          : ["All UAE"],
+      key: "location",
+      options: locationData.length > 0 ? locationData : ["All UAE"],
     },
     {
-      label: "Sort By",
-      options: ["Newest", "Price (Low to High)", "Most Popular"],
+      label: "Price Range",
+      key: "price",
+      options: [
+        { id: 1, name: "Below 500 AED" },
+        { id: 2, name: "500 - 1000 AED" },
+        { id: 3, name: "1000 - 3000 AED" },
+        { id: 4, name: "3000 - 5000 AED" },
+        { id: 5, name: "5000+ AED" },
+      ],
     },
+    // {
+    //   label: "Sort By",
+    //   key: "sort",
+    //   options: ["Newest", "Price (Low to High)", "Most Popular"],
+    // },
   ];
+  const handleClick = () => {
+    // Convert the selectedValues object to query parameters
+    const filteredValues = Object.fromEntries(
+      Object.entries(selectedValues).filter(([key, value]) => value !== "")
+    );
+    // @ts-expect-error
+    const queryParams = new URLSearchParams(filteredValues).toString();
+    router.push(`/${route}?${queryParams}`);
+  };
 
-  useEffect(() => {
-    setSelectedValues(dropdownOptions.map(() => ""));
-  }, [processorData, locationData]);
+  // useEffect(() => {
+  //   setSelectedValues(dropdownOptions.map(() => ""));
+  // }, [processorData, locationData]);
 
-  const handleChange = (index: number, event: any) => {
-    const updatedValues = [...selectedValues];
-    updatedValues[index] = event.target.value;
-    setSelectedValues(updatedValues);
+  const handleChange = (field: string, value: any) => {
+    // @ts-expect-error
+    setSelectedValues((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
   };
 
   const handleReset = () => {
@@ -163,26 +181,35 @@ export default function SelectLabels() {
           {dropdownOptions.map((dropdown, index) => (
             <div key={index} className="flex items-center  gap-2">
               <Select
-                value={selectedValues[index] || ""}
-                onChange={(event) => handleChange(index, event)}
+                value={selectedValues[dropdown.key] || ""}
+                onChange={(event) =>
+                  handleChange(dropdown.key, event.target.value)
+                }
                 displayEmpty
                 inputProps={{ "aria-label": dropdown.label }}
                 // className="lg:w-[105px] h-12 mt-2 max-sm:w-[360px] sm:w-[102px] md:w-[65px] border border-searchFilterBorder"
                 className="w-[105px]"
                 sx={{
+                  overflow: "hidden",
                   borderRadius: "50px",
                   fontFamily: "Urbanist",
                   fontWeight: "600",
                   fontSize: "13px",
                   ".MuiSelect-icon": { color: "#6345ed" },
                 }}
+                MenuProps={{
+                  autoFocus: false,
+                  disablePortal: true,
+                  disableAutoFocus: true,
+                  disableScrollLock: true,
+                }}
               >
                 <MenuItem value="" disabled>
                   {dropdown.label}
                 </MenuItem>
                 {dropdown.options.map((option, id) => (
-                  <MenuItem key={id} value={option}>
-                    {option}
+                  <MenuItem key={id} value={option.id}>
+                    {option.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -199,7 +226,10 @@ export default function SelectLabels() {
         </button>
 
         {/* Filter Button */}
-        <div className="bg-custom-gradient lg:w-[150px] md:w-[100px] md:ml-2 max-sm:w-60 sm:w-[80px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-white">
+        <div
+          onClick={() => handleClick()}
+          className="bg-custom-gradient cursor-pointer lg:w-[150px] md:w-[100px] md:ml-2 max-sm:w-60 sm:w-[80px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-white"
+        >
           🔍 Filter
         </div>
       </div>

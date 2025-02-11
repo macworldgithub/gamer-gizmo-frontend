@@ -10,17 +10,26 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import ProductCard from "@/components/ProductCard";
+import { useRouter } from "next/navigation";
 
-const HeroSection = () => {
+const HeroSection = ({ query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [fetcher, seReftech] = useState(false);
 
   const fetch = async () => {
     try {
+      const filteredValues = Object.fromEntries(
+        Object.entries(query).filter(([key, value]) => value !== "")
+      );
+
+      // @ts-expect-error
+      const queryParams = new URLSearchParams(filteredValues).toString();
       setLoading(true);
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&${queryParams}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -38,13 +47,13 @@ const HeroSection = () => {
   };
   useEffect(() => {
     fetch();
-  }, []);
+  }, [query, fetcher]);
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
       <div className="py-28 max-lg:py-8 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
         <div className="w-[100%] flex flex-col xl:flex-row relative justify-around items-center  mx-auto space-y-8 md:space-y-0">
           <div className="flex w-full max-lg:min-h-[50%] max-xl:max-h-[75%]  justify-center items-center gap-4 xl:absolute xl:-top-36 md:pb-16">
-            <SelectLabels />
+            <SelectLabels query={query} route={"desktop"} />
           </div>
           {/* Free Ad Section */}
           <Wrapper>
@@ -100,7 +109,11 @@ const HeroSection = () => {
                 </p>
               </div>
               {/* Call-to-Action Button */}
-              <button className="bg-custom-gradient text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8">
+              <button
+                onClick={() => router.push("/publish-ad")}
+                className="bg-custom-gradient  
+cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
+              >
                 Sell Your Product
               </button>
             </div>
@@ -114,7 +127,11 @@ const HeroSection = () => {
               <div className="flex flex-wrap gap-4 justify-center sm:justify-start max-sm:gap-[0.5rem] ">
                 {data && data.length > 0 ? (
                   data.map((product, index) => (
-                    <ProductCard product={product} />
+                    <ProductCard
+                      fetcher={fetcher}
+                      seReftech={seReftech}
+                      product={product}
+                    />
                   ))
                 ) : (
                   <div className="text-red-600">No Product To display</div>

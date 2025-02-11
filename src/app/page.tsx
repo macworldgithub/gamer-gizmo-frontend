@@ -35,7 +35,7 @@ export default function HomePage() {
   return (
     <div className="overflow-x-hidden dark:bg-[#0D0D12]">
       <MobileCategories />
-      <FilterSection />
+      <FilterSection  />
       <CategoriesComponent />
       <PopularMainSection />
       <BrowseVideos />
