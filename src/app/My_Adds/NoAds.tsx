@@ -5,7 +5,7 @@ import question from "../../../public/images/question.png";
 export default function NoAds({ ads }) {
   return (
     <>
-    <div className="flex  bg-black text-white w-fit px-4 py-1 rounded-full mb-4">
+    <div className="flex  bg-black text-white w-fit px-4 py-1 rounded-full mb-4 max-lg:mx-4">
         <span className="font-medium text-lg">All Ads (0)</span>
       </div>
     <div className="flex flex-col items-center justify-center">        

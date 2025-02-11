@@ -5,28 +5,28 @@ import AdList from "./AdList";
 
 export default function Add() {
   const [ads, setAds] = useState([
-    // {
-    //   id: 2,
-    //   title: "AMD Radeon RX 580 GTS XXX Edition Graphics Card, S Version, 8GB DDR5 256 Bit Memory, Dual Bios, 2304 Stream Processor, 1386MHz OC+, PCI-E, HDMI, DisplayPort | RX-580S85DD6",
-    //   status: "Active",
-    //   price: "551.00",
-    //   views: 10,
-    //   calls: 5,
-    //   chats: 3,
-    //   likes: 8,
-    //   image: "/images/gpu.png",
-    // },
-    // {
-    //   id: 2,
-    //   title: "AMD Radeon RX 580 GTS XXX Edition Graphics Card, S Version, 8GB DDR5 256 Bit Memory, Dual Bios, 2304 Stream Processor, 1386MHz OC+, PCI-E, HDMI, DisplayPort | RX-580S85DD6",
-    //   status: "Not Posted",
-    //   price: "551.00",
-    //   views: 10,
-    //   calls: 5,
-    //   chats: 3,
-    //   likes: 8,
-    //   image: "/images/gpu.png",
-    // }
+    {
+      id: 2,
+      title: "AMD Radeon RX 580 GTS XXX Edition Graphics Card, S Version, 8GB DDR5 256 Bit Memory, Dual Bios, 2304 Stream Processor, 1386MHz OC+, PCI-E, HDMI, DisplayPort | RX-580S85DD6",
+      status: "Active",
+      price: "551.00",
+      views: 10,
+      calls: 5,
+      chats: 3,
+      likes: 8,
+      image: "/images/gpu.png",
+    },
+    {
+      id: 2,
+      title: "AMD Radeon RX 580 GTS XXX Edition Graphics Card, S Version, 8GB DDR5 256 Bit Memory, Dual Bios, 2304 Stream Processor, 1386MHz OC+, PCI-E, HDMI, DisplayPort | RX-580S85DD6",
+      status: "Not Posted",
+      price: "551.00",
+      views: 10,
+      calls: 5,
+      chats: 3,
+      likes: 8,
+      image: "/images/gpu.png",
+    }
     
   ]);
 
