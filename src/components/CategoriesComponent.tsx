@@ -49,7 +49,7 @@ const CategoriesComponent = () => {
 
   return (
     <div className=" max-md:mb-0 text-black">
-      <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative py-6 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[52rem]">
+      <div className="bg-[#f4f2fe] dark:text-white dark:bg-[#1e1e2f] md:relative py-6 w-full max-sm:h-auto sm:h-auto md:h-[65rem] lg:h-[45rem]">
         <h1 className=" text-center md:text-[1.5rem] font-bold">
           Level Up Your Gaming Gear - Buy, Sell, and
         </h1>
@@ -142,7 +142,7 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      <Wrapper className=" xl:mt-6lg:mt-[5rem] md:mt-[12rem] max-md:m-0 ">
+      <Wrapper className=" xl:mt-4 lg:mt-[5rem] md:mt-[5rem] max-md:m-0 md:mb-6">
         <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto  dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto  max-sm:mt-10">
           <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
