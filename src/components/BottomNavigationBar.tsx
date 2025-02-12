@@ -42,7 +42,7 @@ const BottomNavigationBar = () => {
       if (window.scrollY > 0) {
         setIsScrolling(true);
         if (isDrawerOpen) {
-          setIsDrawerOpen(false); 
+          setIsDrawerOpen(false);
         }
       } else {
         setIsScrolling(false);
@@ -65,7 +65,7 @@ const BottomNavigationBar = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -121,7 +121,7 @@ const BottomNavigationBar = () => {
         </Link>
       ),
     },
-   
+
     {
       key: "5",
       label: <p className="font-bold text-red-700">Logout</p>,
@@ -137,7 +137,7 @@ const BottomNavigationBar = () => {
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         <Link href="/desktop">Desktops</Link>
         <Link href="/laptops">Laptops</Link>
-        <Link href="/console-screen">Store</Link>
+        <Link href="/console-screen">Consoles</Link>
         <Link href="/usedparts">Components</Link>
         <Link href="/blogs">Blogs</Link>
         <Link href="/contact">Contact Us</Link>
@@ -236,11 +236,11 @@ const BottomNavigationBar = () => {
               </Link>
 
               <Link
-                href="#"
+                href="/console-screen"
                 className="text-lg hover:text-gray-300"
                 onClick={() => setIsDrawerOpen(false)}
               >
-                Store
+                Consoles
               </Link>
               <Link
                 href="/usedparts"
