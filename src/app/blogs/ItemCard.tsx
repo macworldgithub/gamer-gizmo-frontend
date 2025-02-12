@@ -79,14 +79,14 @@ const blogPosts = [
 export default function BlogCards() {
   return (
     <div className="container mx-auto p-3 sm:p-4 md:p-6">
-      <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 lg:text-center">
+      <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 lg:text-center dark:text-white ">
         All Blog Posts
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 md:max-w-6xl mx-auto">
         {blogPosts.map((post) => (
           <div
             key={post.id}
-            className="bg-white dark:bg-black shadow-lg overflow-hidden w-full max-w-xs sm:max-w-xs md:max-w-xs mx-auto lg:max-w-xl  "
+            className="bg-white dark:bg-black shadow-lg overflow-hidden w-full max-w-xs sm:max-w-xs md:max-w-xs mx-auto lg:max-w-xl"
           >
             <Image
               src={post.image}
@@ -109,11 +109,11 @@ export default function BlogCards() {
                 {post.tags?.map((tag, index) => (
                   <span
                     key={index}
-                    className={`px-2 py-1 rounded font-semibold 
-        text-[10px] sm:text-[7px] md:text-[10px] lg:text-sm  
-        px-1 sm:px-1.5 md:px-1.5 lg:px-2 
+                    className={`px-2 py-1 rounded font-semibold
+        text-[10px] sm:text-[7px] md:text-[10px] lg:text-sm
+        px-1 sm:px-1.5 md:px-1.5 lg:px-2
         py-0.5 sm:py-1 md:py-0.5 lg:py-1
-        ${tagColors[tag] || "bg-gray-200 text-gray-700"} 
+        ${tagColors[tag] || "bg-gray-200 text-gray-700"}
       `}
                   >
                     {tag}
@@ -127,3 +127,5 @@ export default function BlogCards() {
     </div>
   );
 }
+
+

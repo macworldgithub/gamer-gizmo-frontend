@@ -1,6 +1,7 @@
 import React from "react";
 import UsBlogs from "./UsBlogs";
 import PageHeader from "@/components/PageHeader";
+
 import ItemCard from "./ItemCard";
 
 const page = () => {
@@ -9,6 +10,7 @@ const page = () => {
       <PageHeader pageName={"Blogs"} title="Blogs" />
       <UsBlogs />
       <ItemCard />
+      
     </div>
   );
 };
