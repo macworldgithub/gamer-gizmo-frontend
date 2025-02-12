@@ -88,7 +88,16 @@ export default function AdList({
           className="flex flex-col shadow-lg lg:flex-row items-center rounded-lg p-8 lg:p-6 mb-6"
         >
           <div className="w-28 h-28">
-            {/* <Image width={100} height={100} src={ ad?.images && `${process.env.NEXT_PUBLIC_API_BASE_URL}/${ad?.images[0].image_url}` } alt={"image"} className="object-contain w-full h-full" /> */}
+            <Image
+              width={100}
+              height={100}
+              src={
+                ad?.images &&
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/${ad?.images[0].image_url}`
+              }
+              alt={"image"}
+              className="object-contain w-full h-full"
+            />
           </div>
           <div className="flex-1 px-0 lg:px-6">
             <h3 className="font-bold text-purple-700 max-md:text-[12px] leading-6 break-words">
