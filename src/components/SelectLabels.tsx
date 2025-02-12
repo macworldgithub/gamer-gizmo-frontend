@@ -29,6 +29,9 @@ export default function SelectLabels({ query, route }: any) {
   );
   const router = useRouter();
   useEffect(() => {
+    setSelectedValues((prev: any) => ({ ...prev, ...query }));
+  }, [query]);
+  useEffect(() => {
     fetchProcessors();
     fetchLocations();
     fetchGPU();
@@ -36,7 +39,7 @@ export default function SelectLabels({ query, route }: any) {
     fetchStorgaeType();
     fetchConditions();
   }, []);
-
+  console.log(selectedValues, "queryParams22");
   const fetchLocations = async () => {
     try {
       const response = await axios.get(

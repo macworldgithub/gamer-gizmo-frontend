@@ -14,40 +14,39 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const LaptopHeroSection = ({ query }: any) => {
-  const token = useSelector((state: RootState) => state.user.token);
-  const [data, setData] = useState([]);
+  // const token = useSelector((state: RootState) => state.user.token);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [fetcher, seReftech] = useState(false);
-  const fetch = async () => {
-    try {
-      const filteredValues = Object.fromEntries(
-        Object.entries(query).filter(([key, value]) => value !== "")
-      );
+  // const fetch = async () => {
+  //   try {
+  //     const filteredValues = Object.fromEntries(
+  //       Object.entries(query).filter(([key, value]) => value !== "")
+  //     );
 
-      // @ts-expect-error
-      const queryParams = new URLSearchParams(filteredValues).toString();
-      setLoading(true);
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&${queryParams}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if ((response.status = 200)) {
-        setData(response.data.data);
-      }
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      toast.error("Error");
-    }
-  };
-  useEffect(() => {
-    fetch();
-  }, [query, fetcher]);
+  //     // @ts-expect-error
+  //     const queryParams = new URLSearchParams(filteredValues).toString();
+  //     setLoading(true);
+  //     const response = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&${queryParams}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     if ((response.status = 200)) {
+  //       setData(response.data.data);
+  //     }
+  //     setLoading(false);
+  //   } catch (err) {
+  //     setLoading(false);
+  //     toast.error("Error");
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetch();
+  // }, [query, fetcher]);
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
       {/* Main Content */}
@@ -138,7 +137,7 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
                   <div className="text-red-600">No Product To display</div>
                 )}
               </div> */}
-              <ProductMain categoryId={1} />
+              <ProductMain query={query} categoryId={1} />
             </Wrapper>
           </div>
         </Wrapper>
