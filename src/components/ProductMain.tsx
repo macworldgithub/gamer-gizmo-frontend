@@ -14,7 +14,7 @@ const categoryNames = {
   3: "Consoles",
   4: "Components",
 };
-const ProductMain: React.FC<ProductMainProps> = ({ categoryId }) => {
+const ProductMain = ({ categoryId, query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
   const [newData, setNewData] = useState([]);
   const [usedData, setUsedData] = useState([]);
@@ -23,8 +23,14 @@ const ProductMain: React.FC<ProductMainProps> = ({ categoryId }) => {
   // Function to fetch products based on category and condition
   const fetchProducts = async (categoryId: number, condition: number) => {
     try {
+      const filteredValues = Object.fromEntries(
+        Object.entries(query).filter(([key, value]) => value !== "")
+      );
+
+      // @ts-expect-error
+      const queryParams = new URLSearchParams(filteredValues).toString();
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&condition=${condition}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&condition=${condition}&${queryParams}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
