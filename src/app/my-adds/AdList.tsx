@@ -1,18 +1,31 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "@/components/Store/Store";
 import CustomLoader from "@/components/CustomLoader";
 
-export default function AdList({ ads, setFetch, fetcher }: any) {
+export default function AdList({
+  ads,
+  setFetch,
+  fetcher,
+  total,
+  currentPage,
+  setCurrentPage,
+}: any) {
   const token = useSelector((state: RootState) => state.user.token);
   const userId = useSelector((state: RootState) => state.user.id);
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedAd, setSelectedAd] = useState<any>(null);
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(total / itemsPerPage);
+
+  useEffect(() => {
+    setFetch(!fetcher);
+  }, [currentPage]);
 
   const deleteProduct = async (id: any) => {
     try {
@@ -46,14 +59,13 @@ export default function AdList({ ads, setFetch, fetcher }: any) {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/invertStatus`,
         {
           product_id: selectedAd.id.toString(),
-          // @ts-expect-error jhk
+          // @ts-expect-error kjhk j,h
           user_id: userId.toString(),
         },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
       setLoading(false);
       toast.success(`Status changed to ${newStatus ? "Active" : "Draft"}`);
       setFetch(!fetcher);
@@ -67,7 +79,7 @@ export default function AdList({ ads, setFetch, fetcher }: any) {
   return (
     <div className="m-4">
       <div className="flex justify-between items-center bg-black text-white w-fit px-4 py-1 rounded-full mb-4">
-        <span className="font-medium text-lg">All Ads ({ads.length})</span>
+        <span className="font-medium text-lg">All Ads ({total})</span>
       </div>
 
       {ads.map((ad: any) => (
@@ -127,6 +139,26 @@ export default function AdList({ ads, setFetch, fetcher }: any) {
           {loading && <CustomLoader />}
         </div>
       ))}
+
+      <div className="flex justify-center items-center space-x-2 mt-4">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+          className="px-4 py-2 border rounded-lg disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <span className="px-4 py-2 border rounded-lg">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+          className="px-4 py-2 border rounded-lg disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
 
       {modalOpen && selectedAd && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
