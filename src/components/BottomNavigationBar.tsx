@@ -42,7 +42,7 @@ const BottomNavigationBar = () => {
       if (window.scrollY > 0) {
         setIsScrolling(true);
         if (isDrawerOpen) {
-          setIsDrawerOpen(false); 
+          setIsDrawerOpen(false);
         }
       } else {
         setIsScrolling(false);
@@ -65,7 +65,7 @@ const BottomNavigationBar = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -106,8 +106,8 @@ const BottomNavigationBar = () => {
       icon: <FaCartPlus />,
       key: "3",
       label: (
-        <Link onClick={() => setIsDrawerOpen(false)} href="/Add_to_cart">
-          Cart
+        <Link onClick={() => setIsDrawerOpen(false)} href="/my-adds">
+          My Ads
         </Link>
       ),
     },
@@ -121,7 +121,7 @@ const BottomNavigationBar = () => {
         </Link>
       ),
     },
-   
+
     {
       key: "5",
       label: <p className="font-bold text-red-700">Logout</p>,
