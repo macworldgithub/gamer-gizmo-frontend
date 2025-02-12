@@ -32,12 +32,10 @@ const CategoriesComponent = () => {
     "Used Laptops",
     "Used Gaming PC Parts",
     "Used Gaming Consoles",
-    "Used Gaming Accessories",
     "New Desktops",
     "New Laptops",
     "New Gaming PC Parts",
     "New Gaming Consoles",
-    "Customization & Gaming Gears",
   ];
 
   const offeringList = [
@@ -130,7 +128,7 @@ const CategoriesComponent = () => {
               {category.map((item, index) => (
                 <div
                   key={index}
-                  className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col justify-center items-center"
+                  className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center"
                 >
                   <h2 className="text-[0.9rem]  font-bold text-center mb-4">
                     <Link href="/">{item}</Link>
@@ -144,7 +142,7 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      <Wrapper className=" xl:mt-6 lg:mt-[5rem] md:mt-[12rem] max-md:m-0 ">
+      <Wrapper className=" xl:mt-6 bg-red-500 lg:mt-[5rem] md:mt-[12rem] max-md:m-0 ">
         <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto  dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto  max-sm:mt-10">
           <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
