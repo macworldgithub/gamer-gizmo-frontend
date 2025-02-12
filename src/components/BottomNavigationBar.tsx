@@ -137,7 +137,7 @@ const BottomNavigationBar = () => {
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         <Link href="/desktop">Desktops</Link>
         <Link href="/laptops">Laptops</Link>
-        <Link href="/console-screen">Consoles</Link>
+        <Link href="/console">Consoles</Link>
         <Link href="/usedparts">Components</Link>
         <Link href="/blogs">Blogs</Link>
         <Link href="/contact">Contact Us</Link>
@@ -236,7 +236,7 @@ const BottomNavigationBar = () => {
               </Link>
 
               <Link
-                href="/console-screen"
+                href="/console"
                 className="text-lg hover:text-gray-300"
                 onClick={() => setIsDrawerOpen(false)}
               >

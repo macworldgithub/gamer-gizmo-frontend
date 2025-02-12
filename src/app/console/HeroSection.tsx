@@ -1,64 +1,28 @@
 "use client";
-import PageHeader from "@/components/PageHeader";
-import React from "react";
-import Image from "next/image";
-import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
+import CustomLoader from "@/components/CustomLoader";
 import Inspection from "@/components/Inspection";
+import ProductMain from "@/components/ProductMain";
 import SelectLabels from "@/components/SelectLabels";
+import { RootState } from "@/components/Store/Store";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const usedConsoles = [
-  {
-    id: 1,
-    name: "Radeon RX 580 OC...",
-    description: "Powerful graphics card for gaming...",
-    price: "AED 551.00",
-    imageUrl: "/images/gpu.png",
-  },
-  {
-    id: 2,
-    name: "Asus ROG Hyperion...",
-    description: "High-performance computer case...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu2.png",
-  },
-  {
-    id: 3,
-    name: "MSI PRO B760M-E...",
-    description:
-      "The PRO Series is tailored to professionals from all walks of life. The lineup features... ",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu3.png",
-  },
-  {
-    id: 4,
-    name: "Bloody W95 Max RGB",
-    description:
-      "The A4Tech W95 Max Bloody mouse is the optimal solution for those looking for a high-quality and productive mouse",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu4.png",
-  },
-  {
-    id: 5,
-    name: "Corsair VENGEANCE",
-    description:
-      "CORSAIR VENGEANCE RGB PRO Series DDR4 overclocked memory lights up your PC with mesmerizing ...",
-    price: "AED 1914.95",
-    imageUrl: "/images/gpu5.png",
-  },
-];
+const HeroSection = ({ query }: any) => {
+  const token = useSelector((state: RootState) => state.user.token);
+  // const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [fetcher, seReftech] = useState(false);
 
-const ConsoleHeader = () => {
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
-      {/* Page Header */}
-      <PageHeader pageName="Used-Gaming-PC-Parts" title="Gaming Consoles" />
-
-      {/* Main Content */}
       <div className="py-28 max-lg:py-8 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
         <div className="w-[100%] flex flex-col xl:flex-row relative justify-around items-center  mx-auto space-y-8 md:space-y-0">
           <div className="flex w-full max-lg:min-h-[50%] max-xl:max-h-[75%]  justify-center items-center gap-4 xl:absolute xl:-top-36 md:pb-16">
-            <SelectLabels />
+            <SelectLabels query={query} route={"console"} />
           </div>
           {/* Free Ad Section */}
           <Wrapper>
@@ -128,29 +92,18 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
       <div className="py-10  dark:bg-black">
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
-            <PopularItemSection
-              title="Popular in  Used PC Consoles"
-              subtitle="Choose your necessary gaming items from this category."
-              //@ts-ignore
-              products={usedConsoles}
-              onExplore={() => console.log("Explore Used Consoles")}
-              explorePath=""
-            />
-
-            <PopularItemSection
-              title="Popular in  New PC Consoles"
-              subtitle="Choose your necessary gaming items from this category."
-              //@ts-ignore
-              products={usedConsoles}
-              onExplore={() => console.log("Explore Used Consoles")}
-              explorePath=""
-            />
+            <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
+              <div className="flex flex-wrap gap-4 justify-center sm:justify-start max-sm:gap-[0.5rem] ">
+                <ProductMain categoryId={4} query={query} />
+              </div>
+            </Wrapper>
           </div>
         </Wrapper>
       </div>
       <Inspection />
+      {loading && <CustomLoader />}
     </div>
   );
 };
 
-export default ConsoleHeader;
+export default HeroSection;
