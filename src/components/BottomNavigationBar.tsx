@@ -106,8 +106,8 @@ const BottomNavigationBar = () => {
       icon: <FaCartPlus />,
       key: "3",
       label: (
-        <Link onClick={() => setIsDrawerOpen(false)} href="/Add_to_cart">
-          Cart
+        <Link onClick={() => setIsDrawerOpen(false)} href="/my-adds">
+          My Ads
         </Link>
       ),
     },
