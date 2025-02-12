@@ -11,8 +11,11 @@ import CustomLoader from "@/components/CustomLoader";
 export default function Add() {
   const token = useSelector((state: RootState) => state.user.token);
   const userId = useSelector((state: RootState) => state.user.id);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [] = useState(1);
 
   const [fetcher, setFetch] = useState(false);
+  const [total, setTotal] = useState(false);
   useLayoutEffect(() => {
     if (!token) {
       return redirect("/auth/login");
@@ -26,7 +29,7 @@ export default function Add() {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getUserProducts?userId=${userId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getUserProducts?userId=${userId}&pageNo=${currentPage}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,6 +40,7 @@ export default function Add() {
 
       console.log(response.data.data, "pak");
       setAds(response.data.data);
+      setTotal(response.data.total);
     } catch (err) {
       setLoading(false);
 
@@ -54,7 +58,14 @@ export default function Add() {
         {ads.length === 0 ? (
           <NoAds />
         ) : (
-          <AdList setFetch={setFetch} fetcher={fetcher} ads={ads} />
+          <AdList
+            total={total}
+            setFetch={setFetch}
+            fetcher={fetcher}
+            ads={ads}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         )}
       </div>
       {loading && <CustomLoader />}
