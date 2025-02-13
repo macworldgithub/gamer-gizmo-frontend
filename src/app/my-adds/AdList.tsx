@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "@/components/Store/Store";
 import CustomLoader from "@/components/CustomLoader";
+import { useRouter } from "next/navigation";
 
 export default function AdList({
   ads,
@@ -22,6 +23,7 @@ export default function AdList({
   const [selectedAd, setSelectedAd] = useState<any>(null);
   const itemsPerPage = 8;
   const totalPages = Math.ceil(total / itemsPerPage);
+  const router = useRouter();
 
   useEffect(() => {
     setFetch(!fetcher);
@@ -125,7 +127,10 @@ export default function AdList({
               {ad.active ? "Active" : "Draft"}
             </div>
             <div className="flex flex-row lg:flex-col gap-2">
-              <button className="px-4 lg:px-6 border border-black font-bold rounded-full hover:bg-gray-200">
+              <button
+                className="px-4 lg:px-6 border border-black font-bold rounded-full hover:bg-gray-200"
+                onClick={() => router.push(`/my-adds/edit/${ad.id}`)}
+              >
                 Edit
               </button>
               <button
