@@ -15,9 +15,9 @@ const RelatedNewsSection = () => {
             <Image
               src="/images/profile.png"
               alt="Profile"
-              width={80}
-              height={80}
-              className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[80px] lg:max-h-[80px]"
+              width={50}
+              height={50}
+              className="object-contain max-w-[60px] max-md:w-[3rem] max-md:h-[2.2rem] max-h-[60px] lg:max-w-[80px] lg:max-h-[80px]"
             />
             <div className="text-sm">
               <div className="flex items-center space-x-2 text-gray-500 dark:text-white">
@@ -26,7 +26,7 @@ const RelatedNewsSection = () => {
               </div>
               <Link
                 href="#"
-                className="dark:text-white text-gray-800 font-bold mt-2 block hover:text-gray-600 max-w-xs break-words"
+                className="dark:text-white text-gray-800 font-bold max-md:text-xs mt-1 block hover:text-gray-600 max-w-xs break-words "
               >
                 Comprehensive Guides Server Push Design Feature
               </Link>
@@ -34,13 +34,13 @@ const RelatedNewsSection = () => {
           </div>
 
           {/* Duplicate News Item */}
-          <div className="flex items-start p-4 space-x-4">
+          <div className="flex items-start p-4 space-x-4 ">
             <Image
               src="/images/profile.png"
               alt="Profile"
-              width={80}
-              height={80}
-              className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[80px] lg:max-h-[80px]"
+              width={50}
+              height={50}
+              className="object-contain max-md:w-[3rem] max-md:h-[2.2rem] max-w-[60px] max-h-[60px] lg:max-w-[80px] lg:max-h-[80px]"
             />
             <div className="text-sm">
               <div className="flex items-center space-x-2 text-gray-500 dark:text-white">
@@ -50,7 +50,7 @@ const RelatedNewsSection = () => {
 
               <Link
                 href="#"
-                className="dark:text-white text-gray-800 font-bold mt-2 block hover:text-gray-600 max-w-xs break-words"
+                className="dark:text-white text-gray-800 font-bold mt-1 max-md:text-xs block hover:text-gray-600 max-w-xs break-words"
               >
                 Comprehensive Guides Server Push Design Feature
               </Link>

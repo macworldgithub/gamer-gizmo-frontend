@@ -31,14 +31,14 @@ const AuthorSection = () => {
             <p className="text-gray-500 dark:text-white">Author</p>
           </div>
           {/* Description */}
-          <p className="text-gray-600 text-sm leading-relaxed dark:text-white">
+          <p className="text-gray-600 max-md:text-xs md:text-sm leading-relaxed dark:text-white">
             Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
             quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
             quo voluptas nulla pariatur must explain to you how all this
             mistaken idea of denouncing
           </p>
           {/* Social Links */}
-          <div className="flex space-x-4 ">
+          <div className="flex space-x-4 mt-2">
             <Link href="#" className="text-white">
               <FontAwesomeIcon icon={faFacebookF} color="#4267B2" />
             </Link>

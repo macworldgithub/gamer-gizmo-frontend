@@ -13,8 +13,8 @@ interface ProductMainProps {
 const categoryNames = {
   1: "Laptops",
   2: "Desktops",
-  3: "Consoles",
-  4: "Components",
+  3: "Components",
+  4: "Consoles",
 };
 const ProductMain = ({ categoryId, query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
@@ -81,7 +81,9 @@ const ProductMain = ({ categoryId, query }: any) => {
       {/* For Used Products */}
       {Object.keys(filteredValues).length > 0 ? (
         <>
-          <h1 className="font-bold text-2xl mb-4">Searched {categoryName}</h1>
+          <h1 className="font-bold text-2xl mb-4 dark:text-white">
+            Searched {categoryName}
+          </h1>
           <div className="flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
             {filteredData && filteredData.length > 0 ? (
               filteredData.map((product, index) => (
@@ -105,8 +107,18 @@ const ProductMain = ({ categoryId, query }: any) => {
             seReftech={seReftech}
             refetch={fetcher}
             explorePath={`/${
-              categoryId == 1 ? "laptops" : "desktop"
+              categoryId == 1
+                ? "laptops"
+                : categoryId == 2
+                ? "desktop"
+                : categoryId == 3
+                ? "components"
+                : "console"
             }?condition=2`}
+            //@ts-ignore
+            // explorePath={`/${
+            //   categoryNames[categoryId]?.toLowerCase() || "default"
+            // }?condition=2`}
             onExplore={() => console.log("Explore Used Products")}
           />
 
@@ -117,7 +129,13 @@ const ProductMain = ({ categoryId, query }: any) => {
             seReftech={seReftech}
             refetch={fetcher}
             explorePath={`/${
-              categoryId == 1 ? "laptops" : "desktop"
+              categoryId == 1
+                ? "laptops"
+                : categoryId == 2
+                ? "desktop"
+                : categoryId == 3
+                ? "components"
+                : "console"
             }?condition=1`}
             onExplore={() => console.log("Explore New Products")}
           />

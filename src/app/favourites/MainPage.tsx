@@ -76,7 +76,7 @@ export default function MainPage() {
             <div
               // @ts-expect-error
               key={item.id}
-              className="flex flex-row items-start p-4 rounded-lg w-full"
+              className="flex shadow-lg flex-row items-start p-4 rounded-lg w-full"
             >
               {/* Image */}
               {/* flex-shrink-0 */}

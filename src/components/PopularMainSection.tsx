@@ -165,7 +165,7 @@ const PopularMainSection: React.FC = () => {
         products={desktopUsedData}
         seReftech={seReftech}
         refetch={fetcher}
-        explorePath="/"
+        explorePath={`/desktop?condition=2`}
         onExplore={() => console.log("Explore Gaming PC Parts")}
       />
 
@@ -175,7 +175,7 @@ const PopularMainSection: React.FC = () => {
         products={desktopNewData}
         seReftech={seReftech}
         refetch={fetcher}
-        explorePath="/"
+        explorePath={`/desktop?condition=1`}
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <PopularItemSection
@@ -184,15 +184,15 @@ const PopularMainSection: React.FC = () => {
         products={LaptopUsedData}
         seReftech={seReftech}
         refetch={fetcher}
-        explorePath="/"
+        explorePath={`/laptops?condition=2`}
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <PopularItemSection
         title="Popular in New Laptops"
         subtitle="Choose your necessary gaming items from this category."
-        explorePath="/"
         products={LaptopNewData}
         seReftech={seReftech}
+        explorePath={`/laptops?condition=1`}
         refetch={fetcher}
         onExplore={() => console.log("Explore Used Consoles")}
       />
