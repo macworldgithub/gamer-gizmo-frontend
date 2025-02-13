@@ -136,7 +136,7 @@ const ProductMain = ({ categoryId, query }: any) => {
                 : categoryId == 3
                 ? "components"
                 : "console"
-            }?condition=2`}
+            }?condition=1`}
             onExplore={() => console.log("Explore New Products")}
           />
         </>

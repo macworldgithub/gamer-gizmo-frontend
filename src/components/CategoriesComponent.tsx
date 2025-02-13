@@ -27,7 +27,7 @@ const CategoriesComponent = () => {
 
   const isSmallScreen = useMediaQuery("(max-width: 640px)");
   // const CategoriesComponent = () => {
-  const category = [
+  const categories = [
     "Used Desktops",
     "Used Laptops",
     "Used Gaming PC Parts",
@@ -37,6 +37,29 @@ const CategoriesComponent = () => {
     "New Gaming PC Parts",
     "New Gaming Consoles",
   ];
+
+  const categoryMap = {
+    Desktops: "desktop",
+    Laptops: "laptops",
+    "Gaming PC Parts": "usedparts",
+    "Gaming Consoles": "console",
+  } as const;
+
+  const getCategoryLink = (category: string): string => {
+    // Extract condition based on "New" or "Used"
+    const isNew = category.startsWith("New");
+    const condition = isNew ? 1 : 2;
+
+    // Find the matching key in categoryMap
+    const categoryName = (
+      Object.keys(categoryMap) as (keyof typeof categoryMap)[]
+    ).find((key) => category.includes(key));
+
+    // Construct the link
+    return categoryName
+      ? `/${categoryMap[categoryName]}?condition=${condition}`
+      : "#";
+  };
 
   const offeringList = [
     { name: "Headphones", price: "237 AED", image: "/images/headphones.png" },
@@ -125,13 +148,19 @@ const CategoriesComponent = () => {
               Categories
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center">
-              {category.map((item, index) => (
+              {categories.map((category, index) => (
                 <div
                   key={index}
                   className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center"
                 >
-                  <h2 className="text-[0.9rem]  font-bold text-center mb-4">
-                    <Link href="/">{item}</Link>
+                  <h2 className="text-[0.9rem] font-bold text-center mb-4">
+                    <Link
+                      key={index}
+                      href={getCategoryLink(category)}
+                      className="hover:underline"
+                    >
+                      {category}
+                    </Link>
                   </h2>
                 </div>
               ))}
