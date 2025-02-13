@@ -30,7 +30,7 @@ export default function UsBlogs() {
                 UX review presentations
               </h3>
             </Link>
-            <p className="text-gray-600 mt-2 dark:text-white">
+            <p className="text-gray-600 mt-2 dark:text-white ">
               How do you create compelling presentations that wow your
               colleagues and impress your managers?
             </p>

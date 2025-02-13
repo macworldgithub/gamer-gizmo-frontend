@@ -2,7 +2,6 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 
-
 const blogPosts = [
   {
     id: 1,
@@ -51,8 +50,7 @@ const blogPosts = [
 ];
 
 export default function BlogPost() {
-  const { slug } = useParams(); 
-
+  const { slug } = useParams();
 
   const post = blogPosts.find((p) => p.slug === slug);
 
@@ -61,30 +59,33 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <Image
-        src={post.image}
-        alt={post.title}
-        width={800}
-        height={400}
-        className="w-full object-cover rounded-md  lg:w-4/5"
-      />
-      <p className="text-sm text-purple-600 font-semibold mt-4">
-        {post.author} • {post.date}
-      </p>
-      <h1 className="text-3xl font-bold mt-2 dark:text-white">{post.title}</h1>
-      <p className="text-gray-600 mt-4 dark:text-white">{post.description}</p>
-      <div className="flex space-x-2 mt-4">
-        {post.tags.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium"
-          >
-            {tag}
-          </span>
-        ))}
+    <div className="dark:bg-[#1e1e2f]">
+      <div className="max-w-4xl mx-auto p-6 ">
+        <Image
+          src={post.image}
+          alt={post.title}
+          width={800}
+          height={400}
+          className="w-full object-cover rounded-md  lg:w-4/5"
+        />
+        <p className="text-sm text-purple-600 font-semibold mt-4">
+          {post.author} • {post.date}
+        </p>
+        <h1 className="text-3xl font-bold mt-2 dark:text-white">
+          {post.title}
+        </h1>
+        <p className="text-gray-600 mt-4 dark:text-white">{post.description}</p>
+        <div className="flex space-x-2 mt-4">
+          {post.tags.map((tag, index) => (
+            <span
+              key={index}
+              className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
-
