@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Wrapper from "./Common/Wrapper/Wrapper";
+import Link from "next/link";
 
 const CategoriesComponent = () => {
   // Custom Hook for Media Query
@@ -129,10 +130,10 @@ const CategoriesComponent = () => {
               {category.map((item, index) => (
                 <div
                   key={index}
-                  className="w-full max-w-[15rem] border border-gray-200 bg-white p-6 rounded-lg shadow-md flex flex-col justify-center items-center"
+                  className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col justify-center items-center"
                 >
-                  <h2 className="text-[0.9rem] font-bold text-center mb-4">
-                    {item}
+                  <h2 className="text-[0.9rem]  font-bold text-center mb-4">
+                    <Link href="/">{item}</Link>
                   </h2>
                 </div>
               ))}

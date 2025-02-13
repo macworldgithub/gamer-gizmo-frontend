@@ -42,7 +42,7 @@ const BottomNavigationBar = () => {
       if (window.scrollY > 0) {
         setIsScrolling(true);
         if (isDrawerOpen) {
-          setIsDrawerOpen(false); // Close drawer when scrolling
+          setIsDrawerOpen(false); 
         }
       } else {
         setIsScrolling(false);
@@ -65,7 +65,7 @@ const BottomNavigationBar = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Include Bearer token
+            Authorization: `Bearer ${token}`, 
           },
         }
       );
@@ -121,17 +121,9 @@ const BottomNavigationBar = () => {
         </Link>
       ),
     },
+   
     {
       key: "5",
-      icon: <SettingOutlined />,
-      label: (
-        <Link onClick={() => setIsDrawerOpen(false)} href="/card">
-          Orders
-        </Link>
-      ),
-    },
-    {
-      key: "6",
       label: <p className="font-bold text-red-700">Logout</p>,
       icon: <CiLogout color={"#b91c1c"} />,
       onClick: () => {
@@ -147,7 +139,7 @@ const BottomNavigationBar = () => {
         <Link href="/laptops">Laptops</Link>
         <Link href="/console-screen">Store</Link>
         <Link href="/usedparts">Components</Link>
-        <Link href="/console-screen">Blogs</Link>
+        <Link href="/blogs">Blogs</Link>
         <Link href="/contact">Contact Us</Link>
         <Link href="/about">About Us</Link>
         <Link href="/details" className="text-secondaryColorLight">
@@ -258,7 +250,7 @@ const BottomNavigationBar = () => {
                 Components
               </Link>
               <Link
-                href="#"
+                href="/blogs"
                 className="text-lg hover:text-gray-300"
                 onClick={() => setIsDrawerOpen(false)}
               >
