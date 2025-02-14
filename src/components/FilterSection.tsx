@@ -31,7 +31,7 @@ const FilterSection = () => {
             <i className="fas fa-search text-gray-500 mr-2"></i>
             <input
               type="text"
-              placeholder="Find what do you want"
+              placeholder="Find what  you want"
               className="flex-1 outline-none bg-transparent text-white placeholder-white"
             />
           </div>

@@ -197,7 +197,7 @@ const DetailSection = ({
           fullWidth
           value={formData.otherBrandName || ""}
           onChange={(e) => handleFormChange("otherBrandName", e.target.value)}
-          className="sm:w-full max-sm:w-full" // Responsive width (full width for small screens)
+          className="sm:w-full max-sm:w-full"
         />
       ) : (
         <Box sx={{ minWidth: 120 }}>
@@ -206,16 +206,21 @@ const DetailSection = ({
               selectBrand.name && selectBrand.name != "Others" ? false : true
             }
             fullWidth
-            sx={inputStyles}
+            sx={{
+              ...inputStyles,
+              "& .MuiInputLabel-root": {
+                color: "#dc39fc" ,
+              },
+            }}
           >
-            <InputLabel id="model-select-label">Select Model</InputLabel>
+            <InputLabel id="model-select-label"  shrink>Model</InputLabel>
             <Select
               labelId="model-select-label"
               id="model-select"
               label="Model"
               value={selectModel}
               onChange={(e) => setSelectedModel(e.target.value)}
-              className="sm:w-full max-sm:w-full" // Responsive width
+              className="sm:w-full max-sm:w-full" 
             >
               {models.map((model: any) => (
                 <MenuItem
