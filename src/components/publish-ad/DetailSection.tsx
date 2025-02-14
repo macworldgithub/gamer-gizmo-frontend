@@ -1,4 +1,3 @@
-
 import {
   Box,
   FormControl,
@@ -34,14 +33,13 @@ const DetailSection = ({
   selectedLocation,
   setComponentCategories,
   setSelectedCondition,
-  conditioneData,selectedCondition
+  conditioneData,
+  selectedCondition,
 }: any) => {
   const [models, setModels] = useState<Model[]>([]);
   const token = useSelector((state: RootState) => state.user.token);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [locationData, setLocationData] = useState<Brand[]>([]);
-  
-
 
   const fetchBrands = async () => {
     if (!selectCategory) {
@@ -72,7 +70,6 @@ const DetailSection = ({
     }
   };
 
-  
   const fetchComponentCategories = async () => {
     try {
       const response = await axios.get(
@@ -83,9 +80,10 @@ const DetailSection = ({
       );
 
       if (response?.data) {
-        setComponentCategories(response.data.data);
+        setComponentCategories(response?.data?.data);
+        console.log(response?.data?.data, "here is my data");
       } else {
-        console.error("Unexpected API response structure:", response); // Debugging error log
+        console.error("Unexpected API response structure:", response);
         throw new Error("Unexpected API response");
       }
     } catch (error) {
@@ -191,37 +189,52 @@ const DetailSection = ({
           </Select>
         </FormControl>
       </Box>
-      {selectBrand.name&&selectBrand.name=="Others"?
+      {selectBrand.name && selectBrand.name == "Others" ? (
         <TextField
-        sx={inputStyles}
-        label="Other Brand Name"
-        variant="outlined"
-        fullWidth
-        value={formData.otherBrandName || ""}
-        onChange={(e) => handleFormChange("otherBrandName", e.target.value)}
-        className="sm:w-full max-sm:w-full" // Responsive width (full width for small screens)
-      />
-      :
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl disabled={selectBrand.name&&selectBrand.name!="Others"?false:true} fullWidth sx={inputStyles}>
-          <InputLabel id="model-select-label">Select Model</InputLabel>
-          <Select
-            labelId="model-select-label"
-            id="model-select"
-            label="Model"
-            value={selectModel}
-            onChange={(e) => setSelectedModel(e.target.value)}
-            className="sm:w-full max-sm:w-full" // Responsive width
+          sx={inputStyles}
+          label="Other Brand Name"
+          variant="outlined"
+          fullWidth
+          value={formData.otherBrandName || ""}
+          onChange={(e) => handleFormChange("otherBrandName", e.target.value)}
+          className="sm:w-full max-sm:w-full"
+        />
+      ) : (
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl
+            disabled={
+              selectBrand.name && selectBrand.name != "Others" ? false : true
+            }
+            fullWidth
+            sx={{
+              ...inputStyles,
+              "& .MuiInputLabel-root": {
+                color: "#dc39fc" ,
+              },
+            }}
           >
-            {models.map((model: any) => (
-              <MenuItem key={model.id} value={model} style={{ color: "black" }}>
-                {model.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-}
+            <InputLabel id="model-select-label"  shrink>Model</InputLabel>
+            <Select
+              labelId="model-select-label"
+              id="model-select"
+              label="Model"
+              value={selectModel}
+              onChange={(e) => setSelectedModel(e.target.value)}
+              className="sm:w-full max-sm:w-full" 
+            >
+              {models.map((model: any) => (
+                <MenuItem
+                  key={model.id}
+                  value={model}
+                  style={{ color: "black" }}
+                >
+                  {model.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+      )}
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth sx={inputStyles}>
           <InputLabel id="condition-select-label">Condition</InputLabel>
@@ -234,13 +247,11 @@ const DetailSection = ({
             onChange={(e) => setSelectedCondition(e.target.value)}
             className="sm:w-full max-sm:w-full" // Responsive width
           >
-         
-            {conditioneData.map((loc: any) =>(
+            {conditioneData.map((loc: any) => (
               <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
                 {loc.name}
               </MenuItem>
             ))}
-            
           </Select>
         </FormControl>
       </Box>
@@ -257,16 +268,15 @@ const DetailSection = ({
             className="sm:w-full max-sm:w-full"
           >
             {locationData
-  .sort((a: any, b: any) => a.name.localeCompare(b.name)) 
-  .map((loc: any) =>(
-              <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
-                {loc.name}
-              </MenuItem>
-            ))}
+              .sort((a: any, b: any) => a.name.localeCompare(b.name))
+              .map((loc: any) => (
+                <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                  {loc.name}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
       </Box>
-    
     </div>
   );
 };

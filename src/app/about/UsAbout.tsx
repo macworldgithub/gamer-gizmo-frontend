@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function AboutUs() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 flex flex-col items-center pt-6 px-6 sm:px-10 lg:px-20 dark:bg-black">
-      <div className="max-w-7xl w-full bg-gray-50 shadow-xl rounded-lg overflow-hidden dark:bg-black">
+    <div className=" bg-white text-gray-900 flex flex-col items-center pt-6 px-6 sm:px-10 lg:px-20 dark:bg-black">
+      <div className="max-w-7xl w-full bg-gray-50 shadow-xl rounded-lg overflow-hidden dark:bg-secondaryBlack">
         <div className="relative w-full md:bg-purple-900 h-60 md:hidden">
           <Image
             src="/images/gamingItems.jpg"

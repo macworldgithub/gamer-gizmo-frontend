@@ -6,6 +6,7 @@ import { formatDate } from "@/app/utils/formatDate";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineMailLock } from "react-icons/md";
 import { WhatsAppOutlined } from "@ant-design/icons";
+import Verified from "../../../../public/images/Verified.svg";
 
 const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
@@ -67,10 +68,15 @@ const Rightsection = ({ data }: any) => {
 
       {/* Seller Details Section */}
       <div className="dark:bg-black  border-gray-300 rounded-lg p-6 w-72 h-fit bg-white shadow-md flex flex-col items-center">
-        {/* Heading */}
-        <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
-          Seller Details
-        </h2>
+        <div className="flex justify-center gap-2 items-center">
+          <div className=" flex items-center  justify-center flex-col gap-1">
+            <Image alt="verified" src={Verified} height={25} width={25} />
+            <p className="text-purple-600 font-bold text-sm">Verified</p>
+          </div>
+          <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
+            Seller Details
+          </h2>
+        </div>
 
         {/* Horizontal Line */}
         <hr className="my-4 border-gray-300 w-full" />
@@ -103,15 +109,24 @@ const Rightsection = ({ data }: any) => {
         <div className="text-sm text-black"></div>
         {/* Icons Row */}
         <div className="flex flex-col justify-center gap-2 items-center space-x-6 mb-6 dark:invert">
-          <div className="flex gap-4 text-black">
+          <a
+            href={`https://wa.me/${data?.users?.phone}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex gap-4 text-black cursor-pointer"
+          >
             <WhatsAppOutlined />
             <div className="text-sm">{data?.users?.phone}</div>
-          </div>
+          </a>
 
-          <div className="flex gap-4 text-black">
+          {/* Email Link */}
+          <a
+            href={`mailto:${data?.users?.email}`}
+            className="flex gap-4 text-black cursor-pointer"
+          >
             <MdOutlineMailLock />
             <div className="text-sm">{data?.users?.email}</div>
-          </div>
+          </a>
         </div>
 
         {/* Footer Text */}

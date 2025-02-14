@@ -4,15 +4,22 @@ import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { formatDate } from "@/app/utils/formatDate";
 import { MdOutlineMailLock } from "react-icons/md";
 import { WhatsAppOutlined } from "@ant-design/icons";
+import Verified from "../../../../public/images/Verified.svg";
 const Sellersdetails = ({ data }: any) => {
   console.log(data, "no data");
   return (
     <div className="md:hidden w-full mt-4">
-      <div className="dark:border-[#6345ED] dark:border dark:bg-black border-gray-300 rounded-lg p-2 h-80 bg-white shadow-md flex flex-col items-center ">
+      <div className="dark:border-[#6345ED] dark:border dark:bg-black border-gray-300 rounded-lg p-2  bg-white shadow-md flex flex-col items-center ">
         {/* Heading */}
-        <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
-          Seller Details
-        </h2>
+        <div className="flex justify-center gap-2 items-center">
+          <div className=" flex items-center  justify-center flex-col gap-1">
+            <Image alt="verified" src={Verified} height={20} width={20} />
+            <p className="text-purple-600 font-bold text-[0.6rem]">Verified</p>
+          </div>
+          <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
+            Seller Details
+          </h2>
+        </div>
 
         {/* Horizontal Line */}
         <hr className="my-4 border-gray-300  w-full" />
@@ -39,53 +46,46 @@ const Sellersdetails = ({ data }: any) => {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center space-x-6 mb-2 dark:invert">
-  {/* WhatsApp Number */}
-  <div className="flex gap-4 text-black">
-    <a href={`https://wa.me/${data?.users?.phone}`} target="_blank" rel="noopener noreferrer">
-      <WhatsAppOutlined size={5} />
-    </a>
-    <a href={`https://wa.me/${data?.users?.phone}`} target="_blank" rel="noopener noreferrer">
-      <div className="text-[0.6rem] text-gray-700">
-        {data?.users?.phone}
-      </div>
-    </a>
-  </div>
+          {/* WhatsApp Number */}
+          <div className="flex gap-4 text-black">
+            <a
+              href={`https://wa.me/${data?.users?.phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppOutlined size={5} />
+            </a>
+            <a
+              href={`https://wa.me/${data?.users?.phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="text-[0.6rem] text-gray-700">
+                {data?.users?.phone}
+              </div>
+            </a>
+          </div>
 
-  {/* Email */}
-  <div className="flex gap-4 text-black">
-    <a href={`mailto:${data?.users?.email}`} target="_blank" rel="noopener noreferrer">
-      <MdOutlineMailLock size={15} />
-    </a>
-    <a href={`mailto:${data?.users?.email}`} target="_blank" rel="noopener noreferrer">
-      <div className="text-[0.6rem] text-gray-700">
-        {data?.users?.email}
-      </div>
-    </a>
-  </div>
-</div>
-
-{/* Icons Row */}
-<div className="flex justify-center items-center space-x-6 mb-6 dark:invert">
-  <a href={`https://wa.me/${data?.users?.phone}`} target="_blank" rel="noopener noreferrer">
-    <FaWhatsapp size={32} />
-  </a>
-  <a href={`mailto:${data?.users?.email}`} target="_blank" rel="noopener noreferrer">
-    <Image
-      src="/images/Message.png"
-      alt="Message Icon"
-      width={30}
-      height={30}
-    />
-  </a>
-</div>
-        {/* Footer Text */}
-        <p className="text-center text-sm text-gray-600 mb-2 dark:text-white">
-          See if your friends know this seller
-        </p>
-        {/* Connect with Facebook */}
-        <p className="text-center text-sm text-blue-600 font-semibold cursor-pointer hover:underline">
-          Connect with Facebook
-        </p>
+          {/* Email */}
+          <div className="flex gap-4 text-black">
+            <a
+              href={`mailto:${data?.users?.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MdOutlineMailLock size={15} />
+            </a>
+            <a
+              href={`mailto:${data?.users?.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="text-[0.6rem] text-gray-700">
+                {data?.users?.email}
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Third Card (Buy From GamerGizmo) */}
