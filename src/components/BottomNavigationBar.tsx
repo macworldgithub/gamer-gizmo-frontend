@@ -21,6 +21,7 @@ const BottomNavigationBar = () => {
   const isLogin = useSelector((state: RootState) => state.user.token != null);
   const token = useSelector((state: RootState) => state.user.token);
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState<string>("");
   const theme = useSelector((state: RootState) => state.Theme.theme);
   const [backgroundColor, setBackgroundColor] = useState<string>();
   const [isScrolling, setIsScrolling] = useState(false);
@@ -36,6 +37,9 @@ const BottomNavigationBar = () => {
       setBackgroundColor("bg-black");
     }
   }, [theme]);
+
+
+  const handleTabClick = (tab: string) => setActiveTab(tab);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -131,20 +135,34 @@ const BottomNavigationBar = () => {
       },
     },
   ];
+
+  const tabs = [
+    { name: "Desktops", href: "/desktop" },
+    { name: "Laptops", href: "/laptops" },
+    { name: "Consoles", href: "/console" },
+    { name: "Components", href: "/usedparts" },
+    { name: "Blogs", href: "/blogs" },
+    { name: "Contact Us", href: "/contact" },
+    { name: "About Us", href: "/about" },
+    { name: "Inspection", href: "/Inspection" },
+  ];
+
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
       {/* </div> */}
       <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
-        <Link href="/desktop">Desktops</Link>
-        <Link href="/laptops">Laptops</Link>
-        <Link href="/console">Consoles</Link>
-        <Link href="/usedparts">Components</Link>
-        <Link href="/blogs">Blogs</Link>
-        <Link href="/contact">Contact Us</Link>
-        <Link href="/about">About Us</Link>
-        <Link href="/details" className="text-secondaryColorLight">
-          Inspection
-        </Link>
+         {tabs.map((tab) => (
+          <Link
+            key={tab.name}
+            href={tab.href}
+            onClick={() => handleTabClick(tab.name)}
+            className={`${
+              activeTab === tab.name ? "text-secondaryColorLight" : ""
+            }`}
+          >
+            {tab.name}
+          </Link>
+        ))}
       </div>
 
       <div className="md:hidden absolute left-0 ml-4 ">
