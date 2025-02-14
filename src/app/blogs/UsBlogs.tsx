@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { formatDate } from "../utils/formatDate";
+import { useRouter } from "next/navigation";
 export default function UsBlogs() {
+  const router = useRouter();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const tagColors = [
@@ -77,7 +79,11 @@ export default function UsBlogs() {
                 {/* @ts-expect-error jk hk */}
                 Gamer Gizmo • {formatDate(data[0].Created_at)}
               </p>
-              <h3 className="text-2xl font-bold mt-1 hover:underline cursor-pointer max-md:text-sm dark:text-white">
+              <h3
+                // @ts-expect-error jk kj
+                onClick={() => router.push(`/blog/${data[0].blogId}`)}
+                className="text-2xl font-bold mt-1 hover:underline cursor-pointer max-md:text-sm dark:text-white"
+              >
                 {/* @ts-expect-error jsdb */}
                 {data[0].title}
               </h3>
@@ -120,7 +126,11 @@ export default function UsBlogs() {
                   Gamer Gizmo • {formatDate(data[1].Created_at)}
                 </p>
 
-                <h3 className="text-lg font-bold mt-1 hover:underline cursor-pointer max-md:text-sm dark:text-white">
+                <h3
+                  // @ts-expect-error jk kj
+                  onClick={() => router.push(`/blog/${data[1].blogId}`)}
+                  className="text-lg font-bold mt-1 hover:underline cursor-pointer max-md:text-sm dark:text-white"
+                >
                   {/* @ts-expect-error jsdb */}
                   {data[1].title.slice(0, 10)}...
                 </h3>
@@ -160,7 +170,11 @@ export default function UsBlogs() {
                   {/* @ts-expect-error jk hk */}
                   Gamer Gizmo • {formatDate(data[2].Created_at)}
                 </p>
-                <h3 className="text-lg font-bold mt-1 hover:underline cursor-pointer max-md:text-sm dark:text-white">
+                <h3
+                  // @ts-expect-error jk kj
+                  onClick={() => router.push(`/blog/${data[2].blogId}`)}
+                  className="text-lg font-bold mt-1 hover:underline cursor-pointer max-md:text-sm dark:text-white"
+                >
                   {/* @ts-expect-error jsdb */}
                   {data[2].title.slice(0, 10)}...
                 </h3>
@@ -204,7 +218,11 @@ export default function UsBlogs() {
                 {/* @ts-expect-error jk hk */}
                 Gamer Gizmo • {formatDate(data[3].Created_at)}
               </p>
-              <h3 className="text-2xl font-bold hover:underline cursor-pointer max-md:text-sm dark:text-white">
+              <h3
+                // @ts-expect-error jk
+                onClick={() => router.push(`/blog/${data[3].blogId}`)}
+                className="text-2xl font-bold hover:underline cursor-pointer max-md:text-sm dark:text-white"
+              >
                 {/* @ts-expect-error jkh kj */}
                 {data[3].title.slice(0, 100)}...
               </h3>

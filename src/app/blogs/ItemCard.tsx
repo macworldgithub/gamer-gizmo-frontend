@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { formatDate } from "../utils/formatDate";
+import { useRouter } from "next/navigation";
 
 const tagColors = [
   "bg-blue-100 text-blue-600",
@@ -22,7 +23,7 @@ const tagColors = [
 export default function BlogCards() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter();
   const fetchBlogs = async () => {
     try {
       setLoading(true);
@@ -60,7 +61,7 @@ export default function BlogCards() {
   };
   return (
     <div className="container mx-auto p-3 sm:p-4 md:p-6">
-      <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 lg:text-center">
+      <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 lg:text-center dark:text-white ">
         All Blog Posts
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 md:max-w-6xl mx-auto">
@@ -84,7 +85,10 @@ export default function BlogCards() {
                 <p className="text-xs sm:text-sm md:text-xs text-purple-400 lg:text-lg">
                   Gamer Gizmo • {formatDate(post.Created_at)}
                 </p>
-                <h3 className="text-sm sm:text-xs md:text-xs font-semibold mt-2 mb-1 lg:text-sm dark:text-white">
+                <h3
+                  onClick={() => router.push(`/blog/${post.blogId}`)}
+                  className="text-sm hover:underline cursor-pointer sm:text-xs md:text-xs font-semibold mt-2 mb-1 lg:text-sm dark:text-white"
+                >
                   {post.title}
                 </h3>
                 <p
