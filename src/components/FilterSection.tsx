@@ -32,7 +32,7 @@ const FilterSection = () => {
             <input
               type="text"
               placeholder="Find what do you want"
-              className="outline-none bg-transparent text-white placeholder-white"
+              className="flex-1 outline-none bg-transparent text-white placeholder-white"
             />
           </div>
         )}

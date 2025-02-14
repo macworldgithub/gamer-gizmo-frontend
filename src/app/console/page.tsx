@@ -1,8 +1,7 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
-import React from "react";
-import LaptopHeroSection from "./LaptopHeroSection";
 import { useSearchParams } from "next/navigation";
+import HeroSection from "./HeroSection";
 
 const page = () => {
   const params = useSearchParams();
@@ -25,14 +24,14 @@ const page = () => {
   queryParams.forEach((param) => {
     const value = params.get(param);
     // @ts-expect-error
-    queryObject[param] = value ? value : ""; // If no value, set to an empty string
+    queryObject[param] = value ? value : "";
   });
 
   return (
     <div>
       <div className="w-full">
-        <PageHeader pageName="Laptops" title="Laptops" />
-        <LaptopHeroSection query={queryObject} />
+        <PageHeader pageName="Consoles" title="consoles" />
+        <HeroSection query={queryObject} />
       </div>
     </div>
   );
