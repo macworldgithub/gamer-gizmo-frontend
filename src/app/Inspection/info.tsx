@@ -1,14 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Select, MenuItem } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../components/Store/Store";
-import { setAdField } from "../../components/Store/Slicer/SellForMeSlice";
 
-const PartsInformation = () => {
-  const Ad = useSelector((state: RootState) => state.SellForMe);
-  const dispatch = useDispatch();
-
+const PartsInformation = ({ adInformation, onChange }) => {
   const attributes = [
     { name: "processorVariant", label: "Processor Variant", options: ["i3", "i5", "i7", "i9", "Ryzen 5", "Ryzen 7"] },
     { name: "processor", label: "Processor", options: ["Intel", "AMD"] },
@@ -30,10 +24,6 @@ const PartsInformation = () => {
     { name: "quantity", label: "Quantity", options: ["1", "2", "3", "4", "5"] },
   ];
 
-  const handleChange = (value: string, name: string) => {
-    dispatch(setAdField({ field: name, value }));
-  };
-
   return (
     <div className="w-full py-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
       {attributes.map((attr) => (
@@ -42,8 +32,8 @@ const PartsInformation = () => {
             {attr.label}
           </label>
           <Select
-            value={Ad[attr.name] || ""}
-            onChange={(e) => handleChange(e.target.value, attr.name)}
+            value={adInformation[attr.name] || ""}
+            onChange={(e) => onChange(e.target.value, attr.name)}
             fullWidth
             className="dark:text-white bg-white dark:bg-black"
             sx={{
