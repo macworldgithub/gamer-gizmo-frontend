@@ -174,7 +174,6 @@ const Header = () => {
               </p>
             </div>
 
-            
             <div className="text-center">
               <div className="flex justify-center mb-3">
                 <Image
@@ -204,7 +203,6 @@ const Header = () => {
       <div className="py-10  dark:bg-black">
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
-            
             <CardItem
               title="Popular in New Gaming PC Parts"
               subtitle="Choose your necessary gaming items from this category."

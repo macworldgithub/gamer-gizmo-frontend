@@ -42,6 +42,10 @@ const PublishAdd: React.FC = () => {
     name: "",
   });
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
+  // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+  //   null
+  // );
+
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
   const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
   const [selectedLocation, setSelectedLocation] = useState({ id: 0, name: "" });
@@ -304,10 +308,14 @@ const PublishAdd: React.FC = () => {
       content: (
         <CategorySelection
           setActiveStep={setActiveStep}
+          //@ts-ignore
           selectCategory={selectCategory}
+          //@ts-ignore
           setSelectedCategory={setSelectedCategory}
+          //@ts-ignore
           categories={categories}
           loadingCategories={loadingCategories}
+          //@ts-ignore
           categoryError={categoryError}
         />
       ),
