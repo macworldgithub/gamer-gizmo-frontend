@@ -25,17 +25,17 @@ const MoreSpecification = ({
   ramData,
   storageData,
   selectGpu,
-          setSelectedGpu,
-          setSelectedRam,
-          selectRam,
-          selectStoarge,
-          setSelectedStoarge,
-          selectStorageType,
-          setSelectedStorageType
+  setSelectedGpu,
+  setSelectedRam,
+  selectRam,
+  selectStoarge,
+  setSelectedStoarge,
+  selectStorageType,
+  setSelectedStorageType,
 }: any) => {
-    const [processorVariantData, setProcessorVariantData] = useState<any>([]);
-    const [processorData, setProcessorData] = useState<any>([]);
-  
+  const [processorVariantData, setProcessorVariantData] = useState<any>([]);
+  const [processorData, setProcessorData] = useState<any>([]);
+
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
       "& fieldset": { borderColor: "#ccc" }, // Default border
@@ -73,140 +73,142 @@ const MoreSpecification = ({
       console.error("Failed to fetch models.");
     }
   };
-   useEffect(() => {
+  useEffect(() => {
     fetchProcessorVariants();
-    }, []);
-   useEffect(() => {
+  }, []);
+  useEffect(() => {
     fetchProcessor();
-    }, [selectProcessorVariant]);
-  
+  }, [selectProcessorVariant]);
+
   return (
     <div className="flex flex-col space-y-4">
       {/* Conditionally render additional fields based on the selected category */}
-      {["Laptops", "Desktops"].includes(selectCategory.name) && (
+      {["Laptops", "Desktops", "Gaming PCs"].includes(selectCategory.name) && (
         <>
-        <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth sx={inputStyles}>
-                  <InputLabel id="pro-var-select-label">Processor Variant</InputLabel>
-                  <Select
-                    labelId="pro-var-select-label"
-                    id="pro-var-select"
-                    value={selectProcessorVariant}
-                    label="Processor Variant"
-                    sx={inputStyles}
-                    onChange={(e) => setSelectedProcessorVariant(e.target.value)}
-                    className="sm:w-full max-sm:w-full"
-                  >
-                    {processorVariantData.map((loc: any) => (
-                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
-                        {loc.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth sx={inputStyles}>
-                  <InputLabel id="pro-select-label">Processor</InputLabel>
-                  <Select
-                    labelId="pro-select-label"
-                    id="pro-select"
-                    value={selectProcessor}
-                    label="Processor"
-                    sx={inputStyles}
-                    onChange={(e) => setSelectedProcessor(e.target.value)}
-                    className="sm:w-full max-sm:w-full"
-                  >
-                    {processorData.map((loc: any) => (
-                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
-                        {loc.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth sx={inputStyles}>
-                  <InputLabel id="ram-select-label">RAM</InputLabel>
-                  <Select
-                    labelId="ram-select-label"
-                    id="ram-select"
-                    value={selectRam}
-                    label="RAM"
-                    sx={inputStyles}
-                    onChange={(e) => setSelectedRam(e.target.value)}
-                    className="sm:w-full max-sm:w-full"
-                  >
-                    {ramData.map((loc: any) => (
-                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
-                        {loc.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth sx={inputStyles}>
-                  <InputLabel id="st-select-label">Storage Type</InputLabel>
-                  <Select
-                    labelId="st-select-label"
-                    id="st-select"
-                    value={selectStorageType}
-                    label="Storage Type"
-                    sx={inputStyles}
-                    onChange={(e) => setSelectedStorageType(e.target.value)}
-                    className="sm:w-full max-sm:w-full"
-                  >
-                    {storageTypeData.map((loc: any) => (
-                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
-                        {loc.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-         
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth sx={inputStyles}>
-                  <InputLabel id="s-select-label">Storage</InputLabel>
-                  <Select
-                    labelId="s-select-label"
-                    id="s-select"
-                    value={selectStoarge}
-                    label="Storage"
-                    sx={inputStyles}
-                    onChange={(e) => setSelectedStoarge(e.target.value)}
-                    className="sm:w-full max-sm:w-full"
-                  >
-                    {storageData.map((loc: any) => (
-                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
-                        {loc.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth sx={inputStyles}>
-                  <InputLabel id="G-select-label">GPU</InputLabel>
-                  <Select
-                    labelId="G-select-label"
-                    id="G-select"
-                    value={selectGpu}
-                    label="GPU"
-                    sx={inputStyles}
-                    onChange={(e) => setSelectedGpu(e.target.value)}
-                    className="sm:w-full max-sm:w-full"
-                  >
-                    {gpuData.map((loc: any) => (
-                      <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
-                        {loc.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-          
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="pro-var-select-label">
+                Processor Variant
+              </InputLabel>
+              <Select
+                labelId="pro-var-select-label"
+                id="pro-var-select"
+                value={selectProcessorVariant}
+                label="Processor Variant"
+                sx={inputStyles}
+                onChange={(e) => setSelectedProcessorVariant(e.target.value)}
+                className="sm:w-full max-sm:w-full"
+              >
+                {processorVariantData.map((loc: any) => (
+                  <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                    {loc.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="pro-select-label">Processor</InputLabel>
+              <Select
+                labelId="pro-select-label"
+                id="pro-select"
+                value={selectProcessor}
+                label="Processor"
+                sx={inputStyles}
+                onChange={(e) => setSelectedProcessor(e.target.value)}
+                className="sm:w-full max-sm:w-full"
+              >
+                {processorData.map((loc: any) => (
+                  <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                    {loc.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="ram-select-label">RAM</InputLabel>
+              <Select
+                labelId="ram-select-label"
+                id="ram-select"
+                value={selectRam}
+                label="RAM"
+                sx={inputStyles}
+                onChange={(e) => setSelectedRam(e.target.value)}
+                className="sm:w-full max-sm:w-full"
+              >
+                {ramData.map((loc: any) => (
+                  <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                    {loc.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="st-select-label">Storage Type</InputLabel>
+              <Select
+                labelId="st-select-label"
+                id="st-select"
+                value={selectStorageType}
+                label="Storage Type"
+                sx={inputStyles}
+                onChange={(e) => setSelectedStorageType(e.target.value)}
+                className="sm:w-full max-sm:w-full"
+              >
+                {storageTypeData.map((loc: any) => (
+                  <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                    {loc.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="s-select-label">Storage</InputLabel>
+              <Select
+                labelId="s-select-label"
+                id="s-select"
+                value={selectStoarge}
+                label="Storage"
+                sx={inputStyles}
+                onChange={(e) => setSelectedStoarge(e.target.value)}
+                className="sm:w-full max-sm:w-full"
+              >
+                {storageData.map((loc: any) => (
+                  <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                    {loc.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="G-select-label">GPU</InputLabel>
+              <Select
+                labelId="G-select-label"
+                id="G-select"
+                value={selectGpu}
+                label="GPU"
+                sx={inputStyles}
+                onChange={(e) => setSelectedGpu(e.target.value)}
+                className="sm:w-full max-sm:w-full"
+              >
+                {gpuData.map((loc: any) => (
+                  <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
+                    {loc.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+
           <TextField
             sx={inputStyles}
             label="Screen Size"
