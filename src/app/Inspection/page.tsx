@@ -31,7 +31,7 @@ const SellForMe = () => {
               gaming PC! We will manage your ad and find the best possible deal
               for you. Choose what's best for you today.
             </h1>
-            <div className="flex ">
+            <div className="flex">
               <PartsNames onDeviceSelect={handleDeviceSelect} />
               <PartsInfromation />
             </div>

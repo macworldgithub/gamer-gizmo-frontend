@@ -19,9 +19,9 @@ const ContactCards = () => {
                 height={80}
               />
             </div>
-            <p className="text-lg text-purple-400 dark:text-white ">
-              +012 (345) 678 88
-            </p>
+            <a href="tel:+923318551070" className="text-lg dark:text-white">
+              +92 331 8551070
+            </a>
           </div>
 
           {/* Card 2: Location */}
@@ -53,11 +53,12 @@ const ContactCards = () => {
                 height={80}
               />
             </div>
-            <p className="text-lg text-gray-700 break-words dark:text-white">
-              hotlineinfo@gmail.com
-              <br />
-              www.bidzen.net
-            </p>
+            <a
+              href="mailto:support@gamergizmo.com"
+              className="text-lg text-gray-700 break-words dark:text-white"
+            >
+              support@gamergizmo.com
+            </a>
           </div>
         </div>
       </Wrapper>

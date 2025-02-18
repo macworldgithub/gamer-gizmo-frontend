@@ -97,11 +97,16 @@ const Footer = () => {
           <div className="flex flex-col items-start">
             <div className="text-start ">
               <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
-              <p className="text-sm md:text-xs">
-                Email: support@gamergizmo.com
-                <br />
-                Phone: +123 456 7890
-              </p>
+              <a
+                href="mailto:support@gamergizmo.com"
+                className="text-sm text-gray-700 break-words dark:text-white"
+              >
+                support@gamergizmo.com
+              </a>
+              <br />
+              <a href="tel:+923318551070" className="text-sm dark:text-white">
+                +92 331 8551070
+              </a>
             </div>
             <div className="mt-4">
               <Link href="/about">
