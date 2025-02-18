@@ -42,6 +42,10 @@ const PublishAdd: React.FC = () => {
     name: "",
   });
   const [selectCategory, setSelectedCategory] = useState({ id: 0, name: "" });
+  // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+  //   null
+  // );
+
   const [selectBrand, setSelectedBrand] = useState({ id: 0, name: "" });
   const [selectModel, setSelectedModel] = useState({ id: 0, name: "" });
   const [selectedLocation, setSelectedLocation] = useState({ id: 0, name: "" });
@@ -300,21 +304,25 @@ const PublishAdd: React.FC = () => {
   const steps = [
     {
       isCompleted: false,
-      label: "Category Selection",
+      label: <span className="dark:text-white">Category Selection</span>,
       content: (
         <CategorySelection
           setActiveStep={setActiveStep}
+          //@ts-ignore
           selectCategory={selectCategory}
+          //@ts-ignore
           setSelectedCategory={setSelectedCategory}
+          //@ts-ignore
           categories={categories}
           loadingCategories={loadingCategories}
+          //@ts-ignore
           categoryError={categoryError}
         />
       ),
     },
     {
       isCompleted: false,
-      label: "Details",
+      label: <span className="dark:text-white">Details</span>,
       content: (
         <DetailSection
           handleFormChange={handleFormChange}
@@ -335,7 +343,8 @@ const PublishAdd: React.FC = () => {
     },
     {
       isCompleted: false,
-      label: "More Specifications",
+
+      label: <span className="dark:text-white">More Specifications</span>,
       content: (
         <MoreSpecification
           selectCategory={selectCategory}
@@ -366,7 +375,8 @@ const PublishAdd: React.FC = () => {
 
     {
       isCompleted: false,
-      label: "Set Price",
+
+      label: <span className="dark:text-white">Set Price</span>,
       content: (
         <div className="flex flex-col space-y-4">
           <PriceComponent
@@ -380,7 +390,8 @@ const PublishAdd: React.FC = () => {
     },
     {
       isCompleted: false,
-      label: "Upload Images",
+
+      label: <span className="dark:text-white">Upload Images</span>,
       content: (
         <div className="flex  justify-center items-center ">
           <UploadImages fileList={fileList} setFileList={setFileList} />
@@ -389,7 +400,8 @@ const PublishAdd: React.FC = () => {
     },
     {
       isCompleted: false,
-      label: "Review",
+
+      label: <span className="dark:text-white">Review</span>,
       content: (
         <ReviewSection
           selectCategory={selectCategory}

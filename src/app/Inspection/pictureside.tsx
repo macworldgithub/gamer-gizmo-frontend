@@ -17,7 +17,9 @@ const Features = () => {
             alt="tick"
             style={{ objectFit: "cover", width: "20px", height: "20px" }}
           />
-          <p className="w-[100%]">Dedicated Sales Expert to Sell your PC.</p>
+          <p className="w-[100%] dark:text-white">
+            Dedicated Sales Expert to Sell your PC.
+          </p>
         </div>
 
         <div className="flex text-[#333333] w-[80%] dark:text-white h-max ">
@@ -28,7 +30,7 @@ const Features = () => {
             alt="tick"
             style={{ objectFit: "cover", width: "20px", height: "20px" }}
           />
-          <p className="w-[100%]">
+          <p className="w-[100%] dark:text-white">
             We Bargain for you and share the Best Offer dsdds.
           </p>
         </div>
@@ -40,7 +42,9 @@ const Features = () => {
             alt="tick"
             style={{ objectFit: "cover", width: "20px", height: "20px" }}
           />
-          <p className="w-[100%]">We ensure Safe & Secure Transaction.</p>
+          <p className="w-[100%] dark:text-white">
+            We ensure Safe & Secure Transaction.
+          </p>
         </div>
       </div>
     </div>

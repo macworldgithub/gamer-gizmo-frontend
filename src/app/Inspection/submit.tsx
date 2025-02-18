@@ -34,9 +34,9 @@ const SubmissionButton = () => {
         disabled={disable}
         className={`w-max text-nowrap h-[50px] ${
           disable ? "bg-disabled-button" : "bg-custom-gradient"
-        }  p-5 text-center flex justify-center items-center text-white rounded-[50px]`}
+        }  p-5 text-center flex justify-center items-center text-white rounded-[50px] `}
       >
-        <p>CONTINUE</p>
+        <p className="dark:text-black">CONTINUE</p>
       </button>
     </div>
   );

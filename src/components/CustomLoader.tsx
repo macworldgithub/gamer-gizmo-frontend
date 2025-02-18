@@ -6,7 +6,7 @@ const CustomLoader = () => {
       <div className=" p-6 rounded-lg shadow-lg flex flex-col items-center">
         <div className="mt-3 w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
         <span className="text-lg mt-2 font-semibold text-white">
-          Loading Products...
+          Loading ...
         </span>
       </div>
     </div>

@@ -104,12 +104,12 @@ export default function SelectLabels({ query, route }: any) {
 
   const dropdownOptions = [
     {
-      label: "Processor",
+      label: "PROCESSOR",
       key: "processor",
       options: processorData.length > 0 ? processorData : ["Intel", "AMD"],
     },
     {
-      label: "Gpu",
+      label: "GPU",
       key: "gpu",
       options: gpuData.length > 0 ? gpuData : ["NVIDIA", "AMD"],
     },
@@ -119,23 +119,23 @@ export default function SelectLabels({ query, route }: any) {
       options: ramData.length > 0 ? ramData : ["4GB", "8GB", "16G"],
     },
     {
-      label: "Storage",
+      label: "STORAGE",
       key: "storage",
       options: storageTypeData.length > 0 ? storageTypeData : ["SSD", "HDD"],
     },
 
     {
-      label: "Condition",
+      label: "CONDITION",
       key: "condition",
       options: conditioneData.length > 0 ? conditioneData : ["New", "Used"],
     },
     {
-      label: "Location",
+      label: "LOCATION",
       key: "location",
       options: locationData.length > 0 ? locationData : ["All UAE"],
     },
     {
-      label: "Price Range",
+      label: "PRICE RANGE",
       key: "price",
       options: [
         { id: 1, name: "Below 500 AED" },
@@ -197,7 +197,7 @@ export default function SelectLabels({ query, route }: any) {
                   borderRadius: "50px",
                   fontFamily: "Urbanist",
                   fontWeight: "600",
-                  fontSize: "13px",
+                  fontSize: "12px",
                   ".MuiSelect-icon": { color: "#6345ed" },
                 }}
                 MenuProps={{
