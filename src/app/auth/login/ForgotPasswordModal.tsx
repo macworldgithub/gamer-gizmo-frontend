@@ -7,6 +7,8 @@ import {
   Fade,
   Backdrop,
   TextField,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -189,6 +191,7 @@ const ForgotPasswordModal: React.FC<{
         open={otpModalOpen}
         handleClose={() => setOtpModalOpen(false)}
         email={email} // Pass email state to OTP modal
+        modalStyle={modalStyle}
       />
     </>
   );
@@ -199,7 +202,8 @@ const OtpModal: React.FC<{
   open: boolean;
   handleClose: () => void;
   email: string;
-}> = ({ open, handleClose, email }) => {
+  modalStyle: SxProps<Theme>;
+}> = ({ open, handleClose, email, modalStyle }) => {
   const [otpArray, setOtpArray] = React.useState(["", "", "", "", "", ""]);
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -313,11 +317,32 @@ const OtpModal: React.FC<{
       slotProps={{ backdrop: { timeout: 500 } }}
     >
       <Fade in={open}>
-        <Box sx={style}>
-          <Typography variant="h5" fontWeight="bold" color="#dc39fc">
+        <Box sx={modalStyle}>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            color="#dc39fc"
+            sx={{
+              fontSize: {
+                xs: "16px",
+                sm: "16px",
+                default: "20px",
+              },
+            }}
+          >
             Enter OTP & Reset Password
           </Typography>
-          <Typography sx={{ mt: 1, color: "gray" }}>
+          <Typography
+            sx={{
+              mt: 1,
+              color: "gray",
+              fontSize: {
+                xs: "12px",
+                sm: "14px",
+                default: "20px",
+              },
+            }}
+          >
             Enter the OTP sent to your email and reset your password.
           </Typography>
 
@@ -340,6 +365,7 @@ const OtpModal: React.FC<{
                 sx={{
                   width: "50px",
                   textAlign: "center",
+
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": { borderColor: "#dc39fc" },
                     "&:hover fieldset": { borderColor: "#dc39fc" },
@@ -356,7 +382,16 @@ const OtpModal: React.FC<{
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            sx={{ mt: 2 }}
+            sx={{
+              mt: 2,
+              color: "#dc39fc",
+              "& label.Mui-focused": { color: "#dc39fc" },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "#dc39fc" },
+                "&:hover fieldset": { borderColor: "#dc39fc" },
+                "&.Mui-focused fieldset": { borderColor: "#dc39fc" },
+              },
+            }}
           />
           <TextField
             fullWidth
@@ -364,7 +399,16 @@ const OtpModal: React.FC<{
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            sx={{ mt: 2 }}
+            sx={{
+              mt: 2,
+              "& label.Mui-focused": { color: "#dc39fc" },
+
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "#dc39fc" },
+                "&:hover fieldset": { borderColor: "#dc39fc" },
+                "&.Mui-focused fieldset": { borderColor: "#dc39fc" },
+              },
+            }}
           />
 
           <Button
