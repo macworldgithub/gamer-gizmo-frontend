@@ -143,7 +143,7 @@ const CategoriesComponent = () => {
         {/* Categories Section */}
         {/* <Wrapper className="max:md-hidden"> */}
         <div className="md:relative flex justify-center items-center w-full mt-4 md:p-8 max-md:hidden">
-          <div className="w-full max-w-[1200px] rounded-xl z-20 shadow-lg p-8 bg-gray-200 dark:bg-black text-black">
+          <div className="w-full max-w-[1200px] rounded-xl z-20 shadow-lg p-8 bg-white dark:bg-black text-black">
             <h2 className="text-2xl sm:pl-[0.9rem] md:pl-[calc(8%+10px)] lg:pl-[calc(4%+20px)]  font-bold max-sm:text-center text-start mb-6 dark:text-white">
               Categories
             </h2>
