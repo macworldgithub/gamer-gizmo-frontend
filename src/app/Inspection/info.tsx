@@ -2,7 +2,13 @@
 import React from "react";
 import { Select, MenuItem } from "@mui/material";
 
-const PartsInformation = ({ adInformation, onChange }) => {
+// Define a TypeScript interface for props
+interface PartsInformationProps {
+  adInformation?: Record<string, string>; // Make it optional
+  onChange: (value: string, name: string) => void;
+}
+
+const PartsInformation: React.FC<PartsInformationProps> = ({ adInformation = {}, onChange }) => {
   const attributes = [
     { name: "processorVariant", label: "Processor Variant", options: ["i3", "i5", "i7", "i9", "Ryzen 5", "Ryzen 7"] },
     { name: "processor", label: "Processor", options: ["Intel", "AMD"] },
@@ -32,8 +38,8 @@ const PartsInformation = ({ adInformation, onChange }) => {
             {attr.label}
           </label>
           <Select
-            value={adInformation[attr.name] || ""}
-            onChange={(e) => onChange(e.target.value, attr.name)}
+            value={adInformation?.[attr.name] || ""} // Use optional chaining and default value
+            onChange={(e) => onChange(e.target.value as string, attr.name)}
             fullWidth
             className="dark:text-white bg-white dark:bg-black"
             sx={{
