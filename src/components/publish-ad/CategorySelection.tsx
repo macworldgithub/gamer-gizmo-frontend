@@ -74,11 +74,7 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
                     categoryIconMapping["Default"]
                   }
                   alt={category.name}
-<<<<<<< HEAD
                   className="rounded-lgobject-contain w-full h-full"
-=======
-                  className="rounded-lg object-contain w-full h-full "
->>>>>>> e580517c7429aebb730bc4d84d8a7a9d6b2df167
                 />
               </div>
               {category.name}

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useSelector, UseSelector } from "react-redux";
+import { useSelector} from "react-redux";
 import { RootState } from "../../components/Store/Store";
 
 const SubmissionButton = () => {
