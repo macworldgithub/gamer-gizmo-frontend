@@ -99,12 +99,12 @@ const Footer = () => {
               <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
               <a
                 href="mailto:support@gamergizmo.com"
-                className="text-sm text-gray-700 break-words dark:text-white"
+                className="text-sm  break-words text-white"
               >
                 support@gamergizmo.com
               </a>
               <br />
-              <a href="tel:+923318551070" className="text-sm dark:text-white">
+              <a href="tel:+923318551070" className="text-sm text-white">
                 +92 331 8551070
               </a>
             </div>

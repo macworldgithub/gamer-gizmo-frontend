@@ -304,7 +304,7 @@ const PublishAdd: React.FC = () => {
   const steps = [
     {
       isCompleted: false,
-      label: "Category Selection",
+      label: <span className="dark:text-white">Category Selection</span>,
       content: (
         <CategorySelection
           setActiveStep={setActiveStep}
@@ -322,7 +322,7 @@ const PublishAdd: React.FC = () => {
     },
     {
       isCompleted: false,
-      label: "Details",
+      label: <span className="dark:text-white">Details</span>,
       content: (
         <DetailSection
           handleFormChange={handleFormChange}
@@ -343,7 +343,8 @@ const PublishAdd: React.FC = () => {
     },
     {
       isCompleted: false,
-      label: "More Specifications",
+
+      label: <span className="dark:text-white">More Specifications</span>,
       content: (
         <MoreSpecification
           selectCategory={selectCategory}
@@ -374,7 +375,8 @@ const PublishAdd: React.FC = () => {
 
     {
       isCompleted: false,
-      label: "Set Price",
+
+      label: <span className="dark:text-white">Set Price</span>,
       content: (
         <div className="flex flex-col space-y-4">
           <PriceComponent
@@ -388,7 +390,8 @@ const PublishAdd: React.FC = () => {
     },
     {
       isCompleted: false,
-      label: "Upload Images",
+
+      label: <span className="dark:text-white">Upload Images</span>,
       content: (
         <div className="flex  justify-center items-center ">
           <UploadImages fileList={fileList} setFileList={setFileList} />
@@ -397,7 +400,8 @@ const PublishAdd: React.FC = () => {
     },
     {
       isCompleted: false,
-      label: "Review",
+
+      label: <span className="dark:text-white">Review</span>,
       content: (
         <ReviewSection
           selectCategory={selectCategory}
@@ -422,79 +426,83 @@ const PublishAdd: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto p-6">
-      {/* Responsive Stepper */}
-      <div className="flex flex-wrap justify-center sm:flex-nowrap">
-        <Stepper
-          activeStep={activeStep}
-          alternativeLabel
-          className="w-full sm:w-auto"
-          sx={{
-            flexWrap: "wrap",
-            "& .MuiStep-root": {
-              minWidth: "60px", // Prevent excessive width
-            },
-            "& .MuiStepConnector-root": {
-              display: { xs: "none", sm: "block" }, // Hide connectors on extra small screens
-            },
-          }}
-        >
-          {steps.map((step, index) => (
-            <Step key={index}>
-              <StepLabel
-                onClick={() => handleStepClick(index)}
-                sx={{
-                  "& .MuiStepIcon-root": {
-                    fontSize: "20px", // Smaller step icons
-                    color: activeStep >= index ? "#dc39fc" : "#ccc",
-                  },
-                  "& .MuiStepLabel-label": {
-                    fontSize: { xs: "10px", sm: "14px" }, // Reduce label size
-                    fontWeight: "500",
-                  },
-                }}
-              >
-                {step.label}
-              </StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </div>
-
-      {/* Step Content */}
-      <div className="mt-8">{steps[activeStep].content}</div>
-
-      {/* Navigation Buttons */}
-      <div className="flex justify-between mt-6">
-        <Button
-          disabled={activeStep === 0}
-          onClick={handleBack}
-          variant="contained"
-          className={`${activeStep != 0 && "bg-custom-gradient"}`}
-        >
-          Back
-        </Button>
-        {activeStep === steps.length - 1 ? (
-          <Button
-            onClick={() => handleSubmit()}
-            variant="contained"
-            style={{
-              backgroundColor: "#dc39fc",
-              fontWeight: "bold",
-              fontSize: "15px",
+    <div className="dark:bg-[#1e1e2f]">
+      <div className="container mx-auto p-6 ">
+        {/* Responsive Stepper */}
+        <div className="flex flex-wrap justify-center sm:flex-nowrap">
+          <Stepper
+            activeStep={activeStep}
+            alternativeLabel
+            className="w-full sm:w-auto"
+            sx={{
+              flexWrap: "wrap",
+              "& .MuiStep-root": {
+                minWidth: "60px", // Prevent excessive width
+              },
+              "& .MuiStepConnector-root": {
+                display: { xs: "none", sm: "block" }, // Hide connectors on extra small screens
+              },
             }}
           >
-            Publish
-          </Button>
-        ) : (
+            {steps.map((step, index) => (
+              <Step key={index}>
+                <StepLabel
+                  onClick={() => handleStepClick(index)}
+                  sx={{
+                    "& .MuiStepIcon-root": {
+                      fontSize: "20px", // Smaller step icons
+                      color: activeStep >= index ? "#dc39fc" : "#ccc",
+                    },
+                    "& .MuiStepLabel-label": {
+                      fontSize: { xs: "10px", sm: "14px" }, // Reduce label size
+                      fontWeight: "500",
+                    },
+                  }}
+                >
+                  {step.label}
+                </StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+
+        {/* Step Content */}
+        <div className="mt-8">{steps[activeStep].content}</div>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between mt-6">
           <Button
+            disabled={activeStep === 0}
+            onClick={handleBack}
             variant="contained"
-            className="bg-custom-gradient"
-            onClick={handleNext}
+            className={`${
+              activeStep != 0 && "bg-custom-gradient "
+            } dark:text-white`}
           >
-            Next
+            Back
           </Button>
-        )}
+          {activeStep === steps.length - 1 ? (
+            <Button
+              onClick={() => handleSubmit()}
+              variant="contained"
+              style={{
+                backgroundColor: "#dc39fc",
+                fontWeight: "bold",
+                fontSize: "15px",
+              }}
+            >
+              Publish
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              className="bg-custom-gradient"
+              onClick={handleNext}
+            >
+              Next
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -97,7 +97,7 @@ const MoreSpecification = ({
                 label="Processor Variant"
                 sx={inputStyles}
                 onChange={(e) => setSelectedProcessorVariant(e.target.value)}
-                className="sm:w-full max-sm:w-full"
+                className="sm:w-full max-sm:w-full dark:text-white"
               >
                 {processorVariantData.map((loc: any) => (
                   <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
@@ -117,7 +117,7 @@ const MoreSpecification = ({
                 label="Processor"
                 sx={inputStyles}
                 onChange={(e) => setSelectedProcessor(e.target.value)}
-                className="sm:w-full max-sm:w-full"
+                className="sm:w-full max-sm:w-full dark:text-white"
               >
                 {processorData.map((loc: any) => (
                   <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
@@ -137,7 +137,7 @@ const MoreSpecification = ({
                 label="RAM"
                 sx={inputStyles}
                 onChange={(e) => setSelectedRam(e.target.value)}
-                className="sm:w-full max-sm:w-full"
+                className="sm:w-full max-sm:w-full dark:text-white"
               >
                 {ramData.map((loc: any) => (
                   <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
@@ -157,7 +157,7 @@ const MoreSpecification = ({
                 label="Storage Type"
                 sx={inputStyles}
                 onChange={(e) => setSelectedStorageType(e.target.value)}
-                className="sm:w-full max-sm:w-full"
+                className="sm:w-full max-sm:w-full dark:text-white"
               >
                 {storageTypeData.map((loc: any) => (
                   <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
@@ -178,7 +178,7 @@ const MoreSpecification = ({
                 label="Storage"
                 sx={inputStyles}
                 onChange={(e) => setSelectedStoarge(e.target.value)}
-                className="sm:w-full max-sm:w-full"
+                className="sm:w-full max-sm:w-full dark:text-white"
               >
                 {storageData.map((loc: any) => (
                   <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
@@ -198,7 +198,7 @@ const MoreSpecification = ({
                 label="GPU"
                 sx={inputStyles}
                 onChange={(e) => setSelectedGpu(e.target.value)}
-                className="sm:w-full max-sm:w-full"
+                className="sm:w-full max-sm:w-full dark:text-white"
               >
                 {gpuData.map((loc: any) => (
                   <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
@@ -216,6 +216,7 @@ const MoreSpecification = ({
             fullWidth
             value={formData.screenSize || ""}
             onChange={(e) => handleFormChange("screenSize", e.target.value)}
+           
           />
           <TextField
             sx={inputStyles}

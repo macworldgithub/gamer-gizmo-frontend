@@ -47,9 +47,9 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
 
   return (
     <div className="w-full text-black text-center">
-      <h2 className="text-lg font-bold">Select Category</h2>
+      <h2 className="text-lg font-bold dark:text-white">Select Category</h2>
       {loadingCategories ? (
-        <p>Loading categories...</p>
+        <p className="">Loading categories...</p>
       ) : categoryError ? (
         <p className="text-red-500">{categoryError}</p>
       ) : (
@@ -60,7 +60,7 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
               onDoubleClick={() => setActiveStep(1)}
               onClick={() => setSelectedCategory(category)}
               className={clsx(
-                "p-2 border rounded-lg cursor-pointer text-center",
+                "p-2 border rounded-lg cursor-pointer text-center dark:bg-white",
                 selectCategory.id === category.id
                   ? "bg-custom-gradient text-white"
                   : "hover:bg-gray-200 dark:hover:bg-gray-400"
@@ -74,7 +74,11 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
                     categoryIconMapping["Default"]
                   }
                   alt={category.name}
+<<<<<<< HEAD
                   className="rounded-lgobject-contain w-full h-full"
+=======
+                  className="rounded-lg object-contain w-full h-full "
+>>>>>>> e580517c7429aebb730bc4d84d8a7a9d6b2df167
                 />
               </div>
               {category.name}

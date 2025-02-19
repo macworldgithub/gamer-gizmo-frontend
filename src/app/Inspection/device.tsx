@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const Device = ({ onDeviceSelect }: { onDeviceSelect: (device: string) => void }) => {
+const Device = ({
+  onDeviceSelect,
+}: {
+  onDeviceSelect: (device: string) => void;
+}) => {
   const [selectedDevice, setSelectedDevice] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -11,7 +15,10 @@ const Device = ({ onDeviceSelect }: { onDeviceSelect: (device: string) => void }
 
   return (
     <div className="w-fit px-[5%] py-3">
-      <label htmlFor="deviceType" className="block text-md font-semibold mb-2">
+      <label
+        htmlFor="deviceType"
+        className="block text-md font-semibold mb-2 dark:text-white"
+      >
         Select Device Type
       </label>
       <select
