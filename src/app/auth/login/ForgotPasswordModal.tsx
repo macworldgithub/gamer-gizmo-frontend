@@ -402,7 +402,6 @@ const OtpModal: React.FC<{
             sx={{
               mt: 2,
               "& label.Mui-focused": { color: "#dc39fc" },
-
               "& .MuiOutlinedInput-root": {
                 "& fieldset": { borderColor: "#dc39fc" },
                 "&:hover fieldset": { borderColor: "#dc39fc" },

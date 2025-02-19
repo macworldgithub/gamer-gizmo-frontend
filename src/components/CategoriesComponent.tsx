@@ -149,22 +149,20 @@ const CategoriesComponent = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center">
               {categories.map((category, index) => (
-                  <Link
+                <Link
                   key={index}
                   href={getCategoryLink(category)}
                   className=" w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center no-underline"
                 >
-                {/* <div
+                  {/* <div
                   key={index}
                   className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center"
                 > */}
-                  <h2 className="text-[0.9rem] font-bold text-center mb-4">
-                  
-                      {category}
+                  <h2 className="text-[0.9rem] font-bold  flex justify-center items-center">
+                    {category}
                   </h2>
-                {/* </div> */}
+                  {/* </div> */}
                 </Link>
-
               ))}
             </div>
           </div>
