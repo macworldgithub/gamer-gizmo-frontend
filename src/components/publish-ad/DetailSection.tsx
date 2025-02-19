@@ -136,7 +136,7 @@ const DetailSection = ({
     "& .MuiOutlinedInput-root": {
       "& fieldset": { borderColor: "#ccc" }, // Default border
       "&:hover fieldset": { borderColor: "#dc39fc" }, // Hover effect
-      "&.Mui-focused fieldset": { borderColor: "#dc39fc" }, // Focus effect
+      "&.Mui-focused fieldset": { borderColor: "#dc39fc" },
     },
 
     "& .MuiInputLabel-root": {
@@ -286,4 +286,3 @@ const DetailSection = ({
 };
 
 export default DetailSection;
-
