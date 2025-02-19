@@ -68,10 +68,11 @@ export default function BlogPost() {
         <Image
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.image}`}
           alt={post.title}
-          width={800}
+          width={600}
           height={400}
-          className="w-full object-cover rounded-md "
+          className=" object-cover rounded-md  "
         />
+
         <p className="text-sm text-purple-600 font-semibold mt-4">
           {formatDate(post.created_at)}
         </p>
@@ -85,14 +86,14 @@ export default function BlogPost() {
             </span>
           ))}
         </div>
-        <h1 className="text-3xl font-bold mt-2 dark:text-white">
+        <h1 className="text-3xl font-bold mt-2 dark:text-white lg:text-lg max-md:text-sm md:text-lg">
           {post.title}
         </h1>
         <p
           dangerouslySetInnerHTML={{
             __html: post.description,
           }}
-          className="text-gray-600 mt-4 text-justify dark:text-white"
+          className="text-gray-600 mt-4 text-justify dark:text-white max-md:text-sm lg:text-sm"
         />
       </div>
     </div>
