@@ -71,6 +71,7 @@ const MoreSpecification = ({
       setProcessorData(response?.data?.data || []);
     } catch (err) {
       console.error("Failed to fetch models.");
+      0;
     }
   };
   useEffect(() => {
@@ -216,7 +217,6 @@ const MoreSpecification = ({
             fullWidth
             value={formData.screenSize || ""}
             onChange={(e) => handleFormChange("screenSize", e.target.value)}
-           
           />
           <TextField
             sx={inputStyles}
@@ -335,7 +335,7 @@ const MoreSpecification = ({
                   labelId="cat-select-label"
                   id="cat-select"
                   value={selectComponentCategory}
-                  label="Category"
+                  label="Component Category"
                   //@ts-ignore
                   onChange={(e) => setSelectedComponentCategory(e.target.value)}
                   sx={{ color: "#000000" }}
