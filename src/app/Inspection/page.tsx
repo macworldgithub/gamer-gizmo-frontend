@@ -4,12 +4,10 @@ import React, { useState } from "react";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import PageHeader from "@/components/PageHeader";
 import PartsNames from "./device";
-import PartsInfromation from "./info";
 import Guide from "./guide";
-import Image from "next/image";
 import Features from "./pictureside";
 import SubmissionButton from "./submit";
-import Device from "./device";
+import PartsInformation from "./info";
 
 const SellForMe = () => {
   const [deviceType, setDeviceType] = useState("");
@@ -19,6 +17,7 @@ const SellForMe = () => {
     console.log("Selected Device:", device);
   };
 
+  const [adInformation, setAdInformation] = useState<Record<string, string>>({});
   return (
     <>
       <PageHeader pageName="sellforme" />
@@ -33,11 +32,10 @@ const SellForMe = () => {
                 deal for you. Choose what's best for you today.
               </h1>
               <div
-                className="flex
-               "
+                className="flex"
               >
                 <PartsNames onDeviceSelect={handleDeviceSelect} />
-                <PartsInfromation />
+                <PartsInformation adInformation={adInformation} setAdInformation={setAdInformation} />
               </div>
               <SubmissionButton />
             </div>
