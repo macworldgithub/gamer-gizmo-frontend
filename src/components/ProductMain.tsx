@@ -12,7 +12,7 @@ interface ProductMainProps {
 
 const categoryNames = {
   1: "Laptops",
-  2: "Desktops",
+  2: "Gaming PCs",
   3: "Components",
   4: "Consoles",
 };

@@ -57,13 +57,12 @@ const products = [
     time: "8 hours ago",
     sold: 7,
   },
-  
 ];
 
 //@ts-ignore
 const ProductCard = ({ image, price, title, time, sold }) => {
   return (
-    <div className="bg-white dark:bg-black dark:border dark:border-white shadow-lg rounded-lg p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/5">
+    <div className="bg-white dark:bg-black dark:border dark:border-white shadow-lg rounded-lg p-4">
       <img src={image} alt={title} className="w-full h-40 p-2 object-cover rounded" />
       <div className="mt-2">
         <p className="text-[#6345ED] font-bold text-md">AED {price}</p>
@@ -77,7 +76,7 @@ const ProductCard = ({ image, price, title, time, sold }) => {
 
 const StorePage = () => {
   return (
-    <div className="flex flex-wrap gap-4 p-6 justify-center dark:bg-black">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 dark:bg-black">
       {products.map((product, index) => (
         <ProductCard key={index} {...product} />
       ))}
