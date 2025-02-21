@@ -30,7 +30,7 @@ const page = () => {
   return (
     <div>
       <div className="w-full">
-        <PageHeader pageName="Consoles" title="consoles" />
+        <PageHeader pageName="Consoles" title="Gaming Consoles" />
         <HeroSection query={queryObject} />
       </div>
     </div>
