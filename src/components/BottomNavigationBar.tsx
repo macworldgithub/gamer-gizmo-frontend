@@ -320,7 +320,7 @@ const BottomNavigationBar = () => {
   const tabs = [
     { name: "Gaming PCs", href: "/desktop" },
     { name: "Laptops", href: "/laptops" },
-    { name: "Consoles", href: "/console" },
+    { name: "Gaming Consoles", href: "/console" },
     { name: "Components", href: "/usedparts" },
     { name: "Blogs", href: "/blogs" },
     { name: "Contact Us", href: "/contact" },
@@ -439,7 +439,7 @@ const BottomNavigationBar = () => {
                 className="text-lg hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
               >
-                Consoles
+                Gaming Consoles
               </Link>
               <Link
                 href="/usedparts"

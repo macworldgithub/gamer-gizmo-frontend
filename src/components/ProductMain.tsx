@@ -14,7 +14,7 @@ const categoryNames = {
   1: "Laptops",
   2: "Gaming PCs",
   3: "Components",
-  4: "Consoles",
+  4: "Gaming Consoles",
 };
 const ProductMain = ({ categoryId, query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
