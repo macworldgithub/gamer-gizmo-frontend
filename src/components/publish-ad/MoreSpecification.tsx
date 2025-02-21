@@ -359,6 +359,37 @@ const MoreSpecification = ({
           />
         </>
       )}
+      {/* For Components */}
+      {selectCategory?.name === "Components" && (
+        <>
+          <Form.Item label="Component Type">
+            <Select
+              value={formData.componentType}
+              //@ts-expect-error kejkfke
+              onChange={(e) => setSelectedComponentCategory(e.target.value)}
+              placeholder="Select Component Type"
+            >
+              {componentCategories &&
+                componentCategories.length > 0 &&
+                componentCategories.map((e: any) => (
+                  <Option key={e.id} value={e.name}>
+                    {e.name}
+                  </Option>
+                ))}
+            </Select>
+          </Form.Item>
+
+          <Form.Item label="Component Details">
+            <Input
+              value={formData.componentDetails}
+              onChange={(e) =>
+                handleFormChange("componentDetails", e.target.value)
+              }
+              placeholder="Enter Component Details"
+            />
+          </Form.Item>
+        </>
+      )}
     </div>
   );
 };
