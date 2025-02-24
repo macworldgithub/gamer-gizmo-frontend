@@ -7,11 +7,14 @@ import SelectLabels from "@/components/SelectLabels";
 import { RootState } from "@/components/Store/Store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const HeroSection = ({ query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
+  useEffect(() => {
+    console.log(token, "my token");
+  });
   // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();

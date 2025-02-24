@@ -8,12 +8,16 @@ import FilterSection from "@/components/FilterSection";
 import LiveCommunity from "@/components/LiveCommunity";
 import MobileCategories from "@/components/MobileCategories";
 import PopularMainSection from "@/components/PopularMainSection";
+import { useSelector } from "react-redux";
+import { RootState } from "@/components/Store/Store";
 
 export default function HomePage() {
+  const token = useSelector((state: RootState) => state.user.token);
+
   useEffect(() => {
     console.log("useEffect triggered");
     if (typeof window !== "undefined") {
-      toast.dismiss(); // Dismiss any existing toasts before showing a new one
+      toast.dismiss();
       toast.info(
         "🚧 Our website is online, but some features are still under development. Stay tuned for updates! 🚀",
         {
@@ -25,7 +29,6 @@ export default function HomePage() {
           draggable: true,
           progress: undefined,
           progressClassName: "",
-        
           className: "custom-toast-info",
         }
       );
@@ -35,7 +38,7 @@ export default function HomePage() {
   return (
     <div className="overflow-x-hidden dark:bg-[#0D0D12]">
       <MobileCategories />
-      <FilterSection  />
+      <FilterSection />
       <CategoriesComponent />
       <PopularMainSection />
       <BrowseVideos />
