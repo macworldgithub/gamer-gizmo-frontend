@@ -343,7 +343,7 @@ const MoreSpecification = ({
                   {componentCategories &&
                     componentCategories.length > 0 &&
                     componentCategories.map((e: any) => (
-                      <MenuItem value={e.id}>{e.name}</MenuItem>
+                      <MenuItem value={e}>{e.name}</MenuItem>
                     ))}
                 </Select>
               </FormControl>

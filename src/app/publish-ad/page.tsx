@@ -246,7 +246,7 @@ const PublishAdd: React.FC = () => {
     if (selectCategory?.name === "Components") {
       formDataObject.append(
         "component_type",
-        selectComponentCategory?.name || ""
+        selectComponentCategory?.id.toString() || ""
       );
       formDataObject.append("text", formData.component_text);
     } else {
@@ -294,6 +294,7 @@ const PublishAdd: React.FC = () => {
       console.log("Error", err);
     }
   };
+  console.log(selectComponentCategory, "selectComponentCategory");
 
   // const handleStepClick = (index: number) => {
   //   if (index <= activeStep || completedSteps.includes(index)) {
