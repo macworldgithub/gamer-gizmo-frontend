@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import CustomLoader from "@/components/CustomLoader";
 import { formatDate } from "@/app/utils/formatDate";
+import Wrapper from "@/components/Common/Wrapper/Wrapper";
 
 // Define TypeScript interface for Blog Post data
 interface BlogPostData {
@@ -63,39 +64,40 @@ export default function BlogPost() {
   if (!post) return <p className="text-center text-red-500">Post not found.</p>;
 
   return (
-    <div className="dark:bg-[#1e1e2f]">
-      <div className="max-w-4xl mx-auto p-6">
-        <Image
-          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.image}`}
-          alt={post.title}
-          width={600}
-          height={400}
-          className=" object-cover rounded-md  "
-        />
-
-        <p className="text-sm text-purple-600 font-semibold mt-4">
-          {formatDate(post.created_at)}
-        </p>
-        <div className="flex space-x-2 mt-4">
-          {post.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium"
-            >
-              {tag}
-            </span>
-          ))}
+    <Wrapper>
+      <div className="dark:bg-[#1e1e2f]">
+        <div className="w-full mx-auto p-6">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.image}`}
+            alt={post.title}
+            width={600}
+            height={400}
+            className=" object-cover rounded-md  "
+          />
+          <p className="text-sm text-purple-600 font-semibold mt-4">
+            {formatDate(post.created_at)}
+          </p>
+          <div className="flex space-x-2 mt-4">
+            {post.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <h1 className="text-3xl font-bold mt-2 dark:text-white lg:text-lg max-md:text-sm md:text-lg">
+            {post.title}
+          </h1>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: post.description,
+            }}
+            className="text-gray-600 mt-4 text-justify dark:text-white max-md:text-sm lg:text-sm"
+          />
         </div>
-        <h1 className="text-3xl font-bold mt-2 dark:text-white lg:text-lg max-md:text-sm md:text-lg">
-          {post.title}
-        </h1>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: post.description,
-          }}
-          className="text-gray-600 mt-4 text-justify dark:text-white max-md:text-sm lg:text-sm"
-        />
       </div>
-    </div>
+    </Wrapper>
   );
 }

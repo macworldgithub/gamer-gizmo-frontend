@@ -38,7 +38,7 @@ export default function Add() {
       );
       setLoading(false);
 
-      console.log(response.data.data, "pak");
+      console.log(response?.data?.data, "pak");
       setAds(response.data.data);
       setTotal(response.data.total);
     } catch (err) {

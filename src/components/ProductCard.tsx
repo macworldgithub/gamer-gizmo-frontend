@@ -95,7 +95,7 @@ const ProductCard = ({ product, seReftech, refetch }: any) => {
             onClick={() => {
               router.push(`/product-details/${product.id}`);
             }}
-            className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 "
+            className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 dark:hover:bg-purple-600"
           >
             <p className="max-sm:text-[5px]"> View Details</p>
           </button>
