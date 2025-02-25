@@ -9,6 +9,7 @@ import { getSpecifications } from "@/app/utils/getSpecifications";
 
 export default function EditAdPage() {
   const { id } = useParams(); // Get dynamic ad ID
+  console.log(id, "kkkkkkkkkk");
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
   const userId = useSelector((state: RootState) => state.user.id);

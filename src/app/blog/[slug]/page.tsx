@@ -71,9 +71,10 @@ export default function BlogPost() {
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.image}`}
             alt={post.title}
             width={600}
-            height={400}
-            className=" object-cover rounded-md w-full"
+            height={100}
+            className=" object-cover rounded-md w-full h-80"
           />
+
           <p className="text-sm text-purple-600 font-semibold mt-4">
             {formatDate(post.created_at)}
           </p>

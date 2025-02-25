@@ -124,7 +124,9 @@ const CommentsSection = ({ data }: { data: any }) => {
 
   const username = useSelector((state: RootState) => state.user.username);
   const profile = useSelector((state: RootState) => state.user.profile);
-  console.log(profile, "profilr");
+  const profileImageUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`;
+
+  console.log(profileImageUrl, "ayla");
 
   const handlePostComment = async () => {
     if (rating === 0) {
@@ -232,8 +234,12 @@ const CommentsSection = ({ data }: { data: any }) => {
               className="dark:bg-black flex flex-col sm:flex-row items-start sm:items-center bg-white rounded-lg px-4 pb-1 sm:space-x-4  sm:space-y-0"
             >
               {/* User Avatar */}
-              <div className="w-16 h-16 bg-gray-300 rounded-full flex justify-center items-center text-gray-500 text-sm">
-                {item.user_id}
+              <div className="w-16 h-16 aspect-square bg-gray-300 rounded-full flex justify-center items-center object-contain text-gray-500 text-sm">
+                <img
+                  src={profileImageUrl}
+                  alt="User Avatar"
+                  className="w-full h-full object-cover rounded-full"
+                />
               </div>
 
               {/* User Info */}
