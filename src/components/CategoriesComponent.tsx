@@ -28,18 +28,18 @@ const CategoriesComponent = () => {
   const isSmallScreen = useMediaQuery("(max-width: 640px)");
   // const CategoriesComponent = () => {
   const categories = [
-    "Used Desktops",
+    "Used Gaming PCs",
     "Used Laptops",
     "Used Gaming PC Parts",
     "Used Gaming Consoles",
-    "New Desktops",
+    "New Gaming PCs",
     "New Laptops",
     "New Gaming PC Parts",
     "New Gaming Consoles",
   ];
 
   const categoryMap = {
-    Desktops: "desktop",
+    "Gaming PCs": "desktop",
     Laptops: "laptops",
     "Gaming PC Parts": "usedparts",
     "Gaming Consoles": "console",
