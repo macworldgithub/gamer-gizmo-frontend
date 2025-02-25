@@ -89,7 +89,6 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
         {/* <Buynow data={data} /> */}
         <h1 className=" text-2xl font-bold text-purple-600 text-left mt-4  md:text-2xl">
-          {/* @tsignore */}
           AED {data?.price ?? "N/A"}
         </h1>
         <div className="flex items-center">

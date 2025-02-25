@@ -134,17 +134,16 @@ const DetailSection = ({
 
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
-      "& fieldset": { borderColor: "#ccc" }, // Default border
-      "&:hover fieldset": { borderColor: "#dc39fc" }, // Hover effect
+      "& fieldset": { borderColor: "#ccc" },
+      "&:hover fieldset": { borderColor: "#dc39fc" },
       "&.Mui-focused fieldset": { borderColor: "#dc39fc" },
     },
 
     "& .MuiInputLabel-root": {
       color: "#dc39fc",
-      // Label color when focused
     },
     "& .MuiInputLabel-root.Mui-focused": {
-      color: "#dc39fc", // Label color when focused (purple)
+      color: "#dc39fc", 
     },
   };
 

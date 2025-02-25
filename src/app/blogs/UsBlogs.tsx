@@ -65,7 +65,7 @@ export default function UsBlogs() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data[0] && (
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4 ">
             <Image
               // @ts-expect-error jh jk
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${data[0].image}`}

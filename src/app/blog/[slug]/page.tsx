@@ -72,7 +72,7 @@ export default function BlogPost() {
             alt={post.title}
             width={600}
             height={400}
-            className=" object-cover rounded-md  "
+            className=" object-cover rounded-md w-full"
           />
           <p className="text-sm text-purple-600 font-semibold mt-4">
             {formatDate(post.created_at)}

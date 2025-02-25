@@ -12,9 +12,7 @@ import { useSelector } from "react-redux";
 
 const HeroSection = ({ query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
-  useEffect(() => {
-    console.log(token, "my token");
-  });
+ 
   // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
