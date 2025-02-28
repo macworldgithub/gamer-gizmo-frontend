@@ -9,6 +9,7 @@ import { getSpecifications } from "@/app/utils/getSpecifications";
 
 export default function EditAdPage() {
   const { id } = useParams(); // Get dynamic ad ID
+  console.log(id, "kkkkkkkkkk");
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
   const userId = useSelector((state: RootState) => state.user.id);
@@ -77,12 +78,14 @@ export default function EditAdPage() {
   };
 
   const fetchBrands = async () => {
+    //@ts-ignore
     if (!selectCategory) {
       console.log("No category selected. Skipping brand fetch.");
       return;
     }
     try {
       const response = await axios.get(
+        //@ts-ignore
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/brands/getAll?category=${selectCategory.id}`,
         {
           headers: {
@@ -92,7 +95,7 @@ export default function EditAdPage() {
       );
       if (response.data && response.data.data) {
         setBrands(response.data.data);
-        console.log(response.data.data, "lol");
+        console.log(response.data.data, "lolllll");
       } else {
         console.log("No brands found in the response data.");
         setBrands([]);

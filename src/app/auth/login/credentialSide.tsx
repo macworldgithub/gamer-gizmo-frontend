@@ -11,6 +11,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { detectPlatform } from "@/app/utils/detectPlatform";
 import { getLocation } from "@/app/utils/getLocation";
 import axiosInstance from "@/app/utils/axios";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 const CredentialSide = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,13 @@ const CredentialSide = () => {
   const [accounts, setAccounts] = useState([]);
   const loginUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`;
   const logOutUserAccount = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logoutOtherAccounts`;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   const handleLogin = async () => {
     if (username && password) {
       try {
@@ -169,9 +177,21 @@ const CredentialSide = () => {
         </button>
       </div>
 
-      <Link className="text-[#DC39FC] underline" href="/auth/register">
+      <Link
+        className="text-[#DC39FC] hover:underline  hover:text-secondaryColorLight"
+        href="/auth/register"
+      >
         Register me
       </Link>
+      <button
+        className="text-[#DC39FC] hover:underline hover:text-secondaryColorLight"
+        onClick={() => setIsModalOpen(true)}
+      >
+        Forgot Password?
+      </button>
+
+      <ForgotPasswordModal open={isModalOpen} handleClose={handleModalClose} />
+
       {/* <div className=" relative mt-3">
         <div className=" text-white bg-[#DC39FC] flex justify-center items-center rounded absolute top-[-10px] right-[75px] w-[50px] h-[30px]">
           or

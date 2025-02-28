@@ -1,14 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { Select, MenuItem } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../components/Store/Store";
-import { setAdField } from "../../components/Store/Slicer/SellForMeSlice";
+import { MenuItem, Select } from "@mui/material";
+import React from "react";
 
-const PartsInformation = () => {
-  const Ad = useSelector((state: RootState) => state.SellForMe);
-  const dispatch = useDispatch();
+// Define a TypeScript interface for props
+interface PartsInformationProps {
+  adInformation: Record<string, string>; // Ensure it's not optional
+  setAdInformation: (newInfo: Record<string, string>) => void; // Update function
+}
 
+const PartsInformation: React.FC<PartsInformationProps> = ({ adInformation, setAdInformation }) => {
   const attributes = [
     { name: "processorVariant", label: "Processor Variant", options: ["i3", "i5", "i7", "i9", "Ryzen 5", "Ryzen 7"] },
     { name: "processor", label: "Processor", options: ["Intel", "AMD"] },
@@ -30,8 +30,9 @@ const PartsInformation = () => {
     { name: "quantity", label: "Quantity", options: ["1", "2", "3", "4", "5"] },
   ];
 
-  const handleChange = (value: string, name: string) => {
-    dispatch(setAdField({ field: name, value }));
+  // Handle Select Change
+  const handleChange = (name: string, value: string) => {
+    setAdInformation({ ...adInformation, [name]: value });
   };
 
   return (
@@ -42,23 +43,19 @@ const PartsInformation = () => {
             {attr.label}
           </label>
           <Select
-            value={Ad[attr.name] || ""}
-            onChange={(e) => handleChange(e.target.value, attr.name)}
+            value={adInformation[attr.name] || ""}
+            onChange={(e) => handleChange(attr.name, e.target.value as string)}
             fullWidth
-            className="dark:text-white bg-white dark:bg-black"
+            className="dark:text-black bg-white"
             sx={{
               ".MuiOutlinedInput-notchedOutline": { borderColor: "#6345ED" },
               "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#E14FFB" },
               "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#6345ED" },
             }}
-            MenuProps={{
-              PaperProps: {
-                style: { maxHeight: 200, overflowY: "auto" },
-              },
-            }}
+            MenuProps={{ PaperProps: { style: { maxHeight: 200, overflowY: "auto" } } }}
           >
             {attr.options.map((option) => (
-              <MenuItem key={option} value={option}>
+              <MenuItem key={option} value={option} className="">
                 {option}
               </MenuItem>
             ))}

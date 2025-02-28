@@ -58,7 +58,7 @@ const page = () => {
       toast.error("Error");
     }
   };
-  console.log(data);
+  console.log(data, "product data");
   useEffect(() => {
     fetch();
     fetchSimilarItems();
@@ -112,7 +112,7 @@ const page = () => {
           <ProductDetails seReftech={seReftech} refetch={fetcher} data={data} />
           <AuthorSection />
           <RelatedNewsSection />
-          <CommentsSection />
+          <CommentsSection data={data} />
           <ContactForm />
         </div>
         <div className="md:w-[35%] max-md:w-0">

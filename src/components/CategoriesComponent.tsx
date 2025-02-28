@@ -28,18 +28,18 @@ const CategoriesComponent = () => {
   const isSmallScreen = useMediaQuery("(max-width: 640px)");
   // const CategoriesComponent = () => {
   const categories = [
-    "Used Desktops",
+    "Used Gaming PCs",
     "Used Laptops",
     "Used Gaming PC Parts",
     "Used Gaming Consoles",
-    "New Desktops",
+    "New Gaming PCs",
     "New Laptops",
     "New Gaming PC Parts",
     "New Gaming Consoles",
   ];
 
   const categoryMap = {
-    Desktops: "desktop",
+    "Gaming PCs": "desktop",
     Laptops: "laptops",
     "Gaming PC Parts": "usedparts",
     "Gaming Consoles": "console",
@@ -143,28 +143,26 @@ const CategoriesComponent = () => {
         {/* Categories Section */}
         {/* <Wrapper className="max:md-hidden"> */}
         <div className="md:relative flex justify-center items-center w-full mt-4 md:p-8 max-md:hidden">
-          <div className="w-full max-w-[1200px] rounded-xl z-20 shadow-lg p-8 bg-gray-200 dark:bg-black text-black">
+          <div className="w-full max-w-[1200px] rounded-xl z-20 shadow-lg p-8 bg-white dark:bg-black text-black">
             <h2 className="text-2xl sm:pl-[0.9rem] md:pl-[calc(8%+10px)] lg:pl-[calc(4%+20px)]  font-bold max-sm:text-center text-start mb-6 dark:text-white">
               Categories
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center">
               {categories.map((category, index) => (
-                  <Link
+                <Link
                   key={index}
                   href={getCategoryLink(category)}
                   className=" w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center no-underline"
                 >
-                {/* <div
+                  {/* <div
                   key={index}
                   className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center"
                 > */}
-                  <h2 className="text-[0.9rem] font-bold text-center mb-4">
-                  
-                      {category}
+                  <h2 className="text-[0.9rem] font-bold  flex justify-center items-center">
+                    {category}
                   </h2>
-                {/* </div> */}
+                  {/* </div> */}
                 </Link>
-
               ))}
             </div>
           </div>

@@ -134,21 +134,21 @@ const DetailSection = ({
 
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
-      "& fieldset": { borderColor: "#ccc" }, // Default border
-      "&:hover fieldset": { borderColor: "#dc39fc" }, // Hover effect
-      "&.Mui-focused fieldset": { borderColor: "#dc39fc" }, // Focus effect
+      "& fieldset": { borderColor: "#ccc" },
+      "&:hover fieldset": { borderColor: "#dc39fc" },
+      "&.Mui-focused fieldset": { borderColor: "#dc39fc" },
     },
 
     "& .MuiInputLabel-root": {
-      color: "#dc39fc", // Label color when focused
+      color: "#dc39fc",
     },
     "& .MuiInputLabel-root.Mui-focused": {
-      color: "#dc39fc", // Label color when focused (purple)
+      color: "#dc39fc", 
     },
   };
 
   return (
-    <div className="flex text-black flex-col space-y-4">
+    <div className="flex text-black flex-col space-y-4 ">
       <TextField
         sx={inputStyles}
         label="Title"
@@ -156,7 +156,7 @@ const DetailSection = ({
         fullWidth
         value={formData.title || ""}
         onChange={(e) => handleFormChange("title", e.target.value)}
-        className="sm:w-full max-sm:w-full" // Responsive width (full width for small screens)
+        className="sm:w-full max-sm:w-full dark:text-white " // Responsive width (full width for small screens)
       />
       <TextField
         sx={inputStyles}
@@ -167,11 +167,12 @@ const DetailSection = ({
         rows={4}
         value={formData.description || ""}
         onChange={(e) => handleFormChange("description", e.target.value)}
-        className="sm:w-full max-sm:w-full" // Responsive width (full width for small screens)
+        className="sm:w-full max-sm:w-full dark:text-white " // Responsive width (full width for small screens)
       />
+
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth sx={inputStyles}>
-          <InputLabel id="brand-select-label">Brand</InputLabel>
+          <InputLabel id="brand-select-label dark:bg-white">Brand</InputLabel>
           <Select
             sx={inputStyles}
             labelId="brand-select-label"
@@ -179,7 +180,7 @@ const DetailSection = ({
             value={selectBrand}
             label="Brand"
             onChange={(e) => setSelectedBrand(e.target.value)}
-            className="sm:w-full max-sm:w-full" // Responsive width
+            className="sm:w-full max-sm:w-ful dark:bg-whitel dark:text-white" // Responsive width
           >
             {brands.map((brand: any) => (
               <MenuItem key={brand.id} value={brand} style={{ color: "black" }}>
@@ -197,7 +198,7 @@ const DetailSection = ({
           fullWidth
           value={formData.otherBrandName || ""}
           onChange={(e) => handleFormChange("otherBrandName", e.target.value)}
-          className="sm:w-full max-sm:w-full"
+          className="sm:w-full max-sm:w-full  "
         />
       ) : (
         <Box sx={{ minWidth: 120 }}>
@@ -209,24 +210,26 @@ const DetailSection = ({
             sx={{
               ...inputStyles,
               "& .MuiInputLabel-root": {
-                color: "#dc39fc" ,
+                color: "#dc39fc",
               },
             }}
           >
-            <InputLabel id="model-select-label"  shrink>Model</InputLabel>
+            <InputLabel id="model-select-label" shrink>
+              Model
+            </InputLabel>
             <Select
               labelId="model-select-label"
               id="model-select"
               label="Model"
               value={selectModel}
               onChange={(e) => setSelectedModel(e.target.value)}
-              className="sm:w-full max-sm:w-full" 
+              className="sm:w-full max-sm:w-full dark:text-white"
             >
               {models.map((model: any) => (
                 <MenuItem
                   key={model.id}
                   value={model}
-                  style={{ color: "black" }}
+                  style={{ color: "black " }}
                 >
                   {model.name}
                 </MenuItem>
@@ -245,7 +248,7 @@ const DetailSection = ({
             label="Condition"
             sx={inputStyles}
             onChange={(e) => setSelectedCondition(e.target.value)}
-            className="sm:w-full max-sm:w-full" // Responsive width
+            className="sm:w-full max-sm:w-full dark:text-white " // Responsive width
           >
             {conditioneData.map((loc: any) => (
               <MenuItem key={loc.id} value={loc} style={{ color: "black" }}>
@@ -265,7 +268,7 @@ const DetailSection = ({
             label="location"
             sx={inputStyles}
             onChange={(e) => setSelectedLocation(e.target.value)}
-            className="sm:w-full max-sm:w-full"
+            className="sm:w-full max-sm:w-full dark:text-white "
           >
             {locationData
               .sort((a: any, b: any) => a.name.localeCompare(b.name))

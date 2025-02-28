@@ -71,8 +71,8 @@ export default function UsBlogs() {
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${data[0].image}`}
               alt="Office setup"
               width={800}
-              height={400}
-              className="w-full object-cover"
+              height={100}
+              className="w-full object-cover max-sm:h-[20rem] sm:h-[10rem] md:h-[22rem] lg:h-[22rem]"
             />
             <div>
               <p className="text-sm text-purple-600 font-semibold">
@@ -201,8 +201,8 @@ export default function UsBlogs() {
         </div>
 
         {data[3] && (
-          <div className="lg:col-span-12 flex flex-col lg:flex-row gap-6">
-            <div className="w-full lg:w-1/2">
+          <div className="md:col-span-2 lg:col-span-12 flex flex-col md:flex-row gap-6">
+            <div className="w-full md:w-1/2 lg:w-[53%] xl:w-[55%]">
               <Image
                 // @ts-expect-error jk jk
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${data[3].image}`}
@@ -213,7 +213,7 @@ export default function UsBlogs() {
               />
             </div>
 
-            <div className="flex flex-col justify-center space-y-3 lg:w-1/2">
+            <div className="flex flex-col justify-center space-y-3 md:w-1/2 lg:w-[47%] xl:w-[45%]">
               <p className="text-xs text-purple-600 font-semibold">
                 {/* @ts-expect-error jk hk */}
                 Gamer Gizmo • {formatDate(data[3].Created_at)}

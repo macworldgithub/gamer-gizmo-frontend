@@ -35,10 +35,14 @@ const TopNav = () => {
             <option value="solana">Solana</option>
           </select>
         </div> */}
-      <div className="max-sm:w-[4rem]  sm:w-[5rem] md:w-[6rem] md:h-10 bg-[#ffffff] rounded-md flex justify-center items-center">
+      <div className="max-sm:w-[4rem]  sm:w-[5rem] md:w-[6rem] md:h-10 bg-[#ffffff] rounded-md flex justify-center items-center dark:bg-secondaryBlack dark:text-white">
         <select className="w-full h-full bg-transparent max-md:text-[0.6rem] text-black rounded-md max-sm:px-0 px-2 outline-none">
-          <option value="english">English</option>
-          <option value="french">Arabic</option>
+          <option value="english" className="text-black">
+            English
+          </option>
+          <option value="arabic" className="text-black">
+            Arabic
+          </option>
         </select>
       </div>
       {/* </div> */}

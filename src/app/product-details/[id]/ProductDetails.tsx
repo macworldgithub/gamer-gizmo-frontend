@@ -80,16 +80,16 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             <p className="text-sm md:text-xl text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
               {data?.name}
             </p>
-            <p className="text-sm text-gray-500  text-start dark:text-[#616161]">
+            <div className="text-sm text-gray-500  text-start dark:text-[#616161]">
               <h3 className="text-base font-bold">Warranty:</h3>
               <p className="text-sm">1 year</p>
-            </p>
+            </div>
           </div>
         </div>
 
         {/* <Buynow data={data} /> */}
         <h1 className=" text-2xl font-bold text-purple-600 text-left mt-4  md:text-2xl">
-          AED {data?.price}
+          AED {data?.price ?? "N/A"}
         </h1>
         <div className="flex items-center">
           <h1 className="font-bold text-secondaryColorLight text-lg">Stock:</h1>
@@ -101,7 +101,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           <h1 className="font-bold text-secondaryColorLight text-lg">
             Condition:
           </h1>
-          <p className="ml-3 dark:text-white text-black font-semibold">
+          <div className="ml-3 dark:text-white text-black font-semibold">
             <p>
               {data?.condition === 1
                 ? "New"
@@ -113,7 +113,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 ? "Refurbished"
                 : "Unknown"}
             </p>
-          </p>
+          </div>
         </div>
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">

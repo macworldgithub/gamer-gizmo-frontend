@@ -1,9 +1,9 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
-import { useSearchParams } from "next/navigation";
+import React from "react";
 import HeroSection from "./HeroSection";
-
-const page = () => {
+import { useSearchParams } from "next/navigation";
+const Components = () => {
   const params = useSearchParams();
 
   // Define an object with the possible query parameters
@@ -28,13 +28,11 @@ const page = () => {
   });
 
   return (
-    <div>
-      <div className="w-full">
-        <PageHeader pageName="Consoles" title="Gaming Consoles" />
-        <HeroSection query={queryObject} />
-      </div>
+    <div className="w-full">
+      <PageHeader pageName="Components" title="Components" />
+      <HeroSection query={queryObject} />
     </div>
   );
 };
 
-export default page;
+export default Components;

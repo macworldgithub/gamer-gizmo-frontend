@@ -51,10 +51,14 @@ const NicUploadModal = ({
   return (
     <div className="fixed inset-0 bg-black text-black  bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-md w-[90%] max-w-md">
-        <h2 className="text-xl font-semibold mb-4">Upload NIC Images</h2>
+        <h2 className="text-xl font-semibold mb-4">
+          Upload Emirates ID Images
+        </h2>
         <div className="space-y-4">
           <div>
-            <label className="block font-medium mb-1">NIC Front Image</label>
+            <label className="block font-medium mb-1">
+              Emirates ID Front Image
+            </label>
             <input
               type="file"
               accept="image/*"
@@ -65,7 +69,9 @@ const NicUploadModal = ({
             />
           </div>
           <div>
-            <label className="block font-medium mb-1">NIC Back Image</label>
+            <label className="block font-medium mb-1">
+              Emirates ID Back Image
+            </label>
             <input
               type="file"
               accept="image/*"
