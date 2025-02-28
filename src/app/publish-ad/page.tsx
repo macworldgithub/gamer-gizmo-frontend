@@ -289,6 +289,7 @@ const PublishAdd: React.FC = () => {
       toast.error("Error");
       console.log("Error", err);
     }
+    console.log(formData, "my form data")
   };
 
   // const handleStepClick = (index: number) => {

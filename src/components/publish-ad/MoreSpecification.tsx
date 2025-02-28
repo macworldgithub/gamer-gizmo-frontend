@@ -333,7 +333,7 @@ const MoreSpecification = ({
                   id="cat-select"
                   value={selectComponentCategory}
                   label="Category"
-                  //@ts-ignore
+                  // @ts-ignore
                   onChange={(e) => setSelectedComponentCategory(e.target.value)}
                   sx={{ color: "#000000" }}
                 >
