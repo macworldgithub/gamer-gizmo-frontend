@@ -8,6 +8,7 @@ import { Button, Modal } from "antd";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -15,6 +16,7 @@ interface User {
   id: number;
   first_name: string;
   last_name: string;
+  profile: string;
 }
 interface Comment {
   id: number;
@@ -102,7 +104,7 @@ const CommentsSection = ({ data }: { data: any }) => {
           comments: newComment.trim(),
           ratings: rating,
           created_at: new Date().toISOString(),
-          user_name: `User ${userId}`,
+          // user_name: `User ${userId}`,
         };
 //@ts-ignore
         setComments([...comments, newReview]);
@@ -197,7 +199,12 @@ const CommentsSection = ({ data }: { data: any }) => {
         <h1 className="font-bold text-xl pl-1 mb-1">People's Comments</h1>
         <div className="max-h-80 overflow-y-auto space-y-4 px-2 py-1 border border-gray-300 rounded-lg">
           {comments?.map((item) => {
-            console.log("item.user_id:", item.user_id, "userId:", userId);
+      //  const profileUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${item?.users?.profile}`;const profileUrl = item?.users?.profile
+      const profileUrl = item?.users?.profile
+      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${item.users.profile}`
+      : null; 
+       console.log("Profile Image URL:", profileUrl);
+      
             return (
               <div
                 key={item.id}
@@ -205,18 +212,29 @@ const CommentsSection = ({ data }: { data: any }) => {
               >
                 {/* User Avatar */}
                 <div className="w-16 h-16 aspect-square bg-gray-300 rounded-full flex justify-center items-center object-contain text-gray-500 text-sm">
-                  <img
-                    src={profileImageUrl}
-                    alt="User Avatar"
-                    className="w-full h-full object-cover rounded-full"
-                  />
+                {profileUrl ? (
+          <img
+            src={profileUrl}
+            alt="User Avatar"
+            className="w-full h-full object-cover rounded-full"
+            onError={(e) => {
+              //@ts-ignore
+              e.target.onerror = null; 
+              //@ts-ignore
+
+              e.target.style.display = "none"; 
+            }}
+          />
+        ) : (
+          <FaUser className="w-8 h-8 text-gray-500" /> 
+        )}
                 </div>
 
                 {/* User Info */}
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                     {/* {item?.users?.first_name} */}
-                    {username}
+                    {item?.users?.first_name} {item?.users?.last_name}
                   </h3>
                   {item?.comments && (
                     <p className=" text-gray-600 text-sm leading-relaxed dark:text-[#616161]">
