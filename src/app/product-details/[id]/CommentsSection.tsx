@@ -133,11 +133,16 @@ const CommentsSection = ({ data }: { data: any }) => {
 
   useEffect(() => {
     if (data?.product_reviews) {
+      console.log("API Product Reviews Data:", data.product_reviews);
       setComments(data.product_reviews);
     }
   }, [data]);
 
-  console.log(comments, "hgjhgjkhkj");
+
+
+  console.log("User ID from Redux:", userId);
+  console.log("All Comments with IDs:", comments);
+  
 
   console.log(userId, "user id");
 
@@ -185,7 +190,7 @@ const CommentsSection = ({ data }: { data: any }) => {
           created_at: new Date().toISOString(),
           user_name: `User ${userId}`,
         };
-
+//@ts-ignore
         setComments([...comments, newReview]);
         setNewComment("");
         setRating(0);
@@ -210,18 +215,22 @@ const CommentsSection = ({ data }: { data: any }) => {
     if (!commentToDelete) return;
 
     try {
-      await axios?.delete(`${deleteUrl}?review_id=${commentToDelete}`);
+      const response = await axios?.delete(`${deleteUrl}?review_id=${commentToDelete}`);
+      console.log("Delete Response:", response);
+   
       setComments(comments?.filter((item) => item.id !== commentToDelete));
       toast.success("Comment successfully deleted");
-    } catch (err) {
-      console.log("Failed to delete comment");
+   } catch (err: any) {
+      console.error("Failed to delete comment:", err.response?.data || err);
       toast.error("Failed to delete comment, please try again");
-    } finally {
+   }finally {
       setIsDeleteModalOpen(false);
       setCommentToDelete(null);
     }
   };
 
+
+  
   const openDeleteModal = (commentId: number) => {
     setCommentToDelete(commentId);
     setIsDeleteModalOpen(true);
@@ -294,7 +303,8 @@ const CommentsSection = ({ data }: { data: any }) => {
                 {/* User Info */}
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                    {item?.users?.first_name}
+                    {/* {item?.users?.first_name} */}
+                    {username}
                   </h3>
                   {item?.comments && (
                     <p className=" text-gray-600 text-sm leading-relaxed dark:text-[#616161]">

@@ -29,7 +29,7 @@ const ThemeToggle = () => {
   };
   return (
     <div
-      className="relative  md:w-[5rem] lg:max-w-[9rem] lg:min-w-[7rem] md:h-[2rem] lg:h-[3rem] bg-white rounded-full  flex justify-between items-center  p-1 max-md:my-6 cursor-pointer shadow-md shadow-blue-500/50"
+      className="relative max-md:w-[5.6rem] md:w-[4.5rem] lg:max-w-[9rem] lg:min-w-[7rem] md:h-[2rem] lg:h-[3rem] bg-white rounded-full  flex justify-between items-center  p-1 max-md:my-6 cursor-pointer shadow-md shadow-blue-500/50"
       onClick={handleToggle}
     >
       {/* Icons */}

@@ -6,8 +6,10 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const CategoriesComponent = () => {
+  const router = useRouter();
   // Custom Hook for Media Query
   const useMediaQuery = (query: any) => {
     const [matches, setMatches] = useState(false);
@@ -24,6 +26,10 @@ const CategoriesComponent = () => {
 
     return matches;
   };
+
+  const handleClick = (routeName : string)=> {
+    router.push(routeName)
+  }
 
   const isSmallScreen = useMediaQuery("(max-width: 640px)");
   // const CategoriesComponent = () => {
@@ -102,7 +108,7 @@ const CategoriesComponent = () => {
                   Get Genuine offers from Verified Buyers
                 </li>
               </ul>
-              <button className="bg-custom-gradient text-white py-2 text-sm px-4 rounded-full hover:opacity-90">
+              <button className="bg-custom-gradient text-white py-2 text-sm px-4 rounded-full hover:opacity-90" onClick={()=> handleClick('/publish-ad')}>
                 Post Your Ad
               </button>
             </div>
@@ -133,8 +139,8 @@ const CategoriesComponent = () => {
                   Dedicated Sales Expert to sell your Component
                 </li>
               </ul>
-              <button className="bg-custom-gradient text-white py-2 mb-2 px-4 text-sm  rounded-full hover:opacity-90">
-                Buy For GamerGizmo
+              <button className="bg-custom-gradient text-white py-2 mb-2 px-4 text-sm  rounded-full hover:opacity-90" onClick={()=> handleClick('/store')}>
+                Buy From GamerGizmo
               </button>
             </div>
           </div>

@@ -6,20 +6,29 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import LiveCommunity from "./LiveCommunity";
+import TermsAndConditionModal from "./Modals/TermsAndConditionModal";
 
 const Footer = () => {
+  const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+
+  const handleNavigate = (routeName: string) => {
+    router.push(routeName);
+  };
+
   return (
-    <div className=" w-full h-auto bg-white dark:bg-black">
+    <div className="w-full h-auto bg-white dark:bg-black">
       <div className="">
         <LiveCommunity />
       </div>
 
       <div className="bg-footerBlack h-auto">
         {/* Footer Main Section */}
-        <div className="pt-32 pb-10 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 ">
+        <div className="pt-32 pb-10 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Logo & Description */}
           <div className="">
             <Link href="/">
@@ -63,18 +72,16 @@ const Footer = () => {
 
           {/* Marketplace */}
           <div className="text-start">
-            <h3 className="font-bold mb-4 text-[1.2rem] ">Marketplace</h3>
+            <h3 className="font-bold mb-4 text-[1.2rem] text-secondaryColorDark">Marketplace</h3>
             <ul className="space-y-2 text-sm md:text-xs">
-              <li>Gaming Gear</li>
-              <li>Consoles</li>
-              <li>Gaming PCs</li>
-              <li>Laptops</li>
-              <li>Used Components</li>
-              <li>Accessories</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('desktop')}>Gaming PCs</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('laptops')}>Laptops</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('console')}>Gaming Consoles</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('components')}>Components</li>
               <li>
                 <Link
                   href="/advertising"
-                  className="text-blue-500 hover:underline no-underline text-inherit"
+                  className="  hover:text-secondaryColorDark"
                 >
                   Advertising
                 </Link>
@@ -84,27 +91,24 @@ const Footer = () => {
 
           {/* Support */}
           <div className="text-start">
-            <h3 className="mb-4 text-[1.2rem] font-bold">Supports</h3>
+            <h3 className="mb-4 text-[1.2rem] font-bold text-secondaryColorDark">Supports</h3>
             <ul className="space-y-2 text-sm md:text-xs">
-              <li>Terms & Conditions</li>
-              <li>24/7 Supports</li>
-              <li>Cookie Policy</li>
-              <li>Privacy Policy</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => setShowModal(true)}>Terms & Conditions</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark">24/7 Supports</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark">Cookie Policy</li>
+              <li className="cursor-pointer hover:text-secondaryColorDark">Privacy Policy</li>
             </ul>
           </div>
 
           {/* Contact */}
-          <div className="flex flex-col items-start">
-            <div className="text-start ">
+          <div className="flex flex-col items-start text-secondaryColorDark">
+            <div className="text-start">
               <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
-              <a
-                href="mailto:support@gamergizmo.com"
-                className="text-sm  break-words text-white"
-              >
+              <a href="mailto:support@gamergizmo.com" className="text-sm break-words hover:text-secondaryColorDark text-white">
                 support@gamergizmo.com
               </a>
               <br />
-              <a href="tel:+923318551070" className="text-sm text-white">
+              <a href="tel:+923318551070" className="text-sm text-white hover:text-secondaryColorDark">
                 +92 331 8551070
               </a>
             </div>
@@ -116,7 +120,7 @@ const Footer = () => {
           </div>
 
           <div className="text-start">
-            <h4 className="mb-2 text-[1.2rem] font-bold"> News & Post</h4>
+            <h4 className="mb-2 text-[1.2rem] font-bold text-secondaryColorDark">News & Post</h4>
             <div className="flex items-start space-x-4 mb-4">
               <Image
                 src="/images/footerImg.png"
@@ -125,12 +129,8 @@ const Footer = () => {
                 height={40}
               />
               <div>
-                <p className="text-sm md:text-xs">
-                  Boost Your Gaming Setup with These Hacks
-                </p>
-                <Link href="#" className="text-xs underline">
-                  Read More
-                </Link>
+                <p className="text-sm md:text-xs  hover:text-secondaryColorDark" >Boost Your Gaming Setup with These Hacks</p>
+                <Link href="#" className="text-xs underline hover:text-secondaryColorDark">Read More</Link>
               </div>
             </div>
             <div className="flex items-start space-x-4">
@@ -140,14 +140,9 @@ const Footer = () => {
                 width={40}
                 height={40}
               />
-
               <div>
-                <p className="text-sm">
-                  Boost Your Gaming Setup with These Hacks
-                </p>
-                <Link href="#" className="text-xs underline">
-                  Read More
-                </Link>
+                <p className="text-sm hover:text-secondaryColorDark">Boost Your Gaming Setup with These Hacks</p>
+                <Link href="#" className="text-xs underline hover:text-secondaryColorDark">Read More</Link>
               </div>
             </div>
           </div>
@@ -155,9 +150,10 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="text-center border-t border-gray-800 py-4 text-sm">
-          © Copyright 2021 - All Rights Reserved
+          © Copyright 2025 - All Rights Reserved
         </div>
       </div>
+      <TermsAndConditionModal openEditModal={showModal} setOpenEditModal={setShowModal} />
     </div>
   );
 };

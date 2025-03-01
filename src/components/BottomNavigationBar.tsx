@@ -321,17 +321,18 @@ const BottomNavigationBar = () => {
     { name: "Gaming PCs", href: "/desktop" },
     { name: "Laptops", href: "/laptops" },
     { name: "Gaming Consoles", href: "/console" },
-    { name: "Components", href: "/usedparts" },
+    { name: "Components", href: "/components" },
     { name: "Blogs", href: "/blogs" },
     { name: "Contact Us", href: "/contact" },
     { name: "About Us", href: "/about" },
+    { name: "Store", href: "/store" },
     { name: "Inspection", href: "/Inspection" },
   ];
 
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
       {/* </div> */}
-      <div className="hidden md:flex md:gap-5 md:pl-2 lg:gap-[2rem] font-bold md:text-[0.6rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
+      <div className="hidden md:flex md:gap-5  lg:gap-[2rem] font-bold md:text-[0.5rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
         {tabs.map((tab) => (
           <Link
             key={tab.name}
@@ -404,7 +405,7 @@ const BottomNavigationBar = () => {
                 </div>
               ) : (
                 <Link href="/auth/login" onClick={() => setIsDrawerOpen(false)}>
-                  <div className="w-20 h-8 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+                  <div className="w-[5rem] h-8 bg-custom-gradient rounded-full flex justify-center gap-2 items-center cursor-pointer">
                     <Image
                       src="/images/btnIcon.png"
                       className="md:w-[0.6rem]"
@@ -421,14 +422,14 @@ const BottomNavigationBar = () => {
               )}
               <Link
                 href="/desktop"
-                className="text-lg  hover:text-secondaryColorDark"
+                className="text-sm  hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
               >
                 Gaming PCs
               </Link>
               <Link
                 href="/laptops"
-                className=" text-lg  hover:text-secondaryColorDark "
+                className=" text-sm  hover:text-secondaryColorDark "
                 onClick={() => setIsDrawerOpen(false)}
               >
                 Laptops
@@ -436,21 +437,21 @@ const BottomNavigationBar = () => {
 
               <Link
                 href="/console"
-                className="text-lg hover:text-secondaryColorDark"
+                className="text-sm  hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
               >
                 Gaming Consoles
               </Link>
               <Link
-                href="/usedparts"
-                className="text-lg hover:text-secondaryColorDark"
+                href="/components"
+                className="text-sm  hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
               >
                 Components
               </Link>
               <Link
                 href="/blogs"
-                className="text-lg hover:text-secondaryColorDark"
+                className="text-sm  hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
               >
                 Blogs
@@ -458,15 +459,17 @@ const BottomNavigationBar = () => {
 
               <Link
                 href="/contact"
-                className=" text-lg hover:text-secondaryColorDark"
+                className=" text-sm  hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
               >
                 Contact Us
               </Link>
-              <Link href="/about">About Us</Link>
+              <Link className="text-sm" href="/about" onClick={() => setIsDrawerOpen(false)}>About Us</Link>
+              <Link className="text-sm" href="/store" onClick={() => setIsDrawerOpen(false)}>Store</Link>
+
               <Link
-                href="/details"
-                className=" text-lg hover:text-secondaryColorDark"
+                href="/Inspection"
+                className=" text-sm  hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
               >
                 Inspection
@@ -474,15 +477,15 @@ const BottomNavigationBar = () => {
 
               <div className="flex-col items-center mx-auto pl-0">
                 <Link href="/publish-ad" onClick={() => setIsDrawerOpen(false)}>
-                  <div className="w-[7rem] mx-auto h-9 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+                  <div className="w-[6rem] mx-auto h-8 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
                     <Image
                       src="/images/btnIcon.png"
-                      className="w-[0.8rem]"
-                      width={16}
-                      height={16}
+                      className="w-[0.6rem]"
+                      width={14}
+                      height={14}
                       alt="btnIcon"
                     />
-                    <span className="text-xs text-white ">Post Your Ad</span>
+                    <span className="text-[0.6rem] text-white ">Post Your Ad</span>
                   </div>
                 </Link>
 
@@ -526,7 +529,7 @@ const BottomNavigationBar = () => {
           </div>
         ) : (
           <Link href="/auth/login">
-            <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+            <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:gap-3 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
               <Image
                 src="/images/btnIcon.png"
                 className="md:w-[0.6rem]"
