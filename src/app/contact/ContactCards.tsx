@@ -20,7 +20,7 @@ const ContactCards = () => {
               />
             </div>
             <a href="tel:+923318551070" className="text-lg dark:text-white">
-              +92 331 8551070
+            +971555795213
             </a>
           </div>
 

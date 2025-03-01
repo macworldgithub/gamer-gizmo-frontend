@@ -95,8 +95,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm md:text-xs">
               <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => setShowModal(true)}>Terms & Conditions</li>
               <li className="cursor-pointer hover:text-secondaryColorDark">24/7 Supports</li>
-              <li className="cursor-pointer hover:text-secondaryColorDark">Cookie Policy</li>
-              <li className="cursor-pointer hover:text-secondaryColorDark">Privacy Policy</li>
+              {/* <li className="cursor-pointer hover:text-secondaryColorDark">Privacy Policy</li> */}
             </ul>
           </div>
 
@@ -109,7 +108,7 @@ const Footer = () => {
               </a>
               <br />
               <a href="tel:+923318551070" className="text-sm text-white hover:text-secondaryColorDark">
-                +92 331 8551070
+              +971555795213
               </a>
             </div>
             <div className="mt-4">
@@ -119,7 +118,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="text-start">
+          {/* <div className="text-start">
             <h4 className="mb-2 text-[1.2rem] font-bold text-secondaryColorDark">News & Post</h4>
             <div className="flex items-start space-x-4 mb-4">
               <Image
@@ -145,7 +144,7 @@ const Footer = () => {
                 <Link href="#" className="text-xs underline hover:text-secondaryColorDark">Read More</Link>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Footer Bottom */}
