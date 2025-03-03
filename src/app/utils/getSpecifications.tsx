@@ -4,16 +4,6 @@ export const getSpecifications = (data: any) => {
       label: "Category Name",
       value: data?.categories?.name || "Not Available",
     },
-    { label: "GPU Variant", value: "Polaris 20 XTX (215-0910038)" },
-    { label: "Memory", value: "8 GB" },
-    { label: "Memory Type", value: "GDDR5" },
-    { label: "Memory Bus", value: "256 bit" },
-    { label: "Base Clock", value: "1257 MHz" },
-    { label: "Boost Clock", value: "1360 MHz (+1%)" },
-    { label: "Memory Clock", value: "2000 MHz\n8 Gbps effective" },
-    { label: "Bandwidth", value: "256.0 GB/s" },
-    { label: "Suggested PSU", value: "450 W" },
-    { label: "Power Connectors", value: "1x 8-pin" },
   ];
 
   // Check if category_id is 4 (Gaming Consoles) and render the additional fields explicitly

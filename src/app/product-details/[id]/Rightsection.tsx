@@ -3,14 +3,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { formatDate } from "@/app/utils/formatDate";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaUser } from "react-icons/fa";
 import { MdOutlineMailLock } from "react-icons/md";
 import { WhatsAppOutlined } from "@ant-design/icons";
+import { MdVerified } from "react-icons/md";
 import Verified from "../../../../public/images/Verified.svg";
 
 const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
-
+  const profileUrl = data?.users?.profile
+    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
+    : null;
   const handleIncrement = () => setQuantity(quantity + 1);
   const handleDecrement = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -70,8 +73,18 @@ const Rightsection = ({ data }: any) => {
       <div className="dark:bg-black  border-gray-300 rounded-lg p-6 w-72 h-fit bg-white shadow-md flex flex-col items-center">
         <div className="flex justify-center gap-2 items-center">
           <div className=" flex items-center  justify-center flex-col gap-1">
-            <Image alt="verified" src={Verified} height={25} width={25} />
-            <p className="text-purple-600 font-bold text-sm">Verified</p>
+            {data?.is_verified_by_admin ? (
+              <>
+                <MdVerified />
+                <p className="text-purple-600 font-bold text-[0.6rem]">
+                  Verified
+                </p>
+              </>
+            ) : (
+              <p className="text-red-500 font-bold text-[0.6rem]">
+                Not Verified
+              </p>
+            )}
           </div>
           <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
             Seller Details
@@ -82,9 +95,9 @@ const Rightsection = ({ data }: any) => {
         <hr className="my-4 border-gray-300 w-full" />
 
         {/* Seller Information */}
-        <div className="flex items-center mb-6">
+        <div className="flex items-center mb-6 gap-2">
           {/* Seller Image */}
-          <Image
+          {/* <Image
             src={
               data?.users?.profile
                 ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
@@ -94,7 +107,23 @@ const Rightsection = ({ data }: any) => {
             width={40}
             height={40}
             className="rounded-full mr-4"
-          />
+          /> */}
+          {profileUrl ? (
+            <img
+              src={profileUrl}
+              alt="User Avatar"
+              className="w-11 h-11  rounded-full"
+              onError={(e) => {
+                //@ts-ignore
+                e.target.onerror = null;
+                //@ts-ignore
+
+                e.target.style.display = "none";
+              }}
+            />
+          ) : (
+            <FaUser className="w-8 h-8 text-gray-500" />
+          )}
           {/* Seller Name and Member Since */}
           <div className="text-left">
             <p className="text-gray-800 font-semibold dark:text-white">

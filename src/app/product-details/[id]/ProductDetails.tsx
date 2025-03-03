@@ -20,6 +20,8 @@ import { SlCalender } from "react-icons/sl";
 
 const ProductDetails = ({ data, refetch, seReftech }: any) => {
   const [activeTab, setActiveTab] = useState("overview");
+  const totalReviewsCount = data?.product_reviews?.length || 0;
+
   console.log(data, "ppo");
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -46,32 +48,32 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           <div className="w-full flex justify-start mt-4 mb-7">
             <div className="w-full flex justify-between items-center bg-white shadow-md dark:bg-black">
               {/* User Info */}
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center md:gap-1">
                 <div className="text-purple-600">
-                  <CiUser size={22} />
+                  <CiUser size={22} className="max-md:w-8 max-md:h-4" />
                 </div>
-                <div className="text-gray-700 font-medium dark:text-white">
+                <div className="text-gray-700 font-medium max-md:text-[0.7rem] dark:text-white">
                   {data?.users?.first_name} {data?.users?.last_name}
                 </div>
               </div>
 
               {/* Date Info */}
-              <div className="flex items-center space-x-2">
-                <div className="text-purple-600">
-                  <SlCalender size={18} />
+              <div className="flex items-center max-md:gap-1  md:gap-3">
+                <div className="text-purple-600 ">
+                  <SlCalender size={18} className="max-md:w-6 max-md:h-3" />
                 </div>
-                <div className="text-gray-700 font-medium dark:text-white">
+                <div className="text-gray-700 font-medium dark:text-white max-md:text-[0.7rem]">
                   {formatDate(data?.created_at)}
                 </div>
               </div>
 
               {/* Comments */}
-              <div className="flex items-center space-x-2">
-                <div className="text-purple-600">
-                  <FaRegComment size={20} />
+              <div className="flex items-center max-md:gap-0 md:gap-2">
+                <div className="text-purple-600 ">
+                  <FaRegComment size={20} className="max-md:w-8 max-md:h-4" />
                 </div>
-                <div className="text-gray-700 font-medium dark:text-white">
-                  Comments (5)
+                <div className="text-gray-700 font-medium dark:text-white max-md:text-[0.7rem]">
+                  Reviews ({totalReviewsCount})
                 </div>
               </div>
             </div>
@@ -184,9 +186,12 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
               {data?.name}
             </h2>
-            <p className="lg:text-sm md:text-sm text-gray-600 mt-2 dark:text-white text-[11px]">
-              {data?.description}
-            </p>
+            <div className="flex justify-start gap-2 items-center">
+              <h4>Product Description</h4>
+              <p className="lg:text-sm md:text-sm text-gray-600  dark:text-white text-[11px]">
+                {data?.description}
+              </p>
+            </div>
           </div>
         )}
         {activeTab === "specifications" && <SpecificationsTable data={data} />}

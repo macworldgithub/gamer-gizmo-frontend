@@ -1,11 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import { FaPhoneAlt, FaUser, FaWhatsapp } from "react-icons/fa";
 import { formatDate } from "@/app/utils/formatDate";
-import { MdOutlineMailLock } from "react-icons/md";
+import { MdOutlineMailLock, MdVerified } from "react-icons/md";
 import { WhatsAppOutlined } from "@ant-design/icons";
 import Verified from "../../../../public/images/Verified.svg";
 const Sellersdetails = ({ data }: any) => {
+  const profileUrl = data?.users?.profile
+    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
+    : null;
+  console.log(data?.is_verified_by_admin, "verification");
   console.log(data, "no data");
   return (
     <div className="md:hidden w-full mt-4">
@@ -13,8 +17,20 @@ const Sellersdetails = ({ data }: any) => {
         {/* Heading */}
         <div className="flex justify-center gap-2 items-center">
           <div className=" flex items-center  justify-center flex-col gap-1">
-            <Image alt="verified" src={Verified} height={20} width={20} />
-            <p className="text-purple-600 font-bold text-[0.6rem]">Verified</p>
+            {/* <Image alt="verified" src={Verified} height={20} width={20} /> */}
+            {/* <p className="text-purple-600 font-bold text-[0.6rem]">Verified</p> */}
+            {data?.is_verified_by_admin ? (
+              <>
+                <MdVerified />
+                <p className="text-purple-600 font-bold text-[0.6rem]">
+                  Verified
+                </p>
+              </>
+            ) : (
+              <p className="text-red-500 font-bold text-[0.6rem]">
+                Not Verified
+              </p>
+            )}
           </div>
           <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
             Seller Details
@@ -25,15 +41,24 @@ const Sellersdetails = ({ data }: any) => {
         <hr className="my-4 border-gray-300  w-full" />
 
         {/* Seller Information */}
-        <div className="flex items-center mb-3">
+        <div className="flex items-center mb-3 gap-2">
           {/* Seller Image */}
-          <Image
-            src="/images/person.png"
-            alt="Seller Image"
-            width={40}
-            height={40}
-            className="rounded-full mr-4"
-          />
+          {profileUrl ? (
+            <img
+              src={profileUrl}
+              alt="User Avatar"
+              className="w-14 h-14  rounded-full"
+              onError={(e) => {
+                //@ts-ignore
+                e.target.onerror = null;
+                //@ts-ignore
+
+                e.target.style.display = "none";
+              }}
+            />
+          ) : (
+            <FaUser className="w-8 h-8 text-gray-500" />
+          )}
           {/* Seller Name and Member Since */}
           <div className="text-left">
             <p className="text-gray-800 font-semibold dark:text-white">
