@@ -250,14 +250,16 @@ const PublishAdd: React.FC = () => {
       );
       formDataObject.append("text", formData.component_text);
     } else {
-      formDataObject.append("ram", formData.ram);
+      formDataObject.append("ram", selectRam.id.toString());
       formDataObject.append("processor", selectProcessor.id.toString());
       formDataObject.append(
         "processorVariant",
         selectProcessorVariant.id.toString()
       );
-      formDataObject.append("storage", formData.storage);
+      formDataObject.append("storage", selectStoarge.id.toString());
+      formDataObject.append("storageType", selectStorageType.id.toString());
       formDataObject.append("graphics", formData.graphics);
+      formDataObject.append("gpu", selectGpu.id.toString());
       formDataObject.append("ports", formData.ports);
       formDataObject.append("battery_life", formData.batteryLife);
       formDataObject.append("warranty_status", formData.warranty_status);
@@ -293,7 +295,7 @@ const PublishAdd: React.FC = () => {
       toast.error("Error");
       console.log("Error", err);
     }
-    console.log(formData, "my form data")
+    console.log(formData, "my form data");
   };
   console.log(selectComponentCategory, "selectComponentCategory");
 

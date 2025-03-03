@@ -13,12 +13,11 @@ interface ReviewSectionProps {
   quantity: string;
   fileList: UploadFile[];
   selectComponentCategory: string;
-  selectGpu:any;
-          selectRam:any;
-          selectStoarge:any;
-          selectStorageType:any;
-          selectedCondition:any;
-  
+  selectGpu: any;
+  selectRam: any;
+  selectStoarge: any;
+  selectStorageType: any;
+  selectedCondition: any;
 }
 
 const ReviewSection: React.FC<ReviewSectionProps> = ({
@@ -34,14 +33,17 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
   selectProcessor,
   selectProcessorVariant,
   selectGpu,
-          selectRam,
-          selectStoarge,
-          selectStorageType,
-          selectedCondition,
+  selectRam,
+  selectStoarge,
+  selectStorageType,
+  selectedCondition,
 }) => {
   const details = [
     { label: "Category", value: selectCategory?.name },
-    { label: "Brand", value: selectBrand?.name?selectBrand?.name:formData.otherBrandName },
+    {
+      label: "Brand",
+      value: selectBrand?.name ? selectBrand?.name : formData.otherBrandName,
+    },
     { label: "Model", value: selectModel?.name },
     { label: "Title", value: formData.title },
     { label: "Description", value: formData.description },
@@ -50,7 +52,12 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
     { label: "Price", value: price },
     { label: "Quantity", value: quantity },
   ];
-
+  if (selectBrand?.name == "Others") {
+    details.push({
+      label: "Other Brand Name",
+      value: formData.otherBrandName,
+    });
+  }
   const laptopDetails = [
     { label: "Processor", value: selectProcessor.name },
     { label: "Processor Type", value: selectProcessorVariant.name },
@@ -65,6 +72,23 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
     { label: "Ports", value: formData.ports },
     { label: "Battery Life", value: formData.batteryLife },
     { label: "Color", value: formData.color },
+  ];
+  const consoleDetails = [
+    { label: "Color", value: formData.color },
+    { label: "Accessories", value: formData.accessories },
+    { label: "Connectivity", value: formData.connectivity },
+    { label: "Warranty Status", value: formData.warranty_status },
+    { label: "Battery Life", value: formData.batteryLife },
+  ];
+  const desktopDetails = [
+    { label: "Processor", value: selectProcessor.name },
+    { label: "Processor Type", value: selectProcessorVariant.name },
+    { label: "RAM", value: selectRam.name },
+    { label: "Storage Type", value: selectStorageType.name },
+    { label: "Storage", value: selectStoarge.name },
+    { label: "GPU", value: selectGpu.name },
+    { label: "Graphics", value: formData.graphics },
+    { label: "Ports", value: formData.ports },
   ];
 
   const componentDetails = [
@@ -88,6 +112,15 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
           </div>
         ))}
 
+        {["Gaming PCs", "Desktops"].includes(selectCategory?.name) &&
+          desktopDetails.map(({ label, value }, index) => (
+            <div key={index} className="bg-white p-3 rounded-md">
+              <p className="text-black text-xl font-bold">{label}</p>
+              <p className="text-gray-500 font-semibold">
+                {value || "Not provided"}
+              </p>
+            </div>
+          ))}
         {["Laptops", "Desktops"].includes(selectCategory?.name) &&
           laptopDetails.map(({ label, value }, index) => (
             <div key={index} className="bg-white p-3 rounded-md">
@@ -100,6 +133,13 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
 
         {selectCategory?.name === "Components" &&
           componentDetails.map(({ label, value }, index) => (
+            <div key={index} className="bg-white p-3 rounded-md">
+              <p className="text-black font-bold text-xl">{label}</p>
+              <p>{value || "Not provided"}</p>
+            </div>
+          ))}
+        {selectCategory?.name === "Gaming Consoles" &&
+          consoleDetails.map(({ label, value }, index) => (
             <div key={index} className="bg-white p-3 rounded-md">
               <p className="text-black font-bold text-xl">{label}</p>
               <p>{value || "Not provided"}</p>

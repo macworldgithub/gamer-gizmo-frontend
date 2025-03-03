@@ -28,7 +28,7 @@ interface Comment {
   user_name?: string;
 }
 
-const CommentsSection = ({ data }: { data: any }) => {
+const CommentsSection = ({ data, fetcher, seReftech }: any) => {
   const reviewUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/addReview`;
   const deleteUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/deleteReviewById`;
   const [comments, setComments] = useState<Comment[]>([]);
@@ -52,15 +52,6 @@ const CommentsSection = ({ data }: { data: any }) => {
       setComments(data.product_reviews);
     }
   }, [data]);
-
-  console.log("User ID from Redux:", userId);
-  console.log("All Comments with IDs:", comments);
-
-  console.log(userId, "user id");
-
-  console.log(productId, "product id");
-
-  console.log(profileImageUrl, "ayla");
 
   const handlePostComment = async () => {
     if (!token) {
@@ -109,6 +100,7 @@ const CommentsSection = ({ data }: { data: any }) => {
         setError(null);
 
         toast.success("Comment posted successfully!");
+        seReftech(!fetcher);
       }
     } catch (error: any) {
       console.error(error?.response?.data || error);
@@ -133,6 +125,7 @@ const CommentsSection = ({ data }: { data: any }) => {
 
       setComments(comments?.filter((item) => item.id !== commentToDelete));
       toast.success("Comment successfully deleted");
+      seReftech(!fetcher);
     } catch (err: any) {
       console.error("Failed to delete comment:", err.response?.data || err);
       toast.error("Failed to delete comment, please try again");

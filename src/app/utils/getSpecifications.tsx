@@ -4,7 +4,15 @@ export const getSpecifications = (data: any) => {
       label: "Category Name",
       value: data?.categories?.name || "Not Available",
     },
+    { label: "Brand", value: data?.brands?.name || "Not Available" },
+    { label: "Model", value: data?.models?.name || "Not Available" },
   ];
+  if (data?.brands?.name == "Others") {
+    specifications.push({
+      label: "Other Brand Name",
+      value: data?.other_brand_name || "Not Available",
+    });
+  }
 
   // Check if category_id is 4 (Gaming Consoles) and render the additional fields explicitly
   if (data?.categories?.id === 4 && data?.gaming_console?.length > 0) {
