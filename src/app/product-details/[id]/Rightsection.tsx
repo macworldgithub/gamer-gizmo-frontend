@@ -112,7 +112,7 @@ const Rightsection = ({ data }: any) => {
             <img
               src={profileUrl}
               alt="User Avatar"
-              className="w-11 h-11  rounded-full"
+              className="w-11 h-11    rounded-full"
               onError={(e) => {
                 //@ts-ignore
                 e.target.onerror = null;

@@ -1,17 +1,17 @@
+"use client";
 import PageHeader from "@/components/PageHeader";
-import React from "react";
-import StorePage from "./Store";
+import ProductContainer from "./ProductContainer";
 
 const page = () => {
   return (
-    <>
-      <div>
+    <div className="dark:bg-secondaryBlack">
+      <div className="">
         <PageHeader pageName="Store" title="Gamer Gizmo Store" />
       </div>
       <div>
-        <StorePage />
+        <ProductContainer />
       </div>
-    </>
+    </div>
   );
 };
 

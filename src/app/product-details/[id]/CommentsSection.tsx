@@ -186,7 +186,9 @@ const CommentsSection = ({ data, fetcher, seReftech }: any) => {
       {/* Display Comments */}
       {data?.product_reviews?.length > 0 ? (
         <div>
-          <h1 className="font-bold text-xl pl-1 mb-1">People's Comments</h1>
+          <h1 className="font-bold text-xl pl-1 mb-1 dark:text-white">
+            People's Comments
+          </h1>
           <div className="max-h-80 overflow-y-auto space-y-4 px-2 py-1 border border-gray-300 rounded-lg">
             {data.product_reviews.map((item: any) => {
               const profileUrl = item?.users?.profile
