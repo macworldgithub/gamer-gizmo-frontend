@@ -28,12 +28,6 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
       {/* Image Section */}
       <div className="w-full flex justify-center items-center h-auto">
         {data?.product_images && (
-          // <Image
-          //   src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.product_images[0]?.image_url}`}
-          //   alt="image"
-          //   width={600}
-          //   height={400}
-          // />
           <ProductImageSwiper
             seReftech={seReftech}
             refetch={refetch}
@@ -186,8 +180,8 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
               {data?.name}
             </h2>
-            <div className="flex justify-start gap-2 items-center">
-              <h4>Product Description</h4>
+            <div className="flex-col justify-start gap-2 items-center">
+              <h4 className="font-bold mt-2">Product Description : </h4>
               <p className="lg:text-sm md:text-sm text-gray-600  dark:text-white text-[11px]">
                 {data?.description}
               </p>
