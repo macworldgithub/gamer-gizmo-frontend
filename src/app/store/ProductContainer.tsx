@@ -132,7 +132,7 @@ const ProductContainer = () => {
   return (
     <div className="">
       <h1 className="text-3xl max-md:text-lg font-bold text-center mt-2 dark:text-white">
-        Gaming Gizmo offers
+        Gamer Gizmo offers
       </h1>
 
       <ProductGrid products={products} />
