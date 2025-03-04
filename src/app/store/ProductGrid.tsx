@@ -4,26 +4,8 @@ import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-interface ProductImage {
-  id: number;
-  product_id: number;
-  image_url: string;
-  created_at: string;
-}
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  images: ProductImage[];
-}
-
-interface ProductGridProps {
-  products: Product[];
-}
-
-const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
+//@ts-ignore
+const ProductGrid = ({ products }) => {
   return (
     <Wrapper>
       <div className="w-full  mx-auto mt-3 mb-4">
@@ -31,7 +13,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
           <p className="text-center text-gray-400">No products available</p>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem] ">
-            {products.map((product) => (
+            {products.map((product: any) => (
               <div
                 key={product?.id}
                 className="dark:bg-black  rounded-lg shadow-lg p-4 max-md:p-2 relative border border-gray-300"

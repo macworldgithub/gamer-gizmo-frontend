@@ -19,7 +19,7 @@ export default function EditAdPage() {
     description: "",
     price: "",
     category: "",
-    condition: "New", // Default to "New"
+    condition: "New",
     location: "",
     stock: "",
     brand: "",
@@ -275,24 +275,6 @@ export default function EditAdPage() {
                 {locations.map((location) => (
                   <option key={location.id} value={location.name}>
                     {location.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Brand Dropdown */}
-            <div className="flex flex-col">
-              <label className="edit-label">Brand</label>
-              <select
-                name="brand"
-                value={adData.brand}
-                onChange={handleChange}
-                className="edit-input"
-                required
-              >
-                {brands.map((brand) => (
-                  <option key={brand.id} value={brand.name}>
-                    {brand.name}
                   </option>
                 ))}
               </select>
