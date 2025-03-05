@@ -60,11 +60,11 @@ const CommentsSection = ({ data, fetcher, seReftech }: any) => {
       return;
     }
 
-    if (rating === 0) {
-      setError("Please select a rating.");
-      toast.error("Please select a rating.");
-      return;
-    }
+    // if (rating === 0) {
+    //   setError("Please select a rating.");
+    //   toast.error("Please select a rating.");
+    //   return;
+    // }
 
     try {
       const formData = new FormData();
@@ -186,7 +186,7 @@ const CommentsSection = ({ data, fetcher, seReftech }: any) => {
       {/* Display Comments */}
       {data?.product_reviews?.length > 0 ? (
         <div>
-          <h1 className="font-bold text-xl pl-1 mb-1 dark:text-white">
+          <h1 className="font-bold text-xl pl-1 mb-1 text-secondaryColorDark">
             People's Comments
           </h1>
           <div className="max-h-80 overflow-y-auto space-y-4 px-2 py-1 border border-gray-300 rounded-lg">
@@ -225,12 +225,12 @@ const CommentsSection = ({ data, fetcher, seReftech }: any) => {
                       {item?.users?.first_name} {item?.users?.last_name}
                     </h3>
                     {item?.comments && (
-                      <p className="text-gray-600 text-sm leading-relaxed dark:text-[#616161]">
+                      <p className="text-black md:text-sm max-md:text-xs leading-relaxed dark:text-white">
                         {item?.comments}
                       </p>
                     )}
                     {item.created_at && (
-                      <p className="text-xs text-gray-400 dark:text-gray-500">
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
                         {new Date(item.created_at).toLocaleString()}
                       </p>
                     )}
