@@ -10,6 +10,8 @@ import MobileCategories from "@/components/MobileCategories";
 import PopularMainSection from "@/components/PopularMainSection";
 import { useSelector } from "react-redux";
 import { RootState } from "@/components/Store/Store";
+import CardComponent from "@/components/CardComponent";
+import AdsBanner from "@/components/AdsBanner";
 
 export default function HomePage() {
   const token = useSelector((state: RootState) => state.user.token);
@@ -35,12 +37,15 @@ export default function HomePage() {
     }
   }, []);
 
+
   return (
     <div className="overflow-x-hidden dark:bg-[#0D0D12]">
       <MobileCategories />
       <FilterSection />
       <CategoriesComponent />
       <PopularMainSection />
+      <AdsBanner/>
+      <CardComponent />
       <BrowseVideos />
     </div>
   );

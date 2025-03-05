@@ -126,7 +126,7 @@ const Chat = ({ onSelectChat }: { onSelectChat: (id: number) => void }) => {
   ];
 
   return (
-    <div className="w-full md:w-[25%] xl:[30%] h-screen p-4 border border-black rounded-lg bg-white flex flex-col">
+    <div className="w-full md:w-[25%] xl:[30% ] h-screen p-4 border border-black rounded-lg bg-white flex flex-col">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">All Chats</h2>

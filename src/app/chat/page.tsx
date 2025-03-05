@@ -13,6 +13,7 @@ const chats = [
     image: "/images/graphicCard.png",
     price: "AED 350",
     location: "Al Furjan, Dubai, UAE Today",
+    sellerImage: "/images/profile.png",
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ const chats = [
     image: "/images/graphicCard.png",
     price: "AED 400",
     location: "Downtown Dubai, UAE Today",
+    sellerImage: "/images/profile.png",
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const chats = [
     image: "/images/graphicCard.png",
     price: "AED 500",
     location: "Jumeirah, Dubai, UAE Today",
+    sellerImage: "/images/profile.png",
   },
 ];
 
@@ -42,7 +45,7 @@ const ChatsPage = () => {
     <div className="font-bold text-4xl my-4 ml-10">
         Chats
     </div>
-    <div className="flex justify-center">
+    <div className="flex justify-center"> 
       <Chat onSelectChat={(id) => setSelectedChat(chats.find(chat => chat.id === id) || chats[0])} />
       <ChatWindow chat={selectedChat} />
     </div>
