@@ -41,7 +41,7 @@ const ProductContainer = () => {
     fetchProducts();
   }, []);
 
-  if (loading) return <p className="text-center text-white">Loading...</p>;
+  if (loading) return <p className="text-center text-red-500">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (

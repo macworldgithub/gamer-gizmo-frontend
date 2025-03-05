@@ -19,8 +19,8 @@ const ContactCards = () => {
                 height={80}
               />
             </div>
-            <a href="tel:+923318551070" className="text-lg dark:text-white">
-            +971555795213
+            <a href="tel:+923318551070" className="text-base  dark:text-white">
+              +971555795213
             </a>
           </div>
 
@@ -35,10 +35,9 @@ const ContactCards = () => {
                 height={80}
               />
             </div>
-            <p className="text-lg text-gray-700 break-words dark:text-white">
-              55 Main Street, 2nd Block,
-              <br />
-              3rd Floor, New York
+            <p className="text-sm text-gray-700 break-words dark:text-white ">
+              Shams Buisness Center, Sharjah Media City, Free Zone, AI Messaned,
+              Sharjah, UAE.
             </p>
           </div>
 
@@ -55,7 +54,7 @@ const ContactCards = () => {
             </div>
             <a
               href="mailto:support@gamergizmo.com"
-              className="text-lg text-gray-700 break-words dark:text-white"
+              className="text-base text-gray-700 break-words dark:text-white"
             >
               support@gamergizmo.com
             </a>
