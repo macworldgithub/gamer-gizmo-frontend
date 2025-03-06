@@ -194,8 +194,9 @@ export default function EditAdPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto mt-10 p-6 border rounded-lg shadow-md bg-white">
-      <h1 className="text-3xl text-start font-bold mb-4 text-secondaryColorLight">
+    <div className="w-full bg-black">
+    <div className="max-w-5xl mx-auto mt-10 p-6 border rounded-lg shadow-md bg-white dark:bg-secondaryBlack ">
+      <h1 className="text-3xl text-start font-bold mb-4 text-secondaryColorLight dark:text-white">
         Edit Ad
       </h1>
 
@@ -203,7 +204,6 @@ export default function EditAdPage() {
         <p className="text-center">Loading ad details...</p>
       ) : (
         <form onSubmit={handleSubmit} className="grid gap-4">
-          {/* Grid Layout for 2 Fields per Row */}
           <div className="grid grid-cols-2 gap-4">
             {/* Product Name */}
             <div className="flex flex-col">
@@ -214,7 +214,7 @@ export default function EditAdPage() {
                 value={adData.name}
                 onChange={handleChange}
                 placeholder="Ad Name"
-                className="edit-input"
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
                 required
               />
             </div>
@@ -228,7 +228,7 @@ export default function EditAdPage() {
                 value={adData.price}
                 onChange={handleChange}
                 placeholder="Price"
-                className="edit-input"
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
                 required
               />
             </div>
@@ -242,7 +242,7 @@ export default function EditAdPage() {
                 value={adData.category}
                 onChange={handleChange}
                 placeholder="Category"
-                className="edit-input"
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
                 required
               />
             </div>
@@ -254,7 +254,7 @@ export default function EditAdPage() {
                 name="condition"
                 value={adData.condition}
                 onChange={handleChange}
-                className="edit-input"
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
                 required
               >
                 <option value="New">New</option>
@@ -269,7 +269,7 @@ export default function EditAdPage() {
                 name="location"
                 value={adData.location}
                 onChange={handleChange}
-                className="edit-input"
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
                 required
               >
                 {locations.map((location) => (
@@ -287,7 +287,7 @@ export default function EditAdPage() {
                 name="processorVariant"
                 value={adData.processorVariant}
                 onChange={handleChange}
-                className="edit-input"
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
                 required
               >
                 {processorVariantData.map((variant) => (
@@ -307,7 +307,7 @@ export default function EditAdPage() {
                 value={adData.stock}
                 onChange={handleChange}
                 placeholder="Stock"
-                className="edit-input"
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
                 required
               />
             </div>
@@ -321,7 +321,7 @@ export default function EditAdPage() {
               value={adData.description}
               onChange={handleChange}
               placeholder="Description"
-              className="edit-input min-h-[100px]"
+              className="edit-input min-h-[100px] dark:text-white dark:bg-secondaryBlack"
               required
             />
           </div>
@@ -329,7 +329,7 @@ export default function EditAdPage() {
           {/* Dynamic Specifications */}
           {specifications.length > 0 && (
             <div>
-              <h3 className="text-2xl font-bold text-secondaryColorLight mt-2 mb-1">
+              <h3 className="text-2xl font-bold text-secondaryColorLight dark:text-white mt-2 mb-1">
                 Specifications
               </h3>
               <div className="grid grid-cols-2 gap-4">
@@ -343,7 +343,7 @@ export default function EditAdPage() {
                       value={spec.value}
                       onChange={(e) => handleSpecChange(e, index)}
                       placeholder={spec.label}
-                      className="edit-input"
+                      className="edit-input dark:text-white dark:bg-secondaryBlack"
                     />
                   </div>
                 ))}
@@ -362,6 +362,7 @@ export default function EditAdPage() {
           </div>
         </form>
       )}
+    </div>
     </div>
   );
 }
