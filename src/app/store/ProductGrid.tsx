@@ -13,6 +13,7 @@ const ProductGrid = ({ products }) => {
           <p className="text-center text-gray-400">No products available</p>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem] ">
+            <h1></h1>
             {products.map((product: any) => (
               <div
                 key={product?.id}

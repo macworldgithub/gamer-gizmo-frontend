@@ -18,14 +18,14 @@ export default function SelectLabels({ query, route }: any) {
     query
       ? query
       : {
-          processor: "",
-          storage: "",
-          location: "",
-          condition: "",
-          gpu: "",
-          ram: "",
-          price: "",
-        }
+        processor: "",
+        storage: "",
+        location: "",
+        condition: "",
+        gpu: "",
+        ram: "",
+        price: "",
+      }
   );
   const router = useRouter();
   useEffect(() => {
@@ -180,7 +180,7 @@ export default function SelectLabels({ query, route }: any) {
   return (
     <Wrapper>
       <div className="flex max-sm:flex-col w-[100%] bg-white h-max p-1 rounded bg-w justify-center items-center">
-        <div className="flex flex-wrap max-sm:flex-col max-sm:mb-2 justify-center  lg:justify-around xl:justify-around mb-1 max-lg:gap-4 lg:gap-4 w-[100%] h-max items-center">
+        <div className="flex flex-wrap max-sm:mb-2 justify-center  lg:justify-around xl:justify-around mb-1 max-lg:gap-4 lg:gap-4 w-[100%] h-max items-center">
           {dropdownOptions.map((dropdown, index) => (
             <div key={index} className="flex items-center  gap-2">
               <Select
@@ -218,23 +218,24 @@ export default function SelectLabels({ query, route }: any) {
               </Select>
             </div>
           ))}
+          <button
+            className="bg-gray-300 lg:w-[100px] md:w-[80px] max-sm:w-[100px] sm:w-[100px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-black"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
+          <div
+            onClick={() => handleClick()}
+            className="bg-custom-gradient cursor-pointer lg:w-[150px] md:w-[100px]  max-sm:w-[100px] sm:w-[100px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-white"
+          >
+            🔍 Filter
+          </div>
         </div>
 
         {/* Reset Filters Button */}
-        <button
-          className="bg-gray-300 lg:w-[100=px] md:w-[80px] max-sm:w-40 sm:w-[80px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-black"
-          onClick={handleReset}
-        >
-          Reset
-        </button>
 
         {/* Filter Button */}
-        <div
-          onClick={() => handleClick()}
-          className="bg-custom-gradient cursor-pointer lg:w-[150px] md:w-[100px] md:ml-2 max-sm:w-60 sm:w-[80px] h-[40px] lg:h-12 rounded-full flex justify-center items-center md:text-base font-medium text-white"
-        >
-          🔍 Filter
-        </div>
+
       </div>
     </Wrapper>
   );
