@@ -87,7 +87,7 @@ console.log(categoryName, 'ojl')
               <p className="text-purple-500 font-bold mt-1 text-[0.6rem]">
                 ${product.price}
               </p>
-              <button className="mt-1 dark:bg-gray-300 bg-custom-gradient md:text-[0.4rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white p-1 max-sm:p-[0.25rem] rounded-full">
+              <button className="mt-1 dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white p-1 max-sm:p-[0.25rem] rounded-full">
                 View Details
               </button>
             </div>

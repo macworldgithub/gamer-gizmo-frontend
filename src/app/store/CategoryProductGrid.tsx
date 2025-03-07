@@ -45,12 +45,12 @@ const CategoryProductGrid = ({
 
   return (
     <Wrapper>
-      <div className="flex items-center justify-between mb-1">
-        <h2 className="text-xl font-bold  dark:text-white">{categoryName}</h2>
+      <div className="w-full flex items-center justify-between mt-[0.8rem] mb-1">
+        <h2 className="text-xl max-sm:text-sm font-bold  dark:text-white">{categoryName}</h2>
 
         {products.length > 0 && (
           <button
-            className="bg-custom-gradient rounded-full w-10 h-10 max-lg:w-6 max-lg:h-6 hover:bg-purple-700"
+            className="bg-custom-gradient rounded-full w-10 h-10  max-lg:w-6 max-lg:h-6 hover:bg-purple-700"
             onClick={() => router.push(`/store/category=${categoryId}`)}
           >
             <Image
@@ -66,13 +66,13 @@ const CategoryProductGrid = ({
 
       </div>
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-1">
   {products.length > 0 ? (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {products.map((product: any) => (
         <div
           key={product.id}
-          className="dark:bg-black rounded-lg shadow-lg p-4 border border-gray-300"
+          className="dark:bg-black rounded-lg shadow-lg md:p-2 max-sm:p-2 sm:p-2 border border-gray-300"
         >
           <Image
             src={
@@ -83,9 +83,9 @@ const CategoryProductGrid = ({
             alt={product.name || "Product image"}
             width={100}
             height={100}
-            className="w-full h-32 rounded mx-auto"
+            className=" md:h-28 rounded mx-auto max-sm:h-16 sm:h-20"
           />
-          <h3 className="text-sm text-black dark:text-white w-full truncate font-medium mt-1">
+          <h3 className="md:text-xs max-sm:text-[0.6rem] sm:text-[0.8rem] text-black dark:text-white w-full truncate font-medium ">
             {product.name}
           </h3>
           <p className="text-gray-400 text-xs truncate">
@@ -94,7 +94,7 @@ const CategoryProductGrid = ({
           <p className="text-purple-500 font-bold mt-1 text-xs">
             ${product.price}
           </p>
-          <button className="mt-1 bg-custom-gradient text-white p-1 rounded-full text-xs w-full">
+          <button className="mt-1 max-md:w-20 max-md:h-6  md:w-20 bg-custom-gradient text-white p-1 rounded-full text-xs w-full">
             View Details
           </button>
         </div>
@@ -102,8 +102,8 @@ const CategoryProductGrid = ({
     </div>
   ) : (
       
-      <p className="text-red-500 text-xs mt-2">No products available
-         for {categoryName}
+      <p className="text-red-500 text-xs mt-2">No products to display
+         {/* for {categoryName} */}
       </p>
   )}
 </div>
