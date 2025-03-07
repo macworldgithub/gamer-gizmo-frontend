@@ -179,7 +179,7 @@ export default function SelectLabels({ query, route }: any) {
 
   return (
     <Wrapper>
-      <div className="flex max-sm:flex-col w-[100%] bg-white h-max p-1 rounded bg-w justify-center items-center">
+      <div className="flex max-sm:flex-col w-[100%] bg-white  h-max p-1 rounded bg-w justify-center items-center">
         <div className="flex flex-wrap max-sm:mb-2 justify-center  lg:justify-around xl:justify-around mb-1 max-lg:gap-4 lg:gap-4 w-[100%] h-max items-center">
           {dropdownOptions.map((dropdown, index) => (
             <div key={index} className="flex items-center  gap-2">

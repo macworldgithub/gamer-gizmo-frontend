@@ -11,6 +11,7 @@ import {
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Image from "next/image";
+import { FaYoutube } from "react-icons/fa";
 
 const TopNav = () => {
   return (
@@ -57,11 +58,22 @@ const TopNav = () => {
           </div>
         </div>
         <div className="flex max-md:gap-2 xl:pr-64 gap-3 max-sm:pr-4 sm:gap-4 max-sm:gap-2">
-          <FontAwesomeIcon
-            icon={faFacebookF}
+          <a
+            href="https://www.facebook.com/profile.php?id=61573613765643"
+            target="_blank"
+            rel="noopener noreferrer"
             className="z-10 max-sm:w-2"
-            color="#4267B2"
-          />
+          >
+            <FontAwesomeIcon icon={faFacebookF} color="#4267B2" size="1x" />
+          </a>
+          <a
+            href="https://www.youtube.com/@GamerGizmo_Official"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red-600 hover:text-red-800 transition-colors"
+          >
+            <FaYoutube size={22} />
+          </a>
           <FontAwesomeIcon
             icon={faTwitter}
             className="z-10 max-sm:w-3"
@@ -72,11 +84,11 @@ const TopNav = () => {
             className="z-10 max-sm:w-3"
             color="#a0a4a7"
           />
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             icon={faGlobe}
             className="z-10 max-sm:w-3"
             color="#a0a4a7"
-          />
+          /> */}
           <FontAwesomeIcon
             icon={faLinkedin}
             className="z-10 max-sm:w-3"

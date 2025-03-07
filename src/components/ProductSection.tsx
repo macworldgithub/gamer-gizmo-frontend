@@ -85,7 +85,7 @@ const ProductSection: React.FC<SectionProps> = ({
           {/* </div> */}
         </Wrapper>
         {/* Product Section */}
-        <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
+        {/* <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0"> */}
           <div
             ref={scrollContainerRef}
             className="flex gap-4 max-sm:gap-[0.5rem] overflow-x-auto scrollbar-hide"
@@ -102,7 +102,7 @@ const ProductSection: React.FC<SectionProps> = ({
               <div className="text-red-600">No Product To display</div>
             )}
           </div>
-        </Wrapper>
+        {/* </Wrapper> */}
       </div>
     </div>
   );
