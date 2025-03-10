@@ -194,175 +194,175 @@ export default function EditAdPage() {
   };
 
   return (
-    <div className="w-full bg-black">
-    <div className="max-w-5xl mx-auto mt-10 p-6 border rounded-lg shadow-md bg-white dark:bg-secondaryBlack ">
-      <h1 className="text-3xl text-start font-bold mb-4 text-secondaryColorLight dark:text-white">
-        Edit Ad
-      </h1>
+    <div className="w-full dark:bg-black">
+      <div className="max-w-5xl mx-auto   p-6 border rounded-lg shadow-md bg-white dark:bg-secondaryBlack ">
+        <h1 className="text-3xl text-start font-bold mb-4 text-secondaryColorLight dark:text-white">
+          Edit Ad
+        </h1>
 
-      {loading ? (
-        <p className="text-center">Loading ad details...</p>
-      ) : (
-        <form onSubmit={handleSubmit} className="grid gap-4">
-          <div className="grid grid-cols-2 gap-4">
-            {/* Product Name */}
-            <div className="flex flex-col">
-              <label className="edit-label">Product Name</label>
-              <input
-                type="text"
-                name="name"
-                value={adData.name}
-                onChange={handleChange}
-                placeholder="Ad Name"
-                className="edit-input dark:text-white dark:bg-secondaryBlack"
-                required
-              />
-            </div>
+        {loading ? (
+          <p className="text-center">Loading ad details...</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              {/* Product Name */}
+              <div className="flex flex-col">
+                <label className="edit-label">Product Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={adData.name}
+                  onChange={handleChange}
+                  placeholder="Ad Name"
+                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  required
+                />
+              </div>
 
-            {/* Price */}
-            <div className="flex flex-col">
-              <label className="edit-label">Price</label>
-              <input
-                type="number"
-                name="price"
-                value={adData.price}
-                onChange={handleChange}
-                placeholder="Price"
-                className="edit-input dark:text-white dark:bg-secondaryBlack"
-                required
-              />
-            </div>
+              {/* Price */}
+              <div className="flex flex-col">
+                <label className="edit-label">Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  value={adData.price}
+                  onChange={handleChange}
+                  placeholder="Price"
+                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  required
+                />
+              </div>
 
-            {/* Category */}
-            <div className="flex flex-col">
-              <label className="edit-label">Category</label>
-              <input
-                type="text"
-                name="category"
-                value={adData.category}
-                onChange={handleChange}
-                placeholder="Category"
-                className="edit-input dark:text-white dark:bg-secondaryBlack"
-                required
-              />
-            </div>
+              {/* Category */}
+              <div className="flex flex-col">
+                <label className="edit-label">Category</label>
+                <input
+                  type="text"
+                  name="category"
+                  value={adData.category}
+                  onChange={handleChange}
+                  placeholder="Category"
+                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  required
+                />
+              </div>
 
-            {/* Condition (Hardcoded options) */}
-            <div className="flex flex-col">
-              <label className="edit-label">Condition</label>
-              <select
-                name="condition"
-                value={adData.condition}
-                onChange={handleChange}
-                className="edit-input dark:text-white dark:bg-secondaryBlack"
-                required
-              >
-                <option value="New">New</option>
-                <option value="Used">Used</option>
-              </select>
-            </div>
+              {/* Condition (Hardcoded options) */}
+              <div className="flex flex-col">
+                <label className="edit-label">Condition</label>
+                <select
+                  name="condition"
+                  value={adData.condition}
+                  onChange={handleChange}
+                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  required
+                >
+                  <option value="New">New</option>
+                  <option value="Used">Used</option>
+                </select>
+              </div>
 
-            {/* Location Dropdown */}
-            <div className="flex flex-col">
-              <label className="edit-label">Location</label>
-              <select
-                name="location"
-                value={adData.location}
-                onChange={handleChange}
-                className="edit-input dark:text-white dark:bg-secondaryBlack"
-                required
-              >
-                {locations.map((location) => (
-                  <option key={location.id} value={location.name}>
-                    {location.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+              {/* Location Dropdown */}
+              <div className="flex flex-col">
+                <label className="edit-label">Location</label>
+                <select
+                  name="location"
+                  value={adData.location}
+                  onChange={handleChange}
+                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  required
+                >
+                  {locations.map((location) => (
+                    <option key={location.id} value={location.name}>
+                      {location.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            {/* Processor Variant Dropdown */}
-            <div className="flex flex-col">
-              <label className="edit-label">Processor Variant</label>
-              <select
-                name="processorVariant"
-                value={adData.processorVariant}
-                onChange={handleChange}
-                className="edit-input dark:text-white dark:bg-secondaryBlack"
-                required
-              >
-                {processorVariantData.map((variant) => (
-                  <option key={variant.id} value={variant.name}>
-                    {variant.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+              {/* Processor Variant Dropdown */}
+              <div className="flex flex-col">
+                <label className="edit-label">Processor Variant</label>
+                <select
+                  name="processorVariant"
+                  value={adData.processorVariant}
+                  onChange={handleChange}
+                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  required
+                >
+                  {processorVariantData.map((variant) => (
+                    <option key={variant.id} value={variant.name}>
+                      {variant.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            {/* Stock */}
-            <div className="flex flex-col">
-              <label className="edit-label">Stock</label>
-              <input
-                type="number"
-                name="stock"
-                value={adData.stock}
-                onChange={handleChange}
-                placeholder="Stock"
-                className="edit-input dark:text-white dark:bg-secondaryBlack"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Description - Full Width */}
-          <div className="flex flex-col">
-            <label className="edit-label">Description</label>
-            <textarea
-              name="description"
-              value={adData.description}
-              onChange={handleChange}
-              placeholder="Description"
-              className="edit-input min-h-[100px] dark:text-white dark:bg-secondaryBlack"
-              required
-            />
-          </div>
-
-          {/* Dynamic Specifications */}
-          {specifications.length > 0 && (
-            <div>
-              <h3 className="text-2xl font-bold text-secondaryColorLight dark:text-white mt-2 mb-1">
-                Specifications
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                {specifications.map((spec, index) => (
-                  <div key={index} className="flex flex-col">
-                    <label className="font-medium edit-label">
-                      {spec.label}
-                    </label>
-                    <input
-                      type="text"
-                      value={spec.value}
-                      onChange={(e) => handleSpecChange(e, index)}
-                      placeholder={spec.label}
-                      className="edit-input dark:text-white dark:bg-secondaryBlack"
-                    />
-                  </div>
-                ))}
+              {/* Stock */}
+              <div className="flex flex-col">
+                <label className="edit-label">Stock</label>
+                <input
+                  type="number"
+                  name="stock"
+                  value={adData.stock}
+                  onChange={handleChange}
+                  placeholder="Stock"
+                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  required
+                />
               </div>
             </div>
-          )}
 
-          <div className="flex justify-center mt-4">
-            <button
-              type="submit"
-              className="bg-custom-gradient text-white py-2 px-4 rounded-lg shadow-md"
-              disabled={loading}
-            >
-              {loading ? "Saving..." : "Save Changes"}
-            </button>
-          </div>
-        </form>
-      )}
-    </div>
+            {/* Description - Full Width */}
+            <div className="flex flex-col">
+              <label className="edit-label">Description</label>
+              <textarea
+                name="description"
+                value={adData.description}
+                onChange={handleChange}
+                placeholder="Description"
+                className="edit-input min-h-[100px] dark:text-white dark:bg-secondaryBlack"
+                required
+              />
+            </div>
+
+            {/* Dynamic Specifications */}
+            {specifications.length > 0 && (
+              <div>
+                <h3 className="text-2xl font-bold text-secondaryColorLight dark:text-white mt-2 mb-1">
+                  Specifications
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {specifications.map((spec, index) => (
+                    <div key={index} className="flex flex-col">
+                      <label className="font-medium edit-label">
+                        {spec.label}
+                      </label>
+                      <input
+                        type="text"
+                        value={spec.value}
+                        onChange={(e) => handleSpecChange(e, index)}
+                        placeholder={spec.label}
+                        className="edit-input dark:text-white dark:bg-secondaryBlack"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="flex justify-center mt-4">
+              <button
+                type="submit"
+                className="bg-custom-gradient text-white py-2 px-4 rounded-lg shadow-md"
+                disabled={loading}
+              >
+                {loading ? "Saving..." : "Save Changes"}
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
 }

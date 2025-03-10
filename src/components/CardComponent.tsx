@@ -1,8 +1,7 @@
 import React from "react";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import Image from "next/image";
-import gpu from "../../public/images/consoles.png"
-
+import gpu from "../../public/images/consoles.png";
 
 interface CardProps {
   title: string;
@@ -13,7 +12,7 @@ interface CardProps {
 
 const cards: CardProps[] = [
   {
-    title: "Lorem Ipsum",
+    title: "ADVERTISE WITH US",
     description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum.",
     buttonText: "Explore Now",
     imagePosition: "left",
@@ -39,14 +38,14 @@ const CardComponent: React.FC = () => {
             {card.imagePosition === "left" && (
               <div className="relative flex-shrink-0 w-32 h-24 mx-4">
                 <div className="absolute -left-4 top-2 w-24 h-24 bg-gray-300 rounded-lg transform -rotate-[6deg] border-white border-4">
-                    <Image src={gpu} alt="Ads Banner" className="object-cover"/>
+                  <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
-                
+
                 <div className="absolute left-12 top-2 w-24 h-24 bg-gray-300 rounded-lg transform rotate-[6deg] border-white border-4">
-                <Image src={gpu} alt="Ads Banner" className="object-cover"/>
+                  <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
                 <div className="absolute left-6 top-0 w-20 h-28 bg-gray-300 rounded-lg border-white border-4">
-                <Image src={gpu} alt="Ads Banner" className="object-cover"/>
+                  <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
               </div>
             )}
@@ -64,14 +63,14 @@ const CardComponent: React.FC = () => {
             {card.imagePosition === "right" && (
               <div className="relative flex-shrink-0 w-32 h-24 mx-4">
                 <div className="absolute -left-4 top-2 w-24 h-24 bg-gray-300 rounded-lg transform -rotate-[6deg] border-white border-4">
-                <Image src={gpu} alt="Ads Banner" className="object-cover"/>
+                  <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
-               
+
                 <div className="absolute left-12 top-2 w-24 h-24 bg-gray-300 rounded-lg transform rotate-[6deg] border-white border-4">
-                <Image src={gpu} alt="Ads Banner" className="object-cover"/>
+                  <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
                 <div className="absolute left-6 top-0 w-20 h-28 bg-gray-300 rounded-lg border-white border-4">
-                <Image src={gpu} alt="Ads Banner" className="object-cover"/>
+                  <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
               </div>
             )}
