@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 interface Specification {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 interface Category {
@@ -29,20 +29,35 @@ const Specifications: React.FC<SpecificationsProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [brands, setBrands] = useState<string[]>(["Dell", "HP", "Asus"]);
+  const [processors, setProcessors] = useState<string[]>(["AMD", "Intel"]);
+  const [gpuOptions, setGpuOptions] = useState<string[]>(["NVIDIA", "AMD"]);
+  const [storageTypes, setStorageTypes] = useState<string[]>([
+    "SSD",
+    "HDD",
+    "Hybrid",
+  ]);
 
-  // Fetch categories on component mount
+  const dropdownFields = [
+    "Category Name",
+    "Brand",
+    "Model",
+    "Processor Variant",
+    "Storage",
+    "Storage Type",
+    "GPU",
+  ];
+
   useEffect(() => {
     fetchCategories();
   }, []);
 
-  // Fetch specifications when category changes
   useEffect(() => {
     if (categoryId) {
       fetchSpecifications();
     }
   }, [categoryId]);
 
-  // Fetch categories
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
@@ -55,19 +70,17 @@ const Specifications: React.FC<SpecificationsProps> = ({
     }
   };
 
-  // Fetch specifications based on selected category
   const fetchSpecifications = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/specifications/getByCategory?category=${categoryId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getAll=${categoryId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const specsData = response.data?.data || [];
-
       const formattedSpecs = specsData.map((spec: any) => ({
         label: spec.label,
-        value: "",
+        value: spec.value || "",
       }));
 
       setSpecifications(formattedSpecs);
@@ -78,14 +91,27 @@ const Specifications: React.FC<SpecificationsProps> = ({
     }
   };
 
-  // Handle change for specifications
-  const handleSpecChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleSpecChange = (value: string, index: number) => {
     const updatedSpecs = [...specifications];
-    updatedSpecs[index].value = e.target.value;
+    updatedSpecs[index].value = value;
     setSpecifications(updatedSpecs);
+  };
+
+  const getDropdownOptions = (label: string) => {
+    switch (label) {
+      case "Category Name":
+        return categories.map((cat) => ({ label: cat.name, value: cat.name }));
+      case "Brand":
+        return brands.map((brand) => ({ label: brand, value: brand }));
+      case "Processor Variant":
+        return processors.map((proc) => ({ label: proc, value: proc }));
+      case "GPU":
+        return gpuOptions.map((gpu) => ({ label: gpu, value: gpu }));
+      case "Storage Type":
+        return storageTypes.map((type) => ({ label: type, value: type }));
+      default:
+        return [];
+    }
   };
 
   return (
@@ -94,42 +120,36 @@ const Specifications: React.FC<SpecificationsProps> = ({
         Specifications
       </h3>
 
-      {/* Category Dropdown */}
-      <div className="mb-4">
-        <label className="font-medium edit-label">Select Category</label>
-        <select
-          value={categoryId}
-          onChange={(e) => setCategoryId(e.target.value)}
-          className="edit-input dark:text-white dark:bg-secondaryBlack"
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {specifications.map((spec, index) => (
+          <div key={index} className="flex flex-col">
+            <label className="font-medium edit-label">{spec.label}</label>
 
-      {/* Specifications Inputs */}
-      {loading ? (
-        <p>Loading specifications...</p>
-      ) : (
-        <div className="grid grid-cols-2 gap-4">
-          {specifications.map((spec, index) => (
-            <div key={index} className="flex flex-col">
-              <label className="font-medium edit-label">{spec.label}</label>
+            {dropdownFields.includes(spec.label) ? (
+              <select
+                value={spec.value}
+                onChange={(e) => handleSpecChange(e.target.value, index)}
+                className="edit-input dark:text-white dark:bg-secondaryBlack"
+              >
+                <option value="">Select {spec.label}</option>
+                {getDropdownOptions(spec.label).map((option, idx) => (
+                  <option key={idx} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            ) : (
               <input
                 type="text"
                 value={spec.value}
-                onChange={(e) => handleSpecChange(e, index)}
+                onChange={(e) => handleSpecChange(e.target.value, index)}
                 placeholder={spec.label}
                 className="edit-input dark:text-white dark:bg-secondaryBlack"
               />
-            </div>
-          ))}
-        </div>
-      )}
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
