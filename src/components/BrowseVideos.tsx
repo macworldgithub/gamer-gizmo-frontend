@@ -15,11 +15,18 @@ export default function BrowseVideos() {
       src: "hhttps://www.youtube.com/watch?v=kKH6QKo2Pmc",
       poster: "/images/video3-poster.jpg",
     },
-   
+    {
+      src: "hhttps://www.youtube.com/watch?v=kKH6QKo2Pmc",
+      poster: "/images/video3-poster.jpg",
+    },
+    {
+      src: "hhttps://www.youtube.com/watch?v=kKH6QKo2Pmc",
+      poster: "/images/video3-poster.jpg",
+    },
   ];
   return (
     // <Wrapper>
-    <div className="w-full bg-gray-100 dark:bg-[#1e1e2f] " >
+    <div className="w-full bg-gray-100 dark:bg-[#1e1e2f] ">
       <div className="max-w-5xl mx-auto py-20">
         {/* Heading */}
         <div className="text-start mb-6 px-16">
@@ -50,4 +57,3 @@ export default function BrowseVideos() {
     // </Wrapper>
   );
 }
-
