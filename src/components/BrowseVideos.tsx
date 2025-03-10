@@ -4,25 +4,18 @@ import Player from "./Player";
 export default function BrowseVideos() {
   const videos = [
     {
-      src: "https://www.youtube.com/watch?v=1tEZR9WBLXU&utm_source=chatgpt.com",
+      src: "https://www.youtube.com/watch?v=kKH6QKo2Pmc",
       poster: "/images/logo.png",
     },
     {
-      src: "https://www.youtube.com/watch?pp=ygUGI3BqY2Fw&v=7e3ZclnmyUE",
+      src: "https://www.youtube.com/watch?v=kKH6QKo2Pmc",
       poster: "/images/gameIcon.png",
     },
     {
-      src: "https://www.youtube.com/watch?v=1tEZR9WBLXU&utm_source=chatgpt.com",
+      src: "hhttps://www.youtube.com/watch?v=kKH6QKo2Pmc",
       poster: "/images/video3-poster.jpg",
     },
-    {
-      src: "https://www.youtube.com/watch?pp=ygUGI3BqY2Fw&v=7e3ZclnmyUE",
-      poster: "/images/video2-poster.jpg",
-    },
-    {
-      src: "https://www.youtube.com/watch?pp=ygUGI3BqY2Fw&v=7e3ZclnmyUE",
-      poster: "/images/video2-poster.jpg",
-    },
+   
   ];
   return (
     // <Wrapper>

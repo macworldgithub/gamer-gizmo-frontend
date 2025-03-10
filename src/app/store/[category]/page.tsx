@@ -9,24 +9,32 @@ import { useRouter, useParams } from "next/navigation";
 //@ts-ignore
 const ProductGrid = () => {
   const { category } = useParams();
+//@ts-ignore
+  const decodedCategory = decodeURIComponent(category || ""); // Decode URL encoding
+  const categoryId = decodedCategory.split("=")[1] || "";
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState<boolean>();
   const [error, setError] = useState<string>();
   //@ts-ignore
 
-  const dummyProducts = [
-    {
-      id: 1,
-      name: "Sample Product",
-      description: "This is a sample product description.",
-      price: "19.99",
-      images: [{ image_url: "https://source.unsplash.com/random/100x100" }],
-    },
-  ];
+  const categoryNamesMap: Record<string, string> = {
+    "1": "Laptops",
+    "2": "Gaming PCS",
+    "3": "Components",
+    "4": "Gaming Consoles",
+  };
+  
+  
+  const categoryName = categoryNamesMap[categoryId] || "Unknown Category";
+  console.log("Resolved Category Name:", categoryName)
+  
+console.log(categoryName, 'ojl')  
 
   useEffect(() => {
     //@ts-ignore
-    const id = category?.split("D") ? category?.split("D")[1] : 1;
+    // const id = category?.split("D") ? category?.split("D")[1] : 1;
+    const id = categoryId;
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
@@ -51,6 +59,7 @@ const ProductGrid = () => {
   return (
     <Wrapper>
       <div className="w-full mx-auto mt-3 mb-4">
+        <h1 className="font-bold mb-2 ml-1">{categoryName}</h1>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem]">
           {products.map((product: any) => (
             <div
@@ -78,7 +87,7 @@ const ProductGrid = () => {
               <p className="text-purple-500 font-bold mt-1 text-[0.6rem]">
                 ${product.price}
               </p>
-              <button className="mt-1 dark:bg-gray-300 bg-custom-gradient md:text-[0.4rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white p-1 max-sm:p-[0.25rem] rounded-full">
+              <button className="mt-1 dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white p-1 max-sm:p-[0.25rem] rounded-full">
                 View Details
               </button>
             </div>

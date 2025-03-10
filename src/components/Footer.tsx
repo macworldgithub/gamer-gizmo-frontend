@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LiveCommunity from "./LiveCommunity";
 import TermsAndConditionModal from "./Modals/TermsAndConditionModal";
+import { FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -46,13 +47,14 @@ const Footer = () => {
               and accessories. Level up your gaming experience with ease.”
             </p>
             <div className="flex mt-4">
-              <Link href="#" className="text-white mx-2">
-                <FontAwesomeIcon
-                  icon={faFacebookF}
-                  className="z-10"
-                  color="#4267B2"
-                />
-              </Link>
+              <a
+                href="https://www.facebook.com/profile.php?id=61573613765643"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="z-10 max-sm:w-2"
+              >
+                <FontAwesomeIcon icon={faFacebookF} color="#4267B2" size="1x" />
+              </a>
               <Link href="#" className="text-white mx-2">
                 <FontAwesomeIcon
                   icon={faLinkedin}
@@ -60,13 +62,17 @@ const Footer = () => {
                   color="#a0a4a7"
                 />
               </Link>
-              <Link href="#" className="text-white mx-2">
-                <FontAwesomeIcon
-                  icon={faYoutube}
-                  className="z-10"
-                  color="#a0a4a7"
-                />
-              </Link>
+              {/* <Link href="#" className="text-white mx-2"> */}
+              <a
+                href="https://www.youtube.com/@GamerGizmo_Official"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-600 hover:text-red-800 transition-colors"
+              >
+                <FaYoutube size={22} />
+
+              </a>
+              {/* </Link> */}
             </div>
           </div>
 
@@ -108,7 +114,7 @@ const Footer = () => {
               </a>
               <br />
               <a href="tel:+923318551070" className="text-sm text-white hover:text-secondaryColorDark">
-              +971555795213
+                +971555795213
               </a>
             </div>
             <div className="mt-4">

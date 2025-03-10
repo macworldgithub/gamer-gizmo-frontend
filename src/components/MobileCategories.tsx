@@ -17,7 +17,7 @@ const categories = [
 const categoryMap = {
   "Gaming PCs": "desktop",
   Laptops: "laptops",
-  "Gaming PC Parts": "usedparts",
+  "Gaming PC Parts": "components",
   "Gaming Consoles": "console",
 } as const;
 
@@ -38,8 +38,8 @@ const getCategoryLink = (category: string): string => {
 const MobileCategories = () => {
   return (
     <Wrapper>
-      <div className="w-full flex justify-center py-10 h-auto md:hidden">
-        <div className="w-full grid grid-cols-3 gap-4 dark:border shadow-lg bg-[#FFFFFF] rounded-lg p-6 dark:bg-black dark:border-[#6345ED] sm:grid-cols-3">
+      <div className="w-full flex justify-center pb-2 h-auto md:hidden">
+        <div className="w-full grid grid-cols-3 gap-4 dark:border shadow-lg bg-[#FFFFFF] rounded-lg p-1 dark:bg-black dark:border-[#6345ED] sm:grid-cols-3">
           {categories.map((category) => (
             <Link
               key={category.id}
@@ -49,10 +49,10 @@ const MobileCategories = () => {
               <Image
                 src={category.image}
                 alt={category.title}
-                width={34}
+                width={40}
                 height={34}
               />
-              <h3 className="font-medium text-black dark:text-white text-[0.7rem] mt-1">
+              <h3 className=" text-black dark:text-white text-[0.6rem] ">
                 {category.title}
               </h3>
             </Link>

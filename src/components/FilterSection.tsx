@@ -26,7 +26,7 @@ const FilterSection = () => {
         <p className="text-white max-md:font-light md:font-medium md:text-lg max-md:text-xs mb-2">
           Shop a Wide Range of Accessories for Every Device
         </p>
-        {isVisible && (
+        {/* {isVisible && (
           <div className="flex items-center bg-transparent rounded-full py-2 border border-gray-300 shadow-md p-2 w-[600px] h-[57px] mb-4">
             <i className="fas fa-search text-gray-500 mr-2"></i>
             <input
@@ -35,7 +35,7 @@ const FilterSection = () => {
               className="flex-1 outline-none bg-transparent text-white placeholder-white"
             />
           </div>
-        )}
+        )} */}
 
         <SelectLabels route="search-product" />
         {/* <div className="bg-black dark:bg-custom-gradient w-[191px] h-[55px] mt-5 rounded-full flex justify-center gap-3 items-center">

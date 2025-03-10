@@ -64,15 +64,15 @@ import CategoryProductGrid from "./CategoryProductGrid";
 const ProductContainer = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mt-2 dark:text-white">
+      {/* <h1 className="text-2xl font-bold text-center  max-sm:text-lg dark:text-white">
         Gamer Gizmo Offers
-      </h1>
+      </h1> */}
 
       {/* Display products category-wise */}
       <CategoryProductGrid categoryId={1} categoryName="Laptops" />
-      <CategoryProductGrid categoryId={2} categoryName="Desktops" />
+      <CategoryProductGrid categoryId={2} categoryName="Gaming PCs" />
       <CategoryProductGrid categoryId={3} categoryName="Components" />
-      <CategoryProductGrid categoryId={4} categoryName="Consoles" />
+      <CategoryProductGrid categoryId={4} categoryName="Gaming Consoles" />
     </div>
   );
 };
