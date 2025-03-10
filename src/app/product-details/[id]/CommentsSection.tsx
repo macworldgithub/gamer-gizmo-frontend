@@ -60,12 +60,6 @@ const CommentsSection = ({ data, fetcher, seReftech }: any) => {
       return;
     }
 
-    // if (rating === 0) {
-    //   setError("Please select a rating.");
-    //   toast.error("Please select a rating.");
-    //   return;
-    // }
-
     try {
       const formData = new FormData();
       formData.append("user_id", String(userId));

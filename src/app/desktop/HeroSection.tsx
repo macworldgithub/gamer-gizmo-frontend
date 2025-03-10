@@ -93,7 +93,7 @@ cursor-pointer text-white  w-36 h-12 rounded-full shadow-md text-sm max-md:mt-8"
           <div className="w-full h-auto dark:bg-black">
             <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
               <div className="flex flex-wrap gap-4 justify-center sm:justify-start max-sm:gap-[0.5rem] ">
-                <ProductMain query={query} categoryId={2} />
+                <ProductMain query={query} categoryId={2}/>
               </div>
             </Wrapper>
           </div>

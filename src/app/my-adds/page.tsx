@@ -33,6 +33,7 @@ export default function Add() {
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            
           },
         }
       );
