@@ -5,42 +5,34 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { RootState } from "@/components/Store/Store";
 import { useParams, useRouter } from "next/navigation";
-import { getSpecifications } from "@/app/utils/getSpecifications";
+import SpecificationsForm from "./SpecificationsForm";
 
 export default function EditAdPage() {
-  const { id } = useParams(); // Get dynamic ad ID
-  console.log(id, "kkkkkkkkkk");
+  const { id } = useParams();
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
   const userId = useSelector((state: RootState) => state.user.id);
 
-  const [adData, setAdData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-    condition: "New",
-    location: "",
-    stock: "",
-    brand: "",
-    processorVariant: "",
-  });
-  const [specifications, setSpecifications] = useState<any[]>([]);
+  const [adData, setAdData] = useState<any>({});
+
   const [loading, setLoading] = useState(true);
   const [locations, setLocations] = useState<any[]>([]);
   const [brands, setBrands] = useState<any[]>([]);
   const [componentCategories, setComponentCategories] = useState<any[]>([]);
   const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
+  const [category, setcategory] = useState<any[]>([]);
 
-  // Fetching all necessary data
   useEffect(() => {
     if (!id) return;
     fetchAdDetails();
-    fetchBrands();
     fetchComponentCategories();
     fetchProcessorVariants();
     fetchLocations();
+    fetchCategories();
   }, [id]);
+  useEffect(() => {
+    fetchBrands();
+  }, [adData]);
 
   const fetchAdDetails = async () => {
     try {
@@ -50,26 +42,12 @@ export default function EditAdPage() {
       );
 
       const product = response.data.data;
-      console.log("Product Response:", product);
+      console.log("api response", product);
 
-      if (product) {
-        setAdData({
-          name: product.name || "",
-          description: product.description || "",
-          price: product.price || "",
-          category: product.categories?.name || "",
-          condition:
-            product.condition_product_conditionTocondition?.name || "New",
-          location: product.location_product_locationTolocation?.name || "",
-          stock: product.stock || "",
-          brand: product.brand || "",
-          processorVariant: product.processor_variant || "",
-        });
-
-        const specs = getSpecifications(product);
-        console.log("Specifications Generated:", specs);
-        setSpecifications(specs);
-      }
+      setAdData({
+        ...product,
+        category_id: product?.category_id || "",
+      });
     } catch (err) {
       toast.error("Failed to fetch ad details");
     } finally {
@@ -78,28 +56,17 @@ export default function EditAdPage() {
   };
 
   const fetchBrands = async () => {
-    //@ts-ignore
-    if (!selectCategory) {
-      console.log("No category selected. Skipping brand fetch.");
-      return;
-    }
     try {
+      console.log(adData, "ad data");
       const response = await axios.get(
-        //@ts-ignore
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/brands/getAll?category=${selectCategory.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/brands/getAll?category=${adData.category_id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      if (response.data && response.data.data) {
-        setBrands(response.data.data);
-        console.log(response.data.data, "lolllll");
-      } else {
-        console.log("No brands found in the response data.");
-        setBrands([]);
-      }
+      setBrands(response.data.data || []);
     } catch (err: any) {
       console.error(
         "Error fetching brands:",
@@ -116,13 +83,7 @@ export default function EditAdPage() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      if (response?.data) {
-        setComponentCategories(response?.data?.data);
-        console.log(response?.data?.data, "here is my data");
-      } else {
-        console.error("Unexpected API response structure:", response);
-        throw new Error("Unexpected API response");
-      }
+      setComponentCategories(response?.data?.data || []);
     } catch (error) {
       console.error("Error occurred while fetching categories:", error);
     }
@@ -150,7 +111,17 @@ export default function EditAdPage() {
     }
   };
 
-  // Handle input changes
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getAll`
+      );
+      setcategory(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch locations.");
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -159,17 +130,6 @@ export default function EditAdPage() {
     setAdData({ ...adData, [e.target.name]: e.target.value });
   };
 
-  // Handle specification input change
-  const handleSpecChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const updatedSpecs = [...specifications];
-    updatedSpecs[index].value = e.target.value;
-    setSpecifications(updatedSpecs);
-  };
-
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -180,12 +140,11 @@ export default function EditAdPage() {
           ...adData,
           product_id: id,
           user_id: userId,
-          specifications, // Include the updated specifications
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Ad updated successfully");
-      router.push("/my-adds"); // Redirect to the ad list
+      router.push("/my-adds");
     } catch (err) {
       toast.error("Failed to update ad");
     } finally {
@@ -205,7 +164,6 @@ export default function EditAdPage() {
         ) : (
           <form onSubmit={handleSubmit} className="grid gap-4">
             <div className="grid grid-cols-2 gap-4">
-              {/* Product Name */}
               <div className="flex flex-col">
                 <label className="edit-label">Product Name</label>
                 <input
@@ -214,11 +172,10 @@ export default function EditAdPage() {
                   value={adData.name}
                   onChange={handleChange}
                   placeholder="Ad Name"
-                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  className="edit-input"
                   required
                 />
               </div>
-
               {/* Price */}
               <div className="flex flex-col">
                 <label className="edit-label">Price</label>
@@ -228,25 +185,27 @@ export default function EditAdPage() {
                   value={adData.price}
                   onChange={handleChange}
                   placeholder="Price"
-                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  className="edit-input"
                   required
                 />
               </div>
-
               {/* Category */}
               <div className="flex flex-col">
                 <label className="edit-label">Category</label>
-                <input
-                  type="text"
+                <select
                   name="category"
-                  value={adData.category}
+                  value={adData?.category}
                   onChange={handleChange}
-                  placeholder="Category"
-                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  className="edit-input"
                   required
-                />
+                >
+                  {category.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
               </div>
-
               {/* Condition (Hardcoded options) */}
               <div className="flex flex-col">
                 <label className="edit-label">Condition</label>
@@ -254,14 +213,13 @@ export default function EditAdPage() {
                   name="condition"
                   value={adData.condition}
                   onChange={handleChange}
-                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  className="edit-input"
                   required
                 >
                   <option value="New">New</option>
                   <option value="Used">Used</option>
                 </select>
               </div>
-
               {/* Location Dropdown */}
               <div className="flex flex-col">
                 <label className="edit-label">Location</label>
@@ -269,7 +227,7 @@ export default function EditAdPage() {
                   name="location"
                   value={adData.location}
                   onChange={handleChange}
-                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  className="edit-input"
                   required
                 >
                   {locations.map((location) => (
@@ -279,7 +237,23 @@ export default function EditAdPage() {
                   ))}
                 </select>
               </div>
-
+              {/* Brand Dropdown */}
+              <div className="flex flex-col">
+                <label className="edit-label">Brand</label>
+                <select
+                  name="brand"
+                  value={adData?.brand}
+                  onChange={handleChange}
+                  className="edit-input"
+                  required
+                >
+                  {brands.map((brand) => (
+                    <option key={brand.id} value={brand.id}>
+                      {brand.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
               {/* Processor Variant Dropdown */}
               <div className="flex flex-col">
                 <label className="edit-label">Processor Variant</label>
@@ -287,7 +261,7 @@ export default function EditAdPage() {
                   name="processorVariant"
                   value={adData.processorVariant}
                   onChange={handleChange}
-                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  className="edit-input"
                   required
                 >
                   {processorVariantData.map((variant) => (
@@ -307,7 +281,7 @@ export default function EditAdPage() {
                   value={adData.stock}
                   onChange={handleChange}
                   placeholder="Stock"
-                  className="edit-input dark:text-white dark:bg-secondaryBlack"
+                  className="edit-input"
                   required
                 />
               </div>
@@ -321,45 +295,21 @@ export default function EditAdPage() {
                 value={adData.description}
                 onChange={handleChange}
                 placeholder="Description"
-                className="edit-input min-h-[100px] dark:text-white dark:bg-secondaryBlack"
+                className="edit-input min-h-[100px]"
                 required
               />
             </div>
-
-            {/* Dynamic Specifications */}
-            {specifications.length > 0 && (
-              <div>
-                <h3 className="text-2xl font-bold text-secondaryColorLight dark:text-white mt-2 mb-1">
-                  Specifications
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {specifications.map((spec, index) => (
-                    <div key={index} className="flex flex-col">
-                      <label className="font-medium edit-label">
-                        {spec.label}
-                      </label>
-                      <input
-                        type="text"
-                        value={spec.value}
-                        onChange={(e) => handleSpecChange(e, index)}
-                        placeholder={spec.label}
-                        className="edit-input dark:text-white dark:bg-secondaryBlack"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="flex justify-center mt-4">
-              <button
-                type="submit"
-                className="bg-custom-gradient text-white py-2 px-4 rounded-lg shadow-md"
-                disabled={loading}
-              >
-                {loading ? "Saving..." : "Save Changes"}
-              </button>
+            <div className="grid grid-cols-2 gap-4">
+              <SpecificationsForm
+                //@ts-ignore
+                token={token}
+                categoryId={adData?.categories?.id}
+                adData={adData}
+                handleChange={handleChange}
+              />
             </div>
+
+            {/* </div> */}
           </form>
         )}
       </div>
