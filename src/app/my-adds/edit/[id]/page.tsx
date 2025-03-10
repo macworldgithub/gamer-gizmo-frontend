@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { RootState } from "@/components/Store/Store";
 import { useParams, useRouter } from "next/navigation";
 import { getSpecifications } from "@/app/utils/getSpecifications";
+import Specifications from "./Specifications";
 
 export default function EditAdPage() {
   const { id } = useParams(); // Get dynamic ad ID
@@ -25,12 +26,15 @@ export default function EditAdPage() {
     brand: "",
     processorVariant: "",
   });
-  const [specifications, setSpecifications] = useState<any[]>([]);
+  // const [specifications, setSpecifications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [locations, setLocations] = useState<any[]>([]);
   const [brands, setBrands] = useState<any[]>([]);
   const [componentCategories, setComponentCategories] = useState<any[]>([]);
   const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
+  const [category, setCategory] = useState<any[]>([]);
+  const [specifications, setSpecifications] = useState<any[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
 
   // Fetching all necessary data
   useEffect(() => {
@@ -40,6 +44,7 @@ export default function EditAdPage() {
     fetchComponentCategories();
     fetchProcessorVariants();
     fetchLocations();
+    fetchCategories();
   }, [id]);
 
   const fetchAdDetails = async () => {
@@ -150,6 +155,17 @@ export default function EditAdPage() {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getAll`
+      );
+      setCategory(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch categories.");
+    }
+  };
+
   // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<
@@ -169,27 +185,50 @@ export default function EditAdPage() {
     setSpecifications(updatedSpecs);
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    console.log("Form submission started");
+
     try {
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/updateProduct`,
-        {
-          ...adData,
-          product_id: id,
-          user_id: userId,
-          specifications, // Include the updated specifications
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const payload = {
+        prod_id: id,
+        user_id: userId,
+        name: adData.name,
+        description: adData.description,
+        location: adData.location,
+        price: adData.price,
+        stock: adData.stock,
+        brand_id: adData.brand, // Ensure it's the brand ID
+        //@ts-ignore
+        model_id: adData?.model_id || "", // Replace with actual model id logic
+        category_id: adData?.category, // Ensure it's the category ID
+
+        // Optional fields (only add if they have values)
+        condition: adData.condition || undefined,
+        processorVariant: adData.processorVariant || undefined,
+        specifications: specifications.length > 0 ? specifications : undefined,
+      };
+
+      console.log("Payload to be sent:", payload);
+
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/updateProduct`;
+      console.log("API URL:", apiUrl);
+
+      const response = await axios.post(apiUrl, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log("API response:", response.data);
+
       toast.success("Ad updated successfully");
-      router.push("/my-adds"); // Redirect to the ad list
-    } catch (err) {
+      router.push("/my-adds");
+    } catch (err: any) {
+      console.error("Error response:", err.response?.data || err.message);
       toast.error("Failed to update ad");
     } finally {
       setLoading(false);
+      console.log("Form submission ended");
     }
   };
 
@@ -236,15 +275,19 @@ export default function EditAdPage() {
               {/* Category */}
               <div className="flex flex-col">
                 <label className="edit-label">Category</label>
-                <input
-                  type="text"
+                <select
                   name="category"
                   value={adData.category}
                   onChange={handleChange}
-                  placeholder="Category"
                   className="edit-input dark:text-white dark:bg-secondaryBlack"
                   required
-                />
+                >
+                  {category.map((category) => (
+                    <option key={category.id} value={category.name}>
+                      {category?.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Condition (Hardcoded options) */}
@@ -327,7 +370,7 @@ export default function EditAdPage() {
             </div>
 
             {/* Dynamic Specifications */}
-            {specifications.length > 0 && (
+            {/* {specifications.length > 0 && (
               <div>
                 <h3 className="text-2xl font-bold text-secondaryColorLight dark:text-white mt-2 mb-1">
                   Specifications
@@ -349,7 +392,16 @@ export default function EditAdPage() {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
+
+            <Specifications
+              categoryId={selectedCategoryId}
+              setCategoryId={setSelectedCategoryId}
+              specifications={specifications}
+              setSpecifications={setSpecifications}
+              //@ts-ignore
+              token={token}
+            />
 
             <div className="flex justify-center mt-4">
               <button

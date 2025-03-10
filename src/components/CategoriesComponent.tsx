@@ -27,9 +27,9 @@ const CategoriesComponent = () => {
     return matches;
   };
 
-  const handleClick = (routeName : string)=> {
-    router.push(routeName)
-  }
+  const handleClick = (routeName: string) => {
+    router.push(routeName);
+  };
 
   const isSmallScreen = useMediaQuery("(max-width: 640px)");
   // const CategoriesComponent = () => {
@@ -108,7 +108,10 @@ const CategoriesComponent = () => {
                   Get Genuine offers from Verified Buyers
                 </li>
               </ul>
-              <button className="bg-custom-gradient text-white py-2 text-sm px-4 rounded-full hover:opacity-90" onClick={()=> handleClick('/publish-ad')}>
+              <button
+                className="bg-custom-gradient text-white py-2 text-sm px-4 rounded-full hover:opacity-90"
+                onClick={() => handleClick("/publish-ad")}
+              >
                 Post Your Ad
               </button>
             </div>
@@ -123,7 +126,7 @@ const CategoriesComponent = () => {
             {/* Right Section */}
             <div className="flex-1 justify-start md:px-8 lg:ml-16 max-md:px-4 ">
               <h2 className="text-xl font-bold text-purple-700 mb-4">
-                Try GamerGizmo Sell For Me
+                Gamer Gizmo Offering
               </h2>
               <ul className="text-sm space-y-2 mb-6">
                 <li className="flex items-center gap-2">
@@ -139,7 +142,10 @@ const CategoriesComponent = () => {
                   Dedicated Sales Expert to sell your Component
                 </li>
               </ul>
-              <button className="bg-custom-gradient text-white py-2 mb-2 px-4 text-sm  rounded-full hover:opacity-90" onClick={()=> handleClick('/store')}>
+              <button
+                className="bg-custom-gradient text-white py-2 mb-2 px-4 text-sm  rounded-full hover:opacity-90"
+                onClick={() => handleClick("/store")}
+              >
                 Buy From GamerGizmo
               </button>
             </div>
@@ -177,9 +183,9 @@ const CategoriesComponent = () => {
       </div>
 
       {/* Offering Section */}
-      <Wrapper className=" xl:mt-4 lg:mt-[5rem] md:mt-[5rem] max-md:m-0 md:mb-6">
-        <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto  dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto  max-sm:mt-10">
-          <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
+      {/* <Wrapper className=" xl:mt-4 lg:mt-[5rem] md:mt-[5rem] max-md:m-0 md:mb-6"> */}
+      {/* <div className=" max-sm:px-1 text-black max-md:h-auto relative h-auto  dark:bg-black shadow-xl w-full rounded-lg p-8 gap-6 max-sm:gap-0 mx-auto  max-sm:mt-10"> */}
+      {/* <div className="flex justify-between md:pr-8 max-md:flex-col items-center mb-8">
             <h2 className="text-2xl max-md:text-base max-md:whitespace-nowrap md:pl-10 dark:text-white font-bold">
               GamerGizmo Offering
             </h2>
@@ -195,9 +201,9 @@ const CategoriesComponent = () => {
                 Explore More
               </span>
             </button>
-          </div>
+          </div> */}
 
-          {isSmallScreen ? (
+      {/* {isSmallScreen ? (
             <Swiper
               pagination={{
                 clickable: true,
@@ -252,9 +258,9 @@ const CategoriesComponent = () => {
                 </div>
               ))}
             </div>
-          )}
-        </div>
-      </Wrapper>
+          )} */}
+      {/* </div> */}
+      {/* </Wrapper> */}
     </div>
   );
 };
