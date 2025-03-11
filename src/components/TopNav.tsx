@@ -57,7 +57,7 @@ const TopNav = () => {
             05:29:32:48
           </div>
         </div>
-        <div className="flex max-md:gap-2 xl:pr-64 gap-3 max-sm:pr-4 sm:gap-4 max-sm:gap-2">
+        <div className="flex max-md:gap-2 xl:pr-64 items-center  gap-3 max-sm:pr-4 sm:gap-4 max-sm:gap-2">
           <a
             href="https://www.facebook.com/profile.php?id=61573613765643"
             target="_blank"
@@ -74,16 +74,16 @@ const TopNav = () => {
           >
             <FaYoutube size={22} />
           </a>
-          <FontAwesomeIcon
-            icon={faTwitter}
-            className="z-10 max-sm:w-3"
-            color="#a0a4a7"
-          />
-          <FontAwesomeIcon
+
+          <a href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon
             icon={faInstagram}
-            className="z-10 max-sm:w-3"
-            color="#a0a4a7"
+            className="z-10 max-sm:w-5 hover:text-red-800 "
+            color="#E1306C"
           />
+          </a>
+         
+        
           {/* <FontAwesomeIcon
             icon={faGlobe}
             className="z-10 max-sm:w-3"
