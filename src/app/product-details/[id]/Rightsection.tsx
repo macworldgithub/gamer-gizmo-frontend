@@ -5,12 +5,15 @@ import Image from "next/image";
 import { formatDate } from "@/app/utils/formatDate";
 import { FaPhoneAlt, FaUser } from "react-icons/fa";
 import { MdOutlineMailLock } from "react-icons/md";
+import { IoChatbubbleEllipses } from "react-icons/io5";
 import { WhatsAppOutlined } from "@ant-design/icons";
 import { MdVerified } from "react-icons/md";
 import Verified from "../../../../public/images/Verified.svg";
+import { useRouter } from "next/navigation";
 
 const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
+  const router = useRouter();
   const profileUrl = data?.users?.profile
     ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
     : null;
@@ -157,6 +160,13 @@ const Rightsection = ({ data }: any) => {
             <div className="text-sm">{data?.users?.email}</div>
           </a>
         </div>
+        <button
+          onClick={() => router.push(`/chat/234432432`)}
+          className="bg-purple-600 py-2 text-white w-full flex justify-center items-center gap-4"
+        >
+          Start a Chat
+          <IoChatbubbleEllipses />
+        </button>
 
         {/* Footer Text */}
         {/* <p className="text-center text-sm text-gray-600 mb-2 dark:text-white">
