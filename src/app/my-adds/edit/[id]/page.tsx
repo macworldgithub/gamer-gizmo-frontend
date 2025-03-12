@@ -19,16 +19,13 @@ export default function EditAdPage() {
   const [locations, setLocations] = useState<any[]>([]);
   const [brands, setBrands] = useState<any[]>([]);
   const [componentCategories, setComponentCategories] = useState<any[]>([]);
-  const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
-  const [category, setcategory] = useState<any[]>([]);
+
 
   useEffect(() => {
     if (!id) return;
     fetchAdDetails();
     fetchComponentCategories();
-    fetchProcessorVariants();
     fetchLocations();
-    fetchCategories();
   }, [id]);
   useEffect(() => {
     fetchBrands();
@@ -89,16 +86,6 @@ export default function EditAdPage() {
     }
   };
 
-  const fetchProcessorVariants = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/processor/getProcessorVariant`
-      );
-      setProcessorVariantData(response?.data?.data || []);
-    } catch (err) {
-      console.error("Failed to fetch processor variants.");
-    }
-  };
 
   const fetchLocations = async () => {
     try {
@@ -111,16 +98,7 @@ export default function EditAdPage() {
     }
   };
 
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getAll`
-      );
-      setcategory(response?.data?.data || []);
-    } catch (err) {
-      console.error("Failed to fetch locations.");
-    }
-  };
+ 
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -129,7 +107,24 @@ export default function EditAdPage() {
   ) => {
     setAdData({ ...adData, [e.target.name]: e.target.value });
   };
-
+  const handleLaptopChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+  
+    setAdData((prev: any) => ({
+      ...prev,
+      laptops: [
+        {
+          ...prev.laptops[0],
+          [name]: value,
+        },
+      ],
+    }));
+  };
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -189,23 +184,7 @@ export default function EditAdPage() {
                   required
                 />
               </div>
-              {/* Category */}
-              <div className="flex flex-col">
-                <label className="edit-label">Category</label>
-                <select
-                  name="category"
-                  value={adData?.category}
-                  onChange={handleChange}
-                  className="edit-input"
-                  required
-                >
-                  {category.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+             
               {/* Condition (Hardcoded options) */}
               <div className="flex flex-col">
                 <label className="edit-label">Condition</label>
@@ -254,24 +233,7 @@ export default function EditAdPage() {
                   ))}
                 </select>
               </div>
-              {/* Processor Variant Dropdown */}
-              <div className="flex flex-col">
-                <label className="edit-label">Processor Variant</label>
-                <select
-                  name="processorVariant"
-                  value={adData.processorVariant}
-                  onChange={handleChange}
-                  className="edit-input"
-                  required
-                >
-                  {processorVariantData.map((variant) => (
-                    <option key={variant.id} value={variant.name}>
-                      {variant.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
+        
               {/* Stock */}
               <div className="flex flex-col">
                 <label className="edit-label">Stock</label>
@@ -307,6 +269,7 @@ export default function EditAdPage() {
                 categoryId={adData?.categories?.id}
                 adData={adData}
                 handleChange={handleChange}
+                handleLaptopChange={handleLaptopChange}
               />
             </div>
 

@@ -6,6 +6,7 @@ interface SpecificationsFormProps {
   categoryId: number;
   adData: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleLaptopChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setAdData: (e: React.ChangeEvent<HTMLInputElement>) => void;
   token: string;
 }
@@ -14,19 +15,41 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   categoryId,
   adData,
   handleChange,
+  handleLaptopChange,
   token,
   setAdData,
 }) => {
   const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
   const [processor, setProcessor] = useState<any[]>([]);
   const [storage, setStorage] = useState<any[]>([]);
-
+  const [storageType, setStorageType] = useState<any[]>([]);
+  const [ramOptions, setRamOptions] = useState<any[]>([]);
+  const [gpu, setGpu] = useState<any[]>([]);
   useEffect(() => {
     fetchProcessorVariants();
     fetchProcessor();
     fetchStorage();
+    fetchStorageType();
+    fetchRamOptions();
+    fetchGpu();
   }, []);
 
+  const fetchGpu = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/gpu/getAll`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setGpu(response?.data?.data || []);
+      console.log(response?.data?.data, 'Fetched GPU Options');
+    } catch (error) {
+      console.error("Failed to fetch GPU options.", error);
+    }
+  };
   const fetchProcessorVariants = async () => {
     try {
       const response = await axios.get(
@@ -52,10 +75,28 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             Authorization: `Bearer ${token}`,
           },
         }
+
       );
-      setProcessor(response?.data?.data || []);
+      setStorage(response?.data?.data || []);
+      console.log(response?.data?.data, 'ssssssss')
     } catch (error) {
       console.error("Failed to fetch storage.", error);
+    }
+  };
+  const fetchStorageType = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/getStorageType`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setStorageType(response?.data?.data || []);
+      console.log(response?.data?.data, 'Fetched Storage Types');
+    } catch (error) {
+      console.error("Failed to fetch storage types.", error);
     }
   };
 
@@ -72,6 +113,22 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       setProcessor(response?.data?.data || []);
     } catch (error) {
       console.error("Failed to fetch processor.", error);
+    }
+  };
+  const fetchRamOptions = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/ram/getAll`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setRamOptions(response?.data?.data || []);
+      console.log(response?.data?.data, 'Fetched RAM Options');
+    } catch (error) {
+      console.error("Failed to fetch RAM options.", error);
     }
   };
   useEffect(() => {
@@ -161,19 +218,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={pc.gpu || ""}
             onChange={handleChange}
             placeholder="GPU"
-            className="edit-input"
-            required
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label className="edit-label">GPU Brand</label>
-          <input
-            type="text"
-            name="gpu_brand"
-            value={pc.gpu_personal_computers_gpuTogpu?.name || ""}
-            onChange={handleChange}
-            placeholder="GPU Brand"
             className="edit-input"
             required
           />
@@ -296,7 +340,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="battery_life"
             value={laptop.battery_life || ""}
-            onChange={handleChange}
+            onChange={handleLaptopChange}
             placeholder="Battery Life"
             className="edit-input"
             required
@@ -329,18 +373,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           />
         </div>
 
-        <div className="flex flex-col">
-          <label className="edit-label">GPU Brand</label>
-          <input
-            type="text"
-            name="gpu_brand"
-            value={laptop.gpu_laptops_gpuTogpu?.name || ""}
-            onChange={handleChange}
-            placeholder="GPU Brand"
-            className="edit-input"
-            required
-          />
-        </div>
+       
 
         <div className="flex flex-col">
           <label className="edit-label">Graphics</label>
@@ -348,7 +381,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="graphics"
             value={laptop.graphics || ""}
-            onChange={handleChange}
+            onChange={handleLaptopChange}
             placeholder="Graphics"
             className="edit-input"
             required
@@ -361,7 +394,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="ports"
             value={laptop.ports || ""}
-            onChange={handleChange}
+            onChange={handleLaptopChange}
             placeholder="Ports"
             className="edit-input"
             required
@@ -426,16 +459,24 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         <div className="flex flex-col">
           <label className="edit-label">Storage</label>
           <select
-            name="storage"
+            name="laptops[0]?.storage"
             value={laptop?.storage || ""}
             //@ts-ignore
-            onChange={handleChange}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  { ...prev.laptops[0], storage: e.target.value },
+                ],
+              }))
+            }
             className="edit-input"
             required
           >
             <option value="">Select Storage</option>
             {storage.map((variant) => (
-              <option key={variant.id} value={variant.name}>
+              <option key={variant.id} value={variant.id}>
                 {variant.name}
               </option>
             ))}
@@ -443,16 +484,58 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         </div>
 
         <div className="flex flex-col">
-          <label className="edit-label">RAM</label>
-          <input
-            type="text"
-            name="ram"
-            value={laptop.ram_laptops_ramToram?.name || ""}
-            onChange={handleChange}
-            placeholder="RAM"
+          <label className="edit-label">Storage Type</label>
+          <select
+            name="laptops[0]?.storage_type"
+            value={laptop?.storage_type || ""}
+            //@ts-ignore
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  { ...prev.laptops[0], storage_type: e.target.value },
+                ],
+              }))
+            }
             className="edit-input"
             required
-          />
+          >
+            <option value="">Select Storage Type</option>
+            {storageType.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+
+        <div className="flex flex-col">
+          <label className="edit-label">RAM</label>
+          <select
+            name="laptops[0]?.ram"
+            value={laptop?.ram || ""}
+            //@ts-ignore
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  { ...prev.laptops[0], ram: e.target.value },
+                ],
+              }))
+            }
+            className="edit-input"
+            required
+          >
+            <option value="">Select RAM</option>
+            {ramOptions.map((variant) => (
+              <option key={variant.id} value={variant?.id}>
+                {variant.name} 
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="flex flex-col">
@@ -461,12 +544,39 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="screen_resolution"
             value={laptop.screen_resolution || ""}
-            onChange={handleChange}
+            onChange={handleLaptopChange}
             placeholder="Screen Resolution"
             className="edit-input"
             required
           />
         </div>
+        <div className="flex flex-col">
+  <label className="edit-label">GPU</label>
+  <select
+    name="laptops[0]?.gpu"
+    value={laptop?.gpu || ""}
+    //@ts-ignore
+    onChange={(e) =>
+      //@ts-ignore
+      setAdData((prev) => ({
+        ...prev,
+        laptops: [
+          { ...prev.laptops[0], gpu: e.target.value },
+        ],
+      }))
+    }
+    className="edit-input"
+    required
+  >
+    <option value="">Select GPU</option>
+    {gpu.map((variant) => (
+      <option key={variant.id} value={variant.id}>
+        {variant.name}
+      </option>
+    ))}
+  </select>
+</div>
+
 
         <div className="flex flex-col">
           <label className="edit-label">Screen Size</label>
@@ -474,7 +584,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="screen_size"
             value={laptop.screen_size || ""}
-            onChange={handleChange}
+            onChange={handleLaptopChange}
             placeholder="Screen Size"
             className="edit-input"
             required
