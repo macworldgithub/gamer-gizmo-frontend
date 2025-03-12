@@ -10,7 +10,6 @@ import { RootState } from "@/components/Store/Store";
 import Link from "next/link";
 const Sellersdetails = ({ data }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
-  // const token = undefined;
 
   const profileUrl = data?.users?.profile
     ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
