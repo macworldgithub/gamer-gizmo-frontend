@@ -6,6 +6,7 @@ interface SpecificationsFormProps {
   categoryId: number;
   adData: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setAdData: (e: React.ChangeEvent<HTMLInputElement>) => void;
   token: string;
 }
 
@@ -14,11 +15,11 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   adData,
   handleChange,
   token,
+  setAdData,
 }) => {
   const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
   const [processor, setProcessor] = useState<any[]>([]);
   const [storage, setStorage] = useState<any[]>([]);
-
 
   useEffect(() => {
     fetchProcessorVariants();
@@ -72,7 +73,9 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       console.error("Failed to fetch processor.", error);
     }
   };
-
+  useEffect(() => {
+    console.log(adData, "lol");
+  }, [adData]);
   if (categoryId === 4 && adData?.gaming_console?.length > 0) {
     const gamingConsole = adData.gaming_console[0];
     return (
@@ -280,6 +283,8 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       </>
     );
   }
+  {
+  }
   if (categoryId === 1 && adData?.laptops?.length > 0) {
     const laptop = adData?.laptops[0];
     return (
@@ -365,10 +370,20 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         <div className="flex flex-col">
           <label className="edit-label">Processor</label>
           <select
-            name="processor"
-            value={laptop?.processors?.name || ""}
-            //@ts-ignore
-            onChange={handleChange}
+            name="laptops[0].processor"
+            value={laptop?.processor || ""}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  {
+                    ...prev.laptops[0],
+                    processor: e.target.value, // Only updating the string
+                  },
+                ],
+              }))
+            }
             className="edit-input"
             required
           >
@@ -384,16 +399,24 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         <div className="flex flex-col">
           <label className="edit-label">Processor Variant</label>
           <select
-            name="processor_variant"
-            value={laptop?.processor_variant_laptops_processor_variantToprocessor_variant?.name || ""}
+            name="laptops[0].processor_variant"
+            value={laptop?.processor_variant || ""}
             //@ts-ignore
-            onChange={handleChange}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  { ...prev.laptops[0], processor_variant: e.target.value },
+                ],
+              }))
+            }
             className="edit-input"
             required
           >
             <option value="">Select Processor Variant</option>
             {processorVariantData.map((variant) => (
-              <option key={variant.id} value={variant.name}>
+              <option key={variant.id} value={variant.id}>
                 {variant.name}
               </option>
             ))}

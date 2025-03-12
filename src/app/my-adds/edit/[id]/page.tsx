@@ -303,6 +303,7 @@ export default function EditAdPage() {
               <SpecificationsForm
                 //@ts-ignore
                 token={token}
+                setAdData={setAdData}
                 categoryId={adData?.categories?.id}
                 adData={adData}
                 handleChange={handleChange}

@@ -345,37 +345,37 @@ const PublishAdd: React.FC = () => {
         />
       ),
     },
-    // {
-    //   isCompleted: false,
+    {
+      isCompleted: false,
 
-    //   label: <span className="dark:text-white">More Specifications</span>,
-    //   content: (
-    //     <MoreSpecification
-    //       selectCategory={selectCategory}
-    //       formData={formData}
-    //       handleFormChange={handleFormChange}
-    //       selectComponentCategory={selectComponentCategory}
-    //       setSelectedComponentCategory={setSelectedComponentCategory}
-    //       componentCategories={componentCategories}
-    //       selectProcessorVariant={selectProcessorVariant}
-    //       setSelectedProcessorVariant={setSelectedProcessorVariant}
-    //       selectProcessor={selectProcessor}
-    //       setSelectedProcessor={setSelectedProcessor}
-    //       gpuData={gpuData}
-    //       ramData={ramData}
-    //       storageTypeData={storageTypeData}
-    //       storageData={storageData}
-    //       selectGpu={selectGpu}
-    //       setSelectedGpu={setSelectedGpu}
-    //       setSelectedRam={setSelectedRam}
-    //       selectRam={selectRam}
-    //       selectStoarge={selectStoarge}
-    //       setSelectedStoarge={setSelectedStoarge}
-    //       selectStorageType={selectStorageType}
-    //       setSelectedStorageType={setSelectedStorageType}
-    //     />
-    //   ),
-    // },
+      label: <span className="dark:text-white">More Specifications</span>,
+      content: (
+        <MoreSpecification
+          selectCategory={selectCategory}
+          formData={formData}
+          handleFormChange={handleFormChange}
+          selectComponentCategory={selectComponentCategory}
+          setSelectedComponentCategory={setSelectedComponentCategory}
+          componentCategories={componentCategories}
+          selectProcessorVariant={selectProcessorVariant}
+          setSelectedProcessorVariant={setSelectedProcessorVariant}
+          selectProcessor={selectProcessor}
+          setSelectedProcessor={setSelectedProcessor}
+          gpuData={gpuData}
+          ramData={ramData}
+          storageTypeData={storageTypeData}
+          storageData={storageData}
+          selectGpu={selectGpu}
+          setSelectedGpu={setSelectedGpu}
+          setSelectedRam={setSelectedRam}
+          selectRam={selectRam}
+          selectStoarge={selectStoarge}
+          setSelectedStoarge={setSelectedStoarge}
+          selectStorageType={selectStorageType}
+          setSelectedStorageType={setSelectedStorageType}
+        />
+      ),
+    },
 
     {
       isCompleted: false,
