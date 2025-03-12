@@ -133,11 +133,11 @@ const PublishAdd: React.FC = () => {
       return;
     }
 
-    if (activeStep === 2 && (price === "0" || quantity === "0")) {
+    if (activeStep === 3 && (price === "0" || quantity === "0")) {
       toast.error("Please provide valid price and quantity.");
       return;
     }
-    if (activeStep === 3 && fileList.length < 3) {
+    if (activeStep === 4 && fileList.length < 3) {
       toast.error("At least upload 3 images.");
       return;
     }
