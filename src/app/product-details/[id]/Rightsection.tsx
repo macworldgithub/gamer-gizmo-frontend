@@ -10,10 +10,15 @@ import { WhatsAppOutlined } from "@ant-design/icons";
 import { MdVerified } from "react-icons/md";
 import Verified from "../../../../public/images/Verified.svg";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/components/Store/Store";
+import { toast } from "react-toastify";
 
 const Rightsection = ({ data }: any) => {
   const [quantity, setQuantity] = useState(2);
   const router = useRouter();
+  const token = useSelector((state: RootState) => state.user.token);
+
   const profileUrl = data?.users?.profile
     ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${data?.users?.profile}`
     : null;
@@ -22,7 +27,14 @@ const Rightsection = ({ data }: any) => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
   console.log(data, "data");
-
+  const MoveToChatScreen = () => {
+    if (!token) {
+      toast.error("Please Login First ");
+      return;
+    } else {
+      router.push(`/chat/234432432`);
+    }
+  };
   return (
     <div className=" max-md:hidden py-10 flex flex-col  justify-center items-start gap-8 pl-2">
       {/* First Card (Price & Quantity) */}
@@ -161,7 +173,7 @@ const Rightsection = ({ data }: any) => {
           </a>
         </div>
         <button
-          onClick={() => router.push(`/chat/234432432`)}
+          onClick={() => MoveToChatScreen()}
           className="bg-purple-600 py-2 text-white w-full flex justify-center items-center gap-4"
         >
           Start a Chat

@@ -1,4 +1,4 @@
-// import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 // export default {
 //   darkMode: "class",
@@ -95,8 +95,6 @@
 
 // } satisfies Config;
 
-
-
 export default {
   darkMode: "class",
   content: [
@@ -135,6 +133,9 @@ export default {
         "slide-out": "slideOut 0.5s ease-in-out forwards",
       },
       colors: {
+        colors: {
+          "neon-green": "#39FF14",
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
         navTextLight: "#7d7d7d",
@@ -181,7 +182,6 @@ export default {
       });
     },
 
-    
     function ({ addComponents }) {
       addComponents({
         ".dark input, .dark textarea, .dark select": {
