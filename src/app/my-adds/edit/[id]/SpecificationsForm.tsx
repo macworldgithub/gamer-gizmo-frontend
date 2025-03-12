@@ -6,6 +6,7 @@ interface SpecificationsFormProps {
   categoryId: number;
   adData: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setAdData: (e: React.ChangeEvent<HTMLInputElement>) => void;
   token: string;
 }
 
@@ -14,13 +15,16 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   adData,
   handleChange,
   token,
+  setAdData,
 }) => {
   const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
   const [processor, setProcessor] = useState<any[]>([]);
+  const [storage, setStorage] = useState<any[]>([]);
 
   useEffect(() => {
     fetchProcessorVariants();
     fetchProcessor();
+    fetchStorage();
   }, []);
 
   const fetchProcessorVariants = async () => {
@@ -39,6 +43,22 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
     }
   };
 
+  const fetchStorage = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/getStorage`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setProcessor(response?.data?.data || []);
+    } catch (error) {
+      console.error("Failed to fetch storage.", error);
+    }
+  };
+
   const fetchProcessor = async () => {
     try {
       const response = await axios.get(
@@ -54,7 +74,9 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       console.error("Failed to fetch processor.", error);
     }
   };
-
+  useEffect(() => {
+    console.log(adData, "lol");
+  }, [adData]);
   if (categoryId === 4 && adData?.gaming_console?.length > 0) {
     const gamingConsole = adData.gaming_console[0];
     return (
@@ -262,8 +284,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       </>
     );
   }
+  {
+  }
   if (categoryId === 1 && adData?.laptops?.length > 0) {
-    const laptop = adData.laptops[0];
+    const laptop = adData?.laptops[0];
     return (
       <>
         <div className="flex flex-col">
@@ -347,16 +371,26 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         <div className="flex flex-col">
           <label className="edit-label">Processor</label>
           <select
-            name="processor"
-            value={adData.processor || ""}
-            //@ts-ignore
-            onChange={handleChange}
+            name="laptops[0].processor"
+            value={laptop?.processor || ""}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  {
+                    ...prev.laptops[0],
+                    processor: e.target.value,
+                  },
+                ],
+              }))
+            }
             className="edit-input"
             required
           >
             <option value="">Select Processor</option>
             {processor.map((variant) => (
-              <option key={variant.id} value={variant.name}>
+              <option key={variant.id} value={variant?.id}>
                 {variant.name}
               </option>
             ))}
@@ -366,15 +400,41 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         <div className="flex flex-col">
           <label className="edit-label">Processor Variant</label>
           <select
-            name="processor_variant"
-            value={adData.processor_variant || ""}
+            name="laptops[0].processor_variant"
+            value={laptop?.processor_variant || ""}
             //@ts-ignore
-            onChange={handleChange}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  { ...prev.laptops[0], processor_variant: e.target.value },
+                ],
+              }))
+            }
             className="edit-input"
             required
           >
             <option value="">Select Processor Variant</option>
             {processorVariantData.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col">
+          <label className="edit-label">Storage</label>
+          <select
+            name="storage"
+            value={laptop?.storage || ""}
+            //@ts-ignore
+            onChange={handleChange}
+            className="edit-input"
+            required
+          >
+            <option value="">Select Storage</option>
+            {storage.map((variant) => (
               <option key={variant.id} value={variant.name}>
                 {variant.name}
               </option>

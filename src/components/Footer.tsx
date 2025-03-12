@@ -2,6 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
+  faInstagram,
   faLinkedin,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
@@ -46,7 +47,7 @@ const Footer = () => {
               “Gamer Gizmo – Your ultimate destination for gaming gear, laptops,
               and accessories. Level up your gaming experience with ease.”
             </p>
-            <div className="flex mt-4">
+            <div className="flex items-center gap-4 mt-4">
               <a
                 href="https://www.facebook.com/profile.php?id=61573613765643"
                 target="_blank"
@@ -55,13 +56,14 @@ const Footer = () => {
               >
                 <FontAwesomeIcon icon={faFacebookF} color="#4267B2" size="1x" />
               </a>
-              <Link href="#" className="text-white mx-2">
-                <FontAwesomeIcon
-                  icon={faLinkedin}
-                  className="z-10"
-                  color="#a0a4a7"
-                />
-              </Link>
+                <a href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6" target="_blank" rel="noopener noreferrer">
+                           <FontAwesomeIcon
+                         icon={faInstagram}
+                         className="z-10 max-sm:w-5 hover:text-red-800 "
+                         color="#E1306C"
+                       />
+                       </a>
+                      
               {/* <Link href="#" className="text-white mx-2"> */}
               <a
                 href="https://www.youtube.com/@GamerGizmo_Official"

@@ -2,29 +2,27 @@ import React from "react";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import Image from "next/image";
 import gpu from "../../public/images/consoles.png";
-
+import Link from "next/link";
 interface CardProps {
   title: string;
   description: string;
   buttonText: string;
   imagePosition: "left" | "right";
 }
-
 const cards: CardProps[] = [
   {
-    title: "ADVERTISE WITH US",
-    description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum.",
+    title: "Advertise with us",
+    description: "Advertise with GamerGizmo today!",
     buttonText: "Explore Now",
     imagePosition: "left",
   },
   {
-    title: "Lorem Ipsum",
-    description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum.",
-    buttonText: "Browse Now",
+    title: "Boost your brand visibility",
+    description: "Advertise with GamerGizmo today!",
+    buttonText: "Explore Now",
     imagePosition: "right",
   },
 ];
-
 const CardComponent: React.FC = () => {
   return (
     <Wrapper>
@@ -54,9 +52,14 @@ const CardComponent: React.FC = () => {
             <div className="flex-1 text-center sm:text-left px-4">
               <h2 className="text-lg font-bold text-gray-900">{card.title}</h2>
               <p className="text-gray-600">{card.description}</p>
-              <button className="mt-4 px-4 py-1 bg-custom-gradient text-white rounded-md shadow-md">
+              <div className="mt-2">
+              <Link href="/publish-ad" className="mt-4 px-4 py-1 bg-custom-gradient text-white rounded-md shadow-md">
+              {card.buttonText}
+            </Link>
+            </div>
+              {/* <button className="mt-4 px-4 py-1 bg-custom-gradient text-white rounded-md shadow-md"         >
                 {card.buttonText}
-              </button>
+              </button> */}
             </div>
 
             {/* Right Side (Image Section with 3 Overlapping Cards) */}
