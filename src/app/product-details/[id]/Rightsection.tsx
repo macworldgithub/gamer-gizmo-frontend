@@ -75,98 +75,126 @@ const Rightsection = ({ data }: any) => {
 
       {/* Seller Details Section */}
       <div className="dark:bg-black border-gray-300 rounded-lg p-6 w-72 h-fit bg-white shadow-md flex flex-col items-center">
-        {token ? (
-          <>
-            <div className="flex justify-center gap-2 items-center">
-              <div className="flex items-center justify-center flex-col gap-1">
-                {data?.is_verified_by_admin ? (
-                  <>
-                    <MdVerified />
-                    <p className="text-purple-600 font-bold text-[0.6rem]">
-                      Verified
-                    </p>
-                  </>
-                ) : (
-                  <p className="text-red-500 font-bold text-[0.6rem]">
-                    Not Verified
+      {data?.is_store_product ? (
+        <>
+          {/* Display Gamer Gizmo for Store Products */}
+          <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
+            Gamer Gizmo
+          </h2>
+
+          {/* WhatsApp & Email Icons with Fixed Contact Info */}
+          <div className="flex flex-col justify-center gap-2 items-center space-x-6 mt-4 dark:invert">
+            <a
+              href="https://wa.me/971555795213"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-4 text-black cursor-pointer"
+            >
+              <WhatsAppOutlined />
+              <div className="text-sm">+971555795213</div>
+            </a>
+
+            <a
+              href="mailto:support@gamergizmo.com"
+              className="flex gap-4 text-black cursor-pointer"
+            >
+              <MdOutlineMailLock />
+              <div className="text-sm">support@gamergizmo.com</div>
+            </a>
+          </div>
+        </>
+      ) : token ? (
+        <>
+          {/* Verified or Not Verified */}
+          <div className="flex justify-center gap-2 items-center">
+            <div className="flex items-center justify-center flex-col gap-1">
+              {data?.is_verified_by_admin ? (
+                <>
+                  <MdVerified />
+                  <p className="text-purple-600 font-bold text-[0.6rem]">
+                    Verified
                   </p>
-                )}
-              </div>
-              <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
-                Seller Details
-              </h2>
-            </div>
-
-            {/* Horizontal Line */}
-            <hr className="my-4 border-gray-300 w-full" />
-
-            {/* Seller Information */}
-            <div className="flex items-center mb-6 gap-2">
-              {/* Seller Image */}
-              {profileUrl ? (
-                <img
-                  src={profileUrl}
-                  alt="User Avatar"
-                  className="w-11 h-11 rounded-full"
-                  onError={(e) => {
-                    //@ts-ignore
-                    e.target.onerror = null;
-                    //@ts-ignore
-                    e.target.style.display = "none";
-                  }}
-                />
+                </>
               ) : (
-                <FaUser className="w-8 h-8 text-gray-500" />
+                <p className="text-red-500 font-bold text-[0.6rem]">
+                  Not Verified
+                </p>
               )}
-
-              {/* Seller Name and Member Since */}
-              <div className="text-left">
-                <p className="text-gray-800 font-semibold dark:text-white">
-                  {data?.users?.first_name} {data?.users?.last_name} (
-                  {data?.users?.gender})
-                </p>
-                <p className="text-gray-500 text-sm dark:text-[#969696]">
-                  Member Since {formatDate(data?.users?.created_at)}
-                </p>
-              </div>
             </div>
+            <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
+              Seller Details
+            </h2>
+          </div>
 
-            {/* Contact Information */}
-            <div className="flex flex-col justify-center gap-2 items-center space-x-6 mb-6 dark:invert">
-              <a
-                href={`https://wa.me/${data?.users?.phone}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex gap-4 text-black cursor-pointer"
-              >
-                <WhatsAppOutlined />
-                <div className="text-sm">{data?.users?.phone}</div>
-              </a>
+          {/* Horizontal Line */}
+          <hr className="my-4 border-gray-300 w-full" />
 
-              <a
-                href={`mailto:${data?.users?.email}`}
-                className="flex gap-4 text-black cursor-pointer"
-              >
-                <MdOutlineMailLock />
-                <div className="text-sm">{data?.users?.email}</div>
-              </a>
+          {/* Seller Information */}
+          <div className="flex items-center mb-6 gap-2">
+            {/* Seller Image */}
+            {profileUrl ? (
+              <img
+                src={profileUrl}
+                alt="User Avatar"
+                className="w-11 h-11 rounded-full"
+                onError={(e) => {
+                  //@ts-ignore
+                  e.target.onerror = null;
+                  //@ts-ignore
+                  e.target.style.display = "none";
+                }}
+              />
+            ) : (
+              <FaUser className="w-8 h-8 text-gray-500" />
+            )}
+
+            {/* Seller Name and Member Since */}
+            <div className="text-left">
+              <p className="text-gray-800 font-semibold dark:text-white">
+                {data?.users?.first_name || "Unknown"} {data?.users?.last_name || ""} ({data?.users?.gender || "N/A"})
+              </p>
+              <p className="text-gray-500 text-sm dark:text-[#969696]">
+                Member Since {formatDate(data?.users?.created_at)}
+              </p>
             </div>
-          </>
-        ) : (
-          <p className="text-center text-gray-800 dark:text-white">
-            Please{" "}
-            <span className="text-blue-600 font-semibold cursor-pointer">
-              <Link
-                href="/auth/login"
-                className="text-secondaryColorDark font-bold  text-lg"
-              >
-                log in
-              </Link>
-            </span>{" "}
-            to view seller details.
-          </p>
-        )}
-      </div>
+          </div>
+
+          {/* Contact Information */}
+          <div className="flex flex-col justify-center gap-2 items-center space-x-6 mb-6 dark:invert">
+            <a
+              href={`https://wa.me/${data?.users?.phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-4 text-black cursor-pointer"
+            >
+              <WhatsAppOutlined />
+              <div className="text-sm">{data?.users?.phone || "N/A"}</div>
+            </a>
+
+            <a
+              href={`mailto:${data?.users?.email}`}
+              className="flex gap-4 text-black cursor-pointer"
+            >
+              <MdOutlineMailLock />
+              <div className="text-sm">{data?.users?.email || "N/A"}</div>
+            </a>
+          </div>
+        </>
+      ) : (
+        <p className="text-center text-gray-800 dark:text-white">
+          Please{" "}
+          <span className="text-blue-600 font-semibold cursor-pointer">
+            <Link
+              href="/auth/login"
+              className="text-secondaryColorDark font-bold text-lg"
+            >
+              log in
+            </Link>
+          </span>{" "}
+          to view seller details.
+        </p>
+      )}
+    </div>
       {/* Third Card (Buy From GamerGizmo) */}
       <div className="dark:bg-black border-gray-300 rounded-lg p-6 w-64 h-64 bg-white shadow-md flex flex-col items-center">
         <Image
