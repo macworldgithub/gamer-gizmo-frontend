@@ -24,6 +24,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   useEffect(() => {
     fetchProcessorVariants();
     fetchProcessor();
+    fetchStorage();
   }, []);
 
   const fetchProcessorVariants = async () => {
@@ -379,7 +380,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 laptops: [
                   {
                     ...prev.laptops[0],
-                    processor: e.target.value, // Only updating the string
+                    processor: e.target.value,
                   },
                 ],
               }))
@@ -389,7 +390,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           >
             <option value="">Select Processor</option>
             {processor.map((variant) => (
-              <option key={variant.id} value={variant.name}>
+              <option key={variant.id} value={variant?.id}>
                 {variant.name}
               </option>
             ))}
@@ -426,7 +427,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <label className="edit-label">Storage</label>
           <select
             name="storage"
-            value={laptop?.storage_laptops_storageTostorag?.name || ""}
+            value={laptop?.storage || ""}
             //@ts-ignore
             onChange={handleChange}
             className="edit-input"
