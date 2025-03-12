@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import Image from "next/image";
 
-const socket = io("http://localhost:890");
+const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
 
 export default function Chat() {
   const user_id = useSelector((state: RootState) => state.user.id);
