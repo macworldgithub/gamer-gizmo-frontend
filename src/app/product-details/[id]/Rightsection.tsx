@@ -10,6 +10,7 @@ import { MdVerified } from "react-icons/md";
 import Verified from "../../../../public/images/Verified.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "@/components/Store/Store";
+import Link from "next/link";
 
 const Rightsection = ({ data }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
@@ -155,7 +156,12 @@ const Rightsection = ({ data }: any) => {
           <p className="text-center text-gray-800 dark:text-white">
             Please{" "}
             <span className="text-blue-600 font-semibold cursor-pointer">
-              log in
+              <Link
+                href="/auth/login"
+                className="text-secondaryColorDark font-bold  text-lg"
+              >
+                log in
+              </Link>
             </span>{" "}
             to view seller details.
           </p>
