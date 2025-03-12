@@ -133,11 +133,11 @@ const PublishAdd: React.FC = () => {
       return;
     }
 
-    if (activeStep === 3 && (price === "0" || quantity === "0")) {
+    if (activeStep === 2 && (price === "0" || quantity === "0")) {
       toast.error("Please provide valid price and quantity.");
       return;
     }
-    if (activeStep === 4 && fileList.length < 3) {
+    if (activeStep === 3 && fileList.length < 3) {
       toast.error("At least upload 3 images.");
       return;
     }
@@ -243,33 +243,33 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("location", selectedLocation.id.toString());
     formDataObject.append("is_published", "true");
 
-    if (selectCategory?.name === "Components") {
-      formDataObject.append(
-        "component_type",
-        selectComponentCategory?.id.toString() || ""
-      );
-      formDataObject.append("text", formData.component_text);
-    } else {
-      formDataObject.append("ram", selectRam.id.toString());
-      formDataObject.append("processor", selectProcessor.id.toString());
-      formDataObject.append(
-        "processorVariant",
-        selectProcessorVariant.id.toString()
-      );
-      formDataObject.append("storage", selectStoarge.id.toString());
-      formDataObject.append("storageType", selectStorageType.id.toString());
-      formDataObject.append("graphics", formData.graphics);
-      formDataObject.append("gpu", selectGpu.id.toString());
-      formDataObject.append("ports", formData.ports);
-      formDataObject.append("battery_life", formData.batteryLife);
-      formDataObject.append("warranty_status", formData.warranty_status);
-      formDataObject.append("connectivity", formData.connectivity);
-      formDataObject.append("accessories", formData.accessories);
-      formDataObject.append("screen_size", formData.screenSize);
-      formDataObject.append("weight", formData.weight);
-      formDataObject.append("screen_resolution", formData.screenResolution);
-      formDataObject.append("color", formData.color);
-    }
+    // if (selectCategory?.name === "Components") {
+    //   formDataObject.append(
+    //     "component_type",
+    //     selectComponentCategory?.id.toString() || ""
+    //   );
+    //   formDataObject.append("text", formData.component_text);
+    // } else {
+    //   formDataObject.append("ram", selectRam.id.toString());
+    //   formDataObject.append("processor", selectProcessor.id.toString());
+    //   formDataObject.append(
+    //     "processorVariant",
+    //     selectProcessorVariant.id.toString()
+    //   );
+    //   formDataObject.append("storage", selectStoarge.id.toString());
+    //   formDataObject.append("storageType", selectStorageType.id.toString());
+    //   formDataObject.append("graphics", formData.graphics);
+    //   formDataObject.append("gpu", selectGpu.id.toString());
+    //   formDataObject.append("ports", formData.ports);
+    //   formDataObject.append("battery_life", formData.batteryLife);
+    //   formDataObject.append("warranty_status", formData.warranty_status);
+    //   formDataObject.append("connectivity", formData.connectivity);
+    //   formDataObject.append("accessories", formData.accessories);
+    //   formDataObject.append("screen_size", formData.screenSize);
+    //   formDataObject.append("weight", formData.weight);
+    //   formDataObject.append("screen_resolution", formData.screenResolution);
+    //   formDataObject.append("color", formData.color);
+    // }
     if (fileList.length > 0) {
       fileList.forEach((file) => {
         console.log(file);
@@ -345,37 +345,37 @@ const PublishAdd: React.FC = () => {
         />
       ),
     },
-    {
-      isCompleted: false,
+    // {
+    //   isCompleted: false,
 
-      label: <span className="dark:text-white">More Specifications</span>,
-      content: (
-        <MoreSpecification
-          selectCategory={selectCategory}
-          formData={formData}
-          handleFormChange={handleFormChange}
-          selectComponentCategory={selectComponentCategory}
-          setSelectedComponentCategory={setSelectedComponentCategory}
-          componentCategories={componentCategories}
-          selectProcessorVariant={selectProcessorVariant}
-          setSelectedProcessorVariant={setSelectedProcessorVariant}
-          selectProcessor={selectProcessor}
-          setSelectedProcessor={setSelectedProcessor}
-          gpuData={gpuData}
-          ramData={ramData}
-          storageTypeData={storageTypeData}
-          storageData={storageData}
-          selectGpu={selectGpu}
-          setSelectedGpu={setSelectedGpu}
-          setSelectedRam={setSelectedRam}
-          selectRam={selectRam}
-          selectStoarge={selectStoarge}
-          setSelectedStoarge={setSelectedStoarge}
-          selectStorageType={selectStorageType}
-          setSelectedStorageType={setSelectedStorageType}
-        />
-      ),
-    },
+    //   label: <span className="dark:text-white">More Specifications</span>,
+    //   content: (
+    //     <MoreSpecification
+    //       selectCategory={selectCategory}
+    //       formData={formData}
+    //       handleFormChange={handleFormChange}
+    //       selectComponentCategory={selectComponentCategory}
+    //       setSelectedComponentCategory={setSelectedComponentCategory}
+    //       componentCategories={componentCategories}
+    //       selectProcessorVariant={selectProcessorVariant}
+    //       setSelectedProcessorVariant={setSelectedProcessorVariant}
+    //       selectProcessor={selectProcessor}
+    //       setSelectedProcessor={setSelectedProcessor}
+    //       gpuData={gpuData}
+    //       ramData={ramData}
+    //       storageTypeData={storageTypeData}
+    //       storageData={storageData}
+    //       selectGpu={selectGpu}
+    //       setSelectedGpu={setSelectedGpu}
+    //       setSelectedRam={setSelectedRam}
+    //       selectRam={selectRam}
+    //       selectStoarge={selectStoarge}
+    //       setSelectedStoarge={setSelectedStoarge}
+    //       selectStorageType={selectStorageType}
+    //       setSelectedStorageType={setSelectedStorageType}
+    //     />
+    //   ),
+    // },
 
     {
       isCompleted: false,

@@ -11,6 +11,7 @@ interface ProductMainProps {
 }
 
 const categoryNames = {
+  0: "Products",
   1: "Laptops",
   2: "Gaming PCs",
   3: "Components",
@@ -27,12 +28,17 @@ const ProductMain = ({ categoryId, query }: any) => {
   // Function to fetch products based on category and condition
   const fetchProducts = async (categoryId: number, condition: number) => {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&condition=${condition}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      // If categoryId is not 0, add categoryId to the URL
+      let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll`;
+      if (categoryId == 0) {
+        url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll`;
+      } else {
+        url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?condition=${condition}&category_id=${categoryId}`;
+      }
+
+      const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       return response?.data?.data || [];
     } catch (err) {
       console.error("Failed to fetch models.");
@@ -57,12 +63,15 @@ const ProductMain = ({ categoryId, query }: any) => {
         setNewData(newProducts);
         setUsedData(usedProducts);
       } else {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&${queryParams}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&${queryParams}`;
+        if (categoryId == 0) {
+          url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?${queryParams}`;
+        } else {
+          url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&${queryParams}`;
+        }
+        const response = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setFilteredData(response?.data?.data || []);
       }
 
