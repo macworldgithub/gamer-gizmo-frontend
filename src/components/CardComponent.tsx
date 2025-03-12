@@ -23,8 +23,6 @@ const cards: CardProps[] = [
     imagePosition: "right",
   },
 ];
-
-
 const CardComponent: React.FC = () => {
   return (
     <Wrapper>
