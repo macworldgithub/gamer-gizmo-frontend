@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import { RootState } from "@/components/Store/Store";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
+import Image from "next/image";
 
 const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
 
