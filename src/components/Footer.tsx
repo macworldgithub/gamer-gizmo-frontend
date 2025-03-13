@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LiveCommunity from "./LiveCommunity";
 import TermsAndConditionModal from "./Modals/TermsAndConditionModal";
 import { FaYoutube } from "react-icons/fa";
@@ -17,6 +17,7 @@ import { FaYoutube } from "react-icons/fa";
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleNavigate = (routeName: string) => {
     router.push(routeName);
@@ -25,7 +26,7 @@ const Footer = () => {
   return (
     <div className="w-full h-auto bg-white dark:bg-black">
       <div className="">
-        <LiveCommunity />
+      {pathname !== "/community" && <LiveCommunity />}
       </div>
 
       <div className="bg-footerBlack h-auto">
