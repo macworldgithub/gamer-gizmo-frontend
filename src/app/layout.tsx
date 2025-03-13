@@ -31,6 +31,15 @@ export default function RootLayout({
   return (
     <html className="overflow-x-hidden" lang="en">
       <head>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRX014LJC" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DRRX014LJC');
+          `}
+        </Script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
