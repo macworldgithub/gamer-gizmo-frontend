@@ -12,20 +12,19 @@ import Wrapper from "@/components/Common/Wrapper/Wrapper";
 function DownloadApp() {
   return (
     <Wrapper>
-<<<<<<< HEAD:src/app/advertising/seller-visibility/Download_app.tsx
-      <div className="py-12 px-4 md:px-8 lg:px-16 overflow-hidden bg-[#f7f3ff]">
-=======
       <div className=" bg-[#f7f3ff] py-12 px-4 md:px-8 lg:px-16 overflow-hidden">
->>>>>>> 00c506d1a85adb668528a3979fbc9c3ac838f791:src/app/advertising/sellersvisibility/Download_app.tsx
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Enjoy visibility from anywhere
+          Advertising Packages & pricing
           </h1>
-          <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
-            Developed exclusively for dealers with a valid subscription to
-            GamerGizmo, the GamerGizmo motors app provides more visibility for PC
-            dealers and PC showroom managers over inventory, performance, and
-            account usage — all on the go!
+          <p className="text-gray-400 text-sm text-center max-w-2xl mx-auto">
+          Basic Listing - Standard ad placement, Visible for 30 days
+          </p>
+          <p className="text-gray-400 text-sm text-center max-w-2xl mx-auto">
+          Premium Listing - Featureed on homepage & category pages
+          </p>
+          <p className="text-gray-400 text-sm text-center max-w-2xl mx-auto"> 
+          Sponsored Ad - Banner ad + priority placement
           </p>
         </div>
         <div className="w-full overflow-x-hidden  py-8 px-4 md:px-12 lg:px-20">
@@ -88,8 +87,7 @@ function DownloadApp() {
                   className="max-w-full h-auto"
                 />
                 <h3 className="text-lg font-semibold text-gray-800">
-                  Shareability view
-                </h3>
+                  Shareability </h3>
                 <p className="text-gray-600 text-sm">
                   Export the report to share the data with others or do further analysis
                   of the overall and listings' performance.
@@ -105,7 +103,7 @@ function DownloadApp() {
                   className="max-w-full h-auto"
                 />
                 <h3 className="text-lg font-semibold text-gray-800">
-                  Findability view
+                  Findability
                 </h3>
                 <p className="text-gray-600 text-sm">
                   Save time by using the make/model filter to find the listing you're

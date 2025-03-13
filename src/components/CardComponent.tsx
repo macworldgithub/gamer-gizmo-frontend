@@ -3,26 +3,32 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 import Image from "next/image";
 import gpu from "../../public/images/consoles.png";
 import Link from "next/link";
+
 interface CardProps {
   title: string;
   description: string;
   buttonText: string;
   imagePosition: "left" | "right";
+  link: string; // Added link property
 }
+
 const cards: CardProps[] = [
   {
     title: "Advertise with us",
     description: "Advertise with GamerGizmo today!",
     buttonText: "Explore Now",
     imagePosition: "left",
+    link: "/publish-ad", // Link for the first card
   },
   {
     title: "Boost your brand visibility",
     description: "Advertise with GamerGizmo today!",
-    buttonText: "Explore Now",
+    buttonText: "Browse Now",
     imagePosition: "right",
+    link: "/advertisement", // Link for the second card
   },
 ];
+
 const CardComponent: React.FC = () => {
   return (
     <Wrapper>
@@ -38,7 +44,6 @@ const CardComponent: React.FC = () => {
                 <div className="absolute -left-4 top-2 w-24 h-24 bg-gray-300 rounded-lg transform -rotate-[6deg] border-white border-4">
                   <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
-
                 <div className="absolute left-12 top-2 w-24 h-24 bg-gray-300 rounded-lg transform rotate-[6deg] border-white border-4">
                   <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
@@ -53,13 +58,13 @@ const CardComponent: React.FC = () => {
               <h2 className="text-lg font-bold text-gray-900">{card.title}</h2>
               <p className="text-gray-600">{card.description}</p>
               <div className="mt-2">
-              <Link href="/publish-ad" className="mt-4 px-4 py-1 bg-custom-gradient text-white rounded-md shadow-md">
-              {card.buttonText}
-            </Link>
-            </div>
-              {/* <button className="mt-4 px-4 py-1 bg-custom-gradient text-white rounded-md shadow-md"         >
-                {card.buttonText}
-              </button> */}
+                <Link
+                  href={card.link}
+                  className="mt-4 px-4 py-1 bg-custom-gradient text-white rounded-md shadow-md"
+                >
+                  {card.buttonText}
+                </Link>
+              </div>
             </div>
 
             {/* Right Side (Image Section with 3 Overlapping Cards) */}
@@ -68,7 +73,6 @@ const CardComponent: React.FC = () => {
                 <div className="absolute -left-4 top-2 w-24 h-24 bg-gray-300 rounded-lg transform -rotate-[6deg] border-white border-4">
                   <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
-
                 <div className="absolute left-12 top-2 w-24 h-24 bg-gray-300 rounded-lg transform rotate-[6deg] border-white border-4">
                   <Image src={gpu} alt="Ads Banner" className="object-cover" />
                 </div>
