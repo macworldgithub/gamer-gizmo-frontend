@@ -3,6 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import React from "react";
 import HeroSection from "./HeroSection";
 import { useSearchParams } from "next/navigation";
+import FilterSection from "@/components/FilterSection";
+import SearchBar from "@/components/SearchBar";
 const page = () => {
   const params = useSearchParams();
 
@@ -30,6 +32,7 @@ const page = () => {
   return (
     <div className="w-full">
       <PageHeader pageName="Desktops" title="Gaming PCs" />
+      <SearchBar categoryId="2"/>
       <HeroSection query={queryObject} />
     </div>
   );
