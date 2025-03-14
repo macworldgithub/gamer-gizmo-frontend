@@ -7,7 +7,8 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 const MoreSpecification = ({
   selectCategory,
@@ -32,9 +33,12 @@ const MoreSpecification = ({
   setSelectedStoarge,
   selectStorageType,
   setSelectedStorageType,
+  handleSkip,
 }: any) => {
   const [processorVariantData, setProcessorVariantData] = useState<any>([]);
   const [processorData, setProcessorData] = useState<any>([]);
+  const hasShownToast = useRef(false);
+
 
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
@@ -74,14 +78,31 @@ const MoreSpecification = ({
     }
   };
   useEffect(() => {
-    fetchProcessorVariants();
+    if (!hasShownToast.current) {
+      toast.info("You may skip the specifications by selecting the 'Skip Specifications' option if preferred.");
+      hasShownToast.current = true;
+    }
+  
+    fetchProcessorVariants(); 
   }, []);
+  
   useEffect(() => {
+   
     fetchProcessor();
   }, [selectProcessorVariant]);
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-3">
+      <div className="flex justify-end items-center ">
+        <button
+          type="button"
+          onClick={handleSkip}
+          className="bg-custom-gradient w-42 text-sm font-bold text-white px-4 py-2 rounded hover:bg-gray-300 "
+        >
+          Skip Specifications
+        </button>
+      </div>
+
       {/* Conditionally render additional fields based on the selected category */}
       {["Desktops", "Gaming PCs"].includes(selectCategory.name) && (
         <>

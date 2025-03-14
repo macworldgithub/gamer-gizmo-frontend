@@ -71,7 +71,7 @@ const FilterSection = () => {
           )}
 
           {searchQuery && productResults.length === 0 && !loading && (
-            <div className="bg-white border border-gray-300 rounded-md shadow-md max-h-60 overflow-auto absolute z-50 w-[600px] top-0 mt-[57px] rounded-lg transition-all duration-300 ease-in-out">
+            <div className="bg-white border border-gray-300 shadow-md max-h-60 overflow-auto absolute z-50 w-[600px] top-0 mt-[57px] rounded-lg transition-all duration-300 ease-in-out">
               <div className="p-4 text-center text-gray-500">
                 No products found
               </div>
@@ -79,7 +79,7 @@ const FilterSection = () => {
           )}
 
           {searchQuery && productResults.length > 0 && (
-            <div className="bg-white border border-gray-300 rounded-md shadow-md max-h-60 overflow-auto absolute z-50 w-[600px] top-0 mt-[57px] rounded-lg transition-all duration-300 ease-in-out">
+            <div className="bg-white border border-gray-300 shadow-md max-h-60 overflow-auto absolute z-50 w-[600px] top-0 mt-[57px] rounded-lg transition-all duration-300 ease-in-out">
               {loading ? (
                 <div className="p-4 flex justify-center items-center">
                   <div className="loader"></div> {/* Custom Loader */}

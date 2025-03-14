@@ -19,7 +19,7 @@ const HeroSection = ({ query }: any) => {
 
   return (
     <div className="bg-white dark:bg-black w-full h-auto">
-      <div className="mt-1 w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
+      <div className=" w-[100%] bg-[#F9F9F9] h-auto dark:bg-secondaryBlack dark:text-white">
         <div className="w-[100%] flex flex-col xl:flex-row relative justify-around items-center  mx-auto space-y-8 md:space-y-0">
           <div className="flex w-full   justify-center items-center gap-4">
             <SelectLabels query={query} route={"desktop"} />

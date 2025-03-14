@@ -226,6 +226,16 @@ const PublishAdd: React.FC = () => {
     fetchRam();
     fetchGPU();
   }, []);
+
+
+  // Function to skip the current step
+  const handleSkip = () => {
+    setActiveStep((prevStep) => prevStep + 1);
+    if (!completedSteps.includes(activeStep)) {
+      setCompletedSteps([...completedSteps, activeStep]);
+    }
+  };
+
   const handleSubmit = async () => {
     let formDataObject = new FormData();
 
@@ -351,6 +361,7 @@ const PublishAdd: React.FC = () => {
       label: <span className="dark:text-white">More Specifications</span>,
       content: (
         <MoreSpecification
+          handleSkip={handleSkip}
           selectCategory={selectCategory}
           formData={formData}
           handleFormChange={handleFormChange}
@@ -373,6 +384,7 @@ const PublishAdd: React.FC = () => {
           setSelectedStoarge={setSelectedStoarge}
           selectStorageType={selectStorageType}
           setSelectedStorageType={setSelectedStorageType}
+
         />
       ),
     },
@@ -479,9 +491,8 @@ const PublishAdd: React.FC = () => {
             disabled={activeStep === 0}
             onClick={handleBack}
             variant="contained"
-            className={`${
-              activeStep != 0 && "bg-custom-gradient "
-            } dark:text-white`}
+            className={`${activeStep != 0 && "bg-custom-gradient "
+              } dark:text-white`}
           >
             Back
           </Button>
