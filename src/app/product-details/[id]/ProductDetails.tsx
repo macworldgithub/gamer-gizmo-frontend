@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
-  // faLinkedin,
+  faLinkedin,
   faYoutube,
-  // faTwitter,
-  // faSquareGooglePlus,
+  faTwitter,
+  faSquareGooglePlus,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
@@ -149,7 +149,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">
           <div className="flex flex-col items-start">
-            <h1 className="text-black font-bold text-lg mb-5 dark:text-white">
+            <h1 className="text-black font-bold text-lg mb-5 dar  k:text-white">
               Popular Tags
             </h1>
             <div className="flex gap-6">
@@ -167,15 +167,13 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 <button
                   onClick={() => setActiveTab("specifications")}
                   className={`${activeTab === "specifications"
-                      ? "bg-purple-600 text-white"
-                      : "dark:text-white bg-secondaryColorLight text-black"
+                    ? "bg-purple-600 text-white"
+                    : "dark:text-white bg-secondaryColorLight text-black"
                     } w-28 px-4 py-2 rounded-md text-sm flex justify-center hover:bg-purple-600`}
                 >
                   Specifications
                 </button>
               )}
-
-
             </div>
           </div>
           <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
@@ -183,40 +181,35 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               Share Post:
             </span>
             <div className="flex space-x-3">
-              <Link
+              <a
                 href="https://www.facebook.com/profile.php?id=61573613765643"
-                className="text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="z-10 max-sm:w-2"
               >
                 <div className="bg-blue-600 w-7 h-8 rounded-md text-center flex justify-center items-center">
                   <FontAwesomeIcon icon={faFacebookF} color="#ffffff" />
                 </div>
-              </Link>
-              {/* <Link href="#" className="text-white">
-                <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
-                  <FontAwesomeIcon icon={faLinkedin} color="#000000" />
-                </div>
-              </Link> */}
-              <Link
+              </a>
+
+              <a href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon
+                  icon={faInstagram}
+                  className="z-10 max-sm:w-8 h-8 hover:text-red-800 "
+                  color="#E1306C"
+                />
+              </a>
+              <a
                 href="https://www.youtube.com/@GamerGizmo_Official"
-                className="text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-600 hover:text-red-800 transition-colors"
               >
                 <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
                   <FontAwesomeIcon icon={faYoutube} color="#000000" />
                 </div>
-              </Link>
-              {/* <Link href="#" className="text-white">
-                <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
-                  <FontAwesomeIcon icon={faTwitter} color="#000000" />
-                </div>
-              </Link> */}
-              <Link
-                href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6"
-                className="text-white"
-              >
-                <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
-                  <FontAwesomeIcon icon={faInstagram} color="#000000" />
-                </div>
-              </Link>
+              </a>
+
             </div>
           </div>
         </div>

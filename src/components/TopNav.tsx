@@ -83,17 +83,7 @@ const TopNav = () => {
           />
           </a>
          
-        
-          {/* <FontAwesomeIcon
-            icon={faGlobe}
-            className="z-10 max-sm:w-3"
-            color="#a0a4a7"
-          /> */}
-          <FontAwesomeIcon
-            icon={faLinkedin}
-            className="z-10 max-sm:w-3"
-            color="#a0a4a7"
-          />
+      
         </div>
       </div>
     </div>
