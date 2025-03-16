@@ -216,114 +216,193 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="gpu"
             value={pc.gpu || ""}
-            onChange={handleChange}
+            onChange={(e) =>
+              //@ts-ignore
+
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], gpu: e.target.value },
+                ],
+              }))
+            }
             placeholder="GPU"
             className="edit-input"
             required
           />
         </div>
-
+  
         <div className="flex flex-col">
           <label className="edit-label">Graphics</label>
           <input
             type="text"
             name="graphics"
             value={pc.graphics || ""}
-            onChange={handleChange}
+            onChange={(e) =>
+              //@ts-ignore
+
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], graphics: e.target.value },
+                ],
+              }))
+            }
             placeholder="Graphics"
             className="edit-input"
             required
           />
         </div>
-
+  
         <div className="flex flex-col">
           <label className="edit-label">Ports</label>
           <input
             type="text"
             name="ports"
             value={pc.ports || ""}
-            onChange={handleChange}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], ports: e.target.value },
+                ],
+              }))
+            }
             placeholder="Ports"
             className="edit-input"
             required
           />
         </div>
-
+  
         <div className="flex flex-col">
           <label className="edit-label">Processor</label>
-          <input
-            type="text"
-            name="processor"
-            value={pc.processors?.name || ""}
-            onChange={handleChange}
-            placeholder="Processor"
-            className="edit-input"
-            required
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label className="edit-label">Processor Variant</label>
           <select
-            name="processor_variant"
-            value={
-              pc
-                .processor_variant_personal_computers_processor_variantToprocessor_variant
-                ?.name || ""
+            name="processor"
+            value={pc.processor || ""}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], processor: e.target.value },
+                ],
+              }))
             }
-            //@ts-ignore
-            onChange={handleChange}
             className="edit-input"
             required
           >
-            {processorVariantData.map((variant) => (
-              <option key={variant.id} value={variant.name}>
+            <option value="">Select Processor</option>
+            {processor.map((variant) => (
+              <option key={variant.id} value={variant.id}>
                 {variant.name}
               </option>
             ))}
           </select>
         </div>
-
+  
+        <div className="flex flex-col">
+          <label className="edit-label">Processor Variant</label>
+          <select
+            name="processor_variant"
+            value={pc.processor_variant || ""}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], processor_variant: e.target.value },
+                ],
+              }))
+            }
+            className="edit-input"
+            required
+          >
+            <option value="">Select Processor Variant</option>
+            {processorVariantData.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
+        </div>
+  
         <div className="flex flex-col">
           <label className="edit-label">RAM</label>
-          <input
-            type="text"
+          <select
             name="ram"
-            value={pc.ram_personal_computers_ramToram?.name || ""}
-            onChange={handleChange}
-            placeholder="RAM"
+            value={pc.ram || ""}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], ram: e.target.value },
+                ],
+              }))
+            }
             className="edit-input"
             required
-          />
+          >
+            <option value="">Select RAM</option>
+            {ramOptions.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
         </div>
-
+  
         <div className="flex flex-col">
           <label className="edit-label">Storage</label>
-          <input
-            type="text"
+          <select
             name="storage"
-            value={pc.storage_personal_computers_storageTostorage?.name || ""}
-            onChange={handleChange}
-            placeholder="Storage"
+            value={pc.storage || ""}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], storage: e.target.value },
+                ],
+              }))
+            }
             className="edit-input"
             required
-          />
+          >
+            <option value="">Select Storage</option>
+            {storage.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
         </div>
-
+  
         <div className="flex flex-col">
           <label className="edit-label">Storage Type</label>
-          <input
-            type="text"
+          <select
             name="storage_type"
-            value={
-              pc.storage_type_personal_computers_storage_typeTostorage_type
-                ?.name || ""
+            value={pc.storage_type || ""}
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                personal_computers: [
+                  { ...prev.personal_computers[0], storage_type: e.target.value },
+                ],
+              }))
             }
-            onChange={handleChange}
-            placeholder="Storage Type"
             className="edit-input"
             required
-          />
+          >
+            <option value="">Select Storage Type</option>
+            {storageType.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
         </div>
       </>
     );
@@ -373,7 +452,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           />
         </div>
 
-       
+
 
         <div className="flex flex-col">
           <label className="edit-label">Graphics</label>
@@ -532,7 +611,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             <option value="">Select RAM</option>
             {ramOptions.map((variant) => (
               <option key={variant.id} value={variant?.id}>
-                {variant.name} 
+                {variant.name}
               </option>
             ))}
           </select>
@@ -551,31 +630,31 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           />
         </div>
         <div className="flex flex-col">
-  <label className="edit-label">GPU</label>
-  <select
-    name="laptops[0]?.gpu"
-    value={laptop?.gpu || ""}
-    //@ts-ignore
-    onChange={(e) =>
-      //@ts-ignore
-      setAdData((prev) => ({
-        ...prev,
-        laptops: [
-          { ...prev.laptops[0], gpu: e.target.value },
-        ],
-      }))
-    }
-    className="edit-input"
-    required
-  >
-    <option value="">Select GPU</option>
-    {gpu.map((variant) => (
-      <option key={variant.id} value={variant.id}>
-        {variant.name}
-      </option>
-    ))}
-  </select>
-</div>
+          <label className="edit-label">GPU</label>
+          <select
+            name="laptops[0]?.gpu"
+            value={laptop?.gpu || ""}
+            //@ts-ignore
+            onChange={(e) =>
+              //@ts-ignore
+              setAdData((prev) => ({
+                ...prev,
+                laptops: [
+                  { ...prev.laptops[0], gpu: e.target.value },
+                ],
+              }))
+            }
+            className="edit-input"
+            required
+          >
+            <option value="">Select GPU</option>
+            {gpu.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
 
         <div className="flex flex-col">

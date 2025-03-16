@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -17,10 +16,45 @@ import ProductImageSwiper from "@/components/ProductImageSwiper";
 import { CiUser } from "react-icons/ci";
 import { FaRegComment, FaUser } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
+import { getSpecifications } from "@/app/utils/getSpecifications";
+import { getRelevantFields } from "@/app/utils/specificationFields";
+
 
 const ProductDetails = ({ data, refetch, seReftech }: any) => {
   const [activeTab, setActiveTab] = useState("overview");
   const totalReviewsCount = data?.product_reviews?.length || 0;
+  const specifications = getSpecifications(data);
+  // Function to select the correct specifications based on category_id
+  const categorySpecifications = () => {
+    switch (data?.categories?.id) {
+      case 1: // Laptops
+        return data?.laptops?.[0];
+      case 2: // Personal Computers
+        return data?.personal_computers?.[0];
+      case 3: // Components
+        return data?.components?.[0];
+      case 4: // Gaming Consoles
+        return data?.gaming_console?.[0];
+      default:
+        return null;
+    }
+  };
+
+  const hasValidSpecifications = () => {
+    const categoryData = categorySpecifications();
+    const relevantFields = getRelevantFields(data?.categories?.id);
+
+    if (!categoryData || relevantFields.length === 0) return false;
+
+    return relevantFields.some((field: any) => {
+      const value = field.includes(".")
+        //@ts-ignore
+        ? field.split(".").reduce((obj, key) => obj?.[key], categoryData)
+        : categoryData[field];
+      return value && value !== "Not Available" && value.toString().trim() !== "";
+    });
+  };
+
 
   console.log(data, "ppo");
   return (
@@ -76,10 +110,10 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             <p className="text-sm md:text-xl text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
               {data?.name}
             </p>
-            <div className="text-sm text-gray-500  text-start dark:text-[#616161]">
+            {/* <div className="text-sm text-gray-500  text-start dark:text-[#616161]">
               <h3 className="text-base font-bold">Warranty:</h3>
               <p className="text-sm">1 year</p>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -102,12 +136,12 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               {data?.condition === 1
                 ? "New"
                 : data?.condition === 2
-                ? "Used"
-                : data?.condition === 3
-                ? "Like New"
-                : data?.condition === 4
-                ? "Refurbished"
-                : "Unknown"}
+                  ? "Used"
+                  : data?.condition === 3
+                    ? "Like New"
+                    : data?.condition === 4
+                      ? "Refurbished"
+                      : "Unknown"}
             </p>
           </div>
         </div>
@@ -120,24 +154,27 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             <div className="flex gap-6">
               <button
                 onClick={() => setActiveTab("overview")}
-                className={`${
-                  activeTab === "overview"
-                    ? "bg-purple-600 text-white"
-                    : "dark:text-white bg-secondaryColorLight text-black"
-                } w-28 px-4 py-2 rounded-md text-sm flex justify-center hover:bg-purple-600`}
+                className={`${activeTab === "overview"
+                  ? "bg-purple-600 text-white"
+                  : "dark:text-white bg-secondaryColorLight text-black"
+                  } w-28 px-4 py-2 rounded-md text-sm flex justify-center hover:bg-purple-600`}
               >
                 Overview
               </button>
-              <button
-                onClick={() => setActiveTab("specifications")}
-                className={`${
-                  activeTab === "specifications"
-                    ? "bg-purple-600 text-white"
-                    : "dark:text-white bg-secondaryColorLight text-black"
-                } w-28 px-4 py-2 rounded-md text-sm flex justify-center hover:bg-purple-600`}
-              >
-                Specifications
-              </button>
+
+              {hasValidSpecifications() && (
+                <button
+                  onClick={() => setActiveTab("specifications")}
+                  className={`${activeTab === "specifications"
+                      ? "bg-purple-600 text-white"
+                      : "dark:text-white bg-secondaryColorLight text-black"
+                    } w-28 px-4 py-2 rounded-md text-sm flex justify-center hover:bg-purple-600`}
+                >
+                  Specifications
+                </button>
+              )}
+
+
             </div>
           </div>
           <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
