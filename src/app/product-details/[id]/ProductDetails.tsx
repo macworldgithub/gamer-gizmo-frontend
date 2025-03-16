@@ -3,10 +3,11 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
-  faLinkedin,
+  // faLinkedin,
   faYoutube,
-  faTwitter,
-  faSquareGooglePlus,
+  // faTwitter,
+  // faSquareGooglePlus,
+  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 import SpecificationsTable from "./specification";
@@ -145,29 +146,38 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               Share Post:
             </span>
             <div className="flex space-x-3">
-              <Link href="#" className="text-white">
+              <Link
+                href="https://www.facebook.com/profile.php?id=61573613765643"
+                className="text-white"
+              >
                 <div className="bg-blue-600 w-7 h-8 rounded-md text-center flex justify-center items-center">
                   <FontAwesomeIcon icon={faFacebookF} color="#ffffff" />
                 </div>
               </Link>
-              <Link href="#" className="text-white">
+              {/* <Link href="#" className="text-white">
                 <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
                   <FontAwesomeIcon icon={faLinkedin} color="#000000" />
                 </div>
-              </Link>
-              <Link href="#" className="text-white">
+              </Link> */}
+              <Link
+                href="https://www.youtube.com/@GamerGizmo_Official"
+                className="text-white"
+              >
                 <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
                   <FontAwesomeIcon icon={faYoutube} color="#000000" />
                 </div>
               </Link>
-              <Link href="#" className="text-white">
+              {/* <Link href="#" className="text-white">
                 <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
                   <FontAwesomeIcon icon={faTwitter} color="#000000" />
                 </div>
-              </Link>
-              <Link href="#" className="text-white">
+              </Link> */}
+              <Link
+                href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6"
+                className="text-white"
+              >
                 <div className="bg-btnGray w-7 h-8 rounded-md text-center flex justify-center items-center">
-                  <FontAwesomeIcon icon={faSquareGooglePlus} color="#000000" />
+                  <FontAwesomeIcon icon={faInstagram} color="#000000" />
                 </div>
               </Link>
             </div>
