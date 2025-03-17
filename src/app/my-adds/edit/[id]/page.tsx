@@ -20,7 +20,6 @@ export default function EditAdPage() {
   const [brands, setBrands] = useState<any[]>([]);
   const [componentCategories, setComponentCategories] = useState<any[]>([]);
 
-
   useEffect(() => {
     if (!id) return;
     fetchAdDetails();
@@ -86,7 +85,6 @@ export default function EditAdPage() {
     }
   };
 
-
   const fetchLocations = async () => {
     try {
       const response = await axios.get(
@@ -97,8 +95,6 @@ export default function EditAdPage() {
       console.error("Failed to fetch locations.");
     }
   };
-
- 
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -113,7 +109,7 @@ export default function EditAdPage() {
     >
   ) => {
     const { name, value } = e.target;
-  
+
     setAdData((prev: any) => ({
       ...prev,
       laptops: [
@@ -124,23 +120,60 @@ export default function EditAdPage() {
       ],
     }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     try {
+      // Prepare specifications data based on category_id
+      const specificationsData = () => {
+        const specs = {
+          ...adData.laptops?.[0], // Default for laptops (if any)
+          ...adData.personal_computers?.[0], // or personal computers
+          ...adData.components?.[0], // or components
+          ...adData.gaming_console?.[0], // or gaming console
+        };
+
+        switch (adData.category_id) {
+          case 1: // Laptops
+            return { laptops: [specs] };
+          case 2: // Personal Computers
+            return { personal_computers: [specs] };
+          case 3: // Components
+            return { components: [specs] };
+          case 4: // Gaming Console
+            return { gaming_console: [specs] };
+          default:
+            return {};
+        }
+      };
+
+      // Prepare final payload
+      const payload = {
+        product_id: id,
+        user_id: userId,
+        name: adData.name,
+        price: adData.price,
+        condition: adData.condition,
+        description: adData.description,
+        brand: adData.brand,
+        location: adData.location,
+        stock: adData.stock,
+        ...specificationsData(),
+      };
+
+      // API Call
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/updateProduct`,
-        {
-          ...adData,
-          product_id: id,
-          user_id: userId,
-        },
+        payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
       toast.success("Ad updated successfully");
       router.push("/my-adds");
     } catch (err) {
+      console.error(err);
       toast.error("Failed to update ad");
     } finally {
       setLoading(false);
@@ -184,7 +217,7 @@ export default function EditAdPage() {
                   required
                 />
               </div>
-             
+
               {/* Condition (Hardcoded options) */}
               <div className="flex flex-col">
                 <label className="edit-label">Condition</label>
@@ -233,7 +266,7 @@ export default function EditAdPage() {
                   ))}
                 </select>
               </div>
-        
+
               {/* Stock */}
               <div className="flex flex-col">
                 <label className="edit-label">Stock</label>
@@ -277,6 +310,7 @@ export default function EditAdPage() {
           </form>
         )}
       </div>
+      <button>Update Ad</button>
     </div>
   );
 }
