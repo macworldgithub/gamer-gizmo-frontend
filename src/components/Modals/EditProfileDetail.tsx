@@ -107,9 +107,11 @@ const EditProfileModal = ({
         openEditModal ? "block" : "hidden"
       }`}
     >
-      <div className="bg-white transition-all duration-200 rounded-lg p-8 w-full max-w-md shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">Edit Profile</h2>
-        <form className="space-y-4">
+      <div className="bg-white transition-all duration-200 rounded-lg p-8 w-full max-w-md shadow-md dark:bg-[#1e1e2f]">
+        <h2 className="text-2xl font-semibold mb-4 dark:text-white">
+          Edit Profile
+        </h2>
+        <form className="space-y-4 ">
           {/* Username Field */}
           {/* <div>
             <label
@@ -139,7 +141,7 @@ const EditProfileModal = ({
           <div>
             <label
               htmlFor="first_name"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-white"
             >
               First Name
             </label>
@@ -152,7 +154,7 @@ const EditProfileModal = ({
                 value={formData.first_name}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-black"
               />
             </div>
             {errors.firstName && (
@@ -164,7 +166,7 @@ const EditProfileModal = ({
           <div>
             <label
               htmlFor="lastName"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-white"
             >
               Last Name
             </label>
@@ -177,7 +179,7 @@ const EditProfileModal = ({
                 value={formData.last_name}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-black"
               />
             </div>
             {errors.lastName && (
@@ -189,7 +191,7 @@ const EditProfileModal = ({
           <div>
             <label
               htmlFor="dob"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-white"
             >
               Date of Birth
             </label>
@@ -205,7 +207,7 @@ const EditProfileModal = ({
                     : ""
                 }
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-black"
               />
             </div>
             {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
@@ -214,7 +216,7 @@ const EditProfileModal = ({
           <div>
             <label
               htmlFor="gender"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-white"
             >
               Gender
             </label>
@@ -225,7 +227,7 @@ const EditProfileModal = ({
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-black"
               >
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -239,7 +241,7 @@ const EditProfileModal = ({
           <div>
             <label
               htmlFor="phone"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-white"
             >
               Phone
             </label>
@@ -252,7 +254,7 @@ const EditProfileModal = ({
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Phone"
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-black"
               />
             </div>
             {errors.phone && (
@@ -264,7 +266,7 @@ const EditProfileModal = ({
           <div>
             <label
               htmlFor="address"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-white"
             >
               Address
             </label>
@@ -277,7 +279,7 @@ const EditProfileModal = ({
                 value={formData.address ? formData.address : ""}
                 onChange={handleChange}
                 placeholder="Address"
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-black"
               />
             </div>
             {errors.address && (

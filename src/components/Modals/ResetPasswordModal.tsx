@@ -125,10 +125,10 @@ export default function ResetPasswordModal({
       aria-describedby="modal-modal-description"
       className="flex justify-center items-center text-black "
     >
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md dark:bg-[#1e1e2f] ">
         <div className="right-0 text-right w-full">
           <span
-            className="hover:cursor-pointer"
+            className="hover:cursor-pointer dark:text-white"
             onClick={() => {
               setOpenPassModal(false);
               setOtpSent(false);
@@ -137,10 +137,12 @@ export default function ResetPasswordModal({
             X
           </span>
         </div>
-        <h1 className="text-xl text-center font-bold mb-6">Reset Password</h1>
+        <h1 className="text-xl text-center font-bold mb-6 dark:text-white">
+          Reset Password
+        </h1>
         {!otpSent ? (
           <div className="flex justify-center flex-col">
-            <h1 className="text-gray-600 mb-6">
+            <h1 className="text-gray-600 mb-6 dark:text-white">
               To reset your password, we will send an OTP to your registered
               email. Please enter the OTP to create a new password.
             </h1>
@@ -156,7 +158,7 @@ export default function ResetPasswordModal({
             <TextField
               label="OTP"
               variant="outlined"
-              className="mb-4 w-full"
+              className="mb-4 w-full dark:text-white"
               type="text"
               name="otp"
               value={formData.otp}
@@ -167,7 +169,7 @@ export default function ResetPasswordModal({
             <TextField
               label="New Password"
               variant="outlined"
-              className="mb-4 w-full"
+              className="mb-4 w-full dark:text-white"
               type="password"
               name="newPassword"
               value={formData.newPassword}
@@ -178,7 +180,7 @@ export default function ResetPasswordModal({
             <TextField
               label="Confirm Password"
               variant="outlined"
-              className="mb-6 w-full"
+              className="mb-6 w-full dark:text-white"
               type="password"
               name="confirmPassword"
               value={formData.confirmPassword}
