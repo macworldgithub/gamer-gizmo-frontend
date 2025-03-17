@@ -61,6 +61,13 @@ const PopularMainSection: React.FC = () => {
       // images: ["/images/gpu.png"],
     },
   ]);
+  const ConsoleCategory = "Gaming Consoles";
+  const consoleCondition = 2;
+  const explorePath = `/${encodeURIComponent(
+    ConsoleCategory
+  )}?condition=${consoleCondition}`;
+  const [componentsUsedData, setComponentsUsedData] = useState([]);
+  const [componentsNewData, setComponentsNewData] = useState([]);
   const token = useSelector((state: RootState) => state.user.token);
   const [fetcher, seReftech] = useState(false);
 
@@ -149,6 +156,35 @@ const PopularMainSection: React.FC = () => {
     }
   };
 
+  const fetchUsedComponents = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=3&condition=2`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setComponentsUsedData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
+
+  const fetchNewComponents = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=3&condition=1`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setComponentsNewData(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch models.");
+    }
+  };
   useEffect(() => {
     fetchUsedLaptops();
     fetchNewLaptops();
@@ -156,6 +192,8 @@ const PopularMainSection: React.FC = () => {
     fetchNewConsoles();
     fetchUsedDesktops();
     fetchNewDesktops();
+    fetchUsedComponents();
+    fetchNewComponents();
   }, [fetcher]);
   return (
     <div className="h-auto w-full">
@@ -202,7 +240,7 @@ const PopularMainSection: React.FC = () => {
         products={consolesUsedData}
         seReftech={seReftech}
         refetch={fetcher}
-        explorePath="/"
+        explorePath={`/console?condition=2`}
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <PopularItemSection
@@ -211,8 +249,26 @@ const PopularMainSection: React.FC = () => {
         products={consolesNewData}
         seReftech={seReftech}
         refetch={fetcher}
-        explorePath="/"
+        explorePath={`/console?condition=1`}
         onExplore={() => console.log("Explore Used Consoles")}
+      />
+      <PopularItemSection
+        title="Popular in Used Components"
+        subtitle="Choose your necessary gaming items from this category."
+        products={componentsUsedData}
+        seReftech={seReftech}
+        refetch={fetcher}
+        explorePath={`/components?condition=2`}
+        onExplore={() => console.log("Explore Used Consoles")}
+      />
+      <PopularItemSection
+        title="Popular in New Components"
+        subtitle="Choose your necessary gaming items from this category."
+        products={componentsNewData}
+        seReftech={seReftech}
+        refetch={fetcher}
+        explorePath={`/components?condition=1`}
+        onExplore={() => console.log("Explore New Components")}
       />
     </div>
   );

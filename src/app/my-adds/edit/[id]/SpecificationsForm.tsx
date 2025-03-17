@@ -45,7 +45,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         }
       );
       setGpu(response?.data?.data || []);
-      console.log(response?.data?.data, 'Fetched GPU Options');
+      console.log(response?.data?.data, "Fetched GPU Options");
     } catch (error) {
       console.error("Failed to fetch GPU options.", error);
     }
@@ -75,10 +75,9 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             Authorization: `Bearer ${token}`,
           },
         }
-
       );
       setStorage(response?.data?.data || []);
-      console.log(response?.data?.data, 'ssssssss')
+      console.log(response?.data?.data, "ssssssss");
     } catch (error) {
       console.error("Failed to fetch storage.", error);
     }
@@ -94,7 +93,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         }
       );
       setStorageType(response?.data?.data || []);
-      console.log(response?.data?.data, 'Fetched Storage Types');
+      console.log(response?.data?.data, "Fetched Storage Types");
     } catch (error) {
       console.error("Failed to fetch storage types.", error);
     }
@@ -126,7 +125,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         }
       );
       setRamOptions(response?.data?.data || []);
-      console.log(response?.data?.data, 'Fetched RAM Options');
+      console.log(response?.data?.data, "Fetched RAM Options");
     } catch (error) {
       console.error("Failed to fetch RAM options.", error);
     }
@@ -207,7 +206,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   }
 
   if (categoryId === 2 && adData?.personal_computers?.length > 0) {
-    const pc = adData.personal_computers[0];
+    const pc = adData?.personal_computers[0];
     return (
       <>
         <div className="flex flex-col">
@@ -231,7 +230,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             required
           />
         </div>
-  
+
         <div className="flex flex-col">
           <label className="edit-label">Graphics</label>
           <input
@@ -253,7 +252,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             required
           />
         </div>
-  
+
         <div className="flex flex-col">
           <label className="edit-label">Ports</label>
           <input
@@ -274,7 +273,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             required
           />
         </div>
-  
+
         <div className="flex flex-col">
           <label className="edit-label">Processor</label>
           <select
@@ -300,7 +299,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             ))}
           </select>
         </div>
-  
+
         <div className="flex flex-col">
           <label className="edit-label">Processor Variant</label>
           <select
@@ -311,7 +310,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
               setAdData((prev) => ({
                 ...prev,
                 personal_computers: [
-                  { ...prev.personal_computers[0], processor_variant: e.target.value },
+                  {
+                    ...prev.personal_computers[0],
+                    processor_variant: e.target.value,
+                  },
                 ],
               }))
             }
@@ -326,7 +328,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             ))}
           </select>
         </div>
-  
+
         <div className="flex flex-col">
           <label className="edit-label">RAM</label>
           <select
@@ -352,7 +354,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             ))}
           </select>
         </div>
-  
+
         <div className="flex flex-col">
           <label className="edit-label">Storage</label>
           <select
@@ -378,7 +380,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             ))}
           </select>
         </div>
-  
+
         <div className="flex flex-col">
           <label className="edit-label">Storage Type</label>
           <select
@@ -389,7 +391,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
               setAdData((prev) => ({
                 ...prev,
                 personal_computers: [
-                  { ...prev.personal_computers[0], storage_type: e.target.value },
+                  {
+                    ...prev.personal_computers[0],
+                    storage_type: e.target.value,
+                  },
                 ],
               }))
             }
@@ -451,8 +456,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             required
           />
         </div>
-
-
 
         <div className="flex flex-col">
           <label className="edit-label">Graphics</label>
@@ -545,9 +548,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
               //@ts-ignore
               setAdData((prev) => ({
                 ...prev,
-                laptops: [
-                  { ...prev.laptops[0], storage: e.target.value },
-                ],
+                laptops: [{ ...prev.laptops[0], storage: e.target.value }],
               }))
             }
             className="edit-input"
@@ -572,9 +573,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
               //@ts-ignore
               setAdData((prev) => ({
                 ...prev,
-                laptops: [
-                  { ...prev.laptops[0], storage_type: e.target.value },
-                ],
+                laptops: [{ ...prev.laptops[0], storage_type: e.target.value }],
               }))
             }
             className="edit-input"
@@ -589,7 +588,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           </select>
         </div>
 
-
         <div className="flex flex-col">
           <label className="edit-label">RAM</label>
           <select
@@ -600,9 +598,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
               //@ts-ignore
               setAdData((prev) => ({
                 ...prev,
-                laptops: [
-                  { ...prev.laptops[0], ram: e.target.value },
-                ],
+                laptops: [{ ...prev.laptops[0], ram: e.target.value }],
               }))
             }
             className="edit-input"
@@ -639,9 +635,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
               //@ts-ignore
               setAdData((prev) => ({
                 ...prev,
-                laptops: [
-                  { ...prev.laptops[0], gpu: e.target.value },
-                ],
+                laptops: [{ ...prev.laptops[0], gpu: e.target.value }],
               }))
             }
             className="edit-input"
@@ -655,7 +649,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             ))}
           </select>
         </div>
-
 
         <div className="flex flex-col">
           <label className="edit-label">Screen Size</label>

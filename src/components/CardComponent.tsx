@@ -25,7 +25,7 @@ const cards: CardProps[] = [
     description: "Advertise with GamerGizmo today!",
     buttonText: "Explore Now",
     imagePosition: "right",
-    link: "/advertisement", // Link for the second card
+    link: "/publish-ad", // Link for the second card
   },
 ];
 

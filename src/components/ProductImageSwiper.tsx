@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { FaRegHeart, FaRegBookmark } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -91,11 +91,16 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
       </div>
 
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={10}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
+        autoplay={{
+          delay: 3000, // Slide every 3 seconds
+          disableOnInteraction: false, // Keeps autoplay even after user interaction
+        }}
+        loop={true}
         className="rounded-lg overflow-hidden"
       >
         {data.product_images.map((item: any, idx: any) => (

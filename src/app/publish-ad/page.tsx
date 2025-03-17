@@ -227,7 +227,6 @@ const PublishAdd: React.FC = () => {
     fetchGPU();
   }, []);
 
-
   // Function to skip the current step
   const handleSkip = () => {
     setActiveStep((prevStep) => prevStep + 1);
@@ -253,33 +252,33 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("location", selectedLocation.id.toString());
     formDataObject.append("is_published", "true");
 
-    // if (selectCategory?.name === "Components") {
-    //   formDataObject.append(
-    //     "component_type",
-    //     selectComponentCategory?.id.toString() || ""
-    //   );
-    //   formDataObject.append("text", formData.component_text);
-    // } else {
-    //   formDataObject.append("ram", selectRam.id.toString());
-    //   formDataObject.append("processor", selectProcessor.id.toString());
-    //   formDataObject.append(
-    //     "processorVariant",
-    //     selectProcessorVariant.id.toString()
-    //   );
-    //   formDataObject.append("storage", selectStoarge.id.toString());
-    //   formDataObject.append("storageType", selectStorageType.id.toString());
-    //   formDataObject.append("graphics", formData.graphics);
-    //   formDataObject.append("gpu", selectGpu.id.toString());
-    //   formDataObject.append("ports", formData.ports);
-    //   formDataObject.append("battery_life", formData.batteryLife);
-    //   formDataObject.append("warranty_status", formData.warranty_status);
-    //   formDataObject.append("connectivity", formData.connectivity);
-    //   formDataObject.append("accessories", formData.accessories);
-    //   formDataObject.append("screen_size", formData.screenSize);
-    //   formDataObject.append("weight", formData.weight);
-    //   formDataObject.append("screen_resolution", formData.screenResolution);
-    //   formDataObject.append("color", formData.color);
-    // }
+    if (selectCategory?.name === "Components") {
+      formDataObject.append(
+        "component_type",
+        selectComponentCategory?.id.toString() || ""
+      );
+      formDataObject.append("text", formData.component_text);
+    } else {
+      formDataObject.append("ram", selectRam.id.toString());
+      formDataObject.append("processor", selectProcessor.id.toString());
+      formDataObject.append(
+        "processorVariant",
+        selectProcessorVariant.id.toString()
+      );
+      formDataObject.append("storage", selectStoarge.id.toString());
+      formDataObject.append("storageType", selectStorageType.id.toString());
+      formDataObject.append("graphics", formData.graphics);
+      formDataObject.append("gpu", selectGpu.id.toString());
+      formDataObject.append("ports", formData.ports);
+      formDataObject.append("battery_life", formData.batteryLife);
+      formDataObject.append("warranty_status", formData.warranty_status);
+      formDataObject.append("connectivity", formData.connectivity);
+      formDataObject.append("accessories", formData.accessories);
+      formDataObject.append("screen_size", formData.screenSize);
+      formDataObject.append("weight", formData.weight);
+      formDataObject.append("screen_resolution", formData.screenResolution);
+      formDataObject.append("color", formData.color);
+    }
     if (fileList.length > 0) {
       fileList.forEach((file) => {
         console.log(file);
@@ -384,7 +383,6 @@ const PublishAdd: React.FC = () => {
           setSelectedStoarge={setSelectedStoarge}
           selectStorageType={selectStorageType}
           setSelectedStorageType={setSelectedStorageType}
-
         />
       ),
     },
@@ -491,8 +489,9 @@ const PublishAdd: React.FC = () => {
             disabled={activeStep === 0}
             onClick={handleBack}
             variant="contained"
-            className={`${activeStep != 0 && "bg-custom-gradient "
-              } dark:text-white`}
+            className={`${
+              activeStep != 0 && "bg-custom-gradient "
+            } dark:text-white`}
           >
             Back
           </Button>
