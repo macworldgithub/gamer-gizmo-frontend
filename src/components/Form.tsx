@@ -47,9 +47,9 @@ const Form: React.FC<any> = ({ onSubmit, formData, onChange }) => {
       <input
         type="number"
         name="budget"
-        placeholder="Enter your budget in $"
+        placeholder="Enter your budget in AED"
         value={formData.budget}
-        onChange={onChange}
+        onChange={onChange} 
         className="pl-4 input-field"
         min="0"
       />

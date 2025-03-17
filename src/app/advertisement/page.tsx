@@ -17,7 +17,7 @@ const page = () => {
 
   const features = [
     {
-      icon: "/images/chartline.png",
+      icon: "/images/Chartline.png",
       title: "Highly Target Audience",
       description: "Market directly to gamers & tech buyers",
     },
@@ -57,7 +57,7 @@ const page = () => {
           </div>
           <div className="flex justify-center lg:pr-16">
             <Image
-              src="/images/laptop.png"
+              src="/images/Laptop.png"
               alt="Showroom branding preview"
               className="w-full max-w-sm rounded-lg shadow-lg"
               width={500}
@@ -73,7 +73,7 @@ const page = () => {
         </h2>
 
         <div className="flex justify-center items-center gap-4 mb-6">
-          <Image src="/images/start.png" width={300} height={400} />
+          <Image alt="img" src="/images/start.png" width={300} height={400} />
         </div>
       </div>
 
