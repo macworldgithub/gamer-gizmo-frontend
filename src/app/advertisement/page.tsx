@@ -6,6 +6,7 @@ import FeaturesSection from "@/components/FeaturesSection";
 import BuisnessInquiries from "@/components/BuisnessInquiries";
 import Card from "./card";
 import Image from "next/image";
+import Link from "next/link";
 
 const page = () => {
   const cardContent = {
@@ -41,8 +42,8 @@ const page = () => {
         //  showButton={false}
       />
       <Card />
-      <div className="container mx-auto px-8 lg:px-16 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 py-14">
+      <div className="container mx-auto px-8 lg:px-1 my-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
           <div className="flex flex-col gap-4 lg:gap-6 lg:pr-12 lg:pl-8 lg:py-6">
             <h2 className="text-xl md:text-2xl font-bold">How it works</h2>
 
@@ -68,12 +69,16 @@ const page = () => {
       </div>
 
       <div className=" text-center">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-6 ">
+        <h2 className="md:text-3xl max-md:text-lg font-semibold text-gray-800 mb-3 ">
           Ready to reach thousand of gamers?
         </h2>
 
         <div className="flex justify-center items-center gap-4 mb-6">
-          <Image alt="img" src="/images/start.png" width={300} height={400} />
+          <Link href="/publish-ad">
+            <button className="bg-custom-gradient max-md:w-64 hover:bg-none hover:text-black hover:outline-dashed md:w-80 rounded-md max-md:text-sm md:text-base p-1  text-white">
+              Start Advertising Now
+            </button>
+          </Link>
         </div>
       </div>
 

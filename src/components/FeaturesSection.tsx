@@ -26,22 +26,22 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
 }) => {
   return (
     <Wrapper>
-      <section className="bg-white py-10 px-5 w-full">
+      <section className="bg-white py-6 px-5 w-full mb-4">
         {/* <div className="max-w-7xl mx-auto text-center"> */}
         {/* Section Title */}
         {/* <h1 className="text-3xl font-bold mb-8">{title}</h1> */}
         {title && (
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold">{title}</h1>
+          <div className="text-center mb-4">
+            <h1 className="max-md:text-lg md:text-3xl font-bold">{title}</h1>
           </div>
         )}
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center p-6 rounded-lg "
+              className="flex flex-col items-center text-center p-3 rounded-lg "
             >
               {/* Feature Icon */}
               <Image
@@ -52,12 +52,16 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
               />
               {/* Feature Title */}
               {feature.title && (
-                <h2 className="text-lg font-semibold mb-2">{feature.title}</h2>
+                <h2 className="text-lg max-md:text-sm font-semibold mb-1">
+                  {feature.title}
+                </h2>
               )}
               {/* Feature Description */}
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="text-gray-600 max-md:text-xs max-md:w-36 md:w-56">
+                {feature.description}
+              </p>
               {showButton && (
-                <div className="mt-8 w-[11rem] h-[3rem] bg-custom-gradient rounded-lg text-center flex justify-center items-center">
+                <div className="mt-8 w-[11rem] h-[3rem] bg-custom-gradient  rounded-lg text-center flex justify-center items-center">
                   <Link href={buttonLink} passHref>
                     {/* <a className="px-6 py-2 text-white bg-custom-gradient hover:bg-purple-600 transition rounded-lg"> */}
                     {buttonText}
