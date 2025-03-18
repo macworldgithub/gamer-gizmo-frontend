@@ -79,7 +79,7 @@ export default function AdList({
   };
 
   return (
-    <div className="m-4">
+    <div className="m-4 dark:bg-[#1e1e2f]">
       <div className="flex justify-between items-center bg-black text-white w-fit px-4 py-1 rounded-full mb-4">
         <span className="font-medium text-lg">All Ads ({total})</span>
       </div>
@@ -105,10 +105,10 @@ export default function AdList({
             <h3 className="font-bold text-purple-700 max-md:text-[12px] leading-6 break-words">
               {ad?.category}
             </h3>
-            <h3 className="font-bold text-lg max-md:text-[12px] leading-6 break-words">
+            <h3 className="font-bold text-lg max-md:text-[12px] leading-6 break-words dark:text-white">
               {ad?.name}
             </h3>
-            <h3 className="text-sm max-md:text-[12px] leading-6 break-words">
+            <h3 className="text-sm max-md:text-[12px] leading-6 break-words dark:text-white">
               {ad?.description?.slice(0, 120)} ...
             </h3>
             <div className="flex flex-wrap items-center text-gray-500 text-sm space-x-4 mt-2">
@@ -128,7 +128,7 @@ export default function AdList({
             </div>
             <div className="flex flex-row lg:flex-col gap-2">
               <button
-                className="px-4 lg:px-6 border border-black font-bold rounded-full hover:bg-gray-200"
+                className="px-4 lg:px-6 border border-black font-bold rounded-full hover:bg-gray-200 dark:text-white dark:border-white"
                 onClick={() => router.push(`/my-adds/edit/${ad.id}`)}
               >
                 Edit
@@ -149,17 +149,17 @@ export default function AdList({
         <button
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}
-          className="px-4 py-2 border rounded-lg disabled:opacity-50"
+          className="px-4 py-2 border rounded-lg disabled:opacity-50 dark:text-white"
         >
           Previous
         </button>
-        <span className="px-4 py-2 border rounded-lg">
+        <span className="px-4 py-2 border rounded-lg dark:text-white">
           Page {currentPage} of {totalPages}
         </span>
         <button
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage(currentPage + 1)}
-          className="px-4 py-2 border rounded-lg disabled:opacity-50"
+          className="px-4 py-2 border rounded-lg disabled:opacity-50 dark:text-white"
         >
           Next
         </button>
@@ -167,11 +167,13 @@ export default function AdList({
 
       {modalOpen && selectedAd && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg w-96">
-            <h2 className="text-xl font-bold mb-4">Change Status</h2>
-            <p>
+          <div className="bg-white p-6 rounded-lg w-96 dark:bg-[#1e1e2f]">
+            <h2 className="text-xl font-bold mb-4 dark:text-white">
+              Change Status
+            </h2>
+            <p className="dark:text-white">
               Are you sure you want to change the status to{" "}
-              <span className="font-bold">
+              <span className="font-bold dark:text-white">
                 {selectedAd.active ? "Draft" : "Active"}
               </span>
               ?
@@ -179,7 +181,7 @@ export default function AdList({
             <div className="flex justify-end gap-4 mt-4">
               <button
                 onClick={() => setModalOpen(false)}
-                className="px-4 py-2 border rounded-lg"
+                className="px-4 py-2 border rounded-lg dark:text-white"
               >
                 Cancel
               </button>
