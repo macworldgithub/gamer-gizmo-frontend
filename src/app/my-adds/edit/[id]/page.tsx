@@ -1,23 +1,23 @@
 "use client";
-import { useState, useEffect } from "react";
+import { RootState } from "@/components/Store/Store";
 import axios from "axios";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { RootState } from "@/components/Store/Store";
-import { useParams, useRouter } from "next/navigation";
 import SpecificationsForm from "./SpecificationsForm";
 
 export default function EditAdPage() {
   const { id } = useParams();
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
-  const userId = useSelector((state: RootState) => state.user.id);
 
   const [adData, setAdData] = useState<any>({});
 
   const [loading, setLoading] = useState(true);
   const [locations, setLocations] = useState<any[]>([]);
   const [brands, setBrands] = useState<any[]>([]);
+  const [model, setModels] = useState<any[]>([]);
   const [componentCategories, setComponentCategories] = useState<any[]>([]);
 
   useEffect(() => {
@@ -71,6 +71,32 @@ export default function EditAdPage() {
     }
   };
 
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        console.log(adData, "ad data");
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/models/getAll?brand=${adData?.brand_id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setModels(response.data.data || []);
+      } catch (err: any) {
+        console.error(
+          "Error fetching models:",
+          err.response?.data || err.message
+        );
+      }
+    };
+
+    if (adData?.brand_id) {
+      fetchModels();
+    }
+  }, [adData?.brand_id]);
+
   const fetchComponentCategories = async () => {
     try {
       const response = await axios.get(
@@ -103,6 +129,7 @@ export default function EditAdPage() {
   ) => {
     setAdData({ ...adData, [e.target.name]: e.target.value });
   };
+
   const handleLaptopChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -126,54 +153,68 @@ export default function EditAdPage() {
     setLoading(true);
 
     try {
-      // Prepare specifications data based on category_id
-      const specificationsData = () => {
-        const specs = {
-          ...adData.laptops?.[0], // Default for laptops (if any)
-          ...adData.personal_computers?.[0], // or personal computers
-          ...adData.components?.[0], // or components
-          ...adData.gaming_console?.[0], // or gaming console
-        };
+      console.log("adData:", adData);
 
+      const specificationsData = () => {
+        let specs = {};
+
+        if (adData.laptops?.[0]) {
+          specs = { ...specs, ...adData.laptops[0] };
+        }
+        if (adData.personal_computers?.[0]) {
+          specs = { ...specs, ...adData.personal_computers[0] };
+        }
+        if (adData.components?.[0]) {
+          specs = { ...specs, ...adData.components[0] };
+        }
+        if (adData.gaming_console?.[0]) {
+          specs = { ...specs, ...adData.gaming_console[0] };
+        }
+
+        console.log("Merged specs:", specs);
+
+        // Return the appropriate specifications array based on category_id
         switch (adData.category_id) {
-          case 1: // Laptops
+          case 1:
             return { laptops: [specs] };
-          case 2: // Personal Computers
+          case 2:
             return { personal_computers: [specs] };
-          case 3: // Components
+          case 3:
             return { components: [specs] };
-          case 4: // Gaming Console
+          case 4:
             return { gaming_console: [specs] };
           default:
             return {};
         }
       };
-
-      // Prepare final payload
       const payload = {
-        product_id: id,
-        user_id: userId,
-        name: adData.name,
-        price: adData.price,
-        condition: adData.condition,
-        description: adData.description,
-        brand: adData.brand,
-        location: adData.location,
-        stock: adData.stock,
+        prod_id: adData?.id?.toString() || "",
+        user_id: adData?.user_id?.toString() || "",
+        category_id: adData?.category_id?.toString() || "",
+        name: adData?.name || "",
+        price: adData?.price?.toString() || "",
+        condition: adData?.condition?.toString() || "",
+        description: adData?.description || "",
+        brand_id: adData?.brand_id?.toString() || "",
+        location: adData?.location?.toString() || "",
+        model_id: adData?.model_id?.toString() || "",
+        stock: adData?.stock?.toString() || "",
         ...specificationsData(),
       };
 
-      // API Call
-      await axios.post(
+      console.log("Payload:", payload);
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/updateProduct`,
         payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
+      console.log("API Response:", response?.data);
+
       toast.success("Ad updated successfully");
       router.push("/my-adds");
     } catch (err) {
-      console.error(err);
+      console.error("Error during submission:", err);
       toast.error("Failed to update ad");
     } finally {
       setLoading(false);
@@ -253,8 +294,8 @@ export default function EditAdPage() {
               <div className="flex flex-col">
                 <label className="edit-label">Brand</label>
                 <select
-                  name="brand"
-                  value={adData?.brand}
+                  name="brand_id"
+                  value={adData?.brand_id}
                   onChange={handleChange}
                   className="edit-input"
                   required
@@ -262,6 +303,22 @@ export default function EditAdPage() {
                   {brands.map((brand) => (
                     <option key={brand.id} value={brand.id}>
                       {brand.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex flex-col">
+                <label className="edit-label">Model</label>
+                <select
+                  name="model_id"
+                  value={adData?.model_id}
+                  onChange={handleChange}
+                  className="edit-input"
+                  required
+                >
+                  {model.map((mod) => (
+                    <option key={mod.id} value={mod.id}>
+                      {mod.name}
                     </option>
                   ))}
                 </select>
@@ -305,12 +362,17 @@ export default function EditAdPage() {
                 handleLaptopChange={handleLaptopChange}
               />
             </div>
+            <button
+              className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
+              type="submit"
+            >
+              Update Ad
+            </button>
 
             {/* </div> */}
           </form>
         )}
       </div>
-      <button>Update Ad</button>
     </div>
   );
 }

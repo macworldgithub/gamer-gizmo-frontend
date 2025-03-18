@@ -45,7 +45,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         }
       );
       setGpu(response?.data?.data || []);
-      console.log(response?.data?.data, "Fetched GPU Options");
     } catch (error) {
       console.error("Failed to fetch GPU options.", error);
     }
@@ -77,7 +76,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         }
       );
       setStorage(response?.data?.data || []);
-      console.log(response?.data?.data, "ssssssss");
     } catch (error) {
       console.error("Failed to fetch storage.", error);
     }
@@ -93,7 +91,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         }
       );
       setStorageType(response?.data?.data || []);
-      console.log(response?.data?.data, "Fetched Storage Types");
     } catch (error) {
       console.error("Failed to fetch storage types.", error);
     }
@@ -125,7 +122,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         }
       );
       setRamOptions(response?.data?.data || []);
-      console.log(response?.data?.data, "Fetched RAM Options");
     } catch (error) {
       console.error("Failed to fetch RAM options.", error);
     }
