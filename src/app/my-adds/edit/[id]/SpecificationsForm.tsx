@@ -7,7 +7,11 @@ interface SpecificationsFormProps {
   adData: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleLaptopChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePersonalComputerChange: (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   setAdData: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  consoleChange: any;
   token: string;
 }
 
@@ -16,8 +20,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   adData,
   handleChange,
   handleLaptopChange,
+  handlePersonalComputerChange,
   token,
   setAdData,
+  consoleChange,
 }) => {
   const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
   const [processor, setProcessor] = useState<any[]>([]);
@@ -139,7 +145,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="accessories"
             value={gamingConsole.accessories || ""}
-            onChange={handleChange}
+            onChange={consoleChange}
             placeholder="Accessories"
             className="edit-input"
             required
@@ -152,7 +158,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="battery_life"
             value={gamingConsole.battery_life || ""}
-            onChange={handleChange}
+            onChange={consoleChange}
             placeholder="Battery Life"
             className="edit-input"
             required
@@ -165,7 +171,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="color"
             value={gamingConsole.color || ""}
-            onChange={handleChange}
+            onChange={consoleChange}
             placeholder="Color"
             className="edit-input"
             required
@@ -178,7 +184,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="connectivity"
             value={gamingConsole.connectivity || ""}
-            onChange={handleChange}
+            onChange={consoleChange}
             placeholder="Connectivity"
             className="edit-input"
             required
@@ -191,7 +197,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             type="text"
             name="warranty_status"
             value={gamingConsole.warranty_status || ""}
-            onChange={handleChange}
+            onChange={consoleChange}
             placeholder="Warranty Status"
             className="edit-input"
             required
@@ -206,43 +212,12 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
     return (
       <>
         <div className="flex flex-col">
-          <label className="edit-label">GPU</label>
-          <input
-            type="text"
-            name="gpu"
-            value={pc.gpu || ""}
-            onChange={(e) =>
-              //@ts-ignore
-
-              setAdData((prev) => ({
-                ...prev,
-                personal_computers: [
-                  { ...prev.personal_computers[0], gpu: e.target.value },
-                ],
-              }))
-            }
-            placeholder="GPU"
-            className="edit-input"
-            required
-          />
-        </div>
-
-        <div className="flex flex-col">
           <label className="edit-label">Graphics</label>
           <input
             type="text"
             name="graphics"
             value={pc.graphics || ""}
-            onChange={(e) =>
-              //@ts-ignore
-
-              setAdData((prev) => ({
-                ...prev,
-                personal_computers: [
-                  { ...prev.personal_computers[0], graphics: e.target.value },
-                ],
-              }))
-            }
+            onChange={handlePersonalComputerChange}
             placeholder="Graphics"
             className="edit-input"
             required
@@ -254,16 +229,8 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <input
             type="text"
             name="ports"
-            value={pc.ports || ""}
-            onChange={(e) =>
-              //@ts-ignore
-              setAdData((prev) => ({
-                ...prev,
-                personal_computers: [
-                  { ...prev.personal_computers[0], ports: e.target.value },
-                ],
-              }))
-            }
+            value={pc?.ports || ""}
+            onChange={handlePersonalComputerChange}
             placeholder="Ports"
             className="edit-input"
             required
@@ -300,7 +267,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <label className="edit-label">Processor Variant</label>
           <select
             name="processor_variant"
-            value={pc.processor_variant || ""}
+            value={pc?.processor_variant || ""}
             onChange={(e) =>
               //@ts-ignore
               setAdData((prev) => ({
@@ -317,7 +284,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             required
           >
             <option value="">Select Processor Variant</option>
-            {processorVariantData.map((variant) => (
+            {processorVariantData?.map((variant) => (
               <option key={variant.id} value={variant.id}>
                 {variant.name}
               </option>
@@ -419,7 +386,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <input
             type="text"
             name="battery_life"
-            value={laptop.battery_life || ""}
+            value={laptop?.battery_life || ""}
             onChange={handleLaptopChange}
             placeholder="Battery Life"
             className="edit-input"
@@ -432,22 +399,9 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <input
             type="text"
             name="color"
-            value={laptop.color || ""}
-            onChange={handleChange}
+            value={laptop?.color || ""}
+            onChange={handleLaptopChange}
             placeholder="Color"
-            className="edit-input"
-            required
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label className="edit-label">GPU</label>
-          <input
-            type="text"
-            name="gpu"
-            value={laptop.gpu || ""}
-            onChange={handleChange}
-            placeholder="GPU"
             className="edit-input"
             required
           />
@@ -458,7 +412,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <input
             type="text"
             name="graphics"
-            value={laptop.graphics || ""}
+            value={laptop?.graphics || ""}
             onChange={handleLaptopChange}
             placeholder="Graphics"
             className="edit-input"
@@ -471,7 +425,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <input
             type="text"
             name="ports"
-            value={laptop.ports || ""}
+            value={laptop?.ports || ""}
             onChange={handleLaptopChange}
             placeholder="Ports"
             className="edit-input"
@@ -482,7 +436,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         <div className="flex flex-col">
           <label className="edit-label">Processor</label>
           <select
-            name="laptops[0].processor"
+            name="laptops[0]?.processor"
             value={laptop?.processor || ""}
             onChange={(e) =>
               //@ts-ignore
@@ -511,7 +465,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
         <div className="flex flex-col">
           <label className="edit-label">Processor Variant</label>
           <select
-            name="laptops[0].processor_variant"
+            name="laptops[0]?.processor_variant"
             value={laptop?.processor_variant || ""}
             //@ts-ignore
             onChange={(e) =>

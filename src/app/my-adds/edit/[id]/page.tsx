@@ -148,6 +148,42 @@ export default function EditAdPage() {
     }));
   };
 
+  const handlePersonalComputerChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    setAdData((prev: any) => ({
+      ...prev,
+      personal_computers: [
+        {
+          ...prev.personal_computers[0], // Keep existing data
+          [name]: value, // Update specific field
+        },
+      ],
+    }));
+  };
+
+  const handleGamingConsoleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    setAdData((prev: any) => ({
+      ...prev,
+      gaming_consoles: [
+        {
+          ...prev.gaming_consoles?.[0], // Keep existing data
+          [name]: value, // Update specific field
+        },
+      ],
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -155,38 +191,38 @@ export default function EditAdPage() {
     try {
       console.log("adData:", adData);
 
+      // const specificationsData = () => {
+      //   let specs = {};
+
+      //   if (adData.laptops?.[0]) {
+      //     specs = { ...specs, ...adData.laptops[0] };
+      //   }
+      //   if (adData.personal_computers?.[0]) {
+      //     specs = { ...specs, ...adData.personal_computers[0] };
+      //   }
+      //   if (adData.components?.[0]) {
+      //     specs = { ...specs, ...adData.components[0] };
+      //   }
+      //   if (adData.gaming_console?.[0]) {
+      //     specs = { ...specs, ...adData.gaming_console[0] };
+      //   }
       const specificationsData = () => {
-        let specs = {};
-
-        if (adData.laptops?.[0]) {
-          specs = { ...specs, ...adData.laptops[0] };
-        }
-        if (adData.personal_computers?.[0]) {
-          specs = { ...specs, ...adData.personal_computers[0] };
-        }
-        if (adData.components?.[0]) {
-          specs = { ...specs, ...adData.components[0] };
-        }
-        if (adData.gaming_console?.[0]) {
-          specs = { ...specs, ...adData.gaming_console[0] };
-        }
-
-        console.log("Merged specs:", specs);
-
-        // Return the appropriate specifications array based on category_id
-        switch (adData.category_id) {
+        switch (adData?.category_id) {
           case 1:
-            return { laptops: [specs] };
+            return { laptops: [{ ...adData.laptops?.[0] }] };
           case 2:
-            return { personal_computers: [specs] };
+            return {
+              personal_computers: [{ ...adData.personal_computers?.[0] }],
+            };
           case 3:
-            return { components: [specs] };
+            return { components: [{ ...adData.components?.[0] }] };
           case 4:
-            return { gaming_console: [specs] };
+            return { gaming_console: [{ ...adData.gaming_console?.[0] }] };
           default:
             return {};
         }
       };
+
       const payload = {
         prod_id: adData?.id?.toString() || "",
         user_id: adData?.user_id?.toString() || "",
@@ -201,8 +237,7 @@ export default function EditAdPage() {
         stock: adData?.stock?.toString() || "",
         ...specificationsData(),
       };
-
-      console.log("Payload:", payload);
+      console.log("Final payload:", payload);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/updateProduct`,
         payload,
@@ -360,6 +395,8 @@ export default function EditAdPage() {
                 adData={adData}
                 handleChange={handleChange}
                 handleLaptopChange={handleLaptopChange}
+                handlePersonalComputerChange={handlePersonalComputerChange}
+                consoleChange={handleGamingConsoleChange}
               />
             </div>
             <button
