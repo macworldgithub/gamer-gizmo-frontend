@@ -10,7 +10,6 @@ const page = () => {
       <PageHeader pageName={"Blogs"} title="Blogs" />
       <UsBlogs />
       <ItemCard />
-      
     </div>
   );
 };
