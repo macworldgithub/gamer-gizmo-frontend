@@ -59,8 +59,16 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
   console.log(data, "ppo");
   return (
+    <>
+    <div className="flex flex-col items-start mx-8 2xl:item-center">
+            <p className="text-sm md:text-2xl mt-8 text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
+              {data?.name}
+            </p>
+          </div>
     <div className="w-full flex flex-col justify-center items-center">
+      
       {/* Image Section */}
+      
       <div className="w-full flex justify-center items-center h-auto">
         {data?.product_images && (
           <ProductImageSwiper
@@ -73,10 +81,10 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
       {/* Details Section */}
       <div className="w-full max-w-5xl bg-white p-6 mt-6 dark:bg-black">
-        <div className="flex flex-col justify-center items-start">
+        {/* <div className="flex flex-col justify-center items-start">
           <div className="w-full flex justify-start mt-4 mb-7">
             <div className="w-full flex justify-between items-center bg-white shadow-md dark:bg-black">
-              {/* User Info */}
+              
               <div className="flex items-center md:gap-1">
                 <div className="text-purple-600">
                   <CiUser size={22} className="max-md:w-8 max-md:h-4" />
@@ -86,7 +94,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 </div>
               </div>
 
-              {/* Date Info */}
+              
               <div className="flex items-center max-md:gap-1  md:gap-3">
                 <div className="text-purple-600 ">
                   <SlCalender size={18} className="max-md:w-6 max-md:h-3" />
@@ -96,7 +104,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 </div>
               </div>
 
-              {/* Comments */}
+             
               <div className="flex items-center max-md:gap-0 md:gap-2">
                 <div className="text-purple-600 ">
                   <FaRegComment size={20} className="max-md:w-8 max-md:h-4" />
@@ -107,22 +115,42 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start">
-            <p className="text-sm md:text-xl text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
-              {data?.name}
-            </p>
-            {/* <div className="text-sm text-gray-500  text-start dark:text-[#616161]">
-              <h3 className="text-base font-bold">Warranty:</h3>
-              <p className="text-sm">1 year</p>
-            </div> */}
-          </div>
-        </div>
+          
+        </div> */}
 
         {/* <Buynow data={data} /> */}
-        <h1 className=" text-2xl font-bold text-purple-600 text-left mt-4  md:text-2xl">
+        {/* <h1 className=" text-2xl font-bold text-purple-600 text-left mt-4  md:text-2xl">
           AED {data?.price ?? "N/A"}
-        </h1>
-        <div className="flex items-center">
+        </h1> */}
+<div className="flex gap-4">
+  {/* Stock Card */}
+  <div className="bg-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center">
+    <h1 className="font-semibold text-sm">STOCK</h1>
+    <p className="mt-2 dark:text-white text-black font-semibold">
+      {data?.stock}
+    </p>
+  </div>
+
+  {/* Condition Card */}
+  <div className="bg-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center">
+    <h1 className="font-semibold text-sm">CONDITION</h1>
+    <p className="mt-2 dark:text-white text-black font-semibold">
+      {data?.condition === 1
+        ? "New"
+        : data?.condition === 2
+        ? "Used"
+        : data?.condition === 3
+        ? "Like New"
+        : data?.condition === 4
+        ? "Refurbished"
+        : "Unknown"}
+    </p>
+  </div>
+</div>
+
+
+
+        {/* <div className="flex items-center">
           <h1 className="font-bold text-secondaryColorLight text-lg">Stock:</h1>
           <p className="ml-3 dark:text-white text-black font-semibold">
             {data?.stock}
@@ -145,7 +173,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                       : "Unknown"}
             </p>
           </div>
-        </div>
+        </div> */}
         {/* Tags and Share Section */}
         <div className="flex flex-col lg:flex-row justify-between border-t border-gray-200 mt-6 pt-4 gap-6">
           <div className="flex flex-col items-start">
@@ -233,6 +261,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
         <Sellersdetails data={data} />
       </div>
     </div>
+    </>
   );
 };
 

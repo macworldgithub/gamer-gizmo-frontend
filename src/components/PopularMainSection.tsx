@@ -198,7 +198,7 @@ const PopularMainSection: React.FC = () => {
   return (
     <div className="h-auto w-full">
       <PopularItemSection
-        title="Popular in Used Desktops"
+        title="Popular in Used Gaming PCs"
         subtitle="Choose your necessary parts from this category."
         products={desktopUsedData}
         seReftech={seReftech}
@@ -208,7 +208,7 @@ const PopularMainSection: React.FC = () => {
       />
 
       <PopularItemSection
-        title="Popular in New Desktops"
+        title="Popular in New Gaming PCs"
         subtitle="Choose your necessary gaming items from this category."
         products={desktopNewData}
         seReftech={seReftech}
