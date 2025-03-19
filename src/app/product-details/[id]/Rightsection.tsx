@@ -134,7 +134,7 @@ const Rightsection = ({ data }: any) => {
                 )}
               </div>
               <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
-                Seller Details
+                Posted by
               </h2>
             </div>
 
