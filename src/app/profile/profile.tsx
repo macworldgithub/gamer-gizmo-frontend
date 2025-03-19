@@ -73,15 +73,17 @@ export default function ProfilePage() {
   // console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}${profileData.profile}`);
   return (
     <div className="w-full text-black ">
-      <div className="bg-white p-6 rounded-lg mt-8">
+      <div className="bg-white p-6 rounded-lg mt-8 dark:bg-[#1e1e2f]">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold max-md:text-md">My Profile</h1>
-          <p className="text-black max-md:text-sm">
+          <h1 className="text-2xl font-bold max-md:text-md dark:text-white">
+            My Profile
+          </h1>
+          <p className="text-black max-md:text-sm dark:text-white">
             Update your profile details here
           </p>
         </div>
 
-        <div className="flex w-full  items-center mb-6 max-md:hidden">
+        <div className="flex w-full  items-center mb-6 max-md:hidden dark:text-white">
           <div className="relative">
             <Image
               src={
@@ -107,7 +109,7 @@ export default function ProfilePage() {
             <h2 className="text-xl font-semibold">
               {profileData.first_name} {profileData.last_name}{" "}
             </h2>
-            <p className="text-gray-500">
+            <p className="text-gray-500 dark:text-white">
               Joined on {formatDate(profileData.created_at)}
             </p>
           </div>
@@ -127,7 +129,7 @@ export default function ProfilePage() {
         </div>
 
         {!profileData.is_admin_verified && (
-          <div className="bg-purple-50 p-4 rounded-lg mb-8 max-md:hidden">
+          <div className="bg-purple-50 p-4 rounded-lg mb-8 max-md:hidden dark:bg-black">
             <div className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +149,7 @@ export default function ProfilePage() {
                 Got a verified badge yet?
               </p>
             </div>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-600 mt-1 dark:text-white">
               Get more visibility and enhance your credibility.
             </p>
             {!profileData.applied_for_verification ? (
@@ -168,15 +170,15 @@ export default function ProfilePage() {
         {/* Profile Name Section */}
         <div className="mb-8 ">
           <div className="w-[35%] max-md:w-full">
-            <h3 className="text-lg font-semibold max-md:text-md">
+            <h3 className="text-lg font-semibold max-md:text-md dark:text-white">
               Profile Name
             </h3>
           </div>
           <div className="space-y-4 mt-2">
             <div className="flex md:gap-14 max-md:flex-col">
               <div className="flex gap-3 w-[30%] max-md:w-full">
-                <FaUser fontSize="large" className="md:mt-1" />
-                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                <FaUser fontSize="large" className="md:mt-1 dark:text-white" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2 dark:text-white">
                   User Name
                 </label>
               </div>
@@ -188,8 +190,8 @@ export default function ProfilePage() {
             </div>
             <div className="flex md:gap-14 max-md:flex-col">
               <div className="flex gap-3 w-[30%] max-md:w-full">
-                <MdEmail fontSize="large" className="md:mt-1" />
-                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                <MdEmail fontSize="large" className="md:mt-1 dark:text-white" />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2 dark:text-white">
                   Email
                 </label>
               </div>
@@ -204,7 +206,7 @@ export default function ProfilePage() {
 
         {/* Account Details Section */}
         <div className="mb-8 ">
-          <h2 className="text-lg font-semibold mb-1 max-md:text-md">
+          <h2 className="text-lg font-semibold mb-1 max-md:text-md dark:text-white">
             Account details
           </h2>
 
@@ -214,26 +216,26 @@ export default function ProfilePage() {
               <div className="flex gap-3 w-[30%] max-md:w-full">
                 <CalendarMonthOutlinedIcon
                   fontSize="small"
-                  className="md:mt-1"
+                  className="md:mt-1 dark:text-white"
                 />
-                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2 dark:text-white">
                   Date of birth
                 </label>
               </div>
-              <div className="w-[70%] max-md:w-full">
+              <div className="w-[70%] max-md:w-full dark:text-white">
                 <fieldset className="rounded-md">
                   <p>{formatDate(profileData.dob)}</p>
                 </fieldset>
               </div>
             </div>
             {/* Date of Birth */}
-            <div className="flex md:gap-14 max-md:flex-col">
-              <div className="flex gap-3 w-[30%] max-md:w-full">
+            <div className="flex md:gap-14 max-md:flex-col ">
+              <div className="flex gap-3 w-[30%] max-md:w-full ">
                 <CalendarMonthOutlinedIcon
                   fontSize="small"
-                  className="md:mt-1"
+                  className="md:mt-1 dark:text-white"
                 />
-                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2 dark:text-white">
                   Phone
                 </label>
               </div>
@@ -245,19 +247,22 @@ export default function ProfilePage() {
             {/* Gender */}
             <div className="flex md:gap-14 max-md:flex-col">
               <div className="flex gap-3 w-[30%]">
-                <Person2Icon fontSize="small" className="md:mt-1" />
-                <label className="block text-lg font-medium text-black-400 mb-2 max-md:text-sm">
+                <Person2Icon
+                  fontSize="small"
+                  className="md:mt-1 dark:text-white"
+                />
+                <label className="block text-lg font-medium text-black-400 mb-2 max-md:text-sm dark:text-white">
                   Gender
                 </label>
               </div>
-              <div className="w-[70%] max-md:w-full">
+              <div className="w-[70%] max-md:w-full dark:text-white">
                 <p>{profileData.gender}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="mb-8 ">
-          <h2 className="text-lg font-semibold mb-1 max-md:text-md">
+          <h2 className="text-lg font-semibold mb-1 max-md:text-md dark:text-white">
             Account Address
           </h2>
 
@@ -265,13 +270,16 @@ export default function ProfilePage() {
             {/* Date of Birth */}
             <div className="flex md:gap-14 max-md:flex-col">
               <div className="flex gap-3 w-[30%] max-md:w-full">
-                <FaLocationDot fontSize="large" className="md:mt-1" />
-                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                <FaLocationDot
+                  fontSize="large"
+                  className="md:mt-1 dark:text-white"
+                />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2 dark:text-white">
                   Address
                 </label>
               </div>
               <div className="w-[70%] max-md:w-full">
-                <fieldset className=" rounded-md">
+                <fieldset className=" rounded-md dark:text-white">
                   <p>{profileData.address ? profileData.address : "N/A"}</p>
                 </fieldset>
               </div>
@@ -279,15 +287,18 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="mb-8 ">
-          <h2 className="text-lg font-semibold mb-1 max-md:text-md">
+          <h2 className="text-lg font-semibold mb-1 max-md:text-md dark:text-white">
             Security
           </h2>
 
           <div className=" space-y-4  ">
             <div className="flex md:gap-14 max-md:flex-col">
               <div className="flex gap-3 w-[30%] max-md:w-full">
-                <RiLockPasswordFill fontSize="large" className="md:mt-1" />
-                <label className="block font-medium max-md:text-sm text-black-400 mb-2">
+                <RiLockPasswordFill
+                  fontSize="large"
+                  className="md:mt-1 dark:text-white"
+                />
+                <label className="block font-medium max-md:text-sm text-black-400 mb-2 dark:text-white">
                   Password
                 </label>
               </div>

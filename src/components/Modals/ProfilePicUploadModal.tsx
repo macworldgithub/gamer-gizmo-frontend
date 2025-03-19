@@ -46,8 +46,10 @@ const ProfilePicUploadModal = ({
 
   return (
     <div className="fixed inset-0 bg-black text-black  bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-md w-[90%] max-w-md">
-        <h2 className="text-xl font-semibold mb-4">Upload Profile Images</h2>
+      <div className="bg-white p-6 rounded-lg shadow-md w-[90%] max-w-md dark:bg-[#1e1e2f]">
+        <h2 className="text-xl font-semibold mb-4 dark:text-white">
+          Upload Profile Images
+        </h2>
         <div className="space-y-4">
           <div>
             <input

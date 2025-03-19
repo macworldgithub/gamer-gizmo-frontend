@@ -276,7 +276,7 @@ export default function EditAdPage() {
                   value={adData.name}
                   onChange={handleChange}
                   placeholder="Ad Name"
-                  className="edit-input"
+                  className="edit-input dark:text-black"
                   required
                 />
               </div>
@@ -289,7 +289,7 @@ export default function EditAdPage() {
                   value={adData.price}
                   onChange={handleChange}
                   placeholder="Price"
-                  className="edit-input"
+                  className="edit-input dark:text-black"
                   required
                 />
               </div>
@@ -301,7 +301,7 @@ export default function EditAdPage() {
                   name="condition"
                   value={adData.condition}
                   onChange={handleChange}
-                  className="edit-input"
+                  className="edit-input dark:text-black"
                   required
                 >
                   <option value="New">New</option>
@@ -315,7 +315,7 @@ export default function EditAdPage() {
                   name="location"
                   value={adData.location}
                   onChange={handleChange}
-                  className="edit-input"
+                  className="edit- dark:text-black"
                   required
                 >
                   {locations.map((location) => (
@@ -332,7 +332,7 @@ export default function EditAdPage() {
                   name="brand_id"
                   value={adData?.brand_id}
                   onChange={handleChange}
-                  className="edit-input"
+                  className="edit-input dark:text-black"
                   required
                 >
                   {brands.map((brand) => (
@@ -348,7 +348,7 @@ export default function EditAdPage() {
                   name="model_id"
                   value={adData?.model_id}
                   onChange={handleChange}
-                  className="edit-input"
+                  className="edit-input dark:text-black"
                   required
                 >
                   {model.map((mod) => (
@@ -368,7 +368,7 @@ export default function EditAdPage() {
                   value={adData.stock}
                   onChange={handleChange}
                   placeholder="Stock"
-                  className="edit-input"
+                  className="edit-input dark:text-black"
                   required
                 />
               </div>
@@ -382,7 +382,7 @@ export default function EditAdPage() {
                 value={adData.description}
                 onChange={handleChange}
                 placeholder="Description"
-                className="edit-input min-h-[100px]"
+                className="edit-input min-h-[100px] dark:text-black"
                 required
               />
             </div>

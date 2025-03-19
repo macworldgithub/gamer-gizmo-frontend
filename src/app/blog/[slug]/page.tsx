@@ -64,9 +64,9 @@ export default function BlogPost() {
   if (!post) return <p className="text-center text-red-500">Post not found.</p>;
 
   return (
-    <Wrapper>
-      <div className="dark:bg-[#1e1e2f]">
-        <div className="w-full mx-auto p-6">
+    <div className="dark:bg-black">
+      <Wrapper>
+        <div className="w-full mx-auto p-6 dark:bg-[#1e1e2f] ">
           <Image
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.image}`}
             alt={post.title}
@@ -98,7 +98,7 @@ export default function BlogPost() {
             className="text-gray-600 mt-4 text-justify dark:text-white max-md:text-sm lg:text-sm"
           />
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </div>
   );
 }

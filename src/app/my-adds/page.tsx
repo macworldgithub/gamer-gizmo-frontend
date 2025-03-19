@@ -52,9 +52,11 @@ export default function Add() {
   }, [fetcher]);
   console.log(ads, "adsadsadsads");
   return (
-    <div className="min-h-screen bg-gray-100 py-10 ">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 max-lg:mx-4">My Ads</h2>
+    <div className="min-h-screen bg-gray-100 py-10 dark:bg-black">
+      <div className="max-w-5xl mx-auto ">
+        <h2 className="text-3xl font-bold mb-8 max-lg:mx-4 dark:text-white">
+          My Ads
+        </h2>
         {ads.length === 0 ? (
           <NoAds />
         ) : (
