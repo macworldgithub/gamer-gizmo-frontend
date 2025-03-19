@@ -175,7 +175,7 @@ export default function EditAdPage() {
 
     setAdData((prev: any) => ({
       ...prev,
-      gaming_consoles: [
+      gaming_console: [
         {
           ...prev.gaming_console?.[0], // Keep existing data
           [name]: value, // Update specific field

@@ -135,7 +135,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   useEffect(() => {
     console.log(adData, "lol");
   }, [adData]);
-  if (categoryId === 4 && adData?.gaming_console?.length >= 0) {
+  if (categoryId === 4 && adData?.gaming_console?.length > 0) {
     const gamingConsole = adData?.gaming_console[0];
     console.log(gamingConsole, "myyyyyyyyyy");
 
