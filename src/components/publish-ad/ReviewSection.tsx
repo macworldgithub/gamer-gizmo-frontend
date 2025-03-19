@@ -121,9 +121,36 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
               </p>
             </div>
           ))}
-       
-       
-        
+
+        {["Laptops"].includes(selectCategory?.name) &&
+          laptopDetails.map(({ label, value }, index) => (
+            <div key={index} className="bg-white p-3 rounded-md">
+              <p className="text-black text-xl font-bold">{label}</p>
+              <p className="text-gray-500 font-semibold">
+                {value || "Not provided"}
+              </p>
+            </div>
+          ))}
+
+        {["Components"].includes(selectCategory?.name) &&
+          componentDetails.map(({ label, value }, index) => (
+            <div key={index} className="bg-white p-3 rounded-md">
+              <p className="text-black text-xl font-bold">{label}</p>
+              <p className="text-gray-500 font-semibold">
+                {value || "Not provided"}
+              </p>
+            </div>
+          ))}
+
+        {["Gaming Consoles"].includes(selectCategory?.name) &&
+          consoleDetails.map(({ label, value }, index) => (
+            <div key={index} className="bg-white p-3 rounded-md">
+              <p className="text-black text-xl font-bold">{label}</p>
+              <p className="text-gray-500 font-semibold">
+                {value || "Not provided"}
+              </p>
+            </div>
+          ))}
       </div>
 
       {/* Uploaded Images */}

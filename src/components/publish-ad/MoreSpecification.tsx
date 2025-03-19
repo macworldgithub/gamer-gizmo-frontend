@@ -39,7 +39,6 @@ const MoreSpecification = ({
   const [processorData, setProcessorData] = useState<any>([]);
   const hasShownToast = useRef(false);
 
-
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
       "& fieldset": { borderColor: "#ccc" }, // Default border
@@ -79,15 +78,16 @@ const MoreSpecification = ({
   };
   useEffect(() => {
     if (!hasShownToast.current) {
-      toast.info("You may skip the specifications by selecting the 'Skip Specifications' option if preferred.");
+      toast.info(
+        "You may skip the specifications by selecting the 'Skip Specifications' option if preferred."
+      );
       hasShownToast.current = true;
     }
-  
-    fetchProcessorVariants(); 
+
+    fetchProcessorVariants();
   }, []);
-  
+
   useEffect(() => {
-   
     fetchProcessor();
   }, [selectProcessorVariant]);
 
@@ -498,10 +498,18 @@ const MoreSpecification = ({
                 <Select
                   labelId="cat-select-label"
                   id="cat-select"
+                  name="component_type"
                   value={selectComponentCategory}
                   label="Category"
                   //@ts-ignore
                   onChange={(e) => setSelectedComponentCategory(e.target.value)}
+                  // onChange={(e) =>
+                  //   setSelectedComponentCategory((prev: any) => ({
+                  //     ...prev,
+                  //     id: e.target.value,
+                  //     name: e.target.name,
+                  //   }))
+                  // }
                   sx={{ color: "#000000" }}
                 >
                   {componentCategories &&

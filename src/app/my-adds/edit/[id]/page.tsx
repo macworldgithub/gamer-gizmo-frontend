@@ -177,7 +177,7 @@ export default function EditAdPage() {
       ...prev,
       gaming_consoles: [
         {
-          ...prev.gaming_consoles?.[0], // Keep existing data
+          ...prev.gaming_console?.[0], // Keep existing data
           [name]: value, // Update specific field
         },
       ],

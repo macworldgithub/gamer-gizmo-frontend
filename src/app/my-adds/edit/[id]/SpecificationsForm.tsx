@@ -135,8 +135,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   useEffect(() => {
     console.log(adData, "lol");
   }, [adData]);
-  if (categoryId === 4 && adData?.gaming_console?.length > 0) {
-    const gamingConsole = adData.gaming_console[0];
+  if (categoryId === 4 && adData?.gaming_console?.length >= 0) {
+    const gamingConsole = adData?.gaming_console[0];
+    console.log(gamingConsole, "myyyyyyyyyy");
+
     return (
       <>
         <div className="flex flex-col">
@@ -144,11 +146,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
           <input
             type="text"
             name="accessories"
-            value={gamingConsole.accessories || ""}
+            value={gamingConsole?.accessories || ""}
             onChange={consoleChange}
             placeholder="Accessories"
             className="edit-input"
-            required
           />
         </div>
 
@@ -161,7 +162,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             onChange={consoleChange}
             placeholder="Battery Life"
             className="edit-input"
-            required
           />
         </div>
 
@@ -174,7 +174,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             onChange={consoleChange}
             placeholder="Color"
             className="edit-input"
-            required
           />
         </div>
 
@@ -187,7 +186,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             onChange={consoleChange}
             placeholder="Connectivity"
             className="edit-input"
-            required
           />
         </div>
 
@@ -200,7 +198,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             onChange={consoleChange}
             placeholder="Warranty Status"
             className="edit-input"
-            required
           />
         </div>
       </>
@@ -220,7 +217,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             onChange={handlePersonalComputerChange}
             placeholder="Graphics"
             className="edit-input"
-            required
           />
         </div>
 
@@ -233,7 +229,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             onChange={handlePersonalComputerChange}
             placeholder="Ports"
             className="edit-input"
-            required
           />
         </div>
 

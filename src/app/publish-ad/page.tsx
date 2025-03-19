@@ -253,12 +253,21 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("is_published", "true");
 
     if (selectCategory?.name === "Components") {
+      // Handling Components category
       formDataObject.append(
         "component_type",
         selectComponentCategory?.id.toString() || ""
       );
-      formDataObject.append("text", formData.component_text);
+      formDataObject.append("text", formData?.component_text);
+    } else if (selectCategory?.name === "Gaming Consoles") {
+      // Handling Gaming Console category
+      formDataObject.append("accessories", formData.accessories || "");
+      formDataObject.append("connectivity", formData.connectivity || "");
+      formDataObject.append("warranty_status", formData.warranty_status || "");
+      formDataObject.append("battery_life", formData.batteryLife || "");
+      formDataObject.append("color", formData.color || "");
     } else {
+      // Handling Laptops & Personal Computers
       formDataObject.append("ram", selectRam.id.toString());
       formDataObject.append("processor", selectProcessor.id.toString());
       formDataObject.append(
@@ -279,12 +288,16 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("screen_resolution", formData.screenResolution);
       formDataObject.append("color", formData.color);
     }
+
+    // Handling Images
     if (fileList.length > 0) {
       fileList.forEach((file) => {
         console.log(file);
         formDataObject.append("images", file.originFileObj as Blob);
       });
     }
+
+    // Sending data to the backend
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/createProduct`,
@@ -296,16 +309,19 @@ const PublishAdd: React.FC = () => {
           },
         }
       );
-      if ((response.status = 200)) {
-        toast.success("Product Added Sucessfully");
+
+      if (response.status === 201) {
+        toast.success("Product Added Successfully");
         router.push("/");
       }
     } catch (err) {
       toast.error("Error");
       console.log("Error", err);
     }
+
     console.log(formData, "my form data");
   };
+
   console.log(selectComponentCategory, "selectComponentCategory");
 
   // const handleStepClick = (index: number) => {
