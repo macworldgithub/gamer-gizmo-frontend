@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { Upload, Image } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-//@ts-ignore
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 const getBase64 = (file: FileType): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
-    //@ts-ignore
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => reject(error);
@@ -18,28 +16,37 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
 
-  // Load existing images from adData when editing
   useEffect(() => {
-    if (adData?.product_images) {
-      const existingImages = adData.product_images.map((img: any) => ({
-        uid: img.id.toString(), // Unique ID
-        name: `Image-${img.id}`,
-        url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/${img.image_url}`, // Adjust API URL
-      }));
-
+    if (adData?.product_images?.length > 0) {
+      const existingImages = adData.product_images
+        .filter((img: any) => img.image_url) // Ensure valid URLs
+        .map((img: any) => {
+          const cleanedUrl = img.image_url.replace(/^\/+/, ""); // Remove leading slash
+          return {
+            uid: img.id.toString(),
+            name: `Image-${img.id}`,
+            url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/${cleanedUrl}`.replace(/\/{2,}/g, "/"), // Fix double slashes
+          };
+        });
+  
+      console.log("Existing Images Loaded:", existingImages);
+      console.log("API Image URLs:", adData.product_images.map((img: any) => img.image_url));
+      console.log("Final Image URLs:", existingImages.map((img) => img.url));
+  
       setFileList(existingImages);
     }
-  }, [adData, setFileList]);
+  }, [JSON.stringify(adData.product_images)]); // Dependency to avoid unnecessary re-renders
+  
 
-  const handlePreview = async (file: any) => {
+  const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj as FileType);
     }
-    setPreviewImage(file.url || (file.preview as string));
+    setPreviewImage(file?.url || (file.preview as string));
     setPreviewOpen(true);
   };
-  //@ts-ignore
-  const handleChange = ({ fileList: newFileList }) => {
+
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
 
@@ -54,7 +61,7 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
     <div>
       <Upload
         listType="picture-card"
-        fileList={fileList}
+        defaultFileList={fileList} // Changed from fileList
         accept=".png, .jpeg, .jpg"
         className="flex"
         onPreview={handlePreview}

@@ -401,11 +401,11 @@ export default function EditAdPage() {
                 consoleChange={handleGamingConsoleChange}
               />
             </div>
-            <UploadImages
+            {/* <UploadImages
               fileList={fileList}
               setFileList={setFileList}
               adData={adData}
-            />
+            /> */}
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
               type="submit"
