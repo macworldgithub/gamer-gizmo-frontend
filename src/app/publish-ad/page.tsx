@@ -467,10 +467,10 @@ const PublishAdd: React.FC = () => {
             sx={{
               flexWrap: "wrap",
               "& .MuiStep-root": {
-                minWidth: "60px", // Prevent excessive width
+                minWidth: "60px",
               },
               "& .MuiStepConnector-root": {
-                display: { xs: "none", sm: "block" }, // Hide connectors on extra small screens
+                display: { xs: "none", sm: "block" },
               },
             }}
           >

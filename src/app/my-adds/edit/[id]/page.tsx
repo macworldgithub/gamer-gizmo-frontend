@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import SpecificationsForm from "./SpecificationsForm";
+import UploadImages from "./UploadImages";
 
 export default function EditAdPage() {
   const { id } = useParams();
@@ -19,6 +20,7 @@ export default function EditAdPage() {
   const [brands, setBrands] = useState<any[]>([]);
   const [model, setModels] = useState<any[]>([]);
   const [componentCategories, setComponentCategories] = useState<any[]>([]);
+  const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
     if (!id) return;
@@ -315,7 +317,7 @@ export default function EditAdPage() {
                   name="location"
                   value={adData.location}
                   onChange={handleChange}
-                  className="edit- dark:text-black"
+                  className="edit-input dark:text-black"
                   required
                 >
                   {locations.map((location) => (
@@ -399,6 +401,11 @@ export default function EditAdPage() {
                 consoleChange={handleGamingConsoleChange}
               />
             </div>
+            <UploadImages
+              fileList={fileList}
+              setFileList={setFileList}
+              adData={adData}
+            />
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
               type="submit"
