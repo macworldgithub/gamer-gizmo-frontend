@@ -71,6 +71,7 @@ export default function ProfilePage() {
     fetchProfileData();
   }, [refetch]);
   // console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}${profileData.profile}`);
+  console.log(profileData, "mmm");
   return (
     <div className="w-full text-black ">
       <div className="bg-white p-6 rounded-lg mt-8 dark:bg-[#1e1e2f]">
@@ -183,20 +184,23 @@ export default function ProfilePage() {
                 </label>
               </div>
               <div className="w-[70%] max-md:w-full">
-                <fieldset className="rounded-md">
-                  <p>{profileData.username}</p>
+                <fieldset className="rounded-md text-black dark:text-white">
+                  <p>{profileData?.username}</p>
                 </fieldset>
               </div>
             </div>
             <div className="flex md:gap-14 max-md:flex-col">
               <div className="flex gap-3 w-[30%] max-md:w-full">
-                <MdEmail fontSize="large" className="md:mt-1 dark:text-white" />
+                <MdEmail
+                  fontSize="large"
+                  className="md:mt-1  dark:text-white"
+                />
                 <label className="block font-medium max-md:text-sm text-black-400 mb-2 dark:text-white">
                   Email
                 </label>
               </div>
               <div className="w-[70%] max-md:w-full">
-                <fieldset className="rounded-md">
+                <fieldset className="rounded-md dark:text-white">
                   <p>{profileData.email}</p>
                 </fieldset>
               </div>
@@ -239,7 +243,7 @@ export default function ProfilePage() {
                   Phone
                 </label>
               </div>
-              <div className="w-[70%] max-md:w-full">
+              <div className="w-[70%] max-md:w-full dark:text-white text-black">
                 <p>{profileData.phone}</p>
               </div>
             </div>

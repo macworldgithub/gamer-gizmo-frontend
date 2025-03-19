@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../Store/Store";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { dark } from "@mui/material/styles/createPalette";
 
 export default function ResetPasswordModal({
   openPassModal,
