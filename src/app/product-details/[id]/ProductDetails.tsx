@@ -22,7 +22,8 @@ import { getRelevantFields } from "@/app/utils/specificationFields";
 
 
 const ProductDetails = ({ data, refetch, seReftech }: any) => {
-  const [activeTab, setActiveTab] = useState("overview");
+  // const [activeTab, setActiveTab] = useState("false");
+  const [isSpecOpen, setIsSpecOpen] = useState(false);
   const totalReviewsCount = data?.product_reviews?.length || 0;
   const specifications = getSpecifications(data);
   // Function to select the correct specifications based on category_id
@@ -41,6 +42,9 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     }
   };
 
+  const handleSpecClick = () => {
+    setIsSpecOpen((prev) => !prev); // Toggle state
+  };
   const hasValidSpecifications = () => {
     const categoryData = categorySpecifications();
     const relevantFields = getRelevantFields(data?.categories?.id);
@@ -178,15 +182,17 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
                 {hasValidSpecifications() && (
                   <button
-                    onClick={() => setActiveTab("specifications")}
-                    className={`${activeTab === "specifications"
-                      ? "bg-purple-600 text-white"
-                      : "dark:text-white border border-gray-400 text-black"
-                      } w-fit px-4 py-2 rounded-md text-sm flex justify-center hover:bg-purple-600 hover:text-white`}
+                    onClick={handleSpecClick}
+                    className={`w-fit px-4 py-2 rounded-md text-sm flex justify-center 
+      ${isSpecOpen
+                        ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
+                        : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
+                      }`}
                   >
-                    Additional Details
+                    {isSpecOpen ? "Hide Additional Details" : "Additional Details"}
                   </button>
                 )}
+
               </div>
             </div>
             <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
@@ -237,8 +243,8 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             </div>
           )} */}
 
-         
-          {activeTab === "specifications" && <SpecificationsTable data={data} />}
+
+          {isSpecOpen && <SpecificationsTable data={data} />}
 
           <div className="flex-col justify-start gap-2 items-center mt-4">
             <h4 className="dark:text-white font-bold my-2 text-2xl ">Product Description</h4>
