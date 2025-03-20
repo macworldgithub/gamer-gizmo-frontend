@@ -23,11 +23,11 @@ const ServiceCards = () => {
   return (
     <Wrapper>
       <div className=" text-center">
-        <h2 className="max-md:text-lg md:text-3xl font-bold text-gray-800 mb-4 ">
+        <h2 className="max-md:text-lg md:text-3xl font-bold text-gray-800 mb-4 dark:text-white">
           Advertising Packages & pricing
         </h2>
       </div>
-      <div className="grid grid-cols-2  md:grid-cols-3 gap-8 py-3 w-full dark:bg-black">
+      <div className="grid grid-cols-2  md:grid-cols-3 gap-8 py-3 w-full ">
         {services.map((service, index) => (
           <div
             key={index}
@@ -42,7 +42,7 @@ const ServiceCards = () => {
             />
             <h3
               className="md:text-lg max-md:text-base font-bold  text-black 
-              "
+             dark:text-white "
             >
               {service.title}
             </h3>

@@ -45,8 +45,10 @@ const CategoryProductGrid = ({
 
   return (
     <Wrapper>
-      <div className="w-full flex items-center justify-between mt-[0.8rem] mb-1">
-        <h2 className="text-xl max-sm:text-sm font-bold  dark:text-white">{categoryName}</h2>
+      <div className="w-full flex items-center justify-between mt-[0.8rem] mb-1 ">
+        <h2 className="text-xl max-sm:text-sm font-bold  dark:text-white">
+          {categoryName}
+        </h2>
 
         {products.length > 0 && (
           <button
@@ -62,54 +64,52 @@ const CategoryProductGrid = ({
             />
           </button>
         )}
-
-
       </div>
 
-      <div className="flex justify-between items-center mb-1">
-  {products.length > 0 ? (
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {products.map((product: any) => (
-        <div
-          key={product.id}
-          className="dark:bg-black rounded-lg shadow-lg md:p-2 max-sm:p-2 sm:p-2 border border-gray-300"
-        >
-          <Image
-            src={
-              product.images?.length > 0
-                ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${product.images[0].image_url}`
-                : "/gameIcon.png"
-            }
-            alt={product.name || "Product image"}
-            width={100}
-            height={100}
-            className=" md:h-28 rounded mx-auto max-sm:h-16 sm:h-20"
-          />
-          <h3 className="md:text-xs max-sm:text-[0.6rem] sm:text-[0.8rem] text-black dark:text-white w-full truncate font-medium ">
-            {product.name}
-          </h3>
-          <p className="text-gray-400 text-xs truncate">
-            {product.description}
+      <div className="flex justify-between items-center mb-1 ">
+        {products.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {products.map((product: any) => (
+              <div
+                key={product.id}
+                className="dark:bg-black rounded-lg shadow-lg md:p-2 max-sm:p-2 sm:p-2 border border-gray-300 "
+              >
+                <Image
+                  src={
+                    product.images?.length > 0
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${product.images[0].image_url}`
+                      : "/gameIcon.png"
+                  }
+                  alt={product.name || "Product image"}
+                  width={100}
+                  height={100}
+                  className=" md:h-28 rounded mx-auto max-sm:h-16 sm:h-20"
+                />
+                <h3 className="md:text-xs max-sm:text-[0.6rem] sm:text-[0.8rem] text-black dark:text-white w-full truncate font-medium ">
+                  {product.name}
+                </h3>
+                <p className="text-gray-400 text-xs truncate">
+                  {product.description}
+                </p>
+                <p className="text-purple-500 font-bold mt-1 text-xs">
+                  ${product.price}
+                </p>
+                <button
+                  className="mt-1 max-md:w-20 max-md:h-6  md:w-20 bg-custom-gradient text-white p-1 rounded-full text-xs w-full "
+                  onClick={() => router.push(`/product-details/${product.id}`)}
+                >
+                  View Details
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-red-500 text-xs mt-2">
+            No products to display
+            {/* for {categoryName} */}
           </p>
-          <p className="text-purple-500 font-bold mt-1 text-xs">
-            ${product.price}
-          </p>
-          <button className="mt-1 max-md:w-20 max-md:h-6  md:w-20 bg-custom-gradient text-white p-1 rounded-full text-xs w-full"
-          onClick={() => router.push(`/product-details/${product.id}`)}
-          >
-            View Details
-          </button>
-        </div>
-      ))}
-    </div>
-  ) : (
-      
-      <p className="text-red-500 text-xs mt-2">No products to display
-         {/* for {categoryName} */}
-      </p>
-  )}
-</div>
-
+        )}
+      </div>
     </Wrapper>
   );
 };

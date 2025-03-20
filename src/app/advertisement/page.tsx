@@ -35,17 +35,20 @@ const page = () => {
   ];
 
   return (
-    <div>
+    <div className="dark:bg-black">
       <FeaturesSection
         features={features}
         title="Manage your PC shop on the go!"
+
         //  showButton={false}
       />
       <Card />
       <div className="container mx-auto px-8 lg:px-1 my-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
           <div className="flex flex-col gap-4 lg:gap-6 lg:pr-12 lg:pl-8 lg:py-6">
-            <h2 className="text-xl md:text-2xl font-bold">How it works</h2>
+            <h2 className="text-xl md:text-2xl font-bold dark:text-white">
+              How it works
+            </h2>
 
             <p className="text-gray-600 dark:text-white ">
               1- Select your Ad package - Choose from flexible plans
@@ -69,13 +72,13 @@ const page = () => {
       </div>
 
       <div className=" text-center">
-        <h2 className="md:text-3xl max-md:text-lg font-semibold text-gray-800 mb-3 ">
+        <h2 className="md:text-3xl max-md:text-lg font-semibold text-gray-800 mb-3 dark:text-white">
           Ready to reach thousand of gamers?
         </h2>
 
         <div className="flex justify-center items-center gap-4 mb-6">
           <Link href="/publish-ad">
-            <button className="bg-custom-gradient max-md:w-64 hover:bg-none hover:text-black hover:outline-dashed md:w-80 rounded-md max-md:text-sm md:text-base p-1  text-white">
+            <button className="bg-custom-gradient max-md:w-64 hover:bg-none hover:text-white hover:outline-dashed md:w-80 rounded-md max-md:text-sm md:text-base p-1  text-white">
               Start Advertising Now
             </button>
           </Link>
