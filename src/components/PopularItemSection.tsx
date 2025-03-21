@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useRef } from "react";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import ProductCard from "./ProductCard";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -63,9 +64,9 @@ const PopularItemSection: React.FC<SectionProps> = ({
           {/* <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4  lg:pr-6"> */}
           <div className="flex justify-between items-center mb-2">
             {/* <div className=""> */}
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[0.8rem]">
+            <Link href={explorePath} className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[0.8rem]">
               {title}
-            </h2>
+            </Link>
             {/* </div> */}
             <div className="flex justify-end lg:pr-7 ">
               <button
