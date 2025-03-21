@@ -161,7 +161,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={gamingConsole.battery_life || ""}
             onChange={consoleChange}
             placeholder="Battery Life"
-            className="edit-input"
+            className="edit-input "
           />
         </div>
 
@@ -384,7 +384,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={laptop?.battery_life || ""}
             onChange={handleLaptopChange}
             placeholder="Battery Life"
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           />
         </div>
@@ -397,7 +397,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={laptop?.color || ""}
             onChange={handleLaptopChange}
             placeholder="Color"
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           />
         </div>
@@ -410,7 +410,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={laptop?.graphics || ""}
             onChange={handleLaptopChange}
             placeholder="Graphics"
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           />
         </div>
@@ -423,13 +423,13 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={laptop?.ports || ""}
             onChange={handleLaptopChange}
             placeholder="Ports"
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           />
         </div>
 
         <div className="flex flex-col">
-          <label className="edit-label">Processor</label>
+          <label className="edit-label ">Processor</label>
           <select
             name="laptops[0]?.processor"
             value={laptop?.processor || ""}
@@ -445,7 +445,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 ],
               }))
             }
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           >
             <option value="">Select Processor</option>
@@ -472,7 +472,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 ],
               }))
             }
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           >
             <option value="">Select Processor Variant</option>
@@ -496,7 +496,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 laptops: [{ ...prev.laptops[0], storage: e.target.value }],
               }))
             }
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           >
             <option value="">Select Storage</option>
@@ -521,7 +521,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 laptops: [{ ...prev.laptops[0], storage_type: e.target.value }],
               }))
             }
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           >
             <option value="">Select Storage Type</option>
@@ -546,7 +546,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 laptops: [{ ...prev.laptops[0], ram: e.target.value }],
               }))
             }
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           >
             <option value="">Select RAM</option>
@@ -566,7 +566,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={laptop.screen_resolution || ""}
             onChange={handleLaptopChange}
             placeholder="Screen Resolution"
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           />
         </div>
@@ -583,7 +583,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 laptops: [{ ...prev.laptops[0], gpu: e.target.value }],
               }))
             }
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           >
             <option value="">Select GPU</option>
@@ -603,7 +603,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             value={laptop.screen_size || ""}
             onChange={handleLaptopChange}
             placeholder="Screen Size"
-            className="edit-input"
+            className="edit-input dark:text-black"
             required
           />
         </div>
