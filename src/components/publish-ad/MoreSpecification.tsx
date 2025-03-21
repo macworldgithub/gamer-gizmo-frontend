@@ -491,7 +491,7 @@ const MoreSpecification = ({
       {selectCategory?.name === "Components" && (
         <>
           <div className="w-full text-center">
-            <h2 className="text-lg font-bold">Select Component Type</h2>
+            <h2 className="text-lg font-bold dark:text-white">Select Component Type</h2>
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth sx={inputStyles}>
                 <InputLabel id="cat-select-label">Category</InputLabel>
@@ -510,7 +510,8 @@ const MoreSpecification = ({
                   //     name: e.target.name,
                   //   }))
                   // }
-                  sx={{ color: "#000000" }}
+                  // sx={{ color: "#ffffff" }}
+                  className="text-black  dark:text-white"
                 >
                   {componentCategories &&
                     componentCategories.length > 0 &&

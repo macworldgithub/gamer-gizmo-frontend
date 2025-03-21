@@ -8,7 +8,7 @@ const Inspection = () => {
         {/* Text Content */}
         <div className="max-w-lg text-center md:text-left">
           <h2 className="text-sm md:text-3xl font-bold text-gray-800 dark:text-white">
-            Never buy a used laptop without
+            Never buy a used laptop without 
             <span className="text-purple-500"> GamerGizmo</span> PCs Inspection
           </h2>
 
