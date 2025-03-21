@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../Store/Store";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { set } from "date-fns";
 
 export default function ResetPasswordModal({
   openPassModal,
@@ -56,7 +57,9 @@ export default function ResetPasswordModal({
     return newErrors;
   };
 
+  const [isResetPass, setIsResetPass] = useState(false);
   const handleResetPassword = async () => {
+    setIsResetPass(true);
     const validationErrors = validateFields();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -95,26 +98,37 @@ export default function ResetPasswordModal({
         //  @ts-ignore
         toast.error(err.response.data.message);
       }
+    } finally{
+      setIsResetPass(false);
     }
   };
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
   const SendOtp = async () => {
-    console.log(email, "email");
-    let res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sendForgetPasswordOtp`,
-      { email: email },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    setIsSendingOtp(true);
+    try {
+      console.log(email, "email");
+      let res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sendForgetPasswordOtp`,
+        { email: email },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status == 201) {
+        toast.success("Successfully sent Otp");
+        setTimeout(() => {
+          setOtpSent(true);
+        }, 1000);
+      } else {
+        toast.error("Error updating, Please Try Again");
       }
-    );
-    if (res.status == 201) {
-      toast.success("Successfully sent Otp");
-      setTimeout(() => {
-        setOtpSent(true);
-      }, 1000);
-    } else {
-      toast.error("Error updating, Please Try Again");
+    } catch (error) {
+      toast.error("Error sending OTP, Please Try Again");
+      console.error(error);
+    } finally {
+      setIsSendingOtp(false)
     }
   };
   return (
@@ -145,10 +159,12 @@ export default function ResetPasswordModal({
               email. Please enter the OTP to create a new password.
             </h1>
             <button
-              onClick={() => SendOtp()}
-              className="md:w-auto px-6 py-2 bg-gradient-to-r from-[#DC39FC] to-[#6345ED] text-white rounded-full shadow hover:shadow-xl focus:outline-none"
+              onClick={SendOtp}
+              className={`md:w-auto px-6 py-2 bg-gradient-to-r from-[#DC39FC] to-[#6345ED] text-white rounded-full shadow hover:shadow-xl focus:outline-none ${isSendingOtp ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              disabled={isSendingOtp}
             >
-              Send OTP
+              {isSendingOtp ? "Sending..." : "Send OTP"}
             </button>
           </div>
         ) : (
@@ -188,9 +204,11 @@ export default function ResetPasswordModal({
             />
             <button
               onClick={handleResetPassword}
-              className="md:w-auto px-6 py-2 bg-gradient-to-r from-[#DC39FC] to-[#6345ED] text-white rounded-full shadow hover:shadow-xl focus:outline-none"
+              className={`md:w-auto px-6 py-2 bg-gradient-to-r from-[#DC39FC] to-[#6345ED] text-white rounded-full shadow hover:shadow-xl focus:outline-none ${isResetPass ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={isResetPass}
             >
-              Reset Password
+              {isResetPass ? "Updating..." : "Reset Password"}
             </button>
           </div>
         )}

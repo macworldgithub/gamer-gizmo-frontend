@@ -31,7 +31,9 @@ const CredentialSide = () => {
     setIsModalOpen(false);
   };
 
+  const [isSignIn, setIsSignIn] = useState(false)
   const handleLogin = async () => {
+    setIsSignIn(true)
     if (username && password) {
       try {
         const response = await axiosInstance.post(loginUrl, {
@@ -88,6 +90,8 @@ const CredentialSide = () => {
             );
           }
         }
+      }finally{
+        setIsSignIn(false)
       }
     } else {
       toast.error("Please Fill the fields");
@@ -164,7 +168,9 @@ const CredentialSide = () => {
       <div className="w-[100%]  h-max">
         <button
           onClick={handleLogin}
-          className=" bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center "
+          className={`bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ${isSignIn ? "opacity-50 cursor-not-allowed" : ""            
+          } `}
+          disabled={isSignIn}
         >
           <Image
             className=" mt-1 mr-1"
@@ -173,7 +179,7 @@ const CredentialSide = () => {
             height={13}
             alt="login"
           />
-          Sign In
+          {isSignIn ? "Signing in..." : "SignIn"}
         </button>
       </div>
 
