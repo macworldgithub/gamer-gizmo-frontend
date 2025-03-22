@@ -227,6 +227,14 @@ const Rightsection = ({ data }: any) => {
           <li>3. Money Back Guarantee</li>
         </ul>
       </div>
+      <div className="dark:bg-black border-gray-300 justify-center rounded-lg p-6 w-80  lg:w-[400px] h-64 bg-gray-200 shadow-md flex flex-col items-center">
+        {/* <Image src={banner} alt="Banner" layout="fill" objectFit="cover" />
+         */}
+        <h1 className="text-center font-bold text-xl">Boost Your Brand Visibility</h1>
+        <p className="text-center text-gray-700 text-sm">
+          Advertise with gamergizmo today!
+        </p>
+      </div>
     </div>
   );
 };
