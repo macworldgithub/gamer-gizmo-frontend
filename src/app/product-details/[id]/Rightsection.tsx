@@ -37,9 +37,9 @@ const Rightsection = ({ data }: any) => {
     }
   };
   return (
-    <div className=" max-md:hidden py-10 flex flex-col  justify-center items-start gap-8 pl-2">
+    <div className=" max-md:hidden py-10 flex flex-col  justify-center items-start gap-y-8 pl-2">
       {/* First Card (Price & Quantity) */}
-      <div className=" h-fit border-gray-300 rounded-lg p-6 w-72  bg-white shadow-md flex flex-col justify-between dark:bg-black">
+      <div className=" h-fit border-gray-300 rounded-lg p-6 w-80 lg:w-[400px] bg-white shadow-md flex flex-col justify-between dark:bg-black">
         {/* Price Heading */}
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
           AED {data.price}
@@ -86,7 +86,7 @@ const Rightsection = ({ data }: any) => {
       </div>
 
       {/* Seller Details Section */}
-      <div className="dark:bg-black border-gray-300 rounded-lg p-6 w-72 h-fit bg-white shadow-md flex flex-col items-center">
+      <div className="dark:bg-black border-gray-300 rounded-lg p-6 w-80 lg:w-[400px] h-fit bg-white shadow-md flex flex-col items-center">
         {data?.is_store_product ? (
           <>
             {/* Display Gamer Gizmo for Store Products */}
@@ -210,7 +210,7 @@ const Rightsection = ({ data }: any) => {
         )}
       </div>
       {/* Third Card (Buy From GamerGizmo) */}
-      <div className="dark:bg-black border-gray-300 rounded-lg p-6 w-64 h-64 bg-white shadow-md flex flex-col items-center">
+      <div className="dark:bg-black border-gray-300 rounded-lg p-6 w-80 lg:w-[400px] h-64 bg-white shadow-md flex flex-col items-center">
         <Image
           src="/images/trawly.png"
           alt="Cart Icon"

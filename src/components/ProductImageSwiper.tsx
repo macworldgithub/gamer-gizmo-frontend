@@ -80,13 +80,12 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
   if (!data?.product_images?.length) return null;
 
   return (
-    <div className="relative w-full max-w-[400px] mx-auto mt-8">
+    <div className="relative w-full lg:w-[500px] mx-auto mt-8">
       {/* Favorite Icon */}
       <div
         onClick={() => (data.fav ? remove(data.id) : AddToLike(data.id))}
-        className={`hover:cursor-pointer absolute z-20 top-2 right-2 ${
-          data.fav ? "text-red-600" : "text-gray-300"
-        } hover:text-red-600`}
+        className={`hover:cursor-pointer absolute z-20 top-2 right-2 ${data.fav ? "text-red-600" : "text-gray-300"
+          } hover:text-red-600`}
       >
         <MdFavorite size={34} className="max-sm:h-4" />
       </div>
@@ -104,17 +103,19 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
         loop={true}
         thumbs={{ swiper: thumbsSwiper }}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track active index
-        className="rounded-lg overflow-hidden"
+        className="rounded-lg overflow-hidden "
       >
         {data.product_images.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex justify-center items-center px-9 bg-white dark:bg-black">
+            <div className="flex justify-center items-center px-9 dark:bg-black">
               <Image
                 src={`${baseUrl}/${item.image_url}`}
                 alt={`product-image-${idx}`}
-                width={500}
-                height={200}
-                className="object-cover"
+                width={700}
+                height={500}
+
+                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full"
+
               />
             </div>
           </SwiperSlide>
@@ -137,9 +138,8 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
               alt={`thumbnail-image-${idx}`}
               width={80}
               height={60}
-              className={`object-cover cursor-pointer border-2 rounded-md max-md:h-20 max-md:w-24 max-sm:w-20 max-lg:mt-3 mx-2 ${
-                activeIndex === idx ? "border-customPurpleBorder" : "border-gray-300"
-              }`} // Highlight active thumbnail
+              className={`md:h-[80px] md:w-[80px] max-md:h-[55px] max-md:w-[55px] object-cover border-2 rounded-md mx-2 cursor-pointer max-md:h-20 max-md:w-24 max-sm:w-20 max-lg:mt-3  ${activeIndex === idx ? "border-customPurpleBorder" : "border-gray-300"
+                }`} // Highlight active thumbnail
             />
           </SwiperSlide>
         ))}
