@@ -73,7 +73,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
         {/* Image Section */}
 
-        <div className="w-full flex justify-center items-center h-auto">
+        <div className="w-full flex justify-center items-center h-auto bg-gray-200 max-w-3xl ">
           {data?.product_images && (
             <ProductImageSwiper
               seReftech={seReftech}
@@ -84,7 +84,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
         </div>
 
         {/* Details Section */}
-        <div className="w-full max-w-5xl bg-white p-6 mt-6 dark:bg-black">
+        <div className="w-full max-w-4xl bg-white p-6 mt-6 dark:bg-black">
           {/* <div className="flex flex-col justify-center items-start">
           <div className="w-full flex justify-start mt-4 mb-7">
           <div className="w-full flex justify-between items-center bg-white shadow-md dark:bg-black">
