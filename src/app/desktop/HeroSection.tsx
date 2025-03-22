@@ -40,7 +40,7 @@ const HeroSection = ({ query }: any) => {
       </div>
         {/* Free Ad Section */}
         <FreeAdSection/>
-      <Inspection />
+      {/* <Inspection /> */}
       {/* {loading && <CustomLoader />} */}
     </div>
   );

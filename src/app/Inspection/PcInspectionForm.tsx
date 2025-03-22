@@ -28,26 +28,26 @@ const PcInspectionForm = () => {
     <div className="w-full mt-2 mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg">
       {/* User Details */}
       <div className="space-y-2">
-        <label className="block text-gray-700 dark:text-gray-300">Your Details</label>
+        <label className="block text-gray-700 dark:text-white font-bold ">Your Details</label>
         <div className="flex space-x-2">
-          <input type="text" placeholder="Your Name" className="w-1/2 p-2 border rounded-md dark:bg-gray-800 dark:text-white" />
-          <input type="text" placeholder="+971 5XXXXXXXX" className="w-1/2 p-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+          <input type="text" placeholder="Your Name" className="w-1/2 p-2  rounded-md border border-pinkishBorder dark:bg-gray-800 dark:text-white" />
+          <input type="text" placeholder="+971 5XXXXXXXX" className="w-1/2 p-2 border border-pinkishBorder  rounded-md dark:bg-gray-800 dark:text-white" />
         </div>
       </div>
 
       {/* PC Details */}
       <div className="space-y-2 mt-4">
-        <label className="block text-gray-700 dark:text-gray-300">PC Details (Optional)</label>
-        <input type="text" placeholder="Enter PC Model, Brand, or Specs" className="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+        <label className="block text-gray-700 dark:text-white font-bold">PC Details (Optional)</label>
+        <input type="text" placeholder="Enter PC Model, Brand, or Specs" className="w-full p-2 border border-pinkishBorder rounded-md dark:bg-gray-800 dark:text-white" />
         <div className="flex space-x-2">
-          <input type="text" placeholder="Seller Name" className="w-1/2 p-2 border rounded-md dark:bg-gray-800 dark:text-white" />
-          <input type="text" placeholder="+971 5XXXXXXXX" className="w-1/2 p-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+          <input type="text" placeholder="Seller Name" className="w-1/2 p-2 border border-pinkishBorder rounded-md dark:bg-gray-800 dark:text-white" />
+          <input type="text" placeholder="+971 5XXXXXXXX" className="w-1/2 p-2 border rounded-md border-pinkishBorder dark:bg-gray-800 dark:text-white" />
         </div>
       </div>
 
       {/* Inspection Location */}
       <div className="space-y-2 mt-4">
-      <label className="block text-gray-700 dark:text-gray-300">Inspection Location (Optional)</label>
+      <label className="block text-gray-700 dark:text-white font-bold">Inspection Location (Optional)</label>
       <div className="flex flex-wrap gap-2">
         {locations.length > 0 ? (
           locations.map((city) => (
@@ -57,7 +57,7 @@ const PcInspectionForm = () => {
               className={`px-4 py-2 border rounded-md ${
                 selectedLocation === city
                   ? "bg-secondaryColorDark text-white"
-                  : "text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+                  : "text-gray-700 dark:text-white border-pinkishBorder hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
               {city}

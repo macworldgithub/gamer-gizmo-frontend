@@ -32,7 +32,7 @@ const HeroSection = ({ query }: any) => {
         </Wrapper>
       </div>
       <FreeAdSection/>
-      <Inspection />
+      {/* <Inspection /> */}
       {/* {loading && <CustomLoader />} */}
     </div>
   );

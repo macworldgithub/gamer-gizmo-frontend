@@ -59,7 +59,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
 
   return (
     <div className="px-6 sm:px-6 md:px-10 lg:px-12 ">
-      <div className="my-3">
+      <div className="py-3">
         <Wrapper className="max-sm:pr-2 max-sm:pl-0">
           {/* <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4  lg:pr-6"> */}
           <div className="flex justify-between items-center mb-2">

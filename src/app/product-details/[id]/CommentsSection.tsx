@@ -135,7 +135,7 @@ const CommentsSection = ({ data, fetcher, seReftech }: any) => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 border border-gray-300 dark:bg-black dark:border-[#6345ED] rounded-lg">
+    <div className="w-full max-w-5xl  mx-auto p-4 border border-gray-300 dark:bg-black dark:border-[#6345ED] rounded-lg">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 dark:text-white">
         Add your comment
       </h2>
