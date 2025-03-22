@@ -41,8 +41,10 @@ export default function HomePage() {
     <div className="overflow-x-hidden dark:bg-[#0D0D12]">
       <MobileCategories />
       <FilterSection />
+      <div className="bg-[#F4F2FE] dark:bg-secondaryBlack">
+      <AdsBanner/>
+      </div>
       <CategoriesComponent />
-      <AdsBanner />
       <CardComponent />
       <PopularMainSection />
       <BrowseVideos />

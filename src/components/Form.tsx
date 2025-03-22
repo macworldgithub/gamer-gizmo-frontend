@@ -4,7 +4,7 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 const Form: React.FC<any> = ({ onSubmit, formData, onChange }) => {
   return (
     <form
-      className="p-6 rounded-lg shadow-2xl lg:ml-8 flex flex-col gap-6 dark:bg-black mb-4 max-lg:mx-auto max-md:w-full 
+      className="p-4 rounded-lg shadow-2xl lg:ml-8 flex flex-col gap-2 dark:bg-black mb-4 max-lg:mx-auto max-md:w-full 
      lg:h-auto text-black dark:text-gray-400 "
       onSubmit={onSubmit}
     >

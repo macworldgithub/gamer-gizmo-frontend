@@ -23,16 +23,16 @@ const StatsCards = () => {
   ];
 
   return (
-    <div className="bg-gray-100 dark:bg-[#151520] pt-10 w-full h-auto mb-10 py-10">
+    <div className="bg-gray-100 dark:bg-[#151520]  w-full h-auto  py-4">
       <Wrapper>
-        <h2 className="text-center max-md:text-lg md:text-2xl lg:text-4xl font-bold mb-8 text-black dark:text-white">
+        <h2 className="text-center max-md:text-lg md:text-2xl lg:text-3xl font-bold mb-4 text-black dark:text-white">
           We are the UAE’s Favorite Classifieds
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="text-center dark:bg-black p-6 rounded-lg shadow-md  w-full  max-w-md h-[22rem] mx-auto border border-[#DC39FC] flex flex-col items-center justify-center gap-4"
+              className="text-center dark:bg-black p-6   rounded-lg shadow-md  w-full  max-w-md h-[22rem] mx-auto border border-[#DC39FC] flex flex-col items-center justify-center gap-4"
             >
               <h3 className="text-secondaryColorLight text-3xl lg:text-7xl font-extrabold mb-2">
                 {stat.value}

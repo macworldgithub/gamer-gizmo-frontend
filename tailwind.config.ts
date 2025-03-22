@@ -181,7 +181,8 @@ export default {
         },
       });
     },
-
+    
+//@ts-ignore
     function ({ addComponents }) {
       addComponents({
         ".dark input, .dark textarea, .dark select": {
