@@ -19,7 +19,7 @@ const CommonCard: React.FC<CardProps> = ({
   return (
     // <Wrapper>
     <div>
-      <div className=" bg-white text-black dark:text:white w-full max-md:ml-5 border border-pinkishBorder dark:text-white max-md:p-6 md:p-14 rounded-lg shadow-lg flex flex-col justify-center items-center gap-4 dark:bg-black">
+      <div className=" bg-white text-black dark:text:white w-full  border border-pinkishBorder dark:text-white max-md:p-6 md:p-14 rounded-lg shadow-lg flex flex-col justify-center items-center gap-4 dark:bg-black">
         <h2 className="md:text-3xl max-md:text-center font-bold">{title}</h2>
         <p className="md:text-base text-center max-md:text-xs">{description}</p>
         <small className="text-sm">{note}</small>

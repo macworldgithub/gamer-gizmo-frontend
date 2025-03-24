@@ -31,12 +31,33 @@ const NicUploadModal = ({
           },
         }
       );
-      toast.success("NIC images uploaded successfully!");
+      toast.success("Emirates Id images uploaded successfully!");
       setRefetch(!refetch);
-    } catch (error) {
-      alert("Failed to upload NIC images. Please try again.");
+    } catch (error: any) {
+      console.error("Upload error:", error);
+
+      // Extract meaningful error messages from the backend
+      let errorMessage =
+        "Failed to upload Emirates ID images. Please try again.";
+
+      if (error.response) {
+        // If backend sends an error response
+        errorMessage =
+          error.response.data?.message ||
+          error.response.data?.error ||
+          JSON.stringify(error.response.data);
+      } else if (error.request) {
+        // Request made but no response received
+        errorMessage = "No response from server. Please check your network.";
+      } else {
+        // Something else went wrong
+        errorMessage = error.message;
+      }
+
+      toast.error(errorMessage); // Show error message in toast
     }
   };
+
   const handleSubmit = () => {
     if (nicFront && nicBack) {
       handleNicUpload(nicFront, nicBack);

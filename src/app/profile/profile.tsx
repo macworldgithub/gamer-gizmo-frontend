@@ -65,7 +65,7 @@ export default function ProfilePage() {
       }
     );
     dispatch(InitializeUserData({ ...res.data.data }));
-    setProfileData(res.data.data || {});
+    setProfileData(res?.data.data || {});
   };
   useEffect(() => {
     fetchProfileData();

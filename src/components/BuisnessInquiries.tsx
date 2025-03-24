@@ -42,7 +42,7 @@ const BuisnessInquiries: React.FC<{ cardContent: CardContent }> = ({
 
   return (
     <Wrapper>
-      <div className="w-full flex flex-col lg:flex-row justify-center items-start dark:bg-[#0D0D12] max-lg:gap-7  max-lg:mb-10 p-6 h-auto   lg:pb-28">
+      <div className="w-full flex flex-col lg:flex-row justify-center items-start dark:bg-[#0D0D12] max-lg:gap-7  max-lg:mb-10 p-6 h-auto ">
         {/* Card Content */}
         <div className="w-full lg:w-[55%]">
           <CommonCard
