@@ -66,7 +66,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
             {/* <div className=""> */}
             <Link
               href={explorePath}
-              className="text-2xl font-bold hover:text-secondaryColorDark text-gray-900 dark:text-white max-sm:text-[0.8rem]"
+              className="text-2xl font-bold hover:text-secondaryColorDark dark:hover:text-secondaryColorDark text-gray-900 dark:text-white max-sm:text-[0.8rem]"
             >
               {title}
             </Link>
