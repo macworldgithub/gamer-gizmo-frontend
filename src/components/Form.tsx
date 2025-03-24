@@ -42,6 +42,7 @@ const Form: React.FC<any> = ({ onSubmit, formData, onChange }) => {
         <option value="tech">Tech</option>
         <option value="gaming">Gaming</option>
         <option value="finance">Finance</option>
+        <option value="other"> Others</option>
       </select>
 
       <input
@@ -49,7 +50,7 @@ const Form: React.FC<any> = ({ onSubmit, formData, onChange }) => {
         name="budget"
         placeholder="Enter your budget in AED"
         value={formData.budget}
-        onChange={onChange} 
+        onChange={onChange}
         className="pl-4 input-field"
         min="0"
       />

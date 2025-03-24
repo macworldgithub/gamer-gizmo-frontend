@@ -20,7 +20,6 @@ import { SlCalender } from "react-icons/sl";
 import { getSpecifications } from "@/app/utils/getSpecifications";
 import { getRelevantFields } from "@/app/utils/specificationFields";
 
-
 const ProductDetails = ({ data, refetch, seReftech }: any) => {
   // const [activeTab, setActiveTab] = useState("false");
   const [isSpecOpen, setIsSpecOpen] = useState(false);
@@ -53,13 +52,14 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
     return relevantFields.some((field: any) => {
       const value = field.includes(".")
-        //@ts-ignore
-        ? field.split(".").reduce((obj, key) => obj?.[key], categoryData)
+        ? //@ts-ignore
+          field.split(".").reduce((obj, key) => obj?.[key], categoryData)
         : categoryData[field];
-      return value && value !== "Not Available" && value.toString().trim() !== "";
+      return (
+        value && value !== "Not Available" && value.toString().trim() !== ""
+      );
     });
   };
-
 
   console.log(data, "ppo");
   return (
@@ -70,7 +70,6 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
         </p>
       </div>
       <div className="w-full flex flex-col justify-center items-center">
-
         {/* Image Section */}
 
         <div className="w-full flex justify-center items-center h-auto bg-gray-200 max-w-3xl ">
@@ -126,7 +125,8 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           AED {data?.price ?? "N/A"}
         </h1> */}
 
-          <button className=" text-black 
+          <button
+            className=" text-black 
               dark:text-white  
                w-fit py-2 rounded-md font-semibold text-2xl flex justify-center "
           >
@@ -135,61 +135,53 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
           <div className="flex gap-4 mt-4 max-md:grid grid-cols-1 max-sm:grid-cols-2 sm:grid-cols-3 max-sm:gap-x-6">
             {/* Stock Card */}
-            {
-              data?.stock && (
-                <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 max-sm:p-2 text-center w-40 h-24 flex flex-col justify-center max-sm:w-36">
+            {data?.stock && (
+              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 max-sm:p-2 text-center w-40 h-24 flex flex-col justify-center max-sm:w-36">
                 <h1 className="font-semibold text-sm max-sm:text-xs">STOCK</h1>
                 <p className="mt-2  text-black dark:text-white font-semibold text-xs">
                   {data?.stock}
                 </p>
               </div>
-              )
-            }
-           
-            {
-              data?.models  && data?.models?.name !== "Other" && (
-                <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
+            )}
+
+            {data?.models && data?.models?.name !== "Other" && (
+              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
                 <h1 className="font-semibold text-sm max-sm:text-xs">MODEL</h1>
-             
-                    <p className="mt-2  text-black dark:text-white font-semibold text-xs">
-                      {data?.models?.name}
-                    </p>
+
+                <p className="mt-2  text-black dark:text-white font-semibold text-xs">
+                  {data?.models?.name}
+                </p>
               </div>
-              )
-            }
-           
-           {
-            data?.brands && (
-              <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
-              <h1 className="font-semibold text-sm max-sm:text-xs">BRAND</h1>
-              <p className="mt-2  text-black dark:text-white font-semibold text-xs">
-                {data?.brands?.name}
-              </p>
-            </div>
-            )
-           }
-           
+            )}
+
+            {data?.brands && (
+              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
+                <h1 className="font-semibold text-sm max-sm:text-xs">BRAND</h1>
+                <p className="mt-2  text-black dark:text-white font-semibold text-xs">
+                  {data?.brands?.name}
+                </p>
+              </div>
+            )}
 
             {/* Condition Card */}
-            {
-              data?.condition && (
-                <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 max-sm:w-36 flex flex-col justify-center max-sm:p-2">
-                <h1 className="font-semibold text-sm max-sm:text-xs">CONDITION</h1>
+            {data?.condition && (
+              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 max-sm:w-36 flex flex-col justify-center max-sm:p-2">
+                <h1 className="font-semibold text-sm max-sm:text-xs">
+                  CONDITION
+                </h1>
                 <p className="mt-2 text-black dark:text-white font-semibold text-xs">
                   {data?.condition === 1
                     ? "New"
                     : data?.condition === 2
-                      ? "Used"
-                      : data?.condition === 3
-                        ? "Like New"
-                        : data?.condition === 4
-                          ? "Refurbished"
-                          : "Unknown"}
+                    ? "Used"
+                    : data?.condition === 3
+                    ? "Like New"
+                    : data?.condition === 4
+                    ? "Refurbished"
+                    : "Unknown"}
                 </p>
               </div>
-              )
-            }
-           
+            )}
           </div>
 
           {/* Tags and Share Section */}
@@ -199,21 +191,21 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 Popular Tags
               </h1> */}
               <div className="flex gap-6">
-
-
                 {hasValidSpecifications() && (
                   <button
                     onClick={handleSpecClick}
                     className={`w-fit px-4 py-2 rounded-md text-sm flex justify-center 
-      ${isSpecOpen
-                        ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
-                        : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
-                      }`}
+      ${
+        isSpecOpen
+          ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
+          : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
+      }`}
                   >
-                    {isSpecOpen ? "Hide Additional Details" : "Additional Details"}
+                    {isSpecOpen
+                      ? "Hide Additional Details"
+                      : "Additional Details"}
                   </button>
                 )}
-
               </div>
             </div>
             <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
@@ -232,7 +224,11 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   </div>
                 </a>
 
-                <a href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FontAwesomeIcon
                     icon={faInstagram}
                     className="z-10 max-sm:w-8 h-8 hover:text-red-800 "
@@ -249,7 +245,6 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                     <FontAwesomeIcon icon={faYoutube} color="#000000" />
                   </div>
                 </a>
-
               </div>
             </div>
           </div>
@@ -264,11 +259,12 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             </div>
           )} */}
 
-
           {isSpecOpen && <SpecificationsTable data={data} />}
 
           <div className="flex-col justify-start gap-2 items-center mt-4">
-            <h4 className="dark:text-white font-bold my-2 text-2xl ">Product Description</h4>
+            <h4 className="dark:text-white font-bold my-2 text-2xl ">
+              Product Description
+            </h4>
             <p className="lg:text-sm md:text-sm text-gray-600  dark:text-white text-[11px]">
               {data?.description}
             </p>
