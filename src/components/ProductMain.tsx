@@ -58,7 +58,7 @@ const ProductMain = ({ categoryId, query }: any) => {
       if (!(Object.keys(filteredValues).length > 0)) {
         setFilteredData([]);
         console.log(query, "queryParams23424234");
-        const newProducts = await fetchProducts(categoryId, 1); // New products
+        const newProducts = await fetchProducts(categoryId, 1);
         const usedProducts = await fetchProducts(categoryId, 2); // Used products
         setNewData(newProducts);
         setUsedData(usedProducts);
@@ -97,6 +97,7 @@ const ProductMain = ({ categoryId, query }: any) => {
             {filteredData && filteredData.length > 0 ? (
               filteredData.map((product, index) => (
                 <ProductCard
+                isColumn={true}
                   fetcher={fetcher}
                   seReftech={seReftech}
                   product={product}
@@ -105,6 +106,7 @@ const ProductMain = ({ categoryId, query }: any) => {
             ) : (
               <div className="text-red-600">No Product To display</div>
             )}
+  
           </div>
         </>
       ) : (

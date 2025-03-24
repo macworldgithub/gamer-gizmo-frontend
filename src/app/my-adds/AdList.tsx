@@ -128,7 +128,7 @@ export default function AdList({
             </div>
             <div className="flex flex-row lg:flex-col gap-2">
               <button
-                className="px-4 lg:px-6 border border-black font-bold rounded-full hover:bg-gray-200 dark:text-white dark:border-white"
+                className="px-4 lg:px-6 border border-black font-bold rounded-full hover:bg-gray-200 dark:hover:bg-black dark:text-white dark:border-white"
                 onClick={() => router.push(`/my-adds/edit/${ad.id}`)}
               >
                 Edit
