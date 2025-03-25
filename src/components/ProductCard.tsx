@@ -1,7 +1,8 @@
+"use client"
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +16,25 @@ import "swiper/css/pagination";
 import { formatDistanceToNow } from "date-fns";
 
 const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
+  
+
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   console.log(product, "my product");
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
+
+
+  useEffect(() => {
+    console.log("Active Index Updated:", activeIndex);
+  }, [activeIndex]);
+  
+  useEffect(() => {
+    if (thumbsSwiper) {
+      setThumbsSwiper(thumbsSwiper);
+    }
+  }, [thumbsSwiper]);
 
   const AddToLike = async (prodId: any) => {
     try {
@@ -65,16 +81,17 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
       ? imgUrl
       : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${imgUrl}`;
   };
+  const productImages = useMemo(() => product?.images || [], [product]);
 
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <>
       {isColumn ? (
         <div>
           <div className="flex flex-col md:flex-row p-4 w-full">
-            <div className="relative w-full  md:w-[20%]">
+            <div className="relative max-md:w-80  md:w-[20%]">
               <Swiper
+              key={product?.id}
+            
                 modules={[Pagination, Autoplay, Thumbs]}
                 spaceBetween={10}
                 slidesPerView={1}
@@ -82,23 +99,26 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                 autoplay={{
                   delay: 3000,
                   disableOnInteraction: false,
+                  waitForTransition: false,
                 }}
                 loop={true}
-                thumbs={{ swiper: thumbsSwiper }}
-                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+                 onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
                 className="rounded-lg overflow-hidden"
               >
-                {product?.images.map((img, index) => {
+                {productImages.map((img, index) => {
                   const imageUrl = getImageUrl(img?.image_url);
-                  console.log("Image URL:", imageUrl); // ✅ Check if image URL is valid
+                  console.log("Image URL:", imageUrl); 
 
                   return (
                     <SwiperSlide key={index}>
-                      <div className="max-md:w-[200px] max-md:h-[200px] bg-red-500 md:w-[300px] md:h-[200px] mx-auto relative">
+                      <div className="max-md:w-[200px] mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative">
                         <Image
                           src={imageUrl}
+                          // src={'/images/amazon.png'}
                           alt={`Product image ${index + 1}`}
                           layout="fill"
+                          
                           className="rounded-lg bg-gray-200"
                           onLoadingComplete={() => console.log(`Loaded: ${imageUrl}`)}
                           onError={(e) => {
@@ -126,35 +146,36 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
             </div>
 
             {/* Right Side - Car Details */}
-            <div className="w-full md:w-[60%] md:pl-12 flex flex-col ">
+            <div className="w-full md:w-[60%] md:pl-12  flex flex-col ">
               {/* Car Info */}
-              <div className="flex flex-col gap-1 ">
-                <p className="text-gray-600 font-bold max-md:text-sm  md:text-xl">
+              <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
+                <p className="text-black font-bold max-md:text-sm dark:text-white md:text-xl ">
                   {product.name}
                 </p>
-                <p className="text-gray-500 text-sm max-md:hidden">
-                  {product.description.length > 100
-                    ? `${product.description.slice(0, 100)}...`
+                <p className="text-gray-700 dark:text-gray-100 text-sm max-md:hidden">
+                  {product.description.length > 50
+                    ? `${product.description.slice(0, 50)}......`
                     : product.description}
                 </p>
 
-                <h2 className="text-md font-semibold text-gray-800">
+                <h2 className="text-md font-semibold text-secondaryColorLight">
                   AED {product.price}
                 </h2>
-                <p className="text-gray-400 text-xs">
+                <p className="text-secondaryColorLight text-xs">
                   {formatDistanceToNow(new Date(product.created_at), {
                     addSuffix: true,
                   })}
                 </p>
-              </div>
-
-              {/* View Details Button */}
+                  {/* View Details Button */}
               <button
                 onClick={() => router.push(`/product-details/${product.id}`)}
-                className="mt-4 px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
+                className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
               >
                 View Details
               </button>
+              </div>
+
+            
             </div>
           </div>
         </div>

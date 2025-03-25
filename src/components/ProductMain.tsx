@@ -5,6 +5,8 @@ import { RootState } from "./Store/Store";
 import axios from "axios";
 import CustomLoader from "./CustomLoader";
 import ProductCard from "./ProductCard";
+import LiveAdSection from "./LiveAd";
+import GetStartedBadge from "./GetStartedBadge";
 
 interface ProductMainProps {
   categoryId: number;
@@ -90,10 +92,13 @@ const ProductMain = ({ categoryId, query }: any) => {
       {/* For Used Products */}
       {Object.keys(filteredValues).length > 0 ? (
         <>
+        <div className="mt-4">
+        <GetStartedBadge />
+        </div>
           <h1 className="font-bold text-2xl mb-4 dark:text-white">
             Searched {categoryName}
           </h1>
-          {/* <div className="flex gap-2 w-[100%] relative"> */}
+          <div className="flex items-start gap-2 w-[100%] relative">
             <div className="flex-col flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
               {filteredData && filteredData.length > 0 ? (
                 filteredData.map((product, index) => (
@@ -109,21 +114,11 @@ const ProductMain = ({ categoryId, query }: any) => {
                 <div className="text-red-600">No Product To display</div>
               )}
             </div>
-            {/* <div className="absolute right-0">
-              <div className="dark:bg-black  dark:text-white border-gray-300 justify-center rounded-lg p-4 w-80  lg:w-[30%] h-[40rem] relative bg-gray-200 shadow-md flex flex-col items-center">
-               
-                <h1 className="absolute top-5 font-bold text-2xl">
-                  This section is for live Ad
-                </h1>
-                <h1 className="text-center font-bold text-xl">
-                  Boost Your Brand Visibility
-                </h1>
-                <p className="text-center dark:text-white text-gray-700 text-sm">
-                  Advertise with gamergizmo today!
-                </p>
-              </div>
-            </div> */}
-          {/* </div> */}
+
+
+          </div>
+          
+              <LiveAdSection className="w-[100%] h-[10rem] my-2" />
         </>
       ) : (
         <>
@@ -133,15 +128,14 @@ const ProductMain = ({ categoryId, query }: any) => {
             products={usedData}
             seReftech={seReftech}
             refetch={fetcher}
-            explorePath={`/${
-              categoryId == 1
-                ? "laptops"
-                : categoryId == 2
+            explorePath={`/${categoryId == 1
+              ? "laptops"
+              : categoryId == 2
                 ? "desktop"
                 : categoryId == 3
-                ? "components"
-                : "console"
-            }?condition=2`}
+                  ? "components"
+                  : "console"
+              }?condition=2`}
             //@ts-ignore
             // explorePath={`/${
             //   categoryNames[categoryId]?.toLowerCase() || "default"
@@ -155,15 +149,14 @@ const ProductMain = ({ categoryId, query }: any) => {
             products={newData}
             seReftech={seReftech}
             refetch={fetcher}
-            explorePath={`/${
-              categoryId == 1
-                ? "laptops"
-                : categoryId == 2
+            explorePath={`/${categoryId == 1
+              ? "laptops"
+              : categoryId == 2
                 ? "desktop"
                 : categoryId == 3
-                ? "components"
-                : "console"
-            }?condition=1`}
+                  ? "components"
+                  : "console"
+              }?condition=1`}
             onExplore={() => console.log("Explore New Products")}
           />
         </>

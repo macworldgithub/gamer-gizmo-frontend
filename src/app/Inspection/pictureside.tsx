@@ -13,7 +13,7 @@ const Features = () => {
       <Image src={"/images/CPU.png"} alt="cpu" width={100} height={100} />
       <div className="w-[100%]  flex flex-col items-center gap-3">
         <h1 className=" text-customPurpleBorder text-center ">
-          let Gamer Gizmo Help you to sell your Computer
+          Let GamerGizmo Help you to sell your Computer
         </h1>
         <div className="flex flex-col gap-4">
       {features.map((feature, index) => (
