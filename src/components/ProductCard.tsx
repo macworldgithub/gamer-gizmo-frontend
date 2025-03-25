@@ -88,20 +88,29 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                 onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                 className="rounded-lg overflow-hidden"
               >
-                {product?.images.map((img, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="max-md:w-[200px] max-md:h-[200px]  md:w-[300px] md:h-[200px]  mx-auto relative">
-                      <Image
-                        src={getImageUrl(img.image_url)}
-                        alt={`Product image ${index + 1}`}
-                        layout="fill"
-                        // objectFit="cover"
-                        className="rounded-lg bg-gray-200"
-                        onError={(e) => (e.currentTarget.src = "/gameIcon.png")}
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
+                {product?.images.map((img, index) => {
+                  const imageUrl = getImageUrl(img?.image_url);
+                  console.log("Image URL:", imageUrl); // ✅ Check if image URL is valid
+
+                  return (
+                    <SwiperSlide key={index}>
+                      <div className="max-md:w-[200px] max-md:h-[200px] bg-red-500 md:w-[300px] md:h-[200px] mx-auto relative">
+                        <Image
+                          src={imageUrl}
+                          alt={`Product image ${index + 1}`}
+                          layout="fill"
+                          className="rounded-lg bg-gray-200"
+                          onLoadingComplete={() => console.log(`Loaded: ${imageUrl}`)}
+                          onError={(e) => {
+                            console.error("Image failed to load:", imageUrl); // ✅ Log failed images
+                            e.currentTarget.src = "/gameIcon.png";
+                          }}
+                        />
+                      </div>
+                    </SwiperSlide>
+                  );
+                })}
+
               </Swiper>
 
               {/* Favorite Icon */}
@@ -109,9 +118,8 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                 onClick={() =>
                   product.fav ? remove(product.id) : AddToLike(product.id)
                 }
-                className={`absolute top-2 right-2  z-10 cursor-pointer ${
-                  product.fav ? "text-red-600 " : "text-purple-200"
-                } hover:text-red-600 `}
+                className={`absolute top-2 right-2  z-10 cursor-pointer ${product.fav ? "text-red-600 " : "text-purple-200"
+                  } hover:text-red-600 `}
               >
                 <MdFavorite size={24} className="" />
               </div>
@@ -159,9 +167,8 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
             onClick={() =>
               product.fav ? remove(product.id) : AddToLike(product.id)
             }
-            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${
-              product.fav ? "text-red-600" : "text-white "
-            } hover:text-red-600`}
+            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${product.fav ? "text-red-600" : "text-white "
+              } hover:text-red-600`}
           >
             <MdFavorite size={24} className="max-sm:h-4" />
           </div>

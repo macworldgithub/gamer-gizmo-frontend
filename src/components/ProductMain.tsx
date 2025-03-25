@@ -93,8 +93,8 @@ const ProductMain = ({ categoryId, query }: any) => {
           <h1 className="font-bold text-2xl mb-4 dark:text-white">
             Searched {categoryName}
           </h1>
-          <div className="flex gap-2 w-[100%] relative">
-            <div className="flex-col flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] w-[40%]">
+          {/* <div className="flex gap-2 w-[100%] relative"> */}
+            <div className="flex-col flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
               {filteredData && filteredData.length > 0 ? (
                 filteredData.map((product, index) => (
                   <ProductCard
@@ -123,7 +123,7 @@ const ProductMain = ({ categoryId, query }: any) => {
                 </p>
               </div>
             </div> */}
-          </div>
+          {/* </div> */}
         </>
       ) : (
         <>
