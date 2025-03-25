@@ -83,7 +83,8 @@ export default function BlogCards() {
               )}
               <div className="p-2 sm:p-3 md:p-4">
                 <p className="text-xs sm:text-sm md:text-xs text-purple-400 lg:text-lg">
-                  Gamer Gizmo • {formatDate(post.Created_at)}
+                  {formatDate(post.Created_at)} 
+                  {/* Gamer Gizmo • {formatDate(post.Created_at)} */}
                 </p>
                 <h3
                   onClick={() => router.push(`/blog/${post.blogId}`)}
