@@ -7,6 +7,7 @@ import CustomLoader from "./CustomLoader";
 import ProductCard from "./ProductCard";
 import LiveAdSection from "./LiveAd";
 import GetStartedBadge from "./GetStartedBadge";
+import InspectionBadge from "./InspectionBadge";
 
 interface ProductMainProps {
   categoryId: number;
@@ -26,6 +27,8 @@ const ProductMain = ({ categoryId, query }: any) => {
   const [fetcher, seReftech] = useState(false);
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+
+
 
   // Function to fetch products based on category and condition
   const fetchProducts = async (categoryId: number, condition: number) => {
@@ -92,33 +95,47 @@ const ProductMain = ({ categoryId, query }: any) => {
       {/* For Used Products */}
       {Object.keys(filteredValues).length > 0 ? (
         <>
-        <div className="mt-4">
-        <GetStartedBadge />
-        </div>
-          <h1 className="font-bold text-2xl mb-4 dark:text-white">
-            Searched {categoryName}
-          </h1>
-          <div className="flex items-start gap-2 w-[100%] relative">
-            <div className="flex-col flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
-              {filteredData && filteredData.length > 0 ? (
-                filteredData.map((product, index) => (
-                  <ProductCard
-                    isColumn={true}
-                    fetcher={fetcher}
-                    refetch={fetcher}
-                    seReftech={seReftech}
-                    product={product}
-                  />
-                ))
-              ) : (
-                <div className="text-red-600">No Product To display</div>
-              )}
-            </div>
-
-
+          <div className="mt-4 mb-2">
+            {/* <GetStartedBadge /> */}
+            <LiveAdSection className="h-52" />
           </div>
-          
-              <LiveAdSection className="w-[100%] h-[10rem] my-2" />
+          <h1 className="font-bold text-2xl mb-4 dark:text-white">
+            {Object.keys(filteredValues).length > 0
+              ? ` ${Object.values(filteredValues)
+                .map(value => value === "1" ? "New" : value === "2" ? "Used" : value)
+                .join(", ")} ${categoryName}`
+              : `Popular in ${categoryName}`}
+          </h1>
+          <div className="flex w-full">
+
+            <div className="flex items-start gap-2 w-[70%]  relative">
+              <div className="flex-col flex flex-wrap gap-4 w-[50%] justify-center max-sm:gap-[0.5rem] ">
+                {filteredData && filteredData.length > 0 ? (
+                  filteredData.map((product, index) => (
+                    <ProductCard
+                      isColumn={true}
+                      fetcher={fetcher}
+                      refetch={fetcher}
+                      seReftech={seReftech}
+                      product={product}
+                    />
+                  ))
+                ) : (
+                  <div className="text-red-600">No Product To display</div>
+                )}
+              </div>
+
+
+            </div>
+            <div className="w-[50%]">
+              <LiveAdSection className="w-[90%] ml-6 h-[30rem] " />
+              <LiveAdSection className="w-[90%] ml-6 my-4 h-[30rem] " />
+
+            </div>
+          </div>
+          <InspectionBadge />
+
+          <LiveAdSection className="w-[100%] h-[10rem] my-2" />
         </>
       ) : (
         <>

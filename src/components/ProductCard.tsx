@@ -15,6 +15,17 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { formatDistanceToNow } from "date-fns";
 
+type ProductImage = {
+  id: number;
+  product_id: number;
+  image_url: string;
+  created_at: string;
+};
+
+type Product = {
+  images: string[];
+};
+
 const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
   
 
@@ -106,7 +117,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                  onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
                 className="rounded-lg overflow-hidden"
               >
-                {productImages.map((img, index) => {
+                {productImages.map((img: ProductImage, index: number) => {
                   const imageUrl = getImageUrl(img?.image_url);
                   console.log("Image URL:", imageUrl); 
 
@@ -122,7 +133,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                           className="rounded-lg bg-gray-200"
                           onLoadingComplete={() => console.log(`Loaded: ${imageUrl}`)}
                           onError={(e) => {
-                            console.error("Image failed to load:", imageUrl); // ✅ Log failed images
+                            console.error("Image failed to load:", imageUrl); 
                             e.currentTarget.src = "/gameIcon.png";
                           }}
                         />
