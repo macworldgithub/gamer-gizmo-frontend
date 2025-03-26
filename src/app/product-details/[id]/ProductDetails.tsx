@@ -260,7 +260,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             <div className="flex hover:bg-secondaryColorDark gap-2 bg-gray-200 justify-center items-center rounded-md w-36">
               <FaRegShareSquare size={20}/>
               <button onClick={() => setModalOpen(true)} className=" rounded-md">
-                Share Post
+                Share Product
               </button>
             </div>
 
