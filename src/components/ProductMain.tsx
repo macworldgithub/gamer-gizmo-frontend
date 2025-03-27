@@ -16,9 +16,10 @@ interface ProductMainProps {
 const categoryNames = {
   0: "Products",
   1: "Laptops",
-  2: "Gaming PCs",
+  2: "Gaming PCS",
   3: "Components",
   4: "Gaming Consoles",
+
 };
 const ProductMain = ({ categoryId, query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
@@ -90,6 +91,7 @@ const ProductMain = ({ categoryId, query }: any) => {
   );
   //@ts-ignore
   const categoryName = categoryNames[categoryId] || "Unknown Category";
+  console.log("Filtered Data:", filteredData);
   return (
     <div className="h-auto w-full">
       {/* For Used Products */}
@@ -113,6 +115,9 @@ const ProductMain = ({ categoryId, query }: any) => {
                 {filteredData && filteredData.length > 0 ? (
                   filteredData.map((product, index) => (
                     <>
+                    <div className=" w-full">
+
+                   
                       <ProductCard
                         isColumn={true}
                         fetcher={fetcher}
@@ -122,6 +127,7 @@ const ProductMain = ({ categoryId, query }: any) => {
                         hasPremiumBadge={index < 5}
 
                       />
+                       </div>
                       {/* Insert LiveAdSection after every 5 products */}
                       {(index + 1) % 5 === 0 && <LiveAdSection className="md:w-[103%] h-52 my-4" />}
                     </>
