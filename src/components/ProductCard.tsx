@@ -26,8 +26,8 @@ type Product = {
   images: string[];
 };
 
-const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
-  
+const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }: any) => {
+
 
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -40,7 +40,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
   useEffect(() => {
     console.log("Active Index Updated:", activeIndex);
   }, [activeIndex]);
-  
+
   useEffect(() => {
     if (thumbsSwiper) {
       setThumbsSwiper(thumbsSwiper);
@@ -99,10 +99,11 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
       {isColumn ? (
         <div>
           <div className="flex flex-col md:flex-row p-4 w-full">
-            <div className="relative max-md:w-80  md:w-[20%]">
+            <div className="relative max-md:w-80  md:w-[26%]">
+      
               <Swiper
-              key={product?.id}
-            
+                key={product?.id}
+
                 modules={[Pagination, Autoplay, Thumbs]}
                 spaceBetween={10}
                 slidesPerView={1}
@@ -114,12 +115,12 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                 }}
                 loop={true}
                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-                 onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+                onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
                 className="rounded-lg overflow-hidden"
               >
                 {productImages.map((img: ProductImage, index: number) => {
                   const imageUrl = getImageUrl(img?.image_url);
-                  console.log("Image URL:", imageUrl); 
+                  console.log("Image URL:", imageUrl);
 
                   return (
                     <SwiperSlide key={index}>
@@ -129,11 +130,11 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                           // src={'/images/amazon.png'}
                           alt={`Product image ${index + 1}`}
                           layout="fill"
-                          
+
                           className="rounded-lg bg-gray-200"
                           onLoadingComplete={() => console.log(`Loaded: ${imageUrl}`)}
                           onError={(e) => {
-                            console.error("Image failed to load:", imageUrl); 
+                            console.error("Image failed to load:", imageUrl);
                             e.currentTarget.src = "/gameIcon.png";
                           }}
                         />
@@ -157,12 +158,20 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
             </div>
 
             {/* Right Side - Car Details */}
-            <div className="w-full md:w-[60%] md:pl-12  flex flex-col ">
+            <div className="w-full md:w-[40%] md:pl-12  flex flex-col ">
               {/* Car Info */}
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
+                <div className="flex justify-between items-center">
                 <p className="text-black font-bold max-md:text-sm dark:text-white md:text-xl ">
                   {product.name}
                 </p>
+                {hasPremiumBadge && (
+                <span className=" bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
+                  Premium
+                </span>
+              )}
+                </div>
+              
                 <p className="text-gray-700 dark:text-gray-100 text-sm max-md:hidden">
                   {product.description.length > 50
                     ? `${product.description.slice(0, 50)}......`
@@ -172,21 +181,27 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                 <h2 className="text-md font-semibold text-secondaryColorLight">
                   AED {product.price}
                 </h2>
+                {hasPremiumBadge && (
+                <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
+                  Premium
+                </span>
+              )}
                 <p className="text-secondaryColorLight text-xs">
                   {formatDistanceToNow(new Date(product.created_at), {
                     addSuffix: true,
                   })}
                 </p>
-                  {/* View Details Button */}
-              <button
-                onClick={() => router.push(`/product-details/${product.id}`)}
-                className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
-              >
-                View Details
-              </button>
+              
+                {/* View Details Button */}
+                <button
+                  onClick={() => router.push(`/product-details/${product.id}`)}
+                  className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
+                >
+                  View Details
+                </button>
               </div>
 
-            
+
             </div>
           </div>
         </div>

@@ -95,9 +95,9 @@ const ProductMain = ({ categoryId, query }: any) => {
       {/* For Used Products */}
       {Object.keys(filteredValues).length > 0 ? (
         <>
-          <div className="mt-4 mb-2">
+          <div className="mt-4 md:mb-2 max-md:mb-4">
             {/* <GetStartedBadge /> */}
-            <LiveAdSection className="h-52" />
+            <LiveAdSection className="md:h-52 max-md:h-40" />
           </div>
           <h1 className="font-bold text-2xl mb-4 dark:text-white">
             {Object.keys(filteredValues).length > 0
@@ -109,16 +109,24 @@ const ProductMain = ({ categoryId, query }: any) => {
           <div className="flex w-full">
 
             <div className="flex items-start gap-2 w-[70%]  relative">
-              <div className="flex-col flex flex-wrap gap-4 w-[50%] justify-center max-sm:gap-[0.5rem] ">
+              <div className="flex-col flex flex-wrap gap-4 max-md:w-full  justify-center max-sm:gap-[0.5rem] ">
                 {filteredData && filteredData.length > 0 ? (
                   filteredData.map((product, index) => (
-                    <ProductCard
-                      isColumn={true}
-                      fetcher={fetcher}
-                      refetch={fetcher}
-                      seReftech={seReftech}
-                      product={product}
-                    />
+                    <>
+                      <ProductCard
+                        isColumn={true}
+                        fetcher={fetcher}
+                        refetch={fetcher}
+                        seReftech={seReftech}
+                        product={product}
+                        hasPremiumBadge={index < 5}
+
+                      />
+                      {/* Insert LiveAdSection after every 5 products */}
+                      {(index + 1) % 5 === 0 && <LiveAdSection className="md:w-[103%] h-52 my-4" />}
+                    </>
+
+
                   ))
                 ) : (
                   <div className="text-red-600">No Product To display</div>
@@ -127,15 +135,16 @@ const ProductMain = ({ categoryId, query }: any) => {
 
 
             </div>
-            <div className="w-[50%]">
-              <LiveAdSection className="w-[90%] ml-6 h-[30rem] " />
-              <LiveAdSection className="w-[90%] ml-6 my-4 h-[30rem] " />
+            <div className="w-[30%] max-md:w-0 max-md:hidden">
+              <LiveAdSection className="w-[100%] ml-6 h-[36rem] " />
+              <LiveAdSection className="w-[100%] ml-6 my-4 h-[36rem] " />
 
             </div>
           </div>
           <InspectionBadge />
 
           <LiveAdSection className="w-[100%] h-[10rem] my-2" />
+          <GetStartedBadge/>
         </>
       ) : (
         <>
