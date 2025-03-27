@@ -73,7 +73,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
         {/* Image Section */}
 
-        <div className="w-full flex justify-center items-center h-auto">
+        <div className="w-full flex justify-center items-center h-auto bg-gray-200 max-w-3xl ">
           {data?.product_images && (
             <ProductImageSwiper
               seReftech={seReftech}
@@ -84,7 +84,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
         </div>
 
         {/* Details Section */}
-        <div className="w-full max-w-5xl bg-white p-6 mt-6 dark:bg-black">
+        <div className="w-full max-w-4xl bg-white p-6 mt-6 dark:bg-black">
           {/* <div className="flex flex-col justify-center items-start">
           <div className="w-full flex justify-start mt-4 mb-7">
           <div className="w-full flex justify-between items-center bg-white shadow-md dark:bg-black">
@@ -135,40 +135,61 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
           <div className="flex gap-4 mt-4 max-md:grid grid-cols-1 max-sm:grid-cols-2 sm:grid-cols-3 max-sm:gap-x-6">
             {/* Stock Card */}
-            <div className="bg-white dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 max-sm:p-2 text-center w-40 h-24 flex flex-col justify-center max-sm:w-36">
-              <h1 className="font-semibold text-sm max-sm:text-xs">STOCK</h1>
-              <p className="mt-2  text-black dark:text-white font-semibold text-xs">
-                {data?.stock}
-              </p>
-            </div>
-            <div className="bg-white dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
-              <h1 className="font-semibold text-sm max-sm:text-xs">MODEL</h1>
-              <p className="mt-2  text-black dark:text-white font-semibold text-xs">
-                {data?.models?.name}
-              </p>
-            </div>
-            <div className="bg-white dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
+            {
+              data?.stock && (
+                <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 max-sm:p-2 text-center w-40 h-24 flex flex-col justify-center max-sm:w-36">
+                <h1 className="font-semibold text-sm max-sm:text-xs">STOCK</h1>
+                <p className="mt-2  text-black dark:text-white font-semibold text-xs">
+                  {data?.stock}
+                </p>
+              </div>
+              )
+            }
+           
+            {
+              data?.models  && data?.models?.name !== "Other" && (
+                <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
+                <h1 className="font-semibold text-sm max-sm:text-xs">MODEL</h1>
+             
+                    <p className="mt-2  text-black dark:text-white font-semibold text-xs">
+                      {data?.models?.name}
+                    </p>
+              </div>
+              )
+            }
+           
+           {
+            data?.brands && (
+              <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
               <h1 className="font-semibold text-sm max-sm:text-xs">BRAND</h1>
               <p className="mt-2  text-black dark:text-white font-semibold text-xs">
                 {data?.brands?.name}
               </p>
             </div>
+            )
+           }
+           
 
             {/* Condition Card */}
-            <div className="bg-white dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 max-sm:w-36 flex flex-col justify-center max-sm:p-2">
-              <h1 className="font-semibold text-sm max-sm:text-xs">CONDITION</h1>
-              <p className="mt-2 text-black dark:text-white font-semibold text-xs">
-                {data?.condition === 1
-                  ? "New"
-                  : data?.condition === 2
-                    ? "Used"
-                    : data?.condition === 3
-                      ? "Like New"
-                      : data?.condition === 4
-                        ? "Refurbished"
-                        : "Unknown"}
-              </p>
-            </div>
+            {
+              data?.condition && (
+                <div className="bg-custom-gradient dark:bg-secondaryBlack dark:text-white shadow-md rounded-lg p-4 text-center w-40 h-24 max-sm:w-36 flex flex-col justify-center max-sm:p-2">
+                <h1 className="font-semibold text-sm max-sm:text-xs">CONDITION</h1>
+                <p className="mt-2 text-black dark:text-white font-semibold text-xs">
+                  {data?.condition === 1
+                    ? "New"
+                    : data?.condition === 2
+                      ? "Used"
+                      : data?.condition === 3
+                        ? "Like New"
+                        : data?.condition === 4
+                          ? "Refurbished"
+                          : "Unknown"}
+                </p>
+              </div>
+              )
+            }
+           
           </div>
 
           {/* Tags and Share Section */}

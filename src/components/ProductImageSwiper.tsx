@@ -80,13 +80,12 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
   if (!data?.product_images?.length) return null;
 
   return (
-    <div className="relative w-full max-w-[400px] mx-auto mt-8">
+    <div className="relative w-full lg:w-[500px] mx-auto mt-8">
       {/* Favorite Icon */}
       <div
         onClick={() => (data.fav ? remove(data.id) : AddToLike(data.id))}
-        className={`hover:cursor-pointer absolute z-20 top-2 right-2 ${
-          data.fav ? "text-red-600" : "text-gray-300"
-        } hover:text-red-600`}
+        className={`hover:cursor-pointer absolute z-20 top-2 right-2 ${data.fav ? "text-red-600" : "text-gray-300"
+          } hover:text-red-600`}
       >
         <MdFavorite size={34} className="max-sm:h-4" />
       </div>
@@ -104,17 +103,19 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
         loop={true}
         thumbs={{ swiper: thumbsSwiper }}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track active index
-        className="rounded-lg overflow-hidden"
+        className="rounded-lg overflow-hidden "
       >
         {data.product_images.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex justify-center items-center px-9 bg-white dark:bg-black">
+            <div className="flex justify-center items-center px-9 dark:bg-black">
               <Image
                 src={`${baseUrl}/${item.image_url}`}
                 alt={`product-image-${idx}`}
-                width={500}
-                height={200}
-                className="object-cover"
+                width={700}
+                height={500}
+
+                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full"
+
               />
             </div>
           </SwiperSlide>
@@ -122,10 +123,38 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
       </Swiper>
 
       {/* Thumbnail Swiper */}
+
+
       <Swiper
         modules={[Thumbs]}
         onSwiper={setThumbsSwiper}
-        spaceBetween={12}
+        slidesPerView={Math.min(data.product_images.length, 4)}
+        watchSlidesProgress
+        className="my-2 flex justify-center items-center"
+      >
+        {data.product_images.map((item, idx) => (
+          <SwiperSlide key={idx}>
+            <Image
+              src={`${baseUrl}/${item.image_url}`}
+              alt={`thumbnail-image-${idx}`}
+              width={65}
+              height={65}
+              className={`mx-auto h-[70px] w-[70px] object-cover border-2 rounded-md cursor-pointer 
+          transition-all duration-200 hover:scale-105 
+          ${activeIndex === idx ? "border-purple-400" : "border-gray-300"}
+          max-sm:h-[50px] max-sm:w-[50px]`}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+
+
+
+      {/* <Swiper
+        modules={[Thumbs]}
+        onSwiper={setThumbsSwiper}
+        
         slidesPerView={data.product_images.length < 4 ? data.product_images.length : 4}
         watchSlidesProgress
         className="mt-2 "
@@ -134,16 +163,15 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
           <SwiperSlide key={idx}>
             <Image
               src={`${baseUrl}/${item.image_url}`}
-              alt={`thumbnail-image-${idx}`}
+              alt={`thumbnail-image-${idx}`} 
               width={80}
               height={60}
-              className={`object-cover cursor-pointer border-2 rounded-md max-md:h-20 max-md:w-24 max-sm:w-20 max-lg:mt-3 mx-2 ${
-                activeIndex === idx ? "border-customPurpleBorder" : "border-gray-300"
-              }`} // Highlight active thumbnail
+              className={`md:h-[80px] md:w-[80px] max-md:h-[55px] max-md:w-[55px] object-cover border-2 rounded-md  cursor-pointer max-sm:w-20 max-lg:mt-3  ${activeIndex === idx ? "border-customPurpleBorder" : "border-gray-300"
+                }`} // Highlight active thumbnail
             />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
     </div>
   );
 };

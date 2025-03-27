@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image'
 import React, { use } from 'react'
 import Wrapper from './Common/Wrapper/Wrapper'

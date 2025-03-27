@@ -234,8 +234,11 @@ const PublishAdd: React.FC = () => {
       setCompletedSteps([...completedSteps, activeStep]);
     }
   };
+  
+const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     let formDataObject = new FormData();
 
     formDataObject.append("name", formData.title);
@@ -316,7 +319,10 @@ const PublishAdd: React.FC = () => {
       }
     } catch (err) {
       toast.error("Error");
+      setIsLoading(false);
       console.log("Error", err);
+    } finally {
+      setIsLoading(false);
     }
 
     console.log(formData, "my form data");
@@ -513,16 +519,18 @@ const PublishAdd: React.FC = () => {
           </Button>
           {activeStep === steps.length - 1 ? (
             <Button
-              onClick={() => handleSubmit()}
-              variant="contained"
-              style={{
-                backgroundColor: "#dc39fc",
-                fontWeight: "bold",
-                fontSize: "15px",
-              }}
-            >
-              Publish
-            </Button>
+            onClick={handleSubmit}
+            variant="contained"
+            style={{
+              backgroundColor: "#dc39fc",
+              fontWeight: "bold",
+              fontSize: "15px",
+              cursor: isLoading ? "not-allowed" : "pointer",
+            }}
+            disabled={isLoading}
+          >
+            {isLoading ? "Publishing..." : "Publish"}
+          </Button>
           ) : (
             <Button
               variant="contained"

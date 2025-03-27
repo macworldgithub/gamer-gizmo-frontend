@@ -14,7 +14,7 @@ interface CardProps {
 
 const cards: CardProps[] = [
   {
-    title: "Advertise with us",
+    title: "Boost your brand visibility",
     description: "Advertise with GamerGizmo today!",
     buttonText: "Explore Now",
     imagePosition: "left",
