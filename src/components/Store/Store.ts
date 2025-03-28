@@ -4,6 +4,7 @@ import currencySlice from "./Slicer/CurrencySlice";
 import sellForMeSlice from "./Slicer/SellForMeSlice";
 import ThemeSlice from "./Slicer/ThemeSlice";
 import loginSlice from "./Slicer/LoginSlice";
+import loadingSlice from "./Slicer/LoadingSlice";
 import storage from "redux-persist/lib/storage";
 
 import {
@@ -27,6 +28,7 @@ const combinedReducers = combineReducers({
   Currency: currencySlice.reducer, // Add more reducers here as needed
   Theme: ThemeSlice.reducer,
   user: loginSlice,
+  loading: loadingSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducers);
