@@ -108,17 +108,16 @@ const ProductMain = ({ categoryId, query }: any) => {
                 .join(", ")} ${categoryName}`
               : `Popular in ${categoryName}`}
           </h1>
-          <div className="flex w-full">
+          <div className="flex w-[100%]">
 
-            <div className="flex items-start gap-2 w-[70%]  relative">
-              <div className="flex-col flex flex-wrap gap-4 max-md:w-full  justify-center max-sm:gap-[0.5rem] ">
+            <div className="flex items-start gap-2 max-md:w-full  md:w-[70%] relative">
+              <div className="flex-col flex flex-wrap gap-4 w-full  justify-center max-sm:gap-[0.5rem] ">
                 {filteredData && filteredData.length > 0 ? (
                   filteredData.map((product, index) => (
                     <>
-                    <div className=" w-full">
-
-                   
+                      {/* <div className=" w-full bg-red-500"> */}
                       <ProductCard
+                      //@ts-ignore
                         isColumn={true}
                         fetcher={fetcher}
                         refetch={fetcher}
@@ -127,12 +126,12 @@ const ProductMain = ({ categoryId, query }: any) => {
                         hasPremiumBadge={index < 5}
 
                       />
-                       </div>
+                      <div className="h-[3px] w-full bg-bluishBorder"></div>
+
+                      {/* </div> */}
                       {/* Insert LiveAdSection after every 5 products */}
-                      {(index + 1) % 5 === 0 && <LiveAdSection className="md:w-[103%] h-52 my-4" />}
+                      {(index + 1) % 5 === 0 && <LiveAdSection className="md:w-[100%] h-52 my-4" />}
                     </>
-
-
                   ))
                 ) : (
                   <div className="text-red-600">No Product To display</div>
@@ -150,7 +149,7 @@ const ProductMain = ({ categoryId, query }: any) => {
           <InspectionBadge />
 
           <LiveAdSection className="w-[100%] h-[10rem] my-2" />
-          <GetStartedBadge/>
+          <GetStartedBadge />
         </>
       ) : (
         <>

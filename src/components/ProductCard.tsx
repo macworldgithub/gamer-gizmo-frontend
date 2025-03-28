@@ -1,19 +1,19 @@
 "use client"
 import axios from "axios";
+import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState, useEffect, useMemo } from "react";
-import { MdFavoriteBorder } from "react-icons/md";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { MdFavorite } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./Store/Store";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination, Thumbs } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { formatDistanceToNow } from "date-fns";
+import { Autoplay, Pagination, Thumbs } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { RootState } from "./Store/Store";
+
 
 type ProductImage = {
   id: number;
@@ -92,15 +92,18 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
       ? imgUrl
       : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${imgUrl}`;
   };
+  // const productImages = useMemo(() => product?.images || [], [product]);
+  
   const productImages = useMemo(() => product?.images || [], [product]);
+
 
   return (
     <>
       {isColumn ? (
         <div>
-          <div className="flex flex-col md:flex-row p-4 w-full">
+     <div className="flex flex-col md:flex-row p-4 container">
             <div className="relative max-md:w-80  md:w-[26%]">
-      
+
               <Swiper
                 key={product?.id}
 
@@ -127,7 +130,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                       <div className="max-md:w-[200px] mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative">
                         <Image
                           src={imageUrl}
-                          // src={'/images/amazon.png'}
+                       
                           alt={`Product image ${index + 1}`}
                           layout="fill"
 
@@ -155,23 +158,25 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
               >
                 <MdFavorite size={24} className="" />
               </div>
+
             </div>
 
             {/* Right Side - Car Details */}
             <div className="w-full md:w-[40%] md:pl-12  flex flex-col ">
-              {/* Car Info */}
+            
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
-                <div className="flex justify-between items-center">
-                <p className="text-black font-bold max-md:text-sm dark:text-white md:text-xl ">
-                  {product.name}
-                </p>
-                {hasPremiumBadge && (
-                <span className=" bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
-                  Premium
-                </span>
-              )}
+                <div className="flex justify-between gap-8 items-center">
+                  <p className="text-black font-bold max-md:text-sm dark:text-white md:text-xl ">
+                    {product.name}
+                  </p>
+                  {hasPremiumBadge && (
+                    <span className="lg:mr-24 md:mr-0 bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
+                      Premium
+                    </span>
+                  )}
                 </div>
-              
+
+
                 <p className="text-gray-700 dark:text-gray-100 text-sm max-md:hidden">
                   {product.description.length > 50
                     ? `${product.description.slice(0, 50)}......`
@@ -182,17 +187,17 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                   AED {product.price}
                 </h2>
                 {hasPremiumBadge && (
-                <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
-                  Premium
-                </span>
-              )}
+                  <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
+                    Premium
+                  </span>
+                )}
                 <p className="text-secondaryColorLight text-xs">
                   {formatDistanceToNow(new Date(product.created_at), {
                     addSuffix: true,
                   })}
                 </p>
-              
-                {/* View Details Button */}
+
+             
                 <button
                   onClick={() => router.push(`/product-details/${product.id}`)}
                   className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
@@ -203,6 +208,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
 
 
             </div>
+            
           </div>
         </div>
       ) : (
