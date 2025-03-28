@@ -18,14 +18,14 @@ export default function SelectLabels({ query, route }: any) {
     query
       ? query
       : {
-        processor: "",
-        storage: "",
-        location: "",
-        condition: "",
-        gpu: "",
-        ram: "",
-        price: "",
-      }
+          processor: "",
+          storage: "",
+          location: "",
+          condition: "",
+          gpu: "",
+          ram: "",
+          price: "",
+        }
   );
   const router = useRouter();
   useEffect(() => {
@@ -235,7 +235,6 @@ export default function SelectLabels({ query, route }: any) {
         {/* Reset Filters Button */}
 
         {/* Filter Button */}
-
       </div>
     </Wrapper>
   );

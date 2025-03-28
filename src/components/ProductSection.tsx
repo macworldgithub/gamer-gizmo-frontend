@@ -86,22 +86,22 @@ const ProductSection: React.FC<SectionProps> = ({
         </Wrapper>
         {/* Product Section */}
         {/* <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0"> */}
-          <div
-            ref={scrollContainerRef}
-            className="flex gap-4 max-sm:gap-[0.5rem] overflow-x-auto scrollbar-hide"
-          >
-            {products.length > 0 ? (
-              products.map((product, index) => (
-                <ProductCard
-                  seReftech={seReftech}
-                  refetch={refetch}
-                  product={product}
-                />
-              ))
-            ) : (
-              <div className="text-red-600">No Product To display</div>
-            )}
-          </div>
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-4 max-sm:gap-[0.5rem] overflow-x-auto scrollbar-hide "
+        >
+          {products.length > 0 ? (
+            products.map((product, index) => (
+              <ProductCard
+                seReftech={seReftech}
+                refetch={refetch}
+                product={product}
+              />
+            ))
+          ) : (
+            <div className="text-red-600">No Product To display</div>
+          )}
+        </div>
         {/* </Wrapper> */}
       </div>
     </div>

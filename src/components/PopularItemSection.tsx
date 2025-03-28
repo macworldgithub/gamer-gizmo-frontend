@@ -64,7 +64,10 @@ const PopularItemSection: React.FC<SectionProps> = ({
           {/* <div className="flex justify-between max-sm:flex-col max-sm:items-start items-center mb-4  lg:pr-6"> */}
           <div className="flex justify-between items-center mb-2">
             {/* <div className=""> */}
-            <Link href={explorePath} className="text-2xl font-bold text-gray-900 dark:text-white max-sm:text-[0.8rem]">
+            <Link
+              href={explorePath}
+              className="text-2xl font-bold hover:text-secondaryColorDark dark:hover:text-secondaryColorDark text-gray-900 dark:text-white max-sm:text-[0.8rem]"
+            >
               {title}
             </Link>
             {/* </div> */}

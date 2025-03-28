@@ -2,6 +2,7 @@ import BuisnessInquiries from "@/components/BuisnessInquiries";
 import PageHeader from "@/components/PageHeader";
 import ServiceCards from "./ServiceCards";
 import StatsCards from "./StatsCards";
+import GetStartedBadge from "@/components/GetStartedBadge";
 
 const page = () => {
   const cardContent = {
@@ -22,6 +23,7 @@ const page = () => {
       <ServiceCards />
       <StatsCards />
       <BuisnessInquiries cardContent={cardContent} />
+      <GetStartedBadge />
     </div>
   );
 };

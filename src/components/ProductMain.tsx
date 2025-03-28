@@ -5,6 +5,9 @@ import { RootState } from "./Store/Store";
 import axios from "axios";
 import CustomLoader from "./CustomLoader";
 import ProductCard from "./ProductCard";
+import LiveAdSection from "./LiveAd";
+import GetStartedBadge from "./GetStartedBadge";
+import InspectionBadge from "./InspectionBadge";
 
 interface ProductMainProps {
   categoryId: number;
@@ -13,9 +16,10 @@ interface ProductMainProps {
 const categoryNames = {
   0: "Products",
   1: "Laptops",
-  2: "Gaming PCs",
+  2: "Gaming PCS",
   3: "Components",
   4: "Gaming Consoles",
+
 };
 const ProductMain = ({ categoryId, query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
@@ -24,6 +28,8 @@ const ProductMain = ({ categoryId, query }: any) => {
   const [fetcher, seReftech] = useState(false);
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+
+
 
   // Function to fetch products based on category and condition
   const fetchProducts = async (categoryId: number, condition: number) => {
@@ -58,7 +64,7 @@ const ProductMain = ({ categoryId, query }: any) => {
       if (!(Object.keys(filteredValues).length > 0)) {
         setFilteredData([]);
         console.log(query, "queryParams23424234");
-        const newProducts = await fetchProducts(categoryId, 1); // New products
+        const newProducts = await fetchProducts(categoryId, 1);
         const usedProducts = await fetchProducts(categoryId, 2); // Used products
         setNewData(newProducts);
         setUsedData(usedProducts);
@@ -85,27 +91,66 @@ const ProductMain = ({ categoryId, query }: any) => {
   );
   //@ts-ignore
   const categoryName = categoryNames[categoryId] || "Unknown Category";
+  console.log("Filtered Data:", filteredData);
   return (
     <div className="h-auto w-full">
       {/* For Used Products */}
       {Object.keys(filteredValues).length > 0 ? (
         <>
-          <h1 className="font-bold text-2xl mb-4 dark:text-white">
-            Searched {categoryName}
-          </h1>
-          <div className="flex flex-wrap gap-4 justify-center max-sm:gap-[0.5rem] ">
-            {filteredData && filteredData.length > 0 ? (
-              filteredData.map((product, index) => (
-                <ProductCard
-                  fetcher={fetcher}
-                  seReftech={seReftech}
-                  product={product}
-                />
-              ))
-            ) : (
-              <div className="text-red-600">No Product To display</div>
-            )}
+          <div className="mt-4 md:mb-2 max-md:mb-4">
+            {/* <GetStartedBadge /> */}
+            <LiveAdSection className="md:h-52 max-md:h-40" />
           </div>
+          <h1 className="font-bold text-2xl mb-4 dark:text-white">
+            {Object.keys(filteredValues).length > 0
+              ? ` ${Object.values(filteredValues)
+                .map(value => value === "1" ? "New" : value === "2" ? "Used" : value)
+                .join(", ")} ${categoryName}`
+              : `Popular in ${categoryName}`}
+          </h1>
+          <div className="flex w-full">
+
+            <div className="flex items-start gap-2 w-[70%]  relative">
+              <div className="flex-col flex flex-wrap gap-4 max-md:w-full  justify-center max-sm:gap-[0.5rem] ">
+                {filteredData && filteredData.length > 0 ? (
+                  filteredData.map((product, index) => (
+                    <>
+                    <div className=" w-full">
+
+                   
+                      <ProductCard
+                        isColumn={true}
+                        fetcher={fetcher}
+                        refetch={fetcher}
+                        seReftech={seReftech}
+                        product={product}
+                        hasPremiumBadge={index < 5}
+
+                      />
+                       </div>
+                      {/* Insert LiveAdSection after every 5 products */}
+                      {(index + 1) % 5 === 0 && <LiveAdSection className="md:w-[103%] h-52 my-4" />}
+                    </>
+
+
+                  ))
+                ) : (
+                  <div className="text-red-600">No Product To display</div>
+                )}
+              </div>
+
+
+            </div>
+            <div className="w-[30%] max-md:w-0 max-md:hidden">
+              <LiveAdSection className="w-[100%] ml-6 h-[36rem] " />
+              <LiveAdSection className="w-[100%] ml-6 my-4 h-[36rem] " />
+
+            </div>
+          </div>
+          <InspectionBadge />
+
+          <LiveAdSection className="w-[100%] h-[10rem] my-2" />
+          <GetStartedBadge/>
         </>
       ) : (
         <>
@@ -115,15 +160,14 @@ const ProductMain = ({ categoryId, query }: any) => {
             products={usedData}
             seReftech={seReftech}
             refetch={fetcher}
-            explorePath={`/${
-              categoryId == 1
-                ? "laptops"
-                : categoryId == 2
+            explorePath={`/${categoryId == 1
+              ? "laptops"
+              : categoryId == 2
                 ? "desktop"
                 : categoryId == 3
-                ? "components"
-                : "console"
-            }?condition=2`}
+                  ? "components"
+                  : "console"
+              }?condition=2`}
             //@ts-ignore
             // explorePath={`/${
             //   categoryNames[categoryId]?.toLowerCase() || "default"
@@ -137,15 +181,14 @@ const ProductMain = ({ categoryId, query }: any) => {
             products={newData}
             seReftech={seReftech}
             refetch={fetcher}
-            explorePath={`/${
-              categoryId == 1
-                ? "laptops"
-                : categoryId == 2
+            explorePath={`/${categoryId == 1
+              ? "laptops"
+              : categoryId == 2
                 ? "desktop"
                 : categoryId == 3
-                ? "components"
-                : "console"
-            }?condition=1`}
+                  ? "components"
+                  : "console"
+              }?condition=1`}
             onExplore={() => console.log("Explore New Products")}
           />
         </>
