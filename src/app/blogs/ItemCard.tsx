@@ -46,6 +46,7 @@ export default function BlogList() {
               <div className="flex-1">
                 <p className="text-gray-500 text-xs">2 hours ago</p>
                 <h3 className="font-bold  text-sm hover:underline dark:text-white">
+                  
                   {blog.title}
                 </h3>
               </div>
