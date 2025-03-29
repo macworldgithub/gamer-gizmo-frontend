@@ -2,17 +2,11 @@
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import CustomLoader from "@/components/CustomLoader";
 import FreeAdSection from "@/components/FreeAdSection";
-import Inspection from "@/components/Inspection";
-import ProductCard from "@/components/ProductCard";
+import LiveAdSection from "@/components/LiveAd";
 import ProductMain from "@/components/ProductMain";
 import SelectLabels from "@/components/SelectLabels";
-import { RootState } from "@/components/Store/Store";
-import axios from "axios";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useState } from "react";
 
 const LaptopHeroSection = ({ query }: any) => {
   // const token = useSelector((state: RootState) => state.user.token);
@@ -56,21 +50,20 @@ const LaptopHeroSection = ({ query }: any) => {
           <div className="flex w-full   justify-center items-center gap-4 ">
             <SelectLabels query={query} route={"laptops"} />
           </div>
- 
-          
         </div>
       </div>
       <div className=" dark:bg-black bg-gray-50 ">
         <Wrapper>
           <div className="w-full h-auto dark:bg-black">
             <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0">
-             
+              
               <ProductMain query={query} categoryId={1} />
             </Wrapper>
           </div>
         </Wrapper>
+       
       </div>
-      <FreeAdSection/>
+      <FreeAdSection />
       {/* <Inspection /> */}
       {loading && <CustomLoader />}
     </div>
