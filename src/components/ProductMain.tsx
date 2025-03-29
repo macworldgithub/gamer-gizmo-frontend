@@ -153,6 +153,7 @@ const ProductMain = ({ categoryId, query }: any) => {
         </>
       ) : (
         <>
+       
           <ProductSection
             title={`Popular in Used   ${categoryName}`}
             subtitle="Choose your necessary parts from this category."
