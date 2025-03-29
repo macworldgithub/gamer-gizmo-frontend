@@ -226,7 +226,7 @@ const PopularMainSection: React.FC = () => {
         explorePath={`/laptops?condition=2`}
         onExplore={() => console.log("Explore Used Consoles")}
       />
-       <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-6xl mx-auto mb-4">
+       <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
       </div>
@@ -257,7 +257,7 @@ const PopularMainSection: React.FC = () => {
         explorePath={`/console?condition=1`}
         onExplore={() => console.log("Explore Used Consoles")}
       />
-      <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-6xl mx-auto mb-4">
+      <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4 ">
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
       </div>
@@ -279,7 +279,7 @@ const PopularMainSection: React.FC = () => {
         explorePath={`/components?condition=1`}
         onExplore={() => console.log("Explore New Components")}
       />
-      <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-6xl mx-auto mb-4">
+      <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
       </div>
