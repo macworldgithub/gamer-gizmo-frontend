@@ -47,12 +47,58 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
     }
   }, [thumbsSwiper]);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // const AddToLike = async (prodId: any) => {
+  //   try {
+  //     if (!token) {
+  //       toast.error("Login To add to favourites");
+  //       return;
+  //     }
+  //     const response = await axios.post(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/addToFavourite`,
+  //       {
+  //         userId: id?.toString(),
+  //         productId: prodId.toString(),
+  //       }
+  //     );
+  //     if (response.status === 201) {
+  //       toast.success(response.data.message);
+  //       seReftech(!refetch);
+  //     }
+  //   } catch (err) {
+  //     toast.error("Failed to add to favourites");
+  //   }
+  // };
+
+  // const remove = async (prod: any) => {
+  //   try {
+  //     const response = await axios.delete(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/removeFavourite?userId=${id}&productId=${prod}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     toast.success("Successfully Deleted");
+  //     seReftech(!refetch);
+  //   } catch (err) {
+  //     toast.error("Failed to add to favourites");
+  //   }
+  // };
+
   const AddToLike = async (prodId: any) => {
+    if (isLoading) return; // Prevent further clicks if loading
+
     try {
       if (!token) {
         toast.error("Login To add to favourites");
         return;
       }
+
+      setIsLoading(true); // Disable icon when API call is made
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/addToFavourite`,
         {
@@ -60,17 +106,24 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
           productId: prodId.toString(),
         }
       );
+
       if (response.status === 201) {
         toast.success(response.data.message);
         seReftech(!refetch);
       }
     } catch (err) {
       toast.error("Failed to add to favourites");
+    } finally {
+      setIsLoading(false); // Enable the icon after the response
     }
   };
 
   const remove = async (prod: any) => {
+    if (isLoading) return; // Prevent further clicks if loading
+
     try {
+      setIsLoading(true); // Disable icon when API call is made
+
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/removeFavourite?userId=${id}&productId=${prod}`,
         {
@@ -79,12 +132,18 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
           },
         }
       );
-      toast.success("Successfully Deleted");
-      seReftech(!refetch);
+
+      if (response.status === 200) {
+        toast.success(response.data.message || "Successfully Deleted");
+        seReftech(!refetch);
+      }
     } catch (err) {
       toast.error("Failed to add to favourites");
+    } finally {
+      setIsLoading(false); // Enable the icon after the response
     }
   };
+
 
   //@ts-ignore
   const getImageUrl = (imgUrl) => {
@@ -93,7 +152,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
       : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${imgUrl}`;
   };
   // const productImages = useMemo(() => product?.images || [], [product]);
-  
+
   const productImages = useMemo(() => product?.images || [], [product]);
 
 
@@ -130,7 +189,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                       <div className="max-md:w-[200px] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative">
                         <Image
                           src={imageUrl}
-                       
+
                           alt={`Product image ${index + 1}`}
                           layout="fill"
 
@@ -149,21 +208,31 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
               </Swiper>
 
               {/* Favorite Icon */}
-              <div
-                onClick={() =>
-                  product.fav ? remove(product.id) : AddToLike(product.id)
-                }
-                className={`absolute top-2 right-2  z-10 cursor-pointer ${product.fav ? "text-red-600 " : "text-purple-200"
-                  } hover:text-red-600 `}
-              >
-                <MdFavorite size={24} className="" />
-              </div>
 
+              <div
+                onClick={async () => {
+                  if (isLoading) return;
+                  if (product.fav) {
+                    alert("This product is already in your favorites");
+                    return;
+                  }
+
+                  try {
+                    await AddToLike(product.id);
+                  } catch (error) {
+                    console.error("Error adding to favorites:", error);
+                  }
+                }}
+                className={`absolute top-2 right-2 z-10 cursor-pointer ${product.fav ? "text-red-600" : "text-purple-200"
+                  } ${isLoading ? "opacity-50 cursor-not-allowed" : "hover:text-red-600"}`}
+              >
+                <MdFavorite size={24} />
+              </div>
             </div>
 
             {/* Right Side - Car Details */}
             <div className="w-full md:w-[40%] md:pl-12  flex flex-col ">
-            
+
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
                 <div className="flex justify-between gap-8 items-center">
                   <p className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] ">
@@ -197,7 +266,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                   })}
                 </p>
 
-             
+
                 <button
                   onClick={() => router.push(`/product-details/${product.id}`)}
                   className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
@@ -208,7 +277,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
 
 
             </div>
-            
+
           </div>
         </div>
       ) : (

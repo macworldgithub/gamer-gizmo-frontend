@@ -2,7 +2,7 @@
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import CustomLoader from "@/components/CustomLoader";
 import FreeAdSection from "@/components/FreeAdSection";
-import LiveAdSection from "@/components/LiveAd";
+import Inspection from "@/components/Inspection";
 import ProductMain from "@/components/ProductMain";
 import SelectLabels from "@/components/SelectLabels";
 import { RootState } from "@/components/Store/Store";

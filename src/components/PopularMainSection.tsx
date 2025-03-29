@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import PopularItemSection from "./PopularItemSection";
-import Wrapper from "./Common/Wrapper/Wrapper";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "./Store/Store";
+import LiveAdSection from "./LiveAd";
+import Wrapper from "./Common/Wrapper/Wrapper";
 
 const PopularMainSection: React.FC = () => {
   const [LaptopUsedData, setLaptopUsedData] = useState([
@@ -225,6 +226,10 @@ const PopularMainSection: React.FC = () => {
         explorePath={`/laptops?condition=2`}
         onExplore={() => console.log("Explore Used Consoles")}
       />
+       <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
+        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
+        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
+      </div>
       <PopularItemSection
         title="Popular in New Laptops"
         subtitle="Choose your necessary gaming items from this category."
@@ -252,6 +257,10 @@ const PopularMainSection: React.FC = () => {
         explorePath={`/console?condition=1`}
         onExplore={() => console.log("Explore Used Consoles")}
       />
+      <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4 ">
+        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
+        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
+      </div>
       <PopularItemSection
         title="Popular in Used Components"
         subtitle="Choose your necessary gaming items from this category."
@@ -270,6 +279,10 @@ const PopularMainSection: React.FC = () => {
         explorePath={`/components?condition=1`}
         onExplore={() => console.log("Explore New Components")}
       />
+      <div className="w-full flex flex-col sm:flex-row gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
+        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
+        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
+      </div>
     </div>
   );
 };
