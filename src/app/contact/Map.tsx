@@ -15,11 +15,11 @@ const Map = () => {
         />
 
         <div className="md:absolute md:left-[50%]  transform md:-translate-x-1/2 md:-translate-y-1/3 w-full sm:w-[80%] max-sm:w-[90%] max-md:mx-auto  p-6 bg-white rounded-lg shadow-2xl mt-4 md:-mt-10  max-w-xl dark:bg-black  dark:shadow-purple-500 dark:shadow-sm">
-          <h2 className="text-3xl font-semibold text-center mb-4 dark:text-white">
-            Send Us Message
+          <h2 className="text-3xl font-semibold text-center mb-4 dark:text-white text-black">
+            Send Us A Message
           </h2>
-          <p className="text-center mb-6 dark:text-white">
-            Most popular gaming digital NFT marketplace
+          <p className="text-center mb-6 dark:text-white text-black">
+            Most Popular Digital Gaming Marketplace
           </p>
           <form className="space-y-4 px-8">
             <input
