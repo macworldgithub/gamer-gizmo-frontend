@@ -101,7 +101,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
     <>
       {isColumn ? (
         <div>
-     <div className="flex flex-col md:flex-row p-4 container">
+     <div className="flex flex-col sm:flex-row p-4 container">
             <div className="relative max-md:w-80  md:w-[26%]">
 
               <Swiper
@@ -127,7 +127,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
 
                   return (
                     <SwiperSlide key={index}>
-                      <div className="max-md:w-[200px] mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative">
+                      <div className="max-md:w-[200px] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative">
                         <Image
                           src={imageUrl}
                        
@@ -166,18 +166,18 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
             
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
                 <div className="flex justify-between gap-8 items-center">
-                  <p className="text-black font-bold max-md:text-sm dark:text-white md:text-xl ">
+                  <p className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] ">
                     {product.name}
                   </p>
                   {hasPremiumBadge && (
-                    <span className="lg:mr-24 md:mr-0 bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
+                    <span className="lg:mr-24 md:mr-10  bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
                       Premium
                     </span>
                   )}
                 </div>
 
 
-                <p className="text-gray-700 dark:text-gray-100 text-sm max-md:hidden">
+                <p className="text-gray-700 dark:text-gray-100 md:pr-[3rem] text-xs max-md:hidden">
                   {product.description.length > 50
                     ? `${product.description.slice(0, 50)}......`
                     : product.description}

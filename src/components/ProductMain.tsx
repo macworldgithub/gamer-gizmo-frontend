@@ -147,7 +147,6 @@ const ProductMain = ({ categoryId, query }: any) => {
             </div>
           </div>
           <InspectionBadge />
-
           <LiveAdSection className="w-[100%] h-[10rem] my-2" />
           <GetStartedBadge />
         </>
