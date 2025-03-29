@@ -32,11 +32,11 @@ const cards: CardProps[] = [
 const CardComponent: React.FC = () => {
   return (
     <Wrapper>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2 max-w-6xl mx-auto mb-4">
+     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 max-w-6xl mx-auto mb-4">
         {cards.map((card, index) => (
           <div
             key={index}
-            className="bg-[#e8e3fc] flex flex-col sm:flex-row items-center justify-between p-6 shadow-md gap-6"
+            className="bg-[#e8e3fc] flex flex-col    items-center justify-between p-6 shadow-md gap-6"
           >
             {/* Left Side (Image Section with 3 Overlapping Cards) */}
             {card.imagePosition === "left" && (

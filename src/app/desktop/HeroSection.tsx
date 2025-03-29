@@ -1,18 +1,10 @@
 "use client";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
-import SelectLabels from "@/components/SelectLabels";
-import Image from "next/image";
-import CustomLoader from "@/components/CustomLoader";
-import Inspection from "@/components/Inspection";
-import { RootState } from "@/components/Store/Store";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import ProductCard from "@/components/ProductCard";
-import { useRouter } from "next/navigation";
-import ProductMain from "@/components/ProductMain";
 import FreeAdSection from "@/components/FreeAdSection";
+import LiveAdSection from "@/components/LiveAd";
+import ProductMain from "@/components/ProductMain";
+import SelectLabels from "@/components/SelectLabels";
+import { useRouter } from "next/navigation";
 
 const HeroSection = ({ query }: any) => {
   const router = useRouter();
@@ -31,12 +23,15 @@ const HeroSection = ({ query }: any) => {
           <div className="w-full h-auto dark:bg-black mb-2">
             {/* <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0"> */}
             <div className="flex flex-wrap gap-4 justify-center sm:justify-start max-sm:gap-[0.5rem] ">
+             
               <ProductMain query={query} categoryId={2} />
             </div>
             {/* </Wrapper> */}
           </div>
         </Wrapper>
+       
       </div>
+
       {/* Free Ad Section */}
       <FreeAdSection />
       {/* <Inspection /> */}

@@ -13,6 +13,7 @@ import ProductCard from "@/components/ProductCard";
 import { useRouter } from "next/navigation";
 import ProductMain from "@/components/ProductMain";
 import FreeAdSection from "@/components/FreeAdSection";
+import LiveAdSection from "@/components/LiveAd";
 
 const HeroSection = ({ query }: any) => {
   const router = useRouter();
@@ -31,11 +32,13 @@ const HeroSection = ({ query }: any) => {
           <div className="w-full h-auto dark:bg-black mb-2">
             {/* <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0"> */}
             <div className="flex flex-wrap gap-4 justify-center sm:justify-start max-sm:gap-[0.5rem] ">
+              
               <ProductMain query={query} categoryId={0} />
             </div>
             {/* </Wrapper> */}
           </div>
         </Wrapper>
+     
       </div>
       {/* Free Ad Section */}
       <FreeAdSection />
