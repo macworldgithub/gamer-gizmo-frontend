@@ -48,7 +48,7 @@ const LiveCommunity: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8 bg-white dark:bg-black w-full py-6">
+    <div className="space-y-8 bg-white dark:bg-black w-full py-6 max-w-4xl mx-auto">
       <Wrapper>
         <h1 className="text-3xl text-start font-bold max-sm:text-xl text-black dark:text-white max-sm:ml-4 md:pl-4 sm:pl-3 pb-3">
           Live Community

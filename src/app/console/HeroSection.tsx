@@ -2,13 +2,11 @@
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import CustomLoader from "@/components/CustomLoader";
 import FreeAdSection from "@/components/FreeAdSection";
-import Inspection from "@/components/Inspection";
 import ProductMain from "@/components/ProductMain";
 import SelectLabels from "@/components/SelectLabels";
 import { RootState } from "@/components/Store/Store";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const HeroSection = ({ query }: any) => {
