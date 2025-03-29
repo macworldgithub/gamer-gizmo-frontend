@@ -112,7 +112,10 @@ const page = () => {
           <ProductDetails seReftech={seReftech} refetch={fetcher} data={data} />
           {/* <AuthorSection /> */}
           {/* <RelatedNewsSection /> */}
+          <Wrapper className="mt-4 mx-6">
           <CommentsSection seReftech={seReftech} fetcher={fetcher} data={data} />
+            
+          </Wrapper>
           {/* <ContactForm /> */}
         </div>
         <div className="md:w-[35%] max-md:w-0">

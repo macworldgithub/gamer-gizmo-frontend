@@ -24,6 +24,13 @@ const ShareProductModal = ({ open, onClose }: any) => {
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`,
     email: `mailto:?subject=Check%20this%20out&body=${encodeURIComponent(currentUrl)}`,
   };
+  const shareIcons = [
+    { title: "WhatsApp", icon: faWhatsapp, color: "text-green-500", link: socialLinks.whatsapp },
+    { title: "Facebook", icon: faFacebookF, color: "text-blue-600", link: socialLinks.facebook },
+    { title: "Twitter (X)", icon: faXTwitter, color: "text-black", link: socialLinks.twitter },
+    { title: "LinkedIn", icon: faLinkedinIn, color: "text-blue-500", link: socialLinks.linkedin },
+    { title: "Email", icon: faEnvelope, color: "text-gray-600", link: socialLinks.email },
+  ];
 
   // Copy to clipboard function
   const copyToClipboard = async () => {
@@ -37,66 +44,46 @@ const ShareProductModal = ({ open, onClose }: any) => {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg w-[35%]">
+      <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-[95%] sm:max-w-[80%]  md:max-w-[60%] lg:max-w-[50%] ">
+
         {/* Close Button */}
-        <div className="flex justify-center items-center relative">
-          <h2 className="text-lg font-semibold">Share this Product</h2>
-          <IconButton onClick={onClose} className="">
-            {/* <FontAwesomeIcon icon={faTimes} /> */}
-            {/* <IoCloseCircle/> */}
-            <IoClose  color="red" size={28} />
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-center flex-1">
+            Share this Product
+          </h2>
+          <IconButton onClick={onClose} className="p-1">
+            <IoClose className="text-red-600 text-[24px] max-md:text-[28px] lg:text-[32px]" />
           </IconButton>
         </div>
 
         {/* Share Icons */}
-        <div className="flex justify-center gap-16 my-4">
-          <Tooltip title="Share on WhatsApp">
-            <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faWhatsapp} size="2x" className="text-green-500 text-[42px]" />
-            </a>
-          </Tooltip>
-
-          <Tooltip title="Share on Facebook">
-            <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faFacebookF} size="2x" className="text-blue-600 text-[42px]" />
-            </a>
-          </Tooltip>
-
-          <Tooltip title="Share on X (Twitter)">
-            <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faXTwitter} className="text-black text-[42px]" />
-            </a>
-          </Tooltip>
-
-          <Tooltip title="Share on LinkedIn">
-            <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faLinkedinIn} className="text-blue-500 text-[42px]" />
-            </a>
-          </Tooltip>
-
-          <Tooltip title="Share via Email">
-            <a href={socialLinks.email} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faEnvelope} className="text-gray-600 text-[42px]" />
-            </a>
-          </Tooltip>
+        <div className="flex justify-center flex-wrap max-sm:gap-9  sm:gap-16 md:gap-10 lg:gap-16 xl:gap-20 my-4">
+          {shareIcons.map(({ title, icon, color, link }, index) => (
+            <Tooltip key={index} title={title}>
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={icon} className={`${color} max-md:text-[36px] md:text-[44px] lg:text-[46px]`} />
+              </a>
+            </Tooltip>
+          ))}
         </div>
-
         {/* Copy URL Section */}
-        <div className="flex items-center border p-2 rounded mt-2">
-          <TextField fullWidth variant="standard" value={currentUrl} InputProps={{ readOnly: true  }} sx={{
-      input: {
-        color: "black", // Default text color
-        "&.MuiInputBase-input": {
-          color: "black", // Ensure it's black in dark mode too
-        },
-      },
-    }} />
+        <div className="flex items-center border p-2 rounded mt-2 w-full">
+          <TextField
+            fullWidth
+            variant="standard"
+            value={currentUrl}
+            InputProps={{ readOnly: true }}
+            sx={{
+              input: { color: "black", fontSize: "14px", "@media (min-width: 640px)": { fontSize: "16px" } },
+            }}
+          />
           <IconButton onClick={copyToClipboard}>
-            <FontAwesomeIcon icon={faCopy} className="text-gray-500" />
+            <FontAwesomeIcon icon={faCopy} className="text-gray-500 text-[18px] sm:text-[24px]" />
           </IconButton>
         </div>
       </Box>
     </Modal>
+
   );
 };
 

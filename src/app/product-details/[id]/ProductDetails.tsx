@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -20,12 +20,17 @@ import { SlCalender } from "react-icons/sl";
 import { getSpecifications } from "@/app/utils/getSpecifications";
 import { getRelevantFields } from "@/app/utils/specificationFields";
 import ShareProductModal from "@/components/Modals/ShareProductModal";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/components/Store/Store";
+import { setLoading } from "@/components/Store/Slicer/LoadingSlice";
 
 const ProductDetails = ({ data, refetch, seReftech }: any) => {
   // const [activeTab, setActiveTab] = useState("false");
   const [modalOpen, setModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isSpecOpen, setIsSpecOpen] = useState(false);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
   const totalReviewsCount = data?.product_reviews?.length || 0;
   const specifications = getSpecifications(data);
   // Function to select the correct specifications based on category_id
@@ -64,12 +69,15 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     });
   };
 
-  const handleShareClick = () => {
-    setIsShareModalOpen(true);
-  };
 
-  const handleCloseModal = () => {
-    setIsShareModalOpen(false);
+
+  const handleClick = () => {
+    dispatch(setLoading(true));
+
+    setTimeout(() => {
+      dispatch(setLoading(false));
+      setModalOpen(true); // Open modal after loading is done
+    }, 1000);
   };
 
   console.log(data, "ppo");
@@ -82,7 +90,9 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
       </div>
       <div className="w-full flex flex-col justify-center items-center">
         {/* Image Section */}
-
+<div>
+  
+</div>
         <div className="w-full flex justify-center items-center h-auto bg-gray-200 max-w-3xl ">
           {data?.product_images && (
             <ProductImageSwiper
@@ -93,8 +103,20 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           )}
         </div>
 
+        <div
+          className="flex ml-[62%] mt-4 hover:bg-secondaryColorDark gap-2 bg-gray-200 justify-center items-center rounded-md w-36 h-10 cursor-pointer"
+          onClick={handleClick}
+        >
+          {isLoading ? (
+            <div className="w-5 h-5 border-2 border-t-2 border-gray-500 rounded-full animate-spin"></div>
+          ) : (
+            <FaRegShareSquare size={20} />
+          )}
+          <button className="rounded-md">{isLoading ? "Loading..." : "Share Product"}</button>
+        </div>
+
         {/* Details Section */}
-        <div className="w-full max-w-4xl bg-white p-6 mt-6 dark:bg-black">
+        <div className="w-full max-w-4xl bg-white px-8 mt-0 dark:bg-black">
           {/* <div className="flex flex-col justify-center items-start">
           <div className="w-full flex justify-start mt-4 mb-7">
           <div className="w-full flex justify-between items-center bg-white shadow-md dark:bg-black">
@@ -139,7 +161,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           <button
             className=" text-black 
               dark:text-white  
-               w-fit py-2 rounded-md font-semibold text-2xl flex justify-center "
+               w-fit  rounded-md font-semibold text-2xl flex justify-center "
           >
             Item overview
           </button>
@@ -257,12 +279,8 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 </a>
               </div>
             </div> */}
-            <div className="flex hover:bg-secondaryColorDark gap-2 bg-gray-200 justify-center items-center rounded-md w-36">
-              <FaRegShareSquare size={20}/>
-              <button onClick={() => setModalOpen(true)} className=" rounded-md">
-                Share Product
-              </button>
-            </div>
+
+
 
             {/* Modal Component */}
             <ShareProductModal open={modalOpen} onClose={() => setModalOpen(false)} />
