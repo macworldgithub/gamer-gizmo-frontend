@@ -262,7 +262,7 @@ const PopularMainSection: React.FC = () => {
       <LiveAdSection className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40" />
       </div>
       <PopularItemSection
-        title="Popular in Used Components"
+        title="Popular in Used Components and Accessories"
         subtitle="Choose your necessary gaming items from this category."
         products={componentsUsedData}
         seReftech={seReftech}
@@ -271,7 +271,7 @@ const PopularMainSection: React.FC = () => {
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <PopularItemSection
-        title="Popular in New Components"
+        title="Popular in New Components and Accessories"
         subtitle="Choose your necessary gaming items from this category."
         products={componentsNewData}
         seReftech={seReftech}

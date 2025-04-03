@@ -132,7 +132,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
             </div>
           ))}
 
-        {["Components"].includes(selectCategory?.name) &&
+        {["Components and Accessories", "Components"].includes(selectCategory?.name) &&
           componentDetails.map(({ label, value }, index) => (
             <div key={index} className="bg-white p-3 rounded-md">
               <p className="text-black text-xl font-bold">{label}</p>
