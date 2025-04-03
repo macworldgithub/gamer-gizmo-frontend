@@ -103,7 +103,7 @@ export default function UsBlogs() {
           
             <div className="w-full px-2 text-center md:text-left">
               <p className="text-sm text-gray-500 italic">
-                Gamer Gizmo • {formatDate(blog.Created_at)}
+                GamerGizmo • {formatDate(blog.Created_at)}
               </p>
               <h3
                 onClick={() => router.push(`/blog/${blog.blogId}`)}

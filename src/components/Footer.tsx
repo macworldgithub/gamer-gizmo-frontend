@@ -45,7 +45,7 @@ const Footer = () => {
             </Link>
 
             <p className="text-sm max-w-xs leading-relaxed text-start md:text-xs">
-              “Gamer Gizmo – Your ultimate destination for gaming gear, laptops,
+              “GamerGizmo – Your ultimate destination for gaming gear, laptops,
               and accessories. Level up your gaming experience with ease.”
             </p>
             <div className="flex items-center gap-4 mt-4">

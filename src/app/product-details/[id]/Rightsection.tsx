@@ -91,7 +91,7 @@ const Rightsection = ({ data }: any) => {
           <>
             {/* Display Gamer Gizmo for Store Products */}
             <h2 className="text-center text-lg font-bold text-gray-800 dark:text-white">
-              Gamer Gizmo
+              GamerGizmo
             </h2>
 
             {/* WhatsApp & Email Icons with Fixed Contact Info */}

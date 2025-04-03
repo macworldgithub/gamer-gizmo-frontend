@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div className="dark:bg-secondaryBlack">
       <div className="">
-        <PageHeader pageName="Store" title="Gamer Gizmo Store" />
+        <PageHeader pageName="Store" title="GamerGizmo Store" />
       </div>
       <div>
         <ProductContainer />

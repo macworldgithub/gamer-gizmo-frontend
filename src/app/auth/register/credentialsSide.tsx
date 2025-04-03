@@ -66,7 +66,9 @@ const credentialSlide = () => {
     }
   
     // Phone number validation (International format)
-    const phoneRegex = /^\+\d{1,3}\d{6,14}$/;
+    // const phoneRegex = /^\+\d{1,3}\d{6,14}$/;
+    const phoneRegex = /^(?:\+|00)\d{1,3}\d{6,14}$/;
+
     if (!phoneRegex.test(formData.phone)) {
       toast.error(
         "Invalid phone number! Use international format (e.g., +923001234567)"
