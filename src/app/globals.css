@@ -134,11 +134,11 @@ body {
 /* Adjust Swiper arrows position */
 .swiper-button-prev {
   left: 10px !important;
-}
+} 
 
 .swiper-button-next {
   right: 10px !important;
-}
+} 
 
 /* Hide default text in Swiper buttons */
 .swiper-button-prev::after,
@@ -146,4 +146,4 @@ body {
   font-size: 18px !important;
   font-weight: bold;
   color: white !important;
-}
+} 

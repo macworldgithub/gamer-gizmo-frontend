@@ -371,18 +371,18 @@ export default function ChatBox() {
           ))
         )}
         {/* Message Input */}
-        <div className="w-full   mt-4 flex items-center space-x-2">
+        <div className="w-full  mt-4 flex items-center space-x-2">
           <input
             type="text"
             placeholder="Type a message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="p-2  w-full border border-gray-400 rounded-md text-black"
+            className="p-2  w-full border border-gray-400 rounded-md dark:text-black text-black"
             onKeyPress={(e) => e.key === "Enter" && sendMessage()}
           />
           <button
             onClick={sendMessage}
-            className="px-6 py-2 bg-custom-gradient flex items-center justify-center gap-2 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+            className="px-6 py-2 bg-custom-gradient flex items-center justify-center gap-2 text-black rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
           >
             <BsSend />
             Send

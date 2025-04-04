@@ -24,22 +24,22 @@ const GetStartedBadge = () => {
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="text-purple-500 font-medium md:text-lg max-md:text-[0.7rem]">
+          <p className="text-purple-500 font-medium md:text-lg max-md:text-[0.4rem]">
             Got a verified badge yet?
           </p>
         </div>
-        <p className="md:text-sm max-md:text-[0.6rem] text-black ">
+        <p className="md:text-sm max-md:text-[0.4rem] text-black ">
           Get more visibility and enhance your credibility.
         </p>
         {/* {!profileData.applied_for_verification ? ( */}
         <button
           onClick={() => setOpenNicModal(true)}
-          className=" bg-purple-500 text-white px-4 py-2 max-md:text-xs rounded-md md:text-sm hover:bg-purple-600"
+          className=" bg-purple-500 text-white max-md:px-1 max-md:text-[0.6rem] max-md:w-36 px-4 py-2 max-md:text-xs rounded-md md:text-sm hover:bg-purple-600"
         >
           Get Started
         </button>
         {/* ) : ( */}
-        <p className="text-black font-bold md:text-md max-md:text-[0.6rem]">
+        <p className="text-black font-bold md:text-md max-md:text-[0.4rem]">
           Applied for verification, Wait for admin to verify
         </p>
         {/* )} */}

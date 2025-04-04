@@ -41,47 +41,66 @@ const credentialSlide = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+  
     // Ensure terms are accepted
     if (terms !== "on") {
       toast.error("Please accept terms and conditions");
       return;
     }
-
+  
     // Username validation (at least 3 characters)
     if (formData.username.length < 3) {
       toast.error("Username must be at least 3 characters long");
       return;
     }
-
+  
     // Password validation
     if (formData.password.length < 6) {
       toast.error("Password must be at least 6 characters long");
       return;
     }
-
+  
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-
+  
     // Phone number validation (International format)
-    const phoneRegex = /^\+\d{1,3}\d{6,14}$/;
+    // const phoneRegex = /^\+\d{1,3}\d{6,14}$/;
+    const phoneRegex = /^(?:\+|00)\d{1,3}\d{6,14}$/;
+
     if (!phoneRegex.test(formData.phone)) {
       toast.error(
         "Invalid phone number! Use international format (e.g., +923001234567)"
       );
       return;
     }
-
+  
+    // **Date of Birth Validation** (Must be at least 18 years old)
+    const dobDate = new Date(formData.dob);
+    const today = new Date();
+    let age = today.getFullYear() - dobDate.getFullYear();
+    const monthDiff = today.getMonth() - dobDate.getMonth();
+    const dayDiff = today.getDate() - dobDate.getDate();
+  
+    // Adjust age if birthday hasn't occurred yet this year
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+  
+    if (age < 18) {
+      toast.error("You must be at least 18 years old to register");
+      return;
+    }
+  
     try {
       const response = await axiosInstance.post(signupUrl, {
         ...formData,
-        dob: new Date(formData.dob),
+        dob: dobDate,
       });
-
+  
       console.log("Response:", response);
-
+  
       if (response.status === 200 || response.status === 201) {
         toast.success("Registration successful! OTP has been sent to email", {
           icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
@@ -95,23 +114,24 @@ const credentialSlide = () => {
       console.log("API Response:", response.data);
     } catch (error: any) {
       console.error("Error during signup:", error);
-
+  
       // Show backend error messages properly
       if (error.response?.data?.message) {
         const errorMessage = error.response.data.message;
-
+  
         if (Array.isArray(errorMessage)) {
           errorMessage.forEach((msg) => toast.error(msg));
         } else {
           toast.error(errorMessage || "An error occurred. Please try again.");
         }
-
+  
         console.log(errorMessage);
       } else {
         toast.error("An error occurred. Please try again.");
       }
     }
   };
+  
 
   return (
     <div

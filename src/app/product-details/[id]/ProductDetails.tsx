@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -15,14 +15,22 @@ import Sellersdetails from "./sellersdetail";
 import { formatDate } from "@/app/utils/formatDate";
 import ProductImageSwiper from "@/components/ProductImageSwiper";
 import { CiUser } from "react-icons/ci";
-import { FaRegComment, FaUser } from "react-icons/fa";
+import { FaRegComment, FaRegShareSquare, FaUser } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { getSpecifications } from "@/app/utils/getSpecifications";
 import { getRelevantFields } from "@/app/utils/specificationFields";
+import ShareProductModal from "@/components/Modals/ShareProductModal";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/components/Store/Store";
+import { setLoading } from "@/components/Store/Slicer/LoadingSlice";
 
 const ProductDetails = ({ data, refetch, seReftech }: any) => {
   // const [activeTab, setActiveTab] = useState("false");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isSpecOpen, setIsSpecOpen] = useState(false);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
   const totalReviewsCount = data?.product_reviews?.length || 0;
   const specifications = getSpecifications(data);
   // Function to select the correct specifications based on category_id
@@ -53,12 +61,23 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     return relevantFields.some((field: any) => {
       const value = field.includes(".")
         ? //@ts-ignore
-          field.split(".").reduce((obj, key) => obj?.[key], categoryData)
+        field.split(".").reduce((obj, key) => obj?.[key], categoryData)
         : categoryData[field];
       return (
         value && value !== "Not Available" && value.toString().trim() !== ""
       );
     });
+  };
+
+
+
+  const handleClick = () => {
+    dispatch(setLoading(true));
+
+    setTimeout(() => {
+      dispatch(setLoading(false));
+      setModalOpen(true); // Open modal after loading is done
+    }, 1000);
   };
 
   console.log(data, "ppo");
@@ -71,7 +90,9 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
       </div>
       <div className="w-full flex flex-col justify-center items-center">
         {/* Image Section */}
-
+<div>
+  
+</div>
         <div className="w-full flex justify-center items-center h-auto bg-gray-200 max-w-3xl ">
           {data?.product_images && (
             <ProductImageSwiper
@@ -82,8 +103,20 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           )}
         </div>
 
+        <div
+          className="flex ml-[62%] mt-4 hover:bg-secondaryColorDark gap-2 bg-gray-200 justify-center items-center rounded-md w-36 h-10 cursor-pointer"
+          onClick={handleClick}
+        >
+          {isLoading ? (
+            <div className="w-5 h-5 border-2 border-t-2 border-gray-500 rounded-full animate-spin"></div>
+          ) : (
+            <FaRegShareSquare size={20} />
+          )}
+          <button className="rounded-md">{isLoading ? "Loading..." : "Share Product"}</button>
+        </div>
+
         {/* Details Section */}
-        <div className="w-full max-w-4xl bg-white p-6 mt-6 dark:bg-black">
+        <div className="w-full max-w-4xl bg-white px-8 mt-0 dark:bg-black">
           {/* <div className="flex flex-col justify-center items-start">
           <div className="w-full flex justify-start mt-4 mb-7">
           <div className="w-full flex justify-between items-center bg-white shadow-md dark:bg-black">
@@ -128,7 +161,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           <button
             className=" text-black 
               dark:text-white  
-               w-fit py-2 rounded-md font-semibold text-2xl flex justify-center "
+               w-fit  rounded-md font-semibold text-2xl flex justify-center "
           >
             Item overview
           </button>
@@ -138,7 +171,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             {data?.stock && (
               <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 max-sm:p-2 text-center w-40 h-24 flex flex-col justify-center max-sm:w-36">
                 <h1 className="font-semibold text-sm max-sm:text-xs">STOCK</h1>
-                <p className="mt-2  text-black dark:text-white font-semibold text-xs">
+                <p className="mt-2 text-white font-semibold text-xs">
                   {data?.stock}
                 </p>
               </div>
@@ -148,7 +181,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
                 <h1 className="font-semibold text-sm max-sm:text-xs">MODEL</h1>
 
-                <p className="mt-2  text-black dark:text-white font-semibold text-xs">
+                <p className="mt-2 text-white font-semibold text-xs">
                   {data?.models?.name}
                 </p>
               </div>
@@ -157,7 +190,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             {data?.brands && (
               <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
                 <h1 className="font-semibold text-sm max-sm:text-xs">BRAND</h1>
-                <p className="mt-2  text-black dark:text-white font-semibold text-xs">
+                <p className="mt-2  text-white font-semibold text-xs">
                   {data?.brands?.name}
                 </p>
               </div>
@@ -169,16 +202,16 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 <h1 className="font-semibold text-sm max-sm:text-xs">
                   CONDITION
                 </h1>
-                <p className="mt-2 text-black dark:text-white font-semibold text-xs">
+                <p className="mt-2 text-white font-semibold text-xs">
                   {data?.condition === 1
                     ? "New"
                     : data?.condition === 2
-                    ? "Used"
-                    : data?.condition === 3
-                    ? "Like New"
-                    : data?.condition === 4
-                    ? "Refurbished"
-                    : "Unknown"}
+                      ? "Used"
+                      : data?.condition === 3
+                        ? "Like New"
+                        : data?.condition === 4
+                          ? "Refurbished"
+                          : "Unknown"}
                 </p>
               </div>
             )}
@@ -195,11 +228,10 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   <button
                     onClick={handleSpecClick}
                     className={`w-fit px-4 py-2 rounded-md text-sm flex justify-center 
-      ${
-        isSpecOpen
-          ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
-          : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
-      }`}
+      ${isSpecOpen
+                        ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
+                        : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
+                      }`}
                   >
                     {isSpecOpen
                       ? "Hide Additional Details"
@@ -208,7 +240,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                 )}
               </div>
             </div>
-            <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
+            {/* <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
               <span className="text-gray-600 font-semibold dark:text-white">
                 Share Post:
               </span>
@@ -246,7 +278,13 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   </div>
                 </a>
               </div>
-            </div>
+            </div> */}
+
+
+
+            {/* Modal Component */}
+            <ShareProductModal open={modalOpen} onClose={() => setModalOpen(false)} />
+
           </div>
 
           {/* Conditional Rendering */}
@@ -269,6 +307,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               {data?.description}
             </p>
           </div>
+
 
           <Sellersdetails data={data} />
         </div>

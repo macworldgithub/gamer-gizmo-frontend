@@ -27,7 +27,7 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
   const categoryIconMapping: Record<string, string> = {
     "Gaming PCs": "/images/desktopImage.jpg",
     Laptops: "/images/LaptopImage.png",
-    Components: "/images/components.jpg",
+    "Components and Accessories": "/images/components.jpg",
     "Gaming Consoles": "/images/consoles2.png",
     // Accessories: "/images/accessories.jpg",
     Default: "/images/default.jpg",
@@ -35,13 +35,13 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
 
   // Replace "Desktops" with "Gaming PCs" & sort the categories in required order
   const orderedCategories = categories
-    .map((category) =>
-      category.name === "Desktops"
-        ? { ...category, name: "Gaming PCs" }
-        : category
-    )
+    .map((category) => {
+      if (category.name === "Desktops") return { ...category, name: "Gaming PCs" };
+      if (category.name === "Components") return { ...category, name: "Components and Accessories" };
+      return category;
+    })
     .sort((a, b) => {
-      const order = ["Gaming PCs", "Laptops", "Gaming Consoles", "Components"];
+      const order = ["Gaming PCs", "Laptops", "Gaming Consoles", "Components and Accessories"];
       return order.indexOf(a.name) - order.indexOf(b.name);
     });
 

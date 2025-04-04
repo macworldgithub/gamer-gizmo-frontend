@@ -488,7 +488,7 @@ const MoreSpecification = ({
         </>
       )}
 
-      {selectCategory?.name === "Components" && (
+      {selectCategory?.name === "Components and Accessories"  && (
         <>
           <div className="w-full text-center">
             <h2 className="text-lg font-bold dark:text-white">Select Component Type</h2>
@@ -516,7 +516,7 @@ const MoreSpecification = ({
                   {componentCategories &&
                     componentCategories.length > 0 &&
                     componentCategories.map((e: any) => (
-                      <MenuItem value={e.id}>{e.name}</MenuItem>
+                      <MenuItem key={e.id} value={e}>{e?.name}</MenuItem>
                     ))}
                 </Select>
               </FormControl>

@@ -126,7 +126,7 @@ const CategoriesComponent = () => {
             {/* Right Section */}
             <div className="flex-1 justify-start md:px-8 lg:ml-16 max-md:px-4 ">
               <h2 className="text-xl font-bold text-purple-700 mb-4">
-                Gamer Gizmo Offering
+                GamerGizmo Offering
               </h2>
               <ul className="text-sm space-y-2 mb-6">
                 <li className="flex items-center gap-2">

@@ -11,6 +11,10 @@ export default function BrowseVideos() {
       src: "https://www.youtube.com/watch?v=csSTitLfdMU",
       poster: "/images/gameIcon.png",
     },
+    {
+      src: "https://www.youtube.com/watch?v=IaGo0CmspMU",
+      poster: "/images/gameIcon.png",
+    },
   ];
 
   // Define total slots

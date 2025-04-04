@@ -55,12 +55,17 @@ const LiveCommunity: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8 bg-white dark:bg-black w-full ">
+    <div className="space-y-8  bg-white dark:bg-black w-full ">
       <Wrapper>
         <h1 className="text-3xl text-start font-bold max-sm:text-xl text-black dark:text-white max-sm:ml-4 md:pl-4 sm:pl-3 pb-3">
           Live Community
         </h1>
-        <div className="flex gap-6 max-md:hidden w-full text-black dark:text-white">
+        {/* <div className="flex gap-6 max-md:hidden w-full text-black dark:text-white"> */}
+        {/* {cardsData.map((card, index) => ( */}
+        <CommunityCard />
+        {/* ))} */}
+        {/* </div> */}
+        {/* <div className="flex md:hidden overflow-x-auto scrollbar-hide">
           {cardsData.map((card, index) => (
             <CommunityCard
               key={index}
@@ -71,20 +76,8 @@ const LiveCommunity: React.FC = () => {
               src={card.src}
             />
           ))}
-        </div>
-        <div className="flex md:hidden overflow-x-auto scrollbar-hide">
-          {cardsData.map((card, index) => (
-            <CommunityCard
-              key={index}
-              userName={card.userName}
-              time={card.time}
-              question={card.question}
-              description={card.description}
-              src={card.src}
-            />
-          ))}
-        </div>
-        <div className="flex justify-end max-md:justify-center mt-8">
+        </div> */}
+        <div className="flex justify-end max-md:justify-center max-md:mt-0 md:mt-3">
           <button
             onClick={handleJoinCommunity}
             className="px-6 py-2 w-[10rem] h-[3rem] bg-custom-gradient  text-white text-center text-xs font-semibold rounded-full shadow hover:opacity-90"
