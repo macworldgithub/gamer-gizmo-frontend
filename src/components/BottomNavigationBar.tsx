@@ -1,4 +1,3 @@
-
 "use client";
 import { RootState } from "@/components/Store/Store";
 import Image from "next/image";
@@ -140,7 +139,7 @@ const BottomNavigationBar = () => {
     { name: "Gaming PCs", href: "/desktop" },
     { name: "Laptops", href: "/laptops" },
     { name: "Gaming Consoles", href: "/console" },
-    { name: "Components", href: "/components" },
+    { name: "Components and accessories", href: "/components" },
     { name: "Blogs", href: "/blogs" },
     { name: "Contact Us", href: "/contact" },
     { name: "About Us", href: "/about" },
@@ -283,8 +282,20 @@ const BottomNavigationBar = () => {
               >
                 Contact Us
               </Link>
-              <Link className="text-sm" href="/about" onClick={() => setIsDrawerOpen(false)}>About Us</Link>
-              <Link className="text-sm" href="/store" onClick={() => setIsDrawerOpen(false)}>Store</Link>
+              <Link
+                className="text-sm"
+                href="/about"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                About Us
+              </Link>
+              <Link
+                className="text-sm"
+                href="/store"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Store
+              </Link>
 
               <Link
                 href="/Inspection"
@@ -304,7 +315,9 @@ const BottomNavigationBar = () => {
                       height={14}
                       alt="btnIcon"
                     />
-                    <span className="text-[0.6rem] text-white ">Post Your Ad</span>
+                    <span className="text-[0.6rem] text-white ">
+                      Post Your Ad
+                    </span>
                   </div>
                 </Link>
 

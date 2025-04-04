@@ -77,7 +77,7 @@ const LiveCommunity: React.FC = () => {
             />
           ))}
         </div> */}
-        <div className="flex justify-end max-md:justify-center max-md:mt-0 md:mt-3">
+        <div className="flex justify-end max-md:justify-center max-md:mt-0 md:mt-3 mb-1">
           <button
             onClick={handleJoinCommunity}
             className="px-6 py-2 w-[10rem] h-[3rem] bg-custom-gradient  text-white text-center text-xs font-semibold rounded-full shadow hover:opacity-90"

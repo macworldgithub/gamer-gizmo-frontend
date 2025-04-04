@@ -18,7 +18,7 @@ const categoryNames = {
   0: "Products",
   1: "Laptops",
   2: "Gaming PCS",
-  3: "Components",
+  3: "Components and Accessories",
   4: "Gaming Consoles",
 };
 const ProductMain = ({ categoryId, query }: any) => {

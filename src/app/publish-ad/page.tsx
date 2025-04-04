@@ -234,8 +234,8 @@ const PublishAdd: React.FC = () => {
       setCompletedSteps([...completedSteps, activeStep]);
     }
   };
-  
-const [isLoading, setIsLoading] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -519,18 +519,18 @@ const [isLoading, setIsLoading] = useState(false);
           </Button>
           {activeStep === steps.length - 1 ? (
             <Button
-            onClick={handleSubmit}
-            variant="contained"
-            style={{
-              backgroundColor: "#dc39fc",
-              fontWeight: "bold",
-              fontSize: "15px",
-              cursor: isLoading ? "not-allowed" : "pointer",
-            }}
-            disabled={isLoading}
-          >
-            {isLoading ? "Publishing..." : "Publish"}
-          </Button>
+              onClick={handleSubmit}
+              variant="contained"
+              style={{
+                backgroundColor: "#dc39fc",
+                fontWeight: "bold",
+                fontSize: "15px",
+                cursor: isLoading ? "not-allowed" : "pointer",
+              }}
+              disabled={isLoading}
+            >
+              {isLoading ? "Publishing..." : "Publish"}
+            </Button>
           ) : (
             <Button
               variant="contained"

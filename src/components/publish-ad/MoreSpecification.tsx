@@ -91,6 +91,8 @@ const MoreSpecification = ({
     fetchProcessor();
   }, [selectProcessorVariant]);
 
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
+
   return (
     <div className="flex flex-col space-y-3">
       <div className="flex justify-end items-center ">
@@ -488,48 +490,72 @@ const MoreSpecification = ({
         </>
       )}
 
-      {selectCategory?.name === "Components and Accessories"  && (
+      {selectCategory?.name === "Components and Accessories" && (
         <>
-          <div className="w-full text-center">
-            <h2 className="text-lg font-bold dark:text-white">Select Component Type</h2>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth sx={inputStyles}>
-                <InputLabel id="cat-select-label">Category</InputLabel>
-                <Select
-                  labelId="cat-select-label"
-                  id="cat-select"
-                  name="component_type"
-                  value={selectComponentCategory}
-                  label="Category"
-                  //@ts-ignore
-                  onChange={(e) => setSelectedComponentCategory(e.target.value)}
-                  // onChange={(e) =>
-                  //   setSelectedComponentCategory((prev: any) => ({
-                  //     ...prev,
-                  //     id: e.target.value,
-                  //     name: e.target.name,
-                  //   }))
-                  // }
-                  // sx={{ color: "#ffffff" }}
-                  className="text-black  dark:text-white"
-                >
-                  {componentCategories &&
-                    componentCategories.length > 0 &&
-                    componentCategories.map((e: any) => (
-                      <MenuItem key={e.id} value={e}>{e?.name}</MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Box>
+          {/* Dropdown to choose Components or Accessories */}
+          <div className="w-full text-center mb-4">
+            <h2 className="text-lg font-bold dark:text-white">
+              Choose Type Component or Accessories
+            </h2>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="sub-cat-label">Type</InputLabel>
+              <Select
+                labelId="sub-cat-label"
+                value={selectedSubCategory}
+                label="Type"
+                onChange={(e) => setSelectedSubCategory(e.target.value)}
+                className="text-black dark:text-white"
+              >
+                <MenuItem value="components">Components</MenuItem>
+                <MenuItem value="accessories">Accessories</MenuItem>
+              </Select>
+            </FormControl>
           </div>
-          <TextField
-            sx={inputStyles}
-            label="text"
-            variant="outlined"
-            fullWidth
-            value={formData.component_text || ""}
-            onChange={(e) => handleFormChange("component_text", e.target.value)}
-          />
+
+          {/* Show dropdown only if 'components' selected */}
+          {selectedSubCategory === "components" && (
+            <div className="w-full text-center">
+              <h2 className="text-lg font-bold dark:text-white">
+                Select Component Type
+              </h2>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel id="cat-select-label">Category</InputLabel>
+                  <Select
+                    labelId="cat-select-label"
+                    id="cat-select"
+                    name="component_type"
+                    value={selectComponentCategory}
+                    label="Category"
+                    onChange={(e) =>
+                      setSelectedComponentCategory(e.target.value)
+                    }
+                    className="text-black dark:text-white"
+                  >
+                    {componentCategories?.map((e: any) => (
+                      <MenuItem key={e.id} value={e}>
+                        {e?.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+            </div>
+          )}
+
+          {/* Show text field only if 'accessories' selected */}
+          {selectedSubCategory === "accessories" && (
+            <TextField
+              sx={inputStyles}
+              label="Accessories Text"
+              variant="outlined"
+              fullWidth
+              value={formData.component_text || ""}
+              onChange={(e) =>
+                handleFormChange("component_text", e.target.value)
+              }
+            />
+          )}
         </>
       )}
     </div>

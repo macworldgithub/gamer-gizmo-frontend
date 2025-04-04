@@ -30,8 +30,11 @@ const Components = () => {
 
   return (
     <div className="w-full">
-      <PageHeader pageName="Components" title="Components" />
-      <SearchBar categoryId="3"/>
+      <PageHeader
+        pageName="Components and Accessories"
+        title="Components and Accessories"
+      />
+      <SearchBar categoryId="3" />
       <HeroSection query={queryObject} />
     </div>
   );
