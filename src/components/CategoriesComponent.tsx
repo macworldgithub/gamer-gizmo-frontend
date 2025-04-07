@@ -36,18 +36,18 @@ const CategoriesComponent = () => {
   const categories = [
     "Used Gaming PCs",
     "Used Laptops",
-    "Used Components and accessories",
+    "Used Components and Accessories",
     "Used Gaming Consoles",
     "New Gaming PCs",
     "New Laptops",
-    "New Components and accessories",
+    "New Components and Accessories",
     "New Gaming Consoles",
   ];
 
   const categoryMap = {
     "Gaming PCs": "desktop",
     Laptops: "laptops",
-    "Components and accessories": "components",
+    "Components and Accessories": "components",
     "Gaming Consoles": "console",
   } as const;
 

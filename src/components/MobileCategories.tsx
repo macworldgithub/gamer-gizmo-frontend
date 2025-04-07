@@ -9,7 +9,7 @@ const categories = [
   {
     id: 3,
     image: "/images/used-pc.png",
-    title: "Used Components and accessories",
+    title: "Used Components and Accessories",
   },
   { id: 4, image: "/images/newConsoles.png", title: "Used Gaming Consoles" },
   { id: 5, image: "/images/newDesktops.png", title: "New Gaming PCs" },
@@ -17,7 +17,7 @@ const categories = [
   {
     id: 7,
     image: "/images/newGamingParts.png",
-    title: "New Components and accessories",
+    title: "New Components and Accessories",
   },
   { id: 8, image: "/images/newConsoles.png", title: "New Gaming Consoles" },
 ];
@@ -25,7 +25,7 @@ const categories = [
 const categoryMap = {
   "Gaming PCs": "desktop",
   Laptops: "laptops",
-  "Components and accessories": "components",
+  "Components and Accessories": "components",
   "Gaming Consoles": "console",
 } as const;
 

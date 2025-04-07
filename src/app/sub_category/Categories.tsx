@@ -6,7 +6,7 @@ const categories = [
   {
     id: 1,
     image: "/images/Used Gaming PC Parts.png",
-    title: "Used Components and accessories",
+    title: "Used Components and Accessories",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const categories = [
   {
     id: 6,
     image: "/images/pc_part6.png",
-    title: "New Components and accessories",
+    title: "New Components and Accessories",
   },
   { id: 7, image: "/images/console7.png", title: "New Gaming Consoles" },
   { id: 8, image: "/images/desktop8.png", title: "New Desktops" },
@@ -32,7 +32,7 @@ const categories = [
 
 const GamingCategories = () => {
   return (
-    <div className="w-full flex justify-center py-10 bg-gray-50 h-auto dark:bg-black max-lg:w-[90%] max-lg:mx-auto">
+    <div className="w-full flex justify-center py-10 bg-red-500 h-auto dark:bg-black  max-lg:w-[90%] max-lg:mx-auto">
       <div className="w-full max-w-6xl grid grid-cols-3 gap-6 border bg-[#FFFFFF] rounded-lg p-6 dark:bg-black dark:border-[#6345ED] sm:grid-cols-3">
         {categories.map((category) => (
           <div

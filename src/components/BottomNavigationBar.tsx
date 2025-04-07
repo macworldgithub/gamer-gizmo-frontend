@@ -139,7 +139,7 @@ const BottomNavigationBar = () => {
     { name: "Gaming PCs", href: "/desktop" },
     { name: "Laptops", href: "/laptops" },
     { name: "Gaming Consoles", href: "/console" },
-    { name: "Components and accessories", href: "/components" },
+    { name: "Components and Accessories", href: "/components" },
     { name: "Blogs", href: "/blogs" },
     { name: "Contact Us", href: "/contact" },
     { name: "About Us", href: "/about" },
