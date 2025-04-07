@@ -57,7 +57,7 @@ const PublishAdd: React.FC = () => {
   const [storageData, setStorageData] = useState<any[]>([]);
   const [price, setPrice] = useState("0");
   const [quantity, setQuantity] = useState("0");
-  const [formData, setFormData] = useState<Record<string, any>>({
+  const [formData, setFormData] = useState<Record<string, string | null>>({
     processor: "",
     processor_type: "",
     ram: "",
@@ -236,67 +236,67 @@ const PublishAdd: React.FC = () => {
   };
 
   const [isLoading, setIsLoading] = useState(false);
-
   const handleSubmit = async () => {
     setIsLoading(true);
     let formDataObject = new FormData();
 
-    formDataObject.append("name", formData.title);
-    // @ts-ignore
-    formDataObject.append("user_id", id.toString());
-    formDataObject.append("description", formData.description);
-    formDataObject.append("price", price.toString());
-    formDataObject.append("stock", quantity.toString());
-    formDataObject.append("brand_id", selectBrand.id.toString());
-    formDataObject.append("otherBrandName", formData.otherBrandName);
-    formDataObject.append("model_id", selectModel.id.toString());
-    formDataObject.append("category_id", selectCategory.id.toString());
-    formDataObject.append("condition", selectedCondition.id.toString());
-    formDataObject.append("location", selectedLocation.id.toString());
+    formDataObject.append("name", formData.title || "");
+    formDataObject.append("user_id", id?.toString() || "");
+    formDataObject.append("description", formData.description || "");
+    formDataObject.append("price", price?.toString() || "");
+    formDataObject.append("stock", quantity?.toString() || "");
+    formDataObject.append("brand_id", selectBrand?.id?.toString() || "");
+    formDataObject.append("otherBrandName", formData.otherBrandName || "");
+    formDataObject.append("model_id", selectModel?.id?.toString() || "");
+    formDataObject.append("category_id", selectCategory?.id?.toString() || "");
+    formDataObject.append("condition", selectedCondition?.id?.toString() || "");
+    formDataObject.append("location", selectedLocation?.id?.toString() || "");
     formDataObject.append("is_published", "true");
 
     if (selectCategory?.name === "Components") {
-      // Handling Components category
       formDataObject.append(
         "component_type",
-        selectComponentCategory?.id.toString() || ""
+        selectComponentCategory?.id?.toString() || ""
       );
-      formDataObject.append("text", formData?.component_text);
+      formDataObject.append("text", formData.component_text || "");
     } else if (selectCategory?.name === "Gaming Consoles") {
-      // Handling Gaming Console category
       formDataObject.append("accessories", formData.accessories || "");
       formDataObject.append("connectivity", formData.connectivity || "");
       formDataObject.append("warranty_status", formData.warranty_status || "");
       formDataObject.append("battery_life", formData.batteryLife || "");
       formDataObject.append("color", formData.color || "");
     } else {
-      // Handling Laptops & Personal Computers
-      formDataObject.append("ram", selectRam.id.toString());
+      // Laptops & Personal Computers
+      if (selectRam?.id) formDataObject.append("ram", selectRam.id.toString());
+      if (selectStoarge?.id)
+        formDataObject.append("storage", selectStoarge.id.toString());
+      if (selectStorageType?.id)
+        formDataObject.append("storageType", selectStorageType.id.toString());
 
-      formDataObject.append("storage", selectStoarge.id.toString());
-      formDataObject.append("storageType", selectStorageType.id.toString());
-      formDataObject.append("graphics", formData.graphics);
-      formDataObject.append("gpu", selectGpu.id.toString());
-      formDataObject.append("ports", formData.ports);
-      formDataObject.append("battery_life", formData.batteryLife);
-      formDataObject.append("warranty_status", formData.warranty_status);
-      formDataObject.append("connectivity", formData.connectivity);
-      formDataObject.append("accessories", formData.accessories);
-      formDataObject.append("screen_size", formData.screenSize);
-      formDataObject.append("weight", formData.weight);
-      formDataObject.append("screen_resolution", formData.screenResolution);
-      formDataObject.append("color", formData.color);
+      formDataObject.append("graphics", formData.graphics || "");
+      if (selectGpu?.id) formDataObject.append("gpu", selectGpu.id.toString());
+      formDataObject.append("ports", formData.ports || "");
+      formDataObject.append("battery_life", formData.batteryLife || "");
+      formDataObject.append("warranty_status", formData.warranty_status || "");
+      formDataObject.append("connectivity", formData.connectivity || "");
+      formDataObject.append("accessories", formData.accessories || "");
+      formDataObject.append("screen_size", formData.screenSize || "");
+      formDataObject.append("weight", formData.weight || "");
+      formDataObject.append(
+        "screen_resolution",
+        formData.screenResolution || ""
+      );
+      formDataObject.append("color", formData.color || "");
     }
 
-    // Handling Images
+    // Append images
     if (fileList.length > 0) {
       fileList.forEach((file) => {
-        console.log(file);
         formDataObject.append("images", file.originFileObj as Blob);
       });
     }
 
-    // Sending data to the backend
+    // Send data
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/createProduct`,
