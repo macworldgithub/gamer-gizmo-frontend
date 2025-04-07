@@ -272,11 +272,7 @@ const PublishAdd: React.FC = () => {
     } else {
       // Handling Laptops & Personal Computers
       formDataObject.append("ram", selectRam.id.toString());
-      formDataObject.append("processor", selectProcessor.id.toString());
-      formDataObject.append(
-        "processorVariant",
-        selectProcessorVariant.id.toString()
-      );
+
       formDataObject.append("storage", selectStoarge.id.toString());
       formDataObject.append("storageType", selectStorageType.id.toString());
       formDataObject.append("graphics", formData.graphics);

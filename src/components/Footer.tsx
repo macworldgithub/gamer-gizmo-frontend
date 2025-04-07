@@ -25,9 +25,7 @@ const Footer = () => {
 
   return (
     <div className="w-full h-auto bg-white dark:bg-black">
-      <div className="">
-      {pathname !== "/community" && <LiveCommunity />}
-      </div>
+      <div className="">{pathname !== "/community" && <LiveCommunity />}</div>
 
       <div className="bg-footerBlack h-auto">
         {/* Footer Main Section */}
@@ -57,14 +55,18 @@ const Footer = () => {
               >
                 <FontAwesomeIcon icon={faFacebookF} color="#4267B2" size="1x" />
               </a>
-                <a href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6" target="_blank" rel="noopener noreferrer">
-                           <FontAwesomeIcon
-                         icon={faInstagram}
-                         className="z-10 max-sm:w-5 hover:text-red-800 "
-                         color="#E1306C"
-                       />
-                       </a>
-                      
+              <a
+                href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon
+                  icon={faInstagram}
+                  className="z-10 max-sm:w-5 hover:text-red-800 "
+                  color="#E1306C"
+                />
+              </a>
+
               {/* <Link href="#" className="text-white mx-2"> */}
               <a
                 href="https://www.youtube.com/@GamerGizmo_Official"
@@ -73,7 +75,6 @@ const Footer = () => {
                 className="text-red-600 hover:text-red-800 transition-colors"
               >
                 <FaYoutube size={22} />
-
               </a>
               {/* </Link> */}
             </div>
@@ -81,12 +82,34 @@ const Footer = () => {
 
           {/* Marketplace */}
           <div className="text-start">
-            <h3 className="font-bold mb-4 text-[1.2rem] text-secondaryColorDark">Marketplace</h3>
+            <h3 className="font-bold mb-4 text-[1.2rem] text-secondaryColorDark">
+              Marketplace
+            </h3>
             <ul className="space-y-2 text-sm md:text-xs">
-              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('desktop')}>Gaming PCs</li>
-              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('laptops')}>Laptops</li>
-              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('console')}>Gaming Consoles</li>
-              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => handleNavigate('components')}>Components</li>
+              <li
+                className="cursor-pointer hover:text-secondaryColorDark"
+                onClick={() => handleNavigate("desktop")}
+              >
+                Gaming PCs
+              </li>
+              <li
+                className="cursor-pointer hover:text-secondaryColorDark"
+                onClick={() => handleNavigate("laptops")}
+              >
+                Laptops
+              </li>
+              <li
+                className="cursor-pointer hover:text-secondaryColorDark"
+                onClick={() => handleNavigate("console")}
+              >
+                Gaming Consoles
+              </li>
+              <li
+                className="cursor-pointer hover:text-secondaryColorDark"
+                onClick={() => handleNavigate("components")}
+              >
+                Components and Accessories
+              </li>
               <li>
                 <Link
                   href="/advertising"
@@ -100,10 +123,19 @@ const Footer = () => {
 
           {/* Support */}
           <div className="text-start">
-            <h3 className="mb-4 text-[1.2rem] font-bold text-secondaryColorDark">Supports</h3>
+            <h3 className="mb-4 text-[1.2rem] font-bold text-secondaryColorDark">
+              Supports
+            </h3>
             <ul className="space-y-2 text-sm md:text-xs">
-              <li className="cursor-pointer hover:text-secondaryColorDark" onClick={() => setShowModal(true)}>Terms & Conditions</li>
-              <li className="cursor-pointer hover:text-secondaryColorDark">24/7 Supports</li>
+              <li
+                className="cursor-pointer hover:text-secondaryColorDark"
+                onClick={() => setShowModal(true)}
+              >
+                Terms & Conditions
+              </li>
+              <li className="cursor-pointer hover:text-secondaryColorDark">
+                24/7 Supports
+              </li>
               {/* <li className="cursor-pointer hover:text-secondaryColorDark">Privacy Policy</li> */}
             </ul>
           </div>
@@ -112,11 +144,17 @@ const Footer = () => {
           <div className="flex flex-col items-start text-secondaryColorDark">
             <div className="text-start">
               <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
-              <a href="mailto:support@gamergizmo.com" className="text-sm break-words hover:text-secondaryColorDark text-white">
+              <a
+                href="mailto:support@gamergizmo.com"
+                className="text-sm break-words hover:text-secondaryColorDark text-white"
+              >
                 support@gamergizmo.com
               </a>
               <br />
-              <a href="tel:+923318551070" className="text-sm text-white hover:text-secondaryColorDark">
+              <a
+                href="tel:+923318551070"
+                className="text-sm text-white hover:text-secondaryColorDark"
+              >
                 +971555795213
               </a>
             </div>
@@ -161,7 +199,10 @@ const Footer = () => {
           © Copyright 2025 - All Rights Reserved
         </div>
       </div>
-      <TermsAndConditionModal openEditModal={showModal} setOpenEditModal={setShowModal} />
+      <TermsAndConditionModal
+        openEditModal={showModal}
+        setOpenEditModal={setShowModal}
+      />
     </div>
   );
 };

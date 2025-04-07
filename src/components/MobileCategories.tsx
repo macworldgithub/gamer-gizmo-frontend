@@ -6,18 +6,26 @@ import React from "react";
 const categories = [
   { id: 1, image: "/images/newDesktops.png", title: "Used Gaming PCs" },
   { id: 2, image: "/images/usedLaptops.png", title: "Used Laptops" },
-  { id: 3, image: "/images/used-pc.png", title: "Used Gaming PC Parts" },
+  {
+    id: 3,
+    image: "/images/used-pc.png",
+    title: "Used Components and accessories",
+  },
   { id: 4, image: "/images/newConsoles.png", title: "Used Gaming Consoles" },
   { id: 5, image: "/images/newDesktops.png", title: "New Gaming PCs" },
   { id: 6, image: "/images/usedLaptops.png", title: "New Laptops" },
-  { id: 7, image: "/images/newGamingParts.png", title: "New Gaming PC Parts" },
+  {
+    id: 7,
+    image: "/images/newGamingParts.png",
+    title: "New Components and accessories",
+  },
   { id: 8, image: "/images/newConsoles.png", title: "New Gaming Consoles" },
 ];
 
 const categoryMap = {
   "Gaming PCs": "desktop",
   Laptops: "laptops",
-  "Gaming PC Parts": "components",
+  "Components and accessories": "components",
   "Gaming Consoles": "console",
 } as const;
 

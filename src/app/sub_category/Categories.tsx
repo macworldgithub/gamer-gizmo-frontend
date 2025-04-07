@@ -3,15 +3,31 @@ import Image from "next/image";
 import React from "react";
 
 const categories = [
-  { id: 1, image: "/images/Used Gaming PC Parts.png", title: "Used Gaming PC Parts" },
-  { id: 2, image: "/images/Used Gaming Consoles.png", title: "Used Gaming Consoles" },
+  {
+    id: 1,
+    image: "/images/Used Gaming PC Parts.png",
+    title: "Used Components and accessories",
+  },
+  {
+    id: 2,
+    image: "/images/Used Gaming Consoles.png",
+    title: "Used Gaming Consoles",
+  },
   { id: 3, image: "/images/Used Desktop.png", title: "Used Desktop" },
   { id: 4, image: "/images/Gaming4.png", title: "Used Gaming Accessories" },
   { id: 5, image: "/images/laptop5.png", title: "Used Laptop" },
-  { id: 6, image: "/images/pc_part6.png", title: "New Gaming PC Parts" },
+  {
+    id: 6,
+    image: "/images/pc_part6.png",
+    title: "New Components and accessories",
+  },
   { id: 7, image: "/images/console7.png", title: "New Gaming Consoles" },
   { id: 8, image: "/images/desktop8.png", title: "New Desktops" },
-  { id: 9, image: "/images/setting9.png", title: "Customization & Gaming Gears" },
+  {
+    id: 9,
+    image: "/images/setting9.png",
+    title: "Customization & Gaming Gears",
+  },
 ];
 
 const GamingCategories = () => {
@@ -26,8 +42,8 @@ const GamingCategories = () => {
             <Image
               src={category.image}
               alt={category.title}
-              width={48} 
-              height={48} 
+              width={48}
+              height={48}
               className="mb-4 sm:w-10 sm:h-10 md:w-14 md:h-14 "
             />
             <h3 className="text-sm font-medium text-[#14161B] dark:text-white sm:text-xs md:text-sm">
@@ -37,7 +53,6 @@ const GamingCategories = () => {
         ))}
       </div>
     </div>
-    
   );
 };
 

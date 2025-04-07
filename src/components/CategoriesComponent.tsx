@@ -36,18 +36,18 @@ const CategoriesComponent = () => {
   const categories = [
     "Used Gaming PCs",
     "Used Laptops",
-    "Used Gaming PC Parts",
+    "Used Components and accessories",
     "Used Gaming Consoles",
     "New Gaming PCs",
     "New Laptops",
-    "New Gaming PC Parts",
+    "New Components and accessories",
     "New Gaming Consoles",
   ];
 
   const categoryMap = {
     "Gaming PCs": "desktop",
     Laptops: "laptops",
-    "Gaming PC Parts": "usedparts",
+    "Components and accessories": "components",
     "Gaming Consoles": "console",
   } as const;
 
@@ -170,7 +170,7 @@ const CategoriesComponent = () => {
                   key={index}
                   className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center"
                 > */}
-                  <h2 className="text-[0.9rem] font-bold  flex justify-center items-center">
+                  <h2 className="text-[0.9rem] text-center font-bold  flex justify-center items-center">
                     {category}
                   </h2>
                   {/* </div> */}
