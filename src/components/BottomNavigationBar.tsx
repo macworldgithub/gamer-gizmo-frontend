@@ -262,10 +262,10 @@ const BottomNavigationBar = () => {
               </Link>
               <Link
                 href="/components"
-                className="text-sm  hover:text-secondaryColorDark"
+                className="text-sm  hover:text-secondaryColorDark text-center"
                 onClick={() => setIsDrawerOpen(false)}
               >
-                Components
+                Components and Accessories
               </Link>
               <Link
                 href="/blogs"
