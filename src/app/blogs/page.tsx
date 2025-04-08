@@ -31,7 +31,7 @@ const page = () => {
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
         <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
       </Wrapper>
-      <div className="mt-12 flex  justify-center">
+      <div className="mt-12 flex w-full justify-center">
         <GetStartedBadge />
       </div>
     </div>

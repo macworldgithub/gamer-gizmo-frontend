@@ -127,7 +127,11 @@ const ProductMain = ({ categoryId, query }: any) => {
                           />
                           <div className="h-[3px] w-full bg-bluishBorder"></div>
                           {globalIndex === 2 && <InspectionBadge />}
-                          {globalIndex === 6 && <GetStartedBadge />}
+                          {globalIndex === 6 && (
+                            <div className="w-[70%] ">
+                              <GetStartedBadge />
+                            </div>
+                          )}
                           {(globalIndex + 1) % 5 === 0 && (
                             <LiveAdSection className="md:w-[100%] h-52 my-4" />
                           )}

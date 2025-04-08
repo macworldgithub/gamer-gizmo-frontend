@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
@@ -14,7 +14,6 @@ import { Autoplay, Pagination, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { RootState } from "./Store/Store";
 
-
 type ProductImage = {
   id: number;
   product_id: number;
@@ -26,16 +25,19 @@ type Product = {
   images: string[];
 };
 
-const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }: any) => {
-
-
+const ProductCard = ({
+  product,
+  seReftech,
+  refetch,
+  isColumn,
+  hasPremiumBadge,
+}: any) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   console.log(product, "my product");
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
-
 
   useEffect(() => {
     console.log("Active Index Updated:", activeIndex);
@@ -144,7 +146,6 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
     }
   };
 
-
   //@ts-ignore
   const getImageUrl = (imgUrl) => {
     return imgUrl.startsWith("http")
@@ -155,17 +156,14 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
 
   const productImages = useMemo(() => product?.images || [], [product]);
 
-
   return (
     <>
       {isColumn ? (
         <div>
-     <div className="flex flex-col sm:flex-row p-4 container">
+          <div className="flex flex-col sm:flex-row p-4 container">
             <div className="relative max-md:w-80  md:w-[26%]">
-
               <Swiper
                 key={product?.id}
-
                 modules={[Pagination, Autoplay, Thumbs]}
                 spaceBetween={10}
                 slidesPerView={1}
@@ -176,7 +174,12 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                   waitForTransition: false,
                 }}
                 loop={true}
-                thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+                thumbs={{
+                  swiper:
+                    thumbsSwiper && !thumbsSwiper.destroyed
+                      ? thumbsSwiper
+                      : null,
+                }}
                 onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
                 className="rounded-lg overflow-hidden"
               >
@@ -189,12 +192,12 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                       <div className="max-md:w-[200px] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative">
                         <Image
                           src={imageUrl}
-
                           alt={`Product image ${index + 1}`}
                           layout="fill"
-
                           className="rounded-lg bg-gray-200"
-                          onLoadingComplete={() => console.log(`Loaded: ${imageUrl}`)}
+                          onLoadingComplete={() =>
+                            console.log(`Loaded: ${imageUrl}`)
+                          }
                           onError={(e) => {
                             console.error("Image failed to load:", imageUrl);
                             e.currentTarget.src = "/gameIcon.png";
@@ -204,7 +207,6 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                     </SwiperSlide>
                   );
                 })}
-
               </Swiper>
 
               {/* Favorite Icon */}
@@ -223,8 +225,13 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                     console.error("Error adding to favorites:", error);
                   }
                 }}
-                className={`absolute top-2 right-2 z-10 cursor-pointer ${product.fav ? "text-red-600" : "text-purple-200"
-                  } ${isLoading ? "opacity-50 cursor-not-allowed" : "hover:text-red-600"}`}
+                className={`absolute top-2 right-2 z-10 cursor-pointer ${
+                  product.fav ? "text-red-600" : "text-purple-200"
+                } ${
+                  isLoading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:text-red-600"
+                }`}
               >
                 <MdFavorite size={24} />
               </div>
@@ -232,19 +239,17 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
 
             {/* Right Side - Car Details */}
             <div className="w-full md:w-[40%] md:pl-12  flex flex-col ">
-
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
                 <div className="flex justify-between gap-8 items-center">
                   <p className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] ">
                     {product.name}
                   </p>
                   {hasPremiumBadge && (
-                    <span className="lg:mr-24 md:mr-10  bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
+                    <span className="lg:mr-24 xl:mr-[30%] md:mr-10  bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
                       Premium
                     </span>
                   )}
                 </div>
-
 
                 <p className="text-gray-700 dark:text-gray-100 md:pr-[3rem] text-xs max-md:hidden">
                   {product.description.length > 50
@@ -266,7 +271,6 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                   })}
                 </p>
 
-
                 <button
                   onClick={() => router.push(`/product-details/${product.id}`)}
                   className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
@@ -274,10 +278,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
                   View Details
                 </button>
               </div>
-
-
             </div>
-
           </div>
         </div>
       ) : (
@@ -289,8 +290,9 @@ const ProductCard = ({ product, seReftech, refetch, isColumn, hasPremiumBadge }:
             onClick={() =>
               product.fav ? remove(product.id) : AddToLike(product.id)
             }
-            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${product.fav ? "text-red-600" : "text-white "
-              } hover:text-red-600`}
+            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${
+              product.fav ? "text-red-600" : "text-white "
+            } hover:text-red-600`}
           >
             <MdFavorite size={24} className="max-sm:h-4" />
           </div>
