@@ -10,7 +10,7 @@ const InspectionBadge = ({ onClick }: any) => {
     router.push("/Inspection");
   };
     return (
-      <div className="flex max-md:flex-col items-center p-3 w-[75%] bg-secondaryColorDark rounded-lg shadow-md">
+      <div className="flex max-md:flex-col items-center p-3 w-[100%] bg-secondaryColorDark rounded-lg shadow-md">
         {/* Icon Section */}
         <div className="flex items-center justify-center w-12 h-12 bg-red-200 rounded-full">
           {/* <img src="https://via.placeholder.com/40" alt="Car Inspection" className="w-10 h-10" /> */}
@@ -29,7 +29,7 @@ const InspectionBadge = ({ onClick }: any) => {
   
         {/* Button Section */}
         <button 
-          className="bg-bluishBorder text-black font-bold py-4 px-8 rounded-lg hover:bg-secondaryColorLight"
+          className="bg-bluishBorder text-black font-bold py-2 px-2 rounded-lg hover:bg-secondaryColorLight"
           onClick={handleNavigation} 
         >
           Book Inspection
