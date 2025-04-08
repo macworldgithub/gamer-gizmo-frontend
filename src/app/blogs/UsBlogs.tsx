@@ -1,4 +1,3 @@
-
 "use client";
 import CustomLoader from "@/components/CustomLoader";
 import axios from "axios";
@@ -6,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { formatDate } from "../utils/formatDate"; 
+import { formatDate } from "../utils/formatDate";
 
 interface Blog {
   key: number;
@@ -18,9 +17,7 @@ interface Blog {
   tags: string;
 }
 
-
 export default function UsBlogs() {
-  
   const router = useRouter();
   const [data, setData] = useState<Blog[]>([]);
 
@@ -44,18 +41,22 @@ export default function UsBlogs() {
   const fetchBlogs = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getRecentsBlogs`);
-      
-      const blogs: Blog[] = response.data.data.map((blog: any, index: number) => ({
-        key: index,
-        Created_at: blog.created_at,
-        blogId: blog.id,
-        image: blog.images || "", // Ensure it's a string
-        title: blog.title || "Untitled",
-        description: blog.content || "", 
-        tags: blog.tags || "", 
-      }));
-      
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getRecentsBlogs`
+      );
+
+      const blogs: Blog[] = response.data.data.map(
+        (blog: any, index: number) => ({
+          key: index,
+          Created_at: blog.created_at,
+          blogId: blog.id,
+          image: blog.images || "", // Ensure it's a string
+          title: blog.title || "Untitled",
+          description: blog.content || "",
+          tags: blog.tags || "",
+        })
+      );
+
       setData(blogs);
     } catch (error) {
       toast.error("Failed to fetch blog data!");
@@ -64,7 +65,6 @@ export default function UsBlogs() {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchBlogs();
@@ -76,20 +76,16 @@ export default function UsBlogs() {
     let text = tempDiv.textContent || tempDiv.innerText || "";
     return text.length > limit ? text.substring(0, limit) + "..." : text;
   };
-  
+
   return (
-    <div className="max-w-[1200px] mx-auto p-4 md:p-6">
+    <div className=" mx-auto max-sm:p-1 max-sm:px-2 p-4 md:p-6">
       <h2 className="text-3xl font-bold mb-8 dark:text-white">
         Recent blog posts
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-2  max-sm:gap-2 sm:gap-3 md:gap-2 lg:gap-6">
         {data.slice(0, 2).map((blog: Blog, index: number) => (
-          <div
-            key={index}
-            className="space-y-2 w-full md:max-w-[480px] mx-auto"
-          >
-          
+          <div key={index} className="space-y-2 w-full md:max-w-[480px] ">
             <div className="relative w-full h-[180px] md:h-[250px]">
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${blog.image}`}
@@ -100,14 +96,13 @@ export default function UsBlogs() {
               />
             </div>
 
-          
-            <div className="w-full px-2 text-center md:text-left">
+            <div className="w-full px-2 text-start md:text-left">
               <p className="text-sm text-gray-500 italic">
                 GamerGizmo • {formatDate(blog.Created_at)}
               </p>
               <h3
                 onClick={() => router.push(`/blog/${blog.blogId}`)}
-                className="text-lg font-bold hover:underline cursor-pointer break-words dark:text-white"
+                className="text-base max-md:text-[0.6rem] font-bold hover:underline cursor-pointer break-words dark:text-white"
               >
                 {blog.title}
               </h3>
@@ -115,7 +110,7 @@ export default function UsBlogs() {
                 dangerouslySetInnerHTML={{
                   __html: truncateHtml(blog.description, 100),
                 }}
-                className="text-gray-600 mt-2 text-sm line-clamp-4 dark:text-white"
+                className="text-gray-600 mt-2 text-xs line-clamp-4 dark:text-white"
               />
               <div className="flex flex-wrap gap-2 mt-3">
                 {blog.tags?.split(",").map((tag: string, index: number) => (

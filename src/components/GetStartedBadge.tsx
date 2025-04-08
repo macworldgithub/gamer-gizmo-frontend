@@ -8,7 +8,7 @@ const GetStartedBadge = () => {
   return (
     <div>
       {/* {!profileData.is_admin_verified && ( */}
-      <div className="bg-bluishBorder p-4 rounded-lg pb-8 flex flex-row max-md:gap-2 md:gap-4 w-1/2 justify-center items-center px-5">
+      <div className="bg-bluishBorder p-4 rounded-lg pb-8 flex flex-row max-md:gap-2 md:gap-4  justify-center items-center px-5">
         <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +25,8 @@ const GetStartedBadge = () => {
             />
           </svg>
           <p className="text-purple-500 font-small md:text-sm max-md:text-[0.2rem] whitespace-nowrap">
-  Got a verified badge yet?
-</p>
+            Got a verified badge yet?
+          </p>
         </div>
         <p className="md:text-sm max-md:text-[0.3rem] text-black whitespace-nowrap ">
           Get more visibility and enhance your credibility.
@@ -39,7 +39,7 @@ const GetStartedBadge = () => {
           Get Started
         </button>
         {/* ) : ( */}
-         {/* <p className="text-black font-bold md:text-sm max-md:text-[0.2rem]">
+        {/* <p className="text-black font-bold md:text-sm max-md:text-[0.2rem]">
           Applied for verification, Wait for admin to verify  
         </p> */}
         {/* )} */}
@@ -52,11 +52,6 @@ const GetStartedBadge = () => {
         setOpenNicModal={setOpenNicModal}
       />
     </div>
-
-
-
-
-
   );
 };
 

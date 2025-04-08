@@ -27,13 +27,14 @@ export default function BlogList() {
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
+    <div className="max-w-2xl max-md:pl-8">
+      <h1 className="text-3xl font-bold mb-8 dark:text-white">All Blogs</h1>
       {blogs.length > 0 ? (
         <div className="space-y-6">
-          {blogs.map((blog) => (
+          {blogs.map((blog: any) => (
             <div
               key={blog.id}
-              className="flex items-start space-x-4 border-b pb-4 cursor-pointer"
+              className="flex items-start space-x-2  border-b pb-4 cursor-pointer"
               onClick={() => router.push(`/blog/${blog.id}`)}
             >
               <Image
@@ -45,8 +46,7 @@ export default function BlogList() {
               />
               <div className="flex-1">
                 <p className="text-gray-500 text-xs">2 hours ago</p>
-                <h3 className="font-bold  text-sm hover:underline dark:text-white">
-                  
+                <h3 className="font-bold md:text-[0.6rem] lg:text-xs hover:underline dark:text-white">
                   {blog.title}
                 </h3>
               </div>

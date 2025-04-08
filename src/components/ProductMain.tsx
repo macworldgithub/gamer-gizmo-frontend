@@ -29,7 +29,7 @@ const ProductMain = ({ categoryId, query }: any) => {
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 10;
 
   const fetchProducts = async (categoryId: number, condition: number) => {
     try {
@@ -54,8 +54,9 @@ const ProductMain = ({ categoryId, query }: any) => {
       const filteredValues = Object.fromEntries(
         Object.entries(query).filter(([key, value]) => value !== "")
       );
-      const queryParams = new URLSearchParams(filteredValues as Record<string, string>).toString();
-
+      const queryParams = new URLSearchParams(
+        filteredValues as Record<string, string>
+      ).toString();
 
       if (!(Object.keys(filteredValues).length > 0)) {
         setFilteredData([]);
@@ -82,8 +83,9 @@ const ProductMain = ({ categoryId, query }: any) => {
   const filteredValues = Object.fromEntries(
     Object.entries(query).filter(([key, value]) => value !== "")
   );
-  const categoryName = categoryNames[categoryId as keyof typeof categoryNames] || "Unknown Category";
-
+  const categoryName =
+    categoryNames[categoryId as keyof typeof categoryNames] ||
+    "Unknown Category";
 
   return (
     <div className="h-auto w-full">
