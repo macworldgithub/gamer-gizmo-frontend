@@ -521,7 +521,7 @@ const MoreSpecification = ({
               <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth sx={inputStyles}>
                   <InputLabel id="cat-select-label">Category</InputLabel>
-                  <Select
+                  {/* <Select
                     labelId="cat-select-label"
                     id="cat-select"
                     name="component_type"
@@ -534,6 +534,26 @@ const MoreSpecification = ({
                   >
                     {componentCategories?.map((e: any) => (
                       <MenuItem key={e.id} value={e}>
+                        {e?.name}
+                      </MenuItem>
+                    ))}
+                  </Select> */}
+                  <Select
+                    labelId="cat-select-label"
+                    id="cat-select"
+                    name="component_type"
+                    value={selectComponentCategory?.id || ""} // value is number
+                    label="Category"
+                    onChange={(e) => {
+                      const selected = componentCategories.find(
+                        (item: any) => item.id === e.target.value
+                      );
+                      setSelectedComponentCategory(selected); // store full object in state
+                    }}
+                    className="text-black dark:text-white"
+                  >
+                    {componentCategories?.map((e: any) => (
+                      <MenuItem key={e.id} value={e.id}>
                         {e?.name}
                       </MenuItem>
                     ))}

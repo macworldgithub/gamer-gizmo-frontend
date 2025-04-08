@@ -20,10 +20,9 @@ interface Category {
   icon?: string;
 }
 const PublishAdd: React.FC = () => {
-  const [selectComponentCategory, setSelectedComponentCategory] = useState({
-    id: 0,
-    name: "",
-  });
+  const [selectComponentCategory, setSelectedComponentCategory] =
+    useState<any>(null);
+
   const router = useRouter();
   const [selectProcessorVariant, setSelectedProcessorVariant] = useState({
     id: 0,
@@ -87,6 +86,7 @@ const PublishAdd: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
   const [categoryError, setCategoryError] = useState<string | null>(null);
+  console.log(selectCategory, "..");
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
@@ -253,12 +253,12 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("location", selectedLocation?.id?.toString() || "");
     formDataObject.append("is_published", "true");
 
-    if (selectCategory?.name === "Components") {
+    if (selectCategory?.name === "Components and Accessories") {
       formDataObject.append(
         "component_type",
         selectComponentCategory?.id?.toString() || ""
       );
-      formDataObject.append("text", formData.component_text || "");
+      formDataObject.append("text", formData?.component_text || "");
     } else if (selectCategory?.name === "Gaming Consoles") {
       formDataObject.append("accessories", formData.accessories || "");
       formDataObject.append("connectivity", formData.connectivity || "");
@@ -296,6 +296,7 @@ const PublishAdd: React.FC = () => {
       });
     }
 
+    console.log(formData, "jkek");
     // Send data
     try {
       const response = await axios.post(

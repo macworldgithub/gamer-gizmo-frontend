@@ -32,7 +32,7 @@ const cards: CardProps[] = [
 const CardComponent: React.FC = () => {
   return (
     <Wrapper>
-     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 max-w-6xl mx-auto mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 max-w-6xl mx-auto mb-4 mt-4">
         {cards.map((card, index) => (
           <div
             key={index}

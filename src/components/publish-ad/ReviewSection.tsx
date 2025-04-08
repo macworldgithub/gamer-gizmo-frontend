@@ -59,36 +59,18 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
     });
   }
   const laptopDetails = [
-    {
-      label: "Processor",
-      value: selectProcessor.name ? selectProcessor.name : null,
-    },
-    {
-      label: "Processor Type",
-      value: selectProcessorVariant.name ? selectProcessorVariant.name : null,
-    },
+    { label: "Processor", value: selectProcessor.name ? selectProcessor.name : null },
+    { label: "Processor Type", value: selectProcessorVariant.name ? selectProcessorVariant.name : null },
     { label: "RAM", value: selectRam.name ? selectRam.name : null },
-    {
-      label: "Storage Type",
-      value: selectStorageType.name ? selectStorageType.name : null,
-    },
+    { label: "Storage Type", value: selectStorageType.name ? selectStorageType.name : null },
     { label: "Storage", value: selectStoarge.name ? selectStoarge.name : null },
     { label: "GPU", value: selectGpu.name ? selectGpu.name : null },
-    {
-      label: "Screen Size",
-      value: formData.screenSize ? formData.screenSize : null,
-    },
-    {
-      label: "Screen Resolution",
-      value: formData.screenResolution ? formData.screenResolution : null,
-    },
+    { label: "Screen Size", value: formData.screenSize ? formData.screenSize : null },
+    { label: "Screen Resolution", value: formData.screenResolution ? formData.screenResolution : null },
     { label: "Weight", value: formData.weight ? formData.weight : null },
     { label: "Graphics", value: formData.graphics ? formData.graphics : null },
     { label: "Ports", value: formData.ports ? formData.ports : null },
-    {
-      label: "Battery Life",
-      value: formData.batteryLife ? formData.batteryLife : null,
-    },
+    { label: "Battery Life", value: formData.batteryLife ? formData.batteryLife : null },
     { label: "Color", value: formData.color ? formData.color : null },
   ];
   const consoleDetails = [
@@ -150,9 +132,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({
             </div>
           ))}
 
-        {["Components and Accessories", "Components"].includes(
-          selectCategory?.name
-        ) &&
+        {["Components and Accessories", "Components"].includes(selectCategory?.name) &&
           componentDetails.map(({ label, value }, index) => (
             <div key={index} className="bg-white p-3 rounded-md">
               <p className="text-black text-xl font-bold">{label}</p>
