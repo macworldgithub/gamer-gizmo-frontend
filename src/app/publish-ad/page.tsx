@@ -10,7 +10,7 @@ import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import { UploadFile } from "antd";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -236,8 +236,13 @@ const PublishAdd: React.FC = () => {
   };
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isPublished, setIsPublished] = useState(false);
+  const isSubmittingRef = useRef(false);
   const handleSubmit = async () => {
     setIsLoading(true);
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
+    setIsPublished(false);
     let formDataObject = new FormData();
 
     formDataObject.append("name", formData.title || "");
@@ -312,6 +317,7 @@ const PublishAdd: React.FC = () => {
 
       if (response.status === 201) {
         toast.success("Product Added Successfully");
+        setIsPublished(true);
         router.push("/");
       }
     } catch (err) {
@@ -320,6 +326,7 @@ const PublishAdd: React.FC = () => {
       console.log("Error", err);
     } finally {
       setIsLoading(false);
+      isSubmittingRef.current = false;
     }
 
     console.log(formData, "my form data");

@@ -41,6 +41,11 @@ export default function AdList({
       setLoading(false);
       setFetch(!fetcher);
       toast.success("Successfully Deleted");
+      if (ads.length === 1 && currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      } else {
+        setFetch(!fetcher);
+      }
     } catch (err) {
       setLoading(false);
       toast.error("Failed to delete the product");
