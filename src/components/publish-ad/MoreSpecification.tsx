@@ -521,23 +521,6 @@ const MoreSpecification = ({
               <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth sx={inputStyles}>
                   <InputLabel id="cat-select-label">Category</InputLabel>
-                  {/* <Select
-                    labelId="cat-select-label"
-                    id="cat-select"
-                    name="component_type"
-                    value={selectComponentCategory}
-                    label="Category"
-                    onChange={(e) =>
-                      setSelectedComponentCategory(e.target.value)
-                    }
-                    className="text-black dark:text-white"
-                  >
-                    {componentCategories?.map((e: any) => (
-                      <MenuItem key={e.id} value={e}>
-                        {e?.name}
-                      </MenuItem>
-                    ))}
-                  </Select> */}
                   <Select
                     labelId="cat-select-label"
                     id="cat-select"
