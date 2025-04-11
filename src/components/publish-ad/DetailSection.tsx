@@ -143,10 +143,11 @@ const DetailSection = ({
       color: "#dc39fc",
     },
     "& .MuiInputLabel-root.Mui-focused": {
-      color: "#dc39fc", 
+      color: "#dc39fc",
     },
   };
 
+  console.log(selectCategory, "....");
   return (
     <div className="flex text-black flex-col space-y-4 ">
       <TextField
@@ -169,74 +170,87 @@ const DetailSection = ({
         onChange={(e) => handleFormChange("description", e.target.value)}
         className="sm:w-full max-sm:w-full dark:text-white " // Responsive width (full width for small screens)
       />
-
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth sx={inputStyles}>
-          <InputLabel id="brand-select-label dark:bg-white">Brand</InputLabel>
-          <Select
-            sx={inputStyles}
-            labelId="brand-select-label"
-            id="brand-select"
-            value={selectBrand}
-            label="Brand"
-            onChange={(e) => setSelectedBrand(e.target.value)}
-            className="sm:w-full max-sm:w-ful dark:bg-whitel dark:text-white" // Responsive width
-          >
-            {brands.map((brand: any) => (
-              <MenuItem key={brand.id} value={brand} style={{ color: "black" }}>
-                {brand.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-      {selectBrand.name && selectBrand.name == "Others" ? (
-        <TextField
-          sx={inputStyles}
-          label="Other Brand Name"
-          variant="outlined"
-          fullWidth
-          value={formData.otherBrandName || ""}
-          onChange={(e) => handleFormChange("otherBrandName", e.target.value)}
-          className="sm:w-full max-sm:w-full  "
-        />
-      ) : (
-        <Box sx={{ minWidth: 120 }}>
-          <FormControl
-            disabled={
-              selectBrand.name && selectBrand.name != "Others" ? false : true
-            }
-            fullWidth
-            sx={{
-              ...inputStyles,
-              "& .MuiInputLabel-root": {
-                color: "#dc39fc",
-              },
-            }}
-          >
-            <InputLabel id="model-select-label" shrink>
-              Model
-            </InputLabel>
-            <Select
-              labelId="model-select-label"
-              id="model-select"
-              label="Model"
-              value={selectModel}
-              onChange={(e) => setSelectedModel(e.target.value)}
-              className="sm:w-full max-sm:w-full dark:text-white"
-            >
-              {models.map((model: any) => (
-                <MenuItem
-                  key={model.id}
-                  value={model}
-                  style={{ color: "black " }}
+      {selectCategory?.id !== 3 && (
+        <>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth sx={inputStyles}>
+              <InputLabel id="brand-select-label dark:bg-white">
+                Brand
+              </InputLabel>
+              <Select
+                sx={inputStyles}
+                labelId="brand-select-label"
+                id="brand-select"
+                value={selectBrand}
+                label="Brand"
+                onChange={(e) => setSelectedBrand(e.target.value)}
+                className="sm:w-full max-sm:w-ful dark:bg-whitel dark:text-white" // Responsive width
+              >
+                {brands.map((brand: any) => (
+                  <MenuItem
+                    key={brand.id}
+                    value={brand}
+                    style={{ color: "black" }}
+                  >
+                    {brand.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          {selectBrand.name && selectBrand.name == "Others" ? (
+            <TextField
+              sx={inputStyles}
+              label="Other Brand Name"
+              variant="outlined"
+              fullWidth
+              value={formData.otherBrandName || ""}
+              onChange={(e) =>
+                handleFormChange("otherBrandName", e.target.value)
+              }
+              className="sm:w-full max-sm:w-full  "
+            />
+          ) : (
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl
+                disabled={
+                  selectBrand.name && selectBrand.name != "Others"
+                    ? false
+                    : true
+                }
+                fullWidth
+                sx={{
+                  ...inputStyles,
+                  "& .MuiInputLabel-root": {
+                    color: "#dc39fc",
+                  },
+                }}
+              >
+                <InputLabel id="model-select-label" shrink>
+                  Model
+                </InputLabel>
+                <Select
+                  labelId="model-select-label"
+                  id="model-select"
+                  label="Model"
+                  value={selectModel}
+                  onChange={(e) => setSelectedModel(e.target.value)}
+                  className="sm:w-full max-sm:w-full dark:text-white"
                 >
-                  {model.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
+                  {models.map((model: any) => (
+                    <MenuItem
+                      key={model.id}
+                      value={model}
+                      style={{ color: "black " }}
+                    >
+                      {model.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+          )}
+        </>
       )}
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth sx={inputStyles}>
