@@ -45,7 +45,7 @@ export default function UsBlogs() {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getRecentsBlogs`
       );
 
-      const blogs: Blog[] = response.data.data.map(
+      const blogs: Blog[] = response?.data?.data?.map(
         (blog: any, index: number) => ({
           key: index,
           Created_at: blog.created_at,
@@ -76,6 +76,32 @@ export default function UsBlogs() {
     let text = tempDiv.textContent || tempDiv.innerText || "";
     return text.length > limit ? text.substring(0, limit) + "..." : text;
   };
+  const getTimeAgoOrDate = (dateString: string): string => {
+    const now = new Date();
+    const postedDate = new Date(dateString);
+    const diffMs = now.getTime() - postedDate.getTime();
+
+    const diffMinutes = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+
+    if (diffHours < 24) {
+      if (diffHours === 0 && minutes === 0) return "Just now";
+      if (diffHours === 0)
+        return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${
+        minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
+      } ago`;
+    }
+
+    return postedDate.toLocaleString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   return (
     <div className=" mx-auto max-sm:p-1 max-sm:px-2 p-4 md:p-6">
@@ -98,7 +124,8 @@ export default function UsBlogs() {
 
             <div className="w-full px-2 text-start md:text-left">
               <p className="text-sm text-gray-500 italic">
-                GamerGizmo • {formatDate(blog.Created_at)}
+                {/* GamerGizmo • {formatDate(blog.Created_at)} */}
+                GamerGizmo • {getTimeAgoOrDate(blog.Created_at)}
               </p>
               <h3
                 onClick={() => router.push(`/blog/${blog.blogId}`)}
