@@ -12,7 +12,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import LiveCommunity from "./LiveCommunity";
 import TermsAndConditionModal from "./Modals/TermsAndConditionModal";
-import { FaYoutube } from "react-icons/fa";
+import { FaTiktok, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -53,7 +53,12 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="z-10 max-sm:w-2"
               >
-                <FontAwesomeIcon icon={faFacebookF} color="#4267B2" size="1x" />
+                <FontAwesomeIcon
+                  icon={faFacebookF}
+                  color="#4267B2"
+                  size="lg"
+                  className="hover:text-blue-400"
+                />
               </a>
               <a
                 href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6"
@@ -62,21 +67,31 @@ const Footer = () => {
               >
                 <FontAwesomeIcon
                   icon={faInstagram}
-                  className="z-10 max-sm:w-5 hover:text-red-800 "
+                  className="z-10 max-sm:w-5 hover:text-red-300 "
                   color="#E1306C"
+                  size="lg"
                 />
               </a>
 
-              {/* <Link href="#" className="text-white mx-2"> */}
               <a
                 href="https://www.youtube.com/@GamerGizmo_Official"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-red-600 hover:text-red-800 transition-colors"
+                className="text-red-600 hover:text-red-300 transition-colors"
               >
                 <FaYoutube size={22} />
               </a>
-              {/* </Link> */}
+              <a
+                href="https://www.tiktok.com/@gamergizmo_official"
+                target="_blank"
+                rel="noopener noreferrer"
+                className=""
+              >
+                <FaTiktok
+                  size={22}
+                  className="hover:text-gray-500 max-md:size-0"
+                />
+              </a>
             </div>
           </div>
 

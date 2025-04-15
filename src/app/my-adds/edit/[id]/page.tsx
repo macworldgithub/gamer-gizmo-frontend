@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import SpecificationsForm from "./SpecificationsForm";
 import UploadImages from "./UploadImages";
+import { Upload } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 export default function EditAdPage() {
   const { id } = useParams();
@@ -46,6 +48,16 @@ export default function EditAdPage() {
         ...product,
         category_id: product?.category_id || "",
       });
+
+      const formattedImages = (product?.images || []).map(
+        (url: string, index: number) => ({
+          uid: `${index}`, // unique ID for image
+          name: `image-${index}`,
+          url, // this is important for display
+          status: "done",
+        })
+      );
+      setFileList(formattedImages);
     } catch (err) {
       toast.error("Failed to fetch ad details");
     } finally {
@@ -257,6 +269,16 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
+  const handleImageChange = ({ fileList }: any) => {
+    setFileList(fileList);
+  };
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
   return (
     <div className="w-full dark:bg-black">
@@ -401,11 +423,16 @@ export default function EditAdPage() {
                 consoleChange={handleGamingConsoleChange}
               />
             </div>
-            {/* <UploadImages
+
+            <Upload
+              listType="picture-card"
               fileList={fileList}
-              setFileList={setFileList}
-              adData={adData}
-            /> */}
+              onChange={handleImageChange}
+              onPreview={(file) => window.open(file.url, "_blank")}
+              beforeUpload={() => false} // prevents auto upload
+            >
+              {fileList.length >= 5 ? null : uploadButton}
+            </Upload>
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
               type="submit"

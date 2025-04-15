@@ -276,6 +276,7 @@ const PopularMainSection: React.FC = () => {
         products={LaptopUsedData}
         seReftech={seReftech}
         refetch={fetcher}
+        // explorePath={`/laptops?condition=2`}
         explorePath={`/laptops?condition=2`}
         onExplore={() => console.log("Explore Used Consoles")}
       />

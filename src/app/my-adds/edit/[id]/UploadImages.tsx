@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Upload, Image } from "antd";
+import { Upload, Image, GetProp, UploadProps, UploadFile } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
@@ -25,18 +25,26 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
           return {
             uid: img.id.toString(),
             name: `Image-${img.id}`,
-            url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/${cleanedUrl}`.replace(/\/{2,}/g, "/"), // Fix double slashes
+            url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/${cleanedUrl}`.replace(
+              /\/{2,}/g,
+              "/"
+            ), // Fix double slashes
           };
         });
-  
+
       console.log("Existing Images Loaded:", existingImages);
-      console.log("API Image URLs:", adData.product_images.map((img: any) => img.image_url));
-      console.log("Final Image URLs:", existingImages.map((img) => img.url));
-  
+      console.log(
+        "API Image URLs:",
+        adData.product_images.map((img: any) => img.image_url)
+      );
+      console.log(
+        "Final Image URLs:",
+        existingImages.map((img: any) => img.url)
+      );
+
       setFileList(existingImages);
     }
   }, [JSON.stringify(adData.product_images)]); // Dependency to avoid unnecessary re-renders
-  
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {

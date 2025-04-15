@@ -11,12 +11,12 @@ import {
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Image from "next/image";
-import { FaYoutube } from "react-icons/fa";
+import { FaTiktok, FaYoutube } from "react-icons/fa";
 
 const TopNav = () => {
   return (
     <div
-      className={`max-md:w-full max-md:h-20 h-16 bg-gray-50 max-md:justify-between   flex max-md:px-4 lg:justify-between md:justify-between items-center  md:px-5 lg:px-10`}
+      className={`max-md:w-full max-md:h-20 h-16 bg-gray-50 max-md:justify-between flex max-md:px-4 lg:justify-between md:justify-between items-center  md:px-5 lg:px-10`}
     >
       <Link href="/">
         <Image
@@ -53,9 +53,9 @@ const TopNav = () => {
           <p className="text-navTextLight lg:text-[1rem] w-max text-wrap max-md:text-[0.5rem] md:text-sm  text-center   md:mr-5">
             Live Streaming Coming Soon
           </p>
-          <div className="px-4 tracking-wider max-sm:w-[4rem] sm:w-[5rem] sm:h-6 md:w-28 max-sm:h-6 h-[2rem] md:h-8 ml-2 mr-8 py-1 flex justify-center items-center text-[0.6rem] md:text-sm bg-custom-gradient text-white rounded-md max-sm:text-[0.5rem]">
+          {/* <div className="px-4 tracking-wider max-sm:w-[4rem] sm:w-[5rem] sm:h-6 md:w-28 max-sm:h-6 h-[2rem] md:h-8 ml-2 mr-8 py-1 flex justify-center items-center text-[0.6rem] md:text-sm bg-custom-gradient text-white rounded-md max-sm:text-[0.5rem]">
             05:29:32:48
-          </div>
+          </div> */}
         </div>
         <div className="flex max-md:gap-2 xl:pr-64 items-center  gap-3 max-sm:pr-4 sm:gap-4 max-sm:gap-2">
           <a
@@ -64,26 +64,42 @@ const TopNav = () => {
             rel="noopener noreferrer"
             className="z-10 max-sm:w-2"
           >
-            <FontAwesomeIcon icon={faFacebookF} color="#4267B2" size="1x" />
+            <FontAwesomeIcon
+              icon={faFacebookF}
+              color="#4267B2"
+              size="lg"
+              className="hover:text-blue-400"
+            />
           </a>
           <a
             href="https://www.youtube.com/@GamerGizmo_Official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-red-600 hover:text-red-800 transition-colors"
+            className="text-red-600 hover:text-red-300 transition-colors"
           >
             <FaYoutube size={22} />
           </a>
-
-          <a href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon
-            icon={faInstagram}
-            className="z-10 max-sm:w-5 hover:text-red-800 "
-            color="#E1306C"
-          />
+          <a
+            href="https://www.tiktok.com/@gamergizmo_official"
+            target="_blank"
+            rel="noopener noreferrer"
+            className=""
+          >
+            <FaTiktok size={22} className="hover:text-gray-500" />
           </a>
-         
-      
+
+          <a
+            href="https://www.instagram.com/gamergizmo_official?utm_source=qr&igsh=eWdrMmpkMjEyc3p6"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon
+              icon={faInstagram}
+              className="z-10 max-sm:w-5 hover:text-red-300 "
+              color="#E1306C"
+              size="lg"
+            />
+          </a>
         </div>
       </div>
     </div>

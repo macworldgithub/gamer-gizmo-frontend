@@ -187,7 +187,7 @@ const PublishAdd: React.FC = () => {
       console.error("Failed to fetch locations.");
     }
   };
-  const fetchConditions = async () => {
+  const fetchConditions = async () => { 
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/conditions/getAll`
