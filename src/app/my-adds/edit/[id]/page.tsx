@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import SpecificationsForm from "./SpecificationsForm";
 import UploadImages from "./UploadImages";
-import { Upload } from "antd";
+
 import { PlusOutlined } from "@ant-design/icons";
 
 export default function EditAdPage() {
@@ -49,14 +49,26 @@ export default function EditAdPage() {
         category_id: product?.category_id || "",
       });
 
+      // const formattedImages = (product?.images || []).map(
+      //   (url: string, index: number) => ({
+      //     uid: `${index}`, // unique ID for image
+      //     name: `image-${index}`,
+      //     url, // this is important for display
+      //     status: "done",
+      //   })
+      // );
       const formattedImages = (product?.images || []).map(
         (url: string, index: number) => ({
-          uid: `${index}`, // unique ID for image
+          uid: `${index}`,
           name: `image-${index}`,
-          url, // this is important for display
+          url: new URL(
+            url.replace(/^\/+/, ""),
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          ).toString(), // ✅ full URL
           status: "done",
         })
       );
+
       setFileList(formattedImages);
     } catch (err) {
       toast.error("Failed to fetch ad details");
@@ -424,15 +436,12 @@ export default function EditAdPage() {
               />
             </div>
 
-            <Upload
-              listType="picture-card"
+            <UploadImages
               fileList={fileList}
-              onChange={handleImageChange}
-              onPreview={(file) => window.open(file.url, "_blank")}
-              beforeUpload={() => false} // prevents auto upload
-            >
-              {fileList.length >= 5 ? null : uploadButton}
-            </Upload>
+              setFileList={setFileList}
+              adData={adData}
+            />
+
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
               type="submit"

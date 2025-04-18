@@ -19,33 +19,24 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
   useEffect(() => {
     if (adData?.product_images?.length > 0) {
       const existingImages = adData.product_images
-        .filter((img: any) => img.image_url) // Ensure valid URLs
+        .filter((img: any) => img.image_url)
         .map((img: any) => {
           const cleanedUrl = img.image_url.replace(/^\/+/, ""); // Remove leading slash
+          const fullUrl = new URL(
+            cleanedUrl,
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          ).toString();
           return {
             uid: img.id.toString(),
             name: `Image-${img.id}`,
-            url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/${cleanedUrl}`.replace(
-              /\/{2,}/g,
-              "/"
-            ), // Fix double slashes
+            url: fullUrl,
           };
         });
 
       console.log("Existing Images Loaded:", existingImages);
-      console.log(
-        "API Image URLs:",
-        adData.product_images.map((img: any) => img.image_url)
-      );
-      console.log(
-        "Final Image URLs:",
-        existingImages.map((img: any) => img.url)
-      );
-
       setFileList(existingImages);
     }
-  }, [JSON.stringify(adData.product_images)]); // Dependency to avoid unnecessary re-renders
-
+  }, [JSON.stringify(adData?.product_images)]);
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj as FileType);
@@ -53,7 +44,6 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
     setPreviewImage(file?.url || (file.preview as string));
     setPreviewOpen(true);
   };
-
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
@@ -69,11 +59,11 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
     <div>
       <Upload
         listType="picture-card"
-        defaultFileList={fileList} // Changed from fileList
+        fileList={fileList}
         accept=".png, .jpeg, .jpg"
-        className="flex"
         onPreview={handlePreview}
         onChange={handleChange}
+        beforeUpload={() => false} // prevent auto upload
       >
         {fileList.length >= 10 ? null : uploadButton}
       </Upload>
