@@ -16,6 +16,9 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
 
+  useEffect(() => {
+    setFileList(fileList);
+  }, [fileList]);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {

@@ -259,6 +259,10 @@ export default function EditAdPage() {
         }
       };
 
+
+      const imageUrls = adData?.product_images?.map((img: any) => img.image_url) || [];
+
+
       const payload = {
         prod_id: adData?.id?.toString() || "",
         user_id: adData?.user_id?.toString() || "",
@@ -271,6 +275,7 @@ export default function EditAdPage() {
         location: adData?.location?.toString() || "",
         model_id: adData?.model_id?.toString() || "",
         stock: adData?.stock?.toString() || "",
+        images: imageUrls,
         ...specificationsData(),
       };
       console.log("Final payload:", payload);
@@ -291,6 +296,7 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
+ 
   const handleImageChange = ({ fileList }: any) => {
     setFileList(fileList);
   };
