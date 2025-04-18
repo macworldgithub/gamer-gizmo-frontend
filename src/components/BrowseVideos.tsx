@@ -4,6 +4,10 @@ import Player from "./Player";
 export default function BrowseVideos() {
   const videos = [
     {
+      src: "https://www.youtube.com/watch?v=gzg3bmHC3CQ",
+      poster: "/images/logo.png",
+    },
+    {
       src: "https://www.youtube.com/watch?v=kKH6QKo2Pmc",
       poster: "/images/logo.png",
     },

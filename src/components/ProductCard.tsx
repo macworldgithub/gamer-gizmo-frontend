@@ -210,19 +210,18 @@ const ProductCard = ({
               </Swiper>
 
               {/* Favorite Icon */}
-
               <div
                 onClick={async () => {
                   if (isLoading) return;
-                  if (product.fav) {
-                    alert("This product is already in your favorites");
-                    return;
-                  }
 
                   try {
-                    await AddToLike(product.id);
+                    if (product.fav) {
+                      await remove(product.id);
+                    } else {
+                      await AddToLike(product.id);
+                    }
                   } catch (error) {
-                    console.error("Error adding to favorites:", error);
+                    console.error("Error toggling favorite:", error);
                   }
                 }}
                 className={`absolute top-2 right-2 z-10 cursor-pointer ${

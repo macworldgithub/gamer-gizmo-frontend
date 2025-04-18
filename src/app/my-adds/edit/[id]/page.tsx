@@ -8,7 +8,10 @@ import { toast } from "react-toastify";
 import SpecificationsForm from "./SpecificationsForm";
 import UploadImages from "./UploadImages";
 
+import { PlusOutlined } from "@ant-design/icons";
+
 export default function EditAdPage() {
+  
   const { id } = useParams();
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
@@ -46,12 +49,57 @@ export default function EditAdPage() {
         ...product,
         category_id: product?.category_id || "",
       });
+
+      // const formattedImages = (product?.images || []).map(
+      //   (url: string, index: number) => ({
+      //     uid: `${index}`, // unique ID for image
+      //     name: `image-${index}`,
+      //     url, // this is important for display
+      //     status: "done",
+      //   })
+      // );
+      const formattedImages = (product?.images || []).map(
+        (url: string, index: number) => ({
+          uid: `${index}`,
+          name: `image-${index}`,
+          url: new URL(
+            url.replace(/^\/+/, ""),
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          ).toString(), // ✅ full URL
+          status: "done",
+        })
+      );
+
+      setFileList(formattedImages);
     } catch (err) {
       toast.error("Failed to fetch ad details");
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (fileList.length === 0 && adData?.product_images?.length > 0) {
+      const existingImages = adData.product_images
+        .filter((img: any) => img.image_url)
+        .map((img: any) => {
+          const cleanedUrl = img.image_url.replace(/^\/+/, "");
+          const fullUrl = new URL(
+            cleanedUrl,
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          ).toString();
+          return {
+            uid: img.id.toString(),
+            name: `Image-${img.id}`,
+            url: fullUrl,
+            status: "done",
+          };
+        });
+  
+      setFileList(existingImages);
+    }
+  }, [adData?.product_images]);
+  
 
   const fetchBrands = async () => {
     try {
@@ -193,21 +241,7 @@ export default function EditAdPage() {
     try {
       console.log("adData:", adData);
 
-      // const specificationsData = () => {
-      //   let specs = {};
-
-      //   if (adData.laptops?.[0]) {
-      //     specs = { ...specs, ...adData.laptops[0] };
-      //   }
-      //   if (adData.personal_computers?.[0]) {
-      //     specs = { ...specs, ...adData.personal_computers[0] };
-      //   }
-      //   if (adData.components?.[0]) {
-      //     specs = { ...specs, ...adData.components[0] };
-      //   }
-      //   if (adData.gaming_console?.[0]) {
-      //     specs = { ...specs, ...adData.gaming_console[0] };
-      //   }
+   
       const specificationsData = () => {
         switch (adData?.category_id) {
           case 1:
@@ -257,6 +291,16 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
+  const handleImageChange = ({ fileList }: any) => {
+    setFileList(fileList);
+  };
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
   return (
     <div className="w-full dark:bg-black">
@@ -401,11 +445,13 @@ export default function EditAdPage() {
                 consoleChange={handleGamingConsoleChange}
               />
             </div>
-            {/* <UploadImages
+
+            <UploadImages
               fileList={fileList}
               setFileList={setFileList}
               adData={adData}
-            /> */}
+            />
+
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
               type="submit"

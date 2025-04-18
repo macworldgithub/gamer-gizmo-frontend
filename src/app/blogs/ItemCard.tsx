@@ -26,6 +26,34 @@ export default function BlogList() {
     fetchBlogs();
   }, []);
 
+  const getTimeAgoOrDate = (dateString: string): string => {
+    const now = new Date();
+    const postedDate = new Date(dateString);
+    const diffMs = now.getTime() - postedDate.getTime();
+
+    const diffMinutes = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+
+    if (diffHours < 24) {
+      if (diffHours === 0 && minutes === 0) return "Just now";
+      if (diffHours === 0)
+        return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${
+        minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
+      } ago`;
+    }
+
+    // Fallback to full datetime for older posts
+    return postedDate.toLocaleString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <div className="max-w-2xl max-md:pl-8">
       <h1 className="text-3xl font-bold mb-8 dark:text-white">All Blogs</h1>
@@ -45,7 +73,10 @@ export default function BlogList() {
                 className="w-32 h-20 object-cover"
               />
               <div className="flex-1">
-                <p className="text-gray-500 text-xs">2 hours ago</p>
+                <p className="text-gray-500 text-xs">
+                  {getTimeAgoOrDate(blog.created_at)}
+                </p>
+
                 <h3 className="font-bold md:text-[0.6rem] lg:text-xs hover:underline dark:text-white">
                   {blog.title}
                 </h3>

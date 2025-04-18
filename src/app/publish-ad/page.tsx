@@ -121,10 +121,10 @@ const PublishAdd: React.FC = () => {
       toast.error("Please select a category before proceeding.");
       return;
     }
-    if (activeStep === 1 && !selectBrand?.id) {
-      toast.error("Please fill a brand before proceeding.");
-      return;
-    }
+    // if (activeStep === 1 && !selectBrand?.id) {
+    //   toast.error("Please fill a brand before proceeding.");
+    //   return;
+    // }
     if (
       activeStep === 1 &&
       (!formData?.title || !formData?.description || !selectBrand)
@@ -187,7 +187,7 @@ const PublishAdd: React.FC = () => {
       console.error("Failed to fetch locations.");
     }
   };
-  const fetchConditions = async () => {
+  const fetchConditions = async () => { 
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/conditions/getAll`
@@ -258,15 +258,14 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("location", selectedLocation?.id?.toString() || "");
     formDataObject.append("is_published", "true");
 
-      if (selectCategory?.name === "Components and Accessories") {
-        formDataObject.append(
-          "component_type",
-          selectComponentCategory?.id?.toString() || ""
-        );
-        formDataObject.append("text", formData?.component_text || "");
-      }
-      
-     else if (selectCategory?.name === "Gaming Consoles") {
+    if (selectCategory?.name === "Components and Accessories") {
+      // If no component type is selected, set component_type to 0 (for accessories)
+      formDataObject.append(
+        "component_type",
+        selectComponentCategory?.id || "0" // Default to 0 if not selected
+      );
+      formDataObject.append("text", formData?.component_text || "");
+    } else if (selectCategory?.name === "Gaming Consoles") {
       formDataObject.append("accessories", formData.accessories || "");
       formDataObject.append("connectivity", formData.connectivity || "");
       formDataObject.append("warranty_status", formData.warranty_status || "");
