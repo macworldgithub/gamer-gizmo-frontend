@@ -258,13 +258,15 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("location", selectedLocation?.id?.toString() || "");
     formDataObject.append("is_published", "true");
 
-    if (selectCategory?.name === "Components and Accessories") {
-      formDataObject.append(
-        "component_type",
-        selectComponentCategory?.id?.toString() || ""
-      );
-      formDataObject.append("text", formData?.component_text || "");
-    } else if (selectCategory?.name === "Gaming Consoles") {
+      if (selectCategory?.name === "Components and Accessories") {
+        formDataObject.append(
+          "component_type",
+          selectComponentCategory?.id?.toString() || ""
+        );
+        formDataObject.append("text", formData?.component_text || "");
+      }
+      
+     else if (selectCategory?.name === "Gaming Consoles") {
       formDataObject.append("accessories", formData.accessories || "");
       formDataObject.append("connectivity", formData.connectivity || "");
       formDataObject.append("warranty_status", formData.warranty_status || "");
