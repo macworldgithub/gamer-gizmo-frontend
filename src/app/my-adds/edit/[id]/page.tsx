@@ -11,7 +11,7 @@ import UploadImages from "./UploadImages";
 import { PlusOutlined } from "@ant-design/icons";
 
 export default function EditAdPage() {
-  
+
   const { id } = useParams();
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
@@ -95,11 +95,11 @@ export default function EditAdPage() {
             status: "done",
           };
         });
-  
+
       setFileList(existingImages);
     }
   }, [adData?.product_images]);
-  
+
 
   const fetchBrands = async () => {
     try {
@@ -241,7 +241,7 @@ export default function EditAdPage() {
     try {
       console.log("adData:", adData);
 
-   
+
       const specificationsData = () => {
         switch (adData?.category_id) {
           case 1:
@@ -296,7 +296,7 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
- 
+
   const handleImageChange = ({ fileList }: any) => {
     setFileList(fileList);
   };
@@ -377,7 +377,7 @@ export default function EditAdPage() {
                   ))}
                 </select>
               </div>
-              {/* Brand Dropdown */}
+              {/* Brand Dropdown
               <div className="flex flex-col">
                 <label className="edit-label">Brand</label>
                 <select
@@ -409,7 +409,47 @@ export default function EditAdPage() {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
+              {adData?.category_id !== 3 && (
+                <>
+                  {/* Brand Dropdown */}
+                  <div className="flex flex-col">
+                    <label className="edit-label">Brand</label>
+                    <select
+                      name="brand_id"
+                      value={adData?.brand_id}
+                      onChange={handleChange}
+                      className="edit-input dark:text-black"
+                      required
+                    >
+                      {brands.map((brand) => (
+                        <option key={brand.id} value={brand.id}>
+                          {brand.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Model Dropdown */}
+                  <div className="flex flex-col">
+                    <label className="edit-label">Model</label>
+                    <select
+                      name="model_id"
+                      value={adData?.model_id}
+                      onChange={handleChange}
+                      className="edit-input dark:text-black"
+                      required
+                    >
+                      {model.map((mod) => (
+                        <option key={mod.id} value={mod.id}>
+                          {mod.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
+
 
               {/* Stock */}
               <div className="flex flex-col">
