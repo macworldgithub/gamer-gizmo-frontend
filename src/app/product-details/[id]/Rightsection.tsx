@@ -42,7 +42,7 @@ const Rightsection = ({ data }: any) => {
       <div className=" h-fit border-gray-300 rounded-lg p-6 w-80 lg:w-[400px] bg-white shadow-md flex flex-col justify-between dark:bg-black">
         {/* Price Heading */}
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
-          AED {data.price}
+          {Number(data.price).toLocaleString()}
         </h1>
         {/* Horizontal Divider */}
         {/* <hr className="my-6 border-gray-300 w-full " /> */}
@@ -230,8 +230,12 @@ const Rightsection = ({ data }: any) => {
       <div className="dark:bg-black dark:text-white border-gray-300 justify-center rounded-lg p-4 w-80  lg:w-[400px] h-[40rem] relative bg-gray-200 shadow-md flex flex-col items-center">
         {/* <Image src={banner} alt="Banner" layout="fill" objectFit="cover" />
          */}
-         <h1 className="absolute top-5 font-bold text-2xl">This section is for live Ad</h1>
-        <h1 className="text-center font-bold text-xl">Boost Your Brand Visibility</h1>
+        <h1 className="absolute top-5 font-bold text-2xl">
+          This section is for live Ad
+        </h1>
+        <h1 className="text-center font-bold text-xl">
+          Boost Your Brand Visibility
+        </h1>
         <p className="text-center dark:text-white text-gray-700 text-sm">
           Advertise with gamergizmo today!
         </p>

@@ -61,15 +61,13 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     return relevantFields.some((field: any) => {
       const value = field.includes(".")
         ? //@ts-ignore
-        field.split(".").reduce((obj, key) => obj?.[key], categoryData)
+          field.split(".").reduce((obj, key) => obj?.[key], categoryData)
         : categoryData[field];
       return (
         value && value !== "Not Available" && value.toString().trim() !== ""
       );
     });
   };
-
-
 
   const handleClick = () => {
     dispatch(setLoading(true));
@@ -83,16 +81,14 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
   console.log(data, "ppo");
   return (
     <>
-      <div className="flex flex-col items-start mx-8 2xl:item-center">
+      <div className="container flex flex-col items-start mx-8 pr-11 item-center">
         <p className="text-sm md:text-2xl mt-8 text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
           {data?.name}
         </p>
       </div>
-      <div className="w-full flex flex-col justify-center items-center">
+      <div className="container flex flex-col justify-center items-center">
         {/* Image Section */}
-<div>
-  
-</div>
+        <div></div>
         <div className="w-full flex justify-center items-center h-auto bg-gray-200 max-w-3xl ">
           {data?.product_images && (
             <ProductImageSwiper
@@ -112,7 +108,9 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           ) : (
             <FaRegShareSquare size={20} />
           )}
-          <button className="rounded-md">{isLoading ? "Loading..." : "Share Product"}</button>
+          <button className="rounded-md">
+            {isLoading ? "Loading..." : "Share Product"}
+          </button>
         </div>
 
         {/* Details Section */}
@@ -166,10 +164,18 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             Item overview
           </button>
 
-          <div className="flex gap-4 mt-4 max-md:grid grid-cols-1 max-sm:grid-cols-2 sm:grid-cols-3 max-sm:gap-x-6">
+          <div className="flex flex-wrap gap-2 mt-4">
+            {data?.price && (
+              <div className="items-overview ">
+                <h1 className="font-semibold text-sm max-sm:text-xs">Price</h1>
+                <p className="mt-2 text-white font-semibold text-xs">
+                  {Number(data?.price).toLocaleString()} AED
+                </p>
+              </div>
+            )}
             {/* Stock Card */}
             {data?.stock && (
-              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 max-sm:p-2 text-center w-40 h-24 flex flex-col justify-center max-sm:w-36">
+              <div className="items-overview">
                 <h1 className="font-semibold text-sm max-sm:text-xs">STOCK</h1>
                 <p className="mt-2 text-white font-semibold text-xs">
                   {data?.stock}
@@ -178,7 +184,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             )}
 
             {data?.models && data?.models?.name !== "Other" && (
-              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
+              <div className="items-overview">
                 <h1 className="font-semibold text-sm max-sm:text-xs">MODEL</h1>
 
                 <p className="mt-2 text-white font-semibold text-xs">
@@ -188,7 +194,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
             )}
 
             {data?.brands && (
-              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 flex flex-col justify-center max-sm:p-2 max-sm:w-36">
+              <div className="items-overview">
                 <h1 className="font-semibold text-sm max-sm:text-xs">BRAND</h1>
                 <p className="mt-2  text-white font-semibold text-xs">
                   {data?.brands?.name}
@@ -198,7 +204,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
             {/* Condition Card */}
             {data?.condition && (
-              <div className="bg-custom-gradient dark:bg-secondaryBlack text-white shadow-md rounded-lg p-4 text-center w-40 h-24 max-sm:w-36 flex flex-col justify-center max-sm:p-2">
+              <div className="items-overview">
                 <h1 className="font-semibold text-sm max-sm:text-xs">
                   CONDITION
                 </h1>
@@ -206,12 +212,12 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   {data?.condition === 1
                     ? "New"
                     : data?.condition === 2
-                      ? "Used"
-                      : data?.condition === 3
-                        ? "Like New"
-                        : data?.condition === 4
-                          ? "Refurbished"
-                          : "Unknown"}
+                    ? "Used"
+                    : data?.condition === 3
+                    ? "Like New"
+                    : data?.condition === 4
+                    ? "Refurbished"
+                    : "Unknown"}
                 </p>
               </div>
             )}
@@ -228,10 +234,11 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   <button
                     onClick={handleSpecClick}
                     className={`w-fit px-4 py-2 rounded-md text-sm flex justify-center 
-      ${isSpecOpen
-                        ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
-                        : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
-                      }`}
+      ${
+        isSpecOpen
+          ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
+          : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
+      }`}
                   >
                     {isSpecOpen
                       ? "Hide Additional Details"
@@ -280,11 +287,13 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               </div>
             </div> */}
 
-
-
             {/* Modal Component */}
-            <ShareProductModal open={modalOpen} onClose={() => setModalOpen(false)} />
-
+            <div className="mr-24">
+              <ShareProductModal
+                open={modalOpen}
+                onClose={() => setModalOpen(false)}
+              />
+            </div>
           </div>
 
           {/* Conditional Rendering */}
@@ -299,7 +308,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
 
           {isSpecOpen && <SpecificationsTable data={data} />}
 
-          <div className="flex-col justify-start gap-2 items-center mt-4">
+          <div className="flex-col justify-start gap-2 items-center px-4 mt-4">
             <h4 className="dark:text-white font-bold my-2 text-2xl ">
               Product Description
             </h4>
@@ -307,7 +316,6 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               {data?.description}
             </p>
           </div>
-
 
           <Sellersdetails data={data} />
         </div>
