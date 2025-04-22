@@ -78,7 +78,7 @@ export default function EditAdPage() {
 
   useEffect(() => {
     if (fileList.length === 0 && adData?.product_images?.length > 0) {
-      const existingImages = adData.product_images
+      const existingImages = adData?.product_images
         .filter((img: any) => img.image_url)
         .map((img: any) => {
           const cleanedUrl = img.image_url.replace(/^\/+/, "");
@@ -241,10 +241,17 @@ export default function EditAdPage() {
         }
       };
 
+      // const imageUrls =
+      //   // adData?.product_images?.map((img: any) => img.image_url) || [];
+      //   adData?.product_images?.map((img: any) => ({ path: img.image_url })) ||
+      //   [];
       const imageUrls =
-        // adData?.product_images?.map((img: any) => img.image_url) || [];
-        adData?.product_images?.map((img: any) => ({ path: img.image_url })) ||
-        [];
+        fileList?.map((file: any) => ({
+          path: file.url?.replace(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
+            ""
+          ),
+        })) || [];
 
       const payload = {
         prod_id: adData?.id?.toString() || "",
@@ -361,39 +368,6 @@ export default function EditAdPage() {
                   ))}
                 </select>
               </div>
-              {/* Brand Dropdown
-              <div className="flex flex-col">
-                <label className="edit-label">Brand</label>
-                <select
-                  name="brand_id"
-                  value={adData?.brand_id}
-                  onChange={handleChange}
-                  className="edit-input dark:text-black"
-                  required
-                >
-                  {brands.map((brand) => (
-                    <option key={brand.id} value={brand.id}>
-                      {brand.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col">
-                <label className="edit-label">Model</label>
-                <select
-                  name="model_id"
-                  value={adData?.model_id}
-                  onChange={handleChange}
-                  className="edit-input dark:text-black"
-                  required
-                >
-                  {model.map((mod) => (
-                    <option key={mod.id} value={mod.id}>
-                      {mod.name}
-                    </option>
-                  ))}
-                </select>
-              </div> */}
               {adData?.category_id !== 3 && (
                 <>
                   {/* Brand Dropdown */}
@@ -475,11 +449,11 @@ export default function EditAdPage() {
               />
             </div>
 
-            <UploadImages
+            {/* <UploadImages
               fileList={fileList}
               setFileList={setFileList}
               adData={adData}
-            />
+            /> */}
 
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
