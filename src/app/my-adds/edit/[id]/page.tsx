@@ -11,7 +11,6 @@ import UploadImages from "./UploadImages";
 import { PlusOutlined } from "@ant-design/icons";
 
 export default function EditAdPage() {
-
   const { id } = useParams();
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
@@ -22,13 +21,12 @@ export default function EditAdPage() {
   const [locations, setLocations] = useState<any[]>([]);
   const [brands, setBrands] = useState<any[]>([]);
   const [model, setModels] = useState<any[]>([]);
-  const [componentCategories, setComponentCategories] = useState<any[]>([]);
+  // const [componentCategories, setComponentCategories] = useState<any[]>([]);
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
     if (!id) return;
     fetchAdDetails();
-    fetchComponentCategories();
     fetchLocations();
   }, [id]);
   useEffect(() => {
@@ -100,7 +98,6 @@ export default function EditAdPage() {
     }
   }, [adData?.product_images]);
 
-
   const fetchBrands = async () => {
     try {
       console.log(adData, "ad data");
@@ -146,20 +143,6 @@ export default function EditAdPage() {
       fetchModels();
     }
   }, [adData?.brand_id]);
-
-  const fetchComponentCategories = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/component-category/getAll`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setComponentCategories(response?.data?.data || []);
-    } catch (error) {
-      console.error("Error occurred while fetching categories:", error);
-    }
-  };
 
   const fetchLocations = async () => {
     try {
@@ -241,27 +224,27 @@ export default function EditAdPage() {
     try {
       console.log("adData:", adData);
 
-
       const specificationsData = () => {
         switch (adData?.category_id) {
           case 1:
-            return { laptops: [{ ...adData.laptops?.[0] }] };
+            return { laptops: [{ ...adData?.laptops?.[0] }] };
           case 2:
             return {
-              personal_computers: [{ ...adData.personal_computers?.[0] }],
+              personal_computers: [{ ...adData?.personal_computers?.[0] }],
             };
           case 3:
-            return { components: [{ ...adData.components?.[0] }] };
+            return { components: [{ ...adData?.components?.[0] }] };
           case 4:
-            return { gaming_console: [{ ...adData.gaming_console?.[0] }] };
+            return { gaming_console: [{ ...adData?.gaming_console?.[0] }] };
           default:
             return {};
         }
       };
 
-
-      const imageUrls = adData?.product_images?.map((img: any) => img.image_url) || [];
-
+      const imageUrls =
+        // adData?.product_images?.map((img: any) => img.image_url) || [];
+        adData?.product_images?.map((img: any) => ({ path: img.image_url })) ||
+        [];
 
       const payload = {
         prod_id: adData?.id?.toString() || "",
@@ -276,6 +259,7 @@ export default function EditAdPage() {
         model_id: adData?.model_id?.toString() || "",
         stock: adData?.stock?.toString() || "",
         images: imageUrls,
+        is_published: adData?.is_published,
         ...specificationsData(),
       };
       console.log("Final payload:", payload);
@@ -450,7 +434,6 @@ export default function EditAdPage() {
                 </>
               )}
 
-
               {/* Stock */}
               <div className="flex flex-col">
                 <label className="edit-label">Stock</label>
@@ -492,11 +475,11 @@ export default function EditAdPage() {
               />
             </div>
 
-            {/* <UploadImages
+            <UploadImages
               fileList={fileList}
               setFileList={setFileList}
               adData={adData}
-            /> */}
+            />
 
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"

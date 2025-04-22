@@ -25,6 +25,8 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   setAdData,
   consoleChange,
 }) => {
+  const [componentCategories, setComponentCategories] = useState([]);
+
   const [processorVariantData, setProcessorVariantData] = useState<any[]>([]);
   const [processor, setProcessor] = useState<any[]>([]);
   const [storage, setStorage] = useState<any[]>([]);
@@ -38,6 +40,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
     fetchStorageType();
     fetchRamOptions();
     fetchGpu();
+    fetchComponentCategories();
   }, []);
 
   const fetchGpu = async () => {
@@ -132,13 +135,35 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       console.error("Failed to fetch RAM options.", error);
     }
   };
+  const fetchComponentCategories = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/component-category/getAll`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (response?.data) {
+        setComponentCategories(response?.data?.data);
+        console.log(response?.data?.data, "here is my data");
+      } else {
+        console.error("Unexpected API response structure:", response);
+        throw new Error("Unexpected API response");
+      }
+    } catch (error) {
+      console.error("Error occurred while fetching categories:", error);
+    } finally {
+      console.log("Fetch operation completed.");
+    }
+  };
   useEffect(() => {
     console.log(adData, "lol");
   }, [adData]);
   if (categoryId === 4 && adData?.gaming_console?.length > 0) {
     const gamingConsole = adData?.gaming_console[0];
     console.log(gamingConsole, "myyyyyyyyyy");
-  
+
     return (
       <>
         {gamingConsole?.accessories && (
@@ -154,7 +179,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {gamingConsole?.battery_life && (
           <div className="flex flex-col">
             <label className="edit-label">Battery Life</label>
@@ -168,7 +193,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {gamingConsole?.color && (
           <div className="flex flex-col">
             <label className="edit-label">Color</label>
@@ -182,7 +207,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {gamingConsole?.connectivity && (
           <div className="flex flex-col">
             <label className="edit-label">Connectivity</label>
@@ -196,7 +221,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {gamingConsole?.warranty_status && (
           <div className="flex flex-col">
             <label className="edit-label">Warranty Status</label>
@@ -213,11 +238,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       </>
     );
   }
-  
 
   if (categoryId === 2 && adData?.personal_computers?.length > 0) {
     const pc = adData?.personal_computers[0];
-  
+
     return (
       <>
         {pc?.graphics && (
@@ -233,7 +257,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {pc?.ports && (
           <div className="flex flex-col">
             <label className="edit-label">Ports</label>
@@ -247,7 +271,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {pc?.processor && (
           <div className="flex flex-col">
             <label className="edit-label">Processor</label>
@@ -259,7 +283,10 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
                 setAdData((prev) => ({
                   ...prev,
                   personal_computers: [
-                    { ...prev.personal_computers[0], processor: e.target.value },
+                    {
+                      ...prev.personal_computers[0],
+                      processor: e.target.value,
+                    },
                   ],
                 }))
               }
@@ -275,7 +302,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             </select>
           </div>
         )}
-  
+
         {pc?.processor_variant && (
           <div className="flex flex-col">
             <label className="edit-label">Processor Variant</label>
@@ -307,7 +334,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             </select>
           </div>
         )}
-  
+
         {pc?.ram && (
           <div className="flex flex-col">
             <label className="edit-label">RAM</label>
@@ -336,7 +363,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             </select>
           </div>
         )}
-  
+
         {pc?.storage && (
           <div className="flex flex-col">
             <label className="edit-label">Storage</label>
@@ -364,7 +391,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             </select>
           </div>
         )}
-  
+
         {pc?.storage_type && (
           <div className="flex flex-col">
             <label className="edit-label">Storage Type</label>
@@ -398,12 +425,12 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       </>
     );
   }
-  
+
   {
   }
   if (categoryId === 1 && adData?.laptops?.length > 0) {
     const laptop = adData?.laptops[0];
-  
+
     return (
       <>
         {laptop?.battery_life && (
@@ -419,7 +446,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {laptop?.color && (
           <div className="flex flex-col">
             <label className="edit-label">Color</label>
@@ -433,7 +460,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {laptop?.graphics && (
           <div className="flex flex-col">
             <label className="edit-label">Graphics</label>
@@ -447,7 +474,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {laptop?.ports && (
           <div className="flex flex-col">
             <label className="edit-label">Ports</label>
@@ -461,7 +488,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             />
           </div>
         )}
-  
+
         {laptop?.processor && (
           <div className="flex flex-col">
             <label className="edit-label">Processor</label>
@@ -491,7 +518,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             </select>
           </div>
         )}
-  
+
         {laptop?.processor_variant && (
           <div className="flex flex-col">
             <label className="edit-label">Processor Variant</label>
@@ -499,7 +526,7 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
               name="processor_variant"
               value={laptop?.processor_variant}
               onChange={(e) =>
-              //@ts-ignore
+                //@ts-ignore
                 setAdData((prev) => ({
                   ...prev,
                   laptops: [
@@ -521,44 +548,182 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
             </select>
           </div>
         )}
-  
-        {/* Repeat similar conditional blocks for other fields like RAM, Storage, Storage Type, etc. */}
+        {laptop?.ram && (
+          <div className="flex flex-col">
+            <label className="edit-label">RAM</label>
+            <select
+              name="ram"
+              value={laptop.ram || ""}
+              onChange={(e) =>
+                //@ts-ignore
+                setAdData((prev) => ({
+                  ...prev,
+                  laptops: [
+                    {
+                      ...prev.laptops[0],
+                      ram: e.target.value,
+                    },
+                  ],
+                }))
+              }
+              className="edit-input dark:text-black"
+              required
+            >
+              <option value="">Select RAM</option>
+              {ramOptions.map((variant) => (
+                <option key={variant.id} value={variant.id}>
+                  {variant.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {laptop?.storage && (
+          <div className="flex flex-col">
+            <label className="edit-label">Storage</label>
+            <select
+              name="storage"
+              value={laptop.storage || ""}
+              onChange={(e) =>
+                //@ts-ignore
+                setAdData((prev) => ({
+                  ...prev,
+                  laptops: [
+                    {
+                      ...prev.laptops[0],
+                      storage: e.target.value,
+                    },
+                  ],
+                }))
+              }
+              className="edit-input dark:text-black"
+              required
+            >
+              <option value="">Select Storage</option>
+              {storage.map((variant) => (
+                <option key={variant.id} value={variant.id}>
+                  {variant.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {laptop?.storage_type && (
+          <div className="flex flex-col">
+            <label className="edit-label">Storage Type</label>
+            <select
+              name="storage_type"
+              value={laptop.storage_type || ""}
+              onChange={(e) =>
+                //@ts-ignore
+                setAdData((prev) => ({
+                  ...prev,
+                  laptops: [
+                    {
+                      ...prev.laptops[0],
+                      storage_type: e.target.value,
+                    },
+                  ],
+                }))
+              }
+              className="edit-input dark:text-black"
+              required
+            >
+              <option value="">Select Storage Type</option>
+              {storageType.map((variant) => (
+                <option key={variant.id} value={variant.id}>
+                  {variant.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </>
     );
   }
-  
-  if (categoryId === 4 && adData?.components?.length > 0) {
+
+  if (categoryId === 3 && adData?.components?.length > 0) {
+    const components = adData.components;
+
     return (
       <>
-        {adData.components.map((component : any, index : any) => (
-          component?.component_type_components_component_type?.name && (
+        {components.map((component: any, index: number) => {
+          const selectedComponentType = component?.component_type;
+          const componentTypeId = component?.component_type;
+          const text = component?.text;
+
+          return (
             <div className="flex flex-col" key={component.id || index}>
-              <label className="edit-label">
-                {component.component_type_components_component_type.name}
-              </label>
-              <input
-                type="text"
-                name={`component_${component.component_type}`} // unique field name
-                value={component.text || ""}
-                onChange={(e) => {
-                  const updatedComponents = [...adData.components];
-                  updatedComponents[index].text = e.target.value;
-                  //@ts-ignore
-                  setAdData((prev) => ({
-                    ...prev,
-                    components: updatedComponents,
-                  }));
-                }}
-                placeholder={component.component_type_components_component_type.name}
-                className="edit-input"
-              />
+              {componentTypeId !== 0 ? (
+                <>
+                  <label className="edit-label">Component Type</label>
+                  <select
+                    className="edit-input dark:text-black"
+                    value={componentTypeId || ""}
+                    onChange={(e) => {
+                      const updatedComponents = [...components];
+                      updatedComponents[index].component_type = parseInt(
+                        e.target.value
+                      );
+
+                      const selectedCategory = componentCategories.find(
+                        //@ts-ignore
+                        (cat) => cat.id === parseInt(e.target.value)
+                      );
+
+                      if (selectedCategory) {
+                        updatedComponents[
+                          index
+                        ].component_type_components_component_typeTocomponent_type =
+                          selectedCategory;
+                      }
+
+                      //@ts-ignore
+                      setAdData((prev) => ({
+                        ...prev,
+                        components: updatedComponents,
+                      }));
+                    }}
+                  >
+                    <option value="">Select Component Type</option>
+                    {componentCategories.map((category: any) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                </>
+              ) : (
+                <>
+                  <label className="edit-label mt-2">Component Text</label>
+                  <input
+                    type="text"
+                    name={`component_text_${index}`}
+                    value={text}
+                    onChange={(e) => {
+                      const updatedComponents = [...components];
+                      updatedComponents[index].text = e.target.value;
+
+                      //@ts-ignore
+                      setAdData((prev) => ({
+                        ...prev,
+                        components: updatedComponents,
+                      }));
+                    }}
+                    placeholder="Enter component name"
+                    className="edit-input dark:text-black mt-2"
+                  />
+                </>
+              )}
             </div>
-          )
-        ))}
+          );
+        })}
       </>
     );
   }
-  
+
   return null;
 };
 
