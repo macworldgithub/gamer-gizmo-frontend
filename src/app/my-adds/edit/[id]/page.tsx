@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import SpecificationsForm from "./SpecificationsForm";
 import UploadImages from "./UploadImages";
-import { Upload } from "antd";
+
 import { PlusOutlined } from "@ant-design/icons";
 
 export default function EditAdPage() {
@@ -21,13 +21,12 @@ export default function EditAdPage() {
   const [locations, setLocations] = useState<any[]>([]);
   const [brands, setBrands] = useState<any[]>([]);
   const [model, setModels] = useState<any[]>([]);
-  const [componentCategories, setComponentCategories] = useState<any[]>([]);
+  // const [componentCategories, setComponentCategories] = useState<any[]>([]);
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
     if (!id) return;
     fetchAdDetails();
-    fetchComponentCategories();
     fetchLocations();
   }, [id]);
   useEffect(() => {
@@ -49,14 +48,26 @@ export default function EditAdPage() {
         category_id: product?.category_id || "",
       });
 
+      // const formattedImages = (product?.images || []).map(
+      //   (url: string, index: number) => ({
+      //     uid: `${index}`, // unique ID for image
+      //     name: `image-${index}`,
+      //     url, // this is important for display
+      //     status: "done",
+      //   })
+      // );
       const formattedImages = (product?.images || []).map(
         (url: string, index: number) => ({
-          uid: `${index}`, // unique ID for image
+          uid: `${index}`,
           name: `image-${index}`,
-          url, // this is important for display
+          url: new URL(
+            url.replace(/^\/+/, ""),
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          ).toString(), // ✅ full URL
           status: "done",
         })
       );
+
       setFileList(formattedImages);
     } catch (err) {
       toast.error("Failed to fetch ad details");
@@ -64,6 +75,28 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (fileList.length === 0 && adData?.product_images?.length > 0) {
+      const existingImages = adData?.product_images
+        .filter((img: any) => img.image_url)
+        .map((img: any) => {
+          const cleanedUrl = img.image_url.replace(/^\/+/, "");
+          const fullUrl = new URL(
+            cleanedUrl,
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          ).toString();
+          return {
+            uid: img.id.toString(),
+            name: `Image-${img.id}`,
+            url: fullUrl,
+            status: "done",
+          };
+        });
+
+      setFileList(existingImages);
+    }
+  }, [adData?.product_images]);
 
   const fetchBrands = async () => {
     try {
@@ -110,20 +143,6 @@ export default function EditAdPage() {
       fetchModels();
     }
   }, [adData?.brand_id]);
-
-  const fetchComponentCategories = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/component-category/getAll`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setComponentCategories(response?.data?.data || []);
-    } catch (error) {
-      console.error("Error occurred while fetching categories:", error);
-    }
-  };
 
   const fetchLocations = async () => {
     try {
@@ -205,37 +224,34 @@ export default function EditAdPage() {
     try {
       console.log("adData:", adData);
 
-      // const specificationsData = () => {
-      //   let specs = {};
-
-      //   if (adData.laptops?.[0]) {
-      //     specs = { ...specs, ...adData.laptops[0] };
-      //   }
-      //   if (adData.personal_computers?.[0]) {
-      //     specs = { ...specs, ...adData.personal_computers[0] };
-      //   }
-      //   if (adData.components?.[0]) {
-      //     specs = { ...specs, ...adData.components[0] };
-      //   }
-      //   if (adData.gaming_console?.[0]) {
-      //     specs = { ...specs, ...adData.gaming_console[0] };
-      //   }
       const specificationsData = () => {
         switch (adData?.category_id) {
           case 1:
-            return { laptops: [{ ...adData.laptops?.[0] }] };
+            return { laptops: [{ ...adData?.laptops?.[0] }] };
           case 2:
             return {
-              personal_computers: [{ ...adData.personal_computers?.[0] }],
+              personal_computers: [{ ...adData?.personal_computers?.[0] }],
             };
           case 3:
-            return { components: [{ ...adData.components?.[0] }] };
+            return { components: [{ ...adData?.components?.[0] }] };
           case 4:
-            return { gaming_console: [{ ...adData.gaming_console?.[0] }] };
+            return { gaming_console: [{ ...adData?.gaming_console?.[0] }] };
           default:
             return {};
         }
       };
+
+      // const imageUrls =
+      //   // adData?.product_images?.map((img: any) => img.image_url) || [];
+      //   adData?.product_images?.map((img: any) => ({ path: img.image_url })) ||
+      //   [];
+      const imageUrls =
+        fileList?.map((file: any) => ({
+          path: file.url?.replace(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
+            ""
+          ),
+        })) || [];
 
       const payload = {
         prod_id: adData?.id?.toString() || "",
@@ -249,6 +265,8 @@ export default function EditAdPage() {
         location: adData?.location?.toString() || "",
         model_id: adData?.model_id?.toString() || "",
         stock: adData?.stock?.toString() || "",
+        images: imageUrls,
+        is_published: adData?.is_published,
         ...specificationsData(),
       };
       console.log("Final payload:", payload);
@@ -269,6 +287,7 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
+
   const handleImageChange = ({ fileList }: any) => {
     setFileList(fileList);
   };
@@ -349,39 +368,45 @@ export default function EditAdPage() {
                   ))}
                 </select>
               </div>
-              {/* Brand Dropdown */}
-              <div className="flex flex-col">
-                <label className="edit-label">Brand</label>
-                <select
-                  name="brand_id"
-                  value={adData?.brand_id}
-                  onChange={handleChange}
-                  className="edit-input dark:text-black"
-                  required
-                >
-                  {brands.map((brand) => (
-                    <option key={brand.id} value={brand.id}>
-                      {brand.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col">
-                <label className="edit-label">Model</label>
-                <select
-                  name="model_id"
-                  value={adData?.model_id}
-                  onChange={handleChange}
-                  className="edit-input dark:text-black"
-                  required
-                >
-                  {model.map((mod) => (
-                    <option key={mod.id} value={mod.id}>
-                      {mod.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {adData?.category_id !== 3 && (
+                <>
+                  {/* Brand Dropdown */}
+                  <div className="flex flex-col">
+                    <label className="edit-label">Brand</label>
+                    <select
+                      name="brand_id"
+                      value={adData?.brand_id}
+                      onChange={handleChange}
+                      className="edit-input dark:text-black"
+                      required
+                    >
+                      {brands.map((brand) => (
+                        <option key={brand.id} value={brand.id}>
+                          {brand.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Model Dropdown */}
+                  <div className="flex flex-col">
+                    <label className="edit-label">Model</label>
+                    <select
+                      name="model_id"
+                      value={adData?.model_id}
+                      onChange={handleChange}
+                      className="edit-input dark:text-black"
+                      required
+                    >
+                      {model.map((mod) => (
+                        <option key={mod.id} value={mod.id}>
+                          {mod.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
 
               {/* Stock */}
               <div className="flex flex-col">
@@ -424,15 +449,12 @@ export default function EditAdPage() {
               />
             </div>
 
-            <Upload
-              listType="picture-card"
+            {/* <UploadImages
               fileList={fileList}
-              onChange={handleImageChange}
-              onPreview={(file) => window.open(file.url, "_blank")}
-              beforeUpload={() => false} // prevents auto upload
-            >
-              {fileList.length >= 5 ? null : uploadButton}
-            </Upload>
+              setFileList={setFileList}
+              adData={adData}
+            /> */}
+
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
               type="submit"

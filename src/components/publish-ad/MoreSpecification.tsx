@@ -550,7 +550,7 @@ const MoreSpecification = ({
           {selectedSubCategory === "accessories" && (
             <TextField
               sx={inputStyles}
-              label="Text"
+              label="Accessory Type"
               variant="outlined"
               fullWidth
               value={formData.component_text || ""}

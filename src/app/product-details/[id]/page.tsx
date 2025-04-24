@@ -105,7 +105,7 @@ const page = () => {
     },
   ];
   return (
-    <div className="w-full h-auto bg-white dark:bg-[#14161B]">
+    <div className="w-full  h-auto bg-white dark:bg-[#14161B]">
       <PageHeader pageName="details" title="Details" />
       <div className="w-full  flex mb-2">
         <div className="w-[65%]  max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
@@ -113,8 +113,11 @@ const page = () => {
           {/* <AuthorSection /> */}
           {/* <RelatedNewsSection /> */}
           <Wrapper className="mt-4 mx-6">
-          <CommentsSection seReftech={seReftech} fetcher={fetcher} data={data} />
-            
+            <CommentsSection
+              seReftech={seReftech}
+              fetcher={fetcher}
+              data={data}
+            />
           </Wrapper>
           {/* <ContactForm /> */}
         </div>

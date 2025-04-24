@@ -128,6 +128,7 @@ export default function AdList({
                 ad.active ? "bg-blue-500 text-white" : "bg-black text-white"
               }`}
               onClick={() => openModal(ad)}
+              
             >
               {ad.active ? "Active" : "Draft"}
             </div>

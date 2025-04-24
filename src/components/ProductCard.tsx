@@ -221,7 +221,7 @@ const ProductCard = ({
                 </p>
 
                 <h2 className="text-md font-semibold text-secondaryColorLight">
-                  AED {product.price}
+                  AED {Number(product.price).toLocaleString()}
                 </h2>
                 {hasPremiumBadge && (
                   <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
@@ -286,7 +286,7 @@ const ProductCard = ({
               {product.description}
             </p>
             <p className="text-purple-500 font-bold max-sm:text-[0.4rem]">
-              {product.price} AED
+              {Number(product.price).toLocaleString()} AED
             </p>
             <div className="flex items-center">
               <button
