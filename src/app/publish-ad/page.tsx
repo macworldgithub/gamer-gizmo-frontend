@@ -13,6 +13,7 @@ import { redirect, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import imageCompression from "browser-image-compression"; 
 
 interface Category {
   id: number;
@@ -238,13 +239,16 @@ const PublishAdd: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPublished, setIsPublished] = useState(false);
   const isSubmittingRef = useRef(false);
+
+
   const handleSubmit = async () => {
     setIsLoading(true);
     if (isSubmittingRef.current) return;
     isSubmittingRef.current = true;
     setIsPublished(false);
+  
     let formDataObject = new FormData();
-
+  
     formDataObject.append("name", formData.title || "");
     formDataObject.append("user_id", id?.toString() || "");
     formDataObject.append("description", formData.description || "");
@@ -257,12 +261,11 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("condition", selectedCondition?.id?.toString() || "");
     formDataObject.append("location", selectedLocation?.id?.toString() || "");
     formDataObject.append("is_published", "true");
-
+  
     if (selectCategory?.name === "Components and Accessories") {
-      // If no component type is selected, set component_type to 0 (for accessories)
       formDataObject.append(
         "component_type",
-        selectComponentCategory?.id || "0" // Default to 0 if not selected
+        selectComponentCategory?.id || "0"
       );
       formDataObject.append("text", formData?.component_text || "");
     } else if (selectCategory?.name === "Gaming Consoles") {
@@ -272,13 +275,12 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("battery_life", formData.batteryLife || "");
       formDataObject.append("color", formData.color || "");
     } else {
-      // Laptops & Personal Computers
       if (selectRam?.id) formDataObject.append("ram", selectRam.id.toString());
       if (selectStoarge?.id)
         formDataObject.append("storage", selectStoarge.id.toString());
       if (selectStorageType?.id)
         formDataObject.append("storageType", selectStorageType.id.toString());
-
+  
       formDataObject.append("graphics", formData.graphics || "");
       if (selectGpu?.id) formDataObject.append("gpu", selectGpu.id.toString());
       formDataObject.append("ports", formData.ports || "");
@@ -288,22 +290,46 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("accessories", formData.accessories || "");
       formDataObject.append("screen_size", formData.screenSize || "");
       formDataObject.append("weight", formData.weight || "");
-      formDataObject.append(
-        "screen_resolution",
-        formData.screenResolution || ""
-      );
+      formDataObject.append("screen_resolution", formData.screenResolution || "");
       formDataObject.append("color", formData.color || "");
     }
-
-    // Append images
-    if (fileList.length > 0) {
-      fileList.forEach((file) => {
-        formDataObject.append("images", file.originFileObj as Blob);
-      });
+  
+    // ✅ New Part: Check and Compress Images
+    const MAX_IMAGES = 5;
+    const MAX_IMAGE_SIZE_MB = 0.5; // 500 KB
+  
+    if (fileList.length > MAX_IMAGES) {
+      toast.error(`You can upload a maximum of ${MAX_IMAGES} images.`);
+      setIsLoading(false);
+      isSubmittingRef.current = false;
+      return;
     }
-
-    console.log(formData, "jkek");
-    // Send data
+  
+    if (fileList.length > 0) {
+      for (const file of fileList) {
+        let fileObj = file.originFileObj as File;
+        let fileSizeMB = fileObj.size / 1024 / 1024;
+  
+        if (fileSizeMB > MAX_IMAGE_SIZE_MB) {
+          try {
+            const compressedFile = await imageCompression(fileObj, {
+              maxSizeMB: MAX_IMAGE_SIZE_MB,
+              maxWidthOrHeight: 1920,
+              useWebWorker: true,
+            });
+            formDataObject.append("images", compressedFile);
+          } catch (compressErr) {
+            console.error("Image compression error:", compressErr);
+            toast.error("Failed to compress image.");
+          }
+        } else {
+          formDataObject.append("images", fileObj);
+        }
+      }
+    }
+  
+    console.log(formData, "Form Data to be sent");
+  
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/createProduct`,
@@ -315,23 +341,21 @@ const PublishAdd: React.FC = () => {
           },
         }
       );
-
+  
       if (response.status === 201) {
         toast.success("Product Added Successfully");
         setIsPublished(true);
         router.push("/");
       }
     } catch (err) {
-      toast.error("Error");
-      setIsLoading(false);
+      toast.error("Error submitting product");
       console.log("Error", err);
     } finally {
       setIsLoading(false);
       isSubmittingRef.current = false;
     }
-
-    console.log(formData, "my form data");
   };
+  
 
   console.log(selectComponentCategory, "selectComponentCategory");
 
