@@ -1,28 +1,71 @@
-// const LiveAdSection = ({ className = "w-full h-96" }) => {
-//   return (
-//     <div
-//       className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex flex-col items-center ${className}`}
-//     >
-//       <h1 className="font-bold text-2xl">This section is for live Ad</h1>
-//       <h1 className="text-center font-bold text-xl">
-//         Boost Your Brand Visibility
-//       </h1>
-//       <p className="text-center dark:text-white text-gray-700 text-sm">
-//         Advertise with gamergizmo today!
-//       </p>
-//     </div>
-//   );
-// };
+"use client";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Image from "next/image";
 
-// export default LiveAdSection;
+const LiveAdSection = ({ className = "w-full h-96", category = "Laptops" }) => {
+  const [adImages, setAdImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-const LiveAdSection = ({ className = "w-full h-96" }) => {
+  useEffect(() => {
+    const fetchAdImages = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/ads/fetch?page=${category}`
+        );
+        console.log("Response Data:", response.data);
+
+        const ads = response.data;
+        if (ads.length > 0) {
+          const imageUrls = ads.map((ad: any) => {
+            const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}${
+              ad.url.startsWith("/") ? ad.url : "/" + ad.url
+            }`;
+            return url;
+          });
+          setAdImages(imageUrls);
+          console.log("Images", imageUrls);
+        } else {
+          setError("No live ads available");
+        }
+      } catch (err) {
+        console.error("Error fetching ads:", err);
+        setError("Failed to load ad images");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAdImages();
+  }, [category]); 
   return (
     <div
       className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex flex-col items-center p-4 sm:p-6 ${className}`}
     >
-    
-      <h1>Advertising</h1>
+      <h1 className="font-bold text-2xl mb-2">Advertising</h1>
+
+      {loading && <p>Loading Ads...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {adImages.length > 0 ? (
+        <div className="flex flex-wrap justify-center">
+          {adImages.slice(0, 4).map((imageUrl, index) => (
+            <div key={index} className="w-full sm:w-1/2 lg:w-1/4 p-2">
+              <Image
+                src={imageUrl}
+                alt={`Live Advertisement ${index + 1}`}
+                className="w-full h-auto rounded shadow-md"
+                onError={() => setError("Failed to load image")}
+                width={500}
+                height={300}
+              />
+            </div>
+          ))}
+        </div>
+      ) : !loading ? (
+        <p>No ads available</p>
+      ) : null}
     </div>
   );
 };

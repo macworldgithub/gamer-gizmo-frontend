@@ -72,20 +72,7 @@ const PopularMainSection: React.FC = () => {
   const token = useSelector((state: RootState) => state.user.token);
   const [fetcher, seReftech] = useState(false);
 
-  // const fetchUsedDesktops = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=2`,
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-
-  //     setDesktopUsedData(response?.data?.data || []);
-  //   } catch (err) {
-  //     console.error("Failed to fetch models.");
-  //   }
-  // };
+  
   const fetchUsedDesktops = async () => {
     try {
       const conditions = [2, 3, 4];
@@ -190,20 +177,7 @@ const PopularMainSection: React.FC = () => {
     }
   };
 
-  // const fetchUsedComponents = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=3&condition=2`,
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-
-  //     setComponentsUsedData(response?.data?.data || []);
-  //   } catch (err) {
-  //     console.error("Failed to fetch models.");
-  //   }
-  // };
+  
   const fetchUsedComponents = async () => {
     try {
       const conditions = [2, 3, 4];
@@ -281,8 +255,8 @@ const PopularMainSection: React.FC = () => {
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <div className="w-full flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
-        <LiveAdSection className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 " />
-        <LiveAdSection className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40" />
+        <LiveAdSection category="Home" className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 " />
+        <LiveAdSection  category="Home" className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40" />
       </div>
       <PopularItemSection
         title="Popular in New Laptops"
@@ -312,8 +286,8 @@ const PopularMainSection: React.FC = () => {
         onExplore={() => console.log("Explore Used Consoles")}
       />
       <div className="w-full flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4 ">
-        <LiveAdSection className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 " />
-        <LiveAdSection className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40" />
+        <LiveAdSection category="Home" className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 " />
+        <LiveAdSection category="Home" className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40" />
       </div>
       <PopularItemSection
         title="Popular in Used Components and Accessories"
@@ -334,8 +308,8 @@ const PopularMainSection: React.FC = () => {
         onExplore={() => console.log("Explore New Components")}
       />
       <div className="w-full  flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
-        <LiveAdSection className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 " />
-        <LiveAdSection className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40" />
+        <LiveAdSection category="Home" className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 " />
+        <LiveAdSection category="Home" className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40" />
       </div>
     </div>
   );
