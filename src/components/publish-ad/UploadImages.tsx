@@ -26,15 +26,15 @@ const UploadImages = ({ setFileList, fileList }: any) => {
     setPreviewImage(file.url || (file.preview as string));
     setPreviewOpen(true);
   };
-  const beforeUpload = (file: FileType) => {
-    const isLt2M = file.size / 1024 / 1024 < 2; // limit to 2MB
-    if (!isLt2M) {
-      toast.success("Image must be smaller than 2MB!");
-      return Upload.LIST_IGNORE; // Ignore this file
-    }
-    return true;
-  };
-  
+  // const beforeUpload = (file: FileType) => {
+  //   const isLt2M = file.size / 1024 / 1024 < 2; // limit to 2MB
+  //   if (!isLt2M) {
+  //     toast.success("Image must be smaller than 2MB!");
+  //     return Upload.LIST_IGNORE; // Ignore this file
+  //   }
+  //   return true;
+  // };
+
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
     setFileList(newFileList);
 
@@ -51,7 +51,7 @@ const UploadImages = ({ setFileList, fileList }: any) => {
         fileList={fileList}
         accept=".png , .jpeg , .jpg"
         className="flex "
-        beforeUpload={beforeUpload}
+        // beforeUpload={beforeUpload}
         onPreview={handlePreview}
         onChange={handleChange}
       >
