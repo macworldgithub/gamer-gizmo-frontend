@@ -12,8 +12,16 @@ const page = () => {
     <div className="w-full bg-white dark:bg-black">
       <PageHeader pageName={"Blogs"} title="Blogs" />
       <Wrapper className="flex w-full mt-4 gap-3">
-        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
-        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
+        <LiveAdSection
+          category="Blogs"
+          //@ts-ignore
+          imageindex = {0}
+          className="w-1/2 md:h-52 max-md:h-40 "
+        />
+        <LiveAdSection category="Blogs"
+        //@ts-ignore
+        imageindex= {1}  
+        className="w-1/2 md:h-52 max-md:h-40 " />
       </Wrapper>
 
       <div className="max-w-7xl mx-auto p-6 flex flex-col md:flex-row gap-6">
@@ -28,8 +36,8 @@ const page = () => {
         </div>
       </div>
       <Wrapper className="flex w-full mt-4 gap-3">
-        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 " />
-        <LiveAdSection className="w-1/2 md:h-52 max-md:h-40" />
+        <LiveAdSection category="Blogs" className="w-1/2 md:h-52 max-md:h-40 " />
+        <LiveAdSection category="Blogs" className="w-1/2 md:h-52 max-md:h-40" />
       </Wrapper>
       <div className="mt-12 flex w-full justify-center">
         <GetStartedBadge />
