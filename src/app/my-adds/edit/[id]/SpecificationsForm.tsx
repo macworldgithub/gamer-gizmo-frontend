@@ -42,6 +42,207 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
     fetchGpu();
     fetchComponentCategories();
   }, []);
+  const laptopFields = [
+    { name: "battery_life", label: "Battery Life", type: "text" },
+    { name: "color", label: "Color", type: "text" },
+    { name: "graphics", label: "Graphics", type: "text" },
+    { name: "ports", label: "Ports", type: "text" },
+    {
+      name: "processor",
+      label: "Processor",
+      type: "select",
+      options: processor,
+    },
+    {
+      name: "processor_variant",
+      label: "Processor Variant",
+      type: "select",
+      options: processorVariantData,
+    },
+    {
+      name: "ram",
+      label: "RAM",
+      type: "select",
+      options: ramOptions,
+    },
+    {
+      name: "storage",
+      label: "Storage",
+      type: "select",
+      options: storage,
+    },
+    {
+      name: "storage_type",
+      label: "Storage Type",
+      type: "select",
+      options: storageType,
+    },
+  ];
+  const componentFields = [
+    {
+      name: "component_type",
+      label: "Component Type",
+      type: "select",
+      options: componentCategories,
+    },
+    {
+      name: "text",
+      label: "Component Text",
+      type: "text",
+    },
+  ];
+
+  const [touchedLaptopFields, setTouchedLaptopFields] = useState<string[]>([]);
+  const [touchedComponents, setTouchedComponents] = useState<
+    { index: number; field: "component_type" | "text" }[]
+  >([]);
+
+  const renderLaptopFields = (laptop: any) => {
+    return laptopFields.map((field) => {
+      const hasValue = !!laptop?.[field.name];
+      const isTouched = touchedLaptopFields.includes(field.name);
+
+      // Only show field if it has value or has been touched
+      if (!hasValue && !isTouched) return null;
+
+      return (
+        <div key={field.name} className="flex flex-col">
+          <label className="edit-label">{field.label}</label>
+          {field.type === "text" ? (
+            <input
+              type="text"
+              name={field.name}
+              value={laptop[field.name]}
+              onFocus={() => {
+                if (!touchedLaptopFields.includes(field.name)) {
+                  setTouchedLaptopFields((prev) => [...prev, field.name]);
+                }
+              }}
+              onChange={handleLaptopChange}
+              placeholder={field.label}
+              className="edit-input dark:text-black"
+            />
+          ) : (
+            <select
+              name={field.name}
+              value={laptop[field.name]}
+              onFocus={() => {
+                if (!touchedLaptopFields.includes(field.name)) {
+                  setTouchedLaptopFields((prev) => [...prev, field.name]);
+                }
+              }}
+              onChange={(e) =>
+                //@ts-ignore
+                setAdData((prev) => ({
+                  ...prev,
+                  laptops: [
+                    {
+                      ...prev.laptops[0],
+                      [field.name]: e.target.value,
+                    },
+                  ],
+                }))
+              }
+              className="edit-input dark:text-black"
+            >
+              <option value="">{`Select ${field.label}`}</option>
+              {field.options?.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
+      );
+    });
+  };
+  const renderComponentFields = (component: any, index: number) => {
+    const isTouched = (fieldName: "component_type" | "text") =>
+      //@ts-ignore
+      touchedComponents.some(
+        //@ts-ignore
+        (item) => item.index === index && item.field === fieldName
+      );
+
+    return componentFields.map((field) => {
+      const value = component?.[field.name];
+      const shouldRender = !!value || isTouched(field.name as any);
+
+      if (!shouldRender) return null;
+
+      return (
+        <div key={field.name} className="flex flex-col mt-2">
+          <label className="edit-label">{field.label}</label>
+
+          {field.type === "text" ? (
+            <input
+              type="text"
+              name={`component_${field.name}_${index}`}
+              value={value}
+              placeholder={field.label}
+              onFocus={() =>
+                //@ts-ignore
+                setTouchedComponents((prev) => [
+                  ...prev,
+                  { index, field: field.name },
+                ])
+              }
+              onChange={(e) => {
+                const updatedComponents = [...adData.components];
+                updatedComponents[index][field.name] = e.target.value;
+                //@ts-ignore
+                setAdData((prev) => ({
+                  ...prev,
+                  components: updatedComponents,
+                }));
+              }}
+              className="edit-input dark:text-black"
+            />
+          ) : (
+            <select
+              className="edit-input dark:text-black"
+              value={value || ""}
+              onFocus={() =>
+                //@ts-ignore
+                setTouchedComponents((prev) => [
+                  ...prev,
+                  { index, field: field.name },
+                ])
+              }
+              onChange={(e) => {
+                const updatedComponents = [...adData.components];
+                updatedComponents[index][field.name] = parseInt(e.target.value);
+
+                const selectedCategory = field.options?.find(
+                  (opt: any) => opt.id === parseInt(e.target.value)
+                );
+
+                if (selectedCategory) {
+                  updatedComponents[
+                    index
+                  ].component_type_components_component_typeTocomponent_type =
+                    selectedCategory;
+                }
+                //@ts-ignore
+                setAdData((prev) => ({
+                  ...prev,
+                  components: updatedComponents,
+                }));
+              }}
+            >
+              <option value="">{`Select ${field.label}`}</option>
+              {field.options?.map((opt: any) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.name}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
+      );
+    });
+  };
 
   const fetchGpu = async () => {
     try {
@@ -429,297 +630,17 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
   {
   }
   if (categoryId === 1 && adData?.laptops?.length > 0) {
-    const laptop = adData?.laptops[0];
-
-    return (
-      <>
-        {laptop?.battery_life && (
-          <div className="flex flex-col">
-            <label className="edit-label">Battery Life</label>
-            <input
-              type="text"
-              name="battery_life"
-              value={laptop?.battery_life}
-              onChange={handleLaptopChange}
-              placeholder="Battery Life"
-              className="edit-input dark:text-black"
-            />
-          </div>
-        )}
-
-        {laptop?.color && (
-          <div className="flex flex-col">
-            <label className="edit-label">Color</label>
-            <input
-              type="text"
-              name="color"
-              value={laptop?.color}
-              onChange={handleLaptopChange}
-              placeholder="Color"
-              className="edit-input dark:text-black"
-            />
-          </div>
-        )}
-
-        {laptop?.graphics && (
-          <div className="flex flex-col">
-            <label className="edit-label">Graphics</label>
-            <input
-              type="text"
-              name="graphics"
-              value={laptop?.graphics}
-              onChange={handleLaptopChange}
-              placeholder="Graphics"
-              className="edit-input dark:text-black"
-            />
-          </div>
-        )}
-
-        {laptop?.ports && (
-          <div className="flex flex-col">
-            <label className="edit-label">Ports</label>
-            <input
-              type="text"
-              name="ports"
-              value={laptop?.ports}
-              onChange={handleLaptopChange}
-              placeholder="Ports"
-              className="edit-input dark:text-black"
-            />
-          </div>
-        )}
-
-        {laptop?.processor && (
-          <div className="flex flex-col">
-            <label className="edit-label">Processor</label>
-            <select
-              name="processor"
-              value={laptop?.processor}
-              onChange={(e) =>
-                //@ts-ignore
-                setAdData((prev) => ({
-                  ...prev,
-                  laptops: [
-                    {
-                      ...prev.laptops[0],
-                      processor: e.target.value,
-                    },
-                  ],
-                }))
-              }
-              className="edit-input dark:text-black"
-            >
-              <option value="">Select Processor</option>
-              {processor.map((variant) => (
-                <option key={variant.id} value={variant?.id}>
-                  {variant.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        {laptop?.processor_variant && (
-          <div className="flex flex-col">
-            <label className="edit-label">Processor Variant</label>
-            <select
-              name="processor_variant"
-              value={laptop?.processor_variant}
-              onChange={(e) =>
-                //@ts-ignore
-                setAdData((prev) => ({
-                  ...prev,
-                  laptops: [
-                    {
-                      ...prev.laptops[0],
-                      processor_variant: e.target.value,
-                    },
-                  ],
-                }))
-              }
-              className="edit-input dark:text-black"
-            >
-              <option value="">Select Processor Variant</option>
-              {processorVariantData.map((variant) => (
-                <option key={variant.id} value={variant?.id}>
-                  {variant.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-        {laptop?.ram && (
-          <div className="flex flex-col">
-            <label className="edit-label">RAM</label>
-            <select
-              name="ram"
-              value={laptop.ram || ""}
-              onChange={(e) =>
-                //@ts-ignore
-                setAdData((prev) => ({
-                  ...prev,
-                  laptops: [
-                    {
-                      ...prev.laptops[0],
-                      ram: e.target.value,
-                    },
-                  ],
-                }))
-              }
-              className="edit-input dark:text-black"
-              required
-            >
-              <option value="">Select RAM</option>
-              {ramOptions.map((variant) => (
-                <option key={variant.id} value={variant.id}>
-                  {variant.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        {laptop?.storage && (
-          <div className="flex flex-col">
-            <label className="edit-label">Storage</label>
-            <select
-              name="storage"
-              value={laptop.storage || ""}
-              onChange={(e) =>
-                //@ts-ignore
-                setAdData((prev) => ({
-                  ...prev,
-                  laptops: [
-                    {
-                      ...prev.laptops[0],
-                      storage: e.target.value,
-                    },
-                  ],
-                }))
-              }
-              className="edit-input dark:text-black"
-              required
-            >
-              <option value="">Select Storage</option>
-              {storage.map((variant) => (
-                <option key={variant.id} value={variant.id}>
-                  {variant.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        {laptop?.storage_type && (
-          <div className="flex flex-col">
-            <label className="edit-label">Storage Type</label>
-            <select
-              name="storage_type"
-              value={laptop.storage_type || ""}
-              onChange={(e) =>
-                //@ts-ignore
-                setAdData((prev) => ({
-                  ...prev,
-                  laptops: [
-                    {
-                      ...prev.laptops[0],
-                      storage_type: e.target.value,
-                    },
-                  ],
-                }))
-              }
-              className="edit-input dark:text-black"
-              required
-            >
-              <option value="">Select Storage Type</option>
-              {storageType.map((variant) => (
-                <option key={variant.id} value={variant.id}>
-                  {variant.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-      </>
-    );
+    return <>{renderLaptopFields(adData.laptops[0])}</>;
   }
 
   if (categoryId === 3 && adData?.components?.length > 0) {
-    const components = adData.components;
-
     return (
       <>
-        {components.map((component: any, index: number) => {
-          const selectedComponentType = component?.component_type;
-          const componentTypeId = component?.component_type;
-          const text = component?.text;
-
-          return (
-            <div className="flex flex-col" key={component.id || index}>
-              {componentTypeId !== 0 ? (
-                <>
-                  <label className="edit-label">Component Type</label>
-                  <select
-                    className="edit-input dark:text-black"
-                    value={componentTypeId || ""}
-                    onChange={(e) => {
-                      const updatedComponents = [...components];
-                      updatedComponents[index].component_type = parseInt(
-                        e.target.value
-                      );
-
-                      const selectedCategory = componentCategories.find(
-                        //@ts-ignore
-                        (cat) => cat.id === parseInt(e.target.value)
-                      );
-
-                      if (selectedCategory) {
-                        updatedComponents[
-                          index
-                        ].component_type_components_component_typeTocomponent_type =
-                          selectedCategory;
-                      }
-
-                      //@ts-ignore
-                      setAdData((prev) => ({
-                        ...prev,
-                        components: updatedComponents,
-                      }));
-                    }}
-                  >
-                    <option value="">Select Component Type</option>
-                    {componentCategories.map((category: any) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
-                </>
-              ) : (
-                <>
-                  <label className="edit-label mt-2">Component Text</label>
-                  <input
-                    type="text"
-                    name={`component_text_${index}`}
-                    value={text}
-                    onChange={(e) => {
-                      const updatedComponents = [...components];
-                      updatedComponents[index].text = e.target.value;
-
-                      //@ts-ignore
-                      setAdData((prev) => ({
-                        ...prev,
-                        components: updatedComponents,
-                      }));
-                    }}
-                    placeholder="Enter component name"
-                    className="edit-input dark:text-black mt-2"
-                  />
-                </>
-              )}
-            </div>
-          );
-        })}
+        {adData.components.map((component: any, index: number) => (
+          <div className="flex flex-col" key={component.id || index}>
+            {renderComponentFields(component, index)}
+          </div>
+        ))}
       </>
     );
   }
