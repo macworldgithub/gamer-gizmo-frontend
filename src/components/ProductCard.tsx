@@ -148,7 +148,7 @@ const ProductCard = ({
                   return (
                     <SwiperSlide key={index}>
                       <div
-                        onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on image click
+                        onClick={() => router.push(`/product-details/${product.id}`)} 
                         className="max-md:w-[200px] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative cursor-pointer"
                       >
                         <Image
@@ -203,7 +203,7 @@ const ProductCard = ({
                 <div className="flex justify-between gap-8 items-center">
                   <p
                     className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] cursor-pointer"
-                    onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on title click
+                    onClick={() => router.push(`/product-details/${product.id}`)} 
                   >
                     {product.name}
                   </p>

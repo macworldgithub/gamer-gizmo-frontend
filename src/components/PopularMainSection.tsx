@@ -72,20 +72,7 @@ const PopularMainSection: React.FC = () => {
   const token = useSelector((state: RootState) => state.user.token);
   const [fetcher, seReftech] = useState(false);
 
-  // const fetchUsedDesktops = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=2`,
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-
-  //     setDesktopUsedData(response?.data?.data || []);
-  //   } catch (err) {
-  //     console.error("Failed to fetch models.");
-  //   }
-  // };
+  
   const fetchUsedDesktops = async () => {
     try {
       const conditions = [2, 3, 4];
@@ -190,20 +177,7 @@ const PopularMainSection: React.FC = () => {
     }
   };
 
-  // const fetchUsedComponents = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=3&condition=2`,
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-
-  //     setComponentsUsedData(response?.data?.data || []);
-  //   } catch (err) {
-  //     console.error("Failed to fetch models.");
-  //   }
-  // };
+  
   const fetchUsedComponents = async () => {
     try {
       const conditions = [2, 3, 4];

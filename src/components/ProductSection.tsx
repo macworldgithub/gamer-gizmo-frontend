@@ -93,6 +93,7 @@ const ProductSection: React.FC<SectionProps> = ({
           {products.length > 0 ? (
             products.map((product, index) => (
               <ProductCard
+              key={index}
                 seReftech={seReftech}
                 refetch={refetch}
                 product={product}
