@@ -93,7 +93,11 @@ const ProductMain = ({ categoryId, query }: any) => {
       {Object.keys(filteredValues).length > 0 ? (
         <>
           <div className="mt-4 md:mb-2 max-md:mb-4">
-            <LiveAdSection className="md:h-52 max-md:h-40" />
+            <LiveAdSection
+              category={`Popular ${categoryName}`}
+              className="md:h-52 max-md:h-40"
+              index={0}
+            />
           </div>
           <h1 className="font-bold text-2xl mb-4 dark:text-white">
             {Object.keys(filteredValues).length > 0
@@ -134,7 +138,11 @@ const ProductMain = ({ categoryId, query }: any) => {
                             </div>
                           )}
                           {(globalIndex + 1) % 5 === 0 && (
-                            <LiveAdSection className="md:w-[100%] h-52 my-4" />
+                            <LiveAdSection
+                              className="md:w-[100%] h-52 my-4"
+                              category={`Popular ${categoryName}`}
+                              index={2}
+                            />
                           )}
                         </>
                       );
@@ -145,8 +153,16 @@ const ProductMain = ({ categoryId, query }: any) => {
               </div>
             </div>
             <div className="w-[30%] max-md:w-0 max-md:hidden">
-              <LiveAdSection className="w-[100%] ml-6 h-[36rem] " />
-              <LiveAdSection className="w-[100%] ml-6 my-4 h-[36rem]  " />
+              <LiveAdSection
+                category={`Popular ${categoryName}`}
+                index={2}
+                className="w-[100%] ml-6 h-[36rem] "
+              />
+              <LiveAdSection
+                category={`Popular ${categoryName}`}
+                index={3}
+                className="w-[100%] ml-6 my-4 h-[36rem]  "
+              />
             </div>
           </div>
 
@@ -188,7 +204,11 @@ const ProductMain = ({ categoryId, query }: any) => {
             </button>
           </div>
 
-          <LiveAdSection className="w-[100%] h-[10rem] my-2" />
+          <LiveAdSection
+            category={`Popular ${categoryName}`}
+            index={4}
+            className="w-[100%] h-[10rem] my-2"
+          />
         </>
       ) : (
         <>
