@@ -100,7 +100,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
         </div>
 
         <div
-          className="flex ml-[62%] mt-4 hover:bg-secondaryColorDark gap-2 bg-gray-200 justify-center items-center rounded-md w-36 h-10 cursor-pointer"
+          className="flex ml-[62%] mt-4 hover:bg-secondaryColorDark gap-2 bg-gray-200 justify-center items-center rounded-md w-36 h-10 cursor-pointer transform transition-transform duration-300 hover:scale-105"
           onClick={handleClick}
         >
           {isLoading ? (

@@ -84,8 +84,9 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
       {/* Favorite Icon */}
       <div
         onClick={() => (data.fav ? remove(data.id) : AddToLike(data.id))}
-        className={`hover:cursor-pointer absolute z-20 top-2 right-2 ${data.fav ? "text-red-600" : "text-gray-300"
-          } hover:text-red-600`}
+        className={`hover:cursor-pointer absolute z-20 top-2 right-2 ${
+          data.fav ? "text-red-600" : "text-gray-300"
+        } hover:text-red-600`}
       >
         <MdFavorite size={34} className="max-sm:h-4" />
       </div>
@@ -107,15 +108,13 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
       >
         {data.product_images.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex justify-center items-center px-9 dark:bg-black">
+            <div className="overflow-hidden">
               <Image
                 src={`${baseUrl}/${item.image_url}`}
                 alt={`product-image-${idx}`}
                 width={700}
                 height={500}
-
-                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full"
-
+                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full transition-transform duration-500 hover:scale-150     "
               />
             </div>
           </SwiperSlide>
@@ -123,7 +122,6 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
       </Swiper>
 
       {/* Thumbnail Swiper */}
-
 
       <Swiper
         modules={[Thumbs]}
@@ -147,9 +145,6 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
           </SwiperSlide>
         ))}
       </Swiper>
-
-
-
 
       {/* <Swiper
         modules={[Thumbs]}
