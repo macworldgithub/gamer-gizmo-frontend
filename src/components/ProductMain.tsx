@@ -87,6 +87,7 @@ const ProductMain = ({ categoryId, query }: any) => {
     categoryNames[categoryId as keyof typeof categoryNames] ||
     "Unknown Category";
 
+  console.log(categoryName, "hjk");
   return (
     <div className="h-auto w-full">
       {Object.keys(filteredValues).length > 0 ? (
@@ -192,8 +193,16 @@ const ProductMain = ({ categoryId, query }: any) => {
       ) : (
         <>
           <Wrapper className="flex w-full mt-4 gap-3">
-            <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 hidden sm:block" />
-            <LiveAdSection className="w-1/2 md:h-52 max-md:h-40 hidden sm:block" />
+            <LiveAdSection
+              className="w-1/2 md:h-52 max-md:h-40  hidden sm:block"
+              category={categoryName}
+              index={0}
+            />
+            <LiveAdSection
+              category={categoryName}
+              index={1}
+              className="w-1/2 md:h-52 max-md:h-40 hidden sm:block"
+            />
           </Wrapper>
           <ProductSection
             title={`Popular in Used   ${categoryName}`}
@@ -231,8 +240,16 @@ const ProductMain = ({ categoryId, query }: any) => {
             onExplore={() => console.log("Explore New Products")}
           />
           <div className="flex mx-6 w-full gap-3">
-            <LiveAdSection className="w-[46%] md:h-52 max-md:h-40 hidden sm:block" />
-            <LiveAdSection className="w-[48%] md:h-52 max-md:h-40 hidden sm:block" />
+            <LiveAdSection
+              category={categoryName}
+              index={2}
+              className="w-[46%] md:h-52 max-md:h-40 hidden sm:block"
+            />
+            <LiveAdSection
+              category={categoryName}
+              index={3}
+              className="w-[48%] md:h-52 max-md:h-40 hidden sm:block"
+            />
           </div>
         </>
       )}

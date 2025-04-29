@@ -1,3 +1,4 @@
+import LiveAdSection from "@/components/LiveAd";
 import Image from "next/image";
 
 export default function AboutUs() {
@@ -20,6 +21,18 @@ export default function AboutUs() {
             layout="fill"
             objectFit="contain"
             className="rounded-t-lg "
+          />
+        </div>
+        <div className="w-full  flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
+          <LiveAdSection
+            category="About Us"
+            index={0}
+            className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 "
+          />
+          <LiveAdSection
+            category="About Us"
+            index={1}
+            className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
           />
         </div>
         <div className="px-10 pb-6 text-center">
@@ -87,6 +100,18 @@ export default function AboutUs() {
             </div>
           </div>
         </section>
+        <div className="w-full  flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
+          <LiveAdSection
+            category="About Us"
+            index={2}
+            className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 "
+          />
+          <LiveAdSection
+            category="About Us"
+            index={3}
+            className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
+          />
+        </div>
       </div>
     </div>
   );
