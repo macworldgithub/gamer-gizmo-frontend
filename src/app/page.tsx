@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/components/Store/Store";
 import CardComponent from "@/components/CardComponent";
 import AdsBanner from "@/components/AdsBanner";
+import LiveAdSection from "@/components/LiveAd";
 
 export default function HomePage() {
   const token = useSelector((state: RootState) => state.user.token);
@@ -41,8 +42,13 @@ export default function HomePage() {
     <div className="overflow-x-hidden dark:bg-[#0D0D12]">
       <MobileCategories />
       <FilterSection />
-      <div className="bg-[#F4F2FE] dark:bg-secondaryBlack pt-4">
-      <AdsBanner/>
+      <div className="bg-[#F4F2FE] flex justify-center  dark:bg-secondaryBlack pt-4">
+        {/* <AdsBanner/> */}
+        <LiveAdSection
+          category="Home"
+          index={0}
+          className="md:w-1/2 max-md:w-[45%]  md:h-52 max-md:h-40 mx-auto"
+        />
       </div>
       <CategoriesComponent />
       <CardComponent />

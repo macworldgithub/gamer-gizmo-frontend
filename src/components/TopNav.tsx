@@ -19,7 +19,7 @@ const TopNav = () => {
       className={`max-md:w-full max-md:h-20 h-16 bg-gray-50 max-md:justify-between flex max-md:px-4 lg:justify-between md:justify-between items-center  md:px-5 lg:px-10`}
     >
       <Link href="/">
-        <Image
+        <img
           src="/images/gameIcon.png"
           alt="logo-img"
           width={100}

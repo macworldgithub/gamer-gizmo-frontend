@@ -160,10 +160,7 @@ const ProductCard = ({
                           onLoadingComplete={() =>
                             console.log(`Loaded: ${imageUrl}`)
                           }
-                          onError={(e) => {
-                            console.error("Image failed to load:", imageUrl);
-                            e.currentTarget.src = "/gameIcon.png";
-                          }}
+                    
                         />
                       </div>
                     </SwiperSlide>
@@ -271,7 +268,6 @@ const ProductCard = ({
                 layout="fill"
                 objectFit="contain"
                 className="rounded-t-lg hover:scale-105 transition-all duration-300 mx-auto"
-                onError={(e) => (e.currentTarget.src = "/gameIcon.png")}
               />
             )}
           </div>

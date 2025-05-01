@@ -71,12 +71,12 @@ const ProductContainer = () => {
       <div className="w-full  flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
         <LiveAdSection
           category="Store"
-          index={2}
+          index={0}
           className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 "
         />
         <LiveAdSection
           category="Store"
-          index={3}
+          index={1}
           className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
         />
       </div>

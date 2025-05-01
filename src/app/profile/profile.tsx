@@ -86,7 +86,8 @@ export default function ProfilePage() {
 
         <div className="flex w-full  items-center mb-6 max-md:hidden dark:text-white">
           <div className="relative">
-            <Image
+            <img
+            //@ts-ignore
               src={
                 profileData.profile != null
                   ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profileData.profile}`
