@@ -4,15 +4,18 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "backend.gamergizmo.com",
+        pathname: "/uploads/images/**",
       },
       {
         protocol: "https",
         hostname: "www.backend.gamergizmo.com",
+        pathname: "/uploads/images/**",
       },
       {
         protocol: "http",
         hostname: "localhost",
         port: "4001",
+        pathname: "/**",
       },
     ],
   },
