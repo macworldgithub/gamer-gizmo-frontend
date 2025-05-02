@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
+import { toast } from "react-toastify";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -25,6 +26,14 @@ const UploadImages = ({ setFileList, fileList }: any) => {
     setPreviewImage(file.url || (file.preview as string));
     setPreviewOpen(true);
   };
+  // const beforeUpload = (file: FileType) => {
+  //   const isLt2M = file.size / 1024 / 1024 < 2; // limit to 2MB
+  //   if (!isLt2M) {
+  //     toast.success("Image must be smaller than 2MB!");
+  //     return Upload.LIST_IGNORE; // Ignore this file
+  //   }
+  //   return true;
+  // };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
     setFileList(newFileList);
@@ -42,6 +51,7 @@ const UploadImages = ({ setFileList, fileList }: any) => {
         fileList={fileList}
         accept=".png , .jpeg , .jpg"
         className="flex "
+        // beforeUpload={beforeUpload}
         onPreview={handlePreview}
         onChange={handleChange}
       >

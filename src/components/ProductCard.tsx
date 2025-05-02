@@ -34,7 +34,6 @@ const ProductCard = ({
 }: any) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  console.log(product, "my product");
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
@@ -50,45 +49,6 @@ const ProductCard = ({
   }, [thumbsSwiper]);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  // const AddToLike = async (prodId: any) => {
-  //   try {
-  //     if (!token) {
-  //       toast.error("Login To add to favourites");
-  //       return;
-  //     }
-  //     const response = await axios.post(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/addToFavourite`,
-  //       {
-  //         userId: id?.toString(),
-  //         productId: prodId.toString(),
-  //       }
-  //     );
-  //     if (response.status === 201) {
-  //       toast.success(response.data.message);
-  //       seReftech(!refetch);
-  //     }
-  //   } catch (err) {
-  //     toast.error("Failed to add to favourites");
-  //   }
-  // };
-
-  // const remove = async (prod: any) => {
-  //   try {
-  //     const response = await axios.delete(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/favourite/removeFavourite?userId=${id}&productId=${prod}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     toast.success("Successfully Deleted");
-  //     seReftech(!refetch);
-  //   } catch (err) {
-  //     toast.error("Failed to add to favourites");
-  //   }
-  // };
 
   const AddToLike = async (prodId: any) => {
     if (isLoading) return; // Prevent further clicks if loading
@@ -151,8 +111,8 @@ const ProductCard = ({
     return imgUrl.startsWith("http")
       ? imgUrl
       : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${imgUrl}`;
+     
   };
-  // const productImages = useMemo(() => product?.images || [], [product]);
 
   const productImages = useMemo(() => product?.images || [], [product]);
 
@@ -188,7 +148,10 @@ const ProductCard = ({
 
                   return (
                     <SwiperSlide key={index}>
-                      <div className="max-md:w-[200px] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative">
+                      <div
+                        onClick={() => router.push(`/product-details/${product.id}`)} 
+                        className="max-md:w-[200px] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative cursor-pointer"
+                      >
                         <Image
                           src={imageUrl}
                           alt={`Product image ${index + 1}`}
@@ -197,10 +160,7 @@ const ProductCard = ({
                           onLoadingComplete={() =>
                             console.log(`Loaded: ${imageUrl}`)
                           }
-                          onError={(e) => {
-                            console.error("Image failed to load:", imageUrl);
-                            e.currentTarget.src = "/gameIcon.png";
-                          }}
+                    
                         />
                       </div>
                     </SwiperSlide>
@@ -239,7 +199,10 @@ const ProductCard = ({
             <div className="w-full md:w-[40%] md:pl-12  flex flex-col ">
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
                 <div className="flex justify-between gap-8 items-center">
-                  <p className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] ">
+                  <p
+                    className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] cursor-pointer"
+                    onClick={() => router.push(`/product-details/${product.id}`)} 
+                  >
                     {product.name}
                   </p>
                   {hasPremiumBadge && (
@@ -256,7 +219,7 @@ const ProductCard = ({
                 </p>
 
                 <h2 className="text-md font-semibold text-secondaryColorLight">
-                  AED {product.price}
+                  AED {Number(product.price).toLocaleString()}
                 </h2>
                 {product?.is_featured && (
                   <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
@@ -270,7 +233,7 @@ const ProductCard = ({
                 </p>
 
                 <button
-                  onClick={() => router.push(`/product-details/${product.id}`)}
+                  onClick={() => router.push(`/product-details/${product.id}`)} // View Details button routing
                   className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
                 >
                   View Details
@@ -294,7 +257,10 @@ const ProductCard = ({
           >
             <MdFavorite size={24} className="max-sm:h-4" />
           </div>
-          <div className="relative w-full h-24  bg-black max-sm:h-[50px]">
+          <div
+            onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on image click
+            className="relative w-full h-24  bg-black max-sm:h-[50px]"
+          >
             {product?.images && (
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
@@ -302,26 +268,26 @@ const ProductCard = ({
                 layout="fill"
                 objectFit="contain"
                 className="rounded-t-lg hover:scale-105 transition-all duration-300 mx-auto"
-                onError={(e) => (e.currentTarget.src = "/gameIcon.png")}
               />
             )}
           </div>
 
           <div className="px-3 pb-[6px]">
-            <h3 className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[8px] ">
+            <h3
+              className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[8px] cursor-pointer"
+              onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on title click
+            >
               {product.name}
             </h3>
             <p className="text-xs text-gray-500 truncate max-md:text-[0.8rem] max-sm:text-[0.4rem]">
               {product.description}
             </p>
             <p className="text-purple-500 font-bold max-sm:text-[0.4rem]">
-              {product.price} AED
+              {Number(product.price).toLocaleString()} AED
             </p>
             <div className="flex items-center">
               <button
-                onClick={() => {
-                  router.push(`/product-details/${product.id}`);
-                }}
+                onClick={() => router.push(`/product-details/${product.id}`)} // View Details button routing
                 className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 dark:hover:bg-purple-600"
               >
                 <p className="max-sm:text-[5px]"> View Details</p>

@@ -38,8 +38,6 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
 
-  console.log("Ayeshaaaa", data);
-
   const AddToLike = async (prodId: any) => {
     try {
       if (!token) {
@@ -110,13 +108,13 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
       >
         {data.product_images.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex justify-center items-center px-9 dark:bg-black">
+            <div className="overflow-hidden">
               <Image
                 src={`${baseUrl}/${item.image_url}`}
                 alt={`product-image-${idx}`}
                 width={700}
                 height={500}
-                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full"
+                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full transition-transform duration-500 hover:scale-150     "
               />
             </div>
           </SwiperSlide>

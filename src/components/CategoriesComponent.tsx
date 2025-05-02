@@ -164,16 +164,11 @@ const CategoriesComponent = () => {
                 <Link
                   key={index}
                   href={getCategoryLink(category)}
-                  className=" w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center no-underline"
+                  className="w-full max-w-[15rem] h-[6.5rem] border border-gray-200 bg-custom-gradient p-4 rounded-lg shadow-md flex flex-col justify-center items-center text-white no-underline overflow-hidden"
                 >
-                  {/* <div
-                  key={index}
-                  className="w-full max-w-[15rem] border border-gray-200 bg-custom-gradient p-6 rounded-lg shadow-md flex flex-col text-white justify-center items-center"
-                > */}
-                  <h2 className="text-[0.9rem] text-center font-bold  flex justify-center items-center">
+                  <h2 className="text-[1rem] w-48 text-center font-bold leading-tight ">
                     {category}
                   </h2>
-                  {/* </div> */}
                 </Link>
               ))}
             </div>

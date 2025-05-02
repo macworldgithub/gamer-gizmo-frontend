@@ -208,7 +208,7 @@ const BottomNavigationBar = () => {
               {isLogin ? (
                 <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
                   <Dropdown className="shadow-2xl" menu={{ items }}>
-                    <Image
+                    <img
                       src={
                         profile != null
                           ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
