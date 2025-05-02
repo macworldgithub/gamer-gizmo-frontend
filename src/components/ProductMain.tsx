@@ -123,7 +123,6 @@ const ProductMain = ({ categoryId, query }: any) => {
                             refetch={fetcher}
                             seReftech={seReftech}
                             product={product}
-                            hasPremiumBadge={globalIndex < 5}
                           />
                           <div className="h-[3px] w-full bg-bluishBorder"></div>
                           {globalIndex === 2 && <InspectionBadge />}

@@ -82,6 +82,7 @@ export default function AdList({
       toast.error("Failed to update status");
     }
   };
+  console.log(ads, "all ads");
 
   return (
     <div className="m-4 text-black dark:bg-[#1e1e2f]">

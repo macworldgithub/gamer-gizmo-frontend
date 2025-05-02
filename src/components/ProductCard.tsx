@@ -185,7 +185,6 @@ const ProductCard = ({
               >
                 {productImages.map((img: ProductImage, index: number) => {
                   const imageUrl = getImageUrl(img?.image_url);
-                  console.log("Image URL:", imageUrl);
 
                   return (
                     <SwiperSlide key={index}>
@@ -259,7 +258,7 @@ const ProductCard = ({
                 <h2 className="text-md font-semibold text-secondaryColorLight">
                   AED {product.price}
                 </h2>
-                {hasPremiumBadge && (
+                {product?.is_featured && (
                   <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
                     Premium
                   </span>

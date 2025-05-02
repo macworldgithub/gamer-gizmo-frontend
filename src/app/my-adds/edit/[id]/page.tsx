@@ -220,6 +220,19 @@ export default function EditAdPage() {
       //   if (adData.gaming_console?.[0]) {
       //     specs = { ...specs, ...adData.gaming_console[0] };
       //   }
+
+      const existingImages = fileList
+        .filter((file: any) => file.url) // already uploaded
+        .map((file: any) => ({
+          image_url: file.url.replace(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
+            ""
+          ),
+        }));
+
+      const newImages = fileList
+        .filter((file: any) => file.originFileObj) // new uploads
+        .map((file: any) => file.originFileObj); //
       const specificationsData = () => {
         switch (adData?.category_id) {
           case 1:
@@ -250,6 +263,7 @@ export default function EditAdPage() {
         model_id: adData?.model_id?.toString() || "",
         stock: adData?.stock?.toString() || "",
         ...specificationsData(),
+        product_images: existingImages,
       };
       console.log("Final payload:", payload);
       const response = await axios.post(

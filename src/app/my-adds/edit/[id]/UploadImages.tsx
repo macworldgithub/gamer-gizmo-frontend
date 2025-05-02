@@ -64,7 +64,7 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
-
+  console.log(setPreviewOpen, "hkjfjkd");
   return (
     <div>
       <Upload
@@ -77,7 +77,6 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
       >
         {fileList.length >= 10 ? null : uploadButton}
       </Upload>
-
       {previewImage && (
         <Image
           wrapperStyle={{ display: "none" }}
