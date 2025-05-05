@@ -155,12 +155,12 @@ const ProductMain = ({ categoryId, query }: any) => {
             <div className="w-[30%] max-md:w-0 max-md:hidden">
               <LiveAdSection
                 category={`Popular ${categoryName}`}
-                index={2}
+                index={1}
                 className="w-[100%] ml-6 h-[36rem] "
               />
               <LiveAdSection
                 category={`Popular ${categoryName}`}
-                index={3}
+                index={2}
                 className="w-[100%] ml-6 my-4 h-[36rem]  "
               />
             </div>

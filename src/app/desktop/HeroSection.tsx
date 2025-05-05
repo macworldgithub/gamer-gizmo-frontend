@@ -23,13 +23,11 @@ const HeroSection = ({ query }: any) => {
           <div className="w-full h-auto dark:bg-black mb-2">
             {/* <Wrapper className="max-sm:mx-0 max-sm:pl-0 max-sm:pr-0"> */}
             <div className="flex flex-wrap gap-4 justify-center sm:justify-start max-sm:gap-[0.5rem] ">
-             
               <ProductMain query={query} categoryId={2} />
             </div>
             {/* </Wrapper> */}
           </div>
         </Wrapper>
-       
       </div>
 
       {/* Free Ad Section */}

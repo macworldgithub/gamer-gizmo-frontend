@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean:build": "rimraf .next && npm run build"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
@@ -28,6 +29,7 @@
     "browser-image-compression": "^2.0.2",
     "date-fns": "^4.1.0",
     "font-awesome": "^4.7.0",
+    "jwt-decode": "^4.0.0",
     "next": "^15.1.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -52,6 +54,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5",
     "webpack": "^5.97.1"

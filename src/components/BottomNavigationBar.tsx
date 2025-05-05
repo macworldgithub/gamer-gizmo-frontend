@@ -60,29 +60,36 @@ const BottomNavigationBar = () => {
   }, [isDrawerOpen]);
   const LogoutUser = async () => {
     try {
-      console.log(token, "token");
-      let res = await axios.post(
+      const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logoutUser`,
-        {
-          token: token,
-        },
+        { token: token },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      if (res.status == 201) {
+
+      if (res.status === 201 || res.status === 200) {
         dispatch(clearUserData());
         router.push("/auth/login");
-        toast.success("SuccessFully Logout");
+        toast.success("Successfully Logged Out");
       } else {
-        toast.error("Failed to Logout");
+        // Optional fallback
+        dispatch(clearUserData());
+        router.push("/auth/login");
+        toast.error("Token invalid or already removed. Logged out.");
       }
     } catch (err) {
-      toast.error("Failed to Logout");
+      // Handle invalid token or any other error
+      dispatch(clearUserData());
+      router.push("/auth/login");
+      toast.error(
+        "Session expired or invalid token. You have been logged out."
+      );
     }
   };
+
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
     setFirstClick(true);

@@ -15,25 +15,31 @@ const LiveAdSection = ({
   useEffect(() => {
     const fetchAdImages = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/ads/fetch?page=${category}`
         );
-        console.log("Response Data:", response.data);
 
         const ads = response.data;
+
+        // ✅ Log full response per category
+        console.log(`Ads for category "${category}":`, ads);
+
         if (ads.length > 0) {
           const imageUrls = ads.map((ad: any) => {
+            // ✅ Log each individual ad object
+            console.log(`Ad object in category "${category}":`, ad);
+
             const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}${
               ad.url.startsWith("/") ? ad.url : "/" + ad.url
             }`;
             return url;
           });
+
           setAdImages(imageUrls);
-          console.log("Images", imageUrls);
+        } else {
+          setError("No live ads available");
         }
-        //  else {
-        //   setError("No live ads available");
-        // }
       } catch (err) {
         console.error("Error fetching ads:", err);
         setError("Failed to load ad images");
@@ -45,16 +51,17 @@ const LiveAdSection = ({
     fetchAdImages();
   }, [category]);
 
-  const selectedImage = adImages[index]; // ✅ Pick only the ad you want
+  const selectedImage = adImages[index];
 
   return (
     <div
       className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex flex-col items-center  ${className}`}
     >
       {loading && <p>Loading Ads...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {/* {error && <p className="text-red-500">{error}</p>} */}
+      {!loading && error && <p className="text-red-500 text-center">{error}</p>}
 
-      {selectedImage ? (
+      {!loading && !error && selectedImage ? (
         <div className="relative w-full h-full overflow-hidden rounded shadow-md ">
           <Image
             src={selectedImage}
@@ -68,9 +75,11 @@ const LiveAdSection = ({
             // height={300}
           />
         </div>
-      ) : !loading ? (
-        <p className="text-center pt-6">No ad available for this slot</p>
       ) : null}
+
+      {!loading && !selectedImage && !error && (
+        <p className="text-center pt-6">No ad available for this slot</p>
+      )}
     </div>
   );
 };

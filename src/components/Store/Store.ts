@@ -25,7 +25,7 @@ const persistConfig = {
 const combinedReducers = combineReducers({
   SellForMe: sellForMeSlice.reducer,
   Ad: adSlice.reducer,
-  Currency: currencySlice.reducer, // Add more reducers here as needed
+  Currency: currencySlice.reducer,
   Theme: ThemeSlice.reducer,
   user: loginSlice,
   loading: loadingSlice,
