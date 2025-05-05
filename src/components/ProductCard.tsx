@@ -111,6 +111,7 @@ const ProductCard = ({
     return imgUrl.startsWith("http")
       ? imgUrl
       : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${imgUrl}`;
+     
   };
 
   const productImages = useMemo(() => product?.images || [], [product]);
@@ -161,10 +162,7 @@ const ProductCard = ({
                           onLoadingComplete={() =>
                             console.log(`Loaded: ${imageUrl}`)
                           }
-                          onError={(e) => {
-                            console.error("Image failed to load:", imageUrl);
-                            e.currentTarget.src = "/gameIcon.png";
-                          }}
+                    
                         />
                       </div>
                     </SwiperSlide>
@@ -227,7 +225,7 @@ const ProductCard = ({
                 <h2 className="text-md font-semibold text-secondaryColorLight">
                   AED {Number(product.price).toLocaleString()}
                 </h2>
-                {hasPremiumBadge && (
+                {product?.is_featured && (
                   <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
                     Premium
                   </span>
@@ -274,7 +272,6 @@ const ProductCard = ({
                 layout="fill"
                 objectFit="contain"
                 className="rounded-t-lg hover:scale-105 transition-all duration-300 mx-auto"
-                onError={(e) => (e.currentTarget.src = "/gameIcon.png")}
               />
             )}
           </div>

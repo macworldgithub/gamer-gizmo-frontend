@@ -15,13 +15,13 @@ const page = () => {
         <LiveAdSection
           category="Blogs"
           //@ts-ignore
-          index={0}
-          className="w-1/2 md:h-52 max-md:h-40 "
+          adId={1}
+          className="w-1/2 md:h-52 max-md:h-40"
         />
         <LiveAdSection
           category="Blogs"
           //@ts-ignore
-          index={1}
+          adId={2}
           className="w-1/2 md:h-52 max-md:h-40 "
         />
       </Wrapper>
@@ -40,12 +40,12 @@ const page = () => {
       <Wrapper className="flex w-full mt-4 gap-3">
         <LiveAdSection
           category="Blogs"
-          index={2}
+          adId={3}
           className="w-1/2 md:h-52 max-md:h-40 "
         />
         <LiveAdSection
           category="Blogs"
-          index={3}
+          adId={4}
           className="w-1/2 md:h-52 max-md:h-40"
         />
       </Wrapper>
@@ -57,29 +57,3 @@ const page = () => {
 };
 
 export default page;
-
-// import React from "react";
-// import UsBlogs from "./UsBlogs";
-// import PageHeader from "@/components/PageHeader";
-// import ItemCard from "./ItemCard";
-
-// const Page = () => {
-//   return (
-//     <div className="w-full bg-white dark:bg-black">
-//       <PageHeader pageName={"Blogs"} title="Blogs" />
-//       <div className="max-w-7xl mx-auto p-6 flex flex-col lg:flex-row gap-6">
-//         {/* Left Section (UsBlogs) */}
-//         <div className="w-full lg:w-2/3">
-//           <UsBlogs />
-//         </div>
-
-//         {/* Right Section (ItemCard) */}
-//         <div className="w-full lg:w-1/3 mt-4 ">
-//           <ItemCard />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Page;

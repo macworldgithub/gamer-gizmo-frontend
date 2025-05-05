@@ -13,8 +13,10 @@ const nextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "4001",
+        
       },
     ],
+    unoptimized: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -25,8 +27,7 @@ const nextConfig = {
 
   webpack(config: any) {
     const fileLoaderRule = config.module.rules.find(
-      (rule: any) =>
-        rule.test && rule.test instanceof RegExp && rule.test.test(".svg")
+      (rule: any) => rule.test && rule.test instanceof RegExp && rule.test.test(".svg")
     );
 
     if (fileLoaderRule) {

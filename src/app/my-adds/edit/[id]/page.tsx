@@ -268,6 +268,7 @@ export default function EditAdPage() {
         images: imageUrls,
         is_published: adData?.is_published,
         ...specificationsData(),
+        // product_images: existingImages,
       };
       console.log("Final payload:", payload);
       const response = await axios.post(

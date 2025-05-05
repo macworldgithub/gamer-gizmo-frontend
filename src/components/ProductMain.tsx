@@ -96,7 +96,7 @@ const ProductMain = ({ categoryId, query }: any) => {
             <LiveAdSection
               category={`Popular ${categoryName}`}
               className="md:h-52 max-md:h-40"
-              index={0}
+              adId={1}
             />
           </div>
           <h1 className="font-bold text-2xl mb-4 dark:text-white">
@@ -128,7 +128,6 @@ const ProductMain = ({ categoryId, query }: any) => {
                             refetch={fetcher}
                             seReftech={seReftech}
                             product={product}
-                            hasPremiumBadge={globalIndex < 5}
                           />
                           <div className="h-[3px] w-full bg-bluishBorder"></div>
                           {globalIndex === 2 && <InspectionBadge />}
@@ -141,7 +140,7 @@ const ProductMain = ({ categoryId, query }: any) => {
                             <LiveAdSection
                               className="md:w-[100%] h-52 my-4"
                               category={`Popular ${categoryName}`}
-                              index={2}
+                              adId={2}
                             />
                           )}
                         </>
@@ -155,12 +154,12 @@ const ProductMain = ({ categoryId, query }: any) => {
             <div className="w-[30%] max-md:w-0 max-md:hidden">
               <LiveAdSection
                 category={`Popular ${categoryName}`}
-                index={1}
+                adId={3}
                 className="w-[100%] ml-6 h-[36rem] "
               />
               <LiveAdSection
                 category={`Popular ${categoryName}`}
-                index={2}
+                adId={4}
                 className="w-[100%] ml-6 my-4 h-[36rem]  "
               />
             </div>
@@ -206,7 +205,7 @@ const ProductMain = ({ categoryId, query }: any) => {
 
           <LiveAdSection
             category={`Popular ${categoryName}`}
-            index={4}
+            adId={5}
             className="w-[100%] h-[10rem] my-2"
           />
         </>
@@ -216,11 +215,11 @@ const ProductMain = ({ categoryId, query }: any) => {
             <LiveAdSection
               className="w-1/2 md:h-52 max-md:h-40  hidden sm:block"
               category={categoryName}
-              index={0}
+              adId={1}
             />
             <LiveAdSection
               category={categoryName}
-              index={1}
+              adId={2}
               className="w-1/2 md:h-52 max-md:h-40 hidden sm:block"
             />
           </Wrapper>
@@ -262,12 +261,12 @@ const ProductMain = ({ categoryId, query }: any) => {
           <div className="flex mx-6 w-full gap-3">
             <LiveAdSection
               category={categoryName}
-              index={2}
+              adId={3}
               className="w-[46%] md:h-52 max-md:h-40 hidden sm:block"
             />
             <LiveAdSection
               category={categoryName}
-              index={3}
+              adId={4}
               className="w-[48%] md:h-52 max-md:h-40 hidden sm:block"
             />
           </div>

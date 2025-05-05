@@ -255,12 +255,12 @@ const PopularMainSection: React.FC = () => {
       <div className="w-full flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
         <LiveAdSection
           category="Home"
-          index={0}
+          adId={4}
           className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 "
         />
         <LiveAdSection
           category="Home"
-          index={1}
+          adId={5}
           className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
         />
       </div>
@@ -294,12 +294,12 @@ const PopularMainSection: React.FC = () => {
       <div className="w-full flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4 ">
         <LiveAdSection
           category="Home"
-          index={2}
+          adId={6}
           className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 "
         />
         <LiveAdSection
           category="Home"
-          index={3}
+          adId={7}
           className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
         />
       </div>
@@ -324,12 +324,12 @@ const PopularMainSection: React.FC = () => {
       <div className="w-full  flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
         <LiveAdSection
           category="Home"
-          index={2}
-          className="md:w-1/2 max-md:w-[45%] md:h-52  max-md:h-40 "
+          adId={8}
+          className="md:w-1/2 max-md:w-[45%] md:h-52 border max-md:h-40 "
         />
         <LiveAdSection
           category="Home"
-          index={3}
+          adId={9}
           className="md:w-1/2 max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
         />
       </div>
