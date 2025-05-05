@@ -97,7 +97,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
             {products.length > 0 ? (
               products.map((product, index) => (
                 <ProductCard
-                key={index}
+                  key={index}
                   seReftech={seReftech}
                   refetch={refetch}
                   product={product}

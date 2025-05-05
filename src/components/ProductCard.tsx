@@ -111,7 +111,6 @@ const ProductCard = ({
     return imgUrl.startsWith("http")
       ? imgUrl
       : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${imgUrl}`;
-     
   };
 
   const productImages = useMemo(() => product?.images || [], [product]);
@@ -162,7 +161,6 @@ const ProductCard = ({
                           onLoadingComplete={() =>
                             console.log(`Loaded: ${imageUrl}`)
                           }
-                    
                         />
                       </div>
                     </SwiperSlide>

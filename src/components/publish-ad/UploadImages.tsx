@@ -19,24 +19,38 @@ const UploadImages = ({ setFileList, fileList }: any) => {
   const [previewImage, setPreviewImage] = useState("");
 
   const handlePreview = async (file: UploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj as FileType);
+    try {
+      if (!file.url && !file.preview) {
+        if (file.originFileObj && file.originFileObj.size / 1024 / 1024 > 10) {
+          toast.warning("Preview not available for very large images");
+          return;
+        }
+        file.preview = await getBase64(file.originFileObj as FileType);
+      }
+
+      setPreviewImage(file.url || (file.preview as string));
+      setPreviewOpen(true);
+    } catch (err) {
+      toast.error("Failed to preview image.");
     }
-
-    setPreviewImage(file.url || (file.preview as string));
-    setPreviewOpen(true);
   };
-  // const beforeUpload = (file: FileType) => {
-  //   const isLt2M = file.size / 1024 / 1024 < 2; // limit to 2MB
-  //   if (!isLt2M) {
-  //     toast.success("Image must be smaller than 2MB!");
-  //     return Upload.LIST_IGNORE; // Ignore this file
-  //   }
-  //   return true;
-  // };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
+  const beforeUpload = (file: FileType) => {
+    const isLt50M = file.size / 1024 / 1024 < 50;
+    if (!isLt50M) {
+      toast.error("Image must be smaller than 50MB!");
+      return Upload.LIST_IGNORE;
+    }
+    return true;
+  };
+
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    const updatedList = newFileList.map((file) => ({
+      ...file,
+      status: "done", // Force status to 'done'
+    }));
+    setFileList(updatedList);
+  };
 
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
@@ -51,7 +65,7 @@ const UploadImages = ({ setFileList, fileList }: any) => {
         fileList={fileList}
         accept=".png , .jpeg , .jpg"
         className="flex "
-        // beforeUpload={beforeUpload}
+        beforeUpload={beforeUpload}
         onPreview={handlePreview}
         onChange={handleChange}
       >

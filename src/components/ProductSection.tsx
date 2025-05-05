@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import ProductCard from "./ProductCard";
 
@@ -93,7 +93,7 @@ const ProductSection: React.FC<SectionProps> = ({
           {products.length > 0 ? (
             products.map((product, index) => (
               <ProductCard
-              key={index}
+                key={product?.id}
                 seReftech={seReftech}
                 refetch={refetch}
                 product={product}
