@@ -13,7 +13,7 @@ import { redirect, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import imageCompression from "browser-image-compression"; 
+import imageCompression from "browser-image-compression";
 
 interface Category {
   id: number;
@@ -188,7 +188,7 @@ const PublishAdd: React.FC = () => {
       console.error("Failed to fetch locations.");
     }
   };
-  const fetchConditions = async () => { 
+  const fetchConditions = async () => {
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/conditions/getAll`
@@ -240,15 +240,14 @@ const PublishAdd: React.FC = () => {
   const [isPublished, setIsPublished] = useState(false);
   const isSubmittingRef = useRef(false);
 
-
   const handleSubmit = async () => {
-    setIsLoading(true);
     if (isSubmittingRef.current) return;
     isSubmittingRef.current = true;
+    setIsLoading(true);
     setIsPublished(false);
-  
+
     let formDataObject = new FormData();
-  
+
     formDataObject.append("name", formData.title || "");
     formDataObject.append("user_id", id?.toString() || "");
     formDataObject.append("description", formData.description || "");
@@ -261,7 +260,7 @@ const PublishAdd: React.FC = () => {
     formDataObject.append("condition", selectedCondition?.id?.toString() || "");
     formDataObject.append("location", selectedLocation?.id?.toString() || "");
     formDataObject.append("is_published", "true");
-  
+
     if (selectCategory?.name === "Components and Accessories") {
       formDataObject.append(
         "component_type",
@@ -280,7 +279,7 @@ const PublishAdd: React.FC = () => {
         formDataObject.append("storage", selectStoarge.id.toString());
       if (selectStorageType?.id)
         formDataObject.append("storageType", selectStorageType.id.toString());
-  
+
       formDataObject.append("graphics", formData.graphics || "");
       if (selectGpu?.id) formDataObject.append("gpu", selectGpu.id.toString());
       formDataObject.append("ports", formData.ports || "");
@@ -290,26 +289,29 @@ const PublishAdd: React.FC = () => {
       formDataObject.append("accessories", formData.accessories || "");
       formDataObject.append("screen_size", formData.screenSize || "");
       formDataObject.append("weight", formData.weight || "");
-      formDataObject.append("screen_resolution", formData.screenResolution || "");
+      formDataObject.append(
+        "screen_resolution",
+        formData.screenResolution || ""
+      );
       formDataObject.append("color", formData.color || "");
     }
-  
+
     // ✅ New Part: Check and Compress Images
     const MAX_IMAGES = 5;
     const MAX_IMAGE_SIZE_MB = 0.5; // 500 KB
-  
+
     if (fileList.length > MAX_IMAGES) {
       toast.error(`You can upload a maximum of ${MAX_IMAGES} images.`);
       setIsLoading(false);
       isSubmittingRef.current = false;
       return;
     }
-  
+
     if (fileList.length > 0) {
       for (const file of fileList) {
         let fileObj = file.originFileObj as File;
         let fileSizeMB = fileObj.size / 1024 / 1024;
-  
+
         if (fileSizeMB > MAX_IMAGE_SIZE_MB) {
           try {
             const compressedFile = await imageCompression(fileObj, {
@@ -327,9 +329,9 @@ const PublishAdd: React.FC = () => {
         }
       }
     }
-  
+
     console.log(formData, "Form Data to be sent");
-  
+
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/createProduct`,
@@ -341,7 +343,7 @@ const PublishAdd: React.FC = () => {
           },
         }
       );
-  
+
       if (response.status === 201) {
         toast.success("Product Added Successfully");
         setIsPublished(true);
@@ -355,7 +357,6 @@ const PublishAdd: React.FC = () => {
       isSubmittingRef.current = false;
     }
   };
-  
 
   console.log(selectComponentCategory, "selectComponentCategory");
 
@@ -556,7 +557,7 @@ const PublishAdd: React.FC = () => {
                 fontSize: "15px",
                 cursor: isLoading ? "not-allowed" : "pointer",
               }}
-              disabled={isLoading}
+              disabled={isLoading || isSubmittingRef.current}
             >
               {isLoading ? "Publishing..." : "Publish"}
             </Button>

@@ -74,21 +74,18 @@ const PopularMainSection: React.FC = () => {
 
   const fetchUsedDesktops = async () => {
     try {
-      const conditions = [2, 3, 4];
-      const promises = conditions.map((cond) =>
-        axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=${cond}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
+      // Single optimized API call (backend handles conditions 2,3,4 when condition=2 is passed)
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=2&condition=2`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
-      const responses = await Promise.all(promises);
-      const allData = responses.flatMap((res) => res?.data?.data || []);
-      setDesktopUsedData(allData);
+      setDesktopUsedData(response?.data?.data || []);
     } catch (err) {
-      console.error("Failed to fetch used desktops.");
+      console.error("Failed to fetch used desktops:", err);
+      setDesktopUsedData([]); // Reset state on error
     }
   };
 
@@ -108,21 +105,17 @@ const PopularMainSection: React.FC = () => {
   };
   const fetchUsedConsoles = async () => {
     try {
-      const conditions = [2, 3, 4];
-      const promises = conditions.map((cond) =>
-        axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=${cond}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=4&condition=2`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
-      const responses = await Promise.all(promises);
-      const allData = responses.flatMap((res) => res?.data?.data || []);
-      setConsolesUsedData(allData);
+      setConsolesUsedData(response?.data?.data || []);
     } catch (err) {
-      console.error("Failed to fetch used consoles.");
+      console.error("Failed to fetch used consoles:", err);
+      setConsolesUsedData([]); // Reset to empty array on error
     }
   };
 
@@ -143,19 +136,15 @@ const PopularMainSection: React.FC = () => {
 
   const fetchUsedLaptops = async () => {
     try {
-      const conditions = [2, 3, 4]; // all conditions considered as "used"
-      const promises = conditions.map((cond) =>
-        axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=${cond}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
+      // Just make a single API call with condition=2 (backend already handles [2,3,4])
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=2`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
-      const responses = await Promise.all(promises);
-      const allData = responses.flatMap((res) => res?.data?.data || []);
-      setLaptopUsedData(allData);
+      setLaptopUsedData(response?.data?.data || []);
     } catch (err) {
       console.error("Failed to fetch used laptops.");
     }
@@ -178,20 +167,15 @@ const PopularMainSection: React.FC = () => {
 
   const fetchUsedComponents = async () => {
     try {
-      const conditions = [2, 3, 4];
-      const promises = conditions.map((cond) =>
-        axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=3&condition=${cond}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=3&condition=2`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
-      const responses = await Promise.all(promises);
-      const allData = responses.flatMap((res) => res?.data?.data || []);
       //@ts-ignore
-      setComponentsUsedData(allData);
+      setComponentsUsedData(response?.data?.data || []);
     } catch (err) {
       console.error("Failed to fetch used components.");
     }
