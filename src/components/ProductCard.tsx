@@ -263,9 +263,9 @@ const ProductCard = ({
             onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on image click
             className="relative w-full h-24  bg-black max-sm:h-[50px]"
           >
-            {product?.images && (
+            {product?.images?.[0]?.image_url && (
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
+                src={getImageUrl(product.images[0].image_url)}
                 alt={product.name}
                 layout="fill"
                 objectFit="contain"

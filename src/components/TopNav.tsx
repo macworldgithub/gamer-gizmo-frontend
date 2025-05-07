@@ -20,7 +20,7 @@ const TopNav = () => {
     >
       <Link href="/">
         <img
-          src="/images/gameIcon.png"
+          src="/images/gameIcon.webp"
           alt="logo-img"
           width={100}
           height={100}

@@ -6,9 +6,9 @@ import axios from "axios";
 const LiveAdSection = ({
   className = "w-full h-96",
   category = "Laptops",
-  adId = 1, // Pass adId directly as a number (1, 2, 3, etc.)
+  adId = 1,
 }) => {
-  const [adImages, setAdImages] = useState<any[]>([]); // Store the full ad object with ID and URL
+  const [adImages, setAdImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -38,30 +38,37 @@ const LiveAdSection = ({
 
   const selectedAd = adImages.find((ad: any) => ad.ad_id === adId); // Find the ad by its ID
 
-  // Function to check if the URL is a video
   const isVideo = (url: string) => {
     return (
       url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".avi")
     );
   };
 
+  // const adUrl = selectedAd
+  //   ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${
+  //       selectedAd.url.startsWith("/") ? selectedAd.url : "/" + selectedAd.url
+  //     }`
+  //   : "";
+
   const adUrl = selectedAd
-    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${
-        selectedAd.url.startsWith("/") ? selectedAd.url : "/" + selectedAd.url
-      }`
+    ? selectedAd.url.startsWith("http")
+      ? selectedAd.url
+      : `${process.env.NEXT_PUBLIC_API_BASE_URL}${
+          selectedAd.url.startsWith("/") ? selectedAd.url : "/" + selectedAd.url
+        }`
     : "";
 
   return (
     // <div
-    //   className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex flex-col items-center ${className}`}
+    //   className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex items-center ${className}`}
     // >
     //   {loading && <p>Loading Ads...</p>}
     //   {error && <p className="text-red-500">{error}</p>}
 
     //   {selectedAd ? (
-    //     <div className="relative w-full h-full overflow-hidden rounded shadow-md">
+    //     <div className="relative w-full h-full rounded overflow-hidden">
     //       {isVideo(adUrl) ? (
-    //         <video controls className="object-cover rounded w-full h-full">
+    //         <video controls className="w-full h-full object-cover rounded">
     //           <source src={adUrl} type="video/mp4" />
     //           Your browser does not support the video tag.
     //         </video>
@@ -69,7 +76,7 @@ const LiveAdSection = ({
     //         <img
     //           src={adUrl}
     //           alt={`Live Advertisement ${adId}`}
-    //           className="object-cover rounded"
+    //           className="w-full h-full object-cover rounded"
     //           onError={() => setError("Failed to load image")}
     //         />
     //       )}
@@ -82,7 +89,7 @@ const LiveAdSection = ({
       className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex items-center ${className}`}
     >
       {loading && <p>Loading Ads...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {!loading && error && <p className="text-red-500">{error}</p>}
 
       {selectedAd ? (
         <div className="relative w-full h-full rounded overflow-hidden">
@@ -96,7 +103,12 @@ const LiveAdSection = ({
               src={adUrl}
               alt={`Live Advertisement ${adId}`}
               className="w-full h-full object-cover rounded"
-              onError={() => setError("Failed to load image")}
+              onLoad={() => setError(null)} // Reset error if image loads successfully
+              onError={(e) => {
+                setError("Failed to load image");
+                // Optionally use fallback:
+                // e.currentTarget.src = "/fallback.png";
+              }}
             />
           )}
         </div>

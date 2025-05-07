@@ -5,19 +5,19 @@ export default function BrowseVideos() {
   const videos = [
     {
       src: "https://www.youtube.com/watch?v=gzg3bmHC3CQ",
-      poster: "/images/logo.png",
+      poster: "/images/logo.webp",
     },
     {
       src: "https://www.youtube.com/watch?v=kKH6QKo2Pmc",
-      poster: "/images/logo.png",
+      poster: "/images/logo.webp",
     },
     {
       src: "https://www.youtube.com/watch?v=csSTitLfdMU",
-      poster: "/images/gameIcon.png",
+      poster: "/images/gameIcon.webp",
     },
     {
       src: "https://www.youtube.com/watch?v=IaGo0CmspMU",
-      poster: "/images/gameIcon.png",
+      poster: "/images/gameIcon.webp",
     },
   ];
 
