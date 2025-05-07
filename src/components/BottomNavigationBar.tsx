@@ -97,7 +97,7 @@ const BottomNavigationBar = () => {
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: "My Account",
+      label: <p className="font-bold text-red-700"> My Account</p>,
       disabled: true,
     },
     {

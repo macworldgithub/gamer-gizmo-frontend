@@ -32,7 +32,7 @@ const SellForMe = () => {
               <h1 className="font-bold text-lg text-center pb-2 text-secondaryColorDark">
                 Book Your PC Inspection
               </h1>
-              <h1 className="text-[0.8rem] font-medium dark:text-white">
+              <h1 className="text-[0.8rem] font-medium dark:text-white text-black">
                 PC Inspection, Hassle-Free! Buy with confidence and avoid costly
                 surprises with GamerGizmo’s expert PC inspections. Get a
                 detailed hardware check to ensure you’re getting the best

@@ -108,11 +108,16 @@ body {
 .css-whm5qd-MuiStepLabel-root .MuiStepIcon-root {
   color: #dc39fc !important;
 }
-
 .edit-input {
   @apply border p-2 rounded-md border-secondaryColorLight outline-none 
-         focus:border-secondaryColorDark hover:border-secondaryColorDark;
+         focus:border-secondaryColorDark hover:border-secondaryColorDark 
+         text-black bg-white dark:bg-white;
 }
+
+/* .edit-input {
+  @apply border p-2 rounded-md border-secondaryColorLight outline-none 
+         focus:border-secondaryColorDark hover:border-secondaryColorDark;
+} */
 .edit-label {
   @apply font-medium text-lg text-secondaryColorDark;
 }

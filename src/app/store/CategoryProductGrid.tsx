@@ -46,7 +46,7 @@ const CategoryProductGrid = ({
   return (
     <Wrapper>
       <div className="w-full flex items-center justify-between mt-[0.8rem] mb-1 ">
-        <h2 className="text-xl max-sm:text-sm font-bold  dark:text-white">
+        <h2 className="text-xl max-sm:text-sm font-bold text-black dark:text-white">
           {categoryName}
         </h2>
 

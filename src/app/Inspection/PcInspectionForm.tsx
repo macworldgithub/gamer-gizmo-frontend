@@ -39,36 +39,36 @@ const PcInspectionForm = () => {
           <input
             type="text"
             placeholder="Your Name"
-            className="w-1/2 p-2  rounded-md border border-pinkishBorder dark:bg-gray-800 dark:text-white"
+            className="w-1/2 p-2  rounded-md border border-pinkishBorder dark:bg-gray-800 dark:text-white text-black"
           />
           <input
             type="text"
             placeholder="+971 5XXXXXXXX"
-            className="w-1/2 p-2 border border-pinkishBorder  rounded-md dark:bg-gray-800 dark:text-white"
+            className="w-1/2 p-2 border border-pinkishBorder  rounded-md dark:bg-gray-800 dark:text-white text-black"
           />
         </div>
       </div>
 
       {/* PC Details */}
       <div className="space-y-2 mt-4">
-        <label className="block text-gray-700 dark:text-white font-bold">
+        <label className="block  dark:text-white font-bold text-black">
           PC Details (Optional)
         </label>
         <input
           type="text"
           placeholder="Enter PC Model, Brand, or Specs"
-          className="w-full p-2 border border-pinkishBorder rounded-md dark:bg-gray-800 dark:text-white"
+          className="w-full p-2 border border-pinkishBorder rounded-md dark:bg-gray-800 dark:text-white text-black"
         />
         <div className="flex space-x-2">
           <input
             type="text"
             placeholder="Seller Name"
-            className="w-1/2 p-2 border border-pinkishBorder rounded-md dark:bg-gray-800 dark:text-white"
+            className="w-1/2 p-2 border border-pinkishBorder rounded-md dark:bg-gray-800 dark:text-white text-black"
           />
           <input
             type="text"
             placeholder="+971 5XXXXXXXX"
-            className="w-1/2 p-2 border rounded-md border-pinkishBorder dark:bg-gray-800 dark:text-white"
+            className="w-1/2 p-2 border rounded-md border-pinkishBorder dark:bg-gray-800 dark:text-white text-black"
           />
         </div>
       </div>

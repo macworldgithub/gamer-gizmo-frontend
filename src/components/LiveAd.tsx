@@ -79,7 +79,7 @@ const LiveAdSection = ({
     //   ) : null}
     // </div>
     <div
-      className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex items-center ${className}`}
+      className={`dark:bg-secondaryBlack dark:text-white  justify-center rounded-lg bg-gray-200 shadow-md dark:border border-white-600 flex items-center ${className}`}
     >
       {loading && <p>Loading Ads...</p>}
       {error && <p className="text-red-500">{error}</p>}
@@ -101,7 +101,7 @@ const LiveAdSection = ({
           )}
         </div>
       ) : !loading ? (
-        <p className="text-center pt-6">No ad available for this slot</p>
+        <p className="text-center pt-6 text-black dark:text-white ">No ad available for this slot</p>
       ) : null}
     </div>
   );

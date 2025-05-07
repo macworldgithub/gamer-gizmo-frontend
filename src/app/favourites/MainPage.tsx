@@ -59,7 +59,7 @@ export default function MainPage() {
   return (
     <Wrapper className="max-sm:pr-0">
       <div className="lg:p-6 w-full  max-lg:p-0">
-        <h1 className="text-2xl font-bold mb-6">All Favorites</h1>
+        <h1 className="text-2xl font-bold mb-6 text-black">All Favorites</h1>
 
         {/* Search Bar */}
         {/* <div className="relative mb-6">

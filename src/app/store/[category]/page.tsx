@@ -59,12 +59,12 @@ const ProductGrid = () => {
     <div className=" dark:bg-[#1e1e2f]">
       <Wrapper>
         <div className="w-full mx-auto mt-3 mb-4 ">
-          <h1 className="font-bold mb-2 ml-1">{categoryName}</h1>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem]">
+          <h1 className="font-bold mb-2 ml-1 text-black">{categoryName}</h1>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem] text-black">
             {products.map((product: any) => (
               <div
                 key={product.id}
-                className=" dark:bg-black rounded-lg shadow-lg p-4 max-md:p-2 relative border border-gray-300"
+                className=" dark:bg-black rounded-lg shadow-lg p-4 max-md:p-2 relative border border-gray-300 text-black"
               >
                 <Image
                   src={
@@ -78,7 +78,7 @@ const ProductGrid = () => {
                   className="w-full h-32 max-sm:h-16 rounded mx-auto"
                 />
 
-                <h3 className="text-sm max-md:text-[0.5rem] text-black dark:text-white w-full truncate font-medium mt-1">
+                <h3 className="text-sm max-md:text-[0.5rem] text-black dark:text-white w-full truncate font-medium mt-1 ">
                   {product.name}
                 </h3>
                 <p className="text-gray-400 text-[0.6rem] truncate w-full">
