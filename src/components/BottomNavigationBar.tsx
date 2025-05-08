@@ -355,8 +355,10 @@ const BottomNavigationBar = () => {
             <Dropdown className="shadow-2xl" menu={{ items }}>
               <Image
                 src={
-                  profile != null
-                    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
+                  profile
+                    ? profile.startsWith("http")
+                      ? profile
+                      : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
                     : "/images/profile.png"
                 }
                 alt="Profile"

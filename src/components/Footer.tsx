@@ -34,7 +34,7 @@ const Footer = () => {
           <div className="">
             <Link href="/">
               <Image
-                src="/images/gameIcon.png"
+                src="/images/gameIcon.webp"
                 width={100}
                 height={100}
                 alt="Logo"

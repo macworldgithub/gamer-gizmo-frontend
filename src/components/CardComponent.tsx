@@ -1,7 +1,7 @@
 import React from "react";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import Image from "next/image";
-import gpu from "../../public/images/consoles.png";
+import gpu from "../../public/images/consoles.webp";
 import Link from "next/link";
 
 interface CardProps {

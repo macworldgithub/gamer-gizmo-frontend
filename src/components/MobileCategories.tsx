@@ -4,22 +4,22 @@ import Link from "next/link";
 import React from "react";
 
 const categories = [
-  { id: 1, image: "/images/newDesktops.png", title: "Used Gaming PCs" },
-  { id: 2, image: "/images/usedLaptops.png", title: "Used Laptops" },
+  { id: 1, image: "/images/newDesktops.webp", title: "Used Gaming PCs" },
+  { id: 2, image: "/images/usedLaptops.webp", title: "Used Laptops" },
   {
     id: 3,
-    image: "/images/used-pc.png",
+    image: "/images/used-pc.webp",
     title: "Used Components and Accessories",
   },
-  { id: 4, image: "/images/newConsoles.png", title: "Used Gaming Consoles" },
-  { id: 5, image: "/images/newDesktops.png", title: "New Gaming PCs" },
-  { id: 6, image: "/images/usedLaptops.png", title: "New Laptops" },
+  { id: 4, image: "/images/newConsoles.webp", title: "Used Gaming Consoles" },
+  { id: 5, image: "/images/newDesktops.webp", title: "New Gaming PCs" },
+  { id: 6, image: "/images/usedLaptops.webp", title: "New Laptops" },
   {
     id: 7,
-    image: "/images/newGamingParts.png",
+    image: "/images/newGamingParts.webp",
     title: "New Components and Accessories",
   },
-  { id: 8, image: "/images/newConsoles.png", title: "New Gaming Consoles" },
+  { id: 8, image: "/images/newConsoles.webp", title: "New Gaming Consoles" },
 ];
 
 const categoryMap = {

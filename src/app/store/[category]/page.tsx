@@ -70,7 +70,7 @@ const ProductGrid = () => {
                   src={
                     product.images?.length > 0
                       ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${product.images[0].image_url}`
-                      : "/gameIcon.png"
+                      : "/gameIcon.webp"
                   }
                   alt={product.name}
                   width={100}

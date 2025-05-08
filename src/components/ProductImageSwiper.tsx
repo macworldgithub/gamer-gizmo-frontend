@@ -110,11 +110,11 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
           <SwiperSlide key={idx}>
             <div className="overflow-hidden">
               <Image
-                src={`${baseUrl}/${item.image_url}`}
+                src={item.image_url}
                 alt={`product-image-${idx}`}
                 width={700}
                 height={500}
-                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full transition-transform duration-500 hover:scale-150     "
+                className="object-cover md:object-contain h-[400px] max-sm:h-[250px] w-full transition-transform duration-500 hover:scale-150"
               />
             </div>
           </SwiperSlide>
@@ -133,7 +133,7 @@ const ProductImageSwiper: FC<ProductImageSwiperProps> = ({
         {data.product_images.map((item, idx) => (
           <SwiperSlide key={idx}>
             <Image
-              src={`${baseUrl}/${item.image_url}`}
+              src={item.image_url}
               alt={`thumbnail-image-${idx}`}
               width={65}
               height={65}

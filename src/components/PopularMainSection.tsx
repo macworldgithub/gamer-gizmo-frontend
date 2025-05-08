@@ -14,7 +14,6 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      // images: ["/images/gpu.png"],
     },
   ]);
   const [LaptopNewData, setLaptopNewData] = useState([
@@ -23,7 +22,6 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      // images: ["/images/gpu.png"],
     },
   ]);
   const [consolesNewData, setConsolesNewData] = useState([
@@ -32,7 +30,6 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      // images: ["/images/gpu.png"],
     },
   ]);
   const [consolesUsedData, setConsolesUsedData] = useState([
@@ -41,7 +38,6 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      // images: ["/images/gpu.png"],
     },
   ]);
   const [desktopNewData, setDesktopNewData] = useState([
@@ -50,7 +46,6 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      // images: ["/images/gpu.png"],
     },
   ]);
   const [desktopUsedData, setDesktopUsedData] = useState([
@@ -59,7 +54,6 @@ const PopularMainSection: React.FC = () => {
       name: "Radeon RX 580 OC...",
       description: "Powerful graphics card for gaming...",
       price: "AED 551.00",
-      // images: ["/images/gpu.png"],
     },
   ]);
   const ConsoleCategory = "Gaming Consoles";
@@ -115,7 +109,7 @@ const PopularMainSection: React.FC = () => {
       setConsolesUsedData(response?.data?.data || []);
     } catch (err) {
       console.error("Failed to fetch used consoles:", err);
-      setConsolesUsedData([]); // Reset to empty array on error
+      setConsolesUsedData([]);
     }
   };
 
@@ -136,7 +130,6 @@ const PopularMainSection: React.FC = () => {
 
   const fetchUsedLaptops = async () => {
     try {
-      // Just make a single API call with condition=2 (backend already handles [2,3,4])
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=1&condition=2`,
         {

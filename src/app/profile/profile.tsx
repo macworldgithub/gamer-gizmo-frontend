@@ -90,7 +90,7 @@ export default function ProfilePage() {
             //@ts-ignore
               src={
                 profileData.profile != null
-                  ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profileData.profile}`
+                  ? `${profileData.profile}`
                   : profile
               }
               alt="Profile"

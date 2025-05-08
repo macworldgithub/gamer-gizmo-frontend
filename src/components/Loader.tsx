@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-white">
       <Image
-        src="/images/gameIcon.svg"
+        src="/images/gameIcon.webp"
         alt="Loading"
         width={200}
         height={200}
