@@ -66,7 +66,7 @@ export default function BlogList() {
               onClick={() => router.push(`/blog/${blog.id}`)}
             >
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${blog.images}`}
+                src={`${blog.images}`}
                 alt={blog.title}
                 width={120}
                 height={80}

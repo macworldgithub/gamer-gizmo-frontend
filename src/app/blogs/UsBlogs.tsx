@@ -114,7 +114,7 @@ export default function UsBlogs() {
           <div key={index} className="space-y-2 w-full md:max-w-[480px] ">
             <div className="relative w-full h-[180px] md:h-[250px]">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${blog.image}`}
+                src={`${blog.image}`}
                 alt={blog.title}
                 layout="fill"
                 objectFit="cover"

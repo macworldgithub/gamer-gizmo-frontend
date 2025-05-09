@@ -133,7 +133,10 @@ const PublishAdd: React.FC = () => {
       toast.error("Please provide all the required details.");
       return;
     }
-
+    if (activeStep === 1 && (!selectedLocation || !selectedLocation.id)) {
+      toast.error("Please select a location before proceeding.");
+      return;
+    }
     if (activeStep === 3 && (price === "0" || quantity === "0")) {
       toast.error("Please provide valid price and quantity.");
       return;
