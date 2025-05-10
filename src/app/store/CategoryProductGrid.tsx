@@ -77,7 +77,7 @@ const CategoryProductGrid = ({
                 <Image
                   src={
                     product.images?.length > 0
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${product.images[0].image_url}`
+                      ? `${product.images[0].image_url}`
                       : "/gameIcon.webp"
                   }
                   alt={product.name || "Product image"}

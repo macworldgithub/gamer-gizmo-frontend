@@ -42,7 +42,7 @@ const Rightsection = ({ data }: any) => {
       <div className=" h-fit border-gray-300 rounded-lg p-6 w-80 lg:w-[400px] bg-white shadow-md flex flex-col justify-between dark:bg-black">
         {/* Price Heading */}
         <h1 className="text-2xl font-bold text-purple-600 text-center md:text-3xl">
-          {Number(data.price).toLocaleString()}
+          AED {Number(data.price).toLocaleString()}
         </h1>
         {/* Horizontal Divider */}
         {/* <hr className="my-6 border-gray-300 w-full " /> */}
