@@ -105,16 +105,16 @@ export default function UsBlogs() {
 
   return (
     <div className=" mx-auto max-sm:p-1 max-sm:px-2 p-4 md:p-6">
-      <h2 className="text-3xl font-bold mb-8 dark:text-white">
+      <h2 className="text-3xl font-bold mb-8 dark:text-white text-black">
         Recent blog posts
       </h2>
 
-      <div className="grid grid-cols-2  max-sm:gap-2 sm:gap-3 md:gap-2 lg:gap-6">
+      <div className="grid grid-cols-2  max-sm:gap-2 sm:gap-3 md:gap-2 lg:gap-6 text-black dark:text-white">
         {data.slice(0, 2).map((blog: Blog, index: number) => (
           <div key={index} className="space-y-2 w-full md:max-w-[480px] ">
             <div className="relative w-full h-[180px] md:h-[250px]">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${blog.image}`}
+                src={`${blog.image}`}
                 alt={blog.title}
                 layout="fill"
                 objectFit="cover"
@@ -129,7 +129,7 @@ export default function UsBlogs() {
               </p>
               <h3
                 onClick={() => router.push(`/blog/${blog.blogId}`)}
-                className="text-base max-md:text-[0.6rem] font-bold hover:underline cursor-pointer break-words dark:text-white"
+                className="text-base max-md:text-[0.6rem] font-bold hover:underline cursor-pointer break-words dark:text-white text-black"
               >
                 {blog.title}
               </h3>

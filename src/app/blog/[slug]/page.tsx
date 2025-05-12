@@ -66,7 +66,7 @@ export default function BlogPost() {
   return (
     <div className="dark:bg-black">
       <Wrapper>
-        <div className="w-full mx-auto p-6 dark:bg-[#1e1e2f] ">
+        <div className="w-full mx-auto p-6 dark:bg-[#1e1e2f] text-black dark:text-white">
           <Image
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.image}`}
             alt={post.title}
@@ -75,20 +75,20 @@ export default function BlogPost() {
             className=" object-cover rounded-md w-full h-80"
           />
 
-          <p className="text-sm text-purple-600 font-semibold mt-4">
+          <p className="text-sm text-purple-600 font-semibold mt-4 ">
             {formatDate(post.created_at)}
           </p>
-          <div className="flex space-x-2 mt-4">
+          <div className="flex space-x-2 mt-4 ">
             {post.tags.map((tag, index) => (
               <span
                 key={index}
-                className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium"
+                className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium "
               >
                 {tag}
               </span>
             ))}
           </div>
-          <h1 className="text-3xl font-bold mt-2 dark:text-white lg:text-lg max-md:text-sm md:text-lg">
+          <h1 className="text-3xl font-bold mt-2 dark:text-white lg:text-lg max-md:text-sm md:text-lg text-black">
             {post.title}
           </h1>
           <p

@@ -56,17 +56,17 @@ export default function BlogList() {
 
   return (
     <div className="max-w-2xl max-md:pl-8">
-      <h1 className="text-3xl font-bold mb-8 dark:text-white">All Blogs</h1>
+      <h1 className="text-3xl font-bold mb-8 dark:text-white text-black">All Blogs</h1>
       {blogs.length > 0 ? (
-        <div className="space-y-6">
+        <div className="space-y-6 text-black">
           {blogs.map((blog: any) => (
             <div
               key={blog.id}
-              className="flex items-start space-x-2  border-b pb-4 cursor-pointer"
+              className="flex items-start space-x-2  border-b pb-4 cursor-pointer text-black dark:text-white"
               onClick={() => router.push(`/blog/${blog.id}`)}
             >
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${blog.images}`}
+                src={`${blog.images}`}
                 alt={blog.title}
                 width={120}
                 height={80}
@@ -77,7 +77,7 @@ export default function BlogList() {
                   {getTimeAgoOrDate(blog.created_at)}
                 </p>
 
-                <h3 className="font-bold md:text-[0.6rem] lg:text-xs hover:underline dark:text-white">
+                <h3 className="font-bold md:text-[0.6rem] lg:text-xs hover:underline dark:text-white text-black">
                   {blog.title}
                 </h3>
               </div>

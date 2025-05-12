@@ -101,7 +101,7 @@ export default function AdList({
               height={100}
               src={
                 ad?.images &&
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/${ad?.images[0].image_url}`
+                `${ad?.images[0].image_url}`
               }
               alt={"image"}
               className="object-contain w-full h-full"

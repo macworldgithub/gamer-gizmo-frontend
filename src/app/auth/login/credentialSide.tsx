@@ -184,7 +184,7 @@ const CredentialSide = () => {
             height={13}
             alt="login"
           />
-          {isSignIn ? "Signing in..." : "SignIn"}
+          {isSignIn ? "Signing in..." : "Sign In"}
         </button>
       </div>
 

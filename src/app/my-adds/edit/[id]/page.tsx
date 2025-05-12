@@ -28,7 +28,7 @@ export default function EditAdPage() {
     if (!id) return;
     fetchAdDetails();
     fetchLocations();
-  }, [id]);
+  }, [id]);  
   useEffect(() => {
     fetchBrands();
   }, [adData]);

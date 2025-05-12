@@ -46,7 +46,7 @@ const CategoryProductGrid = ({
   return (
     <Wrapper>
       <div className="w-full flex items-center justify-between mt-[0.8rem] mb-1 ">
-        <h2 className="text-xl max-sm:text-sm font-bold  dark:text-white">
+        <h2 className="text-xl max-sm:text-sm font-bold text-black dark:text-white">
           {categoryName}
         </h2>
 
@@ -77,7 +77,7 @@ const CategoryProductGrid = ({
                 <Image
                   src={
                     product.images?.length > 0
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${product.images[0].image_url}`
+                      ? `${product.images[0].image_url}`
                       : "/gameIcon.webp"
                   }
                   alt={product.name || "Product image"}
