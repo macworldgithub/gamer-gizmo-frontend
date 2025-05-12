@@ -9,6 +9,7 @@ import LiveAdSection from "./LiveAd";
 import GetStartedBadge from "./GetStartedBadge";
 import InspectionBadge from "./InspectionBadge";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
+import { sortByCreatedAt } from "@/app/utils/sort";
 
 interface ProductMainProps {
   categoryId: number;
@@ -31,6 +32,23 @@ const ProductMain = ({ categoryId, query }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  // const fetchProducts = async (categoryId: number, condition: number) => {
+  //   try {
+  //     let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll`;
+  //     if (categoryId !== 0) {
+  //       url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?condition=${condition}&category_id=${categoryId}`;
+  //     }
+
+  //     const response = await axios.get(url, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  //     return response?.data?.data || [];
+  //   } catch (err) {
+  //     console.error("Failed to fetch models.");
+  //     return [];
+  //   }
+  // };
+
   const fetchProducts = async (categoryId: number, condition: number) => {
     try {
       let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll`;
@@ -41,9 +59,12 @@ const ProductMain = ({ categoryId, query }: any) => {
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      return response?.data?.data || [];
+      // console.log(response?.data?.data, "before sorting");
+      const sorted = sortByCreatedAt(response?.data?.data || []);
+      console.log(sorted, "after sorting");
+      return sorted;
     } catch (err) {
-      console.error("Failed to fetch models.");
+      console.error("Failed to fetch products.");
       return [];
     }
   };
@@ -62,7 +83,9 @@ const ProductMain = ({ categoryId, query }: any) => {
         setFilteredData([]);
         const newProducts = await fetchProducts(categoryId, 1);
         const usedProducts = await fetchProducts(categoryId, 2);
+        //@ts-ignore
         setNewData(newProducts);
+        //@ts-ignore
         setUsedData(usedProducts);
       } else {
         let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&${queryParams}`;
@@ -72,7 +95,10 @@ const ProductMain = ({ categoryId, query }: any) => {
         const response = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setFilteredData(response?.data?.data || []);
+        // setFilteredData(response?.data?.data || []);
+        const sortedFiltered = sortByCreatedAt(response?.data?.data || []);
+        //@ts-ignore
+        setFilteredData(sortedFiltered);
         setCurrentPage(1);
       }
       setLoading(false);

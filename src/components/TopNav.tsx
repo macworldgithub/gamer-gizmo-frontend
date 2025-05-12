@@ -49,8 +49,8 @@ const TopNav = () => {
       {/* </div> */}
       {/* Live Streaming Section */}
       <div className="flex items-center justify-between max-sm:mr-2 sm:mr-6">
-        <div className="flex max-sm:block justify-center items-center max-sm:mr-4 sm:gap-4">
-          <p className="text-navTextLight lg:text-[1rem] w-max text-wrap max-md:text-[0.5rem] md:text-sm  text-center   md:mr-5">
+        <div className="flex max-sm:block justify-center items-center max-sm:mr-4 sm:gap-4 mr-6">
+          <p className="text-navTextLight  lg:text-[1rem] w-max text-wrap max-md:text-[0.5rem] md:text-sm  text-center   md:mr-5">
             Live Streaming Coming Soon
           </p>
           {/* <div className="px-4 tracking-wider max-sm:w-[4rem] sm:w-[5rem] sm:h-6 md:w-28 max-sm:h-6 h-[2rem] md:h-8 ml-2 mr-8 py-1 flex justify-center items-center text-[0.6rem] md:text-sm bg-custom-gradient text-white rounded-md max-sm:text-[0.5rem]">

@@ -47,7 +47,7 @@ export default function HomePage() {
         <LiveAdSection
           category="Home"
           adId={1}
-          className="md:w-1/2 max-md:w-[45%]  md:h-52 max-md:h-40 mx-auto"
+          className="md:w-1/2 max-md:w-[80%]  md:h-52  max-md:h-40 mx-auto"
         />
       </div>
       <CategoriesComponent />

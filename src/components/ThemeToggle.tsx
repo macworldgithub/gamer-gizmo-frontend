@@ -29,11 +29,11 @@ const ThemeToggle = () => {
   };
   return (
     <div
-      className="relative max-md:w-[5.6rem] md:w-[4.5rem] lg:max-w-[9rem] lg:min-w-[7rem] md:h-[2rem] lg:h-[3rem] bg-white rounded-full  flex justify-between items-center  p-1 max-md:my-6 cursor-pointer shadow-md shadow-blue-500/50"
+      className="relative max-md:w-[5.6rem]  md:w-[4.5rem] lg:max-w-[8rem] lg:min-w-[6rem] md:h-[2rem] lg:h-[3rem] bg-white rounded-full  flex justify-between items-center  p-1 max-md:my-6 cursor-pointer shadow-md shadow-blue-500/50"
       onClick={handleToggle}
     >
       {/* Icons */}
-      <div className="absolute md:left-[0.8rem] lg:left-[1.28rem] max-md:left-[1rem] flex items-center space-x-12 w-36">
+      <div className="absolute md:left-[0.8rem] lg:left-[1.28rem] max-md:left-[1rem] flex items-center space-x-6 w-36">
         <FontAwesomeIcon icon={faSun} className="z-10 " color="#000000" />
         {/* color={isDarkMode ? 'white' : 'black'} */}
       </div>
@@ -48,7 +48,7 @@ const ThemeToggle = () => {
         {/* style={{ color: isDarkMode ? 'white' : 'black' }} */}
       </div>
       <div
-        className={`lg:w-[3rem] md:w-[2rem] max-md:w-[2.5rem] max-md:h-[1.7rem] md:h-[1.5rem] lg:h-[2rem] bg-custom-gradient rounded-full transform transition-all duration-300 ${
+        className={`lg:w-[2.6rem] md:w-[2rem] max-md:w-[2.5rem] max-md:h-[1.7rem] md:h-[1.5rem] lg:h-[2rem] bg-custom-gradient rounded-full transform transition-all duration-300 ${
           localStorage.getItem("theme") === "dark"
             ? "translate-x-[100%]"
             : "translate-x-0"

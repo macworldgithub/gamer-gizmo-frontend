@@ -157,7 +157,7 @@ const BottomNavigationBar = () => {
   return (
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
       {/* </div> */}
-      <div className="hidden md:flex md:gap-5  lg:gap-[2rem] font-bold md:text-[0.5rem]  lg:text-[0.8rem] whitespace-nowrap text-navTextLight dark:text-white">
+      <div className="hidden md:flex md:gap-3 lg:gap-[.9rem] xl:gap-11 font-bold md:text-[0.5rem]  lg:text-[0.8rem]  whitespace-nowrap text-navTextLight dark:text-white">
         {tabs.map((tab) => (
           <Link
             key={tab.name}
@@ -312,7 +312,7 @@ const BottomNavigationBar = () => {
                 Inspection
               </Link>
 
-              <div className="flex-col items-center mx-auto pl-0">
+              <div className="flex-col items-center mx-auto pl-0 ">
                 <Link href="/publish-ad" onClick={() => setIsDrawerOpen(false)}>
                   <div className="w-[6rem] mx-auto h-8 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
                     <Image
@@ -334,9 +334,9 @@ const BottomNavigationBar = () => {
           </>
         )}
       </div>
-      <div className="hidden md:flex md:justify-between items-center md:gap-[0.9rem]">
+      <div className="hidden md:flex md:justify-between items-center xl:gap-10 md:gap-[0.5rem]">
         <Link href="/publish-ad">
-          <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+          <div className="md:w-[5rem] lg:max-w-[30rem]  lg:min-w-[7rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
             <Image
               src="/images/btnIcon.png"
               className="md:w-[0.6rem]"
@@ -372,7 +372,7 @@ const BottomNavigationBar = () => {
                 alt="Profile"
                 width={50}
                 height={50}
-                className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
+                className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
               />
             </Dropdown>
           </div>

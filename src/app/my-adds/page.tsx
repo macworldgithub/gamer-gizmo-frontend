@@ -38,15 +38,32 @@ export default function Add() {
       );
       setLoading(false);
 
-      console.log(response?.data?.data, "pak");
-      setAds(response.data.data);
+      let data = response.data.data;
+
+      // Sort by latest created_at from images array (newest first)
+      //@ts-ignore
+      data.sort((a, b) => {
+        const aLatest = Math.max(
+          ...(a.images || []).map((img: any) =>
+            new Date(img.created_at).getTime()
+          )
+        );
+        const bLatest = Math.max(
+          ...(b.images || []).map((img: any) =>
+            new Date(img.created_at).getTime()
+          )
+        );
+        return bLatest - aLatest;
+      });
+
+      setAds(data);
       setTotal(response.data.total);
     } catch (err) {
       setLoading(false);
-
       toast.error("Failed to add to favourites");
     }
   };
+
   useEffect(() => {
     fetch();
   }, [fetcher]);
