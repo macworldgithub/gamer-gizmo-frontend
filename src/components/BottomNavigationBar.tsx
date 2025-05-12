@@ -353,7 +353,7 @@ const BottomNavigationBar = () => {
         {isLogin ? (
           <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
             <Dropdown className="shadow-2xl" menu={{ items }}>
-              <Image
+              {/* <Image
                 src={
                   profile
                     ? profile.startsWith("http")
@@ -361,6 +361,14 @@ const BottomNavigationBar = () => {
                       : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
                     : "/images/profile.png"
                 }
+                alt="Profile"
+                width={50}
+                height={50}
+                className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
+              /> */}
+              <Image
+                //@ts-ignore
+                src={profile}
                 alt="Profile"
                 width={50}
                 height={50}

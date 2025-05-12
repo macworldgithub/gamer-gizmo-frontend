@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { InitializeUserData } from "@/components/Store/Slicer/LoginSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -12,6 +12,7 @@ import { detectPlatform } from "@/app/utils/detectPlatform";
 import { getLocation } from "@/app/utils/getLocation";
 import axiosInstance from "@/app/utils/axios";
 import ForgotPasswordModal from "./ForgotPasswordModal";
+import { RootState } from "@/components/Store/Store";
 
 const CredentialSide = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ const CredentialSide = () => {
   const [accounts, setAccounts] = useState([]);
   const loginUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`;
   const logOutUserAccount = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logoutOtherAccounts`;
+  const profile = useSelector((state: RootState) => state.user.profile);
+  console.log(profile, "hello");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -32,71 +35,72 @@ const CredentialSide = () => {
   };
 
   const [isSignIn, setIsSignIn] = useState(false);
+
   const handleLogin = async () => {
+    if (!username || !password) {
+      toast.error("Please fill in all the fields");
+      return;
+    }
+
     setIsSignIn(true);
-    if (username && password) {
-      try {
-        const response = await axiosInstance.post(loginUrl, {
-          name: username,
-          password: password,
-          platform,
-          region,
-        });
+
+    try {
+      const response = await axiosInstance.post(loginUrl, {
+        name: username,
+        password,
+        platform,
+        region,
+      });
+
       console.log("Response:", response);
 
-        if (response.status === 200 || response.status === 201) {
-          toast.success("Login successful!", {
-            icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
-          });
-          dispatch(InitializeUserData(response.data));
-          setTimeout(() => {
-            router.push(`/`);
-          }, 3000);
-        } else {
-          toast.error(response.data.message || "Login failed failed", {});
-        }
-        console.log("API Response:", response.data);
-      } catch (error: any) {
-        console.error("Error during Login:", error);
-        if (Array.isArray(error.response?.data?.message)) {
-          for (let i = 0; error.response?.data?.message.length > i; i++) {
-            toast.error(
-              error.response?.data?.message[i] ||
-                "An error occurred. Please try again."
-            );
-          }
-        } else {
-          if (
-            error.response?.data?.message ==
-            "You have reached max account logins"
-          ) {
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Login successful!", {
+          icon: <FaCheckCircle style={{ color: "#dc39fc" }} />,
+        });
+
+        dispatch(InitializeUserData(response?.data));
+
+        setTimeout(() => {
+          router.push(`/`);
+        }, 3000);
+
+        console.log("User ID:", response?.data?.id);
+      } else {
+        toast.error(response.data.message || "Login failed");
+      }
+    } catch (error: any) {
+      console.error("Error during login:", error);
+
+      const message = error.response?.data?.message;
+
+      if (Array.isArray(message)) {
+        message.forEach((msg: string) =>
+          toast.error(msg || "An error occurred. Please try again.")
+        );
+      } else {
+        switch (message) {
+          case "You have reached max account logins":
             setShowAccountsModal(true);
-            setAccounts(error.response?.data.accounts);
-          } else if (
-            error.response?.data?.message ==
-            "User is not Verified, Email is sent to the registerd email"
-          ) {
-            toast.error(
-              error.response?.data?.message ||
-                "An error occurred. Please try again."
-            );
+            setAccounts(error.response?.data?.accounts);
+            break;
+
+          case "User is not Verified, Email is sent to the registerd email":
+            toast.error(message || "An error occurred. Please try again.");
             setTimeout(() => {
               router.push(`/auth/otp?email=${username}`);
             }, 3000);
-          } else {
-            toast.error(
-              error.response?.data?.message ||
-                "An error occurred. Please try again."
-            );
-          }
+            break;
+
+          default:
+            toast.error(message || "An error occurred. Please try again.");
         }
-      } finally {
-        setIsSignIn(false);
       }
-    } else {
-      toast.error("Please Fill the fields");
+    } finally {
+      setIsSignIn(false);
     }
   };
+
   const LogoutExistingAccount = async (acc: any) => {
     try {
       const response = await axiosInstance.post(logOutUserAccount, {

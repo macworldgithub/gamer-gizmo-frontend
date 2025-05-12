@@ -87,11 +87,9 @@ export default function ProfilePage() {
         <div className="flex w-full  items-center mb-6 max-md:hidden dark:text-white">
           <div className="relative">
             <img
-            //@ts-ignore
+              //@ts-ignore
               src={
-                profileData.profile != null
-                  ? `${profileData.profile}`
-                  : profile
+                profileData.profile != null ? `${profileData.profile}` : profile
               }
               alt="Profile"
               width={100}

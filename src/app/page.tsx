@@ -44,7 +44,6 @@ export default function HomePage() {
       <MobileCategories />
       <FilterSection />
       <div className="bg-[#F4F2FE] flex justify-center  dark:bg-secondaryBlack pt-4">
-        {/* <AdsBanner/> */}
         <LiveAdSection
           category="Home"
           adId={1}
@@ -52,7 +51,6 @@ export default function HomePage() {
         />
       </div>
       <CategoriesComponent />
-      {/* <CardComponent /> */}
       <div className="mt-8">
         <ConditionalLiveAds />
       </div>

@@ -26,14 +26,14 @@ const ConditionalLiveAds = () => {
     fetchAds();
   }, []);
 
-  const hasAd2 = ads.some((ad) => ad.ad_id === 2);
-  const hasAd3 = ads.some((ad) => ad.ad_id === 3);
+  const hasAd2 = ads.some((ad) => ad?.ad_id === 2);
+  const hasAd3 = ads.some((ad) => ad?.ad_id === 3);
 
   if (loading) return <p className="text-center">Loading ads...</p>;
 
   if (hasAd2 && hasAd3) {
     return (
-      <div className="w-full flex max-md:gap-2 md:gap-6 mt-2 max-w-5xl max-lg:ml-4 mx-auto mb-4">
+      <div className="w-full  flex max-md:gap-2 md:gap-6 mt-[3rem] max-w-5xl max-lg:ml-4 mx-auto mb-2">
         <LiveAdSection
           category="Home"
           adId={2}

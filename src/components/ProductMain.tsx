@@ -154,12 +154,12 @@ const ProductMain = ({ categoryId, query }: any) => {
             <div className="w-[30%] max-md:w-0 max-md:hidden">
               <LiveAdSection
                 category={`Popular ${categoryName}`}
-                adId={3}
+                adId={2}
                 className="w-[100%] ml-6 h-[36rem] "
               />
               <LiveAdSection
                 category={`Popular ${categoryName}`}
-                adId={4}
+                adId={3}
                 className="w-[100%] ml-6 my-4 h-[36rem]  "
               />
             </div>
@@ -213,7 +213,7 @@ const ProductMain = ({ categoryId, query }: any) => {
         <>
           <Wrapper className="flex w-full mt-4 gap-3">
             <LiveAdSection
-              className="w-1/2 md:h-52 max-md:h-40  hidden sm:block"
+              className="w-1/2 md:h-52 max-md:h-40 hidden sm:block"
               category={categoryName}
               adId={1}
             />
