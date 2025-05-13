@@ -46,11 +46,6 @@ const LiveAdSection = ({
     return ["mp4", "webm", "avi", "mov"].includes(ext || "");
   };
 
-  // const isVideo = (url: string) => {
-  //   return (
-  //     url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".avi")
-  //   );
-  // };
   const adUrl = selectedAd
     ? selectedAd.url.startsWith("http")
       ? selectedAd.url
@@ -77,7 +72,7 @@ const LiveAdSection = ({
             <img
               src={adUrl}
               alt={`Live Advertisement ${adId}`}
-              className="w-full h-full object-cover rounded"
+              className="w-full h-full object-cover "
               onLoad={() => setError(null)} // Reset error if image loads successfully
               onError={(e) => {
                 setError("Failed to load image");

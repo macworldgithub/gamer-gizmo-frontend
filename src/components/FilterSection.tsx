@@ -98,7 +98,7 @@ const FilterSection = () => {
                       <div className="flex items-center">
                         <Image
                           // @ts-expect-error kuhn mhj
-                          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${product?.images[0]?.image_url}`}
+                          src={`${product?.images[0]?.image_url}`}
                           // @ts-expect-error kuhn mhj
                           alt={product.name}
                           width={40}
