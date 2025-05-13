@@ -37,13 +37,20 @@ const LiveAdSection = ({
   }, [category]);
 
   const selectedAd = adImages.find((ad: any) => ad.ad_id === adId); // Find the ad by its ID
-
-  const isVideo = (url: string) => {
-    return (
-      url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".avi")
-    );
+  const getFileExtension = (url: string) => {
+    return url?.split("?")[0]?.split(".").pop()?.toLowerCase();
   };
 
+  const isVideo = (url: string) => {
+    const ext = getFileExtension(url);
+    return ["mp4", "webm", "avi", "mov"].includes(ext || "");
+  };
+
+  // const isVideo = (url: string) => {
+  //   return (
+  //     url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".avi")
+  //   );
+  // };
   const adUrl = selectedAd
     ? selectedAd.url.startsWith("http")
       ? selectedAd.url
@@ -53,32 +60,6 @@ const LiveAdSection = ({
     : "";
 
   return (
-    // <div
-    //   className={`dark:bg-secondaryBlack dark:text-white border-gray-300 justify-center rounded-lg bg-gray-200 shadow-md flex items-center ${className}`}
-    // >
-    //   {loading && <p>Loading Ads...</p>}
-    //   {error && <p className="text-red-500">{error}</p>}
-
-    //   {selectedAd ? (
-    //     <div className="relative w-full h-full rounded overflow-hidden">
-    //       {isVideo(adUrl) ? (
-    //         <video controls className="w-full h-full object-cover rounded">
-    //           <source src={adUrl} type="video/mp4" />
-    //           Your browser does not support the video tag.
-    //         </video>
-    //       ) : (
-    //         <img
-    //           src={adUrl}
-    //           alt={`Live Advertisement ${adId}`}
-    //           className="w-full h-full object-cover rounded"
-    //           onError={() => setError("Failed to load image")}
-    //         />
-    //       )}
-    //     </div>
-    //   ) : !loading ? (
-    //     <p className="text-center pt-6">No ad available for this slot</p>
-    //   ) : null}
-    // </div>
     <div
       className={`dark:bg-secondaryBlack dark:text-white  justify-center rounded-lg bg-gray-200 shadow-md dark:border border-white-600 flex items-center ${className}`}
     >
@@ -107,7 +88,9 @@ const LiveAdSection = ({
           )}
         </div>
       ) : !loading ? (
-        <p className="text-center pt-6 text-black dark:text-white ">No ad available for this slot</p>
+        <p className="text-center pt-6 text-black dark:text-white ">
+          No ad available for this slot
+        </p>
       ) : null}
     </div>
   );
