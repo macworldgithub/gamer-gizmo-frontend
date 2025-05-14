@@ -30,41 +30,59 @@ const ProductMain = ({ categoryId, query }: any) => {
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
 
-  // const fetchProducts = async (categoryId: number, condition: number) => {
-  //   try {
-  //     let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll`;
-  //     if (categoryId !== 0) {
-  //       url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?condition=${condition}&category_id=${categoryId}`;
-  //     }
-
-  //     const response = await axios.get(url, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-  //     return response?.data?.data || [];
-  //   } catch (err) {
-  //     console.error("Failed to fetch models.");
-  //     return [];
-  //   }
-  // };
-
-  const fetchProducts = async (categoryId: number, condition: number) => {
+  const fetchProducts = async (
+    categoryId: number,
+    condition: number,
+    pageNo = 1
+  ) => {
     try {
-      let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll`;
+      let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?pageNo=${pageNo}`;
       if (categoryId !== 0) {
-        url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?condition=${condition}&category_id=${categoryId}`;
+        url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?condition=${condition}&category_id=${categoryId}&pageNo=${pageNo}`;
       }
 
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // console.log(response?.data?.data, "before sorting");
-      const sorted = sortByCreatedAt(response?.data?.data || []);
-      console.log(sorted, "after sorting");
-      return sorted;
+      setTotalCount(response?.data?.totalCount || 0);
+      setTotalPages(Math.ceil(response?.data?.totalCount / 10) || 1);
+      return sortByCreatedAt(response?.data?.data || []);
     } catch (err) {
       console.error("Failed to fetch products.");
+      return [];
+    }
+  };
+
+  const fetchFilteredProducts = async (pageNo = 1) => {
+    try {
+      const filteredValues = Object.fromEntries(
+        Object.entries(query).filter(([key, value]) => value !== "")
+      );
+
+      let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?pageNo=${pageNo}`;
+      if (categoryId !== 0) {
+        url += `&category_id=${categoryId}`;
+      }
+
+      // Add other query parameters
+      const queryParams = new URLSearchParams(
+        filteredValues as Record<string, string>
+      ).toString();
+      if (queryParams) {
+        url += `&${queryParams}`;
+      }
+
+      const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setTotalCount(response?.data?.totalCount || 0);
+      setTotalPages(Math.ceil(response?.data?.totalCount / 10) || 1);
+      return sortByCreatedAt(response?.data?.data || []);
+    } catch (err) {
+      console.error("Failed to fetch filtered products.");
       return [];
     }
   };
@@ -75,36 +93,31 @@ const ProductMain = ({ categoryId, query }: any) => {
       const filteredValues = Object.fromEntries(
         Object.entries(query).filter(([key, value]) => value !== "")
       );
-      const queryParams = new URLSearchParams(
-        filteredValues as Record<string, string>
-      ).toString();
 
       if (!(Object.keys(filteredValues).length > 0)) {
         setFilteredData([]);
-        const newProducts = await fetchProducts(categoryId, 1);
-        const usedProducts = await fetchProducts(categoryId, 2);
+        const newProducts = await fetchProducts(categoryId, 1, currentPage);
+        const usedProducts = await fetchProducts(categoryId, 2, currentPage);
         //@ts-ignore
         setNewData(newProducts);
         //@ts-ignore
+
         setUsedData(usedProducts);
       } else {
-        let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?category_id=${categoryId}&${queryParams}`;
-        if (categoryId == 0) {
-          url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?${queryParams}`;
-        }
-        const response = await axios.get(url, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        // setFilteredData(response?.data?.data || []);
-        const sortedFiltered = sortByCreatedAt(response?.data?.data || []);
+        const filteredProducts = await fetchFilteredProducts(currentPage);
         //@ts-ignore
-        setFilteredData(sortedFiltered);
-        setCurrentPage(1);
+
+        setFilteredData(filteredProducts);
       }
       setLoading(false);
     };
     fetchData();
-  }, [categoryId, fetcher, token, query]);
+  }, [categoryId, fetcher, token, query, currentPage]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const filteredValues = Object.fromEntries(
     Object.entries(query).filter(([key, value]) => value !== "")
@@ -113,7 +126,6 @@ const ProductMain = ({ categoryId, query }: any) => {
     categoryNames[categoryId as keyof typeof categoryNames] ||
     "Unknown Category";
 
-  console.log(categoryName, "hjk");
   return (
     <div className="h-auto w-full">
       {Object.keys(filteredValues).length > 0 ? (
@@ -135,43 +147,39 @@ const ProductMain = ({ categoryId, query }: any) => {
               : `Popular in ${categoryName}`}
           </h1>
           <div className="flex w-[100%]">
-            <div className="flex items-start gap-2 max-md:w-full  md:w-[70%] relative">
-              <div className="flex-col flex flex-wrap gap-4 w-full  justify-center max-sm:gap-[0.5rem] ">
-                {filteredData && filteredData.length > 0 ? (
-                  filteredData
-                    .slice(
-                      (currentPage - 1) * itemsPerPage,
-                      currentPage * itemsPerPage
-                    )
-                    .map((product, index) => {
-                      const globalIndex =
-                        (currentPage - 1) * itemsPerPage + index;
-                      return (
-                        <>
-                          <ProductCard
-                            isColumn={true}
-                            fetcher={fetcher}
-                            refetch={fetcher}
-                            seReftech={seReftech}
-                            product={product}
-                          />
-                          <div className="h-[3px] w-full bg-bluishBorder"></div>
-                          {globalIndex === 2 && <InspectionBadge />}
-                          {globalIndex === 6 && (
-                            <div className="w-[70%] ">
-                              <GetStartedBadge />
-                            </div>
-                          )}
-                          {(globalIndex + 1) % 5 === 0 && (
-                            <LiveAdSection
-                              className="md:w-[100%] h-52 my-4"
-                              category={`Popular ${categoryName}`}
-                              adId={2}
-                            />
-                          )}
-                        </>
-                      );
-                    })
+            <div className="flex items-start gap-2 max-md:w-full md:w-[70%] relative">
+              <div className="flex-col flex flex-wrap gap-4 w-full justify-center max-sm:gap-[0.5rem]">
+                {loading ? (
+                  <div>Loading...</div>
+                ) : filteredData && filteredData.length > 0 ? (
+                  filteredData.map((product, index) => (
+                    <>
+                      <ProductCard
+                        //@ts-ignore
+                        key={product.id || index}
+                        isColumn={true}
+                        fetcher={fetcher}
+                        refetch={fetcher}
+                        seReftech={seReftech}
+                        product={product}
+                      />
+                      <div className="h-[3px] w-full bg-bluishBorder"></div>
+                      {index === 2 && <InspectionBadge />}
+                      {index === 6 && (
+                        <div className="w-[70%]">
+                          <GetStartedBadge />
+                        </div>
+                      )}
+                      {(index + 1) % 5 === 0 && (
+                        <LiveAdSection
+                          className="md:w-[100%] h-52 my-4"
+                          category={`Popular ${categoryName}`}
+                          adId={5 + Math.floor((index + 1) / 5) - 1}
+                          // adId={2}
+                        />
+                      )}
+                    </>
+                  ))
                 ) : (
                   <div className="text-red-600">No Product To display</div>
                 )}
@@ -181,12 +189,12 @@ const ProductMain = ({ categoryId, query }: any) => {
               <LiveAdSection
                 category={`Popular ${categoryName}`}
                 adId={2}
-                className="w-[100%] ml-6 h-[36rem] "
+                className="w-[100%] ml-6 h-[36rem]"
               />
               <LiveAdSection
                 category={`Popular ${categoryName}`}
                 adId={3}
-                className="w-[100%] ml-6 my-4 h-[36rem]  "
+                className="w-[100%] ml-6 my-4 h-[36rem]"
               />
             </div>
           </div>
@@ -194,7 +202,7 @@ const ProductMain = ({ categoryId, query }: any) => {
           {/* Pagination Controls */}
           <div className="flex justify-center items-center gap-4 my-6">
             <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className={`px-4 py-2 bg-gray-800 text-white rounded ${
                 currentPage === 1
@@ -205,22 +213,13 @@ const ProductMain = ({ categoryId, query }: any) => {
               Prev
             </button>
             <span className="text-lg font-semibold text-gray-700 dark:text-white">
-              Page {currentPage} of{" "}
-              {Math.ceil(filteredData.length / itemsPerPage)}
+              Page {currentPage} of {totalPages}
             </span>
             <button
-              onClick={() =>
-                setCurrentPage((prev) =>
-                  prev < Math.ceil(filteredData.length / itemsPerPage)
-                    ? prev + 1
-                    : prev
-                )
-              }
-              disabled={
-                currentPage >= Math.ceil(filteredData.length / itemsPerPage)
-              }
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage >= totalPages}
               className={`px-4 py-2 bg-gray-800 text-white rounded ${
-                currentPage >= Math.ceil(filteredData.length / itemsPerPage)
+                currentPage >= totalPages
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-gray-700"
               }`}
@@ -231,7 +230,7 @@ const ProductMain = ({ categoryId, query }: any) => {
 
           <LiveAdSection
             category={`Popular ${categoryName}`}
-            adId={5}
+            adId={4}
             className="w-[100%] h-[10rem] my-2"
           />
         </>

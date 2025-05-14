@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import LiveAdSection from "@/components/LiveAd";
 import CardComponent from "@/components/CardComponent";
+import Wrapper from "./Common/Wrapper/Wrapper";
 
 const ConditionalLiveAds = () => {
   const [ads, setAds] = useState<any[]>([]);
@@ -32,35 +33,37 @@ const ConditionalLiveAds = () => {
   if (loading) return <p className="text-center">Loading ads...</p>;
 
   return (
-    <div className="w-full flex  mt-[3rem]   mx-auto mb-2">
-      {/* Left Side */}
-      {hasAd2 ? (
-        <LiveAdSection
-          category="Home"
-          adId={2}
-          className="md:w-[80%] max-md:w-[45%] md:h-52 max-md:h-40"
-        />
-      ) : (
-        <CardComponent
-          position="left"
-          className="md:w-[50%] max-sm:w-[18rem] max-sm:mx-auto max-md:w-[100%] max-md:h-60 md:h-60 lg:h-52"
-        />
-      )}
+    <Wrapper>
+      <div className="w-full flex flex-col sm:flex-row justify-center items-center gap-4 px-4 mt-10">
+        {/* Left Card or Ad */}
+        {hasAd2 ? (
+          <LiveAdSection
+            category="Home"
+            adId={2}
+            className="w-full lg:w-[45%] h-[240px]"
+          />
+        ) : (
+          <CardComponent
+            position="left"
+            className="w-full lg:w-[45%] h-[240px]"
+          />
+        )}
 
-      {/* Right Side */}
-      {hasAd3 ? (
-        <LiveAdSection
-          category="Home"
-          adId={3}
-          className="md:w-[80%] max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
-        />
-      ) : (
-        <CardComponent
-          position="right"
-          className="md:w-[50%] max-sm:hidden max-md:w-[100%] max-lg:h-72  max-md:h-60 md:h-60 lg:h-52"
-        />
-      )}
-    </div>
+        {/* Right Card or Ad */}
+        {hasAd3 ? (
+          <LiveAdSection
+            category="Home"
+            adId={3}
+            className="w-full lg:w-[45%] h-[240px]"
+          />
+        ) : (
+          <CardComponent
+            position="right"
+            className="w-full lg:w-[45%] h-[240px]"
+          />
+        )}
+      </div>
+    </Wrapper>
   );
 };
 
