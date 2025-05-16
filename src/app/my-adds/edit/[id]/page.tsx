@@ -28,7 +28,7 @@ export default function EditAdPage() {
     if (!id) return;
     fetchAdDetails();
     fetchLocations();
-  }, [id]);  
+  }, [id]);
   useEffect(() => {
     fetchBrands();
   }, [adData]);
@@ -41,21 +41,13 @@ export default function EditAdPage() {
       );
 
       const product = response.data.data;
-      console.log("api response", product);
+      console.log("before editing response", product);
 
       setAdData({
         ...product,
         category_id: product?.category_id || "",
       });
 
-      // const formattedImages = (product?.images || []).map(
-      //   (url: string, index: number) => ({
-      //     uid: `${index}`, // unique ID for image
-      //     name: `image-${index}`,
-      //     url, // this is important for display
-      //     status: "done",
-      //   })
-      // );
       const formattedImages = (product?.images || []).map(
         (url: string, index: number) => ({
           uid: `${index}`,
@@ -245,13 +237,25 @@ export default function EditAdPage() {
       //   // adData?.product_images?.map((img: any) => img.image_url) || [];
       //   adData?.product_images?.map((img: any) => ({ path: img.image_url })) ||
       //   [];
+      // const imageUrls =
+      //   fileList?.map((file: any) => ({
+      //     path: file.url?.replace(
+      //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
+      //       ""
+      //     ),
+      //   })) || [];
       const imageUrls =
-        fileList?.map((file: any) => ({
-          path: file.url?.replace(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
-            ""
-          ),
-        })) || [];
+        fileList?.map((file: any) => {
+          if (file.url) {
+            // Already uploaded image — clean the full URL to get just the path
+            const cleanedPath = file.url.split("/").slice(-1)[0]; // last segment of URL
+            return { path: cleanedPath };
+          } else if (file.originFileObj) {
+            // New image to be uploaded — use file name or handle in backend
+            return { path: file.originFileObj.name }; // or keep the file to upload
+          }
+          return { path: undefined };
+        }) || [];
 
       const payload = {
         prod_id: adData?.id?.toString() || "",
@@ -288,17 +292,6 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
-
-  const handleImageChange = ({ fileList }: any) => {
-    setFileList(fileList);
-  };
-
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
 
   return (
     <div className="w-full dark:bg-black">
