@@ -95,18 +95,18 @@ export default function AdList({
           key={ad.id}
           className="flex flex-col shadow-lg lg:flex-row items-center rounded-lg p-8 lg:p-6 mb-6"
         >
-          <div className="w-28 h-28">
-            <Image
-              width={100}
-              height={100}
-              src={
-                ad?.images &&
-                `${ad?.images[0].image_url}`
-              }
-              alt={"image"}
-              className="object-contain w-full h-full"
-            />
-          </div>
+          {ad?.images?.length > 0 && ad.images[0]?.image_url && (
+            <div className="w-28 h-28">
+              <Image
+                width={100}
+                height={100}
+                src={ad.images[0].image_url}
+                alt="image"
+                className="object-contain w-full h-full"
+              />
+            </div>
+          )}
+
           <div className="flex-1 px-0 lg:px-6">
             <h3 className="font-bold text-purple-700 max-md:text-[12px] leading-6 break-words">
               {ad?.category}
@@ -129,7 +129,6 @@ export default function AdList({
                 ad.active ? "bg-blue-500 text-white" : "bg-black text-white"
               }`}
               onClick={() => openModal(ad)}
-              
             >
               {ad.active ? "Active" : "Draft"}
             </div>

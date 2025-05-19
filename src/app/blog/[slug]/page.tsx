@@ -68,7 +68,7 @@ export default function BlogPost() {
       <Wrapper>
         <div className="w-full mx-auto p-6 dark:bg-[#1e1e2f] text-black dark:text-white">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.image}`}
+            src={`${post.image}`}
             alt={post.title}
             width={600}
             height={100}

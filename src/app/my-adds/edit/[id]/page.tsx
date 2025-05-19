@@ -209,90 +209,165 @@ export default function EditAdPage() {
     }));
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     console.log("adData:", adData);
+
+  //     const specificationsData = () => {
+  //       switch (adData?.category_id) {
+  //         case 1:
+  //           return { laptops: [{ ...adData?.laptops?.[0] }] };
+  //         case 2:
+  //           return {
+  //             personal_computers: [{ ...adData?.personal_computers?.[0] }],
+  //           };
+  //         case 3:
+  //           return { components: [{ ...adData?.components?.[0] }] };
+  //         case 4:
+  //           return { gaming_console: [{ ...adData?.gaming_console?.[0] }] };
+  //         default:
+  //           return {};
+  //       }
+  //     };
+
+  //     // const imageUrls =
+  //     //   // adData?.product_images?.map((img: any) => img.image_url) || [];
+  //     //   adData?.product_images?.map((img: any) => ({ path: img.image_url })) ||
+  //     //   [];
+  //     // const imageUrls =
+  //     //   fileList?.map((file: any) => ({
+  //     //     path: file.url?.replace(
+  //     //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
+  //     //       ""
+  //     //     ),
+  //     //   })) || [];
+  //     const imageUrls =
+  //       fileList?.map((file: any) => {
+  //         if (file.url) {
+  //           // Already uploaded image — clean the full URL to get just the path
+  //           const cleanedPath = file.url.split("/").slice(-1)[0]; // last segment of URL
+  //           return { path: cleanedPath };
+  //         } else if (file.originFileObj) {
+  //           // New image to be uploaded — use file name or handle in backend
+  //           return { path: file.originFileObj.name }; // or keep the file to upload
+  //         }
+  //         return { path: undefined };
+  //       }) || [];
+
+  //     const payload = {
+  //       prod_id: adData?.id?.toString() || "",
+  //       user_id: adData?.user_id?.toString() || "",
+  //       category_id: adData?.category_id?.toString() || "",
+  //       name: adData?.name || "",
+  //       price: adData?.price?.toString() || "",
+  //       condition: adData?.condition?.toString() || "",
+  //       description: adData?.description || "",
+  //       brand_id: adData?.brand_id?.toString() || "",
+  //       location: adData?.location?.toString() || "",
+  //       model_id: adData?.model_id?.toString() || "",
+  //       stock: adData?.stock?.toString() || "",
+  //       images: imageUrls,
+  //       is_published: adData?.is_published,
+  //       ...specificationsData(),
+  //       // product_images: existingImages,
+  //     };
+  //     console.log("Final payload:", payload);
+  //     const response = await axios.post(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/updateProduct`,
+  //       payload,
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+
+  //     console.log("API Response:", response?.data);
+
+  //     toast.success("Ad updated successfully");
+  //     router.push("/my-adds");
+  //   } catch (err) {
+  //     console.error("Error during submission:", err);
+  //     toast.error("Failed to update ad");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      console.log("adData:", adData);
+      const formData = new FormData();
 
-      const specificationsData = () => {
-        switch (adData?.category_id) {
-          case 1:
-            return { laptops: [{ ...adData?.laptops?.[0] }] };
-          case 2:
-            return {
-              personal_computers: [{ ...adData?.personal_computers?.[0] }],
-            };
-          case 3:
-            return { components: [{ ...adData?.components?.[0] }] };
-          case 4:
-            return { gaming_console: [{ ...adData?.gaming_console?.[0] }] };
-          default:
-            return {};
+      // Append images
+      fileList.forEach((file: any) => {
+        if (file.originFileObj) {
+          formData.append("images", file.originFileObj);
         }
-      };
+      });
 
-      // const imageUrls =
-      //   // adData?.product_images?.map((img: any) => img.image_url) || [];
-      //   adData?.product_images?.map((img: any) => ({ path: img.image_url })) ||
-      //   [];
-      // const imageUrls =
-      //   fileList?.map((file: any) => ({
-      //     path: file.url?.replace(
-      //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
-      //       ""
-      //     ),
-      //   })) || [];
-      const imageUrls =
-        fileList?.map((file: any) => {
-          if (file.url) {
-            // Already uploaded image — clean the full URL to get just the path
-            const cleanedPath = file.url.split("/").slice(-1)[0]; // last segment of URL
-            return { path: cleanedPath };
-          } else if (file.originFileObj) {
-            // New image to be uploaded — use file name or handle in backend
-            return { path: file.originFileObj.name }; // or keep the file to upload
-          }
-          return { path: undefined };
-        }) || [];
+      // Append base product data
+      formData.append("prod_id", adData?.id?.toString() || "");
+      formData.append("user_id", adData?.user_id?.toString() || "");
+      formData.append("category_id", adData?.category_id?.toString() || "");
+      formData.append("name", adData?.name || "");
+      formData.append("price", adData?.price?.toString() || "");
+      formData.append("condition", adData?.condition?.toString() || "");
+      formData.append("description", adData?.description || "");
+      formData.append("brand_id", adData?.brand_id?.toString() || "");
+      formData.append("location", adData?.location?.toString() || "");
+      formData.append("model_id", adData?.model_id?.toString() || "");
+      formData.append("stock", adData?.stock?.toString() || "");
+      formData.append("is_published", adData?.is_published);
 
-      const payload = {
-        prod_id: adData?.id?.toString() || "",
-        user_id: adData?.user_id?.toString() || "",
-        category_id: adData?.category_id?.toString() || "",
-        name: adData?.name || "",
-        price: adData?.price?.toString() || "",
-        condition: adData?.condition?.toString() || "",
-        description: adData?.description || "",
-        brand_id: adData?.brand_id?.toString() || "",
-        location: adData?.location?.toString() || "",
-        model_id: adData?.model_id?.toString() || "",
-        stock: adData?.stock?.toString() || "",
-        images: imageUrls,
-        is_published: adData?.is_published,
-        ...specificationsData(),
-        // product_images: existingImages,
-      };
-      console.log("Final payload:", payload);
+      // Handle category-specific specifications
+      const specs = specificationsData();
+      Object.entries(specs).forEach(([key, value]) => {
+        if (Array.isArray(value) && value.length > 0) {
+          Object.entries(value[0]).forEach(([specKey, specValue]) => {
+            //@ts-ignore
+            formData.append(`${key}[0][${specKey}]`, specValue);
+          });
+        }
+      });
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/updateProduct`,
-        payload,
-        { headers: { Authorization: `Bearer ${token}` } }
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
-
-      console.log("API Response:", response?.data);
 
       toast.success("Ad updated successfully");
       router.push("/my-adds");
     } catch (err) {
-      console.error("Error during submission:", err);
+      console.error(err);
       toast.error("Failed to update ad");
     } finally {
       setLoading(false);
     }
   };
 
+  // Keep your original specificationsData function as-is
+  const specificationsData = () => {
+    switch (adData?.category_id) {
+      case 1:
+        return { laptops: [{ ...adData?.laptops?.[0] }] };
+      case 2:
+        return { personal_computers: [{ ...adData?.personal_computers?.[0] }] };
+      case 3:
+        return { components: [{ ...adData?.components?.[0] }] };
+      case 4:
+        return { gaming_console: [{ ...adData?.gaming_console?.[0] }] };
+      default:
+        return {};
+    }
+  };
   return (
     <div className="w-full dark:bg-black">
       <div className="max-w-5xl mx-auto t-10  p-6 border rounded-lg shadow-md bg-white dark:bg-secondaryBlack ">
@@ -443,11 +518,11 @@ export default function EditAdPage() {
               />
             </div>
 
-            {/* <UploadImages
+            <UploadImages
               fileList={fileList}
               setFileList={setFileList}
               adData={adData}
-            /> */}
+            />
 
             <button
               className="bg-custom-gradient w-36 text-white rounded-md mx-auto p-1 text-lg"
