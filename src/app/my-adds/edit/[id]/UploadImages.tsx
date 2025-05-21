@@ -15,10 +15,11 @@ const getBase64 = (file: FileType): Promise<string> =>
 const UploadImages = ({ setFileList, fileList, adData }: any) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+  const maxImages = 5; // Maximum number of images allowed
 
   useEffect(() => {
     setFileList(fileList);
-  }, [fileList]);
+  }, [fileList, setFileList]);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -27,28 +28,34 @@ const UploadImages = ({ setFileList, fileList, adData }: any) => {
     setPreviewImage(file?.url || (file.preview as string));
     setPreviewOpen(true);
   };
+
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+    setFileList(newFileList.slice(0, maxImages)); // Ensure fileList never exceeds maxImages
   };
 
   const uploadButton = (
-    <button style={{ border: 0, background: "none" }} type="button">
+    <button
+      style={{ border: 0, background: "none" }}
+      type="button"
+      disabled={fileList.length >= maxImages} // Disable button when limit reached
+    >
       <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
-  console.log(setPreviewOpen, "hkjfjkd");
+
   return (
     <div>
       <Upload
         listType="picture-card"
         fileList={fileList}
-        accept=".png, .jpeg, .jpg"
+        accept=".png,.jpeg,.jpg"
         onPreview={handlePreview}
         onChange={handleChange}
-        beforeUpload={() => false} // prevent auto upload
+        beforeUpload={() => false} // Prevent auto upload
+        maxCount={maxImages} // Limit to 5 images
       >
-        {fileList.length >= 10 ? null : uploadButton}
+        {fileList.length >= maxImages ? null : uploadButton}
       </Upload>
       {previewImage && (
         <Image
