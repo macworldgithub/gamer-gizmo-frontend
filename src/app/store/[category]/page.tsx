@@ -45,7 +45,7 @@ const ProductGrid = () => {
             },
           }
         );
-        setProducts(response.data?.data?.slice(0, 4) || []);
+        setProducts(response.data?.data);
       } catch (err) {
         setError("Failed to fetch products");
       } finally {
@@ -60,16 +60,16 @@ const ProductGrid = () => {
       <Wrapper>
         <div className="w-full mx-auto mt-3 mb-4 ">
           <h1 className="font-bold mb-2 ml-1 text-black">{categoryName}</h1>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem] text-black">
+          <div className="flex flex-wrap  md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem] text-black">
             {products.map((product: any) => (
               <div
                 key={product.id}
-                className=" dark:bg-black rounded-lg shadow-lg p-4 max-md:p-2 relative border border-gray-300 text-black"
+                className=" dark:bg-black w-56 rounded-lg shadow-lg p-4 max-md:p-2 relative border border-gray-300 text-black"
               >
                 <Image
                   src={
                     product.images?.length > 0
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${product.images[0].image_url}`
+                      ? `${product.images[0].image_url}`
                       : "/gameIcon.webp"
                   }
                   alt={product.name}

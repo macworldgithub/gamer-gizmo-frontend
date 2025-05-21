@@ -30,7 +30,7 @@ const CategoryProductGrid = ({
             },
           }
         );
-        setProducts(response.data?.data?.slice(0, 4) || []);
+        setProducts(response.data?.data?.slice(0, 6) || []);
       } catch (err) {
         setError("Failed to fetch products");
       } finally {
@@ -68,11 +68,11 @@ const CategoryProductGrid = ({
 
       <div className="flex justify-between items-center mb-1 ">
         {products.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="flex overflow-x-hidden gap-4">
             {products.map((product: any) => (
               <div
                 key={product.id}
-                className="dark:bg-black rounded-lg shadow-lg md:p-2 max-sm:p-2 sm:p-2 border border-gray-300 "
+                className="dark:bg-black  w-44 rounded-lg shadow-lg md:p-2 max-sm:p-2 sm:p-2 border border-gray-300 "
               >
                 <Image
                   src={
@@ -83,7 +83,7 @@ const CategoryProductGrid = ({
                   alt={product.name || "Product image"}
                   width={100}
                   height={100}
-                  className=" md:h-28 rounded mx-auto max-sm:h-16 sm:h-20"
+                  className=" md:h-24 rounded mx-auto max-sm:h-16 sm:h-20"
                 />
                 <h3 className="md:text-xs max-sm:text-[0.6rem] sm:text-[0.8rem] text-black dark:text-white w-full truncate font-medium ">
                   {product.name}
@@ -91,7 +91,7 @@ const CategoryProductGrid = ({
                 <p className="text-gray-400 text-xs truncate">
                   {product.description}
                 </p>
-                <p className="text-purple-500 font-bold mt-1 text-xs">
+                <p className="text-purple-500 font-bold  text-xs">
                   ${product.price}
                 </p>
                 <button

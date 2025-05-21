@@ -17,6 +17,7 @@ import { clearUserData } from "./Store/Slicer/LoginSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { LuPanelLeftClose } from "react-icons/lu";
+import { LiaAdSolid } from "react-icons/lia";
 const BottomNavigationBar = () => {
   const isLogin = useSelector((state: RootState) => state.user.token != null);
   const token = useSelector((state: RootState) => state.user.token);
@@ -113,7 +114,7 @@ const BottomNavigationBar = () => {
       ),
     },
     {
-      icon: <FaCartPlus />,
+      icon: <LiaAdSolid className="size-5" />,
       key: "3",
       label: (
         <Link onClick={() => setIsDrawerOpen(false)} href="/my-adds">
@@ -131,9 +132,18 @@ const BottomNavigationBar = () => {
         </Link>
       ),
     },
-
     {
       key: "5",
+
+      icon: <FaCartPlus />,
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/Add-to-Cart">
+          Add to cart
+        </Link>
+      ),
+    },
+    {
+      key: "6",
       label: <p className="font-bold text-red-700">Logout</p>,
       icon: <CiLogout color={"#b91c1c"} />,
       onClick: () => {
