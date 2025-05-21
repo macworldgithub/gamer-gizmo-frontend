@@ -44,7 +44,7 @@ const CategoryProductGrid = ({
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <Wrapper>
+    <Wrapper className="max-md:mx-0 max-md:px-0">
       <div className="w-full flex items-center justify-between mt-[0.8rem] mb-1 ">
         <h2 className="text-xl max-sm:text-sm font-bold text-black dark:text-white">
           {categoryName}
@@ -66,13 +66,13 @@ const CategoryProductGrid = ({
         )}
       </div>
 
-      <div className="flex justify-between items-center mb-1 ">
+      <div className="flex w-full justify-between items-center mb-1 ">
         {products.length > 0 ? (
-          <div className="flex overflow-x-hidden gap-4">
+          <div className="flex overflow-x-hidden gap-4 w-[100%] max-md:gap-1">
             {products.map((product: any) => (
               <div
                 key={product.id}
-                className="dark:bg-black  w-44 rounded-lg shadow-lg md:p-2 max-sm:p-2 sm:p-2 border border-gray-300 "
+                className="flex-shrink-0 dark:bg-black  max-sm:w-[34%] sm:w-[28%] md:w-52 lg:w-44  rounded-lg shadow-lg md:p-2 max-sm:p-1 sm:p-2 border border-gray-300 "
               >
                 <Image
                   src={
@@ -83,7 +83,7 @@ const CategoryProductGrid = ({
                   alt={product.name || "Product image"}
                   width={100}
                   height={100}
-                  className=" md:h-24 rounded mx-auto max-sm:h-16 sm:h-20"
+                  className=" md:h-24 rounded mx-auto max-sm:h-16 sm:h-20 md:w-40 sm:w-32"
                 />
                 <h3 className="md:text-xs max-sm:text-[0.6rem] sm:text-[0.8rem] text-black dark:text-white w-full truncate font-medium ">
                   {product.name}

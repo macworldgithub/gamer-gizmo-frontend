@@ -64,7 +64,7 @@ const ProductGrid = () => {
             {products.map((product: any) => (
               <div
                 key={product.id}
-                className=" dark:bg-black w-56 rounded-lg shadow-lg p-4 max-md:p-2 relative border border-gray-300 text-black"
+                className=" dark:bg-black w-56 max-sm:w-40 sm:w-44 md:w-48 rounded-lg shadow-lg p-4 max-md:p-2 relative border border-gray-300 text-black"
               >
                 <Image
                   src={
@@ -75,19 +75,19 @@ const ProductGrid = () => {
                   alt={product.name}
                   width={100}
                   height={100}
-                  className="w-full h-32 max-sm:h-16 rounded mx-auto"
+                  className="w-full h-28 max-sm:h-16 rounded mx-auto"
                 />
 
-                <h3 className="text-sm max-md:text-[0.5rem] text-black dark:text-white w-full truncate font-medium mt-1 ">
+                <h3 className="text-sm max-md:text-[0.5rem] text-black dark:text-white w-full truncate font-medium">
                   {product.name}
                 </h3>
                 <p className="text-gray-400 text-[0.6rem] truncate w-full">
                   {product.description}
                 </p>
-                <p className="text-purple-500 font-bold mt-1 text-[0.6rem]">
+                <p className="text-purple-500 font-bold text-[0.6rem]">
                   ${product.price}
                 </p>
-                <button className="mt-1 dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white p-1 max-sm:p-[0.25rem] rounded-full">
+                <button className=" dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white px-2 py-1 max-sm:px-[0.25rem]  rounded-full">
                   View Details
                 </button>
               </div>
