@@ -4,6 +4,14 @@ import Player from "./Player";
 export default function BrowseVideos() {
   const videos = [
     {
+      src: "https://www.youtube.com/watch?v=3v2BbXvG3Y8",
+      poster: "/images/logo.webp",
+    },
+    {
+      src: "https://www.youtube.com/watch?v=HazSYe19wR4",
+      poster: "/images/logo.webp",
+    },
+    {
       src: "https://www.youtube.com/watch?v=gzg3bmHC3CQ",
       poster: "/images/logo.webp",
     },
@@ -13,10 +21,6 @@ export default function BrowseVideos() {
     },
     {
       src: "https://www.youtube.com/watch?v=csSTitLfdMU",
-      poster: "/images/gameIcon.webp",
-    },
-    {
-      src: "https://www.youtube.com/watch?v=IaGo0CmspMU",
       poster: "/images/gameIcon.webp",
     },
   ];
