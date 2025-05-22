@@ -16,8 +16,7 @@ const ProductGrid = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState<boolean>();
   const [error, setError] = useState<string>();
-  //@ts-ignore
-
+  const router = useRouter();
   const categoryNamesMap: Record<string, string> = {
     "1": "Laptops",
     "2": "Gaming PCS",
@@ -87,7 +86,10 @@ const ProductGrid = () => {
                 <p className="text-purple-500 font-bold text-[0.6rem]">
                   ${product.price}
                 </p>
-                <button className=" dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white px-2 py-1 max-sm:px-[0.25rem]  rounded-full">
+                <button
+                  onClick={() => router.push(`/product-details/${product.id}`)}
+                  className=" dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white px-2 py-1 max-sm:px-[0.25rem]  rounded-full"
+                >
                   View Details
                 </button>
               </div>

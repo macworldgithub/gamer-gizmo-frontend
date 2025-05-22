@@ -64,6 +64,7 @@ export default function EditAdPage() {
       setLoading(false);
     }
   };
+  console.log(adData, "heheheh");
 
   useEffect(() => {
     if (fileList.length === 0 && adData?.product_images?.length > 0) {
@@ -223,7 +224,9 @@ export default function EditAdPage() {
 
     try {
       // Identify images to delete (present in adData.product_images but not in fileList)
-      const originalImageIds = (adData?.product_images || []).map((img: any) => img.id.toString());
+      const originalImageIds = (adData?.product_images || []).map((img: any) =>
+        img.id.toString()
+      );
       const currentImageIds = fileList
         .filter((file: any) => file.id) // Only consider files with an ID (existing images)
         .map((file: any) => file.id.toString());
@@ -237,15 +240,15 @@ export default function EditAdPage() {
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/deleteProductImage`,
           {
             params: { image_ids: imagesToDelete },
-            paramsSerializer: params => {
+            paramsSerializer: (params) => {
               return Object.entries(params)
                 .map(([key, value]) => {
                   if (Array.isArray(value)) {
-                    return value.map(val => `${key}[]=${val}`).join('&');
+                    return value.map((val) => `${key}[]=${val}`).join("&");
                   }
                   return `${key}=${value}`;
                 })
-                .join('&');
+                .join("&");
             },
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -274,14 +277,21 @@ export default function EditAdPage() {
       formData.append("location", adData?.location?.toString() || "");
       formData.append("model_id", adData?.model_id?.toString() || "");
       formData.append("stock", adData?.stock?.toString() || "");
-      formData.append("is_published", adData?.is_published?.toString() || "");
+      // formData.append("is_published", adData?.is_published?.toString() || "");
+      formData.append(
+        "is_published",
+        adData?.is_published === true ? "true" : "false"
+      );
 
       // Handle category-specific specifications
       const specs = specificationsData();
       Object.entries(specs).forEach(([key, value]) => {
         if (Array.isArray(value) && value.length > 0) {
           Object.entries(value[0]).forEach(([specKey, specValue]) => {
-            formData.append(`${key}[0][${specKey}]`, specValue?.toString() || "");
+            formData.append(
+              `${key}[0][${specKey}]`,
+              specValue?.toString() || ""
+            );
           });
         }
       });
@@ -439,6 +449,7 @@ export default function EditAdPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <SpecificationsForm
+                //@ts-ignore
                 token={token}
                 setAdData={setAdData}
                 categoryId={adData?.categories?.id}

@@ -347,7 +347,6 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
 
       if (response?.data) {
         setComponentCategories(response?.data?.data);
-        console.log(response?.data?.data, "here is my data");
       } else {
         console.error("Unexpected API response structure:", response);
         throw new Error("Unexpected API response");
@@ -358,12 +357,9 @@ const SpecificationsForm: React.FC<SpecificationsFormProps> = ({
       console.log("Fetch operation completed.");
     }
   };
-  useEffect(() => {
-    console.log(adData, "lol");
-  }, [adData]);
+  useEffect(() => {}, [adData]);
   if (categoryId === 4 && adData?.gaming_console?.length > 0) {
     const gamingConsole = adData?.gaming_console[0];
-    console.log(gamingConsole, "myyyyyyyyyy");
 
     return (
       <>

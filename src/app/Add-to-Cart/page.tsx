@@ -3,7 +3,7 @@ import AddToCart from "./AddToCart";
 
 const page = () => {
   return (
-    <div>
+    <div className="dark:bg-black">
       <AddToCart />
     </div>
   );

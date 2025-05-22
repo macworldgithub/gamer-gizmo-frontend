@@ -44,7 +44,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
   const [quantity, setQuantity] = useState(1);
   const [adding, setAdding] = useState(false);
   const [showCounter, setShowCounter] = useState(false);
-  const token = useSelector((state: RootState) => state.user.token);
+  const token = useSelector((state: RootState) => state?.user?.token);
   // Function to select the correct specifications based on category_id
   const categorySpecifications = () => {
     switch (data?.categories?.id) {
@@ -119,9 +119,11 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
       );
 
       toast.success("Added to cart successfully!");
-      console.log("Cart response:", response.data);
+      console.log("Cart response:", response?.data);
     } catch (error: any) {
-      toast.error("Failed to add to cart.");
+      const errorMessage =
+        error?.response?.data?.message || "Failed to add to cart.";
+      toast.error(errorMessage);
       console.error("Add to cart error:", error);
     } finally {
       setAdding(false);
@@ -131,7 +133,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
   console.log(data, "ppo");
   return (
     <>
-      <div className="container flex flex-col justify-center  items-center">
+      <div className="container flex flex-col justify-center  items-center max-md:px-10 md:pl-4">
         <div className="flex w-full  justify-between items-center max-w-3xl ">
           <p className="text-sm md:text-2xl mt-8 text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
             {data?.name}
@@ -146,7 +148,9 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   >
                     −
                   </button>
-                  <span className="w-8 text-center">{quantity}</span>
+                  <span className="w-8 text-center text-black dark:text-white">
+                    {quantity}
+                  </span>
                   <button
                     className="w-8 h-8 text-lg font-bold bg-gray-200 rounded-full"
                     onClick={() => setQuantity((prev) => prev + 1)}
