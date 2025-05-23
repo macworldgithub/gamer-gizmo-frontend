@@ -44,7 +44,7 @@ const FilterSection = () => {
   }, []);
 
   return (
-    <div className="w-full h-auto bg-cover dark:bg-black bg-black bg  -[url('/images/curve.webp')] max-md:hidden">
+    <div className="w-full h-auto bg-cover dark:bg-black bg-black bg-[url('/images/curve.webp')] max-md:hidden">
       <div className="max-lg:min-h-[50%] sm:h-auto w-full max-md:h-[50rem] max-xl:max-h-[75%] pt-7 pb-4 bg-curve-light dark:bg-curve-dark relative flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat ">
         <p className="text-white font-bold max-md:text-[1.4rem] md:text-[2.5rem] max-sm:whitespace-nowrap">
           A Premier Marketplace for Gamers
