@@ -10,7 +10,7 @@ import { SettingOutlined } from "@ant-design/icons";
 import { MdOutlineFavorite } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import type { MenuProps } from "antd";
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaRegUserCircle } from "react-icons/fa";
 import { Dropdown } from "antd";
 import { CiLogout } from "react-icons/ci";
 import { clearUserData } from "./Store/Slicer/LoginSlice";
@@ -144,6 +144,23 @@ const BottomNavigationBar = () => {
     },
     {
       key: "6",
+
+      icon: (
+        <Image
+          src="/images/purchase-order.png"
+          alt="Orders"
+          width={20}
+          height={20}
+        />
+      ),
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/order">
+          My Orders
+        </Link>
+      ),
+    },
+    {
+      key: "7",
       label: <p className="font-bold text-red-700">Logout</p>,
       icon: <CiLogout color={"#b91c1c"} />,
       onClick: () => {
@@ -361,27 +378,18 @@ const BottomNavigationBar = () => {
         {isLogin ? (
           <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
             <Dropdown className="shadow-2xl" menu={{ items }}>
-              {/* <Image
-                src={
-                  profile
-                    ? profile.startsWith("http")
-                      ? profile
-                      : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
-                    : "/images/profile.png"
-                }
-                alt="Profile"
-                width={50}
-                height={50}
-                className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
-              /> */}
-              <Image
-                //@ts-ignore
-                src={profile}
-                alt="Profile"
-                width={50}
-                height={50}
-                className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
-              />
+              {profile ? (
+                <Image
+                  //@ts-ignore
+                  src={profile}
+                  alt="Profile"
+                  width={50}
+                  height={50}
+                  className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
+                />
+              ) : (
+                <FaRegUserCircle className="text-3xl text-gray-400 cursor-pointer" />
+              )}
             </Dropdown>
           </div>
         ) : (
