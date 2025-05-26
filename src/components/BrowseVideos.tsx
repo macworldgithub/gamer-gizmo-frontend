@@ -4,19 +4,19 @@ export default function BrowseVideos() {
   const videos = [
     {
       src: "https://www.youtube.com/watch?v=3v2BbXvG3Y8",
-      poster: "/images/logo.webp",
+      poster: "/images/gameIcon.webp",
     },
     {
       src: "https://www.youtube.com/watch?v=HazSYe19wR4",
-      poster: "/images/logo.webp",
+      poster: "/images/gameIcon.webp",
     },
     {
       src: "https://www.youtube.com/watch?v=gzg3bmHC3CQ",
-      poster: "/images/logo.webp",
+      poster: "/images/gameIcon.webp",
     },
     {
       src: "https://www.youtube.com/watch?v=kKH6QKo2Pmc",
-      poster: "/images/logo.webp",
+      poster: "/images/gameIcon.webp",
     },
     {
       src: "https://www.youtube.com/watch?v=csSTitLfdMU",
@@ -31,7 +31,7 @@ export default function BrowseVideos() {
   ];
 
   return (
-    <div className="w-full bg-gray-100 dark:bg-[#1e1e2f] ">
+    <div className="w-full bg-gray-100 dark:bg-[#1e1e2f]">
       <div className="max-w-5xl mx-auto py-1">
         <div className="text-start mb-6 px-16">
           <h2 className="text-2xl max-md:text-xl dark:text-white font-bold">

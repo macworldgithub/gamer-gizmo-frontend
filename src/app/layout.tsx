@@ -20,8 +20,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   // title: "Buy & Sell Gaming PCs, Laptops, Consoles & Components in UAE",
-  title:
-    "GamerGizmo: Buy & Sell Gaming PCs, Laptops, Consoles & Parts in UAE Update this one",
+  title: "GamerGizmo: Buy & Sell Gaming PCs, Laptops, Consoles & Parts in UAE",
   description:
     "Looking to buy or sell gaming PCs, laptops, consoles, or components in UAE? Find the best deals on top brands and latest models. Shop now for great prices!",
 };
