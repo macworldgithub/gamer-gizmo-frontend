@@ -18,6 +18,7 @@ import axios from "axios";
 
 export default function HomePage() {
   const token = useSelector((state: RootState) => state.user.token);
+  console.log(token, "my");
 
   useEffect(() => {
     console.log("useEffect triggered");
