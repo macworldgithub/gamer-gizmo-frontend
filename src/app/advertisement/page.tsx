@@ -44,38 +44,6 @@ const page = () => {
         //  showButton={false}
       />
       <StatsCards/>
-    
-      {/* <Card /> */}
-        {/* <div className="container mx-auto px-8 lg:px-1 my-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
-            <div className="flex flex-col gap-4 lg:gap-6 lg:pr-12 lg:pl-8 lg:py-6">
-              <h2 className="text-xl md:text-2xl font-bold dark:text-white">
-                How it works
-              </h2>
-
-              <p className="text-gray-600 dark:text-white ">
-                1- Select your Ad package - Choose from flexible plans
-                <br />
-                2- Submit your Ad - Upload your banner & product details
-                <br />
-                3- Get Approved & Go Live! - Ads reviewed & published within 24
-                hours
-              </p>
-            </div>
-            <div className="flex justify-center lg:pr-16">
-              <Image
-                src="/images/Laptop.png"
-                alt="Showroom branding preview"
-                className="w-full max-w-sm rounded-lg shadow-lg"
-                width={500}
-                height={400}
-              />
-            </div>
-          </div>
-        </div> */}
-
-
-      {/* <DownloadApp /> */}
       <BuisnessInquiries cardContent={cardContent} />
     </div>
   );
