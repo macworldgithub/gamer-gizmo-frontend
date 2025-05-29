@@ -87,7 +87,7 @@ export default function AdList({
   return (
     <div className="m-4 text-black dark:bg-[#1e1e2f]">
       <div className="flex justify-between items-center bg-black text-white w-fit px-4 py-1 rounded-full mb-4">
-        <span className="font-medium text-lg">All Ads ({total})</span>
+        <span className="font-medium text-lg text-white">All Ads ({total})</span>
       </div>
 
       {ads.map((ad: any) => (
@@ -125,9 +125,8 @@ export default function AdList({
           </div>
           <div className="flex flex-row items-center justify-between w-full lg:w-auto gap-12 mt-4">
             <div
-              className={`px-4 py-1 text-sm font-medium rounded-full cursor-pointer ${
-                ad.active ? "bg-blue-500 text-white" : "bg-black text-white"
-              }`}
+              className={`px-4 py-1 text-sm font-medium rounded-full cursor-pointer ${ad.active ? "bg-blue-500 text-white" : "bg-black text-white"
+                }`}
               onClick={() => openModal(ad)}
             >
               {ad.active ? "Active" : "Draft"}

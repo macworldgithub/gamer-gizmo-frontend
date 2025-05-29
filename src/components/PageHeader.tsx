@@ -17,10 +17,10 @@ const PageHeader = ({
   return (
     <>
       {(title || description || button) && (
-        <div className="w-full h-auto  bg-custom-gradient py-2 text-[white]">
+        <div className="w-full h-auto  bg-custom-gradient py-2 ">
           <div className="flex flex-col bg-custom-gradient   items-start space-y-2 lg:px-32 md:px-32 max-md:px-7 max-md:pb-2 md:mb-6">
             {title && (
-              <h1 className="text-2xl lg:text-4xl max-md:text-lg font-bold">
+              <h1 className="text-2xl lg:text-4xl max-md:text-lg font-bold text-[white]">
                 {title}
               </h1>
             )}

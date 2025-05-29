@@ -235,6 +235,7 @@ const OrdersPage = () => {
               <div className="col-span-2 max-">Order ID</div>
               <div className="col-span-2">Status</div>
               <div className="col-span-2">Customer</div>
+
               <div className="col-span-2">Date</div>
               <div className="col-span-2">Amount</div>
               <div className="col-span-2">Actions</div>
@@ -246,21 +247,20 @@ const OrdersPage = () => {
                 className="grid grid-cols-12 p-4 border-b hover:bg-gray-50 cursor-pointer"
                 onClick={() => handleOrderClick(order)}
               >
-                <div className="col-span-2 font-medium">ORD-{order.id}</div>
+                <div className="col-span-2 text-black font-medium">ORD-{order.id}</div>
                 <div className="col-span-2">
                   <span
-                    className={`px-2 py-1 rounded text-xs ${
-                      order.order_status === "PENDING"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : order.order_status === "DELIVERED"
+                    className={`px-2 py-1 rounded text-xs ${order.order_status === "PENDING"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : order.order_status === "DELIVERED"
                         ? "bg-green-100 text-green-800"
                         : "bg-blue-100 text-blue-800"
-                    }`}
+                      }`}
                   >
                     {order.order_status.toLowerCase()}
                   </span>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-2 text-black " >
                   {order.users.first_name} {order.users.last_name}
                 </div>
                 <div className="col-span-2">{formatDate(order.created_at)}</div>

@@ -68,7 +68,7 @@ const TopNav = () => {
               icon={faFacebookF}
               color="#4267B2"
               size="lg"
-              className="hover:text-blue-400"
+              className="hover:text-blue-400 "
             />
           </a>
           <a
