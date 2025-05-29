@@ -33,6 +33,7 @@ export default function RootLayout({
   return (
     <html className="overflow-x-hidden" lang="en">
       <head>
+        {/* Google Analytics */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-DRRX014LJC"
@@ -44,6 +45,20 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-DRRX014LJC');
           `}
+        </Script>
+
+        {/* Google Ads Conversion Tag */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-962702744"
+        />
+        <Script id="google-ads">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-962702744');
+  `}
         </Script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
