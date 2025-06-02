@@ -64,40 +64,57 @@ export default function BlogPost() {
   if (!post) return <p className="text-center text-red-500">Post not found.</p>;
 
   return (
-    <div className="dark:bg-black">
+    <div className="dark:bg-black min-h-screen py-10">
       <Wrapper>
-        <div className="w-full mx-auto p-6 dark:bg-[#1e1e2f] text-black dark:text-white">
-          <Image
-            src={`${post.image}`}
-            alt={post.title}
-            width={600}
-            height={100}
-            className=" object-cover rounded-md w-full h-80"
-          />
+        <article className="max-w-4xl mx-auto bg-white dark:bg-[#1e1e2f] rounded-xl shadow-lg overflow-hidden">
+          {post.image && (
+            <div className="relative h-[400px] w-full">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          )}
 
-          <p className="text-sm text-purple-600 font-semibold mt-4 ">
-            {formatDate(post.created_at)}
-          </p>
-          <div className="flex space-x-2 mt-4 ">
-            {post.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium "
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="p-8">
+            <div className="flex items-center gap-4 mb-6">
+              <p className="text-sm text-purple-600 font-medium">
+                {formatDate(post.created_at)}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs font-medium hover:bg-purple-200 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+              {post.title}
+            </h1>
+
+            <div
+              dangerouslySetInnerHTML={{
+                __html: post.description,
+              }}
+              className="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
+                prose-p:text-gray-700 dark:prose-p:text-gray-300
+                prose-a:text-purple-600 hover:prose-a:text-purple-500
+                prose-strong:text-gray-900 dark:prose-strong:text-white
+                prose-ul:list-disc prose-ol:list-decimal
+                prose-blockquote:border-l-4 prose-blockquote:border-purple-500
+                prose-img:rounded-lg"
+            />
           </div>
-          <h1 className="text-3xl font-bold mt-2 dark:text-white lg:text-lg max-md:text-sm md:text-lg text-black">
-            {post.title}
-          </h1>
-          <p
-            dangerouslySetInnerHTML={{
-              __html: post.description,
-            }}
-            className="text-gray-600 mt-4 text-justify dark:text-white max-md:text-sm lg:text-sm"
-          />
-        </div>
+        </article>
       </Wrapper>
     </div>
   );

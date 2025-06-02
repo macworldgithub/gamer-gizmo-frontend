@@ -169,6 +169,7 @@ export default {
     },
   },
   plugins: [
+    require("@tailwindcss/typography"),
     //@ts-ignore
     function ({ addUtilities }) {
       addUtilities({
