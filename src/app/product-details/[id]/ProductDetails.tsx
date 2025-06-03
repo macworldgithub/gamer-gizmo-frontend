@@ -73,7 +73,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     return relevantFields.some((field: any) => {
       const value = field.includes(".")
         ? //@ts-ignore
-          field.split(".").reduce((obj, key) => obj?.[key], categoryData)
+        field.split(".").reduce((obj, key) => obj?.[key], categoryData)
         : categoryData[field];
       return (
         value && value !== "Not Available" && value.toString().trim() !== ""
@@ -143,7 +143,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
               {showCounter && (
                 <div className="flex items-center gap-2">
                   <button
-                    className="w-8 h-8 text-lg font-bold bg-gray-200 rounded-full"
+                    className="w-8 h-8 text-lg font-bold bg-gray-200 rounded-full text-gray-500"
                     onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}
                   >
                     −
@@ -152,7 +152,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                     {quantity}
                   </span>
                   <button
-                    className="w-8 h-8 text-lg font-bold bg-gray-200 rounded-full"
+                    className="w-8 h-8 text-lg font-bold bg-gray-200 rounded-full text-gray-500"
                     onClick={() => setQuantity((prev) => prev + 1)}
                   >
                     +
@@ -296,12 +296,12 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   {data?.condition === 1
                     ? "New"
                     : data?.condition === 2
-                    ? "Used"
-                    : data?.condition === 3
-                    ? "Like New"
-                    : data?.condition === 4
-                    ? "Refurbished"
-                    : "Unknown"}
+                      ? "Used"
+                      : data?.condition === 3
+                        ? "Like New"
+                        : data?.condition === 4
+                          ? "Refurbished"
+                          : "Unknown"}
                 </p>
               </div>
             )}
@@ -318,11 +318,10 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   <button
                     onClick={handleSpecClick}
                     className={`w-fit px-4 py-2 rounded-md text-sm flex justify-center 
-      ${
-        isSpecOpen
-          ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
-          : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
-      }`}
+      ${isSpecOpen
+                        ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
+                        : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
+                      }`}
                   >
                     {isSpecOpen
                       ? "Hide Additional Details"

@@ -138,7 +138,7 @@ const ProductMain = ({ categoryId, query }: any) => {
               adId={1}
             />
           </div>
-          <h1 className="font-bold text-2xl mb-4 dark:text-white">
+          <h1 className="font-bold text-2xl mb-4 text-black dark:text-white">
             {Object.keys(filteredValues).length > 0
               ? ` ${Object.values(filteredValues)
                 .map((value) =>
@@ -206,8 +206,8 @@ const ProductMain = ({ categoryId, query }: any) => {
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className={`px-4 py-2 bg-gray-800 text-white rounded ${currentPage === 1
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-gray-700"
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-gray-700"
                 }`}
             >
               Prev
@@ -219,8 +219,8 @@ const ProductMain = ({ categoryId, query }: any) => {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage >= totalPages}
               className={`px-4 py-2 bg-gray-800 text-white rounded ${currentPage >= totalPages
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-gray-700"
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-gray-700"
                 }`}
             >
               Next
@@ -254,12 +254,12 @@ const ProductMain = ({ categoryId, query }: any) => {
             seReftech={seReftech}
             refetch={fetcher}
             explorePath={`/${categoryId == 1
-                ? "laptops"
-                : categoryId == 2
-                  ? "desktop"
-                  : categoryId == 3
-                    ? "components"
-                    : "console"
+              ? "laptops"
+              : categoryId == 2
+                ? "desktop"
+                : categoryId == 3
+                  ? "components"
+                  : "console"
               }?condition=2`}
             onExplore={() => console.log("Explore Used Products")}
           />
@@ -271,12 +271,12 @@ const ProductMain = ({ categoryId, query }: any) => {
             seReftech={seReftech}
             refetch={fetcher}
             explorePath={`/${categoryId == 1
-                ? "laptops"
-                : categoryId == 2
-                  ? "desktop"
-                  : categoryId == 3
-                    ? "components"
-                    : "console"
+              ? "laptops"
+              : categoryId == 2
+                ? "desktop"
+                : categoryId == 3
+                  ? "components"
+                  : "console"
               }?condition=1`}
             onExplore={() => console.log("Explore New Products")}
           />

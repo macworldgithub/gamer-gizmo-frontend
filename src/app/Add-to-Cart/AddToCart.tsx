@@ -138,6 +138,9 @@ const CartPage = () => {
 
       toast.success("Order placed successfully!");
       setCartItems([]);
+      setTimeout(() => {
+        router.push('/order');
+      }, 1000);
       setShippingAddress("");
     } catch (error) {
       console.error("Checkout error:", error);
@@ -192,7 +195,7 @@ const CartPage = () => {
     <div className="bg-white dark:bg-[#1e1e2f] min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Shopping Cart Heading */}
-        <h1 className="text-xl lg:text-2xl font-bold mb-6 text-center lg:text-left dark:text-white">
+        <h1 className="text-xl lg:text-2xl text-black font-bold mb-6 text-center lg:text-left dark:text-white">
           Shopping Cart
         </h1>
 
@@ -202,11 +205,11 @@ const CartPage = () => {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b-2 border-gray-200">
-                    <th className="text-left p-4 text-sm md:text-base dark:text-white">
+                  <tr className="border-b-2 text-black border-gray-200">
+                    <th className="text-left p-4 text-sm md:text-base text-black dark:text-white">
                       Item
                     </th>
-                    <th className="text-left p-4 text-sm md:text-base dark:text-white">
+                    <th className="text-left p-4 text-sm md:text-base text-black dark:text-white">
                       Price
                     </th>
                     <th className="text-left p-4 text-sm md:text-base dark:text-white">
@@ -237,17 +240,17 @@ const CartPage = () => {
                         />
                         <span>{item.product?.name}</span>
                       </td>
-                      <td className="p-4 font-bold text-sm md:text-base">
+                      <td className="p-4 font-bold text-purple-500 text-sm md:text-base">
                         <span className="text-xs dark:text-white">AED </span>
                         <span className="dark:text-white">{item.price}</span>
                       </td>
 
-                      <td className="">
+                      <td className="text-black">
                         <input
                           type="number"
                           min="1"
                           value={item.quantity}
-                          className="w-16 border border-gray-300 p-2 text-center rounded text-xs md:text-sm dark:text-black"
+                          className="w-16  border-none  p-2 text-center rounded text-xs md:text-sm dark:text-black"
                           readOnly
                         />
                       </td>
@@ -287,7 +290,7 @@ const CartPage = () => {
 
           {/* Summary Section */}
           <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-4  md:text-base dark:text-white">
+            <h2 className="text-lg font-semibold mb-4 text-secondaryColorLight md:text-base dark:text-white">
               Summary
             </h2>
             {/* <div className="w-full h-[2px] bg-gray-300 mb-4"></div> */}
@@ -312,34 +315,34 @@ const CartPage = () => {
                 </button>
               </div>
             </div> */}
-            <div className="w-full h-[2px] bg-gray-300 mb-4"></div>
+            <div className="w-full h-[2px]  bg-gray-300 mb-4"></div>
             <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-xs md:text-sm dark:text-white">
+              <div className="flex justify-between text-black">
+                <span className="text-xs md:text-sm text-black dark:text-white">
                   Subtotal
                 </span>
-                <div className="font-bold">
+                <div className="font-bold text-black">
                   {/* <span className="text-xs dark:text-white">AED </span> */}
-                  <span className="dark:text-white">
+                  <span className="dark:text-white text-black">
                     AED {subtotal.toFixed(2)}
                   </span>
                 </div>
               </div>
               <div className="flex justify-between">
-                <span className="text-xs md:text-sm dark:text-white">
+                <span className="text-xs md:text-sm dark:text-white text-black">
                   Shipping (Fixed)
                 </span>
                 <div className="font-bold">
                   {/* <span className="text-xs dark:text-white">AED </span> */}
-                  <span className="dark:text-white">
+                  <span className="dark:text-white text-black">
                     AED {shippingFee.toFixed(2)}
                   </span>
                 </div>
               </div>
               <div className="w-full h-[2px] bg-gray-300 mb-4"></div>
               <div className="flex justify-between font-semibold text-sm md:text-lg">
-                <span className="dark:text-white">Order Total</span>
-                <span className="dark:text-white">
+                <span className="dark:text-white text-black">Order Total</span>
+                <span className="dark:text-white text-black">
                   AED {orderTotal.toFixed(2)}
                 </span>
               </div>
@@ -347,7 +350,7 @@ const CartPage = () => {
 
             {/* Shipping address input */}
             <div className="mb-4 mt-4">
-              <label className="block mb-1 font-semibold dark:text-white">
+              <label className="block mb-1 font-semibold text-black dark:text-white">
                 Shipping Address
               </label>
               <input

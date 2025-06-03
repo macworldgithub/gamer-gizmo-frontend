@@ -231,8 +231,8 @@ const OrdersPage = () => {
           </div>
         ) : (
           <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="grid grid-cols-12 bg-gray-100 p-4 font-medium">
-              <div className="col-span-2 max-">Order ID</div>
+            <div className="grid grid-cols-12 font-bold text-black bg-gray-100 p-4 ">
+              <div className="col-span-2 ">Order ID</div>
               <div className="col-span-2">Status</div>
               <div className="col-span-2">Customer</div>
 
@@ -263,8 +263,8 @@ const OrdersPage = () => {
                 <div className="col-span-2 text-black " >
                   {order.users.first_name} {order.users.last_name}
                 </div>
-                <div className="col-span-2">{formatDate(order.created_at)}</div>
-                <div className="col-span-2 font-bold">
+                <div className="col-span-2 text-black">{formatDate(order.created_at)}</div>
+                <div className="col-span-2 font-semibold text-black">
                   AED {order.total_amount}
                 </div>
                 <div
@@ -364,7 +364,7 @@ const OrdersPage = () => {
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white rounded-lg p-6 w-96">
-              <h2 className="text-lg font-semibold mb-4">
+              <h2 className="text-lg font-semibold mb-4 text-black">
                 Update Shipping Address
               </h2>
 
@@ -372,20 +372,20 @@ const OrdersPage = () => {
                 type="text"
                 value={shippingAddress}
                 onChange={(e) => setShippingAddress(e.target.value)}
-                className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
+                className="w-full border border-gray-300 rounded px-3 py-2 text-black mb-4"
                 placeholder="Enter new shipping address"
               />
 
               <div className="flex justify-end space-x-3">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                  className="px-4 py-2 bg-gray-300 rounded text-gray-700 hover:bg-gray-400"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleUpdate}
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  className="px-4 py-2 bg-secondaryColorLight text-white rounded "
                 >
                   Update
                 </button>
