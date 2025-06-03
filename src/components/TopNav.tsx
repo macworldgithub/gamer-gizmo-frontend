@@ -85,7 +85,7 @@ const TopNav = () => {
             rel="noopener noreferrer"
             className=""
           >
-            <FaTiktok size={22} className="hover:text-gray-500" />
+            <FaTiktok size={22} className="text-black hover:text-gray-500" />
           </a>
 
           <a

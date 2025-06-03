@@ -34,7 +34,7 @@ export default function BrowseVideos() {
     <div className="w-full bg-gray-100 dark:bg-[#1e1e2f]">
       <div className="max-w-5xl mx-auto py-1">
         <div className="text-start mb-6 px-16">
-          <h2 className="text-2xl max-md:text-xl dark:text-white font-bold">
+          <h2 className="text-2xl max-md:text-xl text-black dark:text-white font-bold">
             Browse Our Videos
           </h2>
         </div>

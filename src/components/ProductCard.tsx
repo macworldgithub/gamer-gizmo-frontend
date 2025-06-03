@@ -38,6 +38,14 @@ const ProductCard = ({
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
 
+  // Add specific debug logs
+  console.log("Product Card :", {
+    id: product?.id,
+    name: product?.name,
+    is_featured: product?.is_featured,
+    type: typeof product?.is_featured
+  });
+
   useEffect(() => {
     console.log("Active Index Updated:", activeIndex);
   }, [activeIndex]);
@@ -183,13 +191,11 @@ const ProductCard = ({
                     console.error("Error toggling favorite:", error);
                   }
                 }}
-                className={`absolute top-2 right-2 z-10 cursor-pointer ${
-                  product.fav ? "text-red-600" : "text-purple-200"
-                } ${
-                  isLoading
+                className={`absolute top-2 right-2 z-10 cursor-pointer ${product.fav ? "text-red-600" : "text-purple-200"
+                  } ${isLoading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:text-red-600"
-                }`}
+                  }`}
               >
                 <MdFavorite size={24} />
               </div>
@@ -207,11 +213,12 @@ const ProductCard = ({
                   >
                     {product.name}
                   </p>
-                  {hasPremiumBadge && (
-                    <span className="lg:mr-24 xl:mr-[30%] md:mr-10  bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1  rounded">
+                  {product?.is_featured && (
+                    <span className="lg:mr-24 xl:mr-[30%] md:mr-10 bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1 rounded">
                       Premium
                     </span>
                   )}
+
                 </div>
 
                 <p className="text-gray-700 dark:text-gray-100 md:pr-[3rem] text-xs max-md:hidden">
@@ -223,6 +230,7 @@ const ProductCard = ({
                 <h2 className="text-md font-semibold text-secondaryColorLight">
                   AED {Number(product.price).toLocaleString()}
                 </h2>
+
                 {product?.is_featured && (
                   <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
                     Premium
@@ -253,9 +261,8 @@ const ProductCard = ({
             onClick={() =>
               product.fav ? remove(product.id) : AddToLike(product.id)
             }
-            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${
-              product.fav ? "text-red-600" : "text-white "
-            } hover:text-red-600`}
+            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${product.fav ? "text-red-600" : "text-white "
+              } hover:text-red-600`}
           >
             <MdFavorite size={24} className="max-sm:h-4" />
           </div>
