@@ -184,11 +184,10 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                   <p className="text-sm">
                     <span className="font-medium">Status:</span>{" "}
                     <span
-                      className={`px-2 py-1 rounded text-xs ${
-                        orderDetails.users.is_active
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
+                      className={`px-2 py-1 rounded text-xs ${orderDetails.users.is_active
+                        ? "bg-green-100 text-green-800"
+                        : "bg-red-100 text-red-800"
+                        }`}
                     >
                       {orderDetails.users.is_active ? "Active" : "Inactive"}
                     </span>
@@ -219,13 +218,12 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                   <p className="text-sm">
                     <span className="font-medium">Status:</span>{" "}
                     <span
-                      className={`px-2 py-1 rounded text-xs ${
-                        orderDetails.order_status === "PENDING"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : orderDetails.order_status === "DELIVERED"
+                      className={`px-2 py-1 rounded text-xs ${orderDetails.order_status === "PENDING"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : orderDetails.order_status === "DELIVERED"
                           ? "bg-green-100 text-green-800"
                           : "bg-blue-100 text-blue-800"
-                      }`}
+                        }`}
                     >
                       {orderDetails.order_status}
                     </span>
@@ -286,7 +284,7 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                         </div>
                         <div>
                           <span className="text-gray-500">Price: </span>
-                          <span>${item.price}</span>
+                          <span>AED {item.price}</span>
                         </div>
                         <div>
                           <span className="text-gray-500">Quantity: </span>
@@ -295,8 +293,7 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                         <div>
                           <span className="text-gray-500">Subtotal: </span>
                           <span>
-                            AED
-                            {(parseFloat(item.price) * item.quantity).toFixed(
+                            AED  {(parseFloat(item.price) * item.quantity).toFixed(
                               2
                             )}
                           </span>
@@ -309,7 +306,7 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
             </div>
 
             {/* Payment Summary Section */}
-            <div className="bg-white p-4 rounded-lg shadow">
+            <div className="bg-white p-4 rounded-lg shadow">  
               <h3 className="font-semibold text-lg mb-4">Payment Summary</h3>
               <div className="space-y-2">
                 <div className="flex justify-between font-bold text-lg pt-2 border-t">

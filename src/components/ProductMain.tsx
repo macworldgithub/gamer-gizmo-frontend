@@ -138,7 +138,7 @@ const ProductMain = ({ categoryId, query }: any) => {
               adId={1}
             />
           </div>
-          <h1 className="font-bold text-2xl mb-4 text-black dark:text-white">
+          {/* <h1 className="font-bold text-2xl mb-4 text-black dark:text-white">
             {Object.keys(filteredValues).length > 0
               ? ` ${Object.values(filteredValues)
                 .map((value) =>
@@ -146,15 +146,25 @@ const ProductMain = ({ categoryId, query }: any) => {
                 )
                 .join(", ")} ${categoryName}`
               : `Popular in ${categoryName}`}
-          </h1>
+          </h1> */}
           <div className="flex w-[100%]">
             <div className="flex items-start gap-2 max-md:w-full md:w-[70%] relative">
               <div className="flex-col flex flex-wrap gap-4 w-full justify-center max-sm:gap-[0.5rem]">
+                <h1 className="font-bold overflow-x-wrap text-2xl mb-4 max-sm:text-lg text-black dark:text-white">
+                  {Object.keys(filteredValues).length > 0
+                    ? ` ${Object.values(filteredValues)
+                      .map((value) =>
+                        value === "1" ? "New" : value === "2" ? "Used" : value
+                      )
+                      .join(", ")} ${categoryName}`
+                    : `Popular in ${categoryName}`}
+                </h1>
                 {loading ? (
                   <div>Loading...</div>
                 ) : filteredData && filteredData.length > 0 ? (
                   filteredData.map((product, index) => (
                     <>
+
                       <ProductCard
                         //@ts-ignore
                         key={product.id || index}
@@ -173,10 +183,9 @@ const ProductMain = ({ categoryId, query }: any) => {
                       )}
                       {(index + 1) % 5 === 0 && (
                         <LiveAdSection
-                          className="md:w-[100%] h-52 my-4"
+                          className="md:w-[100%] max-sm:w-full sm:w-[96%] h-40 my-4"
                           category={`Popular ${categoryName}`}
                           adId={5 + Math.floor((index + 1) / 5) - 1}
-                        // adId={2}
                         />
                       )}
                     </>

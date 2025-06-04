@@ -127,8 +127,8 @@ const ProductCard = ({
     <>
       {isColumn ? (
         <div>
-          <div className="flex flex-col sm:flex-row p-4 container">
-            <div className="relative max-md:w-80  md:w-[26%]">
+          <div className="flex flex-col sm:flex-row  container">
+            <div className="relative max-md:w-80  max-sm:w-[100vw]  md:w-[26%]">
               <Swiper
                 key={product?.id}
                 modules={[Pagination, Autoplay, Thumbs]}
@@ -159,7 +159,7 @@ const ProductCard = ({
                         onClick={() =>
                           router.push(`/product-details/${product.id}`)
                         }
-                        className="max-md:w-[200px] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative cursor-pointer"
+                        className="max-md:w-[70%] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative cursor-pointer"
                       >
                         <Image
                           src={imageUrl}
@@ -191,7 +191,7 @@ const ProductCard = ({
                     console.error("Error toggling favorite:", error);
                   }
                 }}
-                className={`absolute top-2 right-2 z-10 cursor-pointer ${product.fav ? "text-red-600" : "text-purple-200"
+                className={`absolute top-2 max-sm:right-20 right-2 z-10 cursor-pointer ${product.fav ? "text-red-600" : "text-purple-200"
                   } ${isLoading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:text-red-600"
@@ -202,24 +202,32 @@ const ProductCard = ({
             </div>
 
             {/* Right Side - Car Details */}
-            <div className="w-full md:w-[40%] md:pl-12  flex flex-col ">
+            <div className="w-full  md:w-[40%] md:pl-12  flex flex-col max-md:w-full">
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
-                <div className="flex justify-between gap-8 items-center">
-                  <p
-                    className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] cursor-pointer"
-                    onClick={() =>
-                      router.push(`/product-details/${product.id}`)
-                    }
-                  >
-                    {product.name}
-                  </p>
-                  {product?.is_featured && (
-                    <span className="lg:mr-24 xl:mr-[30%] md:mr-10 bg-yellow-500 max-md:hidden text-white text-[0.6rem] font-bold p-1 rounded">
-                      Premium
-                    </span>
-                  )}
+                {/* <div className="flex justify-start max-sm:flex-col items-center"> */}
+                {/* <p
+                  className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem]  cursor-pointer"
+                  onClick={() =>
+                    router.push(`/product-details/${product.id}`)
+                  }
+                >
+                  {product.name}
+                </p> */}
+                <p
+                  className="text-black font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] cursor-pointer truncate"
+                  onClick={() => router.push(`/product-details/${product.id}`)}
+                  title={product.name} // optional: shows full name on hover
+                >
+                  {product.name}
+                </p>
 
-                </div>
+                {product?.is_featured && (
+                  <span className=" bg-yellow-500 w-12 text-white text-[0.6rem] font-bold p-1 rounded">
+                    Premium
+                  </span>
+                )}
+
+                {/* </div> */}
 
                 <p className="text-gray-700 dark:text-gray-100 md:pr-[3rem] text-xs max-md:hidden">
                   {product.description.length > 50
@@ -231,11 +239,11 @@ const ProductCard = ({
                   AED {Number(product.price).toLocaleString()}
                 </h2>
 
-                {product?.is_featured && (
+                {/* {product?.is_featured && (
                   <span className=" bg-yellow-500 md:hidden w-14 flex justify-center items-center text-white text-[0.6rem] font-bold p-1  rounded">
                     Premium
                   </span>
-                )}
+                )} */}
                 <p className="text-secondaryColorLight text-xs">
                   {formatDistanceToNow(new Date(product.created_at), {
                     addSuffix: true,
@@ -244,7 +252,7 @@ const ProductCard = ({
 
                 <button
                   onClick={() => router.push(`/product-details/${product.id}`)} // View Details button routing
-                  className="mt-4 max-md:px-0  md:px-4 py-2 w-36 text-sm  bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
+                  className="mt-4 max-md:px-0  md:px-4 py-2 w-36 max-md:w-20 text-sm max-md:text-[0.7rem] max-sm:py-1 bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
                 >
                   View Details
                 </button>
@@ -281,7 +289,7 @@ const ProductCard = ({
             )}
           </div>
 
-          <div className="px-3 pb-[6px]">
+          <div className="px-3 pb-[6px]  dark:bg-[#1e1e2f]">
             <h3
               className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[8px] cursor-pointer"
               onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on title click
