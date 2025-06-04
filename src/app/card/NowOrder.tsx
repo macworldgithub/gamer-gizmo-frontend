@@ -111,7 +111,7 @@ const NowOrder = () => {
 
         {/* Summary Section */}
         <div className="bg-gray-200 p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold mb-4 text-sm md:text-base">
+          <h2 className="text-lg font-semibold mb-4  md:text-base">
             Summary
           </h2>
           <div className="w-full h-[2px] bg-gray-300 mb-4"></div>

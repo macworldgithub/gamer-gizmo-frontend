@@ -10,6 +10,10 @@ import Image from "next/image";
 import { BsSend } from "react-icons/bs";
 
 const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
+// const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL, {
+//   transports: ['websocket', 'polling']
+// });
+
 
 export default function ChatBox() {
   const user_id = useSelector((state: RootState) => state.user.id);
@@ -126,18 +130,16 @@ export default function ChatBox() {
             <div
               key={msg.id}
               ref={index === messages.length - 1 ? lastMessageRef : null}
-              className={`flex w-full my-4 ${
-                msg.sender_id === user_id
-                  ? "justify-end"
-                  : "justify-start border border-secondaryColorLight"
-              }`}
+              className={`flex w-full my-4 ${msg.sender_id === user_id
+                ? "justify-end"
+                : "justify-start border border-secondaryColorLight"
+                }`}
             >
               <div
-                className={`flex items-end gap-3 max-w-[75%] p-3 rounded-lg ${
-                  msg.sender_id === user_id
-                    ? "bg-secondaryColorLight text-white"
-                    : "   text-gray-800 dark:text-white"
-                }`}
+                className={`flex items-end gap-3 max-w-[75%] p-3 rounded-lg ${msg.sender_id === user_id
+                  ? "bg-secondaryColorLight text-white"
+                  : "   text-gray-800 dark:text-white"
+                  }`}
               >
                 {/* Profile Image (only for others) */}
                 {/* {msg.sender_id !== user_id && ( */}
@@ -153,13 +155,12 @@ export default function ChatBox() {
                 {/* Message Content */}
                 <div>
                   <span
-                    className={`block font-semibold text-sm ${
-                      msg.sender_id === user_id
-                        ? "text-white"
-                        : msg.is_admin
+                    className={`block font-semibold text-sm ${msg.sender_id === user_id
+                      ? "text-white"
+                      : msg.is_admin
                         ? "text-red-500"
                         : "text-gray-700 dark:text-gray-300"
-                    }`}
+                      }`}
                   >
                     {msg.is_admin
                       ? `🔴 Admin: ${msg?.users?.username}`
@@ -167,11 +168,10 @@ export default function ChatBox() {
                   </span>
                   <p className="text-sm mt-1">{msg?.content}</p>
                   <span
-                    className={`block text-xs mt-1 ${
-                      msg.sender_id === user_id
-                        ? "text-white"
-                        : "text-gray-500 dark:text-gray-400"
-                    }`}
+                    className={`block text-xs mt-1 ${msg.sender_id === user_id
+                      ? "text-white"
+                      : "text-gray-500 dark:text-gray-400"
+                      }`}
                   >
                     {format(new Date(msg?.created_at), "hh:mm a, MMM dd")}
                   </span>
