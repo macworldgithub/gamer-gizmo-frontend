@@ -190,9 +190,8 @@ const BottomNavigationBar = () => {
             key={tab.name}
             href={tab.href}
             onClick={() => handleTabClick(tab.name)}
-            className={`${
-              activeTab === tab.name ? "text-secondaryColorLight" : ""
-            }`}
+            className={`${activeTab === tab.name ? "text-secondaryColorLight" : ""
+              }`}
           >
             {tab.name}
           </Link>
@@ -224,13 +223,12 @@ const BottomNavigationBar = () => {
             ></div>
             <div
               className={`flex-nowrap fixed top-0 left-0 text-black dark:bg-black bg-white dark:text-white w-[10rem] h-[100vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-2 max-sm:space-y-2 pt-1 overflow-y-auto
-                            ${
-                              isDrawerOpen
-                                ? "animate-slide-in"
-                                : firstClick
-                                ? "animate-slide-out"
-                                : "hidden"
-                            }`}
+                            ${isDrawerOpen
+                  ? "animate-slide-in"
+                  : firstClick
+                    ? "animate-slide-out"
+                    : "hidden"
+                }`}
             >
               <div onClick={() => setIsDrawerOpen(false)}>
                 <LuPanelLeftClose
@@ -242,7 +240,7 @@ const BottomNavigationBar = () => {
               {isLogin ? (
                 <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
                   <Dropdown className="shadow-2xl" menu={{ items }}>
-                    <img
+                    {/* <img
                       src={
                         profile != null ? `${profile}` : "/images/profile.png"
                       }
@@ -250,7 +248,22 @@ const BottomNavigationBar = () => {
                       width={40}
                       height={40}
                       className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
-                    />
+                    /> */}
+                    {profile ? (
+                      <Image
+                        //@ts-ignore
+                        src={profile}
+                        alt="Profile"
+                        width={50}
+                        height={50}
+                        className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
+                      />
+                    ) : (
+                      <span className="cursor-pointer">
+                        <FaRegUserCircle className="text-3xl text-gray-400" />
+                      </span>
+                      // <div>hello</div>
+                    )}
                   </Dropdown>
                 </div>
               ) : (
@@ -388,7 +401,10 @@ const BottomNavigationBar = () => {
                   className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
                 />
               ) : (
-                <FaRegUserCircle className="text-3xl text-gray-400 cursor-pointer" />
+                <span className="cursor-pointer">
+                  <FaRegUserCircle className="text-3xl text-gray-400" />
+                </span>
+                // <div>hello</div>
               )}
             </Dropdown>
           </div>
