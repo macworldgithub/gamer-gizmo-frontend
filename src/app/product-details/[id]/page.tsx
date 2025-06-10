@@ -42,12 +42,24 @@ const page: React.FC = () => {
   const [fetcher, seReftech] = useState(false);
   const [similarItems, setSimilarItems] = useState<SimilarItem[]>([]);
 
-  const cardContent = {
-    title: "Similar Ads",
-    description:
-      "Choose your necessary Parts from this Used Gaming Pc categories",
-    note: "",
+  const getCategoryPath = (categoryId: number) => {
+    switch (categoryId) {
+      case 1:
+        return "desktop";
+      case 2:
+        return "laptop";
+      case 3:
+        return "gaming-console";
+      default:
+        return "explore";
+    }
   };
+
+  const explorePath =
+    data && data.category_id && data.condition !== undefined
+      ? `/${getCategoryPath(data.category_id)}?category_id=${data.category_id}&condition=${data.condition}`
+      : "/explore";
+
 
   // --- Function to Fetch Similar Items Based on Category ID ---
   const fetchSimilarItems = async (categoryId: number) => {
@@ -126,7 +138,8 @@ const page: React.FC = () => {
           subtitle="Choose your necessary gaming items from this category."
           products={similarItems}
           onExplore={() => console.log("Explore Similar Ads")}
-          explorePath=""
+          // explorePath=""
+          explorePath={explorePath}
         />
       </div>
     </div>

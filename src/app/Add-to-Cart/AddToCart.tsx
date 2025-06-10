@@ -7,6 +7,7 @@ import { RootState } from "@/components/Store/Store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MdDelete } from "react-icons/md";
+import StripeCheckoutModal from "./StripeCheckoutModal";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -14,7 +15,8 @@ const CartPage = () => {
   const [loading, setLoading] = useState(false);
   const [shippingAddress, setShippingAddress] = useState("");
   const [discountCode, setDiscountCode] = useState("");
-
+  const [clientSecret, setClientSecret] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
 
@@ -113,21 +115,15 @@ const CartPage = () => {
   };
 
   const handleCheckout = async () => {
-    if (!token) {
-      toast.error("User not authenticated");
-      return;
-    }
-
-    if (!shippingAddress.trim()) {
-      toast.error("Please enter a shipping address.");
-      return;
-    }
+    if (!token) return toast.error("User not authenticated");
+    if (!shippingAddress.trim()) return toast.error("Please enter a shipping address.");
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/orders`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/orders/create-intent`,
         {
           shipping_address: shippingAddress,
+          payment_method: "online",
         },
         {
           headers: {
@@ -136,17 +132,17 @@ const CartPage = () => {
         }
       );
 
-      toast.success("Order placed successfully!");
-      setCartItems([]);
-      setTimeout(() => {
-        router.push('/order');
-      }, 1000);
-      setShippingAddress("");
+      const clientSecret = response.data.clientSecret;
+      if (clientSecret) {
+        setClientSecret(clientSecret);
+        setOpenModal(true); // ⬅️ Open MUI Modal
+      }
     } catch (error) {
       console.error("Checkout error:", error);
-      toast.error("Failed to place order");
+      toast.error("Failed to create payment intent");
     }
   };
+
 
   const handleUpdateCart = () => {
     // Implement cart update logic if needed
@@ -375,6 +371,12 @@ const CartPage = () => {
             >
               Clear Cart
             </button>
+
+            <StripeCheckoutModal
+              open={openModal}
+              onClose={() => setOpenModal(false)}
+              clientSecret={clientSecret}
+            />
           </div>
         </div>
       </div>

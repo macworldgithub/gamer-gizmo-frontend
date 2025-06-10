@@ -271,7 +271,7 @@ const OrdersPage = () => {
                   className="col-span-2"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* <button
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       setConfirmingDeleteId(order.id);
@@ -279,7 +279,7 @@ const OrdersPage = () => {
                     className=" py-1 w-14 bg-red-600 text-white rounded hover:bg-red-700 text-xs"
                   >
                     Delete
-                  </button> */}
+                  </button>
                   {/* <button
                     className=" py-1 w-14 ml-2 bg-custom-gradient text-white rounded text-xs"
                     onClick={(e) => {

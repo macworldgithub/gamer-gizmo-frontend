@@ -1,7 +1,7 @@
 
 
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { RootState } from "@/components/Store/Store";
 import { useSelector } from "react-redux";
@@ -17,6 +17,7 @@ const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
 
 export default function ChatBox() {
   const user_id = useSelector((state: RootState) => state.user.id);
+  console.log(user_id, "user_id from chatBox");
   const chatRef = useRef<HTMLDivElement | null>(null);
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   const [firstTime, setFirstTime] = useState(true);
