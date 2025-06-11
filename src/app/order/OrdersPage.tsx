@@ -70,6 +70,8 @@ const OrdersPage = () => {
           }
         );
         setOrders(response?.data);
+        console.log(response?.data, "orders table data");
+
       } catch (error) {
         console.error("Failed to fetch orders:", error);
         toast.error("Failed to load orders");
@@ -98,6 +100,7 @@ const OrdersPage = () => {
         }
       );
       setOrderDetails(response.data);
+      console.log("order details", response?.data);
     } catch (error) {
       console.error("Failed to fetch order details:", error);
       toast.error("Failed to load order details");
@@ -249,6 +252,7 @@ const OrdersPage = () => {
               >
                 <div className="col-span-2 text-black font-medium">ORD-{order.id}</div>
                 <div className="col-span-2">
+                  
                   <span
                     className={`px-2 py-1 rounded text-xs ${order.order_status === "PENDING"
                       ? "bg-yellow-100 text-yellow-800"
@@ -257,7 +261,11 @@ const OrdersPage = () => {
                         : "bg-blue-100 text-blue-800"
                       }`}
                   >
-                    {order.order_status.toLowerCase()}
+                    {/* {order.order_status.toLowerCase()} */}
+
+                    {order.transactions[0].
+                      transaction_status
+                    }
                   </span>
                 </div>
                 <div className="col-span-2 text-black " >
