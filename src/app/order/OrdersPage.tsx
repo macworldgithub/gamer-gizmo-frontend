@@ -4,10 +4,21 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Image from "next/image";
-import Drawer from "@mui/material/Drawer";
 import OrderDetailsDrawer from "./OrderDetailsDrawer";
 import { RootState } from "@/components/Store/Store";
 import { useRouter } from "next/navigation";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Chip,
+  Button,
+  Drawer,
+} from "@mui/material";
 
 interface Product {
   id: number;
@@ -16,6 +27,16 @@ interface Product {
   price: string;
   profile?: string;
   condition: number;
+}
+interface Transaction {
+  id: number;
+  order_id: number;
+  transaction_id: string;
+  transaction_status: string;
+  payment_method: string;
+  amount: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface OrderItem {
@@ -40,6 +61,7 @@ interface Order {
   shipping_address: string;
   order_items: OrderItem[];
   users: User;
+  transactions: Transaction[];
 }
 
 const OrdersPage = () => {
@@ -216,193 +238,183 @@ const OrdersPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Order</h1>
-        </div>
-
-        {orders.length === 0 ? (
-          <div className="text-center py-10 rounded-lg  flex flex-col justify-center items-center gap-8">
-            <Image
-              width={200}
-              height={200}
-              src="/images/empty-cart.png"
-              alt="hj"
-            />
-            <p className="text-gray-500">You haven't placed any orders yet.</p>
+    <>
+      <div className="min-h-screen bg-gray-50 p-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold text-gray-800">Order</h1>
           </div>
-        ) : (
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="grid grid-cols-12 font-bold text-black bg-gray-100 p-4 ">
-              <div className="col-span-2 ">Order ID</div>
-              <div className="col-span-2">Status</div>
-              <div className="col-span-2">Customer</div>
 
-              <div className="col-span-2">Date</div>
-              <div className="col-span-2">Amount</div>
-              <div className="col-span-2">Actions</div>
+          {orders.length === 0 ? (
+            <div className="text-center py-10 rounded-lg flex flex-col justify-center items-center gap-8">
+              <Image width={200} height={200} src="/images/empty-cart.png" alt="Empty Cart" />
+              <p className="text-gray-500">You haven't placed any orders yet.</p>
             </div>
+          ) : (
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="orders table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell><strong>Order ID</strong></TableCell>
+                    <TableCell><strong>Status</strong></TableCell>
+                    <TableCell><strong>Customer</strong></TableCell>
+                    <TableCell><strong>Date</strong></TableCell>
+                    <TableCell><strong>Amount</strong></TableCell>
+                    <TableCell><strong>Actions</strong></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {orders.map((order) => {
+                    const status = order.transactions?.[0]?.transaction_status || order.order_status;
+                    const statusColor =
+                      status === "PENDING"
+                        ? "warning"
+                        : status === "DELIVERED"
+                          ? "success"
+                          : "info";
 
-            {orders.map((order) => (
-              <div
-                key={order.id}
-                className="grid grid-cols-12 p-4 border-b hover:bg-gray-50 cursor-pointer"
-                onClick={() => handleOrderClick(order)}
-              >
-                <div className="col-span-2 text-black font-medium">ORD-{order.id}</div>
-                <div className="col-span-2">
-                  
-                  <span
-                    className={`px-2 py-1 rounded text-xs ${order.order_status === "PENDING"
-                      ? "bg-yellow-100 text-yellow-800"
-                      : order.order_status === "DELIVERED"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-blue-100 text-blue-800"
-                      }`}
-                  >
-                    {/* {order.order_status.toLowerCase()} */}
+                    return (
+                      <TableRow
+                        key={order.id}
+                        hover
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => handleOrderClick(order)}
+                      >
+                        <TableCell>ORD-{order.id}</TableCell>
+                        <TableCell>
+                          <Chip label={status} color={statusColor} size="small" />
+                        </TableCell>
+                        <TableCell>{order.users.first_name} {order.users.last_name}</TableCell>
+                        <TableCell>{formatDate(order.created_at)}</TableCell>
+                        <TableCell><strong>AED {order.total_amount}</strong></TableCell>
 
-                    {order.transactions[0].
-                      transaction_status
-                    }
-                  </span>
-                </div>
-                <div className="col-span-2 text-black " >
-                  {order.users.first_name} {order.users.last_name}
-                </div>
-                <div className="col-span-2 text-black">{formatDate(order.created_at)}</div>
-                <div className="col-span-2 font-semibold text-black">
-                  AED {order.total_amount}
-                </div>
-                <div
-                  className="col-span-2"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setConfirmingDeleteId(order.id);
-                    }}
-                    className=" py-1 w-14 bg-red-600 text-white rounded hover:bg-red-700 text-xs"
-                  >
-                    Delete
-                  </button>
-                  {/* <button
-                    className=" py-1 w-14 ml-2 bg-custom-gradient text-white rounded text-xs"
-                    onClick={(e) => {
-                      e.stopPropagation();
+                        <TableCell onClick={(e) => e.stopPropagation()}>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                            <Button
+                              variant="contained"
+                              color="error"
+                              size="small"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setConfirmingDeleteId(order.id);
+                              }}
+                            >
+                              DELETE
+                            </Button>
+                            <Button
+                              variant="contained"
+                              size="small"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedOrder(order);
+                                setShippingAddress(order.shipping_address);
+                                setIsModalOpen(true);
+                              }}
+                            >
+                              UPDATE
+                            </Button>
+                          </div>
+                        </TableCell>
 
-                      handleUpdate(order.id);
-                    }}
-                  >
-                    Update
-                  </button> */}
-                  <button
-                    className="py-1 w-14 ml-2 bg-custom-gradient text-white rounded text-xs"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedOrder(order); // full order object
-                      setShippingAddress(order.shipping_address); // preload existing address
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    Update
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
 
-        <Drawer
-          anchor="right"
-          open={drawerOpen}
-          onClose={handleDrawerClose}
-          PaperProps={{
-            sx: {
-              width: {
-                xs: "80%",
-                sm: "75%",
-                md: "50%",
-                lg: "50%",
-                xl: "40%",
-              },
-              transition: "width 0.3s ease-in-out",
-            },
-          }}
-        >
-          <OrderDetailsDrawer
-            //@ts-ignore
-            order={selectedOrder}
-            //@ts-ignore
-            orderDetails={orderDetails}
-            loading={orderDetailsLoading}
+          {/* Drawer */}
+          <Drawer
+            anchor="right"
+            open={drawerOpen}
             onClose={handleDrawerClose}
-          />
-        </Drawer>
+            PaperProps={{
+              sx: {
+                width: {
+                  xs: "80%",
+                  sm: "75%",
+                  md: "50%",
+                  lg: "50%",
+                  xl: "40%",
+                },
+                transition: "width 0.3s ease-in-out",
+              },
+            }}
+          >
+            <OrderDetailsDrawer
+              //@ts-ignore
+              order={selectedOrder}
+              //@ts-ignore
 
-        {confirmingDeleteId !== null && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-              <h2 className="text-lg font-semibold mb-4">Confirm Delete</h2>
-              <p className="text-gray-700 mb-6">
-                Are you sure you want to delete this order?
-              </p>
-              <div className="flex justify-end space-x-4">
-                <button
-                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                  onClick={() => setConfirmingDeleteId(null)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                  onClick={(e) =>
-                    confirmingDeleteId !== null &&
-                    handleDeleteOrder(confirmingDeleteId, e)
-                  }
-                >
-                  Confirm
-                </button>
+              orderDetails={orderDetails}
+              loading={orderDetailsLoading}
+              onClose={handleDrawerClose}
+            />
+          </Drawer>
+
+          {/* Confirm Delete Modal */}
+          {confirmingDeleteId !== null && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
+                <h2 className="text-lg font-semibold mb-4">Confirm Delete</h2>
+                <p className="text-gray-700 mb-6">Are you sure you want to delete this order?</p>
+                <div className="flex justify-end space-x-4">
+                  <button
+                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                    onClick={() => setConfirmingDeleteId(null)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                    onClick={(e) =>
+                      confirmingDeleteId !== null && handleDeleteOrder(confirmingDeleteId, e)
+                    }
+                  >
+                    Confirm
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg p-6 w-96">
-              <h2 className="text-lg font-semibold mb-4 text-black">
-                Update Shipping Address
-              </h2>
+          )}
 
-              <input
-                type="text"
-                value={shippingAddress}
-                onChange={(e) => setShippingAddress(e.target.value)}
-                className="w-full border border-gray-300 rounded px-3 py-2 text-black mb-4"
-                placeholder="Enter new shipping address"
-              />
-
-              <div className="flex justify-end space-x-3">
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-gray-300 rounded text-gray-700 hover:bg-gray-400"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleUpdate}
-                  className="px-4 py-2 bg-secondaryColorLight text-white rounded "
-                >
-                  Update
-                </button>
+          {/* Shipping Address Modal */}
+          {isModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-white rounded-lg p-6 w-96">
+                <h2 className="text-lg font-semibold mb-4 text-black">Update Shipping Address</h2>
+                <input
+                  type="text"
+                  value={shippingAddress}
+                  onChange={(e) => setShippingAddress(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 text-black mb-4"
+                  placeholder="Enter new shipping address"
+                />
+                <div className="flex justify-end space-x-3">
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="px-4 py-2 bg-gray-300 rounded text-gray-700 hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleUpdate}
+                    className="px-4 py-2 bg-secondaryColorLight text-white rounded"
+                  >
+                    Update
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+      <div>
+        hello world
+      </div>
+    </>
+
   );
 };
 

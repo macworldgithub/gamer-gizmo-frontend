@@ -217,7 +217,7 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                 <div>
                   <p className="text-sm">
                     <span className="font-medium">Status:</span>{" "}
-                    <span
+                    {/* <span
                       className={`px-2 py-1 rounded text-xs ${orderDetails.order_status === "PENDING"
                         ? "bg-yellow-100 text-yellow-800"
                         : orderDetails.order_status === "DELIVERED"
@@ -226,6 +226,20 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                         }`}
                     >
                       {orderDetails.order_status}
+                    </span> */}
+                    <span
+                      //@ts-ignore
+                      className={`px-2 py-1 rounded text-xs ${(order.transactions?.[0]?.transaction_status ?? order.order_status) === "PENDING"
+                        ? "bg-yellow-100 text-yellow-800"
+                        //@ts-ignore
+                        : (order.transactions?.[0]?.transaction_status ?? order.order_status) === "DELIVERED"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-blue-100 text-blue-800"
+                        }`}
+                    >
+
+
+                      {order.transactions?.[0]?.transaction_status ?? order.order_status.toLowerCase()}
                     </span>
                   </p>
                   <p className="text-sm">
@@ -306,7 +320,7 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
             </div>
 
             {/* Payment Summary Section */}
-            <div className="bg-white p-4 rounded-lg shadow">  
+            <div className="bg-white p-4 rounded-lg shadow">
               <h3 className="font-semibold text-lg mb-4">Payment Summary</h3>
               <div className="space-y-2">
                 <div className="flex justify-between font-bold text-lg pt-2 border-t">

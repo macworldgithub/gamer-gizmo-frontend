@@ -33,15 +33,15 @@ const OrderSuccessPage = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white px-4">
-            <div className="bg-green-100 border border-green-300 text-green-800 px-6 py-4 rounded-lg shadow-md text-center max-w-md w-full">
-                <h1 className="text-2xl font-bold mb-2">Order Status</h1>
-                <p className="text-base">{statusMessage}</p>
+        <div className="flex flex-col items-center justify-center dark:bg-secondaryBlack w-full h-64 p-4">
+            <div className="bg-purple-400 border-green-300 text-green-800 w-[40%]  py-4 rounded-lg shadow-md text-center">
+                <h1 className="text-3xl font-bold mb-2 text-white">Order Status</h1>
+                <p className="text-lg text-black">{statusMessage}</p>
 
                 {paymentIntent && (
                     <div className="mt-4 text-sm text-gray-600">
-                        <p><span className="font-medium">Payment Intent:</span> {paymentIntent}</p>
-                        <p><span className="font-medium">Client Secret:</span> {clientSecret?.slice(0, 10)}...</p>
+                        <p><span className="font-medium text-base">Payment Intent:</span> {paymentIntent}</p>
+                        <p><span className="font-medium text-base">Client Secret:</span> {clientSecret}</p>
                     </div>
                 )}
             </div>

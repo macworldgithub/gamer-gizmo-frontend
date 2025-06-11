@@ -19,6 +19,8 @@ const CartPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
   const token = useSelector((state: RootState) => state.user.token);
+  const [paymentMethod, setPaymentMethod] = useState("online");
+
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -119,35 +121,52 @@ const CartPage = () => {
     if (!shippingAddress.trim()) return toast.error("Please enter a shipping address.");
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/orders/create-intent`,
-        {
-          shipping_address: shippingAddress,
-          payment_method: "online",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      if (paymentMethod === "cash_on_delivery") {
+        // COD API call
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/orders`,
+          {
+            shipping_address: shippingAddress,
+            payment_method: "cash_on_delivery",
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      const clientSecret = response.data.clientSecret;
-      if (clientSecret) {
-        setClientSecret(clientSecret);
-        setOpenModal(true); // ⬅️ Open MUI Modal
+        toast.success("Order placed successfully (COD)");
+        router.push("/order"); // Redirect to orders or confirmation
+      } else {
+        // Online payment flow
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/orders/create-intent`,
+          {
+            shipping_address: shippingAddress,
+            payment_method: "online",
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const clientSecret = response.data.clientSecret;
+        if (clientSecret) {
+          setClientSecret(clientSecret);
+          setOpenModal(true); // ⬅️ Open Stripe Modal
+        }
       }
     } catch (error) {
       console.error("Checkout error:", error);
-      toast.error("Failed to create payment intent");
+      toast.error("Failed to place order");
     }
   };
 
 
-  const handleUpdateCart = () => {
-    // Implement cart update logic if needed
-    toast.info("Cart updated");
-  };
+
 
   if (loading) {
     return (
@@ -357,6 +376,31 @@ const CartPage = () => {
                 placeholder="123 Test Street, City, Country"
               />
             </div>
+
+            <div className="mb-4">
+              <label className="block font-medium mb-2 text-black dark:text-white">Select Payment Method:</label>
+              <div className="flex gap-4">
+                <label className="flex items-center gap-2 text-sm text-black dark:text-white">
+                  <input
+                    type="radio"
+                    value="online"
+                    checked={paymentMethod === "online"}
+                    onChange={() => setPaymentMethod("online")}
+                  />
+                  Online Payment
+                </label>
+                <label className="flex items-center gap-2 text-sm text-black dark:text-white">
+                  <input
+                    type="radio"
+                    value="cash_on_delivery"
+                    checked={paymentMethod === "cash_on_delivery"}
+                    onChange={() => setPaymentMethod("cash_on_delivery")}
+                  />
+                  Cash on Delivery
+                </label>
+              </div>
+            </div>
+
 
             <button
               onClick={handleCheckout}
