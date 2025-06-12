@@ -61,7 +61,7 @@ const LiveCommunity: React.FC = () => {
           Live Community comming soon
         </h1>
 
-        {/* <CommunityCard /> */}
+        <CommunityCard />
 
         <div className="flex justify-end max-md:justify-center max-md:mt-0 md:mt-3 mb-1">
           <button
