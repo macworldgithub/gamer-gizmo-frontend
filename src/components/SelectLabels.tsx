@@ -18,14 +18,14 @@ export default function SelectLabels({ query, route }: any) {
     query
       ? query
       : {
-          processor: "",
-          storage: "",
-          location: "",
-          condition: "",
-          gpu: "",
-          ram: "",
-          price: "",
-        }
+        processor: "",
+        storage: "",
+        location: "",
+        condition: "",
+        gpu: "",
+        ram: "",
+        price: "",
+      }
   );
   const router = useRouter();
   useEffect(() => {
@@ -39,7 +39,6 @@ export default function SelectLabels({ query, route }: any) {
     fetchStorgaeType();
     fetchConditions();
   }, []);
-  console.log(selectedValues, "queryParams22");
   const fetchLocations = async () => {
     try {
       const response = await axios.get(

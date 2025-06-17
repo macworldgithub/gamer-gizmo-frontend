@@ -13,7 +13,7 @@ interface UserDataState {
   phone: string | null;
   is_admin_verified: false | null;
   dob: string | null;
-  profile: string | null;
+  profile: string | null; 
   gender: string | null;
   nic_front_image: string | null;
   nic_back_image: string | null;

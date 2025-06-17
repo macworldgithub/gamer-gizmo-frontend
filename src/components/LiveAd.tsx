@@ -23,7 +23,6 @@ const LiveAdSection = ({
         const ads = response.data;
         if (ads.length > 0) {
           setAdImages(ads);
-          console.log("Ads Data:", ads);
         }
       } catch (err) {
         console.error("Error fetching ads:", err);
@@ -49,9 +48,8 @@ const LiveAdSection = ({
   const adUrl = selectedAd
     ? selectedAd.url.startsWith("http")
       ? selectedAd.url
-      : `${process.env.NEXT_PUBLIC_API_BASE_URL}${
-          selectedAd.url.startsWith("/") ? selectedAd.url : "/" + selectedAd.url
-        }`
+      : `${process.env.NEXT_PUBLIC_API_BASE_URL}${selectedAd.url.startsWith("/") ? selectedAd.url : "/" + selectedAd.url
+      }`
     : "";
 
   return (

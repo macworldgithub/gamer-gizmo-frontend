@@ -38,13 +38,7 @@ const ProductCard = ({
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
 
-  // Add specific debug logs
-  console.log("Product Card :", {
-    id: product?.id,
-    name: product?.name,
-    is_featured: product?.is_featured,
-    type: typeof product?.is_featured
-  });
+
 
   useEffect(() => {
     console.log("Active Index Updated:", activeIndex);

@@ -269,10 +269,18 @@ export default function CommunityChatBox() {
     socket.on("communityReceiveMessage", (message: Message) => {
       setMessages((prev) => [...prev, message]);
     });
-    socket.on("communityUpdateReactions", (data: { message_id: number; reactions: Reaction[] }) => {
+    // socket.on("communityUpdateReactions", (data: { message_id: number; reactions: Reaction[] }) => {
+    //   setMessages((prev) =>
+    //     prev.map((msg) =>
+    //       msg.id === data.message_id ? { ...msg, reactions: data.reactions } : msg
+    //     )
+    //   );
+    // });
+
+    socket.on("messageReactionUpdated", (data: { messageId: number; reactions: Reaction[] }) => {
       setMessages((prev) =>
         prev.map((msg) =>
-          msg.id === data.message_id ? { ...msg, reactions: data.reactions } : msg
+          msg.id === data.messageId ? { ...msg, reactions: data.reactions } : msg
         )
       );
     });
@@ -281,7 +289,8 @@ export default function CommunityChatBox() {
       socket.off("communityReceiveMessage");
       socket.off("communityLoadMessages");
       socket.off("communityLoadMoreMessages");
-      socket.off("communityUpdateReactions");
+      // socket.off("communityUpdateReactions");
+      socket.off("messageReactionUpdated");
       socket.disconnect();
       socketRef.current = null;
     };
@@ -327,27 +336,59 @@ export default function CommunityChatBox() {
   //     emoji_type: emoji,
   //   });
   // };
+  // const handleReact = (messageId: number, emoji: string) => {
+  //   // Optimistically update UI
+  //   setMessages(prev => prev.map(msg => {
+  //     if (msg.id === messageId) {
+  //       const newReaction = {
+  //         id: Date.now(), // Temporary ID
+  //         emoji_type: emoji,
+  //         user_id: user_id!,
+  //         username: "You", // Or fetch actual username
+  //         created_at: new Date().toISOString()
+  //       };
+  //       return {
+  //         ...msg,
+  //         reactions: [...(msg.reactions || []), newReaction]
+  //       };
+  //     }
+  //     return msg;
+  //   }));
+
+  //   // Then send to server
+  //   socketRef.current?.emit("toggleMessageReaction", {
+  //     messageId,
+  //     emoji
+  //   });
+  // };
   const handleReact = (messageId: number, emoji: string) => {
-    // Optimistically update UI
+    if (!user_id || !socketRef.current) return;
+
+    // Optimistically update the UI to show the new reaction
     setMessages(prev => prev.map(msg => {
       if (msg.id === messageId) {
+        // Remove existing reaction by this user
+        const filteredReactions = (msg.reactions || []).filter(r => r.user_id !== user_id);
+
+        // Add the new one
         const newReaction = {
-          id: Date.now(), // Temporary ID
+          id: Date.now(), // Temporary ID until backend confirms
           emoji_type: emoji,
           user_id: user_id!,
-          username: "You", // Or fetch actual username
+          username: "You", // Or get from store if needed
           created_at: new Date().toISOString()
         };
+
         return {
           ...msg,
-          reactions: [...(msg.reactions || []), newReaction]
+          reactions: [...filteredReactions, newReaction]
         };
       }
       return msg;
     }));
 
-    // Then send to server
-    socketRef.current?.emit("toggleMessageReaction", {
+    // Emit to backend to update
+    socketRef.current.emit("toggleMessageReaction", {
       messageId,
       emoji
     });
@@ -355,7 +396,7 @@ export default function CommunityChatBox() {
 
   return (
     <div className="w-full flex flex-col items-center my-8">
-      <div ref={chatRef} className="w-full max-w-4xl h-[70vh] bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-xl flex flex-col">
+      <div ref={chatRef} className="w-full  h-[70vh] bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-xl flex flex-col">
         {/* Load more messages section */}
         <div onClick={loadMoreMessages} className="w-full flex justify-center items-center cursor-pointer text-sm mb-4">
           {hasMore ? (isFetching ? (
@@ -430,7 +471,7 @@ export default function CommunityChatBox() {
                         <p className="text-sm break-words mt-1">{msg.content}</p>
 
                         {/* Reactions */}
-                        {msg.reactions?.length > 0 && (
+                        {/* {msg.reactions?.length > 0 && (
                           <div className={`flex gap-1 mt-2 flex-wrap ${isSender ? "justify-end" : "justify-start"}`}>
                             {msg.reactions.map((r: any) => (
                               <span
@@ -444,7 +485,26 @@ export default function CommunityChatBox() {
                               </span>
                             ))}
                           </div>
+                        )} */}
+                        {msg.reactions?.length > 0 && (
+                          <div className={`flex gap-1 mt-2 flex-wrap ${isSender ? "justify-end" : "justify-start"}`}>
+                            {Object.entries(
+                              msg.reactions.reduce((acc: Record<string, number>, curr: any) => {
+                                acc[curr.emoji_type] = (acc[curr.emoji_type] || 0) + 1;
+                                return acc;
+                              }, {})
+                            ).map(([emoji, count]: any) => (
+                              <span
+                                key={emoji}
+                                className={`text-xs px-2 py-0.5 rounded-full 
+          ${isSender ? "bg-blue-400 text-white" : "bg-gray-300 dark:bg-zinc-600"}`}
+                              >
+                                {emoji} {count}
+                              </span>
+                            ))}
+                          </div>
                         )}
+
                       </div>
                     </div>
 
