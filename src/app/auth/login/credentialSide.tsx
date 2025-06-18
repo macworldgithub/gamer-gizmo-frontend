@@ -161,6 +161,11 @@ const CredentialSide = () => {
         type="password"
         placeholder="Password"
         value={password}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !isSignIn) {
+            handleLogin();
+          }
+        }}
         onChange={(e) => setPassword(e.target.value)}
       />
       <div className={`w-[100%] text-black dark:text-white`}>
@@ -175,6 +180,7 @@ const CredentialSide = () => {
           onClick={handleLogin}
           className={`bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ${isSignIn ? "opacity-50 cursor-not-allowed" : ""
             } `}
+
           disabled={isSignIn}
         >
           <Image
