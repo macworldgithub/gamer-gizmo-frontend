@@ -153,7 +153,7 @@ const Community = () => {
                     width={40}
                     height={40}
                     alt="profile-pic"
-                    className="rounded-full object-cover"
+                    className="rounded-full w-full h-full object-cover"
                     unoptimized={profilePicture?.startsWith("blob:")}
                   />
                 ) : (
@@ -178,9 +178,9 @@ const Community = () => {
                 {Object.entries(msg.reaction_counts).map(([emoji, count]) => (
                   <span
                     key={emoji}
-                    className="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
+                    className="text-sm bg-gray-100 text-black dark:bg-gray-700 px-2 py-1 rounded"
                   >
-                    {emoji} × {count}
+                    {emoji} {count}
                   </span>
                 ))}
               </div>

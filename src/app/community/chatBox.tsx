@@ -330,70 +330,169 @@ export default function CommunityChatBox() {
 
   // const handleReact = (messageId: number, emoji: string) => {
   //   if (!user_id || !socketRef.current) return;
-  //   socketRef.current.emit("communityAddReaction", {
-  //     message_id: messageId,
-  //     user_id: user_id,
-  //     emoji_type: emoji,
-  //   });
+
+  //   const message = messages.find(msg => msg.id === messageId);
+  //   const userReaction = message?.reactions?.find(r => r.user_id === user_id);
+
+  //   if (userReaction) {
+  //     if (userReaction.emoji_type === emoji) {
+  //       // Clicked same emoji - delete reaction
+  //       handleDeleteReaction(userReaction.id, messageId);
+  //     } else {
+  //       // Clicked different emoji - update reaction
+  //       handleUpdateReaction(userReaction.id, messageId, emoji);
+  //     }
+  //   } else {
+  //     // No existing reaction - add new one
+  //     setMessages(prev => prev.map(msg => {
+  //       if (msg.id === messageId) {
+  //         const newReaction = {
+  //           id: Date.now(), // Temporary ID
+  //           emoji_type: emoji,
+  //           user_id: user_id,
+  //           username: "You",
+  //           created_at: new Date().toISOString()
+  //         };
+
+  //         return {
+  //           ...msg,
+  //           reactions: [...(msg.reactions || []), newReaction]
+  //         };
+  //       }
+  //       return msg;
+  //     }));
+
+  //     socketRef.current.emit("toggleMessageReaction", {
+  //       messageId,
+  //       emoji
+  //     });
+  //   }
+  //   setActiveReactionMsgId(null);
   // };
-  // const handleReact = (messageId: number, emoji: string) => {
-  //   // Optimistically update UI
+
+  // const handleUpdateReaction = (reactionId: number, messageId: number, newEmoji: string) => {
+  //   if (!user_id || !socketRef.current) return;
+
+  //   // Optimistically update the reaction
   //   setMessages(prev => prev.map(msg => {
   //     if (msg.id === messageId) {
-  //       const newReaction = {
-  //         id: Date.now(), // Temporary ID
-  //         emoji_type: emoji,
-  //         user_id: user_id!,
-  //         username: "You", // Or fetch actual username
-  //         created_at: new Date().toISOString()
-  //       };
   //       return {
   //         ...msg,
-  //         reactions: [...(msg.reactions || []), newReaction]
+  //         reactions: (msg.reactions || []).map(r =>
+  //           r.id === reactionId ? { ...r, emoji_type: newEmoji } : r
+  //         )
   //       };
   //     }
   //     return msg;
   //   }));
 
-  //   // Then send to server
-  //   socketRef.current?.emit("toggleMessageReaction", {
-  //     messageId,
-  //     emoji
+  //   socketRef.current.emit("updateMessageReaction", {
+  //     reactionId,
+  //     newEmoji
   //   });
   // };
+
+  // const handleDeleteReaction = (reactionId: number, messageId: number) => {
+  //   if (!user_id || !socketRef.current) return;
+
+  //   // Optimistically remove the reaction
+  //   setMessages(prev => prev.map(msg => {
+  //     if (msg.id === messageId) {
+  //       return {
+  //         ...msg,
+  //         reactions: (msg.reactions || []).filter(r => r.id !== reactionId)
+  //       };
+  //     }
+  //     return msg;
+  //   }));
+
+  //   socketRef.current.emit("deleteMessageReaction", {
+  //     reactionId
+  //   });
+  // };
+
   const handleReact = (messageId: number, emoji: string) => {
     if (!user_id || !socketRef.current) return;
 
-    // Optimistically update the UI to show the new reaction
+    const message = messages.find(msg => msg.id === messageId);
+    const userReaction = message?.reactions?.find(r => r.user_id === user_id);
+
+    if (userReaction) {
+      if (userReaction.emoji_type === emoji) {
+        // Clicked same emoji - delete reaction
+        handleDeleteReaction(userReaction.id, messageId);
+      } else {
+        // Clicked different emoji - update reaction
+        handleUpdateReaction(userReaction.id, messageId, emoji);
+      }
+    } else {
+      // No existing reaction - add new one
+      setMessages(prev => prev.map(msg => {
+        if (msg.id === messageId) {
+          const newReaction = {
+            id: Date.now(), // Temporary ID
+            emoji_type: emoji,
+            user_id: user_id,
+            username: "You",
+            created_at: new Date().toISOString()
+          };
+
+          return {
+            ...msg,
+            reactions: [...(msg.reactions || []), newReaction]
+          };
+        }
+        return msg;
+      }));
+
+      socketRef.current.emit("toggleMessageReaction", {
+        messageId,
+        emoji
+      });
+    }
+    setActiveReactionMsgId(null);
+  };
+
+  const handleUpdateReaction = (reactionId: number, messageId: number, newEmoji: string) => {
+    if (!user_id || !socketRef.current) return;
+
+    // Optimistically update the reaction
     setMessages(prev => prev.map(msg => {
       if (msg.id === messageId) {
-        // Remove existing reaction by this user
-        const filteredReactions = (msg.reactions || []).filter(r => r.user_id !== user_id);
-
-        // Add the new one
-        const newReaction = {
-          id: Date.now(), // Temporary ID until backend confirms
-          emoji_type: emoji,
-          user_id: user_id!,
-          username: "You", // Or get from store if needed
-          created_at: new Date().toISOString()
-        };
-
         return {
           ...msg,
-          reactions: [...filteredReactions, newReaction]
+          reactions: (msg.reactions || []).map(r =>
+            r.id === reactionId ? { ...r, emoji_type: newEmoji } : r
+          )
         };
       }
       return msg;
     }));
 
-    // Emit to backend to update
-    socketRef.current.emit("toggleMessageReaction", {
-      messageId,
-      emoji
+    socketRef.current.emit("updateMessageReaction", {
+      reactionId,
+      newEmoji
     });
   };
 
+  const handleDeleteReaction = (reactionId: number, messageId: number) => {
+    if (!user_id || !socketRef.current) return;
+
+    // Optimistically remove the reaction
+    setMessages(prev => prev.map(msg => {
+      if (msg.id === messageId) {
+        return {
+          ...msg,
+          reactions: (msg.reactions || []).filter(r => r.id !== reactionId)
+        };
+      }
+      return msg;
+    }));
+
+    socketRef.current.emit("deleteMessageReaction", {
+      reactionId
+    });
+  };
   return (
     <div className="w-full flex flex-col items-center my-8">
       <div ref={chatRef} className="w-full  h-[70vh] bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-xl flex flex-col">
@@ -430,7 +529,7 @@ export default function CommunityChatBox() {
               >
                 <div className={`flex max-w-[85%] gap-3 ${isSender ? "flex-row-reverse" : ""}`}>
                   {/* Profile picture */}
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
+                  {/* <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
                     {profilePicture ? (
                       <Image
                         src={profilePicture}
@@ -438,6 +537,19 @@ export default function CommunityChatBox() {
                         width={100}
                         height={100}
                         className="rounded-full object-cover"
+                      />
+                    ) : (
+                      <FaRegUserCircle className="text-3xl text-gray-500 dark:text-gray-400" />
+                    )}
+                  </div> */}
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
+                    {profilePicture ? (
+                      <Image
+                        src={profilePicture}
+                        alt="Profile"
+                        width={40}
+                        height={40}
+                        className="w-full h-full rounded-full object-cover"
                       />
                     ) : (
                       <FaRegUserCircle className="text-3xl text-gray-500 dark:text-gray-400" />
@@ -453,7 +565,7 @@ export default function CommunityChatBox() {
                     >
                       <div
                         className={`flex flex-col p-3 rounded-2xl shadow-sm cursor-pointer transition-colors duration-150
-                          ${isSender
+                              ${isSender
                             ? "bg-blue-500 text-white rounded-br-none hover:bg-blue-600"
                             : "bg-gray-100 dark:bg-zinc-700 text-gray-800 dark:text-white rounded-bl-none hover:bg-gray-200 dark:hover:bg-zinc-600"}`}
                       >
@@ -470,18 +582,38 @@ export default function CommunityChatBox() {
                         {/* Message text */}
                         <p className="text-sm break-words mt-1">{msg.content}</p>
 
-                        {/* Reactions */}
+
+
                         {/* {msg.reactions?.length > 0 && (
                           <div className={`flex gap-1 mt-2 flex-wrap ${isSender ? "justify-end" : "justify-start"}`}>
-                            {msg.reactions.map((r: any) => (
+                            {Object.entries(
+                              msg.reactions.reduce((acc: Record<string, { count: number, reactionId?: number }>, curr: any) => {
+                                // For each emoji, store count and the user's reaction ID (if exists)
+                                if (!acc[curr.emoji_type]) {
+                                  acc[curr.emoji_type] = { count: 0 };
+                                }
+                                acc[curr.emoji_type].count++;
+                                if (curr.user_id === user_id) {
+                                  acc[curr.emoji_type].reactionId = curr.id;
+                                }
+                                return acc;
+                              }, {})
+                            ).map(([emoji, data]: any) => (
                               <span
-                                key={r.id}
-                                className={`text-xs px-2 py-0.5 rounded-full 
-                                  ${isSender
-                                    ? "bg-blue-400 text-white"
-                                    : "bg-gray-300 dark:bg-zinc-600"}`}
+                                key={emoji}
+                                className={`text-xs px-2 py-0.5 rounded-full cursor-pointer
+              ${isSender ? "bg-blue-400 text-white" : "bg-gray-300 dark:bg-zinc-600"}
+              ${data.reactionId ? "ring-1 ring-blue-500" : ""}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (data.reactionId) {
+                                    handleDeleteReaction(data.reactionId, msg.id);
+                                  } else {
+                                    handleReact(msg.id, emoji);
+                                  }
+                                }}
                               >
-                                {r.emoji_type} {r.username}
+                                {emoji} {data.count}
                               </span>
                             ))}
                           </div>
@@ -489,39 +621,55 @@ export default function CommunityChatBox() {
                         {msg.reactions?.length > 0 && (
                           <div className={`flex gap-1 mt-2 flex-wrap ${isSender ? "justify-end" : "justify-start"}`}>
                             {Object.entries(
-                              msg.reactions.reduce((acc: Record<string, number>, curr: any) => {
-                                acc[curr.emoji_type] = (acc[curr.emoji_type] || 0) + 1;
+                              msg.reactions.reduce((acc: Record<string, { count: number, userReacted: boolean }>, curr: any) => {
+                                if (!acc[curr.emoji_type]) {
+                                  acc[curr.emoji_type] = { count: 0, userReacted: false };
+                                }
+                                acc[curr.emoji_type].count++;
+                                if (curr.user_id === user_id) {
+                                  acc[curr.emoji_type].userReacted = true;
+                                }
                                 return acc;
                               }, {})
-                            ).map(([emoji, count]: any) => (
+                            ).map(([emoji, data]: any) => (
                               <span
                                 key={emoji}
-                                className={`text-xs px-2 py-0.5 rounded-full 
-          ${isSender ? "bg-blue-400 text-white" : "bg-gray-300 dark:bg-zinc-600"}`}
+                                className={`text-xs px-2 py-0.5 rounded-full cursor-pointer
+          ${isSender ? "bg-blue-400 text-white" : "bg-gray-300 dark:bg-zinc-600"}
+          ${data.userReacted ? "ring-1 ring-blue-500" : ""}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (data.userReacted) {
+                                    // If user already reacted with this emoji, open reaction modal
+                                    setActiveReactionMsgId(msg.id);
+                                  } else {
+                                    // If not, add this reaction
+                                    handleReact(msg.id, emoji);
+                                  }
+                                }}
                               >
-                                {emoji} {count}
+                                {emoji} {data.count}
                               </span>
                             ))}
                           </div>
                         )}
-
                       </div>
                     </div>
 
                     {/* Emoji reaction options (keep functionality exactly the same) */}
+
                     {activeReactionMsgId === msg.id && (
                       <div
-                        className={`flex gap-2 p-1 rounded-full shadow-md bg-white dark:bg-zinc-700
-                          ${isSender ? "justify-end" : "justify-start"}`}
+                        className={`flex gap-2 p-1  rounded-full shadow-md w-44 bg-white dark:bg-zinc-700
+      ${isSender ? "justify-end" : "justify-start"}`}
                       >
                         {["❤️", "😂", "🔥", "👍", "😢"].map((emoji) => (
                           <span
                             key={emoji}
-                            className="cursor-pointer text-lg hover:scale-110 transition-transform"
+                            className="cursor-pointer text-lg hover:scale-110 mx-auto transition-transform"
                             onClick={(e) => {
                               e.stopPropagation();
                               handleReact(msg.id, emoji);
-                              setActiveReactionMsgId(null);
                             }}
                           >
                             {emoji}
@@ -543,7 +691,7 @@ export default function CommunityChatBox() {
             placeholder="Type your message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             className="flex-1 p-3 border border-gray-300 dark:border-zinc-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-zinc-700 dark:text-white text-gray-800"
           />
           <button
