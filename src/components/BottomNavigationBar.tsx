@@ -238,17 +238,9 @@ const BottomNavigationBar = () => {
                 />
               </div>
               {isLogin ? (
-                <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
+                <div className="shadow-md flex  shadow-blue-500/50 rounded-full w-10 h-10 justify-center items-center">
                   <Dropdown className="shadow-2xl" menu={{ items }}>
-                    {/* <img
-                      src={
-                        profile != null ? `${profile}` : "/images/profile.png"
-                      }
-                      alt="Profile"
-                      width={40}
-                      height={40}
-                      className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
-                    /> */}
+
                     {profile ? (
                       <Image
                         //@ts-ignore
@@ -256,7 +248,7 @@ const BottomNavigationBar = () => {
                         alt="Profile"
                         width={50}
                         height={50}
-                        className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
+                        className="w-full h-full object-cover rounded-full hover:cursor-pointer"
                       />
                     ) : (
                       <span className="cursor-pointer">
@@ -389,25 +381,24 @@ const BottomNavigationBar = () => {
         </Link>
 
         {isLogin ? (
-          <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
+
+          <div className="w-10 h-10 shadow-md shadow-blue-500/50 rounded-full flex justify-center items-center overflow-hidden">
             <Dropdown className="shadow-2xl" menu={{ items }}>
               {profile ? (
                 <Image
                   //@ts-ignore
                   src={profile}
                   alt="Profile"
-                  width={50}
-                  height={50}
-                  className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover rounded-full hover:cursor-pointer"
                 />
               ) : (
-                <span className="cursor-pointer">
-                  <FaRegUserCircle className="text-3xl text-gray-400" />
-                </span>
-                // <div>hello</div>
+                <FaRegUserCircle className="text-2xl text-gray-500" />
               )}
             </Dropdown>
           </div>
+
         ) : (
           <Link href="/auth/login">
             <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:gap-3 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
