@@ -238,6 +238,7 @@ const BottomNavigationBar = () => {
                 />
               </div>
               {isLogin ? (
+                //Mobile Profile Icon
                 <div className="shadow-md flex  shadow-blue-500/50 rounded-full w-10 h-10 justify-center items-center">
                   <Dropdown className="shadow-2xl" menu={{ items }}>
 
@@ -248,13 +249,12 @@ const BottomNavigationBar = () => {
                         alt="Profile"
                         width={50}
                         height={50}
-                        className="w-full h-full object-cover rounded-full hover:cursor-pointer"
+                        className="w-full h-full object-cover rounded-full  hover:cursor-pointer"
                       />
                     ) : (
                       <span className="cursor-pointer">
-                        <FaRegUserCircle className="text-3xl text-gray-400" />
+                        <FaRegUserCircle className="text-3xl text-secondaryColorLight" />
                       </span>
-                      // <div>hello</div>
                     )}
                   </Dropdown>
                 </div>
@@ -381,7 +381,7 @@ const BottomNavigationBar = () => {
         </Link>
 
         {isLogin ? (
-
+          //Desktop and Laptop Profile Icon
           <div className="w-10 h-10 shadow-md shadow-blue-500/50 rounded-full flex justify-center items-center overflow-hidden">
             <Dropdown className="shadow-2xl" menu={{ items }}>
               {profile ? (
@@ -394,7 +394,10 @@ const BottomNavigationBar = () => {
                   className="w-full h-full object-cover rounded-full hover:cursor-pointer"
                 />
               ) : (
-                <FaRegUserCircle className="text-2xl text-gray-500" />
+                <span >
+                  <FaRegUserCircle className="text-2xl  text-secondaryColorLight" />
+
+                </span>
               )}
             </Dropdown>
           </div>

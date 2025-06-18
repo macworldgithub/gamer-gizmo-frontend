@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { RootState } from "./Store/Store";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 interface Reaction {
   id: number;
@@ -39,6 +40,7 @@ const Community = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const token = useSelector((state: RootState) => state.user.token);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -47,7 +49,7 @@ const Community = () => {
         setError(null);
 
         if (!token) {
-          throw new Error("Token not found in Redux state");
+          throw new Error("Please log in to view community messages.");
         }
 
         const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/top-reacted`;
@@ -109,18 +111,22 @@ const Community = () => {
   }
 
   if (error) {
+    const isAuthError = error.toLowerCase().includes("please log in");
     return (
       <div className="grid grid-cols-1 p-4">
         <div className="border border-red-300 rounded-lg p-4 bg-red-50 dark:bg-red-900/20">
           <p className="text-center text-red-500 dark:text-red-300">
-            Error: {error}
+            {error}
           </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-2 px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
-          >
-            Try Again
-          </button>
+          {isAuthError && (
+            <button
+              onClick={() => router.push("/auth/login")}
+              className="mt-2 px-4 py-2 bg-custom-gradient text-white rounded hover:opacity-90 transition-opacity duration-200"
+            >
+              Log In
+            </button>
+          )}
+
         </div>
       </div>
     );
