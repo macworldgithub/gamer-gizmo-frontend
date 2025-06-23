@@ -230,20 +230,7 @@ export default function CommunityChatBox() {
                 className={`flex ${isSender ? "justify-end" : "justify-start"}`}
               >
                 <div className={`flex max-w-[85%] gap-3 ${isSender ? "flex-row-reverse" : ""}`}>
-                  {/* Profile picture */}
-                  {/* <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
-                    {profilePicture ? (
-                      <Image
-                        src={profilePicture}
-                        alt="Profile"
-                        width={100}
-                        height={100}
-                        className="rounded-full object-cover"
-                      />
-                    ) : (
-                      <FaRegUserCircle className="text-3xl text-gray-500 dark:text-gray-400" />
-                    )}
-                  </div> */}
+
                   <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
                     {profilePicture ? (
                       <Image
@@ -281,46 +268,11 @@ export default function CommunityChatBox() {
                           </span>
                         </div>
 
-                        {/* Message text */}
-                        {/* <p className="text-sm break-words mt-1">{msg.content}</p> */}
+                       
 
                         <p className="text-sm break-words break-all mt-1 whitespace-pre-wrap">{msg.content}</p>
 
 
-                        {/* {msg.reactions?.length > 0 && (
-                          <div className={`flex gap-1 mt-2 flex-wrap ${isSender ? "justify-end" : "justify-start"}`}>
-                            {Object.entries(
-                              msg.reactions.reduce((acc: Record<string, { count: number, reactionId?: number }>, curr: any) => {
-                                // For each emoji, store count and the user's reaction ID (if exists)
-                                if (!acc[curr.emoji_type]) {
-                                  acc[curr.emoji_type] = { count: 0 };
-                                }
-                                acc[curr.emoji_type].count++;
-                                if (curr.user_id === user_id) {
-                                  acc[curr.emoji_type].reactionId = curr.id;
-                                }
-                                return acc;
-                              }, {})
-                            ).map(([emoji, data]: any) => (
-                              <span
-                                key={emoji}
-                                className={`text-xs px-2 py-0.5 rounded-full cursor-pointer
-              ${isSender ? "bg-blue-400 text-white" : "bg-gray-300 dark:bg-zinc-600"}
-              ${data.reactionId ? "ring-1 ring-blue-500" : ""}`}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  if (data.reactionId) {
-                                    handleDeleteReaction(data.reactionId, msg.id);
-                                  } else {
-                                    handleReact(msg.id, emoji);
-                                  }
-                                }}
-                              >
-                                {emoji} {data.count}
-                              </span>
-                            ))}
-                          </div>
-                        )} */}
                         {msg.reactions?.length > 0 && (
                           <div className={`flex gap-1 mt-2 flex-wrap ${isSender ? "justify-end" : "justify-start"}`}>
                             {Object.entries(

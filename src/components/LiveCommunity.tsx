@@ -4,6 +4,8 @@ import React from "react";
 import CommunityCard from "../components/CommunityCard";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import { useRouter } from "next/navigation";
+import CreateCommunityButton from "@/app/community/CreateCommunity";
+import CommunityList from "@/app/community/CommunityList";
 
 interface CardData {
   userName: string;
@@ -61,15 +63,27 @@ const LiveCommunity: React.FC = () => {
           Live Community comming soon
         </h1>
 
-        <CommunityCard />
+        {/* <CommunityCard /> */}
+        <CommunityList />
 
-        <div className="flex justify-end max-md:justify-center max-md:mt-0 md:mt-3 mb-1">
+        <div className="flex justify-end gap-4 max-md:justify-center max-md:mt-0 md:mt-3 mb-1">
           <button
             onClick={handleJoinCommunity}
             className="px-6 py-2 w-[10rem] h-[3rem] bg-custom-gradient  text-white text-center text-xs font-semibold rounded-full shadow hover:opacity-90"
           >
             Join Live Community
           </button>
+          {/* <button
+            onClick={handleJoinCommunity}
+            className="px-6 py-2 w-[10rem] h-[3rem] bg-custom-gradient  text-white text-center text-xs font-semibold rounded-full shadow hover:opacity-90"
+          >
+            Create Community
+          </button> */}
+          <div>
+            <CreateCommunityButton />
+
+
+          </div>
         </div>
       </Wrapper>
     </div>
