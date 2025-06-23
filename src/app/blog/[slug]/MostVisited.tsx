@@ -139,7 +139,7 @@ export default function MostVisited() {
                                         {/* {console.log("Rendering Ad ID:", adId)} */}
                                         <LiveAdSection
                                             key={`ad-${adId}`}
-                                            category="Blogs"
+                                            category="Blog Detail"
                                             adId={adId}
                                             className="flex-1 mr-4 md:h-52 max-md:h-40 mt-2"
                                         />
