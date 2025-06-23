@@ -156,7 +156,7 @@ const CartPage = () => {
         const clientSecret = response.data.clientSecret;
         if (clientSecret) {
           setClientSecret(clientSecret);
-          setOpenModal(true); // ⬅️ Open Stripe Modal
+          setOpenModal(true);
         }
       }
     } catch (error) {
