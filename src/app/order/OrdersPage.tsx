@@ -388,7 +388,7 @@ const OrdersPage = () => {
                   type="text"
                   value={shippingAddress}
                   onChange={(e) => setShippingAddress(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 text-black mb-4"
+                  className="w-full border border-gray-300 rounded px-3 py-2 text-black mb-4 dark:text-black"
                   placeholder="Enter new shipping address"
                 />
                 <div className="flex justify-end space-x-3">

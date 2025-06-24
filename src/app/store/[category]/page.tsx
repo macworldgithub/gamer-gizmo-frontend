@@ -58,7 +58,7 @@ const ProductGrid = () => {
     <div className=" dark:bg-[#1e1e2f]">
       <Wrapper>
         <div className="w-full mx-auto mt-3 mb-4 ">
-          <h1 className="font-bold mb-2 ml-1 text-black">{categoryName}</h1>
+          <h1 className="font-bold mb-2 ml-1 dark:text-white text-black">{categoryName}</h1>
           <div className="flex flex-wrap  md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem] text-black">
             {products.map((product: any) => (
               <div
@@ -84,7 +84,7 @@ const ProductGrid = () => {
                   {product.description}
                 </p>
                 <p className="text-purple-500 font-bold text-[0.6rem]">
-                  ${product.price}
+                  AED {product.price}
                 </p>
                 <button
                   onClick={() => router.push(`/product-details/${product.id}`)}
