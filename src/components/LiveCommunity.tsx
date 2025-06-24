@@ -67,14 +67,7 @@ const LiveCommunity: React.FC = () => {
 
         {/* <CommunityCard /> */}
         <div className="flex flex-col gap-4  max-md:gap-2 ">
-          {/* <div className="flex justify-end mt-6">
-            <button
-              onClick={() => router.push("/all-communities")}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-purple-600 hover:text-purple-800 transition-colors duration-200"
-            >
-              Explore More Communities →
-            </button>
-          </div> */}
+
 
 
           <div className="flex justify-end mt-2 mr-2">

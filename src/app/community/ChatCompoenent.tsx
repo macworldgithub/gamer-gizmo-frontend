@@ -13,8 +13,8 @@ import ChatBox from "./chatBox";
 //   );
 // }
 export default function Chat({ communityId, communityData, fallbackName, }: {
-  communityId: string;
-  communityData: { name: string } | null
+  communityId?: string;
+  communityData?: { name: string } | null
   fallbackName?: string;
 }) {
   return (
