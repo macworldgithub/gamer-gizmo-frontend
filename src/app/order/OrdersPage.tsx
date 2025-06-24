@@ -290,7 +290,7 @@ const OrdersPage = () => {
 
                         <TableCell onClick={(e) => e.stopPropagation()}>
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                            <Button
+                            {/* <Button
                               variant="contained"
                               color="error"
                               size="small"
@@ -300,7 +300,7 @@ const OrdersPage = () => {
                               }}
                             >
                               DELETE
-                            </Button>
+                            </Button> */}
                             <Button
                               variant="contained"
                               size="small"

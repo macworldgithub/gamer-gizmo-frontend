@@ -52,14 +52,14 @@ export default function MainPage() {
     } catch (err) {
       toast.error("Failed to add to favourites");
     }
-  };
+  };  
   useEffect(() => {
     fetch();
   }, []);
   return (
     <Wrapper className="max-sm:pr-0">
-      <div className="lg:p-6 w-full max-lg:p-0">
-        <h1 className="text-2xl font-bold mb-6 text-black">All Favorites</h1>
+      <div className="lg:p-6 w-full max-lg:p-0 dark:bg-secondaryBlack bg-white rounded-lg">
+        <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">All Favorites</h1>
 
         {/* Check if there are any favorites */}
         {favorites.length === 0 ? (
@@ -77,7 +77,7 @@ export default function MainPage() {
               <div
                 // @ts-expect-error
                 key={item.id}
-                className="flex shadow-lg flex-row items-start p-4 rounded-lg w-full"
+                className="flex shadow-lg flex-row items-start p-4 rounded-lg w-full dark:bg-bluishBorder"
               >
                 {/* Image */}
                 <div className="w-36 h-36">

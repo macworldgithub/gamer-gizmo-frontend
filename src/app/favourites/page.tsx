@@ -17,7 +17,7 @@ const page = () => {
   }, []);
   return (
     // <Wrapper>
-    <div className="flex w-[100%] ">
+    <div className="flex w-[100%]  min-h-screen dark:bg-black">
       {/* <div className="lg:w-[40rem] xl:w-[35rem] max-lg:hidden max-lg:w-0">
         <FavoritesPage />
       </div> */}
@@ -26,7 +26,7 @@ const page = () => {
       </div>
     </div>
     // </Wrapper>
-  );
+  );    
 };
 
 export default page;

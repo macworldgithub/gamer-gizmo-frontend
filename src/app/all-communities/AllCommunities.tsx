@@ -20,7 +20,7 @@ export default function AllCommunities() {
       setLoading(true);
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/list?limit=100`, // Fetching all communities
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/list?limit=100`, 
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -38,13 +38,13 @@ export default function AllCommunities() {
 
   return (
     <Wrapper>
-      <div className="p-4">
+      <div className="p-4 dark:bg-secondaryBlack rounded-lg">
         <h1 className="text-2xl font-bold mb-6 dark:text-white text-black">
           All Communities
         </h1>
 
         {!token ? (
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-6  ">
             <button
               onClick={() => router.push("/auth/login")}
               className="bg-custom-gradient text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold shadow-lg hover:opacity-90 transition-all flex items-center gap-2"
