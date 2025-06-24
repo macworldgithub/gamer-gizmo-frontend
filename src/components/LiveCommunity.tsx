@@ -6,6 +6,8 @@ import Wrapper from "./Common/Wrapper/Wrapper";
 import { useRouter } from "next/navigation";
 import CreateCommunityButton from "@/app/community/CreateCommunity";
 import CommunityList from "@/app/community/CommunityList";
+import Image from "next/image";
+import Link from "next/link";
 
 interface CardData {
   userName: string;
@@ -59,26 +61,48 @@ const LiveCommunity: React.FC = () => {
   return (
     <div className="space-y-8  bg-white dark:bg-black w-full ">
       <Wrapper>
-        <h1 className="text-3xl text-start font-bold max-sm:text-xl text-black dark:text-white max-sm:ml-4 md:pl-4 sm:pl-3 pb-3">
+        {/* <h1 className="text-3xl text-start font-bold max-sm:text-xl  text-black dark:text-white max-sm:ml-4 md:pl-4 sm:pl-3 pb-3">
           Live Community comming soon
-        </h1>
+        </h1> */}
 
         {/* <CommunityCard /> */}
-        <CommunityList />
+        <div className="flex flex-col gap-4  max-md:gap-2 ">
+          {/* <div className="flex justify-end mt-6">
+            <button
+              onClick={() => router.push("/all-communities")}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-purple-600 hover:text-purple-800 transition-colors duration-200"
+            >
+              Explore More Communities →
+            </button>
+          </div> */}
+
+
+          <div className="flex justify-end mt-2 mr-2">
+            <button
+              className="bg-custom-gradient rounded-full w-10 h-10 max-lg:w-6 max-lg:h-6 hover:bg-purple-700 "
+              onClick={() => router.push("/all-communities")}
+            >
+              <Image
+                src="/images/arrowRight.png"
+                alt="Right Arrow"
+                width={20}
+                height={25}
+                className="mx-auto max-lg:w-[10px] max-lg:h-[10px]"
+              />
+            </button>
+          </div>
+          <CommunityList />
+
+        </div>
 
         <div className="flex justify-end gap-4 max-md:justify-center max-md:mt-0 md:mt-3 mb-1">
-          <button
-            onClick={handleJoinCommunity}
-            className="px-6 py-2 w-[10rem] h-[3rem] bg-custom-gradient  text-white text-center text-xs font-semibold rounded-full shadow hover:opacity-90"
-          >
-            Join Live Community
-          </button>
           {/* <button
             onClick={handleJoinCommunity}
             className="px-6 py-2 w-[10rem] h-[3rem] bg-custom-gradient  text-white text-center text-xs font-semibold rounded-full shadow hover:opacity-90"
           >
-            Create Community
+            Join Live Community
           </button> */}
+
           <div>
             <CreateCommunityButton />
 

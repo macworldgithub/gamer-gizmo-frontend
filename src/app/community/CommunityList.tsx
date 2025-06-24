@@ -4,16 +4,18 @@ import Image from "next/image";
 import { FaRegUserCircle } from "react-icons/fa";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function CommunityList() {
     const [communities, setCommunities] = useState([]);
     const [loading, setLoading] = useState(false);
     const token = useSelector((state: any) => state.user.token);
+    const router = useRouter();
     useEffect(() => {
         const fetchCommunities = async () => {
             setLoading(true);
             try {
-                
+
                 const response = await axios.get(
                     `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/list?limit=4`,
                     {
@@ -47,7 +49,8 @@ export default function CommunityList() {
                     return (
                         <div
                             key={community.id}
-                            className="border border-purple-300 rounded-lg p-4 overflow-hidden shadow-md dark:bg-zinc-800 bg-white hover:shadow-lg transition-shadow duration-200 ease-in-out"
+                            onClick={() => router.push(`/community-chat/${community.id}`)}
+                            className="border border-purple-300 rounded-lg p-4 overflow-hidden shadow-md dark:bg-zinc-800 bg-white hover:shadow-lg transition-shadow duration-200 ease-in-out hover:cursor-pointer dark:hover:bg-zinc-700 hover:bg-purple-50"
                         >
                             <div className="flex items-center space-x-3">
                                 <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gray-200 dark:bg-gray-700">
@@ -80,7 +83,7 @@ export default function CommunityList() {
                             </h3>
 
                             <p className="text-sm text-gray-600 mt-1 dark:text-gray-300 line-clamp-3">
-                                {community.description || "No description provided."}
+                                {community.description || "Get involved — your thoughts matter!."}
                             </p>
 
                             {latestMsg && (

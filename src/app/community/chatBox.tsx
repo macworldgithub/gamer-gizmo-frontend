@@ -28,7 +28,7 @@ type Message = {
   reactions?: Reaction[];
 };
 
-export default function CommunityChatBox() {
+export default function CommunityChatBox({ communityChatId }: any) {
   const user_id = useSelector((state: RootState) => state.user.id);
   const chatRef = useRef<HTMLDivElement | null>(null);
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
@@ -47,7 +47,7 @@ export default function CommunityChatBox() {
     });
     const socket = socketRef.current;
 
-    socket.emit("communityFetchMessages");
+    socket.emit("communityFetchMessages", { communityChatId: Number(communityChatId) });
     socket.on("communityLoadMessages", (msgs: Message[]) => {
       setMessages(msgs);
       if (msgs.length < 10) setHasMore(false);
@@ -58,10 +58,16 @@ export default function CommunityChatBox() {
       if (msgs.length < 10) setHasMore(false);
       setIsFetching(false);
     });
+    // socket.on("communityReceiveMessage", (message: Message) => {
+    //   setMessages((prev) => [...prev, message]);
+    // });
     socket.on("communityReceiveMessage", (message: Message) => {
-      setMessages((prev) => [...prev, message]);
+      // Only add if message belongs to current community
+      //@ts-ignore
+      if (message.community_chat_id === Number(communityChatId)) {
+        setMessages((prev) => [...prev, message]);
+      }
     });
-
     socket.on("messageReactionUpdated", (data: { messageId: number; reactions: Reaction[] }) => {
       setMessages((prev) =>
         prev.map((msg) =>
@@ -91,23 +97,21 @@ export default function CommunityChatBox() {
   const loadMoreMessages = () => {
     if (isFetching || !hasMore || !socketRef.current) return;
     setIsFetching(true);
-    const chatBox = chatRef.current;
-    const previousScrollHeight = chatBox?.scrollHeight || 0;
     const oldestMessageId = messages.length > 0 ? messages[0].id : 0;
 
-    socketRef.current.emit("communityFetchMoreMessages", { lastMessageId: oldestMessageId });
-    setTimeout(() => {
-      if (chatBox) chatBox.scrollTop = chatBox.scrollHeight - previousScrollHeight;
-    }, 100);
+    socketRef.current.emit("communityFetchMoreMessages", {
+      communityChatId: Number(communityChatId),
+      lastMessageId: oldestMessageId
+    });
   };
 
   const sendMessage = () => {
     if (!user_id) { alert("Please log in to send messages."); return; }
     if (input.trim() && socketRef.current) {
       socketRef.current.emit("communitySendMessage", {
-        sender_id: user_id,
         content: input,
         is_admin: false,
+        community_chat_id: Number(communityChatId) 
       });
       setInput("");
     }
@@ -268,7 +272,7 @@ export default function CommunityChatBox() {
                           </span>
                         </div>
 
-                       
+
 
                         <p className="text-sm break-words break-all mt-1 whitespace-pre-wrap">{msg.content}</p>
 
