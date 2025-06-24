@@ -98,7 +98,7 @@ export default function MainPage() {
 
                 {/* Details */}
                 <div className="p-6 max-sm:pr-0 flex flex-col justify-center flex-1">
-                  <h2 className="text-base font-bold break-words max-w-[600px] max-sm:text-xs max-sm:w-48">
+                  <h2 className="text-base font-bold break-words max-w-[600px] max-sm:text-xs max-sm:w-48 text-black ">
                     {/* @ts-ignore */}
                     {item.product.name}
                   </h2>

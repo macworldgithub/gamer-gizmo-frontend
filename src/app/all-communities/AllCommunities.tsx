@@ -54,7 +54,13 @@ export default function AllCommunities() {
                             return (
                                 <div
                                     key={community.id}
-                                    onClick={() => router.push(`/community-chat/${community.id}`)}
+                                    // onClick={() => router.push(`/community-chat/${community.id}`)}
+                                    onClick={() =>
+                                        router.push(
+                                            `/community-chat/${community.id}?name=${encodeURIComponent(community.name)}`
+                                        )
+                                    }
+
                                     className="border border-purple-300 rounded-lg p-4 overflow-hidden shadow-md dark:bg-zinc-800 bg-white hover:shadow-lg transition-shadow duration-200 ease-in-out hover:cursor-pointer dark:hover:bg-zinc-700 hover:bg-purple-50"
                                 >
                                     <div className="flex items-center space-x-3">

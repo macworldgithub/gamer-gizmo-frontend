@@ -60,7 +60,7 @@ export default function Home() {
               />
               {/* Content */}
               <div className=" ">
-                <h3 className="text-lg font-bold truncate  w-32">
+                <h3 className="text-lg font-bold truncate w-32 s">
                   {item.title}
                 </h3>
                 <h3 className="text-lg font-medium text-gray-400 ">1 saves</h3>
