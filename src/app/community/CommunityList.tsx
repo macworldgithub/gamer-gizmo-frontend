@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-export default function CommunityList() {
+export default function CommunityList({ refresh }: { refresh: boolean }) {
     const [communities, setCommunities] = useState([]);
     const [loading, setLoading] = useState(false);
     const token = useSelector((state: any) => state.user.token);
@@ -33,7 +33,7 @@ export default function CommunityList() {
         };
 
         fetchCommunities();
-    }, []);
+    }, [refresh]);
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">

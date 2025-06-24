@@ -1,6 +1,6 @@
 "use client";
 // pages/LiveCommunity.tsx
-import React from "react";
+import React, { useState } from "react";
 import CommunityCard from "../components/CommunityCard";
 import Wrapper from "./Common/Wrapper/Wrapper";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,8 @@ interface CardData {
 
 const LiveCommunity: React.FC = () => {
   const router = useRouter();
+  const [refreshFlag, setRefreshFlag] = useState(false);
+  const triggerRefresh = () => setRefreshFlag(prev => !prev);
 
   const handleJoinCommunity = () => {
     router.push("/community");
@@ -84,7 +86,9 @@ const LiveCommunity: React.FC = () => {
               />
             </button>
           </div>
-          <CommunityList />
+          <CommunityList
+            refresh={refreshFlag}
+          />
 
         </div>
 
@@ -97,7 +101,7 @@ const LiveCommunity: React.FC = () => {
           </button> */}
 
           <div>
-            <CreateCommunityButton />
+            <CreateCommunityButton onCreated={triggerRefresh} />
 
 
           </div>

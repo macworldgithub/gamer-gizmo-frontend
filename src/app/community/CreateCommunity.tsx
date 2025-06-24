@@ -25,7 +25,7 @@ const style = {
     p: 4,
 };
 
-export default function CreateCommunityButton() {
+export default function CreateCommunityButton({ onCreated }: { onCreated: () => void }) {
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -63,6 +63,7 @@ export default function CreateCommunityButton() {
             // alert("Community created successfully!");
             toast.success("Community created successfully!");
             handleClose();
+            onCreated();
         } catch (error) {
             // alert("Failed to create community.");
             toast.error("Failed to create community.");
