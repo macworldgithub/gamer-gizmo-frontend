@@ -31,37 +31,56 @@ const ConditionalLiveAds = () => {
 
   if (loading) return <p className="text-center">Loading ads...</p>;
 
-  return (
-    <div className="w-full flex  mt-[3rem]   mx-auto mb-2">
-      {/* Left Side */}
-      {hasAd2 ? (
-        <LiveAdSection
-          category="Home"
-          adId={2}
-          className="md:w-[80%] max-md:w-[45%] md:h-52 max-md:h-40"
-        />
-      ) : (
-        <CardComponent
-          position="left"
-          className="md:w-[50%] max-sm:w-[18rem] max-sm:mx-auto max-md:w-[100%] max-md:h-60 md:h-60 lg:h-52"
-        />
+ return (
+    <div className={`bg-[#e8e3fc] p-4 rounded-lg shadow-md flex flex-col lg:flex-row items-center justify-between gap-2 ${className}`}>
+      {/* Image Left */}
+      {card.imagePosition === "left" && (
+        <div className="relative flex-shrink-0 w-24 h-24">
+          <div className="absolute -left-4 top-2 w-20 h-20 bg-gray-300 rounded-lg transform -rotate-[6deg] border-4 border-white">
+            <Image src={gpu} alt="Ads Banner" className="object-cover" />
+          </div>
+          <div className="absolute left-10 top-2 w-20 h-20 bg-gray-300 rounded-lg transform rotate-[6deg] border-4 border-white">
+            <Image src={gpu} alt="Ads Banner" className="object-cover" />
+          </div>
+          <div className="absolute left-4 top-0 w-16 h-24 bg-gray-300 rounded-lg border-4 border-white">
+            <Image src={gpu} alt="Ads Banner" className="object-cover" />
+          </div>
+        </div>
       )}
 
-      {/* Right Side */}
-      {hasAd3 ? (
-        <LiveAdSection
-          category="Home"
-          adId={3}
-          className="md:w-[80%] max-md:w-[45%] mr-5 md:h-52 max-md:h-40"
-        />
-      ) : (
-        <CardComponent
-          position="right"
-          className="md:w-[50%] max-sm:hidden max-md:w-[100%] max-lg:h-72  max-md:h-60 md:h-60 lg:h-52"
-        />
+      {/* Content */}
+      <div className="text-center lg:text-left flex-1 px-2">
+        <h2 className="text-lg font-bold text-gray-900">{card.title}</h2>
+        <p className="text-gray-600 mt-1 text-sm">
+          {card.description}
+        </p>
+        <div className="mt-3 flex justify-center lg:justify-start">
+          <Link
+            href={card.link}
+            className="px-4 py-2 bg-custom-gradient text-white rounded-md shadow-md hover:scale-105 transition-all text-sm"
+          >
+            {card.buttonText}
+          </Link>
+        </div>
+      </div>
+
+      {/* Image Right */}
+      {card.imagePosition === "right" && (
+        <div className="relative flex-shrink-0 w-24 h-24">
+          <div className="absolute -left-4 top-2 w-20 h-20 bg-gray-300 rounded-lg transform -rotate-[6deg] border-4 border-white">
+            <Image src={gpu} alt="Ads Banner" className="object-cover" />
+          </div>
+          <div className="absolute left-10 top-2 w-20 h-20 bg-gray-300 rounded-lg transform rotate-[6deg] border-4 border-white">
+            <Image src={gpu} alt="Ads Banner" className="object-cover" />
+          </div>
+          <div className="absolute left-4 top-0 w-16 h-24 bg-gray-300 rounded-lg border-4 border-white">
+            <Image src={gpu} alt="Ads Banner" className="object-cover" />
+          </div>
+        </div>
       )}
     </div>
   );
+
 };
 
 export default ConditionalLiveAds;
