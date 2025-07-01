@@ -89,9 +89,8 @@ export default function UsBlogs() {
       if (diffHours === 0 && minutes === 0) return "Just now";
       if (diffHours === 0)
         return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${
-        minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
-      } ago`;
+      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
+        } ago`;
     }
 
     return postedDate.toLocaleString(undefined, {

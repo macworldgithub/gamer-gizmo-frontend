@@ -52,88 +52,91 @@ export default function MainPage() {
     } catch (err) {
       toast.error("Failed to add to favourites");
     }
-  };
+  };  
   useEffect(() => {
     fetch();
   }, []);
   return (
     <Wrapper className="max-sm:pr-0">
-    <div className="lg:p-6 w-full max-lg:p-0">
-      <h1 className="text-2xl font-bold mb-6 text-black">All Favorites</h1>
-  
-      {/* Check if there are any favorites */}
-      {favorites.length === 0 ? (
-        <div className="text-center text-gray-500 mt-10">
-          <p className="text-lg text-black  font-medium">No favorites found.</p>
-          <p className="text-sm">Start adding products to your favorites to see them here!</p>
-        </div>
-      ) : (
-        <div className="flex flex-col gap-6">
-          {favorites.map((item) => (
-            <div
-              // @ts-expect-error
-              key={item.id}
-              className="flex shadow-lg flex-row items-start p-4 rounded-lg w-full"
-            >
-              {/* Image */}
-              <div className="w-36 h-36">
-                <Image
-                  width={100}
-                  height={100}
-                  src={
-                    // @ts-expect-error
-                    item?.product &&
-                    // @ts-expect-error
-                    `${item?.product?.product_images[0].image_url}`
-                  }
-                  // @ts-expect-error
-                  alt={item.product.name}
-                  className="object-contain w-full h-full"
-                />
-              </div>
-  
-              {/* Details */}
-              <div className="p-6 max-sm:pr-0 flex flex-col justify-center flex-1">
-                <h2 className="text-base font-bold break-words max-w-[600px] max-sm:text-xs max-sm:w-48">
-                  {/* @ts-ignore */}
-                  {item.product.name}
-                </h2>
-                <h2 className="text-base font-bold text-purple-800 break-words max-w-[600px] max-sm:text-xs max-sm:w-48">
-                  {/* @ts-ignore */}
-                  {item.product.categories.name}
-                </h2>
-                <p className="mt-2 text-xs text-gray-500">
-                  {/* @ts-ignore */}
-                  {item.product.description.slice(0, 120)} ...
-                </p>
-                <div className="mt-4 flex items-center gap-2">
-                  <button className="flex items-center justify-center gap-2 border max-sm:w-[6rem] max-sm:h-[2rem] max-sm:px-1 px-3 py-3 rounded-lg bg-custom-gradient text-white w-[8rem] h-12 text-xs">
-                    <FiPhone className="w-7 h-4" />
-                    <p className="w-28 max-sm:text-[0.6rem]">
-                      {/* @ts-expect-error */}
-                      {item.product.users.phone}
-                    </p>
-                  </button>
-                  <button className="flex items-center justify-center gap-2 text-purple-500 border border-[#DC39FC] max-sm:w-[6rem] max-sm:h-[2rem] max-sm:px-0 px-3 py-3 rounded-lg hover:bg-purple-100 w-[8rem] h-12 text-xs">
-                    <FiMessageSquare />
-                    <p className="max-sm:text-[0.45rem]">Send Message</p>
-                  </button>
-                </div>
-              </div>
+      <div className="lg:p-6 w-full max-lg:p-0 dark:bg-secondaryBlack bg-white rounded-lg">
+        <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">All Favorites</h1>
+
+        {/* Check if there are any favorites */}
+        {favorites.length === 0 ? (
+          <div className="text-center text-gray-500 mt-10">
+            <p className="text-lg text-black  font-medium">
+              No favorites found.
+            </p>
+            <p className="text-sm">
+              Start adding products to your favorites to see them here!
+            </p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-6">
+            {favorites.map((item) => (
               <div
                 // @ts-expect-error
-                onClick={() => remove(item.product_id)}
-                className="text-red-700 text-4xl flex justify-center items-center cursor-pointer"
+                key={item.id}
+                className="flex shadow-lg flex-row items-start p-4 rounded-lg w-full dark:bg-bluishBorder"
               >
-                <IoIosRemoveCircleOutline />
+                {/* Image */}
+                <div className="w-36 h-36">
+                  <Image
+                    width={100}
+                    height={100}
+                    src={
+                      // @ts-expect-error
+                      item?.product &&
+                      // @ts-expect-error
+                      `${item?.product?.product_images[0].image_url}`
+                    }
+                    // @ts-expect-error
+                    alt={item.product.name}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+
+                {/* Details */}
+                <div className="p-6 max-sm:pr-0 flex flex-col justify-center flex-1">
+                  <h2 className="text-base font-bold break-words max-w-[600px] max-sm:text-xs max-sm:w-48 text-black ">
+                    {/* @ts-ignore */}
+                    {item.product.name}
+                  </h2>
+                  <h2 className="text-base font-bold text-purple-800 break-words max-w-[600px] max-sm:text-xs max-sm:w-48">
+                    {/* @ts-ignore */}
+                    {item.product.categories.name}
+                  </h2>
+                  <p className="mt-2 text-xs text-gray-500">
+                    {/* @ts-ignore */}
+                    {item.product.description.slice(0, 120)} ...
+                  </p>
+                  <div className="mt-4 flex items-center gap-2">
+                    <button className="flex items-center justify-center gap-2 border max-sm:w-[6rem] max-sm:h-[2rem] max-sm:px-1 px-3 py-3 rounded-lg bg-custom-gradient text-white w-[8rem] h-12 text-xs">
+                      <FiPhone className="w-7 h-4" />
+                      <p className="w-28 max-sm:text-[0.6rem]">
+                        {/* @ts-expect-error */}
+                        {item.product.users.phone}
+                      </p>
+                    </button>
+                    <button className="flex items-center justify-center gap-2 text-purple-500 border border-[#DC39FC] max-sm:w-[6rem] max-sm:h-[2rem] max-sm:px-0 px-3 py-3 rounded-lg hover:bg-purple-100 w-[8rem] h-12 text-xs">
+                      <FiMessageSquare />
+                      <p className="max-sm:text-[0.45rem]">Send Message</p>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  // @ts-expect-error
+                  onClick={() => remove(item.product_id)}
+                  className="text-red-700 text-4xl flex justify-center items-center cursor-pointer"
+                >
+                  <IoIosRemoveCircleOutline />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-    {loading && <CustomLoader />}
-  </Wrapper>
-  
+            ))}
+          </div>
+        )}
+      </div>
+      {loading && <CustomLoader />}
+    </Wrapper>
   );
 }

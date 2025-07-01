@@ -8,7 +8,7 @@ interface layoutProps {
   children: React.ReactNode;
 }
 
-const LoginLayout = ({}: layoutProps) => {
+const LoginLayout = ({ }: layoutProps) => {
   return (
     <>
       <PageHeader pageName="Login" />
@@ -18,6 +18,7 @@ const LoginLayout = ({}: layoutProps) => {
         <div className="w-[75%]  max-md:w-[100%] md:h-max xl:h-[550px] lg:w-[1170px]  h-[550px] max-sm:h-[450px] mb-[80px]  rounded-[12px] flex ">
           <CredentialSide />
           <PictureSide />
+          
         </div>
       </div>
     </>

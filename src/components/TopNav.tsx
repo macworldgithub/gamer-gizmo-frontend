@@ -68,7 +68,7 @@ const TopNav = () => {
               icon={faFacebookF}
               color="#4267B2"
               size="lg"
-              className="hover:text-blue-400"
+              className="hover:text-blue-400 "
             />
           </a>
           <a
@@ -85,7 +85,7 @@ const TopNav = () => {
             rel="noopener noreferrer"
             className=""
           >
-            <FaTiktok size={22} className="hover:text-gray-500" />
+            <FaTiktok size={22} className="text-black hover:text-gray-500" />
           </a>
 
           <a

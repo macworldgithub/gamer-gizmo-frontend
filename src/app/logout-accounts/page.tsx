@@ -32,7 +32,7 @@ const page = () => {
   useLayoutEffect(() => {
     fetch();
   }, []);
-  return <div>Logging Out</div>;
+  return <div className="font-bold text-2xl text-secondaryColorLight">Logging Out</div>;
 };
 
 export default page;

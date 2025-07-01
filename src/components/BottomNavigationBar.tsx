@@ -10,13 +10,14 @@ import { SettingOutlined } from "@ant-design/icons";
 import { MdOutlineFavorite } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import type { MenuProps } from "antd";
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaRegUserCircle } from "react-icons/fa";
 import { Dropdown } from "antd";
 import { CiLogout } from "react-icons/ci";
 import { clearUserData } from "./Store/Slicer/LoginSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { LuPanelLeftClose } from "react-icons/lu";
+import { LiaAdSolid } from "react-icons/lia";
 const BottomNavigationBar = () => {
   const isLogin = useSelector((state: RootState) => state.user.token != null);
   const token = useSelector((state: RootState) => state.user.token);
@@ -113,7 +114,7 @@ const BottomNavigationBar = () => {
       ),
     },
     {
-      icon: <FaCartPlus />,
+      icon: <LiaAdSolid className="size-5" />,
       key: "3",
       label: (
         <Link onClick={() => setIsDrawerOpen(false)} href="/my-adds">
@@ -131,9 +132,35 @@ const BottomNavigationBar = () => {
         </Link>
       ),
     },
-
     {
       key: "5",
+
+      icon: <FaCartPlus />,
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/Add-to-Cart">
+          My Cart Items{" "}
+        </Link>
+      ),
+    },
+    {
+      key: "6",
+
+      icon: (
+        <Image
+          src="/images/purchase-order.png"
+          alt="Orders"
+          width={20}
+          height={20}
+        />
+      ),
+      label: (
+        <Link onClick={() => setIsDrawerOpen(false)} href="/order">
+          My Orders
+        </Link>
+      ),
+    },
+    {
+      key: "7",
       label: <p className="font-bold text-red-700">Logout</p>,
       icon: <CiLogout color={"#b91c1c"} />,
       onClick: () => {
@@ -163,9 +190,8 @@ const BottomNavigationBar = () => {
             key={tab.name}
             href={tab.href}
             onClick={() => handleTabClick(tab.name)}
-            className={`${
-              activeTab === tab.name ? "text-secondaryColorLight" : ""
-            }`}
+            className={`${activeTab === tab.name ? "text-secondaryColorLight" : ""
+              }`}
           >
             {tab.name}
           </Link>
@@ -197,13 +223,12 @@ const BottomNavigationBar = () => {
             ></div>
             <div
               className={`flex-nowrap fixed top-0 left-0 text-black dark:bg-black bg-white dark:text-white w-[10rem] h-[100vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-2 max-sm:space-y-2 pt-1 overflow-y-auto
-                            ${
-                              isDrawerOpen
-                                ? "animate-slide-in"
-                                : firstClick
-                                ? "animate-slide-out"
-                                : "hidden"
-                            }`}
+                            ${isDrawerOpen
+                  ? "animate-slide-in"
+                  : firstClick
+                    ? "animate-slide-out"
+                    : "hidden"
+                }`}
             >
               <div onClick={() => setIsDrawerOpen(false)}>
                 <LuPanelLeftClose
@@ -213,19 +238,24 @@ const BottomNavigationBar = () => {
                 />
               </div>
               {isLogin ? (
-                <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
+                //Mobile Profile Icon
+                <div className="shadow-md flex  shadow-blue-500/50 rounded-full w-10 h-10 justify-center items-center">
                   <Dropdown className="shadow-2xl" menu={{ items }}>
-                    <img
-                      src={
-                        profile != null
-                          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
-                          : "/images/profile.png"
-                      }
-                      alt="Profile"
-                      width={40}
-                      height={40}
-                      className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
-                    />
+
+                    {profile ? (
+                      <Image
+                        //@ts-ignore
+                        src={profile}
+                        alt="Profile"
+                        width={50}
+                        height={50}
+                        className="w-full h-full object-cover rounded-full  hover:cursor-pointer"
+                      />
+                    ) : (
+                      <span className="cursor-pointer">
+                        <FaRegUserCircle className="text-3xl text-secondaryColorLight" />
+                      </span>
+                    )}
                   </Dropdown>
                 </div>
               ) : (
@@ -351,31 +381,27 @@ const BottomNavigationBar = () => {
         </Link>
 
         {isLogin ? (
-          <div className="shadow-md flex  shadow-blue-500/50 rounded-full justify-center items-center">
+          //Desktop and Laptop Profile Icon
+          <div className="w-10 h-10 shadow-md shadow-blue-500/50 rounded-full flex justify-center items-center overflow-hidden">
             <Dropdown className="shadow-2xl" menu={{ items }}>
-              {/* <Image
-                src={
-                  profile
-                    ? profile.startsWith("http")
-                      ? profile
-                      : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile}`
-                    : "/images/profile.png"
-                }
-                alt="Profile"
-                width={50}
-                height={50}
-                className="rounded-full hover:cursor-pointer md:w-[1rem] lg:w-[2.3rem] md:mx-0"
-              /> */}
-              <Image
-                //@ts-ignore
-                src={profile}
-                alt="Profile"
-                width={50}
-                height={50}
-                className="rounded-full hover:cursor-pointer md:w-[2rem] lg:w-[2.3rem] md:mx-0"
-              />
+              {profile ? (
+                <Image
+                  //@ts-ignore
+                  src={profile}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover rounded-full hover:cursor-pointer"
+                />
+              ) : (
+                <span >
+                  <FaRegUserCircle className="text-2xl  text-secondaryColorLight" />
+
+                </span>
+              )}
             </Dropdown>
           </div>
+
         ) : (
           <Link href="/auth/login">
             <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:gap-3 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">

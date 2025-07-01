@@ -80,8 +80,9 @@ const CredentialSide = () => {
         );
       } else {
         switch (message) {
-          case "You have reached max account logins":
+          case "You have  max account logins":
             setShowAccountsModal(true);
+
             setAccounts(error.response?.data?.accounts);
             break;
 
@@ -160,6 +161,11 @@ const CredentialSide = () => {
         type="password"
         placeholder="Password"
         value={password}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !isSignIn) {
+            handleLogin();
+          }
+        }}
         onChange={(e) => setPassword(e.target.value)}
       />
       <div className={`w-[100%] text-black dark:text-white`}>
@@ -172,9 +178,9 @@ const CredentialSide = () => {
       <div className="w-[100%]  h-max">
         <button
           onClick={handleLogin}
-          className={`bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ${
-            isSignIn ? "opacity-50 cursor-not-allowed" : ""
-          } `}
+          className={`bg-custom-gradient  text-white w-[100%] py-2 rounded-full flex justify-center ${isSignIn ? "opacity-50 cursor-not-allowed" : ""
+            } `}
+
           disabled={isSignIn}
         >
           <Image

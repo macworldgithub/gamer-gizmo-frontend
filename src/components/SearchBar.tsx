@@ -33,7 +33,7 @@ const SearchBar = ({ categoryId }: any) => {
   }, [searchQuery, categoryId]);
 
   return (
-    <div className="w-full h-auto bg-cover dark:bg-black bg-black bg-[url('/images/curve.png') md:hidden">
+    <div className="w-full h-auto bg-cover dark:bg-black bg-black bg-[url('/images/curve.webp') md:hidden">
       <div className="relative flex justify-center">
         <div className="flex items-center bg-transparent rounded-full py-2 border border-gray-300 shadow-md p-2 w-80 mt-2  h-[57px] mb-4">
           <i className="fas fa-search text-gray-500 mr-2"></i>

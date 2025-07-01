@@ -25,7 +25,7 @@ const Footer = () => {
 
   return (
     <div className="w-full h-auto bg-white dark:bg-black">
-      <div className="">{pathname !== "/community" && <LiveCommunity />}</div>
+      <div className="">{pathname !== "/all-communities" && <LiveCommunity />}</div>
 
       <div className="bg-footerBlack h-auto">
         {/* Footer Main Section */}

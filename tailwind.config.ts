@@ -169,6 +169,7 @@ export default {
     },
   },
   plugins: [
+    require("@tailwindcss/typography"),
     //@ts-ignore
     function ({ addUtilities }) {
       addUtilities({
@@ -181,8 +182,8 @@ export default {
         },
       });
     },
-    
-//@ts-ignore
+
+    //@ts-ignore
     function ({ addComponents }) {
       addComponents({
         ".dark input, .dark textarea, .dark select": {

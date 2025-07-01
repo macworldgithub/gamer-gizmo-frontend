@@ -15,7 +15,12 @@ import Sellersdetails from "./sellersdetail";
 import { formatDate } from "@/app/utils/formatDate";
 import ProductImageSwiper from "@/components/ProductImageSwiper";
 import { CiUser } from "react-icons/ci";
-import { FaRegComment, FaRegShareSquare, FaUser } from "react-icons/fa";
+import {
+  FaCartPlus,
+  FaRegComment,
+  FaRegShareSquare,
+  FaUser,
+} from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { getSpecifications } from "@/app/utils/getSpecifications";
 import { getRelevantFields } from "@/app/utils/specificationFields";
@@ -23,6 +28,9 @@ import ShareProductModal from "@/components/Modals/ShareProductModal";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/components/Store/Store";
 import { setLoading } from "@/components/Store/Slicer/LoadingSlice";
+import Wrapper from "@/components/Common/Wrapper/Wrapper";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ProductDetails = ({ data, refetch, seReftech }: any) => {
   // const [activeTab, setActiveTab] = useState("false");
@@ -33,6 +41,10 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
   const isLoading = useSelector((state: RootState) => state.loading.isLoading);
   const totalReviewsCount = data?.product_reviews?.length || 0;
   const specifications = getSpecifications(data);
+  const [quantity, setQuantity] = useState(1);
+  const [adding, setAdding] = useState(false);
+  const [showCounter, setShowCounter] = useState(false);
+  const token = useSelector((state: RootState) => state?.user?.token);
   // Function to select the correct specifications based on category_id
   const categorySpecifications = () => {
     switch (data?.categories?.id) {
@@ -61,7 +73,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     return relevantFields.some((field: any) => {
       const value = field.includes(".")
         ? //@ts-ignore
-          field.split(".").reduce((obj, key) => obj?.[key], categoryData)
+        field.split(".").reduce((obj, key) => obj?.[key], categoryData)
         : categoryData[field];
       return (
         value && value !== "Not Available" && value.toString().trim() !== ""
@@ -78,15 +90,87 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     }, 1000);
   };
 
+  const handleAddToCart = async () => {
+    if (!token) {
+      toast.error("Please log in to add items to your cart.");
+      return;
+    }
+
+    if (!showCounter) {
+      // First click reveals the counter
+      setShowCounter(true);
+      return;
+    }
+
+    if (!data?.id) return;
+    setAdding(true);
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/cart`,
+        {
+          product_id: data.id,
+          quantity: quantity,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success("Added to cart successfully!");
+      console.log("Cart response:", response?.data);
+    } catch (error: any) {
+      const errorMessage =
+        error?.response?.data?.message || "Failed to add to cart.";
+      toast.error(errorMessage);
+      console.error("Add to cart error:", error);
+    } finally {
+      setAdding(false);
+    }
+  };
+
   console.log(data, "ppo");
   return (
     <>
-      <div className="container flex flex-col items-start mx-8 pr-11 item-center">
-        <p className="text-sm md:text-2xl mt-8 text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
-          {data?.name}
-        </p>
-      </div>
-      <div className="container flex flex-col justify-center items-center">
+      <div className="container flex flex-col justify-center  items-center max-md:px-10 md:pl-4">
+        <div className="flex w-full  justify-between items-center max-w-3xl ">
+          <p className="text-sm md:text-2xl mt-8 text-start max-md:text-[0.9rem] font-bold text-gray-800 mb-2 dark:text-white">
+            {data?.name}
+          </p>
+          {data?.is_store_product === true && (
+            <div className="flex items-center gap-3">
+              {showCounter && (
+                <div className="flex items-center gap-2">
+                  <button
+                    className="w-8 h-8 text-lg font-bold bg-gray-200 rounded-full text-gray-500"
+                    onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}
+                  >
+                    −
+                  </button>
+                  <span className="w-8 text-center text-black dark:text-white">
+                    {quantity}
+                  </span>
+                  <button
+                    className="w-8 h-8 text-lg font-bold bg-gray-200 rounded-full text-gray-500"
+                    onClick={() => setQuantity((prev) => prev + 1)}
+                  >
+                    +
+                  </button>
+                </div>
+              )}
+
+              <button
+                onClick={handleAddToCart}
+                disabled={adding}
+                className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full transition-all duration-200 disabled:opacity-50"
+              >
+                <FaCartPlus size={20} />
+                {adding ? "Adding..." : showCounter ? "Confirm" : "Add to Cart"}
+              </button>
+            </div>
+          )}
+        </div>
         {/* Image Section */}
         <div></div>
         <div className="w-full flex justify-center items-center h-auto bg-gray-200 max-w-3xl ">
@@ -212,12 +296,12 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   {data?.condition === 1
                     ? "New"
                     : data?.condition === 2
-                    ? "Used"
-                    : data?.condition === 3
-                    ? "Like New"
-                    : data?.condition === 4
-                    ? "Refurbished"
-                    : "Unknown"}
+                      ? "Used"
+                      : data?.condition === 3
+                        ? "Like New"
+                        : data?.condition === 4
+                          ? "Refurbished"
+                          : "Unknown"}
                 </p>
               </div>
             )}
@@ -234,11 +318,10 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   <button
                     onClick={handleSpecClick}
                     className={`w-fit px-4 py-2 rounded-md text-sm flex justify-center 
-      ${
-        isSpecOpen
-          ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
-          : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
-      }`}
+      ${isSpecOpen
+                        ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
+                        : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
+                      }`}
                   >
                     {isSpecOpen
                       ? "Hide Additional Details"

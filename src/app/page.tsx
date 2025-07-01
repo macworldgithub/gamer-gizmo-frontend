@@ -14,13 +14,30 @@ import CardComponent from "@/components/CardComponent";
 import AdsBanner from "@/components/AdsBanner";
 import LiveAdSection from "@/components/LiveAd";
 import ConditionalLiveAds from "@/components/conditionalLiveAds";
+import axios from "axios";
 
 export default function HomePage() {
   const token = useSelector((state: RootState) => state.user.token);
+  console.log(token, "my");
 
   useEffect(() => {
     console.log("useEffect triggered");
+
     if (typeof window !== "undefined") {
+      axios
+        .post(
+          "https://backend.gamergizmo.com/analytics/track-visitor",
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(() => console.log("Visitor tracked for https://gamergizmo.com/"))
+        .catch((error) => console.error("Error tracking visitor:", error));
+
+      // Info toast
       toast.dismiss();
       toast.info(
         "🚧 Our website is online, but some features are still under development. Stay tuned for updates! 🚀",
@@ -32,7 +49,6 @@ export default function HomePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          progressClassName: "",
           className: "custom-toast-info",
         }
       );

@@ -16,7 +16,12 @@ export default function BlogList() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getAll`
         );
-        setBlogs(response.data.data);
+        const sortedBlogs = (response.data.data || []).sort(
+          //@ts-ignore
+          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+
+        setBlogs(sortedBlogs);
       } catch (error) {
         console.error("Failed to fetch blogs:", error);
       } finally {
@@ -39,9 +44,8 @@ export default function BlogList() {
       if (diffHours === 0 && minutes === 0) return "Just now";
       if (diffHours === 0)
         return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${
-        minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
-      } ago`;
+      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
+        } ago`;
     }
 
     // Fallback to full datetime for older posts
