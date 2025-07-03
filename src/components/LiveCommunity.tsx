@@ -26,40 +26,6 @@ const LiveCommunity: React.FC = () => {
   const handleJoinCommunity = () => {
     router.push("/community");
   };
-  const cardsData: CardData[] = [
-    {
-      userName: "Cam Incoll",
-      time: "5 minutes ago",
-      question: "How to buy NFTs?",
-      description:
-        "NFTs can be purchased on various marketplaces. Start by creating a crypto wallet, adding funds, and exploring platforms like OpenSea, Rarible, or Foundation.",
-      src: "/images/profile.png",
-    },
-    {
-      userName: "Cam Incoll",
-      time: "5 minutes ago",
-      question: "How to sell NFTs?",
-      description:
-        "To sell NFTs, mint your digital asset on a blockchain like Ethereum or Solana, list it on a marketplace, and set your desired price or auction.",
-      src: "/images/profile.png",
-    },
-    {
-      userName: "Cam Incoll",
-      time: "5 minutes ago",
-      question: "What are the benefits of NFTs?",
-      description:
-        "NFTs enable artists to monetize their work, ensure ownership authenticity, and provide unique experiences for collectors.",
-      src: "/images/profile.png",
-    },
-    {
-      userName: "Cam Incoll",
-      time: "5 minutes ago",
-      question: "What is the future of NFTs?",
-      description:
-        "NFTs are evolving beyond art, finding use cases in gaming, real estate, identity verification, and more, revolutionizing digital ownership.",
-      src: "/images/profile.png",
-    },
-  ];
 
   return (
     <div className="space-y-8  bg-white dark:bg-black w-full ">

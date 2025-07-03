@@ -58,7 +58,9 @@ const ProductGrid = () => {
     <div className=" dark:bg-[#1e1e2f]">
       <Wrapper>
         <div className="w-full mx-auto mt-3 mb-4 ">
-          <h1 className="font-bold mb-2 ml-1 dark:text-white text-black">{categoryName}</h1>
+          <h1 className="font-bold mb-2 ml-1 dark:text-white text-black">
+            {categoryName}
+          </h1>
           <div className="flex flex-wrap  md:gap-2 sm:gap-[0.3rem] max-sm:gap-[0.6rem] text-black">
             {products.map((product: any) => (
               <div
