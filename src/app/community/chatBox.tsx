@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import Image from "next/image";
 import { BsSend } from "react-icons/bs";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaImage, FaRegUserCircle } from "react-icons/fa";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 type Reaction = {
   id: number;
@@ -38,6 +40,12 @@ export default function CommunityChatBox({ communityChatId }: any) {
   const [hasMore, setHasMore] = useState(true);
   const [input, setInput] = useState("");
   const [activeReactionMsgId, setActiveReactionMsgId] = useState(null);
+  const [communityData, setCommunityData] = useState<any>(null);
+  const [wallpaper, setWallpaper] = useState<string>("/images/wallpaper1.jpg");
+  const token = useSelector((state: RootState) => state.user.token);
+  const [isUserAdmin, setIsUserAdmin] = useState(false);
+
+  const [showWallpaperModal, setShowWallpaperModal] = useState(false);
 
   useEffect(() => {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_BASE_URL!, {
@@ -101,6 +109,39 @@ export default function CommunityChatBox({ communityChatId }: any) {
       setFirstTime(false);
     }
   }, [messages, firstTime]);
+
+  useEffect(() => {
+    const fetchCommunityData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/${communityChatId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = response.data.data;
+
+        // Set full data to state
+        setCommunityData(data);
+        const isUserAdmin = data.admins?.some(
+          (admin: any) => admin.id === user_id
+        );
+        setIsUserAdmin(isUserAdmin); // You’ll define this new state
+
+        // Set wallpaper with fallback to default
+        setWallpaper(data.wallpaper || "/images/wallpaper1.jpg");
+      } catch (error) {
+        console.error("Failed to fetch community data:", error);
+        // Optional fallback if request fails
+        setWallpaper("/images/wallpaper1.jpg");
+      }
+    };
+
+    fetchCommunityData();
+  }, [communityChatId]);
 
   const loadMoreMessages = () => {
     if (isFetching || !hasMore || !socketRef.current) return;
@@ -220,13 +261,113 @@ export default function CommunityChatBox({ communityChatId }: any) {
       reactionId,
     });
   };
+  const handleWallpaperChange = async (newWallpaper: string | File) => {
+    try {
+      let wallpaperUrl = "";
+      if (typeof newWallpaper === "string") {
+        const response = await fetch(newWallpaper);
+        const blob = await response.blob();
+        const file = new File([blob], "wallpaper.jpg", { type: blob.type });
+
+        const formData = new FormData();
+        formData.append("file", file); // ✅ must match backend's expectation
+
+        const uploadRes = await axios.put(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/update-wallpaper/${communityChatId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        wallpaperUrl = uploadRes.data.data.wallpaper;
+      } else {
+        // For file uploads - compress first
+        const compressedFile = await compressImage(newWallpaper);
+
+        const formData = new FormData();
+        formData.append("file", compressedFile);
+
+        const response = await axios.put(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/update-wallpaper/${communityChatId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // Use the signed URL from response
+        wallpaperUrl = response.data.data.wallpaper;
+      }
+
+      setWallpaper(wallpaperUrl);
+      setShowWallpaperModal(false);
+      toast.success("Wallpaper updated successfully");
+    } catch (error: any) {
+      // console.error("Wallpaper update failed:", error);
+      toast.error(error.response?.data?.message || "Wallpaper update failed");
+
+      toast.error(error.response?.data?.message || "Wallpaper update failed");
+      // Revert to previous wallpaper if available
+      if (communityData?.wallpaper) {
+        setWallpaper(communityData.wallpaper);
+      }
+    }
+  };
+
+  // Image compression helper
+  const compressImage = async (file: File) => {
+    try {
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      //@ts-ignore
+      return await imageCompression(file, options);
+    } catch (error) {
+      console.warn("Image compression failed, using original");
+      return file;
+    }
+  };
+
   return (
-    <div className="w-full flex flex-col items-center my-8 max-md:my-2">
+    <div className="w-full flex flex-col items-center   my-8 max-md:my-2 relative">
+      {isUserAdmin && (
+        <button
+          onClick={() => setShowWallpaperModal(true)}
+          className="absolute top-2 right-2 z-20 bg-black/60 text-white p-2 rounded-full shadow-lg hover:bg-black/80 hover:scale-105 transition-all duration-200 group"
+          title="Change wallpaper"
+        >
+          <FaImage
+            className="text-lg group-hover:text-blue-400 transition"
+            size={26}
+          />
+          <span className="absolute top-full right-0 mt-2 px-2 py-1 text-xs text-white bg-black bg-opacity-80 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            Change Wallpaper
+          </span>
+        </button>
+      )}
+
       <div
         ref={chatRef}
-        className="w-full  h-[70vh] bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-xl flex flex-col"
+        className="w-full  h-[80vh]  p-4 rounded-lg shadow-xl flex flex-col relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${wallpaper})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
+        <div className="absolute inset-0 bg-black/20 dark:bg-black/40 -z-10"></div>
+        {/* <div className="flex-1 flex flex-col bg-white/80 dark:bg-zinc-800/90 backdrop-blur-sm"> */}
         {/* Load more messages section */}
+
         <div
           onClick={loadMoreMessages}
           className="w-full flex justify-center items-center cursor-pointer text-sm mb-4"
@@ -438,7 +579,70 @@ export default function CommunityChatBox({ communityChatId }: any) {
             <span>Send</span>
           </button>
         </div>
+        {/* we have to close div here */}
+        {/* </div> */}
       </div>
+      {showWallpaperModal && (
+        <div className="fixed inset-0  bg-black/50 z-50 flex items-center justify-center">
+          <div className="bg-white max-md:w-[350px] dark:bg-zinc-800 p-6 rounded-lg max-w-md w-full">
+            <h3 className="text-xl font-bold mb-4 text-black">
+              Change Wallpaper
+            </h3>
+
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              {[
+                "/images/wallpaper1.jpg",
+                "/images/wallpaper4.jpg",
+                "/images/wallpaper3.webp",
+              ].map((img) => (
+                <div
+                  key={img}
+                  onClick={() => handleWallpaperChange(img)}
+                  className={`cursor-pointer border-2 ${
+                    wallpaper === img ? "border-blue-500" : "border-transparent"
+                  } rounded-lg overflow-hidden`}
+                >
+                  <img
+                    src={img}
+                    alt="Wallpaper option"
+                    className="w-full h-24 object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-sm font-medium mb-2">
+                Upload Custom Wallpaper
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    // Process upload
+                    handleWallpaperChange(file);
+                  }
+                }}
+                className="block w-full text-sm text-gray-500
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-md file:border-0
+            file:text-sm file:font-semibold
+            file:bg-blue-50 file:text-blue-700
+            hover:file:bg-blue-100"
+              />
+            </div>
+
+            <button
+              onClick={() => setShowWallpaperModal(false)}
+              className="mt-6 px-4 py-2 bg-custom-gradient dark:bg-zinc-700 rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
