@@ -175,7 +175,7 @@ export default function CreateCommunityButton({
           <TextField
             fullWidth
             required
-            label="Community Name"
+            label="Community Name "
             value={name}
             onChange={(e) => setName(e.target.value)}
             margin="normal"
@@ -184,7 +184,8 @@ export default function CreateCommunityButton({
           {/* Description */}
           <TextField
             fullWidth
-            label="Description (optional)"
+            required
+            label="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             margin="normal"
