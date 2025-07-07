@@ -10,14 +10,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
-interface CardData {
-  userName: string;
-  time: string;
-  question: string;
-  description: string;
-  src: string;
-}
-
 const LiveCommunity: React.FC = () => {
   const router = useRouter();
   const [refreshFlag, setRefreshFlag] = useState(false);

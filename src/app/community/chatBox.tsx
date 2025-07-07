@@ -9,6 +9,7 @@ import { BsSend } from "react-icons/bs";
 import { FaImage, FaRegUserCircle } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { CgMenuRight } from "react-icons/cg";
 
 type Reaction = {
   id: number;
@@ -44,6 +45,9 @@ export default function CommunityChatBox({ communityChatId }: any) {
   const [wallpaper, setWallpaper] = useState<string>("/images/wallpaper1.jpg");
   const token = useSelector((state: RootState) => state.user.token);
   const [isUserAdmin, setIsUserAdmin] = useState(false);
+  const [activeActionMenuId, setActiveActionMenuId] = useState<number | null>(
+    null
+  );
 
   const [showWallpaperModal, setShowWallpaperModal] = useState(false);
 
@@ -337,6 +341,35 @@ export default function CommunityChatBox({ communityChatId }: any) {
     }
   };
 
+  const banUser = async (userIdToBan: number) => {
+    if (!isUserAdmin) {
+      alert("Only admins can ban users.");
+      return;
+    }
+
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/ban-user/${communityChatId}`,
+        {
+          userId: userIdToBan, // 👈 required body param
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("User has been banned successfully.");
+      // Optionally update UI or refetch communityData
+    } catch (error: any) {
+      console.error("Failed to ban user", error);
+      alert(
+        error?.response?.data?.message ||
+          "Failed to ban user. Please try again."
+      );
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center   my-8 max-md:my-2 relative">
       {isUserAdmin && (
@@ -401,6 +434,9 @@ export default function CommunityChatBox({ communityChatId }: any) {
                 msg.users.profile_picture || msg.users.profile;
               const messageTime = format(new Date(msg.created_at), "h:mm a");
               const messageDate = format(new Date(msg.created_at), "MMM d");
+              const isUserAlreadyBanned = communityData?.banned_users?.some(
+                (u: any) => u.id === msg.sender_id
+              );
 
               return (
                 <div
@@ -415,7 +451,20 @@ export default function CommunityChatBox({ communityChatId }: any) {
                       isSender ? "flex-row-reverse" : ""
                     }`}
                   >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
+                    {/* added code */}
+
+                    {/* {isUserAdmin &&
+                      msg.sender_id !== user_id &&
+                      !isUserAlreadyBanned && (
+                        <button
+                          onClick={() => banUser(msg.sender_id)}
+                          className="text-red-500 text-xs mt-1 hover:underline"
+                        >
+                          🚫 Ban User
+                        </button>
+                      )} */}
+
+                    {/* <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
                       {profilePicture ? (
                         <Image
                           src={profilePicture}
@@ -427,6 +476,68 @@ export default function CommunityChatBox({ communityChatId }: any) {
                       ) : (
                         <FaRegUserCircle className="text-3xl text-gray-500 dark:text-gray-400" />
                       )}
+
+                    </div> */}
+                    <div className="relative flex-shrink-0">
+                      <button
+                        onClick={() =>
+                          isUserAdmin &&
+                          msg.sender_id !== user_id &&
+                          !isUserAlreadyBanned &&
+                          setActiveActionMenuId(
+                            activeActionMenuId === msg.id ? null : msg.id
+                          )
+                        }
+                        className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center focus:outline-none"
+                      >
+                        {profilePicture ? (
+                          <Image
+                            src={profilePicture}
+                            alt="Profile"
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover rounded-full"
+                          />
+                        ) : (
+                          <FaRegUserCircle className="text-3xl text-gray-500 dark:text-gray-400" />
+                        )}
+                      </button>
+
+                      {/* Only show menu if admin & menu is open */}
+                      {isUserAdmin &&
+                        msg.sender_id !== user_id &&
+                        !isUserAlreadyBanned &&
+                        activeActionMenuId === msg.id && (
+                          <div className="absolute left-12 top-0 z-30 w-48 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg shadow-lg animate-fade-in">
+                            <div className="py-2">
+                              <button
+                                onClick={() => {
+                                  banUser(msg.sender_id);
+                                  setActiveActionMenuId(null);
+                                }}
+                                className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
+                              >
+                                🚫 <span className="ml-2">Ban User</span>
+                              </button>
+                              <button
+                                onClick={() => {
+                                  // future mute logic
+                                }}
+                                className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-md transition"
+                              >
+                                🙊 <span className="ml-2">Mute</span>
+                              </button>
+                              <button
+                                onClick={() => {
+                                  // view profile logic
+                                }}
+                                className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-md transition"
+                              >
+                                👤 <span className="ml-2">View Profile</span>
+                              </button>
+                            </div>
+                          </div>
+                        )}
                     </div>
 
                     {/* Message content */}

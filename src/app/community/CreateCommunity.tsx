@@ -115,56 +115,6 @@ export default function CreateCommunityButton({
         Create Community
       </button>
 
-      {/* <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <Typography variant="h6" component="h2" className="mb-4 text-black">
-            Start a new conversation
-          </Typography>
-
-          <TextField
-            fullWidth
-            required
-            label="Community Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            margin="normal"
-          />
-
-          <TextField
-            fullWidth
-            label="Description (optional)"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            margin="normal"
-            multiline
-            rows={3}
-          />
-
-          <Box mt={3} display="flex" justifyContent="flex-end">
-            <Button
-              onClick={handleClose}
-              color="error"
-              className="text-black"
-              disabled={loading}
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              color="secondary"
-              disabled={loading}
-              sx={{ ml: 2 }}
-            >
-              {loading ? (
-                <CircularProgress size={20} color="inherit" />
-              ) : (
-                "Create"
-              )}
-            </Button>
-          </Box>
-        </Box>
-      </Modal> */}
       <Modal open={open} onClose={handleClose} className="">
         <Box sx={style}>
           <Typography variant="h6" component="h2" className="mb-4 text-black">
