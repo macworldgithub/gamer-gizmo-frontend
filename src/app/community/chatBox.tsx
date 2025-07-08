@@ -10,6 +10,7 @@ import { FaImage, FaRegUserCircle } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CgMenuRight } from "react-icons/cg";
+import BannedUsersModal from "./BannedUserModal";
 
 type Reaction = {
   id: number;
@@ -31,6 +32,7 @@ type Message = {
 };
 
 export default function CommunityChatBox({ communityChatId }: any) {
+  //states declarations
   const user_id = useSelector((state: RootState) => state.user.id);
   const chatRef = useRef<HTMLDivElement | null>(null);
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
@@ -45,12 +47,15 @@ export default function CommunityChatBox({ communityChatId }: any) {
   const [wallpaper, setWallpaper] = useState<string>("/images/wallpaper1.jpg");
   const token = useSelector((state: RootState) => state.user.token);
   const [isUserAdmin, setIsUserAdmin] = useState(false);
+  const [bannedUsers, setBannedUsers] = useState<any[]>([]);
+  const [showBannedUsersModal, setShowBannedUsersModal] = useState(false);
+
   const [activeActionMenuId, setActiveActionMenuId] = useState<number | null>(
     null
   );
-
   const [showWallpaperModal, setShowWallpaperModal] = useState(false);
 
+  //Functions
   useEffect(() => {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_BASE_URL!, {
       query: { userId: user_id ? String(user_id) : "" },
@@ -133,7 +138,25 @@ export default function CommunityChatBox({ communityChatId }: any) {
         const isUserAdmin = data.admins?.some(
           (admin: any) => admin.id === user_id
         );
-        setIsUserAdmin(isUserAdmin); // You’ll define this new state
+        setIsUserAdmin(isUserAdmin);
+
+        // Banned Users
+        if (isUserAdmin) {
+          try {
+            const res = await axios.get(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/${communityChatId}/banned-users`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+
+            setBannedUsers(res.data.data || []);
+          } catch (err) {
+            console.error("Failed to fetch banned users:", err);
+          }
+        }
 
         // Set wallpaper with fallback to default
         setWallpaper(data.wallpaper || "/images/wallpaper1.jpg");
@@ -160,7 +183,7 @@ export default function CommunityChatBox({ communityChatId }: any) {
 
   const sendMessage = () => {
     if (!user_id) {
-      alert("Please log in to send messages.");
+      toast.success("Please log in to send messages.");
       return;
     }
     if (input.trim() && socketRef.current) {
@@ -343,7 +366,7 @@ export default function CommunityChatBox({ communityChatId }: any) {
 
   const banUser = async (userIdToBan: number) => {
     if (!isUserAdmin) {
-      alert("Only admins can ban users.");
+      toast.success("Only admins can ban users.");
       return;
     }
 
@@ -351,7 +374,7 @@ export default function CommunityChatBox({ communityChatId }: any) {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/ban-user/${communityChatId}`,
         {
-          userId: userIdToBan, // 👈 required body param
+          userId: userIdToBan,
         },
         {
           headers: {
@@ -359,19 +382,102 @@ export default function CommunityChatBox({ communityChatId }: any) {
           },
         }
       );
-      alert("User has been banned successfully.");
-      // Optionally update UI or refetch communityData
+
+      toast.success("User has been banned successfully.");
+
+      // ✅ Add the user to bannedUsers list immediately (optimistic update)
+      setBannedUsers((prev) => [...prev, { id: userIdToBan }]);
     } catch (error: any) {
       console.error("Failed to ban user", error);
-      alert(
+      toast.success(
         error?.response?.data?.message ||
           "Failed to ban user. Please try again."
       );
     }
   };
 
+  const handleUnban = async (userId: number) => {
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/unban-user/${communityChatId}`,
+        { userId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // ✅ Remove the user from the bannedUsers state
+      setBannedUsers((prev) => prev.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.error("Failed to unban user", error);
+      toast.success("Failed to unban user");
+    }
+  };
+  useEffect(() => {
+    if (showBannedUsersModal && isUserAdmin) {
+      const fetchBannedUsers = async () => {
+        try {
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/${communityChatId}/banned-users`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setBannedUsers(res.data.data || []);
+        } catch (err) {
+          console.error("Failed to fetch banned users:", err);
+        }
+      };
+
+      fetchBannedUsers();
+    }
+  }, [showBannedUsersModal, isUserAdmin]);
+  const deleteMessage = async (messageId: number) => {
+    if (!isUserAdmin) {
+      toast.success("Only admins can delete messages.");
+      return;
+    }
+
+    try {
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/message/${messageId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // ✅ Update UI by removing the message from state
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.id !== messageId)
+      );
+
+      alert("Message deleted successfully.");
+    } catch (error) {
+      console.error("Failed to delete message:", error);
+      alert("Failed to delete message. Please try again.");
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center   my-8 max-md:my-2 relative">
+      {/* <div className="text-black">Hello World</div> */}
+      {isUserAdmin && (
+        //  bannedUsers.length > 0 &&
+        <button
+          onClick={() => setShowBannedUsersModal(true)}
+          className="bg-red-600 text-white p-2 mb-2 rounded-full shadow-lg hover:bg-red-700 hover:scale-105 transition-all duration-200 group"
+          title="View Banned Users"
+        >
+          🚫
+          <span className="text-xs pl-1">View Banned Users</span>
+        </button>
+      )}
       {isUserAdmin && (
         <button
           onClick={() => setShowWallpaperModal(true)}
@@ -428,15 +534,20 @@ export default function CommunityChatBox({ communityChatId }: any) {
             </p>
           ) : (
             messages.map((msg: any, index) => {
+              console.log(msg, "jdkbj");
               const isSender =
                 msg.sender_id === user_id || msg.admin_id === user_id;
               const profilePicture =
                 msg.users.profile_picture || msg.users.profile;
               const messageTime = format(new Date(msg.created_at), "h:mm a");
               const messageDate = format(new Date(msg.created_at), "MMM d");
-              const isUserAlreadyBanned = communityData?.banned_users?.some(
-                (u: any) => u.id === msg.sender_id
+              // const isUserAlreadyBanned = communityData?.banned_users?.some(
+              //   (u: any) => u.id === msg.sender_id
+              // );
+              const isUserAlreadyBanned = bannedUsers?.some(
+                (user: any) => user.id === msg.sender_id
               );
+              if (isUserAlreadyBanned) return null;
 
               return (
                 <div
@@ -451,33 +562,6 @@ export default function CommunityChatBox({ communityChatId }: any) {
                       isSender ? "flex-row-reverse" : ""
                     }`}
                   >
-                    {/* added code */}
-
-                    {/* {isUserAdmin &&
-                      msg.sender_id !== user_id &&
-                      !isUserAlreadyBanned && (
-                        <button
-                          onClick={() => banUser(msg.sender_id)}
-                          className="text-red-500 text-xs mt-1 hover:underline"
-                        >
-                          🚫 Ban User
-                        </button>
-                      )} */}
-
-                    {/* <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center">
-                      {profilePicture ? (
-                        <Image
-                          src={profilePicture}
-                          alt="Profile"
-                          width={40}
-                          height={40}
-                          className="w-full h-full rounded-full object-cover"
-                        />
-                      ) : (
-                        <FaRegUserCircle className="text-3xl text-gray-500 dark:text-gray-400" />
-                      )}
-
-                    </div> */}
                     <div className="relative flex-shrink-0">
                       <button
                         onClick={() =>
@@ -519,25 +603,53 @@ export default function CommunityChatBox({ communityChatId }: any) {
                               >
                                 🚫 <span className="ml-2">Ban User</span>
                               </button>
-                              <button
-                                onClick={() => {
-                                  // future mute logic
-                                }}
-                                className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-md transition"
-                              >
-                                🙊 <span className="ml-2">Mute</span>
-                              </button>
-                              <button
-                                onClick={() => {
-                                  // view profile logic
-                                }}
-                                className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-md transition"
-                              >
-                                👤 <span className="ml-2">View Profile</span>
-                              </button>
+
+                              {(isUserAdmin || msg.sender_id === user_id) && (
+                                <button
+                                  onClick={() => {
+                                    deleteMessage(msg.id);
+                                    setActiveActionMenuId(null);
+                                  }}
+                                  className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
+                                >
+                                  🗑️{" "}
+                                  <span className="ml-2">Delete Message</span>
+                                </button>
+                              )}
                             </div>
                           </div>
                         )}
+                      {/* Show menu if user is admin and menu is open */}
+                      {/* new work */}
+                      {/* {isUserAdmin && activeActionMenuId === msg.id && (
+                        <div className="absolute left-12 top-0 z-30 w-48 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg shadow-lg animate-fade-in">
+                          <div className="py-2">
+                            {msg.sender_id !== user_id &&
+                              !isUserAlreadyBanned && (
+                                <button
+                                  onClick={() => {
+                                    banUser(msg.sender_id);
+                                    setActiveActionMenuId(null);
+                                  }}
+                                  className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
+                                >
+                                  🚫 <span className="ml-2">Ban User</span>
+                                </button>
+                              )}
+
+                            <button
+                              onClick={() => {
+                                deleteMessage(msg.id);
+                                setActiveActionMenuId(null);
+                              }}
+                              className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
+                            >
+                              🗑️ <span className="ml-2">Delete Message</span>
+                            </button>
+
+                          </div>
+                        </div>
+                      )} */}
                     </div>
 
                     {/* Message content */}
@@ -693,6 +805,16 @@ export default function CommunityChatBox({ communityChatId }: any) {
         {/* we have to close div here */}
         {/* </div> */}
       </div>
+      <BannedUsersModal
+        isOpen={showBannedUsersModal}
+        onClose={() => setShowBannedUsersModal(false)}
+        users={bannedUsers}
+        communityChatId={communityChatId}
+        //@ts-ignore
+        token={token}
+        onUnban={handleUnban}
+      />
+
       {showWallpaperModal && (
         <div className="fixed inset-0  bg-black/50 z-50 flex items-center justify-center">
           <div className="bg-white max-md:w-[350px] dark:bg-zinc-800 p-6 rounded-lg max-w-md w-full">

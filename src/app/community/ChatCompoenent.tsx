@@ -39,7 +39,7 @@ export default function Chat({
   }, [communityId]);
   return (
     <div className="bg-custom-gradient text-white min-h-screen flex flex-col items-center p-6">
-      <h2 className="text-3xl font-bold mb-2 text-neon-green">
+      <h2 className="text-3xl font-bold  text-neon-green">
         {/* {communityData?.name ? `🎮 ${communityData.name} Community` : '🎮 Community Chat'} */}
         {communityData?.name || fallbackName
           ? `🎮 ${communityData?.name || fallbackName} `
