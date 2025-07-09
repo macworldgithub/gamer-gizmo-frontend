@@ -55,7 +55,7 @@ export default function Chat({
         )}
         <ChatBox communityChatId={communityId} />
       </div>
-      <div className="w-[30%] ">
+      <div className="w-[30%] max-md:w-[80%]  max-md:pl-4">
         <TopChats token={token} limit={10} />
       </div>
     </div>
