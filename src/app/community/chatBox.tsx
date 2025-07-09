@@ -625,37 +625,6 @@ export default function CommunityChatBox({ communityChatId }: any) {
                           </div>
                         </div>
                       )}
-                      {/* Show menu if user is admin and menu is open */}
-                      {/* new work */}
-                      {/* {isUserAdmin && activeActionMenuId === msg.id && (
-                        <div className="absolute left-12 top-0 z-30 w-48 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg shadow-lg animate-fade-in">
-                          <div className="py-2">
-                            {msg.sender_id !== user_id &&
-                              !isUserAlreadyBanned && (
-                                <button
-                                  onClick={() => {
-                                    banUser(msg.sender_id);
-                                    setActiveActionMenuId(null);
-                                  }}
-                                  className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
-                                >
-                                  🚫 <span className="ml-2">Ban User</span>
-                                </button>
-                              )}
-
-                            <button
-                              onClick={() => {
-                                deleteMessage(msg.id);
-                                setActiveActionMenuId(null);
-                              }}
-                              className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
-                            >
-                              🗑️ <span className="ml-2">Delete Message</span>
-                            </button>
-
-                          </div>
-                        </div>
-                      )} */}
                     </div>
 
                     {/* Message content */}

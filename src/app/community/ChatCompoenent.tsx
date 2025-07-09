@@ -4,6 +4,7 @@ import ChatBox from "./chatBox";
 import axios from "axios";
 import { RootState } from "@/components/Store/Store";
 import { useSelector } from "react-redux";
+import TopChats from "./TopChats";
 type CommunityType = {
   name: string;
   description?: string;
@@ -38,8 +39,8 @@ export default function Chat({
     fetchCommunityData();
   }, [communityId]);
   return (
-    <div className="w-full bg-red-500">
-      <div className="bg-custom-gradient text-white min-h-screen flex flex-col items-center w-[60%] ml-10 p-6">
+    <div className="w-full flex gap-6 max-md:flex-col  dark:bg-black">
+      <div className="bg-custom-gradient text-white min-h-screen flex flex-col items-center w-[60%] ml-10 p-6 max-md:w-[80%]">
         <h2 className="text-3xl font-bold  text-neon-green">
           {/* {communityData?.name ? `🎮 ${communityData.name} Community` : '🎮 Community Chat'} */}
           {communityData?.name || fallbackName
@@ -53,6 +54,9 @@ export default function Chat({
           </p>
         )}
         <ChatBox communityChatId={communityId} />
+      </div>
+      <div className="w-[30%] ">
+        <TopChats token={token} limit={10} />
       </div>
     </div>
   );

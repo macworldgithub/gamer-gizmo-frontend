@@ -18,7 +18,8 @@ export default function BlogList() {
         );
         const sortedBlogs = (response.data.data || []).sort(
           //@ts-ignore
-          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          (a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
 
         setBlogs(sortedBlogs);
@@ -44,8 +45,9 @@ export default function BlogList() {
       if (diffHours === 0 && minutes === 0) return "Just now";
       if (diffHours === 0)
         return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
-        } ago`;
+      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${
+        minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
+      } ago`;
     }
 
     // Fallback to full datetime for older posts
@@ -60,7 +62,9 @@ export default function BlogList() {
 
   return (
     <div className="max-w-2xl max-md:pl-8">
-      <h1 className="text-3xl font-bold mb-8 dark:text-white text-black">All Blogs</h1>
+      <h1 className="text-3xl font-bold mb-8 dark:text-white text-black">
+        All Blogs
+      </h1>
       {blogs.length > 0 ? (
         <div className="space-y-6 text-black">
           {blogs.map((blog: any) => (
