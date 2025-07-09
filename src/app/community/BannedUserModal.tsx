@@ -146,7 +146,7 @@ const BannedUsersModal: React.FC<Props> = ({
                 </div>
                 <button
                   onClick={() => unbanUser(user.id)}
-                  className="text-xs text-red-600 hover:underline hover:text-red-800"
+                  className="px-3 py-1 text-xs font-medium text-white bg-custom-gradient hover:bg-red-600 rounded-md shadow-sm transition duration-200"
                 >
                   Unban
                 </button>
@@ -161,7 +161,7 @@ const BannedUsersModal: React.FC<Props> = ({
 
         <button
           onClick={onClose}
-          className="mt-4 w-full text-sm bg-blue-500 text-white py-1.5 rounded hover:bg-blue-600 transition"
+          className="mt-4 w-full text-sm bg-custom-gradient text-white py-1.5 rounded hover:bg-blue-600 transition"
         >
           Close
         </button>

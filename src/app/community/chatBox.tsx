@@ -57,6 +57,21 @@ export default function CommunityChatBox({ communityChatId }: any) {
   const [showWallpaperModal, setShowWallpaperModal] = useState(false);
 
   //Functions
+  // Inside your component
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setActiveActionMenuId(null); // Close the menu
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   useEffect(() => {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_BASE_URL!, {
       query: { userId: user_id ? String(user_id) : "" },
@@ -458,10 +473,10 @@ export default function CommunityChatBox({ communityChatId }: any) {
         prevMessages.filter((msg) => msg.id !== messageId)
       );
 
-      alert("Message deleted successfully.");
+      toast.success("Message deleted successfully.");
     } catch (error) {
       console.error("Failed to delete message:", error);
-      alert("Failed to delete message. Please try again.");
+      toast.success("Failed to delete message. Please try again.");
     }
   };
 
@@ -595,7 +610,8 @@ export default function CommunityChatBox({ communityChatId }: any) {
     ${isSender ? "right-12 top-16" : "left-12 top-16"}
       ${isSender ? "w-[120px]" : "w-[120px]"} 
     bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg shadow-lg animate-fade-in`}
-                          onClick={(e) => e.stopPropagation()}
+                          // onClick={(e) => e.stopPropagation()}
+                          ref={menuRef}
                         >
                           <div className="py-1">
                             {msg.sender_id !== user_id &&
