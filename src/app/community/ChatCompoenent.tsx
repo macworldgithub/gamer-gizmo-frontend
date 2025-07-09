@@ -38,20 +38,22 @@ export default function Chat({
     fetchCommunityData();
   }, [communityId]);
   return (
-    <div className="bg-custom-gradient text-white min-h-screen flex flex-col items-center p-6">
-      <h2 className="text-3xl font-bold  text-neon-green">
-        {/* {communityData?.name ? `🎮 ${communityData.name} Community` : '🎮 Community Chat'} */}
-        {communityData?.name || fallbackName
-          ? `🎮 ${communityData?.name || fallbackName} `
-          : "🎮 Community Chat"}
-      </h2>
-      {/* ✅ Description added below the name */}
-      {communityData?.description && (
-        <p className="text-sm text-gray-200 text-center max-w-xl mb-4">
-          {communityData.description}
-        </p>
-      )}
-      <ChatBox communityChatId={communityId} />
+    <div className="w-full bg-red-500">
+      <div className="bg-custom-gradient text-white min-h-screen flex flex-col items-center w-[60%] ml-10 p-6">
+        <h2 className="text-3xl font-bold  text-neon-green">
+          {/* {communityData?.name ? `🎮 ${communityData.name} Community` : '🎮 Community Chat'} */}
+          {communityData?.name || fallbackName
+            ? `🎮 ${communityData?.name || fallbackName} `
+            : "🎮 Community Chat"}
+        </h2>
+        {/* ✅ Description added below the name */}
+        {communityData?.description && (
+          <p className="text-sm text-gray-200 text-center max-w-xl mb-4">
+            {communityData.description}
+          </p>
+        )}
+        <ChatBox communityChatId={communityId} />
+      </div>
     </div>
   );
 }

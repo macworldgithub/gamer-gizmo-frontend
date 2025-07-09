@@ -6,11 +6,12 @@ import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import Image from "next/image";
 import { BsSend } from "react-icons/bs";
-import { FaImage, FaRegUserCircle } from "react-icons/fa";
+import { FaBan, FaImage, FaRegUserCircle } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CgMenuRight } from "react-icons/cg";
 import BannedUsersModal from "./BannedUserModal";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 type Reaction = {
   id: number;
@@ -471,11 +472,11 @@ export default function CommunityChatBox({ communityChatId }: any) {
         //  bannedUsers.length > 0 &&
         <button
           onClick={() => setShowBannedUsersModal(true)}
-          className="bg-red-600 text-white p-2 mb-2 rounded-full shadow-lg hover:bg-red-700 hover:scale-105 transition-all duration-200 group"
+          className="bg-secondaryColorDark flex justify-center gap-1 text-white p-2 mb-2 rounded-full shadow-lg hover:bg-pink-300 hover:scale-105 transition-all duration-200 group"
           title="View Banned Users"
         >
-          🚫
-          <span className="text-xs pl-1">View Banned Users</span>
+          <FaBan />
+          <span className="text-xs">View Banned Users</span>
         </button>
       )}
       {isUserAdmin && (
@@ -564,14 +565,14 @@ export default function CommunityChatBox({ communityChatId }: any) {
                   >
                     <div className="relative flex-shrink-0">
                       <button
-                        onClick={() =>
-                          isUserAdmin &&
-                          msg.sender_id !== user_id &&
-                          !isUserAlreadyBanned &&
-                          setActiveActionMenuId(
-                            activeActionMenuId === msg.id ? null : msg.id
-                          )
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (isUserAdmin) {
+                            setActiveActionMenuId(
+                              activeActionMenuId === msg.id ? null : msg.id
+                            );
+                          }
+                        }}
                         className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-zinc-600 flex items-center justify-center focus:outline-none"
                       >
                         {profilePicture ? (
@@ -588,37 +589,42 @@ export default function CommunityChatBox({ communityChatId }: any) {
                       </button>
 
                       {/* Only show menu if admin & menu is open */}
-                      {isUserAdmin &&
-                        msg.sender_id !== user_id &&
-                        !isUserAlreadyBanned &&
-                        activeActionMenuId === msg.id && (
-                          <div className="absolute left-12 top-0 z-30 w-48 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg shadow-lg animate-fade-in">
-                            <div className="py-2">
-                              <button
-                                onClick={() => {
-                                  banUser(msg.sender_id);
-                                  setActiveActionMenuId(null);
-                                }}
-                                className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
-                              >
-                                🚫 <span className="ml-2">Ban User</span>
-                              </button>
-
-                              {(isUserAdmin || msg.sender_id === user_id) && (
+                      {isUserAdmin && activeActionMenuId === msg.id && (
+                        <div
+                          className={`absolute top-0 z-30 w-48
+    ${isSender ? "right-12 top-16" : "left-12 top-16"}
+      ${isSender ? "w-[120px]" : "w-[120px]"} 
+    bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg shadow-lg animate-fade-in`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="py-1">
+                            {msg.sender_id !== user_id &&
+                              !isUserAlreadyBanned && (
                                 <button
                                   onClick={() => {
-                                    deleteMessage(msg.id);
+                                    banUser(msg.sender_id);
                                     setActiveActionMenuId(null);
                                   }}
-                                  className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
+                                  className="w-full flex items-center gap-2 justify-center py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
                                 >
-                                  🗑️{" "}
-                                  <span className="ml-2">Delete Message</span>
+                                  <FaBan />
+                                  <span className="text-xs  ">Ban User</span>
                                 </button>
                               )}
-                            </div>
+
+                            <button
+                              onClick={() => {
+                                deleteMessage(msg.id);
+                                setActiveActionMenuId(null);
+                              }}
+                              className="w-full flex justify-center gap-2 items-center  py-1 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-zinc-700 rounded-md transition"
+                            >
+                              <RiDeleteBin6Line />
+                              <span className="text-xs">Delete Message</span>
+                            </button>
                           </div>
-                        )}
+                        </div>
+                      )}
                       {/* Show menu if user is admin and menu is open */}
                       {/* new work */}
                       {/* {isUserAdmin && activeActionMenuId === msg.id && (
