@@ -84,7 +84,7 @@ const TopChats: React.FC<Props> = ({ token, limit = 10 }) => {
       <h1 className="text-2xl font-semibold mb-6 text-black dark:text-white">
         🔥 Top Community Chats
       </h1>
-      {/* {chats.length > 0 ? (
+      {chats.length > 0 ? (
         <div className="space-y-4">
           {chats.map((chat) => (
             <div
@@ -128,8 +128,8 @@ const TopChats: React.FC<Props> = ({ token, limit = 10 }) => {
         <p className="text-sm text-gray-500">Loading...</p>
       ) : (
         <p className="text-sm text-gray-500">No top chats found.</p>
-      )} */}
-      {chats.length > 0 ? (
+      )}
+      {/* {chats.length > 0 ? (
         <div className="grid grid-cols-1  max-md:grid-cols-3 gap-4">
           {chats.map((chat) => (
             <div
@@ -172,7 +172,7 @@ const TopChats: React.FC<Props> = ({ token, limit = 10 }) => {
         <p className="text-sm text-gray-500">Loading...</p>
       ) : (
         <p className="text-sm text-gray-500">No top chats found.</p>
-      )}
+      )} */}
     </div>
   );
 };
