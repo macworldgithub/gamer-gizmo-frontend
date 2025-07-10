@@ -135,7 +135,10 @@ export default function MainPage() {
                   </div>
                 </div>
                 <div
-                  onClick={() => remove(item.product_id)}
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    remove(item.product_id);
+                  }}
                   className="text-red-700 text-4xl flex justify-center items-center cursor-pointer"
                 >
                   <IoIosRemoveCircleOutline />
