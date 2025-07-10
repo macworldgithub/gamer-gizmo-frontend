@@ -67,7 +67,6 @@ const PopularMainSection: React.FC = () => {
   const token = useSelector((state: RootState) => state.user.token);
   const [fetcher, seReftech] = useState(false);
 
-
   const fetchUsedDesktops = async () => {
     try {
       const response = await axios.get(
@@ -77,15 +76,13 @@ const PopularMainSection: React.FC = () => {
         }
       );
 
-      const sorted = sortByCreatedAt(response?.data?.data);
-      setDesktopUsedData(sorted);
-      console.log(response?.data?.data, "used desktops products")
+      setDesktopUsedData(response?.data?.data); // ✅ No sorting
+      console.log(response?.data?.data, "used desktops products");
     } catch (err) {
       console.error("Failed to fetch used desktops:", err);
       setDesktopUsedData([]); // Reset state on error
     }
   };
-
   const fetchNewDesktops = async () => {
     try {
       const response = await axios.get(
@@ -94,9 +91,7 @@ const PopularMainSection: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      const sorted = sortByCreatedAt(response?.data?.data);
-      setDesktopNewData(sorted);
+      setDesktopNewData(response?.data?.data);
     } catch (err) {
       console.error("Failed to fetch models.");
     }
@@ -109,16 +104,12 @@ const PopularMainSection: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      const sorted = sortByCreatedAt(response?.data?.data);
-      setConsolesUsedData(sorted);
+      setConsolesUsedData(response?.data?.data);
     } catch (err) {
       console.error("Failed to fetch used consoles:", err);
       setConsolesUsedData([]);
     }
   };
-
-
   const fetchNewConsoles = async () => {
     try {
       const response = await axios.get(
@@ -127,9 +118,7 @@ const PopularMainSection: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      const sorted = sortByCreatedAt(response?.data?.data);
-      setConsolesNewData(sorted);
+      setConsolesNewData(response?.data?.data);
     } catch (err) {
       console.error("Failed to fetch models.");
     }
@@ -143,8 +132,7 @@ const PopularMainSection: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-   const sorted = sortByCreatedAt(response?.data?.data);
-    setLaptopUsedData(sorted);
+      setLaptopUsedData(response?.data?.data);
     } catch (err) {
       console.error("Failed to fetch used laptops.");
     }
@@ -158,9 +146,7 @@ const PopularMainSection: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-   const sorted = sortByCreatedAt(response?.data?.data);
-    setLaptopNewData(sorted);
+      setLaptopNewData(response?.data?.data);
     } catch (err) {
       console.error("Failed to fetch models.");
     }
@@ -174,11 +160,7 @@ const PopularMainSection: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      //@ts-ignore
-   const sorted = sortByCreatedAt(response?.data?.data);
-   //@ts-ignore
-    setComponentsUsedData(sorted);
+      setComponentsUsedData(response?.data?.data);
     } catch (err) {
       console.error("Failed to fetch used components.");
     }
@@ -192,10 +174,7 @@ const PopularMainSection: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-   const sorted = sortByCreatedAt(response?.data?.data);
-   //@ts-ignore
-    setComponentsNewData(sorted);
+      setComponentsNewData(response?.data?.data);
     } catch (err) {
       console.error("Failed to fetch models.");
     }

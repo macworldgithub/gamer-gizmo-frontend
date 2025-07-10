@@ -50,7 +50,6 @@ const ProductMain = ({ categoryId, query }: any) => {
       setTotalCount(response?.data?.totalCount || 0);
       setTotalPages(Math.ceil(response?.data?.totalCount / 10) || 1);
       return sortByCreatedAt(response?.data?.data || []);
-
     } catch (err) {
       console.error("Failed to fetch products.");
       return [];
@@ -153,10 +152,10 @@ const ProductMain = ({ categoryId, query }: any) => {
                 <h1 className="font-bold overflow-x-wrap text-2xl mb-4 max-sm:text-lg text-black dark:text-white">
                   {Object.keys(filteredValues).length > 0
                     ? ` ${Object.values(filteredValues)
-                      .map((value) =>
-                        value === "1" ? "New" : value === "2" ? "Used" : value
-                      )
-                      .join(", ")} ${categoryName}`
+                        .map((value) =>
+                          value === "1" ? "New" : value === "2" ? "Used" : value
+                        )
+                        .join(", ")} ${categoryName}`
                     : `Popular in ${categoryName}`}
                 </h1>
                 {loading ? (
@@ -164,7 +163,6 @@ const ProductMain = ({ categoryId, query }: any) => {
                 ) : filteredData && filteredData.length > 0 ? (
                   filteredData.map((product, index) => (
                     <>
-
                       <ProductCard
                         //@ts-ignore
                         key={product.id || index}
@@ -214,10 +212,11 @@ const ProductMain = ({ categoryId, query }: any) => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className={`px-4 py-2 bg-gray-800 text-white rounded ${currentPage === 1
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-gray-700"
-                }`}
+              className={`px-4 py-2 bg-gray-800 text-white rounded ${
+                currentPage === 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-gray-700"
+              }`}
             >
               Prev
             </button>
@@ -227,10 +226,11 @@ const ProductMain = ({ categoryId, query }: any) => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage >= totalPages}
-              className={`px-4 py-2 bg-gray-800 text-white rounded ${currentPage >= totalPages
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-gray-700"
-                }`}
+              className={`px-4 py-2 bg-gray-800 text-white rounded ${
+                currentPage >= totalPages
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-gray-700"
+              }`}
             >
               Next
             </button>
@@ -262,14 +262,15 @@ const ProductMain = ({ categoryId, query }: any) => {
             products={usedData}
             seReftech={seReftech}
             refetch={fetcher}
-            explorePath={`/${categoryId == 1
-              ? "laptops"
-              : categoryId == 2
+            explorePath={`/${
+              categoryId == 1
+                ? "laptops"
+                : categoryId == 2
                 ? "desktop"
                 : categoryId == 3
-                  ? "components"
-                  : "console"
-              }?condition=2`}
+                ? "components"
+                : "console"
+            }?condition=2`}
             onExplore={() => console.log("Explore Used Products")}
           />
 
@@ -279,14 +280,15 @@ const ProductMain = ({ categoryId, query }: any) => {
             products={newData}
             seReftech={seReftech}
             refetch={fetcher}
-            explorePath={`/${categoryId == 1
-              ? "laptops"
-              : categoryId == 2
+            explorePath={`/${
+              categoryId == 1
+                ? "laptops"
+                : categoryId == 2
                 ? "desktop"
                 : categoryId == 3
-                  ? "components"
-                  : "console"
-              }?condition=1`}
+                ? "components"
+                : "console"
+            }?condition=1`}
             onExplore={() => console.log("Explore New Products")}
           />
           <div className="flex mx-6 w-full gap-3">

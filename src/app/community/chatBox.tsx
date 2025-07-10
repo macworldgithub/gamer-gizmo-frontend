@@ -484,16 +484,16 @@ export default function CommunityChatBox({ communityChatId }: any) {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/chats/community/assign-admin/${communityChatId}`,
-        {}, // empty body if API doesn’t need anything
         {
-          params: { communityChatId }, // query param
+          userId: user_id, // ✅ body param
+        },
+        {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // ✅ auth header
           },
         }
       );
 
-      // Optionally show a success message
       console.log("User promoted to admin successfully:", response.data);
     } catch (error: any) {
       console.error(
@@ -668,12 +668,10 @@ export default function CommunityChatBox({ communityChatId }: any) {
                                   assignAdmin(msg.sender_id);
                                   setActiveActionMenuId(null);
                                 }}
-                                className="w-full flex justify-center gap-2 items-center py-1 text-sm text-blue-600 hover:bg-blue-50 dark:hover:bg-zinc-700 rounded-md transition"
+                                className="w-full flex justify-center gap-2 items-center py-1 text-sm text-secondaryColorDark hover:bg-blue-50 dark:hover:bg-zinc-700 rounded-md transition"
                               >
                                 <FaUserShield />
-                                <span className="text-xs">
-                                  Promote to Admin
-                                </span>
+                                <span className="text-xs">Set as Admin</span>
                               </button>
                             )}
                           </div>
