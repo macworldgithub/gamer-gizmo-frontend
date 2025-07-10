@@ -776,7 +776,7 @@ export default function CommunityChatBox({ communityChatId }: any) {
         </div>
 
         {/* Message input (keep exactly the same) */}
-        <div className="w-full p-4 mt-4 flex items-center space-x-2 bg-gray-100 dark:bg-zinc-900 rounded-lg">
+        <div className="w-full p-4 mt-4 flex max-sm:flex-col  max-sm:gap-2 items-center space-x-2 bg-gray-100 dark:bg-zinc-900 rounded-lg">
           <input
             type="text"
             placeholder="Type your message..."
@@ -787,7 +787,8 @@ export default function CommunityChatBox({ communityChatId }: any) {
           />
           <button
             onClick={sendMessage}
-            className="px-6 max-md:px-2 py-2 bg-custom-gradient flex items-center max-md:w-14 justify-center gap-2 text-black rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+            className="px-6 max-md:px-2 max-sm:self-end  py-2 bg-custom-gradient flex items-center max-md:w-14 justify-center gap-2 text-black rounded-lg shadow-md hover:shadow-lg 
+            stransition-all duration-300"
           >
             <BsSend className="text-lg max-md:hidden" />
             <span>Send</span>
