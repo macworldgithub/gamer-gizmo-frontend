@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import Image from "next/image";
 import { BsSend } from "react-icons/bs";
-import { FaBan, FaImage, FaRegUserCircle } from "react-icons/fa";
+import { FaBan, FaImage, FaRegUserCircle, FaUserShield } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CgMenuRight } from "react-icons/cg";
@@ -480,6 +480,29 @@ export default function CommunityChatBox({ communityChatId }: any) {
     }
   };
 
+  const assignAdmin = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/chats/community/assign-admin/${communityChatId}`,
+        {}, // empty body if API doesn’t need anything
+        {
+          params: { communityChatId }, // query param
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Optionally show a success message
+      console.log("User promoted to admin successfully:", response.data);
+    } catch (error: any) {
+      console.error(
+        "Error assigning admin:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center   my-8 max-md:my-2 relative">
       {/* <div className="text-black">Hello World</div> */}
@@ -638,6 +661,21 @@ export default function CommunityChatBox({ communityChatId }: any) {
                               <RiDeleteBin6Line />
                               <span className="text-xs">Delete Message</span>
                             </button>
+                            {msg.sender_id !== user_id && (
+                              <button
+                                onClick={() => {
+                                  //@ts-ignore
+                                  assignAdmin(msg.sender_id);
+                                  setActiveActionMenuId(null);
+                                }}
+                                className="w-full flex justify-center gap-2 items-center py-1 text-sm text-blue-600 hover:bg-blue-50 dark:hover:bg-zinc-700 rounded-md transition"
+                              >
+                                <FaUserShield />
+                                <span className="text-xs">
+                                  Promote to Admin
+                                </span>
+                              </button>
+                            )}
                           </div>
                         </div>
                       )}

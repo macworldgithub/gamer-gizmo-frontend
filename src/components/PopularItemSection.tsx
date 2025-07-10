@@ -71,7 +71,7 @@ const PopularItemSection: React.FC<SectionProps> = ({
               {title}
             </Link>
             {/* </div> */}
-            <div className="flex justify-end lg:pr-7 ">
+            <div className="flex justify-end lg:pr-7">
               <button
                 className="bg-custom-gradient rounded-full w-10 h-10 max-lg:w-6 max-lg:h-6 hover:bg-purple-700 "
                 onClick={handleExplore}
