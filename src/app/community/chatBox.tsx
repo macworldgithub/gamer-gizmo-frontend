@@ -196,6 +196,7 @@ export default function CommunityChatBox({ communityChatId }: any) {
       lastMessageId: oldestMessageId,
     });
   };
+  console.log("URL:", `${process.env.NEXT_PUBLIC_API_BASE}/chats/community/assign-admin/${communityChatId}`);
 
   const sendMessage = () => {
     if (!user_id) {
@@ -407,7 +408,7 @@ export default function CommunityChatBox({ communityChatId }: any) {
       console.error("Failed to ban user", error);
       toast.success(
         error?.response?.data?.message ||
-          "Failed to ban user. Please try again."
+        "Failed to ban user. Please try again."
       );
     }
   };
@@ -480,28 +481,40 @@ export default function CommunityChatBox({ communityChatId }: any) {
     }
   };
 
-  const assignAdmin = async () => {
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/chats/community/assign-admin/${communityChatId}`,
-        {
-          userId: user_id, // ✅ body param
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // ✅ auth header
-          },
-        }
-      );
 
-      console.log("User promoted to admin successfully:", response.data);
-    } catch (error: any) {
-      console.error(
-        "Error assigning admin:",
-        error.response?.data || error.message
-      );
-    }
-  };
+
+const assignAdmin = async (targetUserId: number) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/assign-admin/${communityChatId}`,
+      {
+        userId: targetUserId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Admin Assigned:", response.data);
+
+    // ✅ Update communityData immediately
+    setCommunityData((prev: any) => ({
+      ...prev,
+      admins: [...(prev?.admins || []), { id: targetUserId }],
+    }));
+
+    // ✅ Show success toast
+    toast.success("User has been promoted to Admin 🎉");
+  } catch (error: any) {
+    console.error("Error assigning admin:", error.response?.data || error.message);
+    toast.error(error.response?.data?.message || "Failed to assign admin");
+  }
+};
+
+
 
   return (
     <div className="w-full flex flex-col items-center   my-8 max-md:my-2 relative">
@@ -592,14 +605,12 @@ export default function CommunityChatBox({ communityChatId }: any) {
                 <div
                   key={msg.id}
                   ref={index === messages.length - 1 ? lastMessageRef : null}
-                  className={`flex ${
-                    isSender ? "justify-end" : "justify-start"
-                  }`}
+                  className={`flex ${isSender ? "justify-end" : "justify-start"
+                    }`}
                 >
                   <div
-                    className={`flex max-w-[85%] gap-3 ${
-                      isSender ? "flex-row-reverse" : ""
-                    }`}
+                    className={`flex max-w-[85%] gap-3 ${isSender ? "flex-row-reverse" : ""
+                      }`}
                   >
                     <div className="relative flex-shrink-0">
                       <button
@@ -661,7 +672,7 @@ export default function CommunityChatBox({ communityChatId }: any) {
                               <RiDeleteBin6Line />
                               <span className="text-xs">Delete Message</span>
                             </button>
-                            {msg.sender_id !== user_id && (
+                            {/* {msg.sender_id !== user_id && (
                               <button
                                 onClick={() => {
                                   //@ts-ignore
@@ -673,7 +684,30 @@ export default function CommunityChatBox({ communityChatId }: any) {
                                 <FaUserShield />
                                 <span className="text-xs">Set as Admin</span>
                               </button>
+                            )} */}
+                            {msg.sender_id !== user_id && (
+                              <>
+                                {communityData?.admins?.some((admin: any) => admin.id === msg.sender_id) ? (
+                                  <div className="w-full flex justify-center gap-2 items-center py-1 text-sm text-green-600 dark:text-green-400">
+                                    <FaUserShield />
+                                    <span className="text-xs">Admin</span>
+                                  </div>
+                                ) : (
+                                  <button
+                                    onClick={() => {
+                                      //@ts-ignore
+                                      assignAdmin(msg.sender_id);
+                                      setActiveActionMenuId(null);
+                                    }}
+                                    className="w-full flex justify-center gap-2 items-center py-1 text-sm text-secondaryColorDark hover:bg-blue-50 dark:hover:bg-zinc-700 rounded-md transition"
+                                  >
+                                    <FaUserShield />
+                                    <span className="text-xs">Set as Admin</span>
+                                  </button>
+                                )}
+                              </>
                             )}
+
                           </div>
                         </div>
                       )}
@@ -692,31 +726,28 @@ export default function CommunityChatBox({ communityChatId }: any) {
                       >
                         <div
                           className={`flex flex-col p-3 rounded-2xl shadow-sm cursor-pointer transition-colors duration-150
-                              ${
-                                isSender
-                                  ? "bg-blue-500 text-white rounded-br-none hover:bg-blue-600"
-                                  : "bg-gray-100 dark:bg-zinc-700 text-gray-800 dark:text-white rounded-bl-none hover:bg-gray-200 dark:hover:bg-zinc-600"
-                              }`}
+                              ${isSender
+                              ? "bg-blue-500 text-white rounded-br-none hover:bg-blue-600"
+                              : "bg-gray-100 dark:bg-zinc-700 text-gray-800 dark:text-white rounded-bl-none hover:bg-gray-200 dark:hover:bg-zinc-600"
+                            }`}
                         >
                           {/* Sender info */}
                           <div className="flex items-center gap-2">
                             <span
-                              className={`font-medium text-sm ${
-                                isSender
-                                  ? "text-blue-100"
-                                  : "text-gray-700 dark:text-gray-300"
-                              }`}
+                              className={`font-medium text-sm ${isSender
+                                ? "text-blue-100"
+                                : "text-gray-700 dark:text-gray-300"
+                                }`}
                             >
                               {msg.is_admin
                                 ? `🔴 ${msg.users.username}`
                                 : msg.users.username}
                             </span>
                             <span
-                              className={`text-xs ${
-                                isSender
-                                  ? "text-blue-200"
-                                  : "text-gray-500 dark:text-gray-400"
-                              }`}
+                              className={`text-xs ${isSender
+                                ? "text-blue-200"
+                                : "text-gray-500 dark:text-gray-400"
+                                }`}
                             >
                               {messageTime}
                             </span>
@@ -728,9 +759,8 @@ export default function CommunityChatBox({ communityChatId }: any) {
 
                           {msg.reactions?.length > 0 && (
                             <div
-                              className={`flex gap-1 mt-2 flex-wrap ${
-                                isSender ? "justify-end" : "justify-start"
-                              }`}
+                              className={`flex gap-1 mt-2 flex-wrap ${isSender ? "justify-end" : "justify-start"
+                                }`}
                             >
                               {Object.entries(
                                 msg.reactions.reduce(
@@ -759,9 +789,8 @@ export default function CommunityChatBox({ communityChatId }: any) {
                                 <span
                                   key={emoji}
                                   className={`text-xs px-2 py-0.5 rounded-full cursor-pointer
-          ${
-            isSender ? "bg-blue-400 text-white" : "bg-gray-300 dark:bg-zinc-600"
-          }
+          ${isSender ? "bg-blue-400 text-white" : "bg-gray-300 dark:bg-zinc-600"
+                                    }
           ${data.userReacted ? "ring-1 ring-blue-500" : ""}`}
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -859,9 +888,8 @@ export default function CommunityChatBox({ communityChatId }: any) {
                 <div
                   key={img}
                   onClick={() => handleWallpaperChange(img)}
-                  className={`cursor-pointer border-2 ${
-                    wallpaper === img ? "border-blue-500" : "border-transparent"
-                  } rounded-lg overflow-hidden`}
+                  className={`cursor-pointer border-2 ${wallpaper === img ? "border-blue-500" : "border-transparent"
+                    } rounded-lg overflow-hidden`}
                 >
                   <img
                     src={img}

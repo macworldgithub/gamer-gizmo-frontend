@@ -18,6 +18,8 @@ import axios from "axios";
 
 export default function HomePage() {
   const token = useSelector((state: RootState) => state.user.token);
+  const userId = useSelector((state: RootState) => state.user.id);
+  console.log(userId, "user")
   console.log(token, "my");
 
   useEffect(() => {
