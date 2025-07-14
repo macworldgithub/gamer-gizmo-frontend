@@ -13,6 +13,7 @@ export default function CommunityList({ refresh }: { refresh: boolean }) {
   const router = useRouter();
   const [selectedCommunity, setSelectedCommunity] = useState<any>(null);
   const [showModal, setShowModal] = useState(false);
+  const [agreed, setAgreed] = useState(false);
 
   useEffect(() => {
     const fetchCommunities = async () => {
@@ -143,7 +144,7 @@ export default function CommunityList({ refresh }: { refresh: boolean }) {
           );
         })
       )}
-      {showModal && selectedCommunity && (
+      {/* {showModal && selectedCommunity && (
         <div className="fixed inset-0 bg-black  bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-6 w-[60%] max-sm:w-[80%] max-w-md">
             <h2 className="text-xl font-bold mb-2 text-purple-700 dark:text-white">
@@ -177,6 +178,183 @@ export default function CommunityList({ refresh }: { refresh: boolean }) {
                   );
                 }}
                 className="px-4 py-2 rounded bg-purple-600 hover:bg-purple-700 text-white text-sm"
+              >
+                Join Chat
+              </button>
+            </div>
+          </div>
+        </div>
+      )} */}
+      {showModal && selectedCommunity && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-6 w-[60%] max-sm:w-[80%] max-w-md">
+            <h2 className="text-xl font-bold mb-2 text-purple-700 dark:text-white">
+              {selectedCommunity.name}
+            </h2>
+
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              {selectedCommunity.description || "No description provided."}
+            </p>
+
+            <p className="text-sm text-gray-500 mb-4">
+              Created by: {selectedCommunity.creator?.username}
+            </p>
+
+            {/* ✅ Scrollable Policies Section */}
+            <div className="mb-4 max-h-[250px] overflow-y-auto pr-2">
+              <h3 className="font-bold text-secondaryColorDark mb-2">
+                Gamergizmo Community Chat Terms of Use
+              </h3>
+              <ol className="list-decimal pl-4 space-y-3 text-sm text-gray-800 dark:text-gray-300 text-left">
+                <li>
+                  <strong>Purpose of the Community:</strong>
+                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                    <li>Share insights on gaming PCs and accessories.</li>
+                    <li>Discuss newly released games and technologies.</li>
+                    <li>Stay updated on gaming news and trends.</li>
+                    <li>Connect respectfully with fellow gamers.</li>
+                  </ul>
+                </li>
+
+                <li>
+                  <strong>Code of Conduct:</strong>
+                  <p className="mt-1">
+                    All users must behave responsibly and respectfully. The
+                    following are strictly prohibited:
+                  </p>
+                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                    <li>
+                      <strong>Abusive Language & Hate Speech:</strong> Use of
+                      offensive, obscene, or abusive language, including
+                      personal insults, racial slurs, or hate speech of any
+                      kind.
+                    </li>
+                    <li>
+                      <strong>Defamation & Personal Attacks:</strong> Do not
+                      post content that defames, shames, or personally attacks
+                      other users, companies, or individuals (public or
+                      private).
+                    </li>
+                    <li>
+                      <strong>Piracy & Illegal Content:</strong> Sharing links
+                      to pirated software, games, cracks, or unauthorized
+                      content is strictly forbidden.
+                    </li>
+                    <li>
+                      <strong>Cyberbullying or Harassment:</strong> Harassing,
+                      stalking, or targeting users in a way that causes distress
+                      or fear is a violation of these terms and UAE Federal Law
+                      No. 5 of 2012 (Cybercrime Law).
+                    </li>
+                    <li>
+                      <strong>Promotion of Illegal Activities:</strong> Any
+                      encouragement, promotion, or discussion of unlawful
+                      actions under UAE law — including hacking, identity theft,
+                      or bypassing game protections — is prohibited.
+                    </li>
+                    <li>
+                      <strong>Violations of UAE Law:</strong> Content that
+                      violates UAE laws on cybercrime, content standards,
+                      defamation, or public decency will be reported and may
+                      lead to criminal proceedings.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <strong>Accountability:</strong>
+                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                    <li>
+                      All messages are logged and monitored for safety and
+                      compliance.
+                    </li>
+                    <li>
+                      Gamergizmo reserves the right to suspend or permanently
+                      ban users who violate these terms.
+                    </li>
+                    <li>
+                      Users are solely responsible for their statements and
+                      content posted.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <strong>No Commercial Spam or Self-Promotion:</strong>
+                  <p className="mt-1">
+                    Please do not use the chat rooms for commercial promotion,
+                    affiliate links, or unauthorized advertising unless
+                    explicitly permitted by Gamergizmo admins.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Content Moderation:</strong>
+                  <p className="mt-1">
+                    Moderators may delete or edit content that violates these
+                    terms. Repeated violations may result in account suspension
+                    or termination.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Agreement:</strong>
+                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                    <li>You have read and understood these Terms of Use.</li>
+                    <li>
+                      You agree to follow all guidelines and UAE laws applicable
+                      to online conduct.
+                    </li>
+                    <li>
+                      You understand that your account may be suspended or
+                      terminated if you breach these terms.
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+
+            {/* ✅ Agree Checkbox */}
+            <div className="mb-4">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                />
+                <span className="text-sm text-gray-800 dark:text-gray-300">
+                  I have read and agree to the Terms of Use
+                </span>
+              </label>
+            </div>
+
+            {/* ✅ Action Buttons */}
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 rounded bg-bluishBorder text-white hover:text-purple-500 text-sm"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setShowModal(false);
+                  router.push(
+                    `/community-chat/${
+                      selectedCommunity.id
+                    }?name=${encodeURIComponent(
+                      selectedCommunity.name
+                    )}&description=${encodeURIComponent(
+                      selectedCommunity.description || ""
+                    )}`
+                  );
+                }}
+                disabled={!agreed}
+                className={`px-4 py-2 rounded text-white text-sm ${
+                  agreed
+                    ? "bg-purple-600 hover:bg-purple-700"
+                    : "bg-gray-400 cursor-not-allowed"
+                }`}
               >
                 Join Chat
               </button>
