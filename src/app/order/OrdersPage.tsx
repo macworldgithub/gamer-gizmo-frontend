@@ -93,7 +93,6 @@ const OrdersPage = () => {
         );
         setOrders(response?.data);
         console.log(response?.data, "orders table data");
-
       } catch (error) {
         console.error("Failed to fetch orders:", error);
         toast.error("Failed to load orders");
@@ -239,39 +238,65 @@ const OrdersPage = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 p-4">
+      <div className="min-h-screen bg-gray-50 p-4 dark:bg-secondaryBlack">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">Order</h1>
+            <h1 className="text-2xl font-bold text-secondaryColorLight">
+              Order
+            </h1>
           </div>
 
           {orders.length === 0 ? (
             <div className="text-center py-10 rounded-lg flex flex-col justify-center items-center gap-8">
-              <Image width={200} height={200} src="/images/empty-cart.png" alt="Empty Cart" />
-              <p className="text-gray-500">You haven't placed any orders yet.</p>
+              <Image
+                width={200}
+                height={200}
+                src="/images/empty-cart.png"
+                alt="Empty Cart"
+              />
+              <p className="text-gray-500">
+                You haven't placed any orders yet.
+              </p>
             </div>
           ) : (
-            <TableContainer component={Paper}>
+            <TableContainer
+              component={Paper}
+              className="dark:bg-secondaryBlack"
+            >
               <Table sx={{ minWidth: 650 }} aria-label="orders table">
                 <TableHead>
-                  <TableRow>
-                    <TableCell><strong>Order ID</strong></TableCell>
-                    <TableCell><strong>Status</strong></TableCell>
-                    <TableCell><strong>Customer</strong></TableCell>
-                    <TableCell><strong>Date</strong></TableCell>
-                    <TableCell><strong>Amount</strong></TableCell>
-                    <TableCell><strong>Actions</strong></TableCell>
+                  <TableRow className="dark:text-white">
+                    <TableCell>
+                      <strong className="dark:text-white">Order ID</strong>
+                    </TableCell>
+                    <TableCell className="dark:text-white">
+                      <strong>Status</strong>
+                    </TableCell>
+                    <TableCell className="dark:text-white">
+                      <strong>Customer</strong>
+                    </TableCell>
+                    <TableCell className="dark:text-white">
+                      <strong>Date</strong>
+                    </TableCell>
+                    <TableCell className="dark:text-white">
+                      <strong>Amount</strong>
+                    </TableCell>
+                    <TableCell className="dark:text-white">
+                      <strong>Actions</strong>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {orders.map((order) => {
-                    const status = order.transactions?.[0]?.transaction_status || order.order_status;
+                    const status =
+                      order.transactions?.[0]?.transaction_status ||
+                      order.order_status;
                     const statusColor =
                       status === "PENDING"
                         ? "warning"
                         : status === "DELIVERED"
-                          ? "success"
-                          : "info";
+                        ? "success"
+                        : "info";
 
                     return (
                       <TableRow
@@ -280,16 +305,38 @@ const OrdersPage = () => {
                         sx={{ cursor: "pointer" }}
                         onClick={() => handleOrderClick(order)}
                       >
-                        <TableCell>ORD-{order.id}</TableCell>
-                        <TableCell>
-                          <Chip label={status} color={statusColor} size="small" />
+                        <TableCell className="dark:text-white">
+                          ORD-{order.id}
                         </TableCell>
-                        <TableCell>{order.users.first_name} {order.users.last_name}</TableCell>
-                        <TableCell>{formatDate(order.created_at)}</TableCell>
-                        <TableCell><strong>AED {order.total_amount}</strong></TableCell>
+                        <TableCell>
+                          <Chip
+                            label={status}
+                            color={statusColor}
+                            size="small"
+                            className="dark:text-white"
+                          />
+                        </TableCell>
+                        <TableCell className="dark:text-white">
+                          {order.users.first_name} {order.users.last_name}
+                        </TableCell>
+                        <TableCell className="dark:text-white">
+                          {formatDate(order.created_at)}
+                        </TableCell>
+                        <TableCell className="dark:text-white">
+                          <strong>AED {order.total_amount}</strong>
+                        </TableCell>
 
-                        <TableCell onClick={(e) => e.stopPropagation()}>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                        <TableCell
+                          className="dark:text-white"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              flexWrap: "wrap",
+                              gap: "8px",
+                            }}
+                          >
                             {/* <Button
                               variant="contained"
                               color="error"
@@ -304,6 +351,7 @@ const OrdersPage = () => {
                             <Button
                               variant="contained"
                               size="small"
+                              className="bg-custom-gradient"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setSelectedOrder(order);
@@ -315,7 +363,6 @@ const OrdersPage = () => {
                             </Button>
                           </div>
                         </TableCell>
-
                       </TableRow>
                     );
                   })}
@@ -358,7 +405,9 @@ const OrdersPage = () => {
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
               <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
                 <h2 className="text-lg font-semibold mb-4">Confirm Delete</h2>
-                <p className="text-gray-700 mb-6">Are you sure you want to delete this order?</p>
+                <p className="text-gray-700 mb-6">
+                  Are you sure you want to delete this order?
+                </p>
                 <div className="flex justify-end space-x-4">
                   <button
                     className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
@@ -369,7 +418,8 @@ const OrdersPage = () => {
                   <button
                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                     onClick={(e) =>
-                      confirmingDeleteId !== null && handleDeleteOrder(confirmingDeleteId, e)
+                      confirmingDeleteId !== null &&
+                      handleDeleteOrder(confirmingDeleteId, e)
                     }
                   >
                     Confirm
@@ -383,7 +433,9 @@ const OrdersPage = () => {
           {isModalOpen && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
               <div className="bg-white rounded-lg p-6 w-96">
-                <h2 className="text-lg font-semibold mb-4 text-black">Update Shipping Address</h2>
+                <h2 className="text-lg font-semibold mb-4 text-black">
+                  Update Shipping Address
+                </h2>
                 <input
                   type="text"
                   value={shippingAddress}
@@ -410,11 +462,7 @@ const OrdersPage = () => {
           )}
         </div>
       </div>
-      <div>
-        hello world
-      </div>
     </>
-
   );
 };
 

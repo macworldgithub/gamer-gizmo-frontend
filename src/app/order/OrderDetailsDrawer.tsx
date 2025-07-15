@@ -184,10 +184,11 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                   <p className="text-sm">
                     <span className="font-medium">Status:</span>{" "}
                     <span
-                      className={`px-2 py-1 rounded text-xs ${orderDetails.users.is_active
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                        }`}
+                      className={`px-2 py-1 rounded text-xs ${
+                        orderDetails.users.is_active
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
                     >
                       {orderDetails.users.is_active ? "Active" : "Inactive"}
                     </span>
@@ -229,17 +230,22 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                     </span> */}
                     <span
                       //@ts-ignore
-                      className={`px-2 py-1 rounded text-xs ${(order.transactions?.[0]?.transaction_status ?? order.order_status) === "PENDING"
-                        ? "bg-yellow-100 text-yellow-800"
+                      className={`px-2 py-1 rounded text-xs ${
                         //@ts-ignore
-                        : (order.transactions?.[0]?.transaction_status ?? order.order_status) === "DELIVERED"
+                        (order.transactions?.[0]?.transaction_status ??
+                          //@ts-ignore
+                          order.order_status) === "PENDING"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : //@ts-ignore
+                          (order.transactions?.[0]?.transaction_status ??
+                              //@ts-ignore
+                              order.order_status) === "DELIVERED"
                           ? "bg-green-100 text-green-800"
                           : "bg-blue-100 text-blue-800"
-                        }`}
+                      }`}
                     >
-
-
-                      {order.transactions?.[0]?.transaction_status ?? order.order_status.toLowerCase()}
+                      {order.transactions?.[0]?.transaction_status ??
+                        order.order_status.toLowerCase()}
                     </span>
                   </p>
                   <p className="text-sm">
@@ -307,7 +313,8 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                         <div>
                           <span className="text-gray-500">Subtotal: </span>
                           <span>
-                            AED  {(parseFloat(item.price) * item.quantity).toFixed(
+                            AED{" "}
+                            {(parseFloat(item.price) * item.quantity).toFixed(
                               2
                             )}
                           </span>
