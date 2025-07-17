@@ -160,3 +160,8 @@ body {
 /* .prose ul > li {
   color: #000 !important;
 } */
+@media (min-width: 1024px) and (max-width: 1026px) {
+  .hide-at-1024-1026 {
+    display: none;
+  }
+}

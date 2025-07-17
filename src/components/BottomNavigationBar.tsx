@@ -182,6 +182,7 @@ const BottomNavigationBar = () => {
   ];
 
   return (
+    //desktop
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
       {/* </div> */}
       <div className="hidden md:flex md:gap-3 lg:gap-[.9rem] xl:gap-8 font-bold md:text-[0.5rem]  lg:text-[0.8rem]  whitespace-nowrap text-navTextLight dark:text-white">
@@ -198,7 +199,7 @@ const BottomNavigationBar = () => {
           </Link>
         ))}
       </div>
-
+      {/* Mobile drawer */}
       <div className="md:hidden absolute  left-0 ml-4 ">
         <button
           onClick={toggleDrawer}
@@ -365,15 +366,16 @@ const BottomNavigationBar = () => {
           </>
         )}
       </div>
+      {/* Desktop and Laptop */}
       <div className="hidden md:flex md:justify-between items-center lg:gap-4 xl:gap-8 md:gap-[0.5rem]">
         <Link href="/publish-ad">
           <div
-            className="md:w-[5rem] lg:max-w-[30rem]  lg:min-w-[6rem] lg:ml-2 md:h-8 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full 
-          flex justify-center items-center gap-2 cursor-pointer"
+            className="md:w-[5rem] lg:max-w-[30rem]  lg:min-w-[6rem]  md:h-8 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full 
+            flex justify-center items-center gap-2 cursor-pointer"
           >
             <Image
               src="/images/btnIcon.png"
-              className="md:w-[0.6rem]"
+              className="md:w-[0.6rem] hide-at-1024-1026"
               width={18}
               height={18}
               alt="btnIcon"
@@ -406,7 +408,7 @@ const BottomNavigationBar = () => {
           </div>
         ) : (
           <Link href="/auth/login">
-            <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:gap-3 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+            <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2  md:h-6 lg:gap-3 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
               <Image
                 src="/images/btnIcon.png"
                 className="md:w-[0.6rem]"
