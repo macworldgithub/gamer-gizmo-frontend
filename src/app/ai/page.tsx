@@ -1,10 +1,10 @@
 import React from "react";
-import ChatBot from "./ChatBot";
+import Bot from "./Bot";
 
 const page = () => {
   return (
     <div>
-      <ChatBot />
+      <Bot />
     </div>
   );
 };

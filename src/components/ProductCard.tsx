@@ -38,8 +38,6 @@ const ProductCard = ({
   const token = useSelector((state: RootState) => state.user.token);
   const id = useSelector((state: RootState) => state.user.id);
 
-
-
   useEffect(() => {
     console.log("Active Index Updated:", activeIndex);
   }, [activeIndex]);
@@ -185,11 +183,13 @@ const ProductCard = ({
                     console.error("Error toggling favorite:", error);
                   }
                 }}
-                className={`absolute top-2 max-sm:right-20 right-2 z-10 cursor-pointer ${product.fav ? "text-red-600" : "text-purple-200"
-                  } ${isLoading
+                className={`absolute top-2 max-sm:right-20 right-2 z-10 cursor-pointer ${
+                  product.fav ? "text-red-600" : "text-purple-200"
+                } ${
+                  isLoading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:text-red-600"
-                  }`}
+                }`}
               >
                 <MdFavorite size={24} />
               </div>
@@ -263,8 +263,9 @@ const ProductCard = ({
             onClick={() =>
               product.fav ? remove(product.id) : AddToLike(product.id)
             }
-            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${product.fav ? "text-red-600" : "text-white "
-              } hover:text-red-600`}
+            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${
+              product.fav ? "text-red-600" : "text-white "
+            } hover:text-red-600`}
           >
             <MdFavorite size={24} className="max-sm:h-4" />
           </div>
