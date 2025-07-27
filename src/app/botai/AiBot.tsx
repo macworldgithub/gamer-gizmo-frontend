@@ -2,12 +2,12 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Home() {
+export default function Hom() {
   return (
     <div className="relative h-screen">
       <div className="relative h-full flex justify-center items-center text-white">
         {/* Background Image */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 ">
           <Image
             src="/images/background.png"
             alt="Background"

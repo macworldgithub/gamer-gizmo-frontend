@@ -182,22 +182,24 @@ const BottomNavigationBar = () => {
   ];
 
   return (
+    //desktop
     <div className={`flex justify-evenly items-center h-20  dark:bg-[#0D0D12]`}>
       {/* </div> */}
-      <div className="hidden md:flex md:gap-3 lg:gap-[.9rem] xl:gap-11 font-bold md:text-[0.5rem]  lg:text-[0.8rem]  whitespace-nowrap text-navTextLight dark:text-white">
+      <div className="hidden md:flex md:gap-3 lg:gap-[.9rem] xl:gap-8 font-bold md:text-[0.5rem]  lg:text-[0.8rem]  whitespace-nowrap text-navTextLight dark:text-white">
         {tabs.map((tab) => (
           <Link
             key={tab.name}
             href={tab.href}
             onClick={() => handleTabClick(tab.name)}
-            className={`${activeTab === tab.name ? "text-secondaryColorLight" : ""
-              }`}
+            className={`${
+              activeTab === tab.name ? "text-secondaryColorLight" : ""
+            }`}
           >
             {tab.name}
           </Link>
         ))}
       </div>
-
+      {/* Mobile drawer */}
       <div className="md:hidden absolute  left-0 ml-4 ">
         <button
           onClick={toggleDrawer}
@@ -223,12 +225,13 @@ const BottomNavigationBar = () => {
             ></div>
             <div
               className={`flex-nowrap fixed top-0 left-0 text-black dark:bg-black bg-white dark:text-white w-[10rem] h-[100vh] z-50 bg-red flex flex-col items-center space-y-6 max-sm:gap-2 max-sm:space-y-2 pt-1 overflow-y-auto
-                            ${isDrawerOpen
-                  ? "animate-slide-in"
-                  : firstClick
-                    ? "animate-slide-out"
-                    : "hidden"
-                }`}
+                            ${
+                              isDrawerOpen
+                                ? "animate-slide-in"
+                                : firstClick
+                                ? "animate-slide-out"
+                                : "hidden"
+                            }`}
             >
               <div onClick={() => setIsDrawerOpen(false)}>
                 <LuPanelLeftClose
@@ -241,7 +244,6 @@ const BottomNavigationBar = () => {
                 //Mobile Profile Icon
                 <div className="shadow-md flex  shadow-blue-500/50 rounded-full w-10 h-10 justify-center items-center">
                   <Dropdown className="shadow-2xl" menu={{ items }}>
-
                     {profile ? (
                       <Image
                         //@ts-ignore
@@ -342,7 +344,7 @@ const BottomNavigationBar = () => {
                 Inspection
               </Link>
 
-              <div className="flex-col items-center mx-auto pl-0 ">
+              <div className="flex-col items-center mx-auto pl-0">
                 <Link href="/publish-ad" onClick={() => setIsDrawerOpen(false)}>
                   <div className="w-[6rem] mx-auto h-8 bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
                     <Image
@@ -364,12 +366,16 @@ const BottomNavigationBar = () => {
           </>
         )}
       </div>
-      <div className="hidden md:flex md:justify-between items-center xl:gap-10 md:gap-[0.5rem]">
+      {/* Desktop and Laptop */}
+      <div className="hidden md:flex md:justify-between items-center lg:gap-4 xl:gap-8 md:gap-[0.5rem]">
         <Link href="/publish-ad">
-          <div className="md:w-[5rem] lg:max-w-[30rem]  lg:min-w-[7rem] lg:ml-2 md:h-6 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+          <div
+            className="md:w-[5rem] lg:max-w-[30rem]  lg:min-w-[6rem]  md:h-8 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full 
+            flex justify-center items-center gap-2 cursor-pointer"
+          >
             <Image
               src="/images/btnIcon.png"
-              className="md:w-[0.6rem]"
+              className="md:w-[0.6rem] hide-at-1024-1026"
               width={18}
               height={18}
               alt="btnIcon"
@@ -394,17 +400,15 @@ const BottomNavigationBar = () => {
                   className="w-full h-full object-cover rounded-full hover:cursor-pointer"
                 />
               ) : (
-                <span >
+                <span>
                   <FaRegUserCircle className="text-2xl  text-secondaryColorLight" />
-
                 </span>
               )}
             </Dropdown>
           </div>
-
         ) : (
           <Link href="/auth/login">
-            <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2 md:h-6 lg:gap-3 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
+            <div className="md:w-[5rem] lg:max-w-[30rem] lg:min-w-[8rem] lg:ml-2  md:h-6 lg:gap-3 lg:h-10 md:ml-[0.1rem] bg-custom-gradient rounded-full flex justify-center items-center gap-2 cursor-pointer">
               <Image
                 src="/images/btnIcon.png"
                 className="md:w-[0.6rem]"
