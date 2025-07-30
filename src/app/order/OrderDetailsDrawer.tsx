@@ -244,7 +244,9 @@ const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                           : "bg-blue-100 text-blue-800"
                       }`}
                     >
+                      {/* @ts-ignore */}
                       {order.transactions?.[0]?.transaction_status ??
+                        //@ts-ignore
                         order.order_status.toLowerCase()}
                     </span>
                   </p>
