@@ -18,14 +18,14 @@ export default function SelectLabels({ query, route }: any) {
     query
       ? query
       : {
-        processor: "",
-        storage: "",
-        location: "",
-        condition: "",
-        gpu: "",
-        ram: "",
-        price: "",
-      }
+          processor: "",
+          storage: "",
+          location: "",
+          condition: "",
+          gpu: "",
+          ram: "",
+          price: "",
+        }
   );
   const router = useRouter();
   useEffect(() => {
@@ -75,6 +75,7 @@ export default function SelectLabels({ query, route }: any) {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/conditions/getAll`
       );
       setConditioneData(response?.data?.data || []);
+      console.log(response?.data?.data, "conditioneData");
     } catch (err) {
       console.error("Failed to fetch locations.");
     }
