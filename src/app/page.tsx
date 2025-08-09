@@ -19,7 +19,7 @@ import axios from "axios";
 export default function HomePage() {
   const token = useSelector((state: RootState) => state.user.token);
   const userId = useSelector((state: RootState) => state.user.id);
-  console.log(userId, "user")
+  console.log(userId, "user");
   console.log(token, "my");
 
   useEffect(() => {
@@ -39,21 +39,8 @@ export default function HomePage() {
         .then(() => console.log("Visitor tracked for https://gamergizmo.com/"))
         .catch((error) => console.error("Error tracking visitor:", error));
 
-      // Info toast
+      // Removed toast info since website is now fully live
       toast.dismiss();
-      toast.info(
-        "🚧 Our website is online, but some features are still under development. Stay tuned for updates! 🚀",
-        {
-          position: "top-center",
-          autoClose: 6000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          className: "custom-toast-info",
-        }
-      );
     }
   }, []);
 
