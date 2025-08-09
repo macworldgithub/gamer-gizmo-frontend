@@ -12,58 +12,21 @@ interface Message {
 
 export default function Bot() {
   const [messages, setMessages] = useState<Message[]>([
-    { sender: "bot", text: "Hi! I'm your assistant. Ask me anything..." },
+    { sender: "bot", text: "Your AI gaming buddy is ready. What are you looking for?" },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom of chat when new messages are added
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  // const handleSend = async () => {
-  //   if (!input.trim()) return;
-
-  //   // Add user message
-  //   setMessages((prev) => [...prev, { sender: "user", text: input }]);
-  //   setIsLoading(true);
-
-  //   try {
-  //     // Use environment variable for API base URL
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai/ask`,
-  //       {
-  //         params: { q: input },
-  //       }
-  //     );
-
-  //     // Add bot response
-  //     setMessages((prev) => [
-  //       ...prev,
-  //       {
-  //         sender: "bot",
-  //         text: response.data.reply,
-  //         productLink: response.data.productLink,
-  //       },
-  //     ]);
-  //   } catch (error) {
-  //     console.error("Error fetching API:", error);
-  //     setMessages((prev) => [
-  //       ...prev,
-  //       { sender: "bot", text: "Sorry, something went wrong. Try again!" },
-  //     ]);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-
-  //   setInput("");
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   // };
+
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
+
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -104,7 +67,7 @@ export default function Bot() {
   };
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black">
+    <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black ">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -123,8 +86,8 @@ export default function Bot() {
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-between px-4 py-8 md:px-8">
         {/* Top Area: Bot Info & Intro */}
-        <div className="w-full max-w-5xl space-y-8 text-center">
-          <div className="relative mx-auto w-24 h-24 md:w-32 md:h-32">
+        <div className="w-full max-w-3xl space-y-2 text-center">
+          <div className="relative mx-auto w-24 h-24 md:w-32 md:h-24">
             <Image
               src="/images/boticon.png"
               alt="Bot Icon"
@@ -135,18 +98,15 @@ export default function Bot() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-extrabold drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 animate-fade-in">
-            Welcome Gamer!
+            Welcome to GamerGizmo!
           </h1>
 
           <div className="text-base md:text-xl leading-relaxed text-white/90 space-y-4 drop-shadow-sm max-w-2xl mx-auto">
-            <p className="animate-slide-up">
-              I'm <strong></strong>, your gaming companion and GamerGizmo's
-              mindful AI.
+            <p className="animate-slide-up text-base">
+              I’m GizmoCore, your AI gaming buddy.
+              Whether you’re here to buy, sell, or just talk about gaming gear, I’m here to make it legendary.
             </p>
-            <p className="animate-slide-up animation-delay-200">
-              Ask me anything — from top-tier PCs to epic consoles and
-              components.
-            </p>
+
           </div>
         </div>
 
@@ -155,11 +115,10 @@ export default function Bot() {
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm md:text-base transition-all duration-300 ${
-                msg.sender === "user"
+              className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm md:text-base transition-all duration-300 ${msg.sender === "user"
                   ? "ml-auto mr-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white"
                   : "mr-auto  ml-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white"
-              } shadow-md hover:shadow-lg`}
+                } shadow-md hover:shadow-lg`}
             >
               {msg.text.split("\n").map((line, i) => (
                 <p key={i} className="mb-2 last:mb-0">

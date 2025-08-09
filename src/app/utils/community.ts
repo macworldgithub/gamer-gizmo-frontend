@@ -1,21 +1,3 @@
-// // lib/api.ts
-// import axios from "axios";
-
-// export async function fetchCommunityDetails(communityId: string) {
-//   console.log(communityId, "communityId in fetchCommunityDetails");
-//   try {
-//     const response = await axios.get(
-//       `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/community/messages/CommunityChatId=${communityId}`
-//     );
-//     return response.data; // Axios unwraps JSON for you
-//   } catch (err: any) {
-//     console.error("Failed to fetch community details:", err);
-//     throw new Error(
-//       err.response?.data?.message || "Failed to fetch community details"
-//     );
-//   }
-// }
-// lib/api.ts
 
 "use client";
 import { RootState } from "@/components/Store/Store";
