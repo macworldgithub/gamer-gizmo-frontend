@@ -53,7 +53,7 @@ export default function Bot() {
   };
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black">
+    <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black ">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -67,7 +67,7 @@ export default function Bot() {
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
 
       {/* Main Layout */}
-      <div className="relative z-10 flex flex-col items-center px-4 py-8 md:px-8 min-h-screen">
+      <div className="relative max-md:p-10 max-md:mt-20 z-10 flex flex-col items-center px-4 py-8 md:px-8 min-h-screen">
         {/* Top Intro */}
         <div className="w-full max-w-3xl text-center space-y-2">
           <div className="flex justify-center mb-2">
@@ -87,7 +87,7 @@ export default function Bot() {
         </div>
 
         {/* Chat Messages Area */}
-        <div className="w-full max-w-4xl mt-6 space-y-4 bg-white/5 rounded-2xl shadow-xl backdrop-blur-md p-4 flex flex-col">
+        <div className="w-full max-w-4xl mt-6 space-y-4 bg-white/5  rounded-2xl shadow-xl backdrop-blur-md p-4 flex flex-col">
           {messages.map((msg, idx) => (
             <div
               key={idx}
