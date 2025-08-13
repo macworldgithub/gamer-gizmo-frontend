@@ -10,13 +10,27 @@ interface Message {
 }
 
 export default function Bot() {
+  const [sessionId] = useState(() => {
+    if (typeof window !== "undefined") {
+      let id = localStorage.getItem("sessionId");
+      if (!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem("sessionId", id);
+      }
+      return id;
+    }
+    return "";
+  });
+
   const [messages, setMessages] = useState<Message[]>([
-    { sender: "bot", text: "Your AI gaming buddy is ready. What are you looking for?" },
+    {
+      sender: "bot",
+      text: "Your AI gaming buddy is ready. What are you looking for?",
+    },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -30,7 +44,7 @@ export default function Bot() {
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai/ask`,
-        { params: { q: currentInput } }
+        { params: { q: currentInput, sessionId } }
       );
 
       setMessages((prev) => [
@@ -79,25 +93,42 @@ export default function Bot() {
               className="rounded-full shadow-lg"
             />
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold">Welcome to GamerGizmo!</h1>
+          <h1 className="text-2xl md:text-3xl font-bold">
+            Welcome to GamerGizmo!
+          </h1>
           <p className="text-gray-300 text-sm md:text-base">
-            I’m GizmoCore, your AI gaming buddy.
-            Whether you’re here to buy, sell, or just talk about gaming gear, I’m here to make it legendary
+            I’m GizmoCore, your AI gaming buddy. Whether you’re here to buy,
+            sell, or just talk about gaming gear, I’m here to make it legendary
           </p>
         </div>
 
         {/* Chat Messages Area */}
         <div className="w-full max-w-4xl mt-6 space-y-4 bg-white/5  rounded-2xl shadow-xl backdrop-blur-md p-4 flex flex-col">
           {messages.map((msg, idx) => (
+            // <div
+            //   key={idx}
+            //   className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm md:text-base transition-all duration-300 shadow-md hover:shadow-lg
+            //   ${
+            //     msg.sender === "user"
+            //       ? "ml-auto mr-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+            //       : "mr-auto ml-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white"
+            //   }`}
+            // >
+            //   {msg.text}
+            // </div>
             <div
               key={idx}
               className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm md:text-base transition-all duration-300 shadow-md hover:shadow-lg
-              ${msg.sender === "user"
-                  ? "ml-auto mr-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white"
-                  : "mr-auto ml-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white"
-                }`}
+      ${
+        msg.sender === "user"
+          ? "ml-auto mr-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+          : "mr-auto ml-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white"
+      }`}
+              {...(msg.sender === "bot"
+                ? { dangerouslySetInnerHTML: { __html: msg.text } }
+                : {})}
             >
-              {msg.text}
+              {msg.sender === "user" ? msg.text : null}
             </div>
           ))}
 
@@ -133,6 +164,4 @@ export default function Bot() {
       </div>
     </div>
   );
-
-
 }
