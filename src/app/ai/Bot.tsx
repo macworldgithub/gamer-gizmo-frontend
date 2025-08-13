@@ -64,7 +64,7 @@ export default function Bot() {
     } finally {
       setIsLoading(false);
     }
-  };
+  };  
 
   return (
     <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black ">
