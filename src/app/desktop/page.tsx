@@ -39,3 +39,43 @@ const page = () => {
 };
 
 export default page;
+
+
+// "use client";
+
+// import PageHeader from "@/components/PageHeader";
+// import React from "react";
+// import HeroSection from "./HeroSection";
+// import { useSearchParams } from "next/navigation";
+// import SearchBar from "@/components/SearchBar";
+
+// const Page = () => {
+//   const params = useSearchParams();
+
+//   const queryParams = [
+//     "processor",
+//     "storage",
+//     "location",
+//     "condition",
+//     "gpu",
+//     "ram",
+//     "price",
+//   ];
+
+//   const queryObject: Record<string, string> = {};
+
+//   queryParams.forEach((param) => {
+//     const value = params.get(param);
+//     queryObject[param] = value || "";
+//   });
+
+//   return (
+//     <div className="w-full overflow-x-hidden">
+//       <PageHeader pageName="Desktops" title="Gaming PCs" />
+//       <SearchBar categoryId="2" />
+//       <HeroSection query={queryObject} />
+//     </div>
+//   );
+// };
+
+// export default Page;
