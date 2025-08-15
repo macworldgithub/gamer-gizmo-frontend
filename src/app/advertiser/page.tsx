@@ -1,7 +1,10 @@
+import PageHeader from '@/components/PageHeader'
+import React from 'react'
+import Image from 'next/image'
+import Wrapper from "@/components/Common/Wrapper/Wrapper";
 import BuisnessInquiries from "@/components/BuisnessInquiries";
-import PageHeader from '@/components/PageHeader';
-import Card from './card';
-import MediaPack from './media';
+import Card from './Cards'
+import MediaPack from './MediaPack';
 import Stats from './stats';
 const page = () => {
   
@@ -22,10 +25,10 @@ const page = () => {
          button=  'Book your campaign now!' />
       </div>
 
-      <div className="bg-gray-50 text-gray-800 px-4 dark:bg-black">
+      <div className="bg-gray-50 text-gray-800 px-4">
         {/* Header Section */}
         <section className="py-8 text-center">
-          <h1 className="text-3xl font-bold mb-4 dark:text-white">Why dubizzle advertising?</h1>
+          <h1 className="text-3xl font-bold mb-4">Why dubizzle advertising?</h1>
           <div className="flex flex-col md:flex-row justify-center gap-8 mt-8"></div>
          
         </section>
