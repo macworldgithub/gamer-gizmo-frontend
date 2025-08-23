@@ -119,8 +119,8 @@ const ProductCard = ({
     <>
       {isColumn ? (
         <div>
-          <div className="flex flex-col sm:flex-row  container">
-            <div className="relative max-md:w-80  max-sm:w-[100vw]  md:w-[26%]">
+          <div className="flex flex-col sm:flex-row container">
+            <div className="relative max-md:w-80 max-sm:w-[100vw] md:w-[26%]">
               <Swiper
                 key={product?.id}
                 modules={[Pagination, Autoplay, Thumbs]}
@@ -151,7 +151,7 @@ const ProductCard = ({
                         onClick={() =>
                           router.push(`/product-details/${product.id}`)
                         }
-                        className="max-md:w-[70%] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative cursor-pointer"
+                        className="max-md:w-[70%] sm:mx-0 mx-auto  max-md:h-[200px] md:w-[300px] md:h-[200px] relative cursor-pointer "
                       >
                         <Image
                           src={imageUrl}
@@ -199,21 +199,19 @@ const ProductCard = ({
             <div className="w-full  md:w-[40%] md:pl-12  flex flex-col max-md:w-full">
               <div className="flex flex-col gap-1 max-md:mx-auto md:mx-0">
                 {/* <div className="flex justify-start max-sm:flex-col items-center"> */}
-                {/* <p
+                <p
                   className="text-black   font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem]  cursor-pointer"
-                  onClick={() =>
-                    router.push(`/product-details/${product.id}`)
-                  }
+                  onClick={() => router.push(`/product-details/${product.id}`)}
                 >
                   {product.name}
-                </p> */}
-                <p
+                </p>
+                {/* <p
                   className="text-black font-bold max-md:text-sm sm:w-64 dark:text-white md:text-[0.9rem] cursor-pointer truncate"
                   onClick={() => router.push(`/product-details/${product.id}`)}
                   title={product.name} // optional: shows full name on hover
                 >
                   {product.name}
-                </p>
+                </p> */}
 
                 {product?.is_featured && (
                   <span className=" bg-yellow-500 w-12 text-white text-[0.6rem] font-bold p-1 rounded">
