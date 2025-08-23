@@ -18,39 +18,40 @@ export default function Bot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+ const handleSend = async () => {
+  if (!input.trim()) return;
 
-    const currentInput = input;
-    setInput("");
+  const currentInput = input;
+  setInput("");
 
-    setMessages((prev) => [...prev, { sender: "user", text: currentInput }]);
-    setIsLoading(true);
+  setMessages((prev) => [...prev, { sender: "user", text: currentInput }]);
+  setIsLoading(true);
 
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai/ask`,
-        { params: { q: currentInput } }
-      );
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/query`,
+      { query: currentInput },
+      { headers: { "Content-Type": "application/json" } }
+    );
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          sender: "bot",
-          text: response.data.reply,
-          productLink: response.data.productLink,
-        },
-      ]);
-    } catch (error) {
-      console.error("Error fetching API:", error);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "Sorry, something went wrong. Try again!" },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: "bot",
+        text: response.data.message || "No reply received.",
+        productLink: response.data.productLink,
+      },
+    ]);
+  } catch (error) {
+    console.error("Error fetching API:", error);
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", text: "Sorry, something went wrong. Try again!" },
+    ]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black ">
