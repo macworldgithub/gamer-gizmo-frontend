@@ -11,12 +11,13 @@ interface Message {
 
 export default function Bot() {
   const linkify = (text: string) => {
-  const urlRegex = /(https?:\/\/[^\s]+)/g;
-  return text.replace(
-    urlRegex,
-    (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-400 underline">${url}</a>`
-  );
-};
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(
+      urlRegex,
+      (url) =>
+        `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-400 underline">${url}</a>`
+    );
+  };
 
   const [sessionId] = useState(() => {
     if (typeof window !== "undefined") {
@@ -39,43 +40,46 @@ export default function Bot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-const handleSend = async () => {
-  if (!input.trim()) return;
+  const handleSend = async () => {
+    if (!input.trim()) return;
 
-  const currentInput = input;
-  setInput("");
+    const currentInput = input;
+    setInput("");
 
-  setMessages((prev) => [...prev, { sender: "user", text: currentInput }]);
-  setIsLoading(true);
+    setMessages((prev) => [...prev, { sender: "user", text: currentInput }]);
+    setIsLoading(true);
 
-  try {
-    const res = await axios.post(
-      "http://77.37.51.106:9009/query",
-      { query: currentInput },
-      { headers: { "Content-Type": "application/json" } }
-    );
+    try {
+      const res = await axios.post(
+        "https://www.bot.gamergizmo.com/query",
 
-    const data = res.data;
+        { query: currentInput },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        sender: "bot",
-        text: linkify(data.message), // 🔗 convert URLs to clickable links
-        productLink: data.productLink,
-      },
-    ]);
-  } catch (err) {
-    console.error(err);
-    setMessages((prev) => [
-      ...prev,
-      { sender: "bot", text: "Failed to fetch response. Is the backend running?" },
-    ]);
-  } finally {
-    setIsLoading(false);
-  }
-};
+      const data = res.data;
 
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: linkify(data.message), // 🔗 convert URLs to clickable links
+          productLink: data.productLink,
+        },
+      ]);
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: "Failed to fetch response. Is the backend running?",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black ">
