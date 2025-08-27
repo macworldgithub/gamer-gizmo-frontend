@@ -59,7 +59,7 @@ const UiLayout = ({ children }: UiProps) => {
       <Navbar />
 
       {/* Top-Right Popup */}
-      {/* {showPopup && (
+      {showPopup && (
         <div
           onClick={handleChatClick}
           className="fixed top-5 right-5 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-3 rounded-lg shadow-lg cursor-pointer flex items-center space-x-2 animate-slideIn z-50"
@@ -73,7 +73,7 @@ const UiLayout = ({ children }: UiProps) => {
           />
           <span className="font-medium text-sm">Chat with AI</span>
         </div>
-      )} */}
+      )}
 
       <div>{children}</div>
 
@@ -82,7 +82,7 @@ const UiLayout = ({ children }: UiProps) => {
       </div>
 
       {/* Floating AI Buddy Button */}
-      {/* <button
+      <button
         onClick={handleChatClick}
         className="fixed bottom-6 right-10 z-50 bg-white hover:bg-pink-500 text-gray-800 hover:text-white px-3 py-2 rounded-full shadow-lg transition duration-300 ease-in-out flex items-center space-x-2 animate-pulse"
       >
@@ -96,7 +96,7 @@ const UiLayout = ({ children }: UiProps) => {
         <span className="text-sm font-medium whitespace-nowrap">
           Your AI Buddy
         </span>
-      </button> */}
+      </button>
 
       <style jsx>{`
         .animate-slideIn {
