@@ -157,21 +157,27 @@ export default function Bot() {
         {/* Input Section */}
         <div className="w-full max-w-4xl mt-4">
           <div className="relative flex items-center">
-            <input
-              type="text"
+            <textarea
               placeholder="Ask anything..."
-              className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-3 md:py-4 rounded-full text-sm md:text-lg placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-3 md:py-4 rounded-2xl text-sm md:text-lg placeholder-white/70
+             focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none min-h-[50px] max-h-[150px] pr-8" // Added pr-12 for right padding
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
               disabled={isLoading}
+              rows={1}
             />
             <Image
               src="/images/Send.png"
               alt="Send Icon"
               width={40}
               height={40}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 md:w-8 md:h-8 cursor-pointer hover:scale-110 transition-transform"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 md:w-8 md:h-8 cursor-pointer hover:scale-110 transition-transform z-10" // Added z-10 to ensure it's above the textarea
               onClick={handleSend}
             />
           </div>
