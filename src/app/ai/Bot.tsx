@@ -1,5 +1,6 @@
+
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import axios from "axios";
 
@@ -46,7 +47,7 @@ export default function Bot() {
       '<div class="flex flex-col mb-2 pl-2 border-l-2 border-blue-500">$1$2</div>'
     );
 
-    // Add line breaks for better spacing
+    // Add line breaks
     formattedText = formattedText.replace(/\n/g, "<br />");
 
     return formattedText;
@@ -67,16 +68,11 @@ export default function Bot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: "bot",
-      text: "Your AI gaming buddy is ready. What are you looking for?",
+      text: "I am ready. What are you looking for?",
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -119,7 +115,11 @@ export default function Bot() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black ">
+=======
+    <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black">
+>>>>>>> 0ba26fc0c558e6844f33c9ffa760f62aee4e1fde
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -149,36 +149,41 @@ export default function Bot() {
             Welcome to GamerGizmo!
           </h1>
           <p className="text-gray-300 text-sm md:text-base">
-            I'm GizmoCore, your AI gaming buddy. Whether you're here to buy,
+            I'm Jarvis, your AI gaming buddy. Whether you're here to buy,
             sell, or just talk about gaming gear, I'm here to make it legendary
           </p>
         </div>
 
         {/* Chat Messages Area */}
-        <div className="w-full max-w-4xl mt-6 space-y-4 bg-white/5 rounded-2xl shadow-xl backdrop-blur-md p-4 flex flex-col h-[500px] overflow-y-auto">
-          {messages.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm md:text-base transition-all duration-300 shadow-md hover:shadow-lg
-                ${
-                  msg.sender === "user"
-                    ? "ml-auto mr-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white"
-                    : "mr-auto ml-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white"
-                }`}
-              {...(msg.sender === "bot"
-                ? { dangerouslySetInnerHTML: { __html: msg.text } }
-                : {})}
-            >
-              {msg.sender === "user" ? msg.text : null}
+        <div className="w-full max-w-4xl mt-6 space-y-4 bg-white/5 rounded-2xl shadow-xl backdrop-blur-md p-4 flex flex-col max-h-[500px] overflow-y-auto">
+          {messages.length > 0 ? (
+            messages.map((msg, idx) => (
+              <div
+                key={idx}
+                className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm md:text-base transition-all duration-300 shadow-md hover:shadow-lg
+                  ${
+                    msg.sender === "user"
+                      ? "ml-auto mr-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                      : "mr-auto ml-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white"
+                  }`}
+                {...(msg.sender === "bot"
+                  ? { dangerouslySetInnerHTML: { __html: msg.text } }
+                  : {})}
+              >
+                {msg.sender === "user" ? msg.text : null}
+              </div>
+            ))
+          ) : (
+            <div className="text-gray-400 text-center py-10">
+              👋 Start the conversation by asking something!
             </div>
-          ))}
+          )}
 
           {isLoading && (
             <div className="max-w-[85%] mr-auto px-4 py-3 rounded-2xl text-sm md:text-base bg-gradient-to-r from-gray-700 to-gray-900 text-white animate-pulse">
               I am thinking...
             </div>
           )}
-          <div ref={messagesEndRef} />
         </div>
 
         {/* Input Section */}
