@@ -115,11 +115,7 @@ export default function Bot() {
   };
 
   return (
-<<<<<<< HEAD
     <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black ">
-=======
-    <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-b from-gray-900 to-black">
->>>>>>> 0ba26fc0c558e6844f33c9ffa760f62aee4e1fde
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
