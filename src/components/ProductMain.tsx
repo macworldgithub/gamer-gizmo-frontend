@@ -151,6 +151,7 @@ const ProductMain = ({ categoryId, query }: any) => {
               ) : filteredData && filteredData.length > 0 ? (
                 filteredData.map((product, index) => (
                   <div
+                    //@ts-ignore
                     key={product?.id || index}
                     className="flex flex-col items-center sm:items-start"
                   >
@@ -183,7 +184,7 @@ const ProductMain = ({ categoryId, query }: any) => {
                 </div>
               )}
             </div>
-            <div className="w-full md:w-[30%] hidden md:block">
+            <div className="w-full md:w-[27%] hidden lg:block">
               <LiveAdSection
                 category={`Popular ${categoryName}`}
                 adId={2}

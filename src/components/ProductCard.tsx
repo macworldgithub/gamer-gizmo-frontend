@@ -312,8 +312,6 @@
 
 // export default ProductCard;
 
-
-
 "use client";
 import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
@@ -337,12 +335,7 @@ type ProductImage = {
   created_at: string;
 };
 
-const ProductCard = ({
-  product,
-  seReftech,
-  refetch,
-  isColumn,
-}: any) => {
+const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const router = useRouter();
@@ -405,7 +398,7 @@ const ProductCard = ({
         <div className="w-full overflow-hidden">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 container">
             {/* Image */}
-            <div className="relative w-full sm:w-80 md:w-[26%] mx-auto">
+            <div className="relative w-full sm:w-80 md:w-[50%] lg:w-[40%]  max-md:mx-auto">
               <Swiper
                 key={product?.id}
                 modules={[Pagination, Autoplay, Thumbs]}
@@ -438,7 +431,7 @@ const ProductCard = ({
                         src={getImageUrl(img?.image_url)}
                         alt={`Product image ${index + 1}`}
                         layout="fill"
-                        className="rounded-lg bg-gray-200 object-contain"
+                        className="rounded-lg bg-gray-200 object-cover"
                       />
                     </div>
                   </SwiperSlide>
@@ -464,7 +457,9 @@ const ProductCard = ({
                 className="text-black font-bold text-sm sm:text-base dark:text-white cursor-pointer"
                 onClick={() => router.push(`/product-details/${product.id}`)}
               >
-                {product.name}
+                {product.name.length > 10
+                  ? product.name.slice(0, 50) + "..."
+                  : product.name}
               </p>
 
               {product?.is_featured && (
@@ -499,20 +494,23 @@ const ProductCard = ({
           </div>
         </div>
       ) : (
-        <div className="flex-none relative dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] max-sm:w-[80%] sm:w-[50%] md:w-[35%] lg:w-[18.5%] transition-transform duration-500 ease-in-out mx-auto">
+        <div
+          key={product.id}
+          className={`flex-none relative  dark:bg-black dark:text-white shadow-md rounded-lg overflow-hidden border border-gray-200 w-[55%] max-sm:w-[30%] sm:w-[50%] md:w-[35%] lg:w-[18.5%] transition-transform duration-500  ease-in-out`}
+        >
           <div
             onClick={() =>
               product.fav ? remove(product.id) : AddToLike(product.id)
             }
-            className={`absolute top-2 right-2 ${
-              product.fav ? "text-red-600" : "text-white"
+            className={`hover:cursor-pointer z-20 top-2 right-2 absolute ${
+              product.fav ? "text-red-600" : "text-white "
             } hover:text-red-600`}
           >
             <MdFavorite size={24} className="max-sm:h-4" />
           </div>
           <div
-            onClick={() => router.push(`/product-details/${product.id}`)}
-            className="relative w-full h-24 bg-black max-sm:h-[150px]"
+            onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on image click
+            className="relative w-full h-24  bg-black max-sm:h-[50px]"
           >
             {product?.images?.[0]?.image_url && (
               <Image
@@ -520,30 +518,32 @@ const ProductCard = ({
                 alt={product.name}
                 layout="fill"
                 objectFit="contain"
-                className="rounded-t-lg hover:scale-105 transition-all duration-300"
+                className="rounded-t-lg hover:scale-105 transition-all duration-300 mx-auto"
               />
             )}
           </div>
 
-          <div className="px-3 pb-3 dark:bg-[#1e1e2f] text-center">
+          <div className="px-3 pb-[6px]  dark:bg-[#1e1e2f]">
             <h3
-              className="text-sm dark:text-white font-semibold text-gray-900 truncate max-sm:text-xs cursor-pointer"
-              onClick={() => router.push(`/product-details/${product.id}`)}
+              className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[8px] cursor-pointer"
+              onClick={() => router.push(`/product-details/${product.id}`)} // Added routing on title click
             >
               {product.name}
             </h3>
-            <p className="text-xs text-gray-500 truncate max-sm:text-[0.8rem]">
+            <p className="text-xs text-gray-500 truncate max-md:text-[0.8rem] max-sm:text-[0.4rem]">
               {product.description}
             </p>
-            <p className="text-purple-500 font-bold max-sm:text-[0.8rem]">
+            <p className="text-purple-500 font-bold max-sm:text-[0.4rem]">
               {Number(product.price).toLocaleString()} AED
             </p>
-            <button
-              onClick={() => router.push(`/product-details/${product.id}`)}
-              className="bg-btnGray font-bold mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 py-1 rounded-full text-xs hover:bg-purple-600"
-            >
-              View Details
-            </button>
+            <div className="flex items-center">
+              <button
+                onClick={() => router.push(`/product-details/${product.id}`)} // View Details button routing
+                className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 dark:hover:bg-purple-600"
+              >
+                <p className="max-sm:text-[5px]"> View Details</p>
+              </button>
+            </div>
           </div>
         </div>
       )}
