@@ -22,6 +22,7 @@ const categoryNames = {
   3: "Components and Accessories",
   4: "Gaming Consoles",
 };
+
 const ProductMain = ({ categoryId, query }: any) => {
   const token = useSelector((state: RootState) => state.user.token);
   const [newData, setNewData] = useState([]);
@@ -67,7 +68,6 @@ const ProductMain = ({ categoryId, query }: any) => {
         url += `&category_id=${categoryId}`;
       }
 
-      // Add other query parameters
       const queryParams = new URLSearchParams(
         filteredValues as Record<string, string>
       ).toString();
@@ -101,12 +101,10 @@ const ProductMain = ({ categoryId, query }: any) => {
         //@ts-ignore
         setNewData(newProducts);
         //@ts-ignore
-
         setUsedData(usedProducts);
       } else {
         const filteredProducts = await fetchFilteredProducts(currentPage);
         //@ts-ignore
-
         setFilteredData(filteredProducts);
       }
       setLoading(false);
@@ -127,7 +125,7 @@ const ProductMain = ({ categoryId, query }: any) => {
     "Unknown Category";
 
   return (
-    <div className="h-auto w-full">
+    <div className="h-auto w-full overflow-x-hidden px-2 sm:px-0">
       {Object.keys(filteredValues).length > 0 ? (
         <>
           <div className="mt-4 md:mb-2 max-md:mb-4">
@@ -137,77 +135,68 @@ const ProductMain = ({ categoryId, query }: any) => {
               adId={1}
             />
           </div>
-          {/* <h1 className="font-bold text-2xl mb-4 text-black dark:text-white">
-            {Object.keys(filteredValues).length > 0
-              ? ` ${Object.values(filteredValues)
-                .map((value) =>
-                  value === "1" ? "New" : value === "2" ? "Used" : value
-                )
-                .join(", ")} ${categoryName}`
-              : `Popular in ${categoryName}`}
-          </h1> */}
-          <div className="flex w-[100%]">
-            <div className="flex items-start gap-2 max-md:w-full md:w-[70%] relative">
-              <div className="flex-col flex flex-wrap gap-4 w-full justify-center max-sm:gap-[0.5rem]">
-                <h1 className="font-bold overflow-x-wrap text-2xl mb-4 max-sm:text-lg text-black dark:text-white">
-                  {Object.keys(filteredValues).length > 0
-                    ? ` ${Object.values(filteredValues)
-                        .map((value) =>
-                          value === "1" ? "New" : value === "2" ? "Used" : value
-                        )
-                        .join(", ")} ${categoryName}`
-                    : `Popular in ${categoryName}`}
-                </h1>
-                {loading ? (
-                  <div>Loading...</div>
-                ) : filteredData && filteredData.length > 0 ? (
-                  filteredData.map((product, index) => (
-                    <>
-                      <ProductCard
-                        //@ts-ignore
-                        key={product.id || index}
-                        isColumn={true}
-                        fetcher={fetcher}
-                        refetch={fetcher}
-                        seReftech={seReftech}
-                        product={product}
+          <div className="flex flex-col md:flex-row w-full">
+            <div className="flex flex-col gap-4 w-full md:w-[70%]">
+              <h1 className="font-bold text-lg sm:text-2xl mb-4 text-black dark:text-white text-center sm:text-left">
+                {Object.keys(filteredValues).length > 0
+                  ? ` ${Object.values(filteredValues)
+                      .map((value) =>
+                        value === "1" ? "New" : value === "2" ? "Used" : value
+                      )
+                      .join(", ")} ${categoryName}`
+                  : `Popular in ${categoryName}`}
+              </h1>
+              {loading ? (
+                <div>Loading...</div>
+              ) : filteredData && filteredData.length > 0 ? (
+                filteredData.map((product, index) => (
+                  <div
+                    key={product?.id || index}
+                    className="flex flex-col items-center sm:items-start"
+                  >
+                    <ProductCard
+                      isColumn={true}
+                      fetcher={fetcher}
+                      refetch={fetcher}
+                      seReftech={seReftech}
+                      product={product}
+                    />
+                    <div className="h-[3px] w-full bg-bluishBorder"></div>
+                    {index === 2 && <InspectionBadge />}
+                    {index === 6 && (
+                      <div className="w-full sm:w-[70%] mx-auto">
+                        <GetStartedBadge />
+                      </div>
+                    )}
+                    {(index + 1) % 5 === 0 && (
+                      <LiveAdSection
+                        className="w-full sm:w-[96%] h-40 my-4"
+                        category={`Popular ${categoryName}`}
+                        adId={5 + Math.floor((index + 1) / 5) - 1}
                       />
-                      <div className="h-[3px] w-full bg-bluishBorder"></div>
-                      {index === 2 && <InspectionBadge />}
-                      {index === 6 && (
-                        <div className="w-[70%]">
-                          <GetStartedBadge />
-                        </div>
-                      )}
-                      {(index + 1) % 5 === 0 && (
-                        <LiveAdSection
-                          className="md:w-[100%] max-sm:w-full sm:w-[96%] h-40 my-4"
-                          category={`Popular ${categoryName}`}
-                          adId={5 + Math.floor((index + 1) / 5) - 1}
-                        />
-                      )}
-                    </>
-                  ))
-                ) : (
-                  <div className="text-red-600">No Product To display</div>
-                )}
-              </div>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className="text-red-600 text-center sm:text-left">
+                  No Product To display
+                </div>
+              )}
             </div>
-            <div className="w-[30%] max-md:w-0 max-md:hidden">
+            <div className="w-full md:w-[30%] hidden md:block">
               <LiveAdSection
                 category={`Popular ${categoryName}`}
                 adId={2}
-                className="w-[100%] ml-6 h-[36rem]"
+                className="w-full ml-0 md:ml-6 h-[36rem]"
               />
               <LiveAdSection
                 category={`Popular ${categoryName}`}
                 adId={3}
-                className="w-[100%] ml-6 my-4 h-[36rem]"
+                className="w-full ml-0 md:ml-6 my-4 h-[36rem]"
               />
             </div>
           </div>
 
-          {/* Pagination Controls */}
           <div className="flex justify-center items-center gap-4 my-6">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -220,7 +209,7 @@ const ProductMain = ({ categoryId, query }: any) => {
             >
               Prev
             </button>
-            <span className="text-lg font-semibold text-gray-700 dark:text-white">
+            <span className="text-base sm:text-lg font-semibold text-gray-700 dark:text-white">
               Page {currentPage} of {totalPages}
             </span>
             <button
@@ -239,25 +228,25 @@ const ProductMain = ({ categoryId, query }: any) => {
           <LiveAdSection
             category={`Popular ${categoryName}`}
             adId={4}
-            className="w-[100%] h-[10rem] my-2"
+            className="w-full h-[10rem] my-2"
           />
         </>
       ) : (
         <>
-          <Wrapper className="flex w-full mt-4 gap-3">
+          <Wrapper className="flex flex-wrap w-full mt-4 gap-3">
             <LiveAdSection
-              className="w-1/2 md:h-52 max-md:h-40 hidden sm:block"
+              className="w-full sm:w-1/2 md:h-52 max-md:h-40 hidden sm:block"
               category={categoryName}
               adId={1}
             />
             <LiveAdSection
               category={categoryName}
               adId={2}
-              className="w-1/2 md:h-52 max-md:h-40 hidden sm:block"
+              className="w-full sm:w-1/2 md:h-52 max-md:h-40 hidden sm:block"
             />
           </Wrapper>
           <ProductSection
-            title={`Popular in Used   ${categoryName}`}
+            title={`Popular in Used ${categoryName}`}
             subtitle="Choose your necessary parts from this category."
             products={usedData}
             seReftech={seReftech}
@@ -271,11 +260,9 @@ const ProductMain = ({ categoryId, query }: any) => {
                 ? "components"
                 : "console"
             }?condition=2`}
-            onExplore={() => console.log("Explore Used Products")}
           />
-
           <ProductSection
-            title={`Popular in New  ${categoryName}`}
+            title={`Popular in New ${categoryName}`}
             subtitle="Choose your necessary parts from this category."
             products={newData}
             seReftech={seReftech}
@@ -289,18 +276,17 @@ const ProductMain = ({ categoryId, query }: any) => {
                 ? "components"
                 : "console"
             }?condition=1`}
-            onExplore={() => console.log("Explore New Products")}
           />
-          <div className="flex mx-6 w-full gap-3">
+          <div className="flex flex-wrap gap-3 mx-0 sm:mx-6">
             <LiveAdSection
               category={categoryName}
               adId={3}
-              className="w-[46%] md:h-52 max-md:h-40 hidden sm:block"
+              className="w-full sm:w-[46%] md:h-52 max-md:h-40 hidden sm:block"
             />
             <LiveAdSection
               category={categoryName}
               adId={4}
-              className="w-[48%] md:h-52 max-md:h-40 hidden sm:block"
+              className="w-full sm:w-[48%] md:h-52 max-md:h-40 hidden sm:block"
             />
           </div>
         </>
