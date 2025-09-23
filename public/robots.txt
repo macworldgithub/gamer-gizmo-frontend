@@ -1,3 +1,36 @@
+# For all robots
 User-agent: *
+
+# Block access to specific groups of pages
+Disallow: /?
+Disallow: /*?processor
+Disallow: /*?gpu
+Disallow: /*?ram
+Disallow: /*?storage
+Disallow: /*?condition
+Disallow: /*?location
+Disallow: /*?price
+Disallow: /*?category_id
+Disallow: /search-product*
+Disallow: /auth/register*
+Disallow: /auth/login*
+
+User-agent: Mediapartners-Google
 Allow: /
-Sitemap: https://www.gamergizmo.com/sitemap.xml
+
+User-agent: AdsBot-Google
+User-agent: Googlebot-Image
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Baiduspider
+User-agent: GPTBot
+User-agent: PerplexityBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: YandexBot
+User-agent: Qwantify
+User-agent: SeznamBot
+User-agent: Yeti
+User-agent: Slurp
+
+Sitemap: https://gamergizmo.com/sitemap.xml
