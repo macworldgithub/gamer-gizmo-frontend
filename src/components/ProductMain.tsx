@@ -234,7 +234,7 @@ const ProductMain = ({ categoryId, query }: any) => {
         </>
       ) : (
         <>
-          <Wrapper className="flex flex-wrap w-full mt-4 gap-3">
+          {/* <Wrapper className="flex flex-wrap w-full mt-4 gap-3">
             <LiveAdSection
               className="w-full sm:w-1/2 md:h-52 max-md:h-40 hidden sm:block"
               category={categoryName}
@@ -245,7 +245,19 @@ const ProductMain = ({ categoryId, query }: any) => {
               adId={2}
               className="w-full sm:w-1/2 md:h-52 max-md:h-40 hidden sm:block"
             />
-          </Wrapper>
+          </Wrapper> */}
+          <div className="flex flex-wrap gap-3 mx-0 sm:mx-6">
+            <LiveAdSection
+              category={categoryName}
+              adId={1}
+              className="w-full sm:w-[46%] md:h-52 max-md:h-40 hidden sm:block"
+            />
+            <LiveAdSection
+              category={categoryName}
+              adId={2}
+              className="w-full sm:w-[48%] md:h-52 max-md:h-40 hidden sm:block"
+            />
+          </div>
           <ProductSection
             title={`Popular in Used ${categoryName}`}
             subtitle="Choose your necessary parts from this category."

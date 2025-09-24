@@ -63,10 +63,15 @@ const SearchBar = ({ categoryId }: any) => {
             ) : (
               productResults.map((product, ind) => (
                 <>
+                
                   <div
                     onClick={() => {
                       // @ts-expect-error kuhn mhj
-                      router.push(`/product-details/${product.id}`);
+                      router.push(
+                        `/products/${encodeURIComponent(
+                          product.name.replace(/\s+/g, "-").toLowerCase()
+                        )}/${product.id}`
+                      );
                     }}
                     key={ind}
                     className="p-4 hover:bg-gray-200 cursor-pointer transition-all duration-200 ease-in-out rounded-md"

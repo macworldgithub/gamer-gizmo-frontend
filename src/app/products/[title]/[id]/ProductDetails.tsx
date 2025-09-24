@@ -73,7 +73,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
     return relevantFields.some((field: any) => {
       const value = field.includes(".")
         ? //@ts-ignore
-        field.split(".").reduce((obj, key) => obj?.[key], categoryData)
+          field.split(".").reduce((obj, key) => obj?.[key], categoryData)
         : categoryData[field];
       return (
         value && value !== "Not Available" && value.toString().trim() !== ""
@@ -296,12 +296,12 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   {data?.condition === 1
                     ? "New"
                     : data?.condition === 2
-                      ? "Used"
-                      : data?.condition === 3
-                        ? "Like New"
-                        : data?.condition === 4
-                          ? "Refurbished"
-                          : "Unknown"}
+                    ? "Used"
+                    : data?.condition === 3
+                    ? "Like New"
+                    : data?.condition === 4
+                    ? "Refurbished"
+                    : "Unknown"}
                 </p>
               </div>
             )}
@@ -318,10 +318,11 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
                   <button
                     onClick={handleSpecClick}
                     className={`w-fit px-4 py-2 rounded-md text-sm flex justify-center 
-      ${isSpecOpen
-                        ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
-                        : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
-                      }`}
+      ${
+        isSpecOpen
+          ? "border border-black dark:bg-white dark:hover:bg-purple-600 border-dotted hover:bg-gray-100 text-black font-bold text-lg" // Active (open) state
+          : "bg-purple-600 text-white border  hover:bg-black border-gray-400  hover:text-white" // Default (closed) state
+      }`}
                   >
                     {isSpecOpen
                       ? "Hide Additional Details"
@@ -392,7 +393,7 @@ const ProductDetails = ({ data, refetch, seReftech }: any) => {
           {isSpecOpen && <SpecificationsTable data={data} />}
 
           <div className="flex-col justify-start gap-2 items-center px-4 mt-4">
-            <h4 className="dark:text-white font-bold my-2 text-2xl ">
+            <h4 className="dark:text-white text-black font-bold my-2 text-2xl ">
               Product Description
             </h4>
             <p className="lg:text-sm md:text-sm text-gray-600  dark:text-white text-[11px]">

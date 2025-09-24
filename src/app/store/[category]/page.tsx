@@ -89,7 +89,13 @@ const ProductGrid = () => {
                   AED {product.price}
                 </p>
                 <button
-                  onClick={() => router.push(`/product-details/${product.id}`)}
+                  onClick={() =>
+                    router.push(
+                      `/products/${encodeURIComponent(
+                        product.name.replace(/\s+/g, "-").toLowerCase()
+                      )}/${product.id}`
+                    )
+                  }
                   className=" dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white px-2 py-1 max-sm:px-[0.25rem]  rounded-full"
                 >
                   View Details

@@ -22,7 +22,7 @@ interface Product {
   description: string;
   price: string;
   imageUrl: string;
-  category_id: number;  // Assuming category_id is part of the product
+  category_id: number; // Assuming category_id is part of the product
   [key: string]: any;
 }
 
@@ -37,6 +37,7 @@ interface SimilarItem {
 
 const page: React.FC = () => {
   const params = useParams();
+  const { title, id } = params;
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState<Product | null>(null);
   const [fetcher, seReftech] = useState(false);
@@ -57,9 +58,10 @@ const page: React.FC = () => {
 
   const explorePath =
     data && data.category_id && data.condition !== undefined
-      ? `/${getCategoryPath(data.category_id)}?category_id=${data.category_id}&condition=${data.condition}`
+      ? `/${getCategoryPath(data.category_id)}?category_id=${
+          data.category_id
+        }&condition=${data.condition}`
       : "/explore";
-
 
   // --- Function to Fetch Similar Items Based on Category ID ---
   const fetchSimilarItems = async (categoryId: number) => {
@@ -99,7 +101,6 @@ const page: React.FC = () => {
 
   console.log(data, "product data");
 
-
   useEffect(() => {
     fetch();
   }, [fetcher]);
@@ -110,7 +111,11 @@ const page: React.FC = () => {
       <div className="w-full flex mb-2">
         <div className="w-[65%] max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
           {data && (
-            <ProductDetails seReftech={seReftech} refetch={fetcher} data={data} />
+            <ProductDetails
+              seReftech={seReftech}
+              refetch={fetcher}
+              data={data}
+            />
           )}
           {/* <AuthorSection /> */}
           {/* <RelatedNewsSection /> */}

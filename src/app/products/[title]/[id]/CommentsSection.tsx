@@ -145,7 +145,7 @@ const CommentsSection = ({ data, fetcher, seReftech }: any) => {
       {/* Post Comment Section */}
       <div className="mb-6 space-y-4">
         <textarea
-          className="w-full p-3 border rounded-lg dark:bg-gray-800 dark:text-white"
+          className="w-full p-3 border rounded-lg dark:bg-gray-800 text-black dark:text-white"
           placeholder="Write a comment..."
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}

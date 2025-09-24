@@ -83,8 +83,19 @@ export default function MainPage() {
               <div
                 key={item.id}
                 className="flex shadow-lg flex-row items-start p-4 rounded-lg w-full dark:bg-bluishBorder"
+                // onClick={() =>
+                //   router.push(
+                //     `/products/${encodeURIComponent(
+                //       item.product_name.replace(/\s+/g, "-").toLowerCase()
+                //     )}/${item.product_id}`
+                //   )
+                // }
                 onClick={() =>
-                  router.push(`/product-details/${item.product_id}`)
+                  router.push(
+                    `/products/${encodeURIComponent(
+                      item.product.name.replace(/\s+/g, "-").toLowerCase()
+                    )}/${item.product_id}`
+                  )
                 }
               >
                 {/* Image */}
@@ -136,7 +147,7 @@ export default function MainPage() {
                 </div>
                 <div
                   onClick={(e) => {
-                    e.stopPropagation(); 
+                    e.stopPropagation();
                     remove(item.product_id);
                   }}
                   className="text-red-700 text-4xl flex justify-center items-center cursor-pointer"

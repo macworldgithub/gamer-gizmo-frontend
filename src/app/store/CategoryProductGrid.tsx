@@ -96,7 +96,13 @@ const CategoryProductGrid = ({
                 </p>
                 <button
                   className="mt-1 max-md:w-20 max-md:h-6  md:w-20 bg-custom-gradient text-white p-1 rounded-full text-xs w-full "
-                  onClick={() => router.push(`/product-details/${product.id}`)}
+                  onClick={() =>
+                    router.push(
+                      `/products/${encodeURIComponent(
+                        product.name.replace(/\s+/g, "-").toLowerCase()
+                      )}/${product.id}`
+                    )
+                  }
                 >
                   View Details
                 </button>

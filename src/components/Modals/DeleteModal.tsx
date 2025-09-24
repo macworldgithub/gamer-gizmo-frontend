@@ -28,7 +28,12 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
           textAlign: "center",
         }}
       >
-        <Typography id="delete-modal-title" variant="h6" gutterBottom>
+        <Typography
+          id="delete-modal-title"
+          variant="h6"
+          gutterBottom
+          className="text-black dark:text-white"
+        >
           Are you sure you want to delete this comment?
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
