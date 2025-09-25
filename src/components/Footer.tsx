@@ -25,7 +25,9 @@ const Footer = () => {
 
   return (
     <div className="w-full h-auto bg-white dark:bg-black">
-      <div className="">{pathname !== "/all-communities" && <LiveCommunity />}</div>
+      <div className="">
+        {pathname !== "/all-communities" && <LiveCommunity />}
+      </div>
 
       <div className="bg-footerBlack h-auto">
         {/* Footer Main Section */}
@@ -151,14 +153,24 @@ const Footer = () => {
               <li className="cursor-pointer hover:text-secondaryColorDark">
                 24/7 Supports
               </li>
+
               {/* <li className="cursor-pointer hover:text-secondaryColorDark">Privacy Policy</li> */}
             </ul>
+            <div className="mt-4 text-secondaryColorDark">
+              <Link href="/about">
+                <h3 className="font-bold">About Us</h3>
+              </Link>
+            </div>
           </div>
 
           {/* Contact */}
           <div className="flex flex-col items-start text-secondaryColorDark">
             <div className="text-start">
-              <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3>
+              {/* <h3 className="mb-4 text-[1.2rem] font-bold">Contact</h3> */}
+
+              <Link href="/contact">
+                <h3 className="font-bold">Contact Us</h3>
+              </Link>
               <a
                 href="mailto:support@gamergizmo.com"
                 className="text-sm break-words hover:text-secondaryColorDark text-white"
@@ -174,10 +186,16 @@ const Footer = () => {
               </a>
             </div>
             <div className="mt-4">
+              <Link href="/blogs">
+                <h3 className="font-bold">Blogs</h3>
+              </Link>
+            </div>
+           
+            {/* <div className="mt-4">
               <Link href="/about">
                 <h3 className="font-bold">About Us</h3>
               </Link>
-            </div>
+            </div> */}
           </div>
 
           {/* <div className="text-start">
