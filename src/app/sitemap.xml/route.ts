@@ -10,19 +10,14 @@ export async function GET() {
     "/about",
     "/Add-to-Cart",
     "/advertisement",
-    "/advertiser",
     "/advertising",
     "/ai",
     "/all-communities",
-    "/appreciation_recognition",
     "/auth/login",
     "/auth/otp",
     "/auth/register",
     "/blogs",
-    "/blog", // dynamic: /blog/[slug] handled below if needed
-    "/botai",
-    "/card",
-    "/category",
+
     "/chat", // dynamic: /chat/[slug] handled below if needed
     "/community",
     "/community-chat", // dynamic: /community-chat/[id] handled below if needed
@@ -33,14 +28,11 @@ export async function GET() {
     "/favourites",
     "/Inspection",
     "/laptops",
-    "/layout",
-    "/logout-accounts",
     "/my-adds",
     "/order",
     "/order-success",
-    "/postadd",
+
     "/privacy-policy",
-    "/products",
     "/products-search",
     "/profile",
     "/publish-ad",
@@ -53,7 +45,7 @@ export async function GET() {
   // fetch their slugs/ids from your backend and add them to the sitemap as well.
   // 2. Fetch all products for dynamic routes
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?pageNo=1`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?limit=10000`
   );
   const data = await res.json();
   const products = data.data || [];
@@ -137,17 +129,6 @@ export async function GET() {
     }
   } catch {}
 
-  // Example: Fetch all product-details ids (legacy route)
-  let productDetailsUrls: string[] = [];
-  try {
-    if (Array.isArray(products)) {
-      productDetailsUrls = products.map(
-        (product: any) =>
-          `<url><loc>${BASE_URL}/product-details/${product.id}</loc></url>`
-      );
-    }
-  } catch {}
-
   // 3. Build XML for static and dynamic routes
   let urls = [
     ...staticPages.map((page) => `<url><loc>${BASE_URL}${page}</loc></url>`),
@@ -157,7 +138,6 @@ export async function GET() {
     ...communityChatUrls,
     ...storeCategoryUrls,
     ...myAddsEditUrls,
-    ...productDetailsUrls,
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
