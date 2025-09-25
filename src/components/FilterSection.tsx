@@ -194,12 +194,21 @@ const FilterSection = () => {
                         </div>
                       </div>
                       <div
-                        onClick={() =>
-                          router.push(`/products?title=${searchQuery}`)
-                        } // Navigates to a page showing all products
+                        // onClick={() =>
+                        //   router.push(
+                        //     `/products?title=${searchQuery}`
+                        //   )
+                        // }
+                        onClick={() => {
+                          router.push(
+                            `/products/${encodeURIComponent(
+                              product.name.replace(/\s+/g, "-").toLowerCase()
+                            )}/${product.id}`
+                          );
+                        }}
                         className="p-2 bg-custom-gradient text-white text-center cursor-pointer rounded-b-md  transition-all duration-200"
                       >
-                        View All
+                        View
                       </div>
                     </>
                   ))

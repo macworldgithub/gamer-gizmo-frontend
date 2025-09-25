@@ -63,7 +63,6 @@ const SearchBar = ({ categoryId }: any) => {
             ) : (
               productResults.map((product, ind) => (
                 <>
-                
                   <div
                     onClick={() => {
                       // @ts-expect-error kuhn mhj
@@ -93,7 +92,7 @@ const SearchBar = ({ categoryId }: any) => {
                   <div
                     onClick={() =>
                       router.push(
-                        `/products?title=${searchQuery}&category_id=${categoryId}`
+                        `/products-search?title=${searchQuery}&category_id=${categoryId}`
                       )
                     } // Navigates to a page showing all products
                     className="p-2 bg-custom-gradient text-white text-center cursor-pointer rounded-b-md  transition-all duration-200"
