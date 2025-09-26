@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import BrowseVideos from "@/components/BrowseVideos";
@@ -18,8 +16,7 @@ import axios from "axios";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:
-    "Buy & Sell Gaming PCs, Laptops, Consoles & Parts in UAE | GamerGizmo",
+  title: "Buy & Sell Gaming PCs, Laptops, Consoles & Parts in UAE | GamerGizmo",
   description:
     "Looking to buy or sell gaming PCs, laptops, consoles, or components in the UAE? Find the best deals on top brands and latest models. Shop now for great prices!",
 };
@@ -28,28 +25,6 @@ export default function HomePage() {
   const userId = useSelector((state: RootState) => state.user.id);
   console.log(userId, "user");
   console.log(token, "my");
-
-  useEffect(() => {
-    console.log("useEffect triggered");
-
-    if (typeof window !== "undefined") {
-      axios
-        .post(
-          "https://backend.gamergizmo.com/analytics/track-visitor",
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then(() => console.log("Visitor tracked for https://gamergizmo.com/"))
-        .catch((error) => console.error("Error tracking visitor:", error));
-
-      // Removed toast info since website is now fully live
-      toast.dismiss();
-    }
-  }, []);
 
   return (
     <div className="overflow-x-hidden dark:bg-[#0D0D12]">

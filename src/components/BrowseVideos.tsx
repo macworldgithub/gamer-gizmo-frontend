@@ -1,4 +1,8 @@
+"use client";
+import { useEffect } from "react";
 import { LazyVideo } from "./LazyVideo"; // Adjust import as needed
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function BrowseVideos() {
   const videos = [
@@ -29,6 +33,28 @@ export default function BrowseVideos() {
     ...videos,
     ...Array(totalSlots - videos.length).fill({ src: "", poster: "" }),
   ];
+
+  useEffect(() => {
+    console.log("useEffect triggered");
+
+    if (typeof window !== "undefined") {
+      axios
+        .post(
+          "https://backend.gamergizmo.com/analytics/track-visitor",
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(() => console.log("Visitor tracked for https://gamergizmo.com/"))
+        .catch((error) => console.error("Error tracking visitor:", error));
+
+      // Removed toast info since website is now fully live
+      toast.dismiss();
+    }
+  }, []);
 
   return (
     <div className="w-full bg-gray-100 dark:bg-[#1e1e2f]">
