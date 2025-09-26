@@ -43,16 +43,19 @@ export async function GET() {
   let blogUrls: string[] = [];
   try {
     const blogRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getRecentsBlogs`,
+      { cache: "no-store" }
     );
     const blogs = await blogRes.json();
     if (Array.isArray(blogs.data)) {
-      blogUrls = blogs.data.map(
-        (blog: any) =>
-          `<url><loc>${BASE_URL}/blogs/${encodeURIComponent(
-            blog.title.replace(/\s+/g, "-").toLowerCase()
-          )}</loc></url>`
-      );
+      blogUrls = blogs.data.map((blog: any) => {
+        const rawSlug: string | undefined = blog?.slug;
+        const fallbackFromTitle = typeof blog?.title === "string"
+          ? blog.title.replace(/\s+/g, "-").toLowerCase()
+          : "";
+        const finalSlug = encodeURIComponent(rawSlug || fallbackFromTitle);
+        return `<url><loc>${BASE_URL}/blogs/${finalSlug}</loc></url>`;
+      });
     }
   } catch {}
 
@@ -115,8 +118,8 @@ export async function GET() {
   // 3. Build XML for static and dynamic routes
   let urls = [
     ...staticPages.map((page) => `<url><loc>${BASE_URL}${page}</loc></url>`),
-    ...productUrls,
     ...blogUrls,
+    ...productUrls,
     ...chatUrls,
     ...communityChatUrls,
     ...storeCategoryUrls,
