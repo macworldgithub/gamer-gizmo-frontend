@@ -7,36 +7,18 @@ export async function GET() {
   // 1. List your static routes
   const staticPages = [
     "",
-    "/about",
-    "/Add-to-Cart",
-    "/advertisement",
-    "/advertising",
-    "/ai",
-    "/all-communities",
-    "/auth/login",
-    "/auth/otp",
-    "/auth/register",
-    "/blogs",
-    "/chat", // dynamic: /chat/[slug] handled below if needed
-    "/community",
-    "/community-chat", // dynamic: /community-chat/[id] handled below if needed
+   
     "/components",
     "/console",
-    "/contact",
     "/desktop",
-    "/favourites",
-    "/Inspection",
     "/laptops",
-    "/my-adds",
-    "/order",
-    "/order-success",
-    "/privacy-policy",
-    "/products-search",
-    "/profile",
-    "/publish-ad",
-    "/search-product",
     "/store",
-    // Add more as needed
+    "/contact",
+    "/about",
+    "/ai",
+    "/all-communities",
+    "/blogs",
+
   ];
 
   // TODO: For dynamic routes like /blog/[slug], /chat/[slug], /community-chat/[id], /store/[category],

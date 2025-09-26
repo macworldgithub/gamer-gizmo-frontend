@@ -131,11 +131,11 @@ export default function UsBlogs() {
             <div className="w-full px-2 text-start md:text-left">
               <p className="text-sm text-gray-500 italic">
                 {/* GamerGizmo • {formatDate(blog.Created_at)} */}
-                GamerGizmo • {getTimeAgoOrDate(blog.Created_at)}
+                GamerGizmo • {getTimeAgoOrDate(blog?.Created_at)}
               </p>
               <h3
                 onClick={() =>
-                  router.push(`/blogs/${encodeURIComponent(blog.slug)}`)
+                  router.push(`/blogs/${encodeURIComponent(blog?.slug)}`)
                 }
                 className="text-base max-md:text-[0.6rem] font-bold hover:underline cursor-pointer break-words dark:text-white text-black"
               >
