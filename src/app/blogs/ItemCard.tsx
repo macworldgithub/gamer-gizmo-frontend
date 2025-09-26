@@ -33,30 +33,14 @@ export default function BlogList() {
   }, []);
 
   const getTimeAgoOrDate = (dateString: string): string => {
-    const now = new Date();
+    // Use a more stable date formatting to prevent hydration issues
     const postedDate = new Date(dateString);
-    const diffMs = now.getTime() - postedDate.getTime();
-
-    const diffMinutes = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMinutes / 60);
-    const minutes = diffMinutes % 60;
-
-    if (diffHours < 24) {
-      if (diffHours === 0 && minutes === 0) return "Just now";
-      if (diffHours === 0)
-        return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${
-        minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
-      } ago`;
-    }
-
-    // Fallback to full datetime for older posts
-    return postedDate.toLocaleString(undefined, {
+    
+    // Always return formatted date to avoid server/client mismatch
+    return postedDate.toLocaleDateString(undefined, {
       year: "numeric",
       month: "short",
       day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
     });
   };
 
@@ -71,7 +55,9 @@ export default function BlogList() {
             <div
               key={blog.id}
               className="flex items-start space-x-2  border-b pb-4 cursor-pointer text-black dark:text-white"
-              onClick={() => router.push(`/blog/${blog.id}`)}
+              onClick={() =>
+                router.push(`/blogs/${blog.slug}`)
+              }
             >
               <Image
                 src={`${blog.images}`}

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { formatDate } from "../utils/formatDate";
+import { SlUmbrella } from "react-icons/sl";
 
 interface Blog {
   key: number;
@@ -15,6 +16,7 @@ interface Blog {
   title: string;
   description: string;
   tags: string;
+  slug: string;
 }
 
 export default function UsBlogs() {
@@ -46,15 +48,19 @@ export default function UsBlogs() {
       );
 
       const blogs: Blog[] = response?.data?.data?.map(
-        (blog: any, index: number) => ({
-          key: index,
-          Created_at: blog.created_at,
-          blogId: blog.id,
-          image: blog.images || "", // Ensure it's a string
-          title: blog.title || "Untitled",
-          description: blog.content || "",
-          tags: blog.tags || "",
-        })
+        (blog: any, index: number) => {
+          console.log("Blog Slug:", blog.slug); // ✅ console slug here
+          return {
+            key: index,
+            Created_at: blog.created_at,
+            blogId: blog.id,
+            image: blog.images || "", // Ensure it's a string
+            title: blog.title || "Untitled",
+            description: blog.content || "",
+            tags: blog.tags || "",
+            slug: blog.slug || "",
+          };
+        }
       );
 
       setData(blogs);
@@ -89,8 +95,9 @@ export default function UsBlogs() {
       if (diffHours === 0 && minutes === 0) return "Just now";
       if (diffHours === 0)
         return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
-        } ago`;
+      return `${diffHours} hour${diffHours > 1 ? "s" : ""}${
+        minutes > 0 ? ` ${minutes} minute${minutes > 1 ? "s" : ""}` : ""
+      } ago`;
     }
 
     return postedDate.toLocaleString(undefined, {
@@ -127,7 +134,9 @@ export default function UsBlogs() {
                 GamerGizmo • {getTimeAgoOrDate(blog.Created_at)}
               </p>
               <h3
-                onClick={() => router.push(`/blog/${blog.blogId}`)}
+                onClick={() =>
+                  router.push(`/blogs/${encodeURIComponent(blog.slug)}`)
+                }
                 className="text-base max-md:text-[0.6rem] font-bold hover:underline cursor-pointer break-words dark:text-white text-black"
               >
                 {blog.title}

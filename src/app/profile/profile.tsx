@@ -85,8 +85,8 @@ export default function ProfilePage() {
         </div>
 
         <div className="flex w-full  items-center mb-6 max-md:hidden dark:text-white">
-          <div className="relative">
-            <img
+          <div className="relative w-[100px] h-[100px]">
+            {/* <img
               //@ts-ignore
               src={
                 profileData.profile != null ? `${profileData.profile}` : profile
@@ -95,6 +95,14 @@ export default function ProfilePage() {
               width={100}
               height={100}
               className=" rounded-full"
+            /> */}
+            <img
+              //@ts-ignore
+              src={
+                profileData.profile != null ? `${profileData.profile}` : profile
+              }
+              alt="Profile"
+              className="w-full h-full object-cover rounded-full border-2 border-gray-300"
             />
             <Image
               src={camera}

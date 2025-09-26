@@ -164,8 +164,7 @@ const Rightsection = ({ data }: any) => {
               <div className="text-left">
                 <p className="text-gray-800 font-semibold dark:text-white">
                   {data?.users?.first_name || "Unknown"}{" "}
-                  {data?.users?.last_name || ""} ({data?.users?.gender || "N/A"}
-                  )
+                  {data?.users?.last_name || ""}
                 </p>
                 <p className="text-gray-500 text-sm dark:text-[#969696]">
                   Member Since {formatDate(data?.users?.created_at)}
@@ -230,7 +229,7 @@ const Rightsection = ({ data }: any) => {
       <div className="dark:bg-black dark:text-white border-gray-300 justify-center rounded-lg p-4 w-80  lg:w-[400px] h-[40rem] relative bg-gray-200 shadow-md flex flex-col items-center">
         {/* <Image src={banner} alt="Banner" layout="fill" objectFit="cover" />
          */}
-        <h1 className="absolute top-5 font-bold text-2xl">
+        <h1 className="absolute top-5 font-bold text-2xl text-black dark:text-white">
           This section is for live Ad
         </h1>
         <h1 className="text-center font-bold text-xl">

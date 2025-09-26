@@ -17,7 +17,6 @@ export async function GET() {
     "/auth/otp",
     "/auth/register",
     "/blogs",
-
     "/chat", // dynamic: /chat/[slug] handled below if needed
     "/community",
     "/community-chat", // dynamic: /community-chat/[id] handled below if needed
@@ -31,7 +30,6 @@ export async function GET() {
     "/my-adds",
     "/order",
     "/order-success",
-
     "/privacy-policy",
     "/products-search",
     "/profile",
@@ -68,7 +66,10 @@ export async function GET() {
     const blogs = await blogRes.json();
     if (Array.isArray(blogs.data)) {
       blogUrls = blogs.data.map(
-        (blog: any) => `<url><loc>${BASE_URL}/blog/${blog.slug}</loc></url>`
+        (blog: any) =>
+          `<url><loc>${BASE_URL}/blogs/${encodeURIComponent(
+            blog.title.replace(/\s+/g, "-").toLowerCase()
+          )}</loc></url>`
       );
     }
   } catch {}

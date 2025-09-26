@@ -66,8 +66,7 @@ const Sellersdetails = ({ data }: any) => {
               {/* Seller Name and Member Since */}
               <div className="text-left">
                 <p className="text-gray-800 font-semibold dark:text-white">
-                  {data?.users?.first_name} {data?.users?.last_name} (
-                  {data?.users?.gender})
+                  {data?.users?.first_name} {data?.users?.last_name}
                 </p>
                 <p className="text-gray-500 text-sm dark:text-[#969696]">
                   Member Since {formatDate(data?.users?.created_at)}
