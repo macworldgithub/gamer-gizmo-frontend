@@ -174,9 +174,9 @@ const BottomNavigationBar = () => {
     { name: "Laptops", href: "/laptops" },
     { name: "Gaming Consoles", href: "/console" },
     { name: "Components and Accessories", href: "/components" },
-    { name: "Blogs", href: "/blogs" },
-    { name: "Contact Us", href: "/contact" },
-    { name: "About Us", href: "/about" },
+    // { name: "Blogs", href: "/blogs" },
+    // { name: "Contact Us", href: "/contact" },
+    // { name: "About Us", href: "/about" },
     { name: "Store", href: "/store" },
     { name: "Inspection", href: "/Inspection" },
   ];
@@ -306,7 +306,8 @@ const BottomNavigationBar = () => {
               >
                 Components and Accessories
               </Link>
-              <Link
+              
+              {/* <Link
                 href="/blogs"
                 className="text-sm  hover:text-secondaryColorDark"
                 onClick={() => setIsDrawerOpen(false)}
@@ -327,7 +328,7 @@ const BottomNavigationBar = () => {
                 onClick={() => setIsDrawerOpen(false)}
               >
                 About Us
-              </Link>
+              </Link> */}
               <Link
                 className="text-sm"
                 href="/store"
