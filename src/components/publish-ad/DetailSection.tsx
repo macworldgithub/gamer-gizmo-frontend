@@ -156,7 +156,12 @@ const DetailSection = ({
         variant="outlined"
         fullWidth
         value={formData.title || ""}
-        onChange={(e) => handleFormChange("title", e.target.value)}
+        onChange={(e) => {
+          const val = (e.target.value || "").slice(0, 70);
+          handleFormChange("title", val);
+        }}
+        inputProps={{ maxLength: 70 }}
+        helperText={`${(formData.title?.length ?? 0)}/70`}
         className="sm:w-full max-sm:w-full dark:text-white " // Responsive width (full width for small screens)
       />
       <TextField
