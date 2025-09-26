@@ -42,19 +42,7 @@ export default function BlogDetail() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   console.log(post, "post");
-  // useEffect(() => {
-  //   if (!title) return;
-  //   setLoading(true);
-  //   fetchBlogBySlug(title as string)
-  //     .then((data) => {
-  //       setPost(data);
-  //       setLoading(false);
-  //     })
-  //     .catch(() => {
-  //       setError("Failed to load blog.");
-  //       setLoading(false);
-  //     });
-  // }, [title]);
+ 
   useEffect(() => {
     if (!decodedSlug) return;
     setLoading(true);
@@ -80,8 +68,8 @@ export default function BlogDetail() {
           {post.images && (
             <div className="relative h-[400px] w-full">
               <Image
-                src={post.images}
-                alt={post.title}
+                src={post?.images}
+                alt={post?.title}
                 fill
                 className="object-cover"
                 priority

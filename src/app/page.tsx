@@ -15,7 +15,14 @@ import AdsBanner from "@/components/AdsBanner";
 import LiveAdSection from "@/components/LiveAd";
 import ConditionalLiveAds from "@/components/conditionalLiveAds";
 import axios from "axios";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title:
+    "Buy & Sell Gaming PCs, Laptops, Consoles & Parts in UAE | GamerGizmo",
+  description:
+    "Looking to buy or sell gaming PCs, laptops, consoles, or components in the UAE? Find the best deals on top brands and latest models. Shop now for great prices!",
+};
 export default function HomePage() {
   const token = useSelector((state: RootState) => state.user.token);
   const userId = useSelector((state: RootState) => state.user.id);
