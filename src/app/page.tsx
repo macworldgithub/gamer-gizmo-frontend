@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Buy & Sell Gaming PCs, Laptops, Consoles & Parts in UAE | GamerGizmo",
   description:
     "Looking to buy or sell gaming PCs, laptops, consoles, or components in the UAE? Find the best deals on top brands and latest models. Shop now for great prices!",
+  alternates: {
+    canonical: "/",
+  },
 };
 export default function HomePage() {
   return <HomePageClient />;

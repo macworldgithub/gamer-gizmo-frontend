@@ -18,7 +18,13 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-
+export const metadata: Metadata = {
+  // Use your production URL in NEXT_PUBLIC_SITE_URL
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
+  
+};
 
 export default function RootLayout({
   children,
