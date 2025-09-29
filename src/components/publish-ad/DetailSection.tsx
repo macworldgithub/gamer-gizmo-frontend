@@ -162,7 +162,7 @@ const DetailSection = ({
         }}
         inputProps={{ maxLength: 70 }}
         helperText={`${(formData.title?.length ?? 0)}/70`}
-        className="sm:w-full max-sm:w-full dark:text-white " // Responsive width (full width for small screens)
+        className="sm:w-full max-sm:w-full dark:text-white " 
       />
       <TextField
         sx={inputStyles}
@@ -173,7 +173,7 @@ const DetailSection = ({
         rows={4}
         value={formData.description || ""}
         onChange={(e) => handleFormChange("description", e.target.value)}
-        className="sm:w-full max-sm:w-full dark:text-white " // Responsive width (full width for small screens)
+        className="sm:w-full max-sm:w-full dark:text-white " 
       />
       {selectCategory?.id !== 3 && (
         <>

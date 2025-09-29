@@ -335,6 +335,15 @@ type ProductImage = {
   created_at: string;
 };
 
+// Create a clean, SEO-friendly slug from a product name
+const slugify = (str: string) =>
+  str
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-") // replace any non-alphanumeric sequence with hyphen
+    .replace(/^-+|-+$/g, ""); // trim leading/trailing hyphens
+
 const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -424,9 +433,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                     <div
                       onClick={() =>
                         router.push(
-                          `/products/${encodeURIComponent(
-                            product.name.replace(/\s+/g, "-").toLowerCase()
-                          )}/${product.id}`
+                          `/products/${slugify(product.name)}/${product.id}`
                         )
                       }
                       className="w-full h-[200px] relative cursor-pointer"
@@ -461,9 +468,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                 className="text-black font-bold text-sm sm:text-base dark:text-white cursor-pointer"
                 onClick={() =>
                   router.push(
-                    `/products/${encodeURIComponent(
-                      product.name.replace(/\s+/g, "-").toLowerCase()
-                    )}/${product.id}`
+                    `/products/${slugify(product.name)}/${product.id}`
                   )
                 }
               >
@@ -497,9 +502,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
               <button
                 onClick={() =>
                   router.push(
-                    `/products/${encodeURIComponent(
-                      product.name.replace(/\s+/g, "-").toLowerCase()
-                    )}/${product.id}`
+                    `/products/${slugify(product.name)}/${product.id}`
                   )
                 }
                 className="mt-4 max-md:px-0  md:px-4 py-2 w-36 max-md:w-20 text-sm max-md:text-[0.7rem] max-sm:py-1 bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
@@ -527,9 +530,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
           <div
             onClick={() =>
               router.push(
-                `/products/${encodeURIComponent(
-                  product.name.replace(/\s+/g, "-").toLowerCase()
-                )}/${product.id}`
+                `/products/${slugify(product.name)}/${product.id}`
               )
             }
             className="relative w-full h-24 bg-black max-sm:h-[50px]"
@@ -550,9 +551,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
               className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[8px] cursor-pointer"
               onClick={() =>
                 router.push(
-                  `/products/${encodeURIComponent(
-                    product.name.replace(/\s+/g, "-").toLowerCase()
-                  )}/${product.id}`
+                  `/products/${slugify(product.name)}/${product.id}`
                 )
               } // Added routing on title click
             >
@@ -568,15 +567,13 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
               <button
                 onClick={() =>
                   router.push(
-                    `/products/${encodeURIComponent(
-                      product.name.replace(/\s+/g, "-").toLowerCase()
-                    )}/${product.id}`
+                    `/products/${slugify(product.name)}/${product.id}`
                   )
                 }
-                // View Details button routing
-                className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 dark:hover:bg-purple-600"
-              >
-                <p className="max-sm:text-[5px]"> View Details</p>
+              // View Details button routing
+              className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 dark:hover:bg-purple-600"
+            >
+              <p className="max-sm:text-[5px]"> View Details</p>
               </button>
             </div>
           </div>
