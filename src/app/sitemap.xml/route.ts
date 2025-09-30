@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 
-// Replace with your actual domain
-const BASE_URL = "https://gamergizmo.com";
+// Prefer environment-configured site URL; fallback to production domain
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://gamergizmo.com";
 
 export async function GET() {
   // 1. List your static routes

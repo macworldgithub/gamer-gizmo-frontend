@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import UsBlogs from "./UsBlogs";
 import PageHeader from "@/components/PageHeader";
 
@@ -6,6 +7,14 @@ import ItemCard from "./ItemCard";
 import LiveAdSection from "@/components/LiveAd";
 import GetStartedBadge from "@/components/GetStartedBadge";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
+
+export const metadata: Metadata = {
+  title: "Blogs | GamerGizmo",
+  description:
+    "Explore the latest gaming news, reviews, and guides from GamerGizmo.",
+  alternates: { canonical: "/blogs" },
+  robots: { index: true, follow: true },
+};
 
 const page = () => {
   return (
