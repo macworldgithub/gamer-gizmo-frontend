@@ -8,19 +8,24 @@ const BASE_URL =
 export async function GET() {
   // 1. List your static routes
   const staticPages = [
-    "",
-   
+    "", // homepage
+    "/about",
+    "/contact",
+    "/blogs",
     "/components",
     "/console",
     "/desktop",
     "/laptops",
     "/store",
-    "/contact",
-    "/about",
+    "/advertiser",
+    "/publish-ad",
+    "/favourites",
+    "/Add-to-Cart",
+    "/order",
+    "/profile",
+    "/my-adds",
     "/ai",
     "/all-communities",
-    "/blogs",
-
   ];
 
   // TODO: For dynamic routes like /blog/[slug], /chat/[slug], /community-chat/[id], /store/[category],
