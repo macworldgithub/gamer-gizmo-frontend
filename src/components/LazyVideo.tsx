@@ -1,10 +1,10 @@
 import { useInView } from "react-intersection-observer";
-import Player from "./Player"; // Assuming your Player component is here
+import Player from "./Player";
 
 export function LazyVideo({ src, poster }: any) {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.2, // Load when 20% of the video enters viewport
+    threshold: 0.2,
   });
 
   return (

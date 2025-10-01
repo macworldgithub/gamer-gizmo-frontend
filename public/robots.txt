@@ -33,3 +33,7 @@ User-agent: SeznamBot
 User-agent: Yeti
 User-agent: Slurp
 
+Sitemap: https://gamergizmo.com/sitemap.xml
+Sitemap: https://gamergizmo.com/sitemap-static.xml
+Sitemap: https://gamergizmo.com/sitemap-products.xml
+Sitemap: https://gamergizmo.com/sitemap-blogs.xml
