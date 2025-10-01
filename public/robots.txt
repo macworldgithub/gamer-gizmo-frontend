@@ -19,6 +19,7 @@ User-agent: Mediapartners-Google
 Allow: /
 
 User-agent: AdsBot-Google
+
 User-agent: Googlebot-Image
 User-agent: Googlebot
 User-agent: Bingbot
