@@ -274,6 +274,7 @@ const ProductMain = ({ categoryId, query }: any) => {
                 ? "components"
                 : "console"
             }?condition=2`}
+            onExplore={() => {}}
           />
           <ProductSection
             title={`Popular in New ${categoryName}`}
@@ -290,6 +291,7 @@ const ProductMain = ({ categoryId, query }: any) => {
                 ? "components"
                 : "console"
             }?condition=1`}
+            onExplore={() => {}}
           />
           <div className="flex flex-wrap gap-3 mx-0 sm:mx-6">
             <LiveAdSection

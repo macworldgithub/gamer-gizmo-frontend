@@ -65,10 +65,11 @@ const SearchBar = ({ categoryId }: any) => {
                 <>
                   <div
                     onClick={() => {
-                      // @ts-expect-error kuhn mhj
                       router.push(
                         `/products/${encodeURIComponent(
+                          ///@ts-ignore
                           product.name.replace(/\s+/g, "-").toLowerCase()
+                          //@ts-ignore
                         )}/${product.id}`
                       );
                     }}
