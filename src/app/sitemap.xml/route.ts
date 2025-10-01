@@ -5,6 +5,16 @@ const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://gamergizmo.com";
 
+// Use the exact same slug rules as ProductCard to keep URLs consistent
+const slugify = (str: string) =>
+  str
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+//publishAd, favorites, Add-to-Cart, order, profile, my-adds, all-communities
 export async function GET() {
   // 1. List your static routes
   const staticPages = [
@@ -18,14 +28,7 @@ export async function GET() {
     "/laptops",
     "/store",
     "/advertiser",
-    "/publish-ad",
-    "/favourites",
-    "/Add-to-Cart",
-    "/order",
-    "/profile",
-    "/my-adds",
     "/ai",
-    "/all-communities",
   ];
 
   // TODO: For dynamic routes like /blog/[slug], /chat/[slug], /community-chat/[id], /store/[category],
@@ -40,9 +43,7 @@ export async function GET() {
   // Dynamic product URLs
   const productUrls = products.map(
     (product: any) =>
-      `<url><loc>${BASE_URL}/products/${encodeURIComponent(
-        product.name.replace(/\s+/g, "-").toLowerCase()
-      )}/${product.id}</loc></url>`
+      `<url><loc>${BASE_URL}/products/${slugify(product.name)}/${product.id}</loc></url>`
   );
 
   // --- DYNAMIC ROUTES ---
@@ -57,42 +58,16 @@ export async function GET() {
     if (Array.isArray(blogs.data)) {
       blogUrls = blogs.data.map((blog: any) => {
         const rawSlug: string | undefined = blog?.slug;
-        const fallbackFromTitle = typeof blog?.title === "string"
-          ? blog.title.replace(/\s+/g, "-").toLowerCase()
-          : "";
+        const fallbackFromTitle =
+          typeof blog?.title === "string"
+            ? blog.title.replace(/\s+/g, "-").toLowerCase()
+            : "";
         const finalSlug = encodeURIComponent(rawSlug || fallbackFromTitle);
         return `<url><loc>${BASE_URL}/blogs/${finalSlug}</loc></url>`;
       });
     }
   } catch {}
 
-  // Example: Fetch all chat slugs
-  let chatUrls: string[] = [];
-  try {
-    const chatRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats`
-    );
-    const chats = await chatRes.json();
-    if (Array.isArray(chats.data)) {
-      chatUrls = chats.data.map(
-        (chat: any) => `<url><loc>${BASE_URL}/chat/${chat.slug}</loc></url>`
-      );
-    }
-  } catch {}
-
-  // Example: Fetch all community-chat ids
-  let communityChatUrls: string[] = [];
-  try {
-    const commRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/community-chats`
-    );
-    const comms = await commRes.json();
-    if (Array.isArray(comms.data)) {
-      communityChatUrls = comms.data.map(
-        (c: any) => `<url><loc>${BASE_URL}/community-chat/${c.id}</loc></url>`
-      );
-    }
-  } catch {}
 
   // Example: Fetch all store categories
   let storeCategoryUrls: string[] = [];
@@ -108,29 +83,12 @@ export async function GET() {
     }
   } catch {}
 
-  // Example: Fetch all my-adds/edit ids
-  let myAddsEditUrls: string[] = [];
-  try {
-    const addsRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/my-adds`
-    );
-    const adds = await addsRes.json();
-    if (Array.isArray(adds.data)) {
-      myAddsEditUrls = adds.data.map(
-        (ad: any) => `<url><loc>${BASE_URL}/my-adds/edit/${ad.id}</loc></url>`
-      );
-    }
-  } catch {}
-
   // 3. Build XML for static and dynamic routes
   let urls = [
     ...staticPages.map((page) => `<url><loc>${BASE_URL}${page}</loc></url>`),
     ...blogUrls,
     ...productUrls,
-    ...chatUrls,
-    ...communityChatUrls,
     ...storeCategoryUrls,
-    ...myAddsEditUrls,
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

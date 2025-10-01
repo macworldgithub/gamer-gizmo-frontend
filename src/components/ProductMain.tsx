@@ -258,7 +258,7 @@ const ProductMain = ({ categoryId, query }: any) => {
               className="w-full sm:w-[48%] md:h-52 max-md:h-40 hidden sm:block"
             />
           </div>
- 
+
           <ProductSection
             title={`Popular in Used ${categoryName}`}
             subtitle="Choose your necessary parts from this category."
