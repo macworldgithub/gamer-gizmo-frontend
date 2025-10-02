@@ -18,7 +18,7 @@ const SearchBar = ({ categoryId }: any) => {
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?title=${searchQuery}&category_id=${categoryId}&pageNo=1`
           );
           setProductResults(response.data.data);
-        } catch (error) {
+        } catch (error) { 
           console.error("Error fetching products:", error);
         } finally {
           setLoading(false);
