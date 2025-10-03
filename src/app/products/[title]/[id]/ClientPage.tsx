@@ -6,7 +6,7 @@ import AuthorSection from "./AuthorSection";
 import RelatedNewsSection from "./RelatedNewsSection";
 import Rightsection from "./Rightsection";
 import CommentsSection from "./CommentsSection";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import ContactForm from "./ContactForm";
 import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
@@ -37,6 +37,7 @@ interface SimilarItem {
 
 const ClientPage: React.FC = () => {
   const params = useParams();
+  const router = useRouter();
   const { title, id } = params as { title: string; id: string };
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState<Product | null>(null);
@@ -87,14 +88,26 @@ const ClientPage: React.FC = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          validateStatus: () => true, // handle non-2xx ourselves
         }
       );
-      if (response.status === 200) {
+
+      if (response.status === 200 && response.data?.data) {
         setData(response.data.data);
         // Fetch similar items based on the product's category_id
         fetchSimilarItems(response.data.data.category_id);
+      } else if (response.status === 404 || !response.data?.data) {
+        // Product not found -> redirect to not-found route
+        router.replace("/not-found");
+      } else {
+        toast.error("Error loading product");
       }
-    } catch (err) {
+    } catch (err: any) {
+      // Network or unexpected error -> try to route to not-found if server says so
+      if (axios.isAxiosError(err) && err.response?.status === 404) {
+        router.replace("/not-found");
+        return;
+      }
       toast.error("Error");
     }
   };
