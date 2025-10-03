@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ClientPage from "./ClientPage";
+import { notFound } from "next/navigation";
 
 const slugify = (s: string) =>
   s
@@ -18,6 +19,34 @@ export async function generateMetadata({
   return { alternates: { canonical } };
 }
 
-export default function Page() {
-  return <ClientPage />;
+type BlogPost = {
+  id: number;
+  title: string;
+  content: string;
+  images: string;
+  created_at: string;
+  tags: string;
+  slug: string;
+  [key: string]: any;
+};
+
+async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getSingleBlogsDetails?slug=${encodeURIComponent(slug)}`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json?.data ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function Page({ params }: { params: { title: string } }) {
+  const slug = decodeURIComponent(params.title);
+  const post = await getPostBySlug(slug);
+  if (!post) return notFound();
+  return <ClientPage initialPost={post} />;
 }

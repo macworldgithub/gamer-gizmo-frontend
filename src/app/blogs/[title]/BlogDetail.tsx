@@ -1,66 +1,19 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import CustomLoader from "@/components/CustomLoader";
 import { formatDate } from "@/app/utils/formatDate";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
 
-// Define TypeScript interface for Blog Post data
+// Define TypeScript interface for Blog Post data (only fields used here)
 interface BlogPostData {
-  id: number;
-  admin_id: number;
   title: string;
   content: string;
-  images: string;
+  images?: string;
   created_at: string;
-  updated_at: string;
-  is_verified: boolean;
-  verified_by: number;
-  is_published: boolean;
   tags: string;
-  views: number;
-  slug: string;
 }
 
-const fetchBlogBySlug = async (slug: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getSingleBlogsDetails?slug=${slug}`
-  );
-  if (!res.ok) return null;
-  const data = await res.json();
-  return data.data || null;
-};
-
-export default function BlogDetail() {
-  // const { title } = useParams<{ title: string }>();
-  const { title } = useParams<{ title: string }>();
-  const decodedSlug = decodeURIComponent(title);
-
-  const [post, setPost] = useState<BlogPostData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
-  console.log(post, "post");
- 
-  useEffect(() => {
-    if (!decodedSlug) return;
-    setLoading(true);
-    fetchBlogBySlug(decodedSlug)
-      .then((data) => {
-        setPost(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Failed to load blog.");
-        setLoading(false);
-      });
-  }, [decodedSlug]);
-
-  if (loading) return <CustomLoader />;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
-  if (!post) return <p className="text-center text-red-500">Post not found.</p>;
-
+export default function BlogDetail({ post }: { post: BlogPostData }) {
   return (
     <div className="dark:bg-black min-h-screen max-md:container py-10">
       <Wrapper>

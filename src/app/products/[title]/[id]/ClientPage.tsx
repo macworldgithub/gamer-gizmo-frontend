@@ -6,11 +6,9 @@ import AuthorSection from "./AuthorSection";
 import RelatedNewsSection from "./RelatedNewsSection";
 import Rightsection from "./Rightsection";
 import CommentsSection from "./CommentsSection";
-import { useParams, useRouter } from "next/navigation";
 import ContactForm from "./ContactForm";
 import PopularItemSection from "@/components/PopularItemSection";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
-import { toast } from "react-toastify";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "@/components/Store/Store";
@@ -21,8 +19,8 @@ interface Product {
   name: string;
   description: string;
   price: string;
-  imageUrl: string;
-  category_id: number; // Assuming category_id is part of the product
+  imageUrl?: string;
+  category_id?: number; // Assuming category_id is part of the product
   [key: string]: any;
 }
 
@@ -35,12 +33,10 @@ interface SimilarItem {
   [key: string]: any;
 }
 
-const ClientPage: React.FC = () => {
-  const params = useParams();
-  const router = useRouter();
-  const { title, id } = params as { title: string; id: string };
+const ClientPage: React.FC<{ initialProduct: Product }> = ({ initialProduct }) => {
   const token = useSelector((state: RootState) => state.user.token);
-  const [data, setData] = useState<Product | null>(null);
+  const [data, setData] = useState<Product | null>(initialProduct);
+  const [loading, setLoading] = useState<boolean>(false);
   const [fetcher, seReftech] = useState(false);
   const [similarItems, setSimilarItems] = useState<SimilarItem[]>([]);
 
@@ -79,41 +75,18 @@ const ClientPage: React.FC = () => {
     }
   };
 
-  // --- Function to Fetch Product Data ---
-  const fetch = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getProductById?id=${(params as any).id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          validateStatus: () => true, // handle non-2xx ourselves
-        }
-      );
-
-      if (response.status === 200 && response.data?.data) {
-        setData(response.data.data);
-        // Fetch similar items based on the product's category_id
-        fetchSimilarItems(response.data.data.category_id);
-      } else if (response.status === 404 || !response.data?.data) {
-        // Product not found -> redirect to not-found route
-        router.replace("/not-found");
-      } else {
-        toast.error("Error loading product");
-      }
-    } catch (err: any) {
-      // Network or unexpected error -> try to route to not-found if server says so
-      if (axios.isAxiosError(err) && err.response?.status === 404) {
-        router.replace("/not-found");
-        return;
-      }
-      toast.error("Error");
-    }
-  };
-
+  // When initial product is available, fetch similar items
   useEffect(() => {
-    fetch();
+    if (initialProduct?.category_id) {
+      fetchSimilarItems(initialProduct.category_id);
+    }
+    // keep state in sync in case we ever re-mount with a different product
+    setData(initialProduct);
+  }, [initialProduct?.id]);
+
+  // keep a way to refetch similar items if child triggers seReftech
+  useEffect(() => {
+    if (data?.category_id) fetchSimilarItems(data.category_id);
   }, [fetcher]);
 
   return (
@@ -121,7 +94,17 @@ const ClientPage: React.FC = () => {
       <PageHeader pageName="details" title="Details" />
       <div className="w-full flex mb-2">
         <div className="w-[65%] max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
-          {data && (
+          {loading && (
+            <div className="p-6">
+              <div className="animate-pulse space-y-4">
+                <div className="h-6 bg-gray-200 dark:bg-gray-800 rounded w-1/3" />
+                <div className="h-64 bg-gray-200 dark:bg-gray-800 rounded" />
+                <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-2/3" />
+              </div>
+            </div>
+          )}
+
+          {data && !loading && (
             <ProductDetails
               seReftech={seReftech}
               refetch={fetcher}
@@ -131,7 +114,7 @@ const ClientPage: React.FC = () => {
           {/* <AuthorSection /> */}
           {/* <RelatedNewsSection /> */}
           <Wrapper className="mt-4 mx-6">
-            {data && (
+            {data && !loading && (
               <CommentsSection
                 seReftech={seReftech}
                 fetcher={fetcher}
@@ -142,22 +125,24 @@ const ClientPage: React.FC = () => {
           {/* <ContactForm /> */}
         </div>
         <div className="md:w-[35%] max-md:w-0">
-          {data && <Rightsection data={data} />}
+          {data && !loading && <Rightsection data={data} />}
         </div>
       </div>
 
-      <div className="w-full h-auto">
-        <PopularItemSection
-          title="Similar Ads"
-          seReftech={seReftech}
-          refetch={fetcher}
-          subtitle="Choose your necessary gaming items from this category."
-          products={similarItems}
-          onExplore={() => console.log("Explore Similar Ads")}
-          // explorePath=""
-          explorePath={explorePath}
-        />
-      </div>
+      {data && !loading && similarItems.length > 0 && (
+        <div className="w-full h-auto">
+          <PopularItemSection
+            title="Similar Ads"
+            seReftech={seReftech}
+            refetch={fetcher}
+            subtitle="Choose your necessary gaming items from this category."
+            products={similarItems}
+            onExplore={() => console.log("Explore Similar Ads")}
+            // explorePath=""
+            explorePath={explorePath}
+          />
+        </div>
+      )}
     </div>
   );
 };
