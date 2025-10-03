@@ -28,8 +28,8 @@ const BottomNavigationBar = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [firstClick, setFirstClick] = useState(false);
-  const profile = useSelector((state: RootState) => state.user.profile);
-  const username = useSelector((state: RootState) => state.user.username);
+  const profile = useSelector((state: RootState) => state?.user?.profile);
+  const username = useSelector((state: RootState) => state?.user?.username);
   const dispatch = useDispatch();
   useEffect(() => {
     if (theme === "day") {
@@ -306,7 +306,7 @@ const BottomNavigationBar = () => {
               >
                 Components and Accessories
               </Link>
-              
+
               {/* <Link
                 href="/blogs"
                 className="text-sm  hover:text-secondaryColorDark"
@@ -392,9 +392,21 @@ const BottomNavigationBar = () => {
           <div className="w-10 h-10 shadow-md shadow-blue-500/50 rounded-full flex justify-center items-center overflow-hidden">
             <Dropdown className="shadow-2xl" menu={{ items }}>
               {profile ? (
+                // <Image
+                //   //@ts-ignore
+                //   src={profile}
+                //   alt="Profile"
+                //   width={40}
+                //   height={40}
+                //   className="w-full h-full object-cover rounded-full hover:cursor-pointer"
+                // />
                 <Image
-                  //@ts-ignore
-                  src={profile}
+                  src={profile || "/images/user.avif"}
+                  onError={(e) => {
+                    // @ts-ignore
+                    e.currentTarget.src = "/images/user.avif";
+                    // optionally dispatch a background refresh here
+                  }}
                   alt="Profile"
                   width={40}
                   height={40}

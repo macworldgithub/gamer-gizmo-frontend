@@ -7,7 +7,9 @@ import { RootState } from "@/components/Store/Store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ReactNode, useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfileData } from "@/app/utils/profileFetch";
+import { InitializeUserData } from "@/components/Store/Slicer/LoginSlice";
 
 interface UiProps {
   children: ReactNode;
@@ -18,6 +20,7 @@ const UiLayout = ({ children }: UiProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const token = useSelector((state: RootState) => state.user.token);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,6 +45,20 @@ const UiLayout = ({ children }: UiProps) => {
       return () => clearTimeout(hideTimer);
     }
   }, [showPopup]);
+
+  // Refresh user profile on app load to avoid stale/expired avatar URLs
+  useEffect(() => {
+    const refreshUser = async () => {
+      try {
+        if (!token) return;
+        const data = await fetchProfileData(token);
+        if (data) dispatch(InitializeUserData({ ...data } as any));
+      } catch (_) {
+        // Silently ignore; avatar will fallback
+      }
+    };
+    refreshUser();
+  }, [token]);
 
   const handleChatClick = useCallback(() => {
     if (!token) {
