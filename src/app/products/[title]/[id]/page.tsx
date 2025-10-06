@@ -52,5 +52,90 @@ export default async function Page({
 }) {
   const product = await getProduct(params.id);
   if (!product) return notFound();
-  return <ClientPage initialProduct={product} />;
+  const canonical = `${
+    process.env.NEXT_PUBLIC_SITE_URL || ""
+  }/products/${slugify(params.title)}/${params.id}`;
+  const currency = process.env.NEXT_PUBLIC_CURRENCY || "USD";
+
+  // Derive images array from possible fields
+  const images: string[] = Array.isArray((product as any).images)
+    ? ((product as any).images as string[])
+    : product.imageUrl
+    ? [product.imageUrl]
+    : Array.isArray((product as any).product_images)
+    ? ((product as any).product_images || [])
+        .map((pi: any) => pi?.image_url)
+        .filter(Boolean)
+    : [];
+
+  // Derive availability from stock when available
+  const stockVal = (product as any).stock;
+  const availability =
+    stockVal === 0 ||
+    stockVal === "0" ||
+    String(stockVal || "")
+      .toLowerCase()
+      .includes("out")
+      ? "https://schema.org/OutOfStock"
+      : "https://schema.org/InStock";
+
+  // Optional brand/category names if present in response
+  const brandName =
+    (product as any)?.brands?.name ||
+    (product as any)?.brand?.name ||
+    (product as any)?.brand_name;
+  const categoryName =
+    (product as any)?.categories?.name || (product as any)?.category?.name;
+
+  // Optional aggregate rating if reviews are present
+  const reviews: any[] = Array.isArray((product as any)?.product_reviews)
+    ? (product as any).product_reviews
+    : [];
+  const reviewCount = reviews.length;
+  const ratingValues = reviews
+    .map((r: any) => Number(r?.ratings))
+    .filter((n: number) => !Number.isNaN(n));
+  const ratingValue = ratingValues.length
+    ? Number(
+        (
+          ratingValues.reduce((a: number, b: number) => a + b, 0) /
+          ratingValues.length
+        ).toFixed(2)
+      )
+    : undefined;
+
+  const jsonLd: any = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: images.length ? images : undefined,
+    brand: brandName ? { "@type": "Brand", name: brandName } : undefined,
+    category: categoryName || undefined,
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: currency,
+      availability,
+      url: canonical,
+    },
+  };
+
+  if (ratingValue && reviewCount) {
+    jsonLd.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue,
+      reviewCount,
+    };
+  }
+
+  return (
+    <>
+      <ClientPage initialProduct={product} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </>
+  );
 }

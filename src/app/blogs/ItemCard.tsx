@@ -35,7 +35,7 @@ export default function BlogList() {
   const getTimeAgoOrDate = (dateString: string): string => {
     // Use a more stable date formatting to prevent hydration issues
     const postedDate = new Date(dateString);
-    
+
     // Always return formatted date to avoid server/client mismatch
     return postedDate.toLocaleDateString(undefined, {
       year: "numeric",
@@ -55,9 +55,7 @@ export default function BlogList() {
             <div
               key={blog.id}
               className="flex items-start space-x-2  border-b pb-4 cursor-pointer text-black dark:text-white"
-              onClick={() =>
-                router.push(`/blogs/${blog.slug}`)
-              }
+              onClick={() => router.push(`/blogs/${blog.slug}`)}
             >
               <Image
                 src={`${blog.images}`}
