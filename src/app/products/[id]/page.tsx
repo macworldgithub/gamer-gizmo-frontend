@@ -2,20 +2,12 @@ import type { Metadata } from "next";
 import ClientPage from "./ClientPage";
 import { notFound } from "next/navigation";
 
-const slugify = (s: string) =>
-  s
-    .toLowerCase()
-    .trim()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
 export async function generateMetadata({
   params,
 }: {
-  params: { title: string; id: string };
+  params: { id: string };
 }): Promise<Metadata> {
-  const canonical = `/products/${slugify(params.title)}/${params.id}`;
+  const canonical = `/products/${params.id}`;
   return {
     alternates: { canonical },
   };
@@ -45,16 +37,12 @@ async function getProduct(id: string): Promise<Product | null> {
   }
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { title: string; id: string };
-}) {
+export default async function Page({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
   if (!product) return notFound();
-  const canonical = `${
-    process.env.NEXT_PUBLIC_SITE_URL || ""
-  }/products/${slugify(params.title)}/${params.id}`;
+  const canonical = `${process.env.NEXT_PUBLIC_SITE_URL || ""}/products/${
+    params.id
+  }`;
   const currency = process.env.NEXT_PUBLIC_CURRENCY || "USD";
 
   // Derive images array from possible fields

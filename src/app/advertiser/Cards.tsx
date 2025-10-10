@@ -41,8 +41,10 @@ const ServiceCards = () => {
               height={100}
               alt="pc"
             />
-            <h3 className="text-xl font-bold mb-2 text-black 
-            ">
+            <h3
+              className="text-xl font-bold mb-2 text-black 
+            "
+            >
               {service.title}
             </h3>
             <p className="text-gray-500 text-base mb-4">

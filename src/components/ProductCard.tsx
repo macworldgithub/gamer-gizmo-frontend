@@ -345,6 +345,7 @@ const slugify = (str: string) =>
     .replace(/^-+|-+$/g, ""); // trim leading/trailing hyphens
 
 const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
+  console.log(product?.slug, "passing slug");
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const router = useRouter();
@@ -431,11 +432,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
                 {productImages.map((img: ProductImage, index: number) => (
                   <SwiperSlide key={index}>
                     <div
-                      onClick={() =>
-                        router.push(
-                          `/products/${slugify(product.name)}/${product.id}`
-                        )
-                      }
+                      onClick={() => router.push(`/products/${product.slug}`)}
                       className="w-full h-[200px] relative cursor-pointer"
                     >
                       <Image
@@ -466,11 +463,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
             <div className="w-full md:w-[40%] flex flex-col gap-2 text-center md:text-left px-2">
               <p
                 className="text-black font-bold text-sm sm:text-base dark:text-white cursor-pointer"
-                onClick={() =>
-                  router.push(
-                    `/products/${slugify(product.name)}/${product.id}`
-                  )
-                }
+                onClick={() => router.push(`/products/${product.slug}`)}
               >
                 {product.name.length > 10
                   ? product.name.slice(0, 50) + "..."
@@ -500,11 +493,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
               </p>
 
               <button
-                onClick={() =>
-                  router.push(
-                    `/products/${slugify(product.name)}/${product.id}`
-                  )
-                }
+                onClick={() => router.push(`/products/${product.slug}`)}
                 className="mt-4 max-md:px-0  md:px-4 py-2 w-36 max-md:w-20 text-sm max-md:text-[0.7rem] max-sm:py-1 bg-purple-600 text-white font-bold rounded-lg hover:bg-gray-200 hover:text-secondaryColorDark transition-all"
               >
                 View Details
@@ -528,11 +517,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
             <MdFavorite size={24} className="max-sm:h-4" />
           </div>
           <div
-            onClick={() =>
-              router.push(
-                `/products/${slugify(product.name)}/${product.id}`
-              )
-            }
+            onClick={() => router.push(`/products/${product.slug}`)}
             className="relative w-full h-24 bg-black max-sm:h-[50px]"
           >
             {product?.images?.[0]?.image_url && (
@@ -549,11 +534,7 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
           <div className="px-3 pb-[6px]  dark:bg-[#1e1e2f]">
             <h3
               className="text-sm dark:text-white font-semibold text-gray-900 truncate max-md:text-xs max-sm:text-[8px] cursor-pointer"
-              onClick={() =>
-                router.push(
-                  `/products/${slugify(product.name)}/${product.id}`
-                )
-              } // Added routing on title click
+              onClick={() => router.push(`/products/${product.slug}`)} // Added routing on title click
             >
               {product.name}
             </h3>
@@ -565,15 +546,11 @@ const ProductCard = ({ product, seReftech, refetch, isColumn }: any) => {
             </p>
             <div className="flex items-center">
               <button
-                onClick={() =>
-                  router.push(
-                    `/products/${slugify(product.name)}/${product.id}`
-                  )
-                }
-              // View Details button routing
-              className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 dark:hover:bg-purple-600"
-            >
-              <p className="max-sm:text-[5px]"> View Details</p>
+                onClick={() => router.push(`/products/${product.slug}`)}
+                // View Details button routing
+                className="bg-btnGray font-bold flex justify-center items-center mx-auto dark:bg-white dark:text-black hover:text-white text-gray-500 mt-2 px-3 md:py-1 rounded-full text-xs hover:bg-purple-600 dark:hover:bg-purple-600"
+              >
+                <p className="max-sm:text-[5px]"> View Details</p>
               </button>
             </div>
           </div>
