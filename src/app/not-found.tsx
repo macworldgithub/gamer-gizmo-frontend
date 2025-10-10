@@ -105,13 +105,7 @@ export default function NotFoundPage() {
                       <React.Fragment key={ind}>
                         <div
                           onClick={() => {
-                            router.push(
-                              `/products/${encodeURIComponent(
-                                (product.name || "")
-                                  .replace(/\s+/g, "-")
-                                  .toLowerCase()
-                              )}/${product.id}`
-                            );
+                            router.push(`/products/${product.slug}`);
                           }}
                           className="p-4 hover:bg-gray-200 cursor-pointer transition-all duration-200 ease-in-out rounded-md"
                         >
@@ -137,13 +131,7 @@ export default function NotFoundPage() {
                         </div>
                         <div
                           onClick={() => {
-                            router.push(
-                              `/products/${encodeURIComponent(
-                                (product.name || "")
-                                  .replace(/\s+/g, "-")
-                                  .toLowerCase()
-                              )}/${product.id}`
-                            );
+                            router.push(`/products/${product.slug}`);
                           }}
                           className="p-2 bg-custom-gradient text-white text-center cursor-pointer rounded-b-md transition-all duration-200"
                         >

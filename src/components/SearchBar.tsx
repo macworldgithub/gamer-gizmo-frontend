@@ -65,13 +65,8 @@ const SearchBar = ({ categoryId }: any) => {
                 <>
                   <div
                     onClick={() => {
-                      router.push(
-                        `/products/${encodeURIComponent(
-                          ///@ts-ignore
-                          product.name.replace(/\s+/g, "-").toLowerCase()
-                          //@ts-ignore
-                        )}/${product.id}`
-                      );
+                      // @ts-ignore ensure product has slug in search response
+                      router.push(`/products/${product.slug}`);
                     }}
                     key={ind}
                     className="p-4 hover:bg-gray-200 cursor-pointer transition-all duration-200 ease-in-out rounded-md"

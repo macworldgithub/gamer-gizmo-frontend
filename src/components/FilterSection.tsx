@@ -19,6 +19,7 @@ interface Product {
   brand_id: number;
   model?: string;
   model_id?: number;
+  slug: string;
   images: ProductImage[];
 }
 interface Props {
@@ -167,11 +168,7 @@ const FilterSection = () => {
                     <>
                       <div
                         onClick={() => {
-                          router.push(
-                            `/products/${encodeURIComponent(
-                              product.name.replace(/\s+/g, "-").toLowerCase()
-                            )}/${product.id}`
-                          );
+                          router.push(`/products/${product.slug}`);
                         }}
                         key={ind}
                         className="p-4 hover:bg-gray-200 cursor-pointer transition-all duration-200 ease-in-out rounded-md"
@@ -201,11 +198,7 @@ const FilterSection = () => {
                         //   )
                         // }
                         onClick={() => {
-                          router.push(
-                            `/products/${encodeURIComponent(
-                              product.name.replace(/\s+/g, "-").toLowerCase()
-                            )}/${product.id}`
-                          );
+                          router.push(`/products/${product.slug}`);
                         }}
                         className="p-2 bg-custom-gradient text-white text-center cursor-pointer rounded-b-md  transition-all duration-200"
                       >

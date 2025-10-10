@@ -43,8 +43,7 @@ const ClientPage = () => {
     fetchProducts();
   }, [category]);
 
-  const slugify = (s: string) =>
-    s.toLowerCase().trim().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  // Use backend-provided slug
 
   return (
     <div className=" dark:bg-[#1e1e2f]">
@@ -71,9 +70,7 @@ const ClientPage = () => {
                 <p className="text-gray-400 text-[0.6rem] truncate w-full">{product.description}</p>
                 <p className="text-purple-500 font-bold text-[0.6rem]">AED {product.price}</p>
                 <button
-                  onClick={() =>
-                    router.push(`/products/${slugify(product.name)}/${product.id}`)
-                  }
+                  onClick={() => router.push(`/products/${product.slug}`)}
                   className=" dark:bg-gray-300 bg-custom-gradient md:text-[0.6rem] sm:text-[0.7rem] max-sm:text-[0.4rem] flex justify-center items-center text-white px-2 py-1 max-sm:px-[0.25rem]  rounded-full"
                 >
                   View Details

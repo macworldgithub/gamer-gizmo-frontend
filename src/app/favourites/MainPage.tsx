@@ -90,13 +90,7 @@ export default function MainPage() {
                 //     )}/${item.product_id}`
                 //   )
                 // }
-                onClick={() =>
-                  router.push(
-                    `/products/${encodeURIComponent(
-                      item.product.name.replace(/\s+/g, "-").toLowerCase()
-                    )}/${item.product_id}`
-                  )
-                }
+                onClick={() => router.push(`/products/${item.product.slug}`)}
               >
                 {/* Image */}
                 <div className="w-36 h-36">
