@@ -94,27 +94,56 @@
 // }
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://gamergizmo.com";
 
 export async function GET() {
-  // Fetch all products
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?limit=10000`
-  );
-  const data = await res.json();
-  const products = data.data || [];
+  try {
+    // Fetch all products with extended timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
-  const urls = products.map(
-    (product: any) =>
-      `<url><loc>${BASE_URL}/products/${product.slug}</loc></url>`
-  );
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAll?limit=10000`,
+      {
+        cache: "no-store",
+        signal: controller.signal,
+      }
+    );
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join(
-    "\n"
-  )}\n</urlset>`;
-  return new NextResponse(sitemap, {
-    headers: { "Content-Type": "application/xml" },
-  });
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      throw new Error(`API returned status ${res.status}`);
+    }
+
+    const data = await res.json();
+    const products = data.data || [];
+
+    const urls = products.map(
+      (product: any) =>
+        `<url><loc>${BASE_URL}/products/${product.slug}</loc></url>`
+    );
+
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join(
+      "\n"
+    )}\n</urlset>`;
+    
+    return new NextResponse(sitemap, {
+      headers: { "Content-Type": "application/xml" },
+    });
+  } catch (error) {
+    console.error("Error generating sitemap:", error);
+    
+    // Return empty sitemap on error instead of 500
+    const emptySitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>`;
+    
+    return new NextResponse(emptySitemap, {
+      status: 200,
+      headers: { "Content-Type": "application/xml" },
+    });
+  }
 }
