@@ -8,7 +8,23 @@ export async function generateMetadata({
   params: { id: string };
 }): Promise<Metadata> {
   const canonical = `/products/${params.id}`;
+  // Default fallbacks
+  let title: string = "Product | GamerGizmo";
+  let description: string =
+    "Get this product at Gamergizmo UAE. Affordable prices and fast delivery. Buy now and level up your gaming setup today.";
+
+  try {
+    const product = await getProduct(params.id);
+    const productName = product?.name?.toString().trim();
+    if (productName) {
+      title = `Buy ${productName} at GamerGizmo`;
+      description = `Get ${productName} at Gamergizmo UAE. Affordable prices and fast delivery. Buy now and level up your gaming setup today.`;
+    }
+  } catch {}
+
   return {
+    title,
+    description,
     alternates: { canonical },
   };
 }
