@@ -34,6 +34,7 @@ const PartsInformation: React.FC<PartsInformationProps> = ({ adInformation, setA
   const handleChange = (name: string, value: string) => {
     setAdInformation({ ...adInformation, [name]: value });
   };
+  
 
   return (
     <div className="w-full py-5 grid grid-cols-1 lg:grid-cols-2 gap-4">

@@ -232,7 +232,7 @@ const Rightsection = ({ data }: any) => {
         <h1 className="absolute top-5 font-bold text-2xl md:text-lg text-black dark:text-white">
           This section is for live Ad
         </h1>
-        <h1 className="text-center font-bold text-xl">
+        <h1 className="text-center font-bold text-xl text-black dark:text-white mt-20">
           Boost Your Brand Visibility
         </h1>
         <p className="text-center dark:text-white text-gray-700 text-sm">
