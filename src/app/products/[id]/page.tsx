@@ -108,12 +108,29 @@ export default async function Page({ params }: { params: { id: string } }) {
       )
     : undefined;
 
+  // Optional SKU/MPN if available
+  const sku = (product as any)?.sku || String(product.id);
+  const mpn = (product as any)?.mpn;
+
+  // Map numeric condition to schema.org URL
+  const conditionVal = (product as any)?.condition;
+  const itemCondition =
+    conditionVal === 1
+      ? "https://schema.org/NewCondition"
+      : conditionVal === 2 || conditionVal === 3
+      ? "https://schema.org/UsedCondition"
+      : conditionVal === 4
+      ? "https://schema.org/RefurbishedCondition"
+      : undefined;
+
   const jsonLd: any = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
     image: images.length ? images : undefined,
+    sku: sku || undefined,
+    mpn: mpn || undefined,
     brand: brandName ? { "@type": "Brand", name: brandName } : undefined,
     category: categoryName || undefined,
     offers: {
@@ -122,6 +139,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       priceCurrency: currency,
       availability,
       url: canonical,
+      itemCondition: itemCondition,
+      seller: {
+        "@type": "Organization",
+        name: "Gamer Gizmo",
+      },
     },
   };
 
@@ -132,6 +154,37 @@ export default async function Page({ params }: { params: { id: string } }) {
       reviewCount,
     };
   }
+
+  // Build reviews array for JSON-LD if reviews exist
+  if (reviewCount) {
+    jsonLd.review = reviews
+      .map((r: any) => {
+        const authorName =
+          (r?.users?.first_name || "").toString().trim() +
+          (r?.users?.last_name ? ` ${r.users.last_name}` : "");
+        const rating = Number(r?.ratings);
+        return {
+          "@type": "Review",
+          author: authorName
+            ? { "@type": "Person", name: authorName }
+            : undefined,
+          reviewRating: !Number.isNaN(rating)
+            ? { "@type": "Rating", ratingValue: rating, bestRating: 5 }
+            : undefined,
+          reviewBody: r?.comments || undefined,
+          datePublished: r?.created_at || undefined,
+        };
+      })
+      .filter(Boolean);
+  }
+
+  // Include optional fields in JSON-LD if available
+  if (sku) jsonLd.sku = sku;
+  if (mpn) jsonLd.mpn = mpn;
+  if (brandName) jsonLd.brand = { "@type": "Brand", name: brandName };
+  if (categoryName) jsonLd.category = categoryName;
+  // itemCondition belongs to Offer (already set above)
+  if (reviewCount) jsonLd.reviewCount = reviewCount;
 
   return (
     <>
