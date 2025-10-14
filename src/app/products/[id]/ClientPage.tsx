@@ -33,7 +33,9 @@ interface SimilarItem {
   [key: string]: any;
 }
 
-const ClientPage: React.FC<{ initialProduct: Product }> = ({ initialProduct }) => {
+const ClientPage: React.FC<{ initialProduct: Product }> = ({
+  initialProduct,
+}) => {
   const token = useSelector((state: RootState) => state.user.token);
   const [data, setData] = useState<Product | null>(initialProduct);
   const [loading, setLoading] = useState<boolean>(false);
@@ -93,7 +95,7 @@ const ClientPage: React.FC<{ initialProduct: Product }> = ({ initialProduct }) =
     <div className="w-full h-auto bg-white dark:bg-[#14161B]">
       <PageHeader pageName="details" title="Details" />
       <div className="w-full flex mb-2">
-        <div className="w-[65%] max-md:w-[100%] max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
+        <div className="w-[65%]  max-md:flex max-md:flex-col max-md:justify-center max-md:mx-auto">
           {loading && (
             <div className="p-6">
               <div className="animate-pulse space-y-4">
@@ -124,7 +126,7 @@ const ClientPage: React.FC<{ initialProduct: Product }> = ({ initialProduct }) =
           </Wrapper>
           {/* <ContactForm /> */}
         </div>
-        <div className="md:w-[35%] max-md:w-0">
+        <div className="md:w-[35%] ">
           {data && !loading && <Rightsection data={data} />}
         </div>
       </div>
