@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Store | GamerGizmo",
+  title: "Buy GamerGizmo Branded Gaming Products and Accessories Online",
   description:
-    "Browse the GamerGizmo store for gaming PCs, laptops, components, and accessories.",
+    "Explore GamerGizmo's official store for branded gaming PCs, consoles, and accessories.Get top performance , exclusive deals and fast delivery across UAE.",
   alternates: { canonical: "/store" },
   robots: { index: true, follow: true },
   openGraph: {
@@ -25,5 +25,3 @@ export const metadata: Metadata = {
 export default function StoreLayout({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
-
-
