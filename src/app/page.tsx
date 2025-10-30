@@ -71,8 +71,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <StructuredData data={organization} />
-      <StructuredData data={website} />
+      <StructuredData data={[organization, website]} />
       <HomePageClient />
     </>
   );

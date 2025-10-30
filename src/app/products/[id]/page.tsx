@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ClientPage from "./ClientPage";
 import { notFound } from "next/navigation";
+import { StructuredData } from "@/components/StructuredData";
 
 export async function generateMetadata({
   params,
@@ -56,13 +57,14 @@ async function getProduct(id: string): Promise<Product | null> {
 export default async function Page({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
   if (!product) return notFound();
-  const canonical = `${process.env.NEXT_PUBLIC_SITE_URL || ""}/products/${
-    params.id
-  }`;
-  const currency = process.env.NEXT_PUBLIC_CURRENCY || "USD";
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://gamergizmo.com"
+  ).replace(/\/$/, "");
+  const canonical = `${siteUrl}/products/${params.id}`;
+  const currency = process.env.NEXT_PUBLIC_CURRENCY || "AED";
 
   // Derive images array from possible fields
-  const images: string[] = Array.isArray((product as any).images)
+  const rawImages: string[] = Array.isArray((product as any).images)
     ? ((product as any).images as string[])
     : product.imageUrl
     ? [product.imageUrl]
@@ -71,6 +73,15 @@ export default async function Page({ params }: { params: { id: string } }) {
         .map((pi: any) => pi?.image_url)
         .filter(Boolean)
     : [];
+  const images = rawImages
+    .map((url: string) =>
+      /^https?:\/\//i.test(url)
+        ? url
+        : url?.startsWith("/")
+        ? `${siteUrl}${url}`
+        : `${siteUrl}/${url}`
+    )
+    .filter(Boolean);
 
   // Derive availability from stock when available
   const stockVal = (product as any).stock;
@@ -133,6 +144,8 @@ export default async function Page({ params }: { params: { id: string } }) {
     mpn: mpn || undefined,
     brand: brandName ? { "@type": "Brand", name: brandName } : undefined,
     category: categoryName || undefined,
+    url: canonical,
+    "@id": `${canonical}#product`,
     offers: {
       "@type": "Offer",
       price: product.price,
@@ -186,13 +199,35 @@ export default async function Page({ params }: { params: { id: string } }) {
   // itemCondition belongs to Offer (already set above)
   if (reviewCount) jsonLd.reviewCount = reviewCount;
 
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${siteUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: categoryName || "Products",
+        item: `${siteUrl}/products`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: canonical,
+      },
+    ],
+  };
+
   return (
     <>
       <ClientPage initialProduct={product} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <StructuredData data={[jsonLd, breadcrumb]} />
     </>
   );
 }
