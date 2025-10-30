@@ -7,6 +7,7 @@ import ItemCard from "./ItemCard";
 import LiveAdSection from "@/components/LiveAd";
 import GetStartedBadge from "@/components/GetStartedBadge";
 import Wrapper from "@/components/Common/Wrapper/Wrapper";
+import { StructuredData } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Blogs | GamerGizmo",
@@ -17,8 +18,36 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://gamergizmo.com"
+  ).replace(/\/$/, "");
+  const canonical = `${siteUrl}/blogs`;
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "GamerGizmo Blogs",
+    description:
+      "Explore the latest gaming news, reviews, and guides from GamerGizmo.",
+    url: canonical,
+    publisher: {
+      "@type": "Organization",
+      name: "Gamer Gizmo",
+      url: siteUrl,
+    },
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Blogs", item: canonical },
+    ],
+  };
   return (
     <div className="w-full bg-white dark:bg-black">
+      <StructuredData data={[blogSchema, breadcrumb]} />
       <PageHeader pageName={"Blogs"} title="Blogs" />
       <Wrapper className="flex w-full mt-4 gap-3">
         <LiveAdSection

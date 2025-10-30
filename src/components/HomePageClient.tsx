@@ -22,7 +22,7 @@ export default function HomePageClient() {
     <div className="overflow-x-hidden dark:bg-[#0D0D12]">
       <MobileCategories />
       <FilterSection />
-      <div className="bg-[#F4F2FE] flex justify-center  dark:bg-secondaryBlack pt-4">
+      <div className="bg-[#F4F2FE] flex justify-center dark:bg-secondaryBlack pt-4">
         <LiveAdSection
           category="Home"
           adId={1}
