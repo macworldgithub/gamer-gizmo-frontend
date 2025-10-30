@@ -34,7 +34,9 @@ type BlogPost = {
 async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/getSingleBlogsDetails?slug=${encodeURIComponent(slug)}`,
+      `${
+        process.env.NEXT_PUBLIC_API_BASE_URL
+      }/blogs/getSingleBlogsDetails?slug=${encodeURIComponent(slug)}`,
       { cache: "no-store" }
     );
     if (!res.ok) return null;
@@ -52,13 +54,18 @@ export default async function Page({ params }: { params: { title: string } }) {
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://gamergizmo.com"
   ).replace(/\/$/, "");
-  const canonical = `${siteUrl}/blogs/${encodeURIComponent(post.slug || slugify(slug))}`;
+  const canonical = `${siteUrl}/blogs/${encodeURIComponent(
+    post.slug || slugify(slug)
+  )}`;
 
   // Normalize images to absolute URLs array
   const rawImages: string[] = Array.isArray((post as any).images)
     ? ((post as any).images as string[])
     : typeof (post as any).images === "string"
-    ? (post as any).images.split(",").map((s: string) => s.trim()).filter(Boolean)
+    ? (post as any).images
+        .split(",")
+        .map((s: string) => s.trim())
+        .filter(Boolean)
     : [];
   const images = rawImages
     .map((url: string) =>
@@ -71,7 +78,13 @@ export default async function Page({ params }: { params: { title: string } }) {
     .filter(Boolean);
 
   const published = (post as any)?.created_at || (post as any)?.Created_at;
-  const tags = typeof post?.tags === "string" ? post.tags.split(",").map((t: string) => t.trim()).filter(Boolean) : [];
+  const tags =
+    typeof post?.tags === "string"
+      ? post.tags
+          .split(",")
+          .map((t: string) => t.trim())
+          .filter(Boolean)
+      : [];
 
   const blogPosting = {
     "@context": "https://schema.org",
@@ -102,7 +115,12 @@ export default async function Page({ params }: { params: { title: string } }) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
-      { "@type": "ListItem", position: 2, name: "Blogs", item: `${siteUrl}/blogs` },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blogs",
+        item: `${siteUrl}/blogs`,
+      },
       { "@type": "ListItem", position: 3, name: post.title, item: canonical },
     ],
   };

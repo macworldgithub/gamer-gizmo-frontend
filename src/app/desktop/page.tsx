@@ -5,8 +5,32 @@ import HeroSection from "./HeroSection";
 import { useSearchParams } from "next/navigation";
 import FilterSection from "@/components/FilterSection";
 import SearchBar from "@/components/SearchBar";
+import { StructuredData } from "@/components/StructuredData";
 const page = () => {
   const params = useSearchParams();
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://gamergizmo.com"
+  ).replace(/\/$/, "");
+  const canonical = `${siteUrl}/desktop`;
+
+  const collectionPage = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Gaming PCs | GamerGizmo",
+    description:
+      "Browse Gaming PCs at GamerGizmo. Explore desktops, compare prices, and shop now in the UAE.",
+    url: canonical,
+    isPartOf: { "@type": "WebSite", name: "GamerGizmo", url: siteUrl },
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Gaming PCs", item: canonical },
+    ],
+  };
 
   // Define an object with the possible query parameters
   const queryParams = [
@@ -31,6 +55,7 @@ const page = () => {
 
   return (
     <div className="w-full">
+      <StructuredData data={[collectionPage, breadcrumb]} />
       <PageHeader pageName="Desktops" title="Gaming PCs" />
       <SearchBar categoryId="2"/>
       <HeroSection query={queryObject} />
