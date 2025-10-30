@@ -199,6 +199,29 @@ export default async function Page({ params }: { params: { id: string } }) {
   // itemCondition belongs to Offer (already set above)
   if (reviewCount) jsonLd.reviewCount = reviewCount;
 
+  // Resolve category route for breadcrumb
+  const norm = (s: any) => (s ? String(s).toLowerCase().trim() : "");
+  const cname = norm(categoryName);
+  const cid = (product as any)?.category_id;
+  let categoryPath = "/store";
+  let categoryDisplay = categoryName || "Products";
+  if (cname.includes("laptop") || cid === 1) {
+    categoryPath = "/laptops";
+    categoryDisplay = "Laptops";
+  } else if (cname.includes("desktop") || cname.includes("pc") || cid === 2) {
+    categoryPath = "/desktop";
+    categoryDisplay = "Gaming PCs";
+  } else if (cname.includes("console") || cid === 4) {
+    categoryPath = "/console";
+    categoryDisplay = "Gaming Consoles";
+  } else if (cname.includes("component") || cname.includes("accessor") || cid === 3) {
+    categoryPath = "/components";
+    categoryDisplay = "Components and Accessories";
+  } else if (cid) {
+    categoryPath = `/store/${encodeURIComponent(String(cid))}`;
+  }
+  const categoryUrl = `${siteUrl}${categoryPath}`;
+
   const breadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -212,8 +235,8 @@ export default async function Page({ params }: { params: { id: string } }) {
       {
         "@type": "ListItem",
         position: 2,
-        name: categoryName || "Products",
-        item: `${siteUrl}/products`,
+        name: categoryDisplay,
+        item: categoryUrl,
       },
       {
         "@type": "ListItem",
