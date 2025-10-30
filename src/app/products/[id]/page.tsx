@@ -98,7 +98,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const brandName =
     (product as any)?.brands?.name ||
     (product as any)?.brand?.name ||
-    (product as any)?.brand_name;
+    (product as any)?.brand_name; 
   const categoryName =
     (product as any)?.categories?.name || (product as any)?.category?.name;
 
