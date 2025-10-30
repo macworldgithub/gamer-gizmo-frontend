@@ -199,28 +199,42 @@ export default async function Page({ params }: { params: { id: string } }) {
   // itemCondition belongs to Offer (already set above)
   if (reviewCount) jsonLd.reviewCount = reviewCount;
 
-  // Resolve category route for breadcrumb
+  // Resolve category route for breadcrumb to /collections/<category-slug>
   const norm = (s: any) => (s ? String(s).toLowerCase().trim() : "");
+  const slugify = (s: string) =>
+    s
+      .toLowerCase()
+      .trim()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   const cname = norm(categoryName);
   const cid = (product as any)?.category_id;
-  let categoryPath = "/store";
+  let categorySlug = "products";
   let categoryDisplay = categoryName || "Products";
   if (cname.includes("laptop") || cid === 1) {
-    categoryPath = "/laptops";
+    categorySlug = "laptops";
     categoryDisplay = "Laptops";
   } else if (cname.includes("desktop") || cname.includes("pc") || cid === 2) {
-    categoryPath = "/desktop";
+    categorySlug = "gaming-pcs";
     categoryDisplay = "Gaming PCs";
   } else if (cname.includes("console") || cid === 4) {
-    categoryPath = "/console";
+    categorySlug = "consoles";
+    categoryDisplay = "Laptops".replace("Laptops", "Gaming Consoles");
     categoryDisplay = "Gaming Consoles";
-  } else if (cname.includes("component") || cname.includes("accessor") || cid === 3) {
-    categoryPath = "/components";
+  } else if (
+    cname.includes("component") ||
+    cname.includes("accessor") ||
+    cid === 3
+  ) {
+    categorySlug = "components-accessories";
     categoryDisplay = "Components and Accessories";
+  } else if (categoryName) {
+    categorySlug = slugify(String(categoryName));
   } else if (cid) {
-    categoryPath = `/store/${encodeURIComponent(String(cid))}`;
+    categorySlug = String(cid);
   }
-  const categoryUrl = `${siteUrl}${categoryPath}`;
+  const categoryUrl = `${siteUrl}/collections/${categorySlug}`;
 
   const breadcrumb = {
     "@context": "https://schema.org",
