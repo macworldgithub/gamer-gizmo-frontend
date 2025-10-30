@@ -9,6 +9,7 @@ import Features from "./pictureside";
 import SubmissionButton from "./submit";
 import PartsInformation from "./info";
 import PcInspectionForm from "./PcInspectionForm";
+import { StructuredData } from "@/components/StructuredData";
 
 const SellForMe = () => {
   const [deviceType, setDeviceType] = useState("");
@@ -21,8 +22,34 @@ const SellForMe = () => {
   const [adInformation, setAdInformation] = useState<Record<string, string>>(
     {}
   );
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://gamergizmo.com"
+  ).replace(/\/$/, "");
+  const canonical = `${siteUrl}/Inspection`;
+
+  const service = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "PC Inspection Service",
+    description:
+      "GamerGizmo PC inspection: expert hardware checks to ensure performance and value before you buy.",
+    provider: { "@type": "Organization", name: "GamerGizmo", url: siteUrl },
+    areaServed: { "@type": "Country", name: "United Arab Emirates" },
+    url: canonical,
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+      { "@type": "ListItem", position: 2, name: "PC Inspection", item: canonical },
+    ],
+  };
+
   return (
     <>
+      <StructuredData data={[service, breadcrumb]} />
       <PageHeader pageName="sellforme" />
       <div className="dark:bg-[#1e1e2f] ">
         <Guide />
